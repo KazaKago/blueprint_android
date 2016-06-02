@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Android-CleanArchitecture</string>
+
+    <!-- Main -->
+    <string name="full_name">%1$s %2$s</string>
+    <string name="age_unit">Age %1$d</string>
+
+    <!-- About -->
+    <string name="about_ver">Ver. %1$s</string>
+    <string name="about_develop_by">Develop by %1$s</string>
+    <string name="about_play_store">Playストア</string>
+    <string name="about_email">Eメール</string>
+    <string name="about_web_site">Webサイト</string>
+    <string name="about_copyright">© %1$d %2$s</string>
+</resources>
