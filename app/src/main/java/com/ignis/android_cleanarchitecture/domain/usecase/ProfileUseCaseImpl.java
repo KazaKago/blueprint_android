@@ -5,6 +5,8 @@ import com.ignis.android_cleanarchitecture.domain.repository.ProfileRepository;
 
 import java.util.List;
 
+import rx.Observable;
+
 /**
  * Profile UseCase Implement
  *
@@ -19,7 +21,7 @@ public class ProfileUseCaseImpl implements ProfileUseCase {
     }
 
     @Override
-    public List<ProfileModel> getProfileList() {
+    public Observable<List<ProfileModel>> getProfileList() {
         return profileRepository.selectAll();
     }
 

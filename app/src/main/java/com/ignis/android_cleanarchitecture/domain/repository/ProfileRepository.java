@@ -4,6 +4,8 @@ import com.ignis.android_cleanarchitecture.domain.model.ProfileModel;
 
 import java.util.List;
 
+import rx.Observable;
+
 /**
  * Profile Repository
  *
@@ -14,6 +16,6 @@ public interface ProfileRepository {
     /**
      * プロフィール一覧を取得する
      */
-    List<ProfileModel> selectAll();
+    Observable<List<ProfileModel>> selectAll();
 
 }

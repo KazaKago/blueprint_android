@@ -32,7 +32,7 @@ public class AboutFragmentViewModel {
         this.context = context;
         this.verText = new ObservableField<>(context.getString(R.string.about_ver, aboutUseCase.getCurrentVersion()));
         this.developByText = new ObservableField<>(context.getString(R.string.about_develop_by, context.getString(R.string.developer_name)));
-        this.copyrightText = new ObservableField<>(context.getString(R.string.about_copyright, aboutUseCase.getCurrentYear(), context.getString(R.string.developer_name)));
+        this.copyrightText = new ObservableField<>(context.getString(R.string.about_copyright, aboutUseCase.getCurrentYear().toBlocking().single(), context.getString(R.string.developer_name)));
     }
 
     public void onClickPlayStore(View view) {
@@ -51,7 +51,9 @@ public class AboutFragmentViewModel {
      * PlayStoreへ遷移
      */
     private void toPlayStore() {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(aboutUseCase.getPlayStoreUrl()));
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(aboutUseCase.getPlayStoreUrl()
+                .toBlocking()
+                .single()));
         context.startActivity(intent);
     }
 
@@ -59,7 +61,9 @@ public class AboutFragmentViewModel {
      * メールアプリを開く
      */
     private void toMailApp() {
-        Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + aboutUseCase.getMailUrl()));
+        Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + aboutUseCase.getMailUrl()
+                .toBlocking()
+                .single()));
         context.startActivity(intent);
     }
 
@@ -67,7 +71,9 @@ public class AboutFragmentViewModel {
      * Webサイトをブラウザで開く
      */
     private void toWebSite() {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(aboutUseCase.getWebSiteUrl()));
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(aboutUseCase.getWebSiteUrl()
+                .toBlocking()
+                .single()));
         context.startActivity(intent);
     }
 

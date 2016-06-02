@@ -4,6 +4,8 @@ import com.ignis.android_cleanarchitecture.domain.model.ProfileModel;
 
 import java.util.List;
 
+import rx.Observable;
+
 /**
  * Profile UseCase
  *
@@ -11,6 +13,6 @@ import java.util.List;
  */
 public interface ProfileUseCase {
 
-    List<ProfileModel> getProfileList();
+    Observable<List<ProfileModel>> getProfileList();
 
 }
