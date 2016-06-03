@@ -1,7 +1,5 @@
 package com.ignis.android_cleanarchitecture.domain.usecase;
 
-import rx.Observable;
-
 /**
  * About UseCase
  *
@@ -9,14 +7,14 @@ import rx.Observable;
  */
 public interface AboutUseCase {
 
-    Observable<String> getPlayStoreUrl();
+    String getPlayStoreUrl();
 
-    Observable<String> getMailUrl();
+    String getMailUrl();
 
-    Observable<String> getWebSiteUrl();
+    String getWebSiteUrl();
 
-    Observable<String> getCurrentVersion();
+    String getCurrentVersion();
 
-    Observable<Integer> getCurrentYear();
+    int getCurrentYear();
 
 }

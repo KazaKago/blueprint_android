@@ -3,9 +3,9 @@ package com.ignis.android_cleanarchitecture.presentation.di.module;
 import android.content.Context;
 
 import com.ignis.android_cleanarchitecture.data.repository.AboutRepositoryImpl;
-import com.ignis.android_cleanarchitecture.data.repository.ProfileRepositoryImpl;
+import com.ignis.android_cleanarchitecture.data.repository.WeatherRepositoryImpl;
 import com.ignis.android_cleanarchitecture.domain.repository.AboutRepository;
-import com.ignis.android_cleanarchitecture.domain.repository.ProfileRepository;
+import com.ignis.android_cleanarchitecture.domain.repository.WeatherRepository;
 
 import javax.inject.Singleton;
 
@@ -17,8 +17,8 @@ public class DataModule {
 
     @Provides
     @Singleton
-    public ProfileRepository provideProfileRepository(Context context) {
-        return new ProfileRepositoryImpl(context);
+    public WeatherRepository provideWeatherRepository(Context context) {
+        return new WeatherRepositoryImpl(context);
     }
 
     @Provides

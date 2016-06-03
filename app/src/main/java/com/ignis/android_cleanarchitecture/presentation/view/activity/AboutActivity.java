@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.ignis.android_cleanarchitecture.R;
@@ -38,9 +37,7 @@ public class AboutActivity extends AppCompatActivity implements AboutActivityLis
         viewModel = new AboutActivityViewModel(this, this);
         binding.setViewModel(viewModel);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
+        setSupportActionBar(binding.toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
@@ -54,8 +51,6 @@ public class AboutActivity extends AppCompatActivity implements AboutActivityLis
         switch (item.getItemId()) {
             case android.R.id.home:
                 viewModel.onClickBackIcon();
-                break;
-            default:
                 break;
         }
         return super.onOptionsItemSelected(item);

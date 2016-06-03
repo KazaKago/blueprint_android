@@ -1,7 +1,5 @@
 package com.ignis.android_cleanarchitecture.domain.repository;
 
-import rx.Observable;
-
 /**
  * About Repository
  *
@@ -9,26 +7,12 @@ import rx.Observable;
  */
 public interface AboutRepository {
 
-    /**
-     * PlayStore URLを取得する
-     */
-    Observable<String> getPlayStoreUrl();
+    String getPlayStoreUrl();
 
-    /**
-     * メールアドレスを取得する
-     */
-    Observable<String> getMailUrl();
+    String getMailUrl();
 
-    /**
-     * デベロッパーページURLを取得する
-     */
-    Observable<String> getWebSiteUrl();
+    String getWebSiteUrl();
 
-    /**
-     * 現在のバージョン名を取得する
-     *
-     * @return
-     */
-    Observable<String> getCurrentVersion();
+    String getCurrentVersion();
 
 }

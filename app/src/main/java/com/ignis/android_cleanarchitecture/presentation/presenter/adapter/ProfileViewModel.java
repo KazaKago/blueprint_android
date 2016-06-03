@@ -5,8 +5,7 @@ import android.databinding.ObservableField;
 import android.view.View;
 import android.widget.Toast;
 
-import com.ignis.android_cleanarchitecture.R;
-import com.ignis.android_cleanarchitecture.domain.model.ProfileModel;
+import com.ignis.android_cleanarchitecture.domain.model.WeatherModel;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -26,13 +25,13 @@ public class ProfileViewModel {
     public ObservableField<String> birthday;
     public ObservableField<String> age;
 
-    public ProfileViewModel(Context context, ProfileModel profileModel) {
+    public ProfileViewModel(Context context, WeatherModel weatherModel) {
         this.context = context;
-        this.firstName = new ObservableField<>(profileModel.getFirstName());
-        this.lastName = new ObservableField<>(profileModel.getLastName());
-        this.fullName = new ObservableField<>(context.getString(R.string.full_name, profileModel.getFirstName(), profileModel.getLastName()));
-        this.birthday = new ObservableField<>(formatBirthday(profileModel.getBirthday()));
-        this.age = new ObservableField<>(context.getString(R.string.age_unit, getAge(profileModel.getBirthday())));
+//        this.firstName = new ObservableField<>(weatherModel.getFirstName());
+//        this.lastName = new ObservableField<>(weatherModel.getLastName());
+//        this.fullName = new ObservableField<>(context.getString(R.string.full_name, weatherModel.getFirstName(), weatherModel.getLastName()));
+//        this.birthday = new ObservableField<>(formatBirthday(weatherModel.getBirthday()));
+//        this.age = new ObservableField<>(context.getString(R.string.age_unit, getAge(weatherModel.getBirthday())));
     }
 
     public void onItemClick(View view) {

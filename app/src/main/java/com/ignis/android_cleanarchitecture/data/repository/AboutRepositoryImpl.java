@@ -7,8 +7,6 @@ import com.ignis.android_cleanarchitecture.data.util.StoreUtils;
 import com.ignis.android_cleanarchitecture.data.util.VersionUtils;
 import com.ignis.android_cleanarchitecture.domain.repository.AboutRepository;
 
-import rx.Observable;
-
 /**
  * About Repository Implement
  * <p>
@@ -23,35 +21,23 @@ public class AboutRepositoryImpl implements AboutRepository {
     }
 
     @Override
-    public Observable<String> getPlayStoreUrl() {
-        return Observable.create((Observable.OnSubscribe<String>) subscriber -> {
-            subscriber.onNext(StoreUtils.getStoreDirectLink(context));
-            subscriber.onCompleted();
-        });
+    public String getPlayStoreUrl() {
+        return StoreUtils.getStoreDirectLink(context);
     }
 
     @Override
-    public Observable<String> getMailUrl() {
-        return Observable.create((Observable.OnSubscribe<String>) subscriber -> {
-            subscriber.onNext(context.getString(R.string.developer_mail_address));
-            subscriber.onCompleted();
-        });
+    public String getMailUrl() {
+        return context.getString(R.string.developer_mail_address);
     }
 
     @Override
-    public Observable<String> getWebSiteUrl() {
-        return Observable.create((Observable.OnSubscribe<String>) subscriber -> {
-            subscriber.onNext(context.getString(R.string.developer_website_url));
-            subscriber.onCompleted();
-        });
+    public String getWebSiteUrl() {
+        return context.getString(R.string.developer_website_url);
     }
 
     @Override
-    public Observable<String> getCurrentVersion() {
-        return Observable.create((Observable.OnSubscribe<String>) subscriber -> {
-            subscriber.onNext(VersionUtils.getVersionName(context));
-            subscriber.onCompleted();
-        });
+    public String getCurrentVersion() {
+        return VersionUtils.getVersionName(context);
     }
 
 }

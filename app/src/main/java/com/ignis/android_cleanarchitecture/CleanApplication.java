@@ -3,11 +3,12 @@ package com.ignis.android_cleanarchitecture;
 import android.app.Application;
 import android.content.Context;
 
+import com.ignis.android_cleanarchitecture.data.dao.RealmManager;
 import com.ignis.android_cleanarchitecture.presentation.di.component.ApplicationComponent;
 import com.ignis.android_cleanarchitecture.presentation.di.component.DaggerApplicationComponent;
+import com.ignis.android_cleanarchitecture.presentation.di.module.ApplicationModule;
 import com.ignis.android_cleanarchitecture.presentation.di.module.DataModule;
 import com.ignis.android_cleanarchitecture.presentation.di.module.DomainModule;
-import com.ignis.android_cleanarchitecture.presentation.di.module.ApplicationModule;
 
 /**
  * アプリケーションクラス
@@ -26,6 +27,7 @@ public class CleanApplication extends Application {
     public void onCreate() {
         super.onCreate();
         initializeInjector();
+        RealmManager.initRealmConfiguration(this);
     }
 
     private void initializeInjector() {

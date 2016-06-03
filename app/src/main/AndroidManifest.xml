@@ -2,6 +2,8 @@
 <manifest package="com.ignis.android_cleanarchitecture"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".CleanApplication"
         android:allowBackup="false"
@@ -18,7 +20,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.view.activity.AboutActivity"/>
+            android:name=".presentation.view.activity.AboutActivity"
+            android:label="@string/about_title"/>
     </application>
 
 </manifest>

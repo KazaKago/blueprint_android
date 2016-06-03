@@ -4,8 +4,6 @@ import com.ignis.android_cleanarchitecture.domain.repository.AboutRepository;
 
 import java.util.Calendar;
 
-import rx.Observable;
-
 /**
  * About UseCase Implement
  *
@@ -20,32 +18,29 @@ public class AboutUseCaseImpl implements AboutUseCase {
     }
 
     @Override
-    public Observable<String> getPlayStoreUrl() {
+    public String getPlayStoreUrl() {
         return aboutRepository.getPlayStoreUrl();
     }
 
     @Override
-    public Observable<String> getMailUrl() {
+    public String getMailUrl() {
         return aboutRepository.getMailUrl();
     }
 
     @Override
-    public Observable<String> getWebSiteUrl() {
+    public String getWebSiteUrl() {
         return aboutRepository.getWebSiteUrl();
     }
 
     @Override
-    public Observable<String> getCurrentVersion() {
+    public String getCurrentVersion() {
         return aboutRepository.getCurrentVersion();
     }
 
     @Override
-    public Observable<Integer> getCurrentYear() {
-        return Observable.create((Observable.OnSubscribe<Integer>) subscriber -> {
-            Calendar calendar = Calendar.getInstance();
-            subscriber.onNext(calendar.get(Calendar.YEAR));
-            subscriber.onCompleted();
-        });
+    public int getCurrentYear() {
+        Calendar calendar = Calendar.getInstance();
+        return calendar.get(Calendar.YEAR);
     }
 
 }

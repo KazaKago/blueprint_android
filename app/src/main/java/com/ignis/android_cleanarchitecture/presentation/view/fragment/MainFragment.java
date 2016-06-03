@@ -14,7 +14,7 @@ import com.ignis.android_cleanarchitecture.presentation.presenter.adapter.Profil
 import com.ignis.android_cleanarchitecture.presentation.presenter.fragment.MainFragmentViewModel;
 import com.ignis.android_cleanarchitecture.presentation.view.adapter.ProfileRecyclerAdapter;
 
-import java.util.List;
+import java.util.Collections;
 
 /**
  * Main Fragment
@@ -49,7 +49,6 @@ public class MainFragment extends Fragment implements MainFragmentListener {
     public void onStart() {
         super.onStart();
         viewModel.onStart();
-        viewModel.getProfileList();
     }
 
     @Override
@@ -61,8 +60,8 @@ public class MainFragment extends Fragment implements MainFragmentListener {
     /* MainFragment.MainFragmentListener */
 
     @Override
-    public void onGetProfileList(List<ProfileViewModel> profileList) {
-        adapter.setProfileViewModelList(profileList);
+    public void onGetWeather(ProfileViewModel profile) {
+        adapter.setProfileViewModelList(Collections.singletonList(profile));
         adapter.notifyDataSetChanged();
     }
 

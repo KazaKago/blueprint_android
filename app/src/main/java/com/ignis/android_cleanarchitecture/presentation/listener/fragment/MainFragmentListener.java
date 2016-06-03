@@ -2,8 +2,6 @@ package com.ignis.android_cleanarchitecture.presentation.listener.fragment;
 
 import com.ignis.android_cleanarchitecture.presentation.presenter.adapter.ProfileViewModel;
 
-import java.util.List;
-
 /**
  * Main Fragment Listener
  * <p>
@@ -11,6 +9,6 @@ import java.util.List;
  */
 public interface MainFragmentListener {
 
-    void onGetProfileList(List<ProfileViewModel> profileList);
+    void onGetWeather(ProfileViewModel profile);
 
 }
