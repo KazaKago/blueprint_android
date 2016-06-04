@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.ignis.android_cleanarchitecture.presentation.presenter.adapter.ProfileViewModel"/>
+            type="com.ignis.android_cleanarchitecture.presentation.presenter.adapter.PinpointLocationViewModel"/>
 
     </data>
 
@@ -25,26 +25,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.fullName}"
+            android:text="@{viewModel.name}"
             tools:text="Full Name"/>
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{viewModel.birthday}"
-            tools:text="1980/01/01"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="@{viewModel.age}"
-            tools:text="Age 23"/>
 
     </LinearLayout>
 

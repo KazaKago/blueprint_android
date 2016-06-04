@@ -10,11 +10,11 @@ import android.view.ViewGroup;
 import com.ignis.android_cleanarchitecture.R;
 import com.ignis.android_cleanarchitecture.databinding.FragmentMainBinding;
 import com.ignis.android_cleanarchitecture.presentation.listener.fragment.MainFragmentListener;
-import com.ignis.android_cleanarchitecture.presentation.presenter.adapter.ProfileViewModel;
+import com.ignis.android_cleanarchitecture.presentation.presenter.adapter.PinpointLocationViewModel;
 import com.ignis.android_cleanarchitecture.presentation.presenter.fragment.MainFragmentViewModel;
-import com.ignis.android_cleanarchitecture.presentation.view.adapter.ProfileRecyclerAdapter;
+import com.ignis.android_cleanarchitecture.presentation.view.adapter.PinpointLocationRecyclerAdapter;
 
-import java.util.Collections;
+import java.util.List;
 
 /**
  * Main Fragment
@@ -25,7 +25,7 @@ public class MainFragment extends Fragment implements MainFragmentListener {
 
     private FragmentMainBinding binding;
     private MainFragmentViewModel viewModel;
-    private ProfileRecyclerAdapter adapter;
+    private PinpointLocationRecyclerAdapter adapter;
 
     public static MainFragment newInstance() {
         MainFragment fragment = new MainFragment();
@@ -39,7 +39,7 @@ public class MainFragment extends Fragment implements MainFragmentListener {
             viewModel = new MainFragmentViewModel(getActivity(), this);
             binding.setViewModel(viewModel);
 
-            adapter = new ProfileRecyclerAdapter(getActivity());
+            adapter = new PinpointLocationRecyclerAdapter(getActivity());
             binding.recyclerName.setAdapter(adapter);
         }
         return binding.getRoot();
@@ -60,8 +60,8 @@ public class MainFragment extends Fragment implements MainFragmentListener {
     /* MainFragment.MainFragmentListener */
 
     @Override
-    public void onGetWeather(ProfileViewModel profile) {
-        adapter.setProfileViewModelList(Collections.singletonList(profile));
+    public void onGetWeather(List<PinpointLocationViewModel> pinpointLocationViewModelList) {
+        adapter.setPinpointLocationViewModelList(pinpointLocationViewModelList);
         adapter.notifyDataSetChanged();
     }
 

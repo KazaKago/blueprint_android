@@ -22,7 +22,9 @@ public class WeatherUseCaseImpl implements WeatherUseCase {
     public Observable<WeatherModel> download(int cityId) {
         return weatherRepository.fetch(cityId)
                 .map(weatherModel -> {
-                    if (weatherRepository.exist(cityId)) weatherRepository.delete(cityId);
+                    if (weatherRepository.exist(cityId)) {
+                        weatherRepository.delete(cityId);
+                    }
                     weatherModel.setCityId(cityId);
                     weatherRepository.save(weatherModel);
                     return weatherModel;

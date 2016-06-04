@@ -5,17 +5,20 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.ignis.android_cleanarchitecture.CleanApplication;
-import com.ignis.android_cleanarchitecture.data.repository.WeatherRepositoryImpl;
 import com.ignis.android_cleanarchitecture.domain.model.WeatherModel;
 import com.ignis.android_cleanarchitecture.domain.repository.WeatherRepository;
 import com.ignis.android_cleanarchitecture.domain.usecase.WeatherUseCase;
 import com.ignis.android_cleanarchitecture.presentation.listener.fragment.MainFragmentListener;
-import com.ignis.android_cleanarchitecture.presentation.presenter.adapter.ProfileViewModel;
+import com.ignis.android_cleanarchitecture.presentation.presenter.adapter.PinpointLocationViewModel;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
+import io.realm.RealmList;
+import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
@@ -29,6 +32,8 @@ public class MainFragmentViewModel {
 
     @Inject
     public WeatherUseCase weatherUseCase;
+    @Inject
+    public WeatherRepository weatherRepository;
 
     private Context context;
     private MainFragmentListener mainFragmentListener;
@@ -40,7 +45,10 @@ public class MainFragmentViewModel {
         CleanApplication.getInstance(context).getApplicationComponent().inject(this);
         this.context = context;
         this.mainFragmentListener = mainFragmentListener;
-        this.realmChangeListener = element -> mainFragmentListener.onGetWeather(new ProfileViewModel(context, getWeather()));
+        this.realmChangeListener = element -> {
+            WeatherModel weatherModel = getWeather();
+            if (weatherModel != null) mainFragmentListener.onGetWeather(getPinpointLocation(weatherModel));
+        };
     }
 
     public void onStart() {
@@ -48,9 +56,9 @@ public class MainFragmentViewModel {
         realm = Realm.getDefaultInstance();
         realm.addChangeListener(realmChangeListener);
 
-        WeatherModel weatherModel = getWeather();
-        if (weatherModel != null) {
-            mainFragmentListener.onGetWeather(new ProfileViewModel(context, weatherModel));
+        WeatherModel weather = getWeather();
+        if (weather != null) {
+            mainFragmentListener.onGetWeather(getPinpointLocation(weather));
         } else {
             downloadWeather();
         }
@@ -66,7 +74,7 @@ public class MainFragmentViewModel {
         downloadWeather();
     }
 
-    public void downloadWeather() {
+    private void downloadWeather() {
         subscriptions.add(weatherUseCase.download(400040)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -77,11 +85,16 @@ public class MainFragmentViewModel {
                         }));
     }
 
-    public WeatherModel getWeather() {
-        WeatherRepository weatherRepository = new WeatherRepositoryImpl(context);
+    private WeatherModel getWeather() {
         return weatherRepository.find(realm, 400040);
     }
 
+    private List<PinpointLocationViewModel> getPinpointLocation(WeatherModel weather) {
+        return Observable.from(weather.getPinpointLocation())
+                .map(linkModel -> new PinpointLocationViewModel(context, linkModel))
+                .toList()
+                .toBlocking().single();
+    }
 
     private void showToast(String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
