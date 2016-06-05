@@ -26,7 +26,7 @@ public class WeatherUseCaseImpl implements WeatherUseCase {
                         weatherRepository.delete(cityId);
                     }
                     weatherModel.setCityId(cityId);
-                    weatherRepository.save(weatherModel);
+                    weatherRepository.insert(weatherModel);
                     return weatherModel;
                 });
     }

@@ -26,9 +26,9 @@ public class WeatherModel extends RealmObject {
     //天気概況文
     private DescriptionModel description;
     //府県天気予報の予報日毎の配列
-    private RealmList<ForecastsModel> forecasts;
+    private RealmList<ForecastModel> forecasts;
     //ピンポイント予報の発表地点の配列
-    private RealmList<LinkModel> pinpointLocation;
+    private RealmList<LinkModel> pinpointLocations;
     //コピーライト
     private CopyrightModel copyright;
 
@@ -81,20 +81,20 @@ public class WeatherModel extends RealmObject {
         this.description = description;
     }
 
-    public RealmList<ForecastsModel> getForecasts() {
+    public RealmList<ForecastModel> getForecasts() {
         return forecasts;
     }
 
-    public void setForecasts(RealmList<ForecastsModel> forecasts) {
+    public void setForecasts(RealmList<ForecastModel> forecasts) {
         this.forecasts = forecasts;
     }
 
-    public RealmList<LinkModel> getPinpointLocation() {
-        return pinpointLocation;
+    public RealmList<LinkModel> getPinpointLocations() {
+        return pinpointLocations;
     }
 
-    public void setPinpointLocation(RealmList<LinkModel> pinpointLocation) {
-        this.pinpointLocation = pinpointLocation;
+    public void setPinpointLocations(RealmList<LinkModel> pinpointLocations) {
+        this.pinpointLocations = pinpointLocations;
     }
 
     public CopyrightModel getCopyright() {

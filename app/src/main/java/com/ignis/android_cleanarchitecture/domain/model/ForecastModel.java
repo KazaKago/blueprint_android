@@ -7,7 +7,7 @@ import io.realm.RealmObject;
  * <p>
  * Created by tamura_k on 2016/06/03.
  */
-public class ForecastsModel extends RealmObject {
+public class ForecastModel extends RealmObject {
 
     //予報日
     private String date;

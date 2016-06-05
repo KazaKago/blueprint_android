@@ -18,7 +18,7 @@ public interface WeatherRepository {
 
     boolean exist(int cityId);
 
-    void save(WeatherModel weatherModel);
+    void insert(WeatherModel weatherModel);
 
     void delete(int cityId);
 

@@ -3,10 +3,11 @@
     <string name="app_name">CleanArchitectureSample</string>
 
     <!-- Main -->
-    <string name="full_name">%1$s %2$s</string>
-    <string name="age_unit">Age %1$d</string>
-    <string name="action_about">About</string>
-    <string name="refresh">Refresh</string>
+    <string name="refresh">更新</string>
+    <string name="refresh_complete">更新しました</string>
+    <string name="temperature_max">最高:%1$s℃</string>
+    <string name="temperature_min">最低:%1$s℃</string>
+    <string name="action_about">アプリについて</string>
 
     <!-- About -->
     <string name="about_title">About</string>

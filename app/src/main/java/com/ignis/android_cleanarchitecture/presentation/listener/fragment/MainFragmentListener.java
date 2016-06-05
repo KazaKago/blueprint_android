@@ -1,6 +1,6 @@
 package com.ignis.android_cleanarchitecture.presentation.listener.fragment;
 
-import com.ignis.android_cleanarchitecture.presentation.presenter.adapter.PinpointLocationViewModel;
+import com.ignis.android_cleanarchitecture.presentation.presenter.adapter.WeatherViewModel;
 
 import java.util.List;
 
@@ -11,6 +11,6 @@ import java.util.List;
  */
 public interface MainFragmentListener {
 
-    void onGetWeather(List<PinpointLocationViewModel> pinpointLocationViewModelList);
+    void onGetWeather(List<WeatherViewModel> weatherViewModelList);
 
 }

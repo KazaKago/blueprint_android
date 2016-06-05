@@ -2,10 +2,12 @@ package com.ignis.android_cleanarchitecture.data.dao;
 
 import android.support.annotation.NonNull;
 
+import com.ignis.android_cleanarchitecture.domain.model.ForecastModel;
+import com.ignis.android_cleanarchitecture.domain.model.ImageModel;
+import com.ignis.android_cleanarchitecture.domain.model.TemperatureUnitModel;
 import com.ignis.android_cleanarchitecture.domain.model.WeatherModel;
 
 import io.realm.Realm;
-import rx.Observable;
 
 /**
  * Weather Dao
@@ -24,32 +26,35 @@ public class WeatherDao extends AbsDao {
                 .findFirst();
     }
 
-    public boolean isExist(int cityId) {
+    public boolean exist(int cityId) {
         return (0 <= getRealm().where(WeatherModel.class)
                 .equalTo("cityId", cityId)
                 .count());
     }
 
-    public void save(WeatherModel weatherModel) {
-        getRealm().copyToRealmOrUpdate(weatherModel);
+    public void insert(WeatherModel weatherModel) {
+        getRealm().copyToRealm(weatherModel);
     }
 
     public void delete(int cityId) {
-        WeatherModel weatherModel = getRealm().where(WeatherModel.class)
-                .equalTo("cityId", cityId)
-                .findFirst();
+        WeatherModel weatherModel = find(cityId);
         if (weatherModel != null) {
-            Observable.from(weatherModel.getForecasts())
-                    .subscribe(forecastsModel -> {
-                        forecastsModel.getImage().deleteFromRealm();
-                        forecastsModel.getTemperature().deleteFromRealm();
-                    });
+            for (ForecastModel forecastModel : weatherModel.getForecasts()) {
+                TemperatureUnitModel max = forecastModel.getTemperature().getMax();
+                if (max != null) max.deleteFromRealm();
+                TemperatureUnitModel min = forecastModel.getTemperature().getMin();
+                if (min != null) min.deleteFromRealm();
+                forecastModel.getTemperature().deleteFromRealm();
+                forecastModel.getImage().deleteFromRealm();
+            }
             weatherModel.getForecasts().deleteAllFromRealm();
             weatherModel.getCopyright().getProvider().deleteAllFromRealm();
+            ImageModel image = weatherModel.getCopyright().getImage();
+            if (image != null) image.deleteFromRealm();
             weatherModel.getCopyright().deleteFromRealm();
             weatherModel.getLocation().deleteFromRealm();
             weatherModel.getDescription().deleteFromRealm();
-            weatherModel.getPinpointLocation().deleteAllFromRealm();
+            weatherModel.getPinpointLocations().deleteAllFromRealm();
             weatherModel.deleteFromRealm();
         }
     }

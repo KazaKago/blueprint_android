@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 import com.ignis.android_cleanarchitecture.R;
 import com.ignis.android_cleanarchitecture.databinding.FragmentMainBinding;
 import com.ignis.android_cleanarchitecture.presentation.listener.fragment.MainFragmentListener;
-import com.ignis.android_cleanarchitecture.presentation.presenter.adapter.PinpointLocationViewModel;
+import com.ignis.android_cleanarchitecture.presentation.presenter.adapter.WeatherViewModel;
 import com.ignis.android_cleanarchitecture.presentation.presenter.fragment.MainFragmentViewModel;
-import com.ignis.android_cleanarchitecture.presentation.view.adapter.PinpointLocationRecyclerAdapter;
+import com.ignis.android_cleanarchitecture.presentation.view.adapter.WeatherRecyclerAdapter;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class MainFragment extends Fragment implements MainFragmentListener {
 
     private FragmentMainBinding binding;
     private MainFragmentViewModel viewModel;
-    private PinpointLocationRecyclerAdapter adapter;
+    private WeatherRecyclerAdapter adapter;
 
     public static MainFragment newInstance() {
         MainFragment fragment = new MainFragment();
@@ -39,9 +39,10 @@ public class MainFragment extends Fragment implements MainFragmentListener {
             viewModel = new MainFragmentViewModel(getActivity(), this);
             binding.setViewModel(viewModel);
 
-            adapter = new PinpointLocationRecyclerAdapter(getActivity());
-            binding.recyclerName.setAdapter(adapter);
+            adapter = new WeatherRecyclerAdapter(getActivity());
+            binding.recyclerWeather.setAdapter(adapter);
         }
+        viewModel.onCreateView(savedInstanceState);
         return binding.getRoot();
     }
 
@@ -60,8 +61,8 @@ public class MainFragment extends Fragment implements MainFragmentListener {
     /* MainFragment.MainFragmentListener */
 
     @Override
-    public void onGetWeather(List<PinpointLocationViewModel> pinpointLocationViewModelList) {
-        adapter.setPinpointLocationViewModelList(pinpointLocationViewModelList);
+    public void onGetWeather(List<WeatherViewModel> weatherViewModelList) {
+        adapter.setWeatherViewModelList(weatherViewModelList);
         adapter.notifyDataSetChanged();
     }
 

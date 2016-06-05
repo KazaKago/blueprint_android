@@ -25,18 +25,22 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/refresh"
-            android:onClick="@{viewModel.onClickRefresh}"/>
+            android:onClick="@{viewModel.onClickRefresh}"
+            android:text="@string/refresh"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""/>
+            android:text="@{viewModel.title}"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="@dimen/text_size_medium_large"
+            tools:text="東京都の天気"/>
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_name"
+            android:id="@+id/recycler_weather"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
             android:scrollbars="vertical"
             app:layoutManager="LinearLayoutManager"/>
 

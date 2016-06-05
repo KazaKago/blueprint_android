@@ -44,20 +44,20 @@ public class WeatherRepositoryImpl implements WeatherRepository {
         try {
             realm = Realm.getDefaultInstance();
             WeatherDao weatherDao = new WeatherDao(realm);
-            return weatherDao.isExist(cityId);
+            return weatherDao.exist(cityId);
         } finally {
             if (realm != null) realm.close();
         }
     }
 
     @Override
-    public void save(WeatherModel weatherModel) {
+    public void insert(WeatherModel weatherModel) {
         Realm realm = null;
         try {
             realm = Realm.getDefaultInstance();
             realm.beginTransaction();
             WeatherDao weatherDao = new WeatherDao(realm);
-            weatherDao.save(weatherModel);
+            weatherDao.insert(weatherModel);
             realm.commitTransaction();
         } finally {
             if (realm != null) realm.close();
