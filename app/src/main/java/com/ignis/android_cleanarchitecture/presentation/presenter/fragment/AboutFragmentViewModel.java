@@ -22,10 +22,11 @@ public class AboutFragmentViewModel {
     @Inject
     public AboutUseCase aboutUseCase;
 
-    private Context context;
     public ObservableField<String> verText;
     public ObservableField<String> developByText;
     public ObservableField<String> copyrightText;
+
+    private Context context;
 
     public AboutFragmentViewModel(Context context) {
         CleanApplication.getInstance(context).getApplicationComponent().inject(this);
@@ -47,25 +48,16 @@ public class AboutFragmentViewModel {
         toWebSite();
     }
 
-    /**
-     * PlayStoreへ遷移
-     */
     private void toPlayStore() {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(aboutUseCase.getPlayStoreUrl()));
         context.startActivity(intent);
     }
 
-    /**
-     * メールアプリを開く
-     */
     private void toMailApp() {
         Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + aboutUseCase.getMailUrl()));
         context.startActivity(intent);
     }
 
-    /**
-     * Webサイトをブラウザで開く
-     */
     private void toWebSite() {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(aboutUseCase.getWebSiteUrl()));
         context.startActivity(intent);

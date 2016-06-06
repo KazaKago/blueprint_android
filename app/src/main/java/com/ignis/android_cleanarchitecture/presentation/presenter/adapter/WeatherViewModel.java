@@ -1,33 +1,31 @@
 package com.ignis.android_cleanarchitecture.presentation.presenter.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.databinding.ObservableField;
-import android.net.Uri;
 import android.view.View;
 import android.widget.Toast;
 
 import com.ignis.android_cleanarchitecture.R;
 import com.ignis.android_cleanarchitecture.domain.model.ForecastModel;
 import com.ignis.android_cleanarchitecture.domain.model.ImageModel;
-import com.ignis.android_cleanarchitecture.domain.model.LinkModel;
 import com.ignis.android_cleanarchitecture.domain.model.TemperatureModel;
 import com.ignis.android_cleanarchitecture.domain.model.TemperatureUnitModel;
 
 /**
- * PinpointLocation ViewModel
+ * Weather ViewModel
  * <p>
  * Created by tamura_k on 2016/06/01.
  */
 public class WeatherViewModel {
 
-    private Context context;
-    private String imageUrl;
     public ObservableField<String> dateLabel;
     public ObservableField<String> date;
     public ObservableField<String> telop;
     public ObservableField<String> maxTemperature;
     public ObservableField<String> minTemperature;
+
+    private Context context;
+    private String imageUrl;
 
     public WeatherViewModel(Context context, ForecastModel forecast) {
         this.context = context;
@@ -65,6 +63,10 @@ public class WeatherViewModel {
 
     private void showToast(String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
     }
 
 }

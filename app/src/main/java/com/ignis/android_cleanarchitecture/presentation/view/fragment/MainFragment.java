@@ -1,5 +1,6 @@
 package com.ignis.android_cleanarchitecture.presentation.view.fragment;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.ignis.android_cleanarchitecture.R;
 import com.ignis.android_cleanarchitecture.databinding.FragmentMainBinding;
+import com.ignis.android_cleanarchitecture.presentation.listener.activity.MainActivityListener;
 import com.ignis.android_cleanarchitecture.presentation.listener.fragment.MainFragmentListener;
 import com.ignis.android_cleanarchitecture.presentation.presenter.adapter.WeatherViewModel;
 import com.ignis.android_cleanarchitecture.presentation.presenter.fragment.MainFragmentViewModel;
@@ -26,10 +28,22 @@ public class MainFragment extends Fragment implements MainFragmentListener {
     private FragmentMainBinding binding;
     private MainFragmentViewModel viewModel;
     private WeatherRecyclerAdapter adapter;
+    private MainActivityListener mainActivityListener;
 
     public static MainFragment newInstance() {
         MainFragment fragment = new MainFragment();
         return fragment;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        try {
+            mainActivityListener = (MainActivityListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement " + MainActivityListener.class.getSimpleName());
+        }
     }
 
     @Override
@@ -40,9 +54,8 @@ public class MainFragment extends Fragment implements MainFragmentListener {
             binding.setViewModel(viewModel);
 
             adapter = new WeatherRecyclerAdapter(getActivity());
-            binding.recyclerWeather.setAdapter(adapter);
+            binding.weatherRecycler.setAdapter(adapter);
         }
-        viewModel.onCreateView(savedInstanceState);
         return binding.getRoot();
     }
 
@@ -64,6 +77,11 @@ public class MainFragment extends Fragment implements MainFragmentListener {
     public void onGetWeather(List<WeatherViewModel> weatherViewModelList) {
         adapter.setWeatherViewModelList(weatherViewModelList);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void setActionBarTitle(String title) {
+        mainActivityListener.setActionBarTitle(title);
     }
 
 }

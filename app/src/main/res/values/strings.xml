@@ -5,12 +5,13 @@
     <!-- Main -->
     <string name="refresh">更新</string>
     <string name="refresh_complete">更新しました</string>
+    <string name="public_time">発表日時: %1$s</string>
     <string name="temperature_max">最高:%1$s℃</string>
     <string name="temperature_min">最低:%1$s℃</string>
     <string name="action_about">アプリについて</string>
 
     <!-- About -->
-    <string name="about_title">About</string>
+    <string name="about_title">アプリについて</string>
     <string name="about_ver">Ver. %1$s</string>
     <string name="about_develop_by">Develop by %1$s</string>
     <string name="about_play_store">Playストア</string>

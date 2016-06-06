@@ -13,4 +13,6 @@ public interface MainFragmentListener {
 
     void onGetWeather(List<WeatherViewModel> weatherViewModelList);
 
+    void setActionBarTitle(String title);
+
 }

@@ -12,7 +12,7 @@ public class LocationModel extends RealmObject {
     //地方名（例・九州地方）
     private String area;
     //都道府県名（例・福岡県）
-    private String pref;
+    private String prefecture;
     //1次細分区名（例・八幡）
     private String city;
 
@@ -24,12 +24,12 @@ public class LocationModel extends RealmObject {
         this.area = area;
     }
 
-    public String getPref() {
-        return pref;
+    public String getPrefecture() {
+        return prefecture;
     }
 
-    public void setPref(String pref) {
-        this.pref = pref;
+    public void setPrefecture(String pref) {
+        this.prefecture = pref;
     }
 
     public String getCity() {

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.ignis.android_cleanarchitecture.R;
 import com.ignis.android_cleanarchitecture.databinding.RecyclerWeatherBinding;
 import com.ignis.android_cleanarchitecture.presentation.presenter.adapter.WeatherViewModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +62,8 @@ public class WeatherRecyclerAdapter extends RecyclerView.Adapter<WeatherRecycler
 
         holder.getBinding().setVariable(com.ignis.android_cleanarchitecture.BR.viewModel, item);
         holder.getBinding().executePendingBindings();
+
+        Picasso.with(context).load(item.getImageUrl()).into(holder.getBinding().weatherImage);
     }
 
     public void setWeatherViewModelList(List<WeatherViewModel> weatherViewModelList) {

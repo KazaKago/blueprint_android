@@ -2,7 +2,7 @@ package com.ignis.android_cleanarchitecture.data.repository;
 
 import android.content.Context;
 
-import com.ignis.android_cleanarchitecture.data.api.RetrofitManager;
+import com.ignis.android_cleanarchitecture.data.api.WeatherRetrofit;
 import com.ignis.android_cleanarchitecture.data.api.WeatherApi;
 import com.ignis.android_cleanarchitecture.data.dao.WeatherDao;
 import com.ignis.android_cleanarchitecture.domain.model.WeatherModel;
@@ -27,7 +27,7 @@ public class WeatherRepositoryImpl implements WeatherRepository {
 
     @Override
     public Observable<WeatherModel> fetch(int cityId) {
-        Retrofit retrofit = RetrofitManager.getInstance();
+        Retrofit retrofit = WeatherRetrofit.getInstance();
         WeatherApi weatherApi = retrofit.create(WeatherApi.class);
         return weatherApi.get(cityId);
     }

@@ -12,6 +12,7 @@ import android.view.MenuItem;
 
 import com.ignis.android_cleanarchitecture.R;
 import com.ignis.android_cleanarchitecture.databinding.ActivityMainBinding;
+import com.ignis.android_cleanarchitecture.presentation.listener.activity.MainActivityListener;
 import com.ignis.android_cleanarchitecture.presentation.presenter.activity.MainActivityViewModel;
 import com.ignis.android_cleanarchitecture.presentation.view.fragment.MainFragment;
 
@@ -20,7 +21,7 @@ import com.ignis.android_cleanarchitecture.presentation.view.fragment.MainFragme
  *
  * @author Kensuke
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainActivityListener {
 
     private MainActivityViewModel viewModel;
 
@@ -66,6 +67,13 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container_fragment, fragment);
         fragmentTransaction.commit();
+    }
+
+    /* MainActivityListener */
+
+    @Override
+    public void setActionBarTitle(String title) {
+        getSupportActionBar().setTitle(title);
     }
 
 }

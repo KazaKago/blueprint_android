@@ -5,11 +5,11 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * RetrofitManager
+ * WeatherRetrofit from livedoor
  * <p>
  * Created by tamura_k on 2016/06/03.
  */
-public class RetrofitManager {
+public class WeatherRetrofit {
 
     public static Retrofit getInstance() {
         return new Retrofit.Builder()
