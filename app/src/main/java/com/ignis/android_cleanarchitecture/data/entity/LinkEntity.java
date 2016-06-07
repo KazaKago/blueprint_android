@@ -1,11 +1,13 @@
-package com.ignis.android_cleanarchitecture.domain.model;
+package com.ignis.android_cleanarchitecture.data.entity;
+
+import io.realm.RealmObject;
 
 /**
- * Link Model
+ * Link Entity
  * <p>
  * Created by tamura_k on 2016/06/03.
  */
-public class LinkModel {
+public class LinkEntity extends RealmObject {
 
     //市区町村名
     private String name;

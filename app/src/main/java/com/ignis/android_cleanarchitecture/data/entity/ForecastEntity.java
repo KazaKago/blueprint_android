@@ -1,11 +1,13 @@
-package com.ignis.android_cleanarchitecture.domain.model;
+package com.ignis.android_cleanarchitecture.data.entity;
+
+import io.realm.RealmObject;
 
 /**
- * Forecasts Model
+ * Forecasts Entity
  * <p>
  * Created by tamura_k on 2016/06/03.
  */
-public class ForecastModel {
+public class ForecastEntity extends RealmObject {
 
     //予報日
     private String date;
@@ -14,9 +16,9 @@ public class ForecastModel {
     //天気（晴れ、曇り、雨など）
     private String telop;
     //画像
-    private ImageModel image;
+    private ImageEntity image;
     //気温
-    private TemperatureModel temperature;
+    private TemperatureEntity temperature;
 
     public String getDate() {
         return date;
@@ -42,19 +44,19 @@ public class ForecastModel {
         this.telop = telop;
     }
 
-    public ImageModel getImage() {
+    public ImageEntity getImage() {
         return image;
     }
 
-    public void setImage(ImageModel image) {
+    public void setImage(ImageEntity image) {
         this.image = image;
     }
 
-    public TemperatureModel getTemperature() {
+    public TemperatureEntity getTemperature() {
         return temperature;
     }
 
-    public void setTemperature(TemperatureModel temperature) {
+    public void setTemperature(TemperatureEntity temperature) {
         this.temperature = temperature;
     }
 

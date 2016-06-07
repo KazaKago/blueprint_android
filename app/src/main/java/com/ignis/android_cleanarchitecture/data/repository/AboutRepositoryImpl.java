@@ -22,7 +22,7 @@ public class AboutRepositoryImpl implements AboutRepository {
 
     @Override
     public String getPlayStoreUrl() {
-        return StoreUtils.getStoreDirectLink(context);
+        return StoreUtils.getStoreAppLink(context);
     }
 
     @Override

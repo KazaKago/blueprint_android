@@ -1,6 +1,6 @@
 package com.ignis.android_cleanarchitecture.data.api;
 
-import com.ignis.android_cleanarchitecture.domain.model.WeatherModel;
+import com.ignis.android_cleanarchitecture.data.entity.WeatherEntity;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -15,6 +15,6 @@ import rx.Observable;
 public interface WeatherApi {
 
     @GET("json/v1")
-    Observable<WeatherModel> get(@Query("city") int cityId);
+    Observable<WeatherEntity> get(@Query("city") int cityId);
 
 }

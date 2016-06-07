@@ -19,16 +19,13 @@ public class WeatherUseCaseImpl implements WeatherUseCase {
     }
 
     @Override
-    public Observable<WeatherModel> download(int cityId) {
-        return weatherRepository.fetch(cityId)
-                .map(weatherModel -> {
-                    if (weatherRepository.exist(cityId)) {
-                        weatherRepository.delete(cityId);
-                    }
-                    weatherModel.setCityId(cityId);
-                    weatherRepository.insert(weatherModel);
-                    return weatherModel;
-                });
+    public Observable<WeatherModel> fetch(int cityId) {
+        return weatherRepository.fetch(cityId);
+    }
+
+    @Override
+    public WeatherModel find(int cityId) {
+        return weatherRepository.find(cityId);
     }
 
 }

@@ -1,11 +1,13 @@
-package com.ignis.android_cleanarchitecture.domain.model;
+package com.ignis.android_cleanarchitecture.data.entity;
+
+import io.realm.RealmObject;
 
 /**
- * Temperature Unit Model
+ * Temperature Unit Entity
  * <p>
  * Created by tamura_k on 2016/06/03.
  */
-public class TemperatureUnitModel {
+public class TemperatureUnitEntity extends RealmObject {
 
     //摂氏
     private Float celsius;

@@ -1,22 +1,23 @@
-package com.ignis.android_cleanarchitecture.domain.model;
+package com.ignis.android_cleanarchitecture.data.entity;
 
-import java.util.List;
+import io.realm.RealmList;
+import io.realm.RealmObject;
 
 /**
- * Copyright Model
+ * Copyright Entity
  * <p>
  * Created by tamura_k on 2016/06/03.
  */
-public class CopyrightModel {
+public class CopyrightEntity extends RealmObject {
 
     //コピーライトの文言
     private String title;
     //livedoor 天気情報のURL
     private String link;
     //livedoor 天気情報へのURL、アイコンなど
-    private ImageModel image;
+    private ImageEntity image;
     //livedoor 天気情報で使用している気象データの配信元
-    private List<LinkModel> provider;
+    private RealmList<LinkEntity> provider;
 
     public String getTitle() {
         return title;
@@ -34,19 +35,19 @@ public class CopyrightModel {
         this.link = link;
     }
 
-    public ImageModel getImage() {
+    public ImageEntity getImage() {
         return image;
     }
 
-    public void setImage(ImageModel image) {
+    public void setImage(ImageEntity image) {
         this.image = image;
     }
 
-    public List<LinkModel> getProvider() {
+    public RealmList<LinkEntity> getProvider() {
         return provider;
     }
 
-    public void setProvider(List<LinkModel> provider) {
+    public void setProvider(RealmList<LinkEntity> provider) {
         this.provider = provider;
     }
 

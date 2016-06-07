@@ -1,11 +1,13 @@
-package com.ignis.android_cleanarchitecture.domain.model;
+package com.ignis.android_cleanarchitecture.data.entity;
+
+import io.realm.RealmObject;
 
 /**
- * Description Model
+ * Description Entity
  * <p>
  * Created by tamura_k on 2016/05/31.
  */
-public class DescriptionModel {
+public class DescriptionEntity extends RealmObject {
 
     //天気概況文
     private String text;

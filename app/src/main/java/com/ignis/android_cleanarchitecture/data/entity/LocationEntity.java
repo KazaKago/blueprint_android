@@ -1,11 +1,13 @@
-package com.ignis.android_cleanarchitecture.domain.model;
+package com.ignis.android_cleanarchitecture.data.entity;
+
+import io.realm.RealmObject;
 
 /**
- * Location Model
+ * Location Entity
  * <p>
  * Created by tamura_k on 2016/05/31.
  */
-public class LocationModel {
+public class LocationEntity extends RealmObject {
 
     //地方名（例・九州地方）
     private String area;

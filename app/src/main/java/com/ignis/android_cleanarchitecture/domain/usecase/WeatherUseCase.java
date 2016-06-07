@@ -11,6 +11,8 @@ import rx.Observable;
  */
 public interface WeatherUseCase {
 
-    Observable<WeatherModel> download(int cityId);
+    Observable<WeatherModel> fetch(int cityId);
+
+    WeatherModel find(int cityId);
 
 }

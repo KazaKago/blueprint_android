@@ -1,11 +1,13 @@
-package com.ignis.android_cleanarchitecture.domain.model;
+package com.ignis.android_cleanarchitecture.data.entity;
+
+import io.realm.RealmObject;
 
 /**
- * Image Model
+ * Image Entity
  * <p>
  * Created by tamura_k on 2016/06/03.
  */
-public class ImageModel {
+public class ImageEntity extends RealmObject {
 
     //天気（晴れ、曇り、雨など）
     private String title;

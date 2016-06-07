@@ -5,18 +5,12 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
 /**
- * バージョン関連のUtilクラス
+ * Version Related Utilities.
  * <p/>
  * Created by tamura_k on 2016/03/18.
  */
 public class VersionUtils {
 
-    /**
-     * 自身のバージョン名を取得する
-     *
-     * @param context
-     * @return
-     */
     public static String getVersionName(Context context) {
         try {
             PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
@@ -27,12 +21,6 @@ public class VersionUtils {
         }
     }
 
-    /**
-     * 自身のバージョンコードを取得する
-     *
-     * @param context
-     * @return
-     */
     public static int getVersionCode(Context context) {
         try {
             PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);

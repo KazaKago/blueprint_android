@@ -1,13 +1,11 @@
 package com.ignis.android_cleanarchitecture.domain.model;
 
-import io.realm.RealmObject;
-
 /**
  * Temperature Model
  * <p>
  * Created by tamura_k on 2016/06/03.
  */
-public class TemperatureModel extends RealmObject {
+public class TemperatureModel {
 
     //最高気温
     private TemperatureUnitModel max;

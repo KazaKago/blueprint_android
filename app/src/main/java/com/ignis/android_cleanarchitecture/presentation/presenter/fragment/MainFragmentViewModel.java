@@ -9,7 +9,6 @@ import com.ignis.android_cleanarchitecture.CleanApplication;
 import com.ignis.android_cleanarchitecture.R;
 import com.ignis.android_cleanarchitecture.domain.model.LocationModel;
 import com.ignis.android_cleanarchitecture.domain.model.WeatherModel;
-import com.ignis.android_cleanarchitecture.domain.repository.WeatherRepository;
 import com.ignis.android_cleanarchitecture.domain.usecase.WeatherUseCase;
 import com.ignis.android_cleanarchitecture.presentation.listener.fragment.MainFragmentListener;
 import com.ignis.android_cleanarchitecture.presentation.presenter.adapter.WeatherViewModel;
@@ -22,8 +21,6 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
-import io.realm.Realm;
-import io.realm.RealmChangeListener;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -38,8 +35,6 @@ public class MainFragmentViewModel {
 
     @Inject
     public WeatherUseCase weatherUseCase;
-    @Inject
-    public WeatherRepository weatherRepository;
 
     public ObservableField<String> area;
     public ObservableField<String> prefecture;
@@ -49,8 +44,6 @@ public class MainFragmentViewModel {
     private Context context;
     private MainFragmentListener mainFragmentListener;
     private CompositeSubscription subscriptions;
-    private Realm realm;
-    private RealmChangeListener<Realm> realmChangeListener;
 
     public MainFragmentViewModel(Context context, MainFragmentListener mainFragmentListener) {
         CleanApplication.getInstance(context).getApplicationComponent().inject(this);
@@ -60,44 +53,40 @@ public class MainFragmentViewModel {
         this.city = new ObservableField<>();
         this.publicTime = new ObservableField<>();
         this.mainFragmentListener = mainFragmentListener;
-        this.realmChangeListener = element -> refreshView();
     }
 
     public void onStart() {
         subscriptions = new CompositeSubscription();
-        realm = Realm.getDefaultInstance();
-        realm.addChangeListener(realmChangeListener);
-
         refreshView();
     }
 
     public void onStop() {
-        realm.removeChangeListener(realmChangeListener);
-        realm.close();
         subscriptions.unsubscribe();
     }
 
     public void onClickRefresh(View view) {
-        downloadWeather();
+        fetchWeather();
     }
 
-    private void downloadWeather() {
-        subscriptions.add(weatherUseCase.download(130010)
+    private void fetchWeather() {
+        subscriptions.add(weatherUseCase.fetch(130010)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        weatherModel -> showToast(context.getString(R.string.refresh_complete)),
+                        weather -> {
+                            refreshView(weather);
+                            showToast(context.getString(R.string.refresh_complete));
+                        },
                         error -> showToast(error.getLocalizedMessage()),
                         () -> {
                         }));
     }
 
-    private WeatherModel getWeather() {
-        return weatherRepository.find(realm, 130010);
+    private void refreshView() {
+        refreshView(weatherUseCase.find(130010));
     }
 
-    private void refreshView() {
-        WeatherModel weather = getWeather();
+    private void refreshView(WeatherModel weather) {
         if (weather != null) {
             LocationModel location = weather.getLocation();
             if (location != null) {

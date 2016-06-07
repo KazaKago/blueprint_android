@@ -2,10 +2,10 @@ package com.ignis.android_cleanarchitecture.data.dao;
 
 import android.support.annotation.NonNull;
 
-import com.ignis.android_cleanarchitecture.domain.model.ForecastModel;
-import com.ignis.android_cleanarchitecture.domain.model.ImageModel;
-import com.ignis.android_cleanarchitecture.domain.model.TemperatureUnitModel;
-import com.ignis.android_cleanarchitecture.domain.model.WeatherModel;
+import com.ignis.android_cleanarchitecture.data.entity.ForecastEntity;
+import com.ignis.android_cleanarchitecture.data.entity.ImageEntity;
+import com.ignis.android_cleanarchitecture.data.entity.TemperatureUnitEntity;
+import com.ignis.android_cleanarchitecture.data.entity.WeatherEntity;
 
 import io.realm.Realm;
 
@@ -20,42 +20,42 @@ public class WeatherDao extends AbsDao {
         super(realm);
     }
 
-    public WeatherModel find(int cityId) {
-        return getRealm().where(WeatherModel.class)
+    public WeatherEntity find(int cityId) {
+        return getRealm().where(WeatherEntity.class)
                 .equalTo("cityId", cityId)
                 .findFirst();
     }
 
     public boolean exist(int cityId) {
-        return (0 <= getRealm().where(WeatherModel.class)
+        return (0 <= getRealm().where(WeatherEntity.class)
                 .equalTo("cityId", cityId)
                 .count());
     }
 
-    public void insert(WeatherModel weatherModel) {
-        getRealm().copyToRealm(weatherModel);
+    public void insert(WeatherEntity weather) {
+        getRealm().copyToRealm(weather);
     }
 
     public void delete(int cityId) {
-        WeatherModel weatherModel = find(cityId);
-        if (weatherModel != null) {
-            for (ForecastModel forecastModel : weatherModel.getForecasts()) {
-                TemperatureUnitModel max = forecastModel.getTemperature().getMax();
+        WeatherEntity weather = find(cityId);
+        if (weather != null) {
+            for (ForecastEntity forecast : weather.getForecasts()) {
+                TemperatureUnitEntity max = forecast.getTemperature().getMax();
                 if (max != null) max.deleteFromRealm();
-                TemperatureUnitModel min = forecastModel.getTemperature().getMin();
+                TemperatureUnitEntity min = forecast.getTemperature().getMin();
                 if (min != null) min.deleteFromRealm();
-                forecastModel.getTemperature().deleteFromRealm();
-                forecastModel.getImage().deleteFromRealm();
+                forecast.getTemperature().deleteFromRealm();
+                forecast.getImage().deleteFromRealm();
             }
-            weatherModel.getForecasts().deleteAllFromRealm();
-            weatherModel.getCopyright().getProvider().deleteAllFromRealm();
-            ImageModel image = weatherModel.getCopyright().getImage();
+            weather.getForecasts().deleteAllFromRealm();
+            weather.getCopyright().getProvider().deleteAllFromRealm();
+            ImageEntity image = weather.getCopyright().getImage();
             if (image != null) image.deleteFromRealm();
-            weatherModel.getCopyright().deleteFromRealm();
-            weatherModel.getLocation().deleteFromRealm();
-            weatherModel.getDescription().deleteFromRealm();
-            weatherModel.getPinpointLocations().deleteAllFromRealm();
-            weatherModel.deleteFromRealm();
+            weather.getCopyright().deleteFromRealm();
+            weather.getLocation().deleteFromRealm();
+            weather.getDescription().deleteFromRealm();
+            weather.getPinpointLocations().deleteAllFromRealm();
+            weather.deleteFromRealm();
         }
     }
 

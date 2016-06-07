@@ -1,19 +1,22 @@
-package com.ignis.android_cleanarchitecture.domain.model;
+package com.ignis.android_cleanarchitecture.data.entity;
 
-import java.util.List;
+import io.realm.RealmList;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
- * Weather Model
+ * Weather Entity
  * <p>
  * Created by tamura_k on 2016/05/31.
  */
-public class WeatherModel {
+public class WeatherEntity extends RealmObject {
 
     //地域ID
+    @PrimaryKey
     private int cityId;
 
     //予報を発表した地域を定義
-    private LocationModel location;
+    private LocationEntity location;
     //タイトル・見出し
     private String title;
     //リクエストされたデータの地域に該当するlivedoor 天気情報のURL
@@ -21,13 +24,13 @@ public class WeatherModel {
     //予報の発表日時
     private String publicTime;
     //天気概況文
-    private DescriptionModel description;
+    private DescriptionEntity description;
     //府県天気予報の予報日毎の配列
-    private List<ForecastModel> forecasts;
+    private RealmList<ForecastEntity> forecasts;
     //ピンポイント予報の発表地点の配列
-    private List<LinkModel> pinpointLocations;
+    private RealmList<LinkEntity> pinpointLocations;
     //コピーライト
-    private CopyrightModel copyright;
+    private CopyrightEntity copyright;
 
     public int getCityId() {
         return cityId;
@@ -37,11 +40,11 @@ public class WeatherModel {
         this.cityId = cityId;
     }
 
-    public LocationModel getLocation() {
+    public LocationEntity getLocation() {
         return location;
     }
 
-    public void setLocation(LocationModel location) {
+    public void setLocation(LocationEntity location) {
         this.location = location;
     }
 
@@ -69,35 +72,35 @@ public class WeatherModel {
         this.publicTime = publicTime;
     }
 
-    public DescriptionModel getDescription() {
+    public DescriptionEntity getDescription() {
         return description;
     }
 
-    public void setDescription(DescriptionModel description) {
+    public void setDescription(DescriptionEntity description) {
         this.description = description;
     }
 
-    public List<ForecastModel> getForecasts() {
+    public RealmList<ForecastEntity> getForecasts() {
         return forecasts;
     }
 
-    public void setForecasts(List<ForecastModel> forecasts) {
+    public void setForecasts(RealmList<ForecastEntity> forecasts) {
         this.forecasts = forecasts;
     }
 
-    public List<LinkModel> getPinpointLocations() {
+    public RealmList<LinkEntity> getPinpointLocations() {
         return pinpointLocations;
     }
 
-    public void setPinpointLocations(List<LinkModel> pinpointLocations) {
+    public void setPinpointLocations(RealmList<LinkEntity> pinpointLocations) {
         this.pinpointLocations = pinpointLocations;
     }
 
-    public CopyrightModel getCopyright() {
+    public CopyrightEntity getCopyright() {
         return copyright;
     }
 
-    public void setCopyright(CopyrightModel copyright) {
+    public void setCopyright(CopyrightEntity copyright) {
         this.copyright = copyright;
     }
 
