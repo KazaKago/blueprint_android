@@ -1,7 +1,7 @@
 package com.ignis.android_cleanarchitecture.presentation.listener.presenter.activity;
 
 /**
- * About Fragment Listener
+ * About Fragment ViewModel Listener
  * <p>
  * Created by tamura_k on 2016/06/02.
  */

@@ -2,12 +2,14 @@ package com.ignis.android_cleanarchitecture.presentation.presenter.adapter;
 
 import android.content.Context;
 import android.databinding.ObservableField;
+import android.widget.ImageView;
 
 import com.ignis.android_cleanarchitecture.R;
 import com.ignis.android_cleanarchitecture.domain.model.weather.ForecastModel;
 import com.ignis.android_cleanarchitecture.domain.model.weather.ImageModel;
 import com.ignis.android_cleanarchitecture.domain.model.weather.TemperatureModel;
 import com.ignis.android_cleanarchitecture.domain.model.weather.TemperatureUnitModel;
+import com.squareup.picasso.Picasso;
 
 /**
  * Forecast ViewModel
@@ -53,8 +55,8 @@ public class ForecastViewModel {
         }
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public void loadImage(ImageView imageView){
+        Picasso.with(context).load(imageUrl).into(imageView);
     }
 
 }

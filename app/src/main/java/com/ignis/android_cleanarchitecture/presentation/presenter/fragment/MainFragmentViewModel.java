@@ -67,8 +67,9 @@ public class MainFragmentViewModel implements ForecastRecyclerAdapterListener {
         this.city = new ObservableField<>();
         this.publicTime = new ObservableField<>();
         this.citySpinnerAdapter = new ObservableField<>(new CitySpinnerAdapter(context));
-        this.forecastRecyclerAdapter = new ObservableField<>(new ForecastRecyclerAdapter(context));
-        this.forecastRecyclerAdapter.get().setForecastRecyclerAdapterListener(this);
+        ForecastRecyclerAdapter forecastRecyclerAdapter = new ForecastRecyclerAdapter(context);
+        forecastRecyclerAdapter.setForecastRecyclerAdapterListener(this);
+        this.forecastRecyclerAdapter = new ObservableField<>(forecastRecyclerAdapter);
         this.mainFragmentViewModelListener = mainFragmentViewModelListener;
     }
 
@@ -155,7 +156,7 @@ public class MainFragmentViewModel implements ForecastRecyclerAdapterListener {
 
     private List<CityViewModel> getCityViewModelList(List<CityModel> cityList) {
         return Observable.from(cityList)
-                .map(CityViewModel::new)
+                .map(cityModel -> new CityViewModel(context, cityModel))
                 .toList()
                 .toBlocking()
                 .single();
