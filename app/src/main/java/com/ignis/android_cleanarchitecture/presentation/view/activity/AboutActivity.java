@@ -12,7 +12,7 @@ import android.view.MenuItem;
 
 import com.ignis.android_cleanarchitecture.R;
 import com.ignis.android_cleanarchitecture.databinding.ActivityAboutBinding;
-import com.ignis.android_cleanarchitecture.presentation.listener.activity.AboutActivityListener;
+import com.ignis.android_cleanarchitecture.presentation.listener.presenter.activity.AboutActivityViewModelListener;
 import com.ignis.android_cleanarchitecture.presentation.presenter.activity.AboutActivityViewModel;
 import com.ignis.android_cleanarchitecture.presentation.view.fragment.AboutFragment;
 
@@ -21,7 +21,7 @@ import com.ignis.android_cleanarchitecture.presentation.view.fragment.AboutFragm
  *
  * @author Kensuke
  */
-public class AboutActivity extends AppCompatActivity implements AboutActivityListener {
+public class AboutActivity extends AppCompatActivity implements AboutActivityViewModelListener {
 
     private AboutActivityViewModel viewModel;
 
@@ -65,7 +65,7 @@ public class AboutActivity extends AppCompatActivity implements AboutActivityLis
         fragmentTransaction.commit();
     }
 
-    /* AboutActivity.AboutActivityListener */
+    /* AboutActivityViewModelListener */
 
     @Override
     public void onPerformFinish() {

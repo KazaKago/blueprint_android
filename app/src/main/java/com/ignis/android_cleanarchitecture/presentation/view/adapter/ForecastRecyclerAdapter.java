@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.ignis.android_cleanarchitecture.R;
 import com.ignis.android_cleanarchitecture.databinding.RecyclerForecastBinding;
+import com.ignis.android_cleanarchitecture.presentation.listener.view.adapter.ForecastRecyclerAdapterListener;
 import com.ignis.android_cleanarchitecture.presentation.presenter.adapter.ForecastViewModel;
 import com.squareup.picasso.Picasso;
 
@@ -17,7 +18,7 @@ import java.util.List;
 
 /**
  * Forecast RecyclerView Adapter
- * <p/>
+ * <p>
  * Created by tamura_k on 2016/05/31.
  */
 public class ForecastRecyclerAdapter extends RecyclerView.Adapter<ForecastRecyclerAdapter.ViewHolder> {
@@ -39,6 +40,7 @@ public class ForecastRecyclerAdapter extends RecyclerView.Adapter<ForecastRecycl
 
     private Context context;
     private List<ForecastViewModel> forecastViewModelList;
+    private ForecastRecyclerAdapterListener forecastRecyclerAdapterListener;
 
     public ForecastRecyclerAdapter(Context context) {
         this.context = context;
@@ -62,12 +64,23 @@ public class ForecastRecyclerAdapter extends RecyclerView.Adapter<ForecastRecycl
 
         holder.getBinding().setVariable(com.ignis.android_cleanarchitecture.BR.viewModel, item);
         holder.getBinding().executePendingBindings();
+        holder.getBinding().getRoot().setOnClickListener(v -> {
+            if (forecastRecyclerAdapterListener != null) forecastRecyclerAdapterListener.onItemClick(item);
+        });
 
         Picasso.with(context).load(item.getImageUrl()).into(holder.getBinding().weatherImage);
     }
 
     public void setForecastViewModelList(List<ForecastViewModel> forecastViewModelList) {
         this.forecastViewModelList = forecastViewModelList;
+    }
+
+    public ForecastRecyclerAdapterListener getForecastRecyclerAdapterListener() {
+        return forecastRecyclerAdapterListener;
+    }
+
+    public void setForecastRecyclerAdapterListener(ForecastRecyclerAdapterListener forecastRecyclerAdapterListener) {
+        this.forecastRecyclerAdapterListener = forecastRecyclerAdapterListener;
     }
 
 }

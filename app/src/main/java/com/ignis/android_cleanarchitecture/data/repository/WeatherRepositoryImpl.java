@@ -6,9 +6,10 @@ import com.ignis.android_cleanarchitecture.data.api.WeatherApi;
 import com.ignis.android_cleanarchitecture.data.api.WeatherRetrofit;
 import com.ignis.android_cleanarchitecture.data.dao.WeatherDao;
 import com.ignis.android_cleanarchitecture.data.entity.WeatherEntity;
-import com.ignis.android_cleanarchitecture.data.entity.mapper.WeatherMapper;
 import com.ignis.android_cleanarchitecture.domain.model.weather.WeatherModel;
 import com.ignis.android_cleanarchitecture.domain.repository.WeatherRepository;
+
+import org.modelmapper.ModelMapper;
 
 import io.realm.Realm;
 import retrofit2.Retrofit;
@@ -31,13 +32,14 @@ public class WeatherRepositoryImpl implements WeatherRepository {
     public Observable<WeatherModel> fetch(int cityId) {
         Retrofit retrofit = WeatherRetrofit.getInstance();
         WeatherApi weatherApi = retrofit.create(WeatherApi.class);
+        ModelMapper modelMapper = new ModelMapper();
         return weatherApi.get(cityId)
                 .doOnNext(weatherEntity -> {
                     if (exist(cityId)) delete(cityId);
                     weatherEntity.setCityId(cityId);
                     insert(weatherEntity);
                 })
-                .map(WeatherMapper::convert);
+                .map(weatherEntity -> modelMapper.map(weatherEntity, WeatherModel.class));
     }
 
     @Override
@@ -47,7 +49,9 @@ public class WeatherRepositoryImpl implements WeatherRepository {
             realm = Realm.getDefaultInstance();
             WeatherDao weatherDao = new WeatherDao(realm);
             WeatherEntity weatherEntity = weatherDao.find(cityId);
-            return WeatherMapper.convert(weatherEntity);
+
+            ModelMapper modelMapper = new ModelMapper();
+            return modelMapper.map(weatherEntity, WeatherModel.class);
         } finally {
             if (realm != null) realm.close();
         }

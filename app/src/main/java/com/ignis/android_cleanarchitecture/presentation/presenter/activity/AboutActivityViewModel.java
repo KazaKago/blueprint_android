@@ -2,7 +2,7 @@ package com.ignis.android_cleanarchitecture.presentation.presenter.activity;
 
 import android.content.Context;
 
-import com.ignis.android_cleanarchitecture.presentation.listener.activity.AboutActivityListener;
+import com.ignis.android_cleanarchitecture.presentation.listener.presenter.activity.AboutActivityViewModelListener;
 
 /**
  * About Activity ViewModel
@@ -12,15 +12,15 @@ import com.ignis.android_cleanarchitecture.presentation.listener.activity.AboutA
 public class AboutActivityViewModel {
 
     private Context context;
-    private AboutActivityListener listener;
+    private AboutActivityViewModelListener aboutActivityViewModelListener;
 
-    public AboutActivityViewModel(Context context, AboutActivityListener listener) {
+    public AboutActivityViewModel(Context context, AboutActivityViewModelListener aboutActivityViewModelListener) {
         this.context = context;
-        this.listener = listener;
+        this.aboutActivityViewModelListener = aboutActivityViewModelListener;
     }
 
     public void onClickBackIcon() {
-        listener.onPerformFinish();
+        aboutActivityViewModelListener.onPerformFinish();
     }
 
 }

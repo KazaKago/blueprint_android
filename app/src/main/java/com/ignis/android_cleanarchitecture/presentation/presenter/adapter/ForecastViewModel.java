@@ -2,8 +2,6 @@ package com.ignis.android_cleanarchitecture.presentation.presenter.adapter;
 
 import android.content.Context;
 import android.databinding.ObservableField;
-import android.view.View;
-import android.widget.Toast;
 
 import com.ignis.android_cleanarchitecture.R;
 import com.ignis.android_cleanarchitecture.domain.model.weather.ForecastModel;
@@ -53,14 +51,6 @@ public class ForecastViewModel {
                 }
             }
         }
-    }
-
-    public void onItemClick(View view) {
-        showToast(telop.get());
-    }
-
-    private void showToast(String message) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
     public String getImageUrl() {

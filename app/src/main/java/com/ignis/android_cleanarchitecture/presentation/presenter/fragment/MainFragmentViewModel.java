@@ -15,7 +15,8 @@ import com.ignis.android_cleanarchitecture.domain.model.weather.LocationModel;
 import com.ignis.android_cleanarchitecture.domain.model.weather.WeatherModel;
 import com.ignis.android_cleanarchitecture.domain.usecase.CityUseCase;
 import com.ignis.android_cleanarchitecture.domain.usecase.WeatherUseCase;
-import com.ignis.android_cleanarchitecture.presentation.listener.fragment.MainFragmentListener;
+import com.ignis.android_cleanarchitecture.presentation.listener.presenter.fragment.MainFragmentViewModelListener;
+import com.ignis.android_cleanarchitecture.presentation.listener.view.adapter.ForecastRecyclerAdapterListener;
 import com.ignis.android_cleanarchitecture.presentation.presenter.adapter.CityViewModel;
 import com.ignis.android_cleanarchitecture.presentation.presenter.adapter.ForecastViewModel;
 import com.ignis.android_cleanarchitecture.presentation.view.adapter.CitySpinnerAdapter;
@@ -39,7 +40,7 @@ import rx.subscriptions.CompositeSubscription;
  *
  * @author Kensuke
  */
-public class MainFragmentViewModel {
+public class MainFragmentViewModel implements ForecastRecyclerAdapterListener {
 
     @Inject
     public WeatherUseCase weatherUseCase;
@@ -55,10 +56,10 @@ public class MainFragmentViewModel {
 
     private Context context;
     private int selectedCityId;
-    private MainFragmentListener mainFragmentListener;
+    private MainFragmentViewModelListener mainFragmentViewModelListener;
     private CompositeSubscription subscriptions;
 
-    public MainFragmentViewModel(Context context, MainFragmentListener mainFragmentListener) {
+    public MainFragmentViewModel(Context context, MainFragmentViewModelListener mainFragmentViewModelListener) {
         CleanApplication.getInstance(context).getApplicationComponent().inject(this);
         this.context = context;
         this.area = new ObservableField<>();
@@ -67,7 +68,8 @@ public class MainFragmentViewModel {
         this.publicTime = new ObservableField<>();
         this.citySpinnerAdapter = new ObservableField<>(new CitySpinnerAdapter(context));
         this.forecastRecyclerAdapter = new ObservableField<>(new ForecastRecyclerAdapter(context));
-        this.mainFragmentListener = mainFragmentListener;
+        this.forecastRecyclerAdapter.get().setForecastRecyclerAdapterListener(this);
+        this.mainFragmentViewModelListener = mainFragmentViewModelListener;
     }
 
     public void onCreateView(Bundle savedInstanceState) {
@@ -133,7 +135,7 @@ public class MainFragmentViewModel {
                 e.printStackTrace();
                 publicTime.set(null);
             }
-            mainFragmentListener.setActionBarTitle(weather.getTitle());
+            mainFragmentViewModelListener.setActionBarTitle(weather.getTitle());
 
             forecastRecyclerAdapter.get().setForecastViewModelList(getForecastViewModelList(weather.getForecasts()));
             forecastRecyclerAdapter.get().notifyDataSetChanged();
@@ -169,6 +171,13 @@ public class MainFragmentViewModel {
 
     private void showToast(String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    }
+
+    /* ForecastRecyclerAdapterListener */
+
+    @Override
+    public void onItemClick(ForecastViewModel forecastViewModel) {
+        showToast(forecastViewModel.telop.get());
     }
 
 }

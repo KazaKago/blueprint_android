@@ -52,6 +52,8 @@ dependencies {
     compile 'com.google.dagger:dagger:2.2'
     apt 'com.google.dagger:dagger-compiler:2.2'
     provided 'org.glassfish:javax.annotation:10.0-b28'
+    //ModelMapper
+    compile 'org.modelmapper:modelmapper:0.7.5'
     //Picasso
     compile 'com.squareup.picasso:picasso:2.5.2'
     //Stetho

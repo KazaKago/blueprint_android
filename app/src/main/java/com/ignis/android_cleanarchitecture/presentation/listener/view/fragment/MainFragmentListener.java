@@ -1,4 +1,4 @@
-package com.ignis.android_cleanarchitecture.presentation.listener.fragment;
+package com.ignis.android_cleanarchitecture.presentation.listener.view.fragment;
 
 /**
  * Main Fragment Listener

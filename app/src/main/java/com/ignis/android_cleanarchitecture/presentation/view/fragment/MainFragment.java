@@ -10,20 +10,19 @@ import android.view.ViewGroup;
 
 import com.ignis.android_cleanarchitecture.R;
 import com.ignis.android_cleanarchitecture.databinding.FragmentMainBinding;
-import com.ignis.android_cleanarchitecture.presentation.listener.activity.MainActivityListener;
-import com.ignis.android_cleanarchitecture.presentation.listener.fragment.MainFragmentListener;
-import com.ignis.android_cleanarchitecture.presentation.presenter.fragment.MainFragmentViewModel;
+import com.ignis.android_cleanarchitecture.presentation.listener.view.fragment.MainFragmentListener;
+import com.ignis.android_cleanarchitecture.presentation.listener.presenter.fragment.MainFragmentViewModelListener;
 
 /**
  * Main Fragment
  *
  * @author Kensuke
  */
-public class MainFragment extends Fragment implements MainFragmentListener {
+public class MainFragment extends Fragment implements MainFragmentViewModelListener {
 
     private FragmentMainBinding binding;
-    private MainFragmentViewModel viewModel;
-    private MainActivityListener mainActivityListener;
+    private com.ignis.android_cleanarchitecture.presentation.presenter.fragment.MainFragmentViewModel viewModel;
+    private MainFragmentListener mainFragmentListener;
 
     public static MainFragment newInstance() {
         MainFragment fragment = new MainFragment();
@@ -35,9 +34,9 @@ public class MainFragment extends Fragment implements MainFragmentListener {
         super.onAttach(context);
 
         try {
-            mainActivityListener = (MainActivityListener) context;
+            mainFragmentListener = (MainFragmentListener) context;
         } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() + " must implement " + MainActivityListener.class.getSimpleName());
+            throw new ClassCastException(context.toString() + " must implement " + MainFragmentListener.class.getSimpleName());
         }
     }
 
@@ -45,7 +44,7 @@ public class MainFragment extends Fragment implements MainFragmentListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (binding == null) {
             binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false);
-            viewModel = new MainFragmentViewModel(getActivity(), this);
+            viewModel = new com.ignis.android_cleanarchitecture.presentation.presenter.fragment.MainFragmentViewModel(getActivity(), this);
             binding.setViewModel(viewModel);
         }
         viewModel.onCreateView(savedInstanceState);
@@ -64,11 +63,11 @@ public class MainFragment extends Fragment implements MainFragmentListener {
         super.onStop();
     }
 
-    /* MainFragment.MainFragmentListener */
+    /* MainFragmentViewModelListener */
 
     @Override
     public void setActionBarTitle(String title) {
-        mainActivityListener.setActionBarTitle(title);
+        mainFragmentListener.setActionBarTitle(title);
     }
 
 }
