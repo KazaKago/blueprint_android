@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.ignis.android_cleanarchitecture.presentation.presenter.activity.MainActivityViewModel"/>
+            type="com.weathercock.android_cleanarchitecture.presentation.presenter.activity.MainActivityViewModel"/>
 
     </data>
 

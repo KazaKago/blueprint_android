@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.ignis.android_cleanarchitecture.presentation.presenter.adapter.ForecastViewModel"/>
+            type="com.weathercock.android_cleanarchitecture.presentation.presenter.adapter.ForecastViewModel"/>
 
     </data>
 

@@ -8,7 +8,7 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        applicationId "com.ignis.android_cleanarchitecture"
+        applicationId "com.weathercock.android_cleanarchitecture"
         minSdkVersion 17
         targetSdkVersion 23
         versionCode 1
