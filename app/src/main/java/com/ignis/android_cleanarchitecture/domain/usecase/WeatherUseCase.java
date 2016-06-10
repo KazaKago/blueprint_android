@@ -1,6 +1,6 @@
 package com.ignis.android_cleanarchitecture.domain.usecase;
 
-import com.ignis.android_cleanarchitecture.domain.model.WeatherModel;
+import com.ignis.android_cleanarchitecture.domain.model.weather.WeatherModel;
 
 import rx.Observable;
 

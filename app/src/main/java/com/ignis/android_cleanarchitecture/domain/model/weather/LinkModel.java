@@ -1,4 +1,4 @@
-package com.ignis.android_cleanarchitecture.domain.model;
+package com.ignis.android_cleanarchitecture.domain.model.weather;
 
 /**
  * Link Model

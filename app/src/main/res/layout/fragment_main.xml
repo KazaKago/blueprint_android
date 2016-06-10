@@ -22,15 +22,32 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin">
 
-        <Button
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="@{viewModel.onClickRefresh}"
-            android:text="@string/refresh"/>
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onItemSelected="@{viewModel.onCitySelected}"
+                app:adapter="@{viewModel.citySpinnerAdapter}"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:onClick="@{viewModel.onClickRefresh}"
+                android:text="@string/refresh"/>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:orientation="horizontal">
 
             <TextView
@@ -62,20 +79,20 @@
         </LinearLayout>
 
         <TextView
-            android:layout_marginTop="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:text="@{viewModel.publicTime}"
             android:textColor="?android:textColorSecondary"
             android:textSize="@dimen/text_size_medium_small"
             tools:text="発表日時: 2016/06/06 00:00:00"/>
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/weatherRecycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="8dp"
             android:scrollbars="vertical"
+            app:adapter="@{viewModel.forecastRecyclerAdapter}"
             app:layoutManager="LinearLayoutManager"/>
 
     </LinearLayout>

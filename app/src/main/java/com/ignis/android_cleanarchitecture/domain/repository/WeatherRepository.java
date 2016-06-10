@@ -1,11 +1,11 @@
 package com.ignis.android_cleanarchitecture.domain.repository;
 
-import com.ignis.android_cleanarchitecture.domain.model.WeatherModel;
+import com.ignis.android_cleanarchitecture.domain.model.weather.WeatherModel;
 
 import rx.Observable;
 
 /**
- * Profile Repository
+ * Weather Repository
  *
  * @author Kensuke
  */

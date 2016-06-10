@@ -12,11 +12,7 @@ import com.ignis.android_cleanarchitecture.R;
 import com.ignis.android_cleanarchitecture.databinding.FragmentMainBinding;
 import com.ignis.android_cleanarchitecture.presentation.listener.activity.MainActivityListener;
 import com.ignis.android_cleanarchitecture.presentation.listener.fragment.MainFragmentListener;
-import com.ignis.android_cleanarchitecture.presentation.presenter.adapter.WeatherViewModel;
 import com.ignis.android_cleanarchitecture.presentation.presenter.fragment.MainFragmentViewModel;
-import com.ignis.android_cleanarchitecture.presentation.view.adapter.WeatherRecyclerAdapter;
-
-import java.util.List;
 
 /**
  * Main Fragment
@@ -27,7 +23,6 @@ public class MainFragment extends Fragment implements MainFragmentListener {
 
     private FragmentMainBinding binding;
     private MainFragmentViewModel viewModel;
-    private WeatherRecyclerAdapter adapter;
     private MainActivityListener mainActivityListener;
 
     public static MainFragment newInstance() {
@@ -52,10 +47,8 @@ public class MainFragment extends Fragment implements MainFragmentListener {
             binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false);
             viewModel = new MainFragmentViewModel(getActivity(), this);
             binding.setViewModel(viewModel);
-
-            adapter = new WeatherRecyclerAdapter(getActivity());
-            binding.weatherRecycler.setAdapter(adapter);
         }
+        viewModel.onCreateView(savedInstanceState);
         return binding.getRoot();
     }
 
@@ -72,12 +65,6 @@ public class MainFragment extends Fragment implements MainFragmentListener {
     }
 
     /* MainFragment.MainFragmentListener */
-
-    @Override
-    public void onGetWeather(List<WeatherViewModel> weatherViewModelList) {
-        adapter.setWeatherViewModelList(weatherViewModelList);
-        adapter.notifyDataSetChanged();
-    }
 
     @Override
     public void setActionBarTitle(String title) {

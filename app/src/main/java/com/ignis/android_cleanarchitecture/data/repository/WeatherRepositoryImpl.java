@@ -7,7 +7,7 @@ import com.ignis.android_cleanarchitecture.data.api.WeatherRetrofit;
 import com.ignis.android_cleanarchitecture.data.dao.WeatherDao;
 import com.ignis.android_cleanarchitecture.data.entity.WeatherEntity;
 import com.ignis.android_cleanarchitecture.data.entity.mapper.WeatherMapper;
-import com.ignis.android_cleanarchitecture.domain.model.WeatherModel;
+import com.ignis.android_cleanarchitecture.domain.model.weather.WeatherModel;
 import com.ignis.android_cleanarchitecture.domain.repository.WeatherRepository;
 
 import io.realm.Realm;
