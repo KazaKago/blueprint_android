@@ -68,7 +68,6 @@ public class MainFragmentViewModel implements ForecastRecyclerAdapterListener {
 
     public MainFragmentViewModel(Context context, MainFragmentViewModelListener mainFragmentViewModelListener) {
         CleanApplication.getInstance(context).getApplicationComponent().inject(this);
-        this.context = context;
         this.area = new ObservableField<>();
         this.prefecture = new ObservableField<>();
         this.city = new ObservableField<>();
@@ -80,8 +79,8 @@ public class MainFragmentViewModel implements ForecastRecyclerAdapterListener {
         forecastRecyclerAdapter.setForecastRecyclerAdapterListener(this);
         this.forecastRecyclerAdapter = new ObservableField<>(forecastRecyclerAdapter);
         this.mainFragmentViewModelListener = mainFragmentViewModelListener;
+        this.context = context;
         this.selectedPosition = 0;
-
     }
 
     public void onCreate(Bundle savedInstanceState) {
