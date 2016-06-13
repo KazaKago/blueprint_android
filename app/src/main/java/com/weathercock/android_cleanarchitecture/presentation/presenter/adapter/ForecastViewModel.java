@@ -2,14 +2,12 @@ package com.weathercock.android_cleanarchitecture.presentation.presenter.adapter
 
 import android.content.Context;
 import android.databinding.ObservableField;
-import android.widget.ImageView;
 
 import com.weathercock.android_cleanarchitecture.R;
 import com.weathercock.android_cleanarchitecture.domain.model.weather.ForecastModel;
 import com.weathercock.android_cleanarchitecture.domain.model.weather.ImageModel;
 import com.weathercock.android_cleanarchitecture.domain.model.weather.TemperatureModel;
 import com.weathercock.android_cleanarchitecture.domain.model.weather.TemperatureUnitModel;
-import com.squareup.picasso.Picasso;
 
 /**
  * Forecast ViewModel
@@ -23,14 +21,17 @@ public class ForecastViewModel {
     public ObservableField<String> telop;
     public ObservableField<String> maxTemperature;
     public ObservableField<String> minTemperature;
+    public ObservableField<String> imageUrl;
 
     private Context context;
-    private String imageUrl;
 
     public ForecastViewModel(Context context, ForecastModel forecast) {
         this.context = context;
+        this.imageUrl = new ObservableField<>();
         ImageModel image = forecast.getImage();
-        if (image != null) this.imageUrl = image.getUrl();
+        if (image != null) {
+            this.imageUrl.set(image.getUrl());
+        }
         this.dateLabel = new ObservableField<>(forecast.getDateLabel());
         this.date = new ObservableField<>(forecast.getDate());
         this.telop = new ObservableField<>(forecast.getTelop());
@@ -53,10 +54,6 @@ public class ForecastViewModel {
                 }
             }
         }
-    }
-
-    public void loadImage(ImageView imageView){
-        Picasso.with(context).load(imageUrl).into(imageView);
     }
 
 }

@@ -19,14 +19,14 @@ import javax.inject.Inject;
  */
 public class AboutFragmentViewModel {
 
-    @Inject
-    public AboutUseCase aboutUseCase;
-
     public ObservableField<String> verText;
     public ObservableField<String> developByText;
     public ObservableField<String> copyrightText;
 
     private Context context;
+
+    @Inject
+    public AboutUseCase aboutUseCase;
 
     public AboutFragmentViewModel(Context context) {
         CleanApplication.getInstance(context).getApplicationComponent().inject(this);

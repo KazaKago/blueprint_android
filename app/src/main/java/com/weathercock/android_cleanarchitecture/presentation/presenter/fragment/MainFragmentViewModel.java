@@ -3,7 +3,10 @@ package com.weathercock.android_cleanarchitecture.presentation.presenter.fragmen
 import android.content.Context;
 import android.databinding.ObservableField;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
@@ -30,6 +33,8 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
+import icepick.Icepick;
+import icepick.State;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -42,11 +47,6 @@ import rx.subscriptions.CompositeSubscription;
  */
 public class MainFragmentViewModel implements ForecastRecyclerAdapterListener {
 
-    @Inject
-    public WeatherUseCase weatherUseCase;
-    @Inject
-    public CityUseCase cityUseCase;
-
     public ObservableField<String> area;
     public ObservableField<String> prefecture;
     public ObservableField<String> city;
@@ -55,9 +55,16 @@ public class MainFragmentViewModel implements ForecastRecyclerAdapterListener {
     public ObservableField<ForecastRecyclerAdapter> forecastRecyclerAdapter;
 
     private Context context;
-    private int selectedCityId;
     private MainFragmentViewModelListener mainFragmentViewModelListener;
     private CompositeSubscription subscriptions;
+
+    @State
+    public int selectedPosition;
+
+    @Inject
+    public WeatherUseCase weatherUseCase;
+    @Inject
+    public CityUseCase cityUseCase;
 
     public MainFragmentViewModel(Context context, MainFragmentViewModelListener mainFragmentViewModelListener) {
         CleanApplication.getInstance(context).getApplicationComponent().inject(this);
@@ -66,19 +73,24 @@ public class MainFragmentViewModel implements ForecastRecyclerAdapterListener {
         this.prefecture = new ObservableField<>();
         this.city = new ObservableField<>();
         this.publicTime = new ObservableField<>();
-        this.citySpinnerAdapter = new ObservableField<>(new CitySpinnerAdapter(context));
+        CitySpinnerAdapter citySpinnerAdapter = new CitySpinnerAdapter(context);
+        citySpinnerAdapter.setCityViewModelList(getCityViewModelList(cityUseCase.findAll()));
+        this.citySpinnerAdapter = new ObservableField<>(citySpinnerAdapter);
         ForecastRecyclerAdapter forecastRecyclerAdapter = new ForecastRecyclerAdapter(context);
         forecastRecyclerAdapter.setForecastRecyclerAdapterListener(this);
         this.forecastRecyclerAdapter = new ObservableField<>(forecastRecyclerAdapter);
         this.mainFragmentViewModelListener = mainFragmentViewModelListener;
+        this.selectedPosition = 0;
+
     }
 
-    public void onCreateView(Bundle savedInstanceState) {
-        if (savedInstanceState == null) {
-            List<CityModel> cityList = cityUseCase.findAll();
-            citySpinnerAdapter.get().setCityViewModelList(getCityViewModelList(cityList));
-            citySpinnerAdapter.get().notifyDataSetChanged();
-            if (0 < cityList.size()) selectedCityId = cityList.get(0).getId();
+    public void onCreate(Bundle savedInstanceState) {
+        Icepick.restoreInstanceState(this, savedInstanceState);
+    }
+
+    public void onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            new Handler().post(() -> mainFragmentViewModelListener.setCitySpinnerSelection(selectedPosition));
         }
     }
 
@@ -91,17 +103,22 @@ public class MainFragmentViewModel implements ForecastRecyclerAdapterListener {
         subscriptions.unsubscribe();
     }
 
+    public void onSaveInstanceState(Bundle outState) {
+        Icepick.saveInstanceState(this, outState);
+    }
+
     public void onClickRefresh(View view) {
         fetchWeather();
     }
 
     public void onCitySelected(AdapterView<?> parent, View view, int position, long id) {
-        selectedCityId = citySpinnerAdapter.get().getItem(position).id.get();
+        selectedPosition = position;
         fetchWeather();
     }
 
     private void fetchWeather() {
-        subscriptions.add(weatherUseCase.fetch(selectedCityId)
+        int cityId = citySpinnerAdapter.get().getItem(selectedPosition).id.get();
+        subscriptions.add(weatherUseCase.fetch(cityId)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -119,7 +136,8 @@ public class MainFragmentViewModel implements ForecastRecyclerAdapterListener {
     }
 
     private void refreshView() {
-        refreshView(weatherUseCase.find(selectedCityId));
+        int cityId = citySpinnerAdapter.get().getItem(selectedPosition).id.get();
+        refreshView(weatherUseCase.find(cityId));
     }
 
     private void refreshView(WeatherModel weather) {

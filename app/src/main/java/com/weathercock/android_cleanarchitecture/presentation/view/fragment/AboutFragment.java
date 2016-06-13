@@ -2,6 +2,7 @@ package com.weathercock.android_cleanarchitecture.presentation.view.fragment;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,10 +28,15 @@ public class AboutFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        viewModel = new AboutFragmentViewModel(getActivity());
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (binding == null) {
             binding = DataBindingUtil.inflate(inflater, R.layout.fragment_about, container, false);
-            viewModel = new AboutFragmentViewModel(getActivity());
             binding.setViewModel(viewModel);
         }
         return binding.getRoot();

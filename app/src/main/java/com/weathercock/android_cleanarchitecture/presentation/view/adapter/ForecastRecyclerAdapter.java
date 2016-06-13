@@ -66,7 +66,6 @@ public class ForecastRecyclerAdapter extends RecyclerView.Adapter<ForecastRecycl
         holder.getBinding().getRoot().setOnClickListener(v -> {
             if (forecastRecyclerAdapterListener != null) forecastRecyclerAdapterListener.onItemClick(item);
         });
-        item.loadImage(holder.getBinding().weatherImage);
     }
 
     public void setForecastViewModelList(List<ForecastViewModel> forecastViewModelList) {

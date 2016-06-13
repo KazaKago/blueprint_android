@@ -9,4 +9,6 @@ public interface MainFragmentViewModelListener {
 
     void setActionBarTitle(String title);
 
+    void setCitySpinnerSelection(int position);
+
 }

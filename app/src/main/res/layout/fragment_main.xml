@@ -28,7 +28,8 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <Spinner
+            <com.weathercock.android_cleanarchitecture.presentation.view.view.UserSelectSpinner
+                android:id="@+id/citySpinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
