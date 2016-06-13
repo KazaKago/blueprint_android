@@ -1,4 +1,4 @@
-package com.weathercock.android_cleanarchitecture.presentation.view.utils;
+package com.weathercock.android_cleanarchitecture.presentation.utils;
 
 import android.databinding.BindingAdapter;
 import android.graphics.drawable.Drawable;
