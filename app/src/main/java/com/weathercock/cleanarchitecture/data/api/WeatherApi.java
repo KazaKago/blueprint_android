@@ -1,6 +1,6 @@
 package com.weathercock.cleanarchitecture.data.api;
 
-import com.weathercock.cleanarchitecture.data.entity.WeatherEntity;
+import com.weathercock.cleanarchitecture.data.entity.weather.WeatherEntity;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -15,6 +15,6 @@ import rx.Observable;
 public interface WeatherApi {
 
     @GET("json/v1")
-    Observable<WeatherEntity> get(@Query("city") int cityId);
+    Observable<WeatherEntity> get(@Query("city") String cityId);
 
 }

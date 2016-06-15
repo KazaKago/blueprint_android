@@ -42,7 +42,7 @@ public class CitySpinnerAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return getItem(position).id.get();
+        return position;
     }
 
     @Override

@@ -19,8 +19,8 @@ public class DataModule {
 
     @Provides
     @Singleton
-    public CityRepository provideCityRepository() {
-        return new CityRepositoryImpl();
+    public CityRepository provideCityRepository(Context context) {
+        return new CityRepositoryImpl(context);
     }
 
     @Provides

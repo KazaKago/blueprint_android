@@ -1,4 +1,4 @@
-package com.weathercock.cleanarchitecture.data.entity;
+package com.weathercock.cleanarchitecture.data.entity.weather;
 
 import io.realm.RealmObject;
 

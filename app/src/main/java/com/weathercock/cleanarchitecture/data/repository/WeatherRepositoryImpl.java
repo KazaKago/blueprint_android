@@ -3,7 +3,7 @@ package com.weathercock.cleanarchitecture.data.repository;
 import com.weathercock.cleanarchitecture.data.api.WeatherApi;
 import com.weathercock.cleanarchitecture.data.api.WeatherRetrofit;
 import com.weathercock.cleanarchitecture.data.dao.WeatherDao;
-import com.weathercock.cleanarchitecture.data.entity.WeatherEntity;
+import com.weathercock.cleanarchitecture.data.entity.weather.WeatherEntity;
 import com.weathercock.cleanarchitecture.domain.model.weather.WeatherModel;
 import com.weathercock.cleanarchitecture.domain.repository.WeatherRepository;
 
@@ -24,7 +24,7 @@ public class WeatherRepositoryImpl implements WeatherRepository {
     }
 
     @Override
-    public Observable<WeatherModel> fetch(int cityId) {
+    public Observable<WeatherModel> fetch(String cityId) {
         Retrofit retrofit = WeatherRetrofit.getInstance();
         WeatherApi weatherApi = retrofit.create(WeatherApi.class);
         ModelMapper modelMapper = new ModelMapper();
@@ -38,7 +38,7 @@ public class WeatherRepositoryImpl implements WeatherRepository {
     }
 
     @Override
-    public WeatherModel find(int cityId) {
+    public WeatherModel find(String cityId) {
         Realm realm = null;
         try {
             realm = Realm.getDefaultInstance();
@@ -56,7 +56,7 @@ public class WeatherRepositoryImpl implements WeatherRepository {
         }
     }
 
-    private boolean exist(int cityId) {
+    private boolean exist(String cityId) {
         Realm realm = null;
         try {
             realm = Realm.getDefaultInstance();
@@ -80,7 +80,7 @@ public class WeatherRepositoryImpl implements WeatherRepository {
         }
     }
 
-    private void delete(int cityId) {
+    private void delete(String cityId) {
         Realm realm = null;
         try {
             realm = Realm.getDefaultInstance();

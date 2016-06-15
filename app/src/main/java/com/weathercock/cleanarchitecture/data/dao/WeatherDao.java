@@ -1,42 +1,42 @@
 package com.weathercock.cleanarchitecture.data.dao;
 
-import android.support.annotation.NonNull;
-
-import com.weathercock.cleanarchitecture.data.entity.ForecastEntity;
-import com.weathercock.cleanarchitecture.data.entity.ImageEntity;
-import com.weathercock.cleanarchitecture.data.entity.TemperatureUnitEntity;
-import com.weathercock.cleanarchitecture.data.entity.WeatherEntity;
+import com.weathercock.cleanarchitecture.data.entity.weather.ForecastEntity;
+import com.weathercock.cleanarchitecture.data.entity.weather.ImageEntity;
+import com.weathercock.cleanarchitecture.data.entity.weather.TemperatureUnitEntity;
+import com.weathercock.cleanarchitecture.data.entity.weather.WeatherEntity;
 
 import io.realm.Realm;
 
 /**
- * Weather Dao
+ * Weather Data Access Object.
  * <p>
  * Created by tamura_k on 2016/06/03.
  */
-public class WeatherDao extends AbsDao {
+public class WeatherDao {
 
-    public WeatherDao(@NonNull Realm realm) {
-        super(realm);
+    private Realm realm;
+
+    public WeatherDao(Realm realm) {
+        this.realm = realm;
     }
 
-    public WeatherEntity find(int cityId) {
-        return getRealm().where(WeatherEntity.class)
+    public WeatherEntity find(String cityId) {
+        return realm.where(WeatherEntity.class)
                 .equalTo("cityId", cityId)
                 .findFirst();
     }
 
-    public boolean exist(int cityId) {
-        return (0 <= getRealm().where(WeatherEntity.class)
+    public boolean exist(String cityId) {
+        return (0 <= realm.where(WeatherEntity.class)
                 .equalTo("cityId", cityId)
                 .count());
     }
 
     public void insert(WeatherEntity weather) {
-        getRealm().copyToRealm(weather);
+        realm.copyToRealm(weather);
     }
 
-    public void delete(int cityId) {
+    public void delete(String cityId) {
         WeatherEntity weather = find(cityId);
         if (weather != null) {
             for (ForecastEntity forecast : weather.getForecasts()) {

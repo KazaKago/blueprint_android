@@ -1,9 +1,17 @@
 package com.weathercock.cleanarchitecture.data.repository;
 
+import android.content.Context;
+
+import com.weathercock.cleanarchitecture.data.dao.CityDao;
+import com.weathercock.cleanarchitecture.data.entity.city.CityEntity;
+import com.weathercock.cleanarchitecture.data.entity.city.PrefEntity;
 import com.weathercock.cleanarchitecture.domain.model.city.CityModel;
 import com.weathercock.cleanarchitecture.domain.repository.CityRepository;
 
-import java.util.Arrays;
+import org.json.JSONException;
+
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,20 +21,32 @@ import java.util.List;
  */
 public class CityRepositoryImpl implements CityRepository {
 
-    public CityRepositoryImpl() {
+    private Context context;
+
+    public CityRepositoryImpl(Context context) {
+        this.context = context;
     }
 
     public List<CityModel> findAll() {
-        CityModel cityModel1 = new CityModel();
-        cityModel1.setId(130010);
-        cityModel1.setName("東京");
-        CityModel cityModel2 = new CityModel();
-        cityModel2.setId(140010);
-        cityModel2.setName("横浜");
-        CityModel cityModel3 = new CityModel();
-        cityModel3.setId(150010);
-        cityModel3.setName("新潟");
-        return Arrays.asList(cityModel1, cityModel2, cityModel3);
+        List<CityModel> cityModelList = new ArrayList<>();
+
+        try {
+            CityDao cityDao = new CityDao(context);
+            List<PrefEntity> prefEntityList = cityDao.find();
+            for (PrefEntity prefEntity : prefEntityList) {
+                String prefTitle = prefEntity.getTitle();
+                for (CityEntity cityEntity : prefEntity.getCityList()) {
+                    CityModel cityModel = new CityModel();
+                    cityModel.setId(cityEntity.getId());
+                    cityModel.setName(prefTitle + " " + cityEntity.getTitle());
+                    cityModelList.add(cityModel);
+                }
+            }
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
+
+        return cityModelList;
     }
 
 }

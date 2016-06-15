@@ -116,7 +116,7 @@ public class MainFragmentViewModel implements ForecastRecyclerAdapterListener {
     }
 
     private void fetchWeather() {
-        int cityId = citySpinnerAdapter.get().getItem(selectedPosition).id.get();
+        String cityId = citySpinnerAdapter.get().getItem(selectedPosition).id.get();
         subscriptions.add(weatherUseCase.fetch(cityId)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -135,7 +135,7 @@ public class MainFragmentViewModel implements ForecastRecyclerAdapterListener {
     }
 
     private void refreshView() {
-        int cityId = citySpinnerAdapter.get().getItem(selectedPosition).id.get();
+        String cityId = citySpinnerAdapter.get().getItem(selectedPosition).id.get();
         refreshView(weatherUseCase.find(cityId));
     }
 

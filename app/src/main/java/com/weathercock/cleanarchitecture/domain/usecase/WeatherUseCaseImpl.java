@@ -19,12 +19,12 @@ public class WeatherUseCaseImpl implements WeatherUseCase {
     }
 
     @Override
-    public Observable<WeatherModel> fetch(int cityId) {
+    public Observable<WeatherModel> fetch(String cityId) {
         return weatherRepository.fetch(cityId);
     }
 
     @Override
-    public WeatherModel find(int cityId) {
+    public WeatherModel find(String cityId) {
         return weatherRepository.find(cityId);
     }
 

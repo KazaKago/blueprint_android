@@ -1,4 +1,4 @@
-package com.weathercock.cleanarchitecture.data.entity;
+package com.weathercock.cleanarchitecture.data.entity.weather;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
@@ -13,7 +13,7 @@ public class WeatherEntity extends RealmObject {
 
     //地域ID
     @PrimaryKey
-    private int cityId;
+    private String cityId;
 
     //予報を発表した地域を定義
     private LocationEntity location;
@@ -32,11 +32,11 @@ public class WeatherEntity extends RealmObject {
     //コピーライト
     private CopyrightEntity copyright;
 
-    public int getCityId() {
+    public String getCityId() {
         return cityId;
     }
 
-    public void setCityId(int cityId) {
+    public void setCityId(String cityId) {
         this.cityId = cityId;
     }
 

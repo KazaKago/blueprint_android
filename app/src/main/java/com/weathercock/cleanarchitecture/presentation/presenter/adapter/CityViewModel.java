@@ -12,7 +12,7 @@ import com.weathercock.cleanarchitecture.domain.model.city.CityModel;
  */
 public class CityViewModel {
 
-    public ObservableField<Integer> id;
+    public ObservableField<String> id;
     public ObservableField<String> name;
 
     private Context context;
