@@ -26,7 +26,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -51,15 +51,15 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     //v7 AppCompat Support Library
     compile 'com.android.support:appcompat-v7:23.4.0'
-    //v7 RecyclerView Support Library
-    compile 'com.android.support:recyclerview-v7:23.4.0'
+    //Design Support Library
+    compile 'com.android.support:design:23.4.0'
     //Rx
     compile 'io.reactivex:rxandroid:1.2.0'
     compile 'io.reactivex:rxjava:1.1.5'
     //Retrofit
-    compile 'com.squareup.retrofit2:retrofit:2.0.2'
-    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
     //Dagger2
     compile 'com.google.dagger:dagger:2.2'
     apt 'com.google.dagger:dagger-compiler:2.2'
