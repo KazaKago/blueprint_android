@@ -25,8 +25,8 @@ import static org.junit.Assert.assertThat;
  * <p>
  * Created by tamura_k on 2016/06/14.
  */
-@SmallTest
 @RunWith(AndroidJUnit4.class)
+@SmallTest
 public class AboutUseCaseTest {
 
     @Inject
