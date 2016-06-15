@@ -1,7 +1,5 @@
 package com.weathercock.android_cleanarchitecture.data.repository;
 
-import android.content.Context;
-
 import com.weathercock.android_cleanarchitecture.data.api.WeatherApi;
 import com.weathercock.android_cleanarchitecture.data.api.WeatherRetrofit;
 import com.weathercock.android_cleanarchitecture.data.dao.WeatherDao;
@@ -22,10 +20,7 @@ import rx.Observable;
  */
 public class WeatherRepositoryImpl implements WeatherRepository {
 
-    private Context context;
-
-    public WeatherRepositoryImpl(Context context) {
-        this.context = context;
+    public WeatherRepositoryImpl() {
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.weathercock.android_cleanarchitecture.presentation.di.module;
+package com.weathercock.android_cleanarchitecture.di.module;
 
 import com.weathercock.android_cleanarchitecture.domain.repository.AboutRepository;
 import com.weathercock.android_cleanarchitecture.domain.repository.CityRepository;

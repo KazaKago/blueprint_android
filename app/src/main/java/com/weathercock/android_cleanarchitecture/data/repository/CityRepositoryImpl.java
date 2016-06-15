@@ -1,7 +1,5 @@
 package com.weathercock.android_cleanarchitecture.data.repository;
 
-import android.content.Context;
-
 import com.weathercock.android_cleanarchitecture.domain.model.city.CityModel;
 import com.weathercock.android_cleanarchitecture.domain.repository.CityRepository;
 
@@ -15,10 +13,7 @@ import java.util.List;
  */
 public class CityRepositoryImpl implements CityRepository {
 
-    private Context context;
-
-    public CityRepositoryImpl(Context context) {
-        this.context = context;
+    public CityRepositoryImpl() {
     }
 
     public List<CityModel> findAll() {

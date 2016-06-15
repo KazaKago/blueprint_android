@@ -1,4 +1,4 @@
-package com.weathercock.android_cleanarchitecture.presentation.di.module;
+package com.weathercock.android_cleanarchitecture.di.module;
 
 import android.content.Context;
 
@@ -19,14 +19,14 @@ public class DataModule {
 
     @Provides
     @Singleton
-    public CityRepository provideCityRepository(Context context) {
-        return new CityRepositoryImpl(context);
+    public CityRepository provideCityRepository() {
+        return new CityRepositoryImpl();
     }
 
     @Provides
     @Singleton
-    public WeatherRepository provideWeatherRepository(Context context) {
-        return new WeatherRepositoryImpl(context);
+    public WeatherRepository provideWeatherRepository() {
+        return new WeatherRepositoryImpl();
     }
 
     @Provides

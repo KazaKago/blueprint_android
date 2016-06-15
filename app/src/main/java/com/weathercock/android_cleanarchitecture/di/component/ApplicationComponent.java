@@ -1,8 +1,8 @@
-package com.weathercock.android_cleanarchitecture.presentation.di.component;
+package com.weathercock.android_cleanarchitecture.di.component;
 
-import com.weathercock.android_cleanarchitecture.presentation.di.module.ApplicationModule;
-import com.weathercock.android_cleanarchitecture.presentation.di.module.DataModule;
-import com.weathercock.android_cleanarchitecture.presentation.di.module.DomainModule;
+import com.weathercock.android_cleanarchitecture.di.module.ApplicationModule;
+import com.weathercock.android_cleanarchitecture.di.module.DataModule;
+import com.weathercock.android_cleanarchitecture.di.module.DomainModule;
 import com.weathercock.android_cleanarchitecture.presentation.presenter.fragment.AboutFragmentViewModel;
 import com.weathercock.android_cleanarchitecture.presentation.presenter.fragment.MainFragmentViewModel;
 

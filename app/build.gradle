@@ -13,6 +13,7 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -41,8 +42,15 @@ repositories {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    //Support Library
+    //Test Support Library
+    androidTestCompile 'com.android.support:support-annotations:23.4.0'
+    androidTestCompile 'com.android.support.test:runner:0.5'
+    androidTestCompile 'com.android.support.test:rules:0.5'
+    //Espresso
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+    //v7 Support Library
     compile 'com.android.support:appcompat-v7:23.4.0'
+    //Design Support Library
     compile 'com.android.support:design:23.4.0'
     //Rx
     compile 'io.reactivex:rxandroid:1.2.0'
@@ -54,7 +62,9 @@ dependencies {
     //Dagger2
     compile 'com.google.dagger:dagger:2.2'
     apt 'com.google.dagger:dagger-compiler:2.2'
-    provided 'org.glassfish:javax.annotation:10.0-b28'
+    provided 'javax.annotation:jsr250-api:1.0'
+    //Dagger2 for Test
+    androidTestApt 'com.google.dagger:dagger-compiler:2.2'
     //Icepick
     compile 'frankiesardo:icepick:3.2.0'
     provided 'frankiesardo:icepick-processor:3.2.0'

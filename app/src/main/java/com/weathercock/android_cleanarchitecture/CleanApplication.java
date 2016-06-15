@@ -3,11 +3,11 @@ package com.weathercock.android_cleanarchitecture;
 import android.app.Application;
 import android.content.Context;
 
-import com.weathercock.android_cleanarchitecture.presentation.di.component.ApplicationComponent;
-import com.weathercock.android_cleanarchitecture.presentation.di.component.DaggerApplicationComponent;
-import com.weathercock.android_cleanarchitecture.presentation.di.module.ApplicationModule;
-import com.weathercock.android_cleanarchitecture.presentation.di.module.DataModule;
-import com.weathercock.android_cleanarchitecture.presentation.di.module.DomainModule;
+import com.weathercock.android_cleanarchitecture.di.component.ApplicationComponent;
+import com.weathercock.android_cleanarchitecture.di.component.DaggerApplicationComponent;
+import com.weathercock.android_cleanarchitecture.di.module.ApplicationModule;
+import com.weathercock.android_cleanarchitecture.di.module.DataModule;
+import com.weathercock.android_cleanarchitecture.di.module.DomainModule;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
