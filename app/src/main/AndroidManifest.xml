@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.weathercock.android_cleanarchitecture">
+    package="com.weathercock.cleanarchitecture">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:name=".CleanApplication"
+        android:name="com.weathercock.cleanarchitecture.CleanApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".presentation.view.activity.MainActivity">
+            android:name="com.weathercock.cleanarchitecture.presentation.view.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.view.activity.AboutActivity"
+            android:name="com.weathercock.cleanarchitecture.presentation.view.activity.AboutActivity"
             android:label="@string/about_title"/>
     </application>
 

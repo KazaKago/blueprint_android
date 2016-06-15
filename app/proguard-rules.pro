@@ -74,5 +74,5 @@
 -dontwarn org.modelmapper.**
 
 # MyClass for Gson & ModelMapper
--keep class com.weathercock.android_cleanarchitecture.data.entity.** { *; }
--keep class com.weathercock.android_cleanarchitecture.domain.model.** { *; }
+-keep class com.weathercock.cleanarchitecture.data.entity.** { *; }
+-keep class com.weathercock.cleanarchitecture.domain.model.** { *; }

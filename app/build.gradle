@@ -11,11 +11,13 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        applicationId "com.weathercock.android_cleanarchitecture"
+        applicationId "com.weathercock.cleanarchitecture"
         minSdkVersion 17
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        //Vector Drawable Support
+        vectorDrawables.useSupportLibrary = true
         //Need for Android-Test
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -28,6 +30,12 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            applicationIdSuffix ".debug"
+            versionNameSuffix " debug"
         }
     }
     dataBinding {

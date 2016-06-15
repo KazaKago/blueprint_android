@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.weathercock.android_cleanarchitecture.presentation.presenter.fragment.AboutFragmentViewModel"/>
+            type="com.weathercock.cleanarchitecture.presentation.presenter.fragment.AboutFragmentViewModel"/>
 
     </data>
 
