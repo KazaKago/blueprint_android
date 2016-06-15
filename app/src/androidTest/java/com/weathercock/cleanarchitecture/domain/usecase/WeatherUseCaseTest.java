@@ -48,12 +48,12 @@ public class WeatherUseCaseTest {
 
     @Test
     public void testFetch() throws Exception {
-        assertThat(weatherUseCase.fetch(400040).toBlocking().single(), notNullValue());
+        assertThat(weatherUseCase.fetch("400040").toBlocking().single(), notNullValue());
     }
 
     @Test
     public void testFind() throws Exception {
-        assertThat(weatherUseCase.find(400040), notNullValue());
+        assertThat(weatherUseCase.find("400040"), notNullValue());
     }
 
 }
