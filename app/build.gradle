@@ -1,6 +1,9 @@
 apply plugin: 'com.android.application'
+//Android APT for Dagger2
 apply plugin: 'android-apt'
+//Retrolambda
 apply plugin: 'me.tatarka.retrolambda'
+//Realm
 apply plugin: 'realm-android'
 
 android {
@@ -13,9 +16,11 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        //Need for Android-Test
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
+        //Need for Retrolambda
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -26,15 +31,18 @@ android {
         }
     }
     dataBinding {
+        //Need for Android Data-Binding
         enabled = true
     }
 }
 
 repositories {
     maven {
+        //Need for Stetho-Realm
         url 'https://github.com/uPhyca/stetho-realm/raw/master/maven-repo'
     }
     maven {
+        //Need for Icepick
         url "https://clojars.org/repo/"
     }
 }
@@ -48,10 +56,10 @@ dependencies {
     androidTestCompile 'com.android.support.test:rules:0.5'
     //Espresso
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
-    //v7 Support Library
+    //v7 AppCompat Support Library
     compile 'com.android.support:appcompat-v7:23.4.0'
-    //Design Support Library
-    compile 'com.android.support:design:23.4.0'
+    //v7 RecyclerView Support Library
+    compile 'com.android.support:recyclerview-v7:23.4.0'
     //Rx
     compile 'io.reactivex:rxandroid:1.2.0'
     compile 'io.reactivex:rxjava:1.1.5'
@@ -74,5 +82,6 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     //Stetho
     debugCompile 'com.facebook.stetho:stetho:1.3.1'
+    //Stetho-Realm
     debugCompile 'com.uphyca:stetho_realm:0.8.0'
 }
