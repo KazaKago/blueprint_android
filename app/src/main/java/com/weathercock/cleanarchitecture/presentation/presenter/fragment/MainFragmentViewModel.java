@@ -25,6 +25,9 @@ import com.weathercock.cleanarchitecture.presentation.presenter.adapter.Forecast
 import com.weathercock.cleanarchitecture.presentation.view.adapter.CitySpinnerAdapter;
 import com.weathercock.cleanarchitecture.presentation.view.adapter.ForecastRecyclerAdapter;
 
+import org.json.JSONException;
+
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -73,7 +76,11 @@ public class MainFragmentViewModel implements ForecastRecyclerAdapterListener {
         this.city = new ObservableField<>();
         this.publicTime = new ObservableField<>();
         CitySpinnerAdapter citySpinnerAdapter = new CitySpinnerAdapter(context);
-        citySpinnerAdapter.setCityViewModelList(getCityViewModelList(cityUseCase.findAll()));
+        try {
+            citySpinnerAdapter.setCityViewModelList(getCityViewModelList(cityUseCase.findAll()));
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
         this.citySpinnerAdapter = new ObservableField<>(citySpinnerAdapter);
         ForecastRecyclerAdapter forecastRecyclerAdapter = new ForecastRecyclerAdapter(context);
         forecastRecyclerAdapter.setForecastRecyclerAdapterListener(this);

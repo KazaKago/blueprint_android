@@ -27,10 +27,9 @@ public class CityRepositoryImpl implements CityRepository {
         this.context = context;
     }
 
-    public List<CityModel> findAll() {
+    public List<CityModel> findAll() throws IOException, JSONException {
         List<CityModel> cityModelList = new ArrayList<>();
 
-        try {
             CityDao cityDao = new CityDao(context);
             List<PrefEntity> prefEntityList = cityDao.find();
             for (PrefEntity prefEntity : prefEntityList) {
@@ -42,9 +41,6 @@ public class CityRepositoryImpl implements CityRepository {
                     cityModelList.add(cityModel);
                 }
             }
-        } catch (IOException | JSONException e) {
-            e.printStackTrace();
-        }
 
         return cityModelList;
     }
