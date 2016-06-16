@@ -7,13 +7,13 @@ apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'realm-android'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    compileSdkVersion 24
+    buildToolsVersion "24.0.0"
 
     defaultConfig {
         applicationId "com.weathercock.cleanarchitecture"
         minSdkVersion 17
-        targetSdkVersion 23
+        targetSdkVersion 24
         versionCode 1
         versionName "1.0"
         //Vector Drawable Support
@@ -58,9 +58,9 @@ repositories {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     //v7 AppCompat Support Library
-    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:appcompat-v7:24.0.0'
     //Design Support Library
-    compile 'com.android.support:design:23.4.0'
+    compile 'com.android.support:design:24.0.0'
     //Rx
     compile 'io.reactivex:rxandroid:1.2.0'
     compile 'io.reactivex:rxjava:1.1.5'
@@ -88,7 +88,7 @@ dependencies {
     //JUnit
     testCompile 'junit:junit:4.12'
     //Test Support Library
-    androidTestCompile 'com.android.support:support-annotations:23.4.0'
+    androidTestCompile 'com.android.support:support-annotations:24.0.0'
     androidTestCompile 'com.android.support.test:runner:0.5'
     androidTestCompile 'com.android.support.test:rules:0.5'
     //Hamcrest
