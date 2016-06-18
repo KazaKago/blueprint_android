@@ -23,4 +23,5 @@ deployment:
         branch:
             - feature/circleci
         commands:
-            - ./gradlew assembleDebug
+            - ./gradlew assemble
+            - curl -F "file=@app/build/outputs/apk/app-debug.apk" -F "token=${DEPLOY_GATE_API_KEY}" -F "message=sample" https://deploygate.com/api/users/weathercock/apps
