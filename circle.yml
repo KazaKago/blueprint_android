@@ -4,7 +4,7 @@ machine:
 
 dependencies:
     override:
-        - echo y | android update sdk --no-ui --all --filter "tools, build-tools-24.0.0, platform-tools, android-24, extra-google-m2repository, extra-google-google_play_services, extra-android-support-24.0.0"
+        - echo y | android update sdk --no-ui --all --filter "tools, platform-tools, build-tools-24.0.0, android-24, extra-google-m2repository, extra-google-google_play_services"
 test:
     override:
         - ./gradlew test
