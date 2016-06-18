@@ -1,7 +1,7 @@
 general:
     branches:
             only:
-              - feature/circleci
+              - master
     artifacts:
         - "app/build/outputs/apk/"
 
@@ -16,12 +16,13 @@ dependencies:
 
 test:
     override:
-        - ./gradlew test
+        # - ./gradlew test
+        - echo "Nothing to do here"
 
 deployment:
     master:
         branch:
-            - feature/circleci
+            - master
         commands:
             - ./gradlew assembleDebug
             - curl -F "file=@app/build/outputs/apk/app-debug.apk" -F "token=${DEPLOY_GATE_API_KEY}" -F "message=Uploaded by CircleCI." https://deploygate.com/api/users/${DEPLOY_GATE_USER_NAME}/apps
