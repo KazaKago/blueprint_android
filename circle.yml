@@ -1,17 +1,26 @@
+general:
+    branches:
+            only:
+              - feature/circleci
+    artifacts:
+        - "app/build/outputs/apk/"
+
 machine:
     java:
         version: openjdk8
 
 dependencies:
-    override:
-        - echo y | android update sdk --no-ui --all --filter "tools, platform-tools, build-tools-24.0.0, android-24, extra-android-m2repository, extra-google-m2repository, extra-google-google_play_services"
+    pre:
+        # check 'android list sdk --all --extended'
+        - echo y | android update sdk --no-ui --all --filter "tools, platform-tools, build-tools-24.0.0, android-24, extra-android-m2repository"
+
 test:
     override:
         - ./gradlew test
 
 deployment:
-    develop:
+    master:
         branch:
-            - circleci
+            - feature/circleci
         commands:
             - ./gradlew assembleDebug
