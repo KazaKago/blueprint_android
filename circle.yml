@@ -2,8 +2,9 @@ general:
     branches:
             only:
               - master
-    artifacts:
-        - "app/build/outputs/apk/"
+    # artifacts:
+        # - "app/build/outputs/apk/"
+        # - "app/build/outputs/spoon/"
 
 machine:
     java:
@@ -17,12 +18,25 @@ dependencies:
 test:
     override:
         # - ./gradlew test
-        - echo "Nothing to do here"
+        # - echo "Nothing to do here"
+
+        # start the emulator
+        - emulator -avd circleci-android22 -no-audio -no-window:
+            background: true
+            parallel: true
+        # wait for it to have booted
+        - circle-android wait-for-boot
+        # run tests  against the emulator.
+        - ./gradlew spoon
+        # copy the build outputs to artifacts
+        - cp -r app/build/outputs/apk/* $CIRCLE_ARTIFACTS
+        # copy the test results to the test results directory.
+        - cp -r app/build/outputs/spoon/* $CIRCLE_TEST_REPORTS
 
 deployment:
     master:
         branch:
             - master
         commands:
-            - ./gradlew assembleDebug
+#            - ./gradlew assembleDebug
             - curl -F "file=@app/build/outputs/apk/app-debug.apk" -F "token=${DEPLOY_GATE_API_KEY}" -F "message=Uploaded by CircleCI." https://deploygate.com/api/users/${DEPLOY_GATE_USER_NAME}/apps
