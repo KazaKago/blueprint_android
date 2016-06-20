@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.weathercock.cleanarchitecture.presentation.presenter.fragment.AboutFragmentViewModel"/>
+            type="com.kazakago.cleanarchitecture.presentation.presenter.fragment.AboutFragmentViewModel"/>
 
     </data>
 

@@ -13,7 +13,7 @@ android {
     buildToolsVersion "24.0.0"
 
     defaultConfig {
-        applicationId "com.weathercock.cleanarchitecture"
+        applicationId "com.kazakago.cleanarchitecture"
         minSdkVersion 17
         targetSdkVersion 24
         versionCode 1
