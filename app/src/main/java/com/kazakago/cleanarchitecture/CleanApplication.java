@@ -31,7 +31,8 @@ public class CleanApplication extends Application {
 
         initializeInjector();
 
-        RealmConfiguration realmConfiguration = new RealmConfiguration.Builder(this).build();
+        Realm.init(this);
+        RealmConfiguration realmConfiguration = new RealmConfiguration.Builder().build();
         Realm.setDefaultConfiguration(realmConfiguration);
     }
 

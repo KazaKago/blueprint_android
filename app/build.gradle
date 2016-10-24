@@ -9,13 +9,13 @@ apply plugin: 'realm-android'
 apply plugin: 'spoon'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion '24.0.2'
+    compileSdkVersion 25
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
         applicationId "com.kazakago.cleanarchitecture"
         minSdkVersion 17
-        targetSdkVersion 24
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         //Vector Drawable Support
@@ -57,12 +57,25 @@ repositories {
     }
 }
 
+spoon {
+    // for debug output
+    debug true
+    // To execute the tests device by device
+    sequential true
+    // To grant permissions to Android M >= devices
+    grantAllPermissions true
+    // Disable animated gif generation
+    noAnimations true
+    // Set maximum execution time per test in seconds (10min default)
+    adbTimeout 60
+}
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     //v7 AppCompat Support Library
-    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:appcompat-v7:25.0.0'
     //Design Support Library
-    compile 'com.android.support:design:24.2.1'
+    compile 'com.android.support:design:25.0.0'
     //Rx
     compile 'io.reactivex:rxandroid:1.2.0'
     compile 'io.reactivex:rxjava:1.1.5'
@@ -81,10 +94,12 @@ dependencies {
     compile 'org.modelmapper:modelmapper:0.7.5'
     //Picasso
     compile 'com.squareup.picasso:picasso:2.5.2'
+
     //Stetho
-    debugCompile 'com.facebook.stetho:stetho:1.3.1'
+    debugCompile 'com.facebook.stetho:stetho:1.4.1'
     //Stetho-Realm
-    debugCompile 'com.uphyca:stetho_realm:0.8.0'
+    debugCompile 'com.uphyca:stetho_realm:2.0.0'
+
     //JUnit
     testCompile 'junit:junit:4.12'
     //Hamcrest
@@ -93,14 +108,13 @@ dependencies {
     testCompile 'com.google.dagger:dagger:2.2'
     testApt 'com.google.dagger:dagger-compiler:2.2'
     testProvided 'javax.annotation:jsr250-api:1.0'
-    //Android Testing Support Library
-    androidTestCompile 'com.android.support.test:runner:0.5'
-    androidTestCompile 'com.android.support.test:rules:0.5'
-    androidTestCompile 'com.android.support:support-annotations:24.2.1'
+
     //Espresso
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
     //Spoon
-    androidTestCompile 'com.squareup.spoon:spoon-client:1.5.6'
+    androidTestCompile 'com.squareup.spoon:spoon-client:1.7.0'
     //Hamcrest
     androidTestCompile 'org.hamcrest:hamcrest-library:1.3'
     //Dagger2
