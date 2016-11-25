@@ -10,7 +10,7 @@ apply plugin: 'spoon'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '25.0.1'
 
     defaultConfig {
         applicationId "com.kazakago.cleanarchitecture"
@@ -73,9 +73,9 @@ spoon {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     //v7 AppCompat Support Library
-    compile 'com.android.support:appcompat-v7:25.0.0'
+    compile 'com.android.support:appcompat-v7:25.0.1'
     //Design Support Library
-    compile 'com.android.support:design:25.0.0'
+    compile 'com.android.support:design:25.0.1'
     //Rx
     compile 'io.reactivex:rxandroid:1.2.0'
     compile 'io.reactivex:rxjava:1.1.5'
