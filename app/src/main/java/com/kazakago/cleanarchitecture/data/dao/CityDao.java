@@ -6,8 +6,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.kazakago.cleanarchitecture.data.entity.city.PrefEntity;
 
-import org.json.JSONException;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,7 +25,7 @@ public class CityDao {
         this.context = context;
     }
 
-    public List<PrefEntity> find() throws IOException, JSONException {
+    public List<PrefEntity> find() throws IOException {
         String cityJson = readJson();
         return parseJson(cityJson);
     }
@@ -53,7 +51,7 @@ public class CityDao {
         return text;
     }
 
-    private List<PrefEntity> parseJson(String jsonStr) throws JSONException {
+    private List<PrefEntity> parseJson(String jsonStr) {
         Gson gson = new Gson();
         List<PrefEntity> entityList = gson.fromJson(jsonStr, new TypeToken<List<PrefEntity>>() {
         }.getType());

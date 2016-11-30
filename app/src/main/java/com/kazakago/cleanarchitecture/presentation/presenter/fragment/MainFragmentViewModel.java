@@ -25,8 +25,6 @@ import com.kazakago.cleanarchitecture.presentation.presenter.adapter.ForecastVie
 import com.kazakago.cleanarchitecture.presentation.view.adapter.CitySpinnerAdapter;
 import com.kazakago.cleanarchitecture.presentation.view.adapter.ForecastRecyclerAdapter;
 
-import org.json.JSONException;
-
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -78,7 +76,7 @@ public class MainFragmentViewModel implements ForecastRecyclerAdapterListener {
         CitySpinnerAdapter citySpinnerAdapter = new CitySpinnerAdapter(context);
         try {
             citySpinnerAdapter.setCityViewModelList(getCityViewModelList(cityUseCase.findAll()));
-        } catch (IOException | JSONException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         this.citySpinnerAdapter = new ObservableField<>(citySpinnerAdapter);

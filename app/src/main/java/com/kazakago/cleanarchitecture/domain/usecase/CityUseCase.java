@@ -2,8 +2,6 @@ package com.kazakago.cleanarchitecture.domain.usecase;
 
 import com.kazakago.cleanarchitecture.domain.model.city.CityModel;
 
-import org.json.JSONException;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -14,6 +12,6 @@ import java.util.List;
  */
 public interface CityUseCase {
 
-    List<CityModel> findAll() throws IOException, JSONException;
+    List<CityModel> findAll() throws IOException;
 
 }

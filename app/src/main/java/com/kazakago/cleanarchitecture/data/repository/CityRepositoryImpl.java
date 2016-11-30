@@ -8,8 +8,6 @@ import com.kazakago.cleanarchitecture.data.entity.city.PrefEntity;
 import com.kazakago.cleanarchitecture.domain.model.city.CityModel;
 import com.kazakago.cleanarchitecture.domain.repository.CityRepository;
 
-import org.json.JSONException;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +25,7 @@ public class CityRepositoryImpl implements CityRepository {
         this.context = context;
     }
 
-    public List<CityModel> findAll() throws IOException, JSONException {
+    public List<CityModel> findAll() throws IOException {
         List<CityModel> cityModelList = new ArrayList<>();
 
             CityDao cityDao = new CityDao(context);

@@ -91,7 +91,7 @@ dependencies {
     compile 'frankiesardo:icepick:3.2.0'
     provided 'frankiesardo:icepick-processor:3.2.0'
     //ModelMapper
-    compile 'org.modelmapper:modelmapper:0.7.5'
+    compile 'org.modelmapper:modelmapper:0.7.7'
     //Picasso
     compile 'com.squareup.picasso:picasso:2.5.2'
 
