@@ -9,6 +9,7 @@ import android.view.View;
 import com.kazakago.cleanarchitecture.CleanApplication;
 import com.kazakago.cleanarchitecture.R;
 import com.kazakago.cleanarchitecture.domain.usecase.AboutUseCase;
+import com.kazakago.cleanarchitecture.presentation.listener.presenter.fragment.AboutFragmentViewModelListener;
 
 import javax.inject.Inject;
 
@@ -24,13 +25,15 @@ public class AboutFragmentViewModel {
     public ObservableField<String> copyrightText;
 
     private Context context;
+    private AboutFragmentViewModelListener listener;
 
     @Inject
     public AboutUseCase aboutUseCase;
 
-    public AboutFragmentViewModel(Context context) {
-        CleanApplication.getInstance(context).getApplicationComponent().inject(this);
+    public AboutFragmentViewModel(Context context, AboutFragmentViewModelListener listener) {
+        CleanApplication.applicationComponent.inject(this);
         this.context = context;
+        this.listener = listener;
         this.verText = new ObservableField<>(context.getString(R.string.about_ver, aboutUseCase.getCurrentVersion()));
         this.developByText = new ObservableField<>(context.getString(R.string.about_develop_by, context.getString(R.string.developer_name)));
         this.copyrightText = new ObservableField<>(context.getString(R.string.about_copyright, aboutUseCase.getCurrentYear(), context.getString(R.string.developer_name)));

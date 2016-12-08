@@ -1,7 +1,6 @@
 package com.kazakago.cleanarchitecture;
 
 import android.app.Application;
-import android.content.Context;
 
 import com.kazakago.cleanarchitecture.di.component.ApplicationComponent;
 import com.kazakago.cleanarchitecture.di.component.DaggerApplicationComponent;
@@ -19,11 +18,7 @@ import io.realm.RealmConfiguration;
  */
 public class CleanApplication extends Application {
 
-    private ApplicationComponent applicationComponent;
-
-    public static CleanApplication getInstance(Context context) {
-        return (CleanApplication) context.getApplicationContext();
-    }
+    public static ApplicationComponent applicationComponent;
 
     @Override
     public void onCreate() {
@@ -42,10 +37,6 @@ public class CleanApplication extends Application {
                 .domainModule(new DomainModule())
                 .dataModule(new DataModule())
                 .build();
-    }
-
-    public ApplicationComponent getApplicationComponent() {
-        return applicationComponent;
     }
 
 }

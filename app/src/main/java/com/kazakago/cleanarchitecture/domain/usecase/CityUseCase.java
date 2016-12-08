@@ -3,7 +3,8 @@ package com.kazakago.cleanarchitecture.domain.usecase;
 import com.kazakago.cleanarchitecture.domain.model.city.CityModel;
 
 import java.io.IOException;
-import java.util.List;
+
+import io.reactivex.Observable;
 
 /**
  * City UseCase
@@ -12,6 +13,6 @@ import java.util.List;
  */
 public interface CityUseCase {
 
-    List<CityModel> findAll() throws IOException;
+    Observable<CityModel> findAll() throws IOException;
 
 }

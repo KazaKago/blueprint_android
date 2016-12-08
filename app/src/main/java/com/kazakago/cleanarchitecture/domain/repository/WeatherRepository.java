@@ -2,7 +2,7 @@ package com.kazakago.cleanarchitecture.domain.repository;
 
 import com.kazakago.cleanarchitecture.domain.model.weather.WeatherModel;
 
-import rx.Observable;
+import io.reactivex.Single;
 
 /**
  * Weather Repository
@@ -11,7 +11,7 @@ import rx.Observable;
  */
 public interface WeatherRepository {
 
-    Observable<WeatherModel> fetch(String cityId);
+    Single<WeatherModel> fetch(String cityId);
 
     WeatherModel find(String cityId);
 

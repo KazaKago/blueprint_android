@@ -3,7 +3,7 @@ package com.kazakago.cleanarchitecture.domain.usecase;
 import com.kazakago.cleanarchitecture.domain.model.weather.WeatherModel;
 import com.kazakago.cleanarchitecture.domain.repository.WeatherRepository;
 
-import rx.Observable;
+import io.reactivex.Single;
 
 /**
  * Weather UseCase Implement
@@ -19,7 +19,7 @@ public class WeatherUseCaseImpl implements WeatherUseCase {
     }
 
     @Override
-    public Observable<WeatherModel> fetch(String cityId) {
+    public Single<WeatherModel> fetch(String cityId) {
         return weatherRepository.fetch(cityId);
     }
 

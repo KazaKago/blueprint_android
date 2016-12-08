@@ -10,7 +10,7 @@ import java.util.List;
 public class WeatherModel {
 
     //地域ID
-    private int cityId;
+    private String cityId;
 
     //予報を発表した地域を定義
     private LocationModel location;
@@ -29,11 +29,11 @@ public class WeatherModel {
     //コピーライト
     private CopyrightModel copyright;
 
-    public int getCityId() {
+    public String getCityId() {
         return cityId;
     }
 
-    public void setCityId(int cityId) {
+    public void setCityId(String cityId) {
         this.cityId = cityId;
     }
 

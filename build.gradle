@@ -11,7 +11,7 @@ buildscript {
         //Retrolambda
         classpath 'me.tatarka:gradle-retrolambda:3.3.0'
         //Realm
-        classpath 'io.realm:realm-gradle-plugin:2.0.2'
+        classpath 'io.realm:realm-gradle-plugin:2.2.1'
         //Spoon
         classpath 'com.stanfy.spoon:spoon-gradle-plugin:1.2.2'
 

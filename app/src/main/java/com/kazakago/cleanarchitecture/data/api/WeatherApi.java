@@ -2,9 +2,9 @@ package com.kazakago.cleanarchitecture.data.api;
 
 import com.kazakago.cleanarchitecture.data.entity.weather.WeatherEntity;
 
+import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
-import rx.Observable;
 
 /**
  * Weather API from livedoor
@@ -15,6 +15,6 @@ import rx.Observable;
 public interface WeatherApi {
 
     @GET("json/v1")
-    Observable<WeatherEntity> get(@Query("city") String cityId);
+    Single<WeatherEntity> get(@Query("city") String cityId);
 
 }

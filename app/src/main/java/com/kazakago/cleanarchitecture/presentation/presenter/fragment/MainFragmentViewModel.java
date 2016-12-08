@@ -36,10 +36,10 @@ import javax.inject.Inject;
 
 import icepick.Icepick;
 import icepick.State;
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Main Fragment ViewModel
@@ -56,8 +56,8 @@ public class MainFragmentViewModel implements ForecastRecyclerAdapterListener {
     public ObservableField<ForecastRecyclerAdapter> forecastRecyclerAdapter;
 
     private Context context;
-    private MainFragmentViewModelListener mainFragmentViewModelListener;
-    private CompositeSubscription subscriptions;
+    private MainFragmentViewModelListener listener;
+    private CompositeDisposable compositeDisposable;
 
     @State
     public int selectedPosition;
@@ -67,8 +67,8 @@ public class MainFragmentViewModel implements ForecastRecyclerAdapterListener {
     @Inject
     public CityUseCase cityUseCase;
 
-    public MainFragmentViewModel(Context context, MainFragmentViewModelListener mainFragmentViewModelListener) {
-        CleanApplication.getInstance(context).getApplicationComponent().inject(this);
+    public MainFragmentViewModel(Context context, MainFragmentViewModelListener listener) {
+        CleanApplication.applicationComponent.inject(this);
         this.area = new ObservableField<>();
         this.prefecture = new ObservableField<>();
         this.city = new ObservableField<>();
@@ -83,7 +83,7 @@ public class MainFragmentViewModel implements ForecastRecyclerAdapterListener {
         ForecastRecyclerAdapter forecastRecyclerAdapter = new ForecastRecyclerAdapter(context);
         forecastRecyclerAdapter.setForecastRecyclerAdapterListener(this);
         this.forecastRecyclerAdapter = new ObservableField<>(forecastRecyclerAdapter);
-        this.mainFragmentViewModelListener = mainFragmentViewModelListener;
+        this.listener = listener;
         this.context = context;
         this.selectedPosition = 0;
     }
@@ -94,17 +94,17 @@ public class MainFragmentViewModel implements ForecastRecyclerAdapterListener {
 
     public void onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (savedInstanceState != null) {
-            new Handler().post(() -> mainFragmentViewModelListener.setCitySpinnerSelection(selectedPosition));
+            new Handler().post(() -> listener.setCitySpinnerSelection(selectedPosition));
         }
     }
 
     public void onStart() {
-        subscriptions = new CompositeSubscription();
+        compositeDisposable = new CompositeDisposable();
         refreshView();
     }
 
     public void onStop() {
-        subscriptions.unsubscribe();
+        compositeDisposable.dispose();
     }
 
     public void onSaveInstanceState(Bundle outState) {
@@ -122,7 +122,7 @@ public class MainFragmentViewModel implements ForecastRecyclerAdapterListener {
 
     private void fetchWeather() {
         String cityId = citySpinnerAdapter.get().getItem(selectedPosition).id.get();
-        subscriptions.add(weatherUseCase.fetch(cityId)
+        compositeDisposable.add(weatherUseCase.fetch(cityId)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -133,8 +133,6 @@ public class MainFragmentViewModel implements ForecastRecyclerAdapterListener {
                         error -> {
                             refreshView();
                             showToast(error.getLocalizedMessage());
-                        },
-                        () -> {
                         }
                 ));
     }
@@ -158,7 +156,7 @@ public class MainFragmentViewModel implements ForecastRecyclerAdapterListener {
                 e.printStackTrace();
                 publicTime.set(null);
             }
-            mainFragmentViewModelListener.setActionBarTitle(weather.getTitle());
+            listener.setActionBarTitle(weather.getTitle());
 
             forecastRecyclerAdapter.get().setForecastViewModelList(getForecastViewModelList(weather.getForecasts()));
             forecastRecyclerAdapter.get().notifyDataSetChanged();
@@ -176,20 +174,18 @@ public class MainFragmentViewModel implements ForecastRecyclerAdapterListener {
         return dateFormat.format(timestamp) + " " + timeFormat.format(timestamp);
     }
 
-    private List<CityViewModel> getCityViewModelList(List<CityModel> cityList) {
-        return Observable.from(cityList)
+    private List<CityViewModel> getCityViewModelList(Observable<CityModel> cityObservable) {
+        return cityObservable
                 .map(cityModel -> new CityViewModel(context, cityModel))
                 .toList()
-                .toBlocking()
-                .single();
+                .blockingGet();
     }
 
     private List<ForecastViewModel> getForecastViewModelList(List<ForecastModel> forecastList) {
-        return Observable.from(forecastList)
+        return Observable.fromIterable(forecastList)
                 .map(forecast -> new ForecastViewModel(context, forecast))
                 .toList()
-                .toBlocking()
-                .single();
+                .blockingGet();
     }
 
     private void showToast(String message) {

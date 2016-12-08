@@ -4,7 +4,8 @@ import com.kazakago.cleanarchitecture.domain.model.city.CityModel;
 import com.kazakago.cleanarchitecture.domain.repository.CityRepository;
 
 import java.io.IOException;
-import java.util.List;
+
+import io.reactivex.Observable;
 
 /**
  * City UseCase Implement
@@ -19,7 +20,7 @@ public class CityUseCaseImpl implements CityUseCase {
         this.cityRepository = cityRepository;
     }
 
-    public List<CityModel> findAll() throws IOException {
+    public Observable<CityModel> findAll() throws IOException {
         return cityRepository.findAll();
     }
 

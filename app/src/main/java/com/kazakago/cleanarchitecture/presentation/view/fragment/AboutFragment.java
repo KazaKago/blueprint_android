@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.kazakago.cleanarchitecture.R;
 import com.kazakago.cleanarchitecture.databinding.FragmentAboutBinding;
+import com.kazakago.cleanarchitecture.presentation.listener.presenter.fragment.AboutFragmentViewModelListener;
 import com.kazakago.cleanarchitecture.presentation.presenter.fragment.AboutFragmentViewModel;
 
 /**
@@ -17,7 +18,7 @@ import com.kazakago.cleanarchitecture.presentation.presenter.fragment.AboutFragm
  *
  * @author Kensuke
  */
-public class AboutFragment extends Fragment {
+public class AboutFragment extends Fragment implements AboutFragmentViewModelListener {
 
     private FragmentAboutBinding binding;
     private AboutFragmentViewModel viewModel;
@@ -30,7 +31,7 @@ public class AboutFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel = new AboutFragmentViewModel(getActivity());
+        viewModel = new AboutFragmentViewModel(getActivity(), this);
     }
 
     @Override
@@ -41,5 +42,7 @@ public class AboutFragment extends Fragment {
         }
         return binding.getRoot();
     }
+
+    /* AboutFragmentViewModelListener */
 
 }

@@ -12,15 +12,15 @@ import com.kazakago.cleanarchitecture.presentation.listener.presenter.activity.A
 public class AboutActivityViewModel {
 
     private Context context;
-    private AboutActivityViewModelListener aboutActivityViewModelListener;
+    private AboutActivityViewModelListener listener;
 
-    public AboutActivityViewModel(Context context, AboutActivityViewModelListener aboutActivityViewModelListener) {
+    public AboutActivityViewModel(Context context, AboutActivityViewModelListener listener) {
         this.context = context;
-        this.aboutActivityViewModelListener = aboutActivityViewModelListener;
+        this.listener = listener;
     }
 
     public void onClickBackIcon() {
-        aboutActivityViewModelListener.onPerformFinish();
+        listener.onPerformFinish();
     }
 
 }

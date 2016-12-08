@@ -4,14 +4,13 @@ import com.kazakago.cleanarchitecture.data.api.WeatherApi;
 import com.kazakago.cleanarchitecture.data.api.WeatherRetrofit;
 import com.kazakago.cleanarchitecture.data.dao.WeatherDao;
 import com.kazakago.cleanarchitecture.data.entity.weather.WeatherEntity;
+import com.kazakago.cleanarchitecture.data.mapper.WeatherMapper;
 import com.kazakago.cleanarchitecture.domain.model.weather.WeatherModel;
 import com.kazakago.cleanarchitecture.domain.repository.WeatherRepository;
 
-import org.modelmapper.ModelMapper;
-
+import io.reactivex.Single;
 import io.realm.Realm;
 import retrofit2.Retrofit;
-import rx.Observable;
 
 /**
  * Weather Repository Implement
@@ -24,17 +23,16 @@ public class WeatherRepositoryImpl implements WeatherRepository {
     }
 
     @Override
-    public Observable<WeatherModel> fetch(String cityId) {
+    public Single<WeatherModel> fetch(String cityId) {
         Retrofit retrofit = WeatherRetrofit.getInstance();
         WeatherApi weatherApi = retrofit.create(WeatherApi.class);
-        ModelMapper modelMapper = new ModelMapper();
         return weatherApi.get(cityId)
-                .doOnNext(weatherEntity -> {
+                .doOnSuccess(weatherEntity -> {
                     if (exist(cityId)) delete(cityId);
                     weatherEntity.setCityId(cityId);
                     insert(weatherEntity);
                 })
-                .map(weatherEntity -> modelMapper.map(weatherEntity, WeatherModel.class));
+                .map(WeatherMapper::map);
     }
 
     @Override
@@ -44,13 +42,7 @@ public class WeatherRepositoryImpl implements WeatherRepository {
             realm = Realm.getDefaultInstance();
             WeatherDao weatherDao = new WeatherDao(realm);
             WeatherEntity weatherEntity = weatherDao.find(cityId);
-
-            if (weatherEntity != null) {
-                ModelMapper modelMapper = new ModelMapper();
-                return modelMapper.map(weatherEntity, WeatherModel.class);
-            } else {
-                return null;
-            }
+            return WeatherMapper.map(weatherEntity);
         } finally {
             if (realm != null) realm.close();
         }

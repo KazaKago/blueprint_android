@@ -12,6 +12,7 @@ import android.view.MenuItem;
 
 import com.kazakago.cleanarchitecture.R;
 import com.kazakago.cleanarchitecture.databinding.ActivityMainBinding;
+import com.kazakago.cleanarchitecture.presentation.listener.presenter.activity.MainActivityViewModelListener;
 import com.kazakago.cleanarchitecture.presentation.listener.view.fragment.MainFragmentListener;
 import com.kazakago.cleanarchitecture.presentation.presenter.activity.MainActivityViewModel;
 import com.kazakago.cleanarchitecture.presentation.view.fragment.MainFragment;
@@ -21,7 +22,7 @@ import com.kazakago.cleanarchitecture.presentation.view.fragment.MainFragment;
  *
  * @author Kensuke
  */
-public class MainActivity extends AppCompatActivity implements MainFragmentListener {
+public class MainActivity extends AppCompatActivity implements MainFragmentListener, MainActivityViewModelListener {
 
     private MainActivityViewModel viewModel;
 
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements MainFragmentListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        viewModel = new MainActivityViewModel(this);
+        viewModel = new MainActivityViewModel(this, this);
         binding.setViewModel(viewModel);
 
         setSupportActionBar(binding.toolbar);
@@ -74,6 +75,14 @@ public class MainActivity extends AppCompatActivity implements MainFragmentListe
     @Override
     public void setActionBarTitle(String title) {
         getSupportActionBar().setTitle(title);
+    }
+
+    /* MainActivityViewModelListener */
+
+    @Override
+    public void toAboutActivity() {
+        Intent intent = AboutActivity.newInstance(this);
+        startActivity(intent);
     }
 
 }
