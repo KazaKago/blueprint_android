@@ -2,8 +2,6 @@ package com.kazakago.cleanarchitecture.di.module;
 
 import android.content.Context;
 
-import com.kazakago.cleanarchitecture.CleanApplication;
-
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -12,16 +10,16 @@ import dagger.Provides;
 @Module
 public class ApplicationModule {
 
-    private CleanApplication cleanApplication;
+    private Context context;
 
-    public ApplicationModule(CleanApplication cleanApplication) {
-        this.cleanApplication = cleanApplication;
+    public ApplicationModule(Context context) {
+        this.context = context.getApplicationContext();
     }
 
     @Provides
     @Singleton
     public Context provideApplicationContext() {
-        return cleanApplication.getApplicationContext();
+        return context;
     }
 
 }

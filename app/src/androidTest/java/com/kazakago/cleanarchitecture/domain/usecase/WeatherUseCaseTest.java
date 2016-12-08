@@ -4,7 +4,6 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.SmallTest;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.kazakago.cleanarchitecture.CleanApplication;
 import com.kazakago.cleanarchitecture.di.component.DaggerTestApplicationComponent;
 import com.kazakago.cleanarchitecture.di.module.ApplicationModule;
 import com.kazakago.cleanarchitecture.di.module.DataModule;
@@ -35,7 +34,7 @@ public class WeatherUseCaseTest {
     @Before
     public void setUp() throws Exception {
         DaggerTestApplicationComponent.builder()
-                .applicationModule(new ApplicationModule(CleanApplication.getInstance(InstrumentationRegistry.getTargetContext())))
+                .applicationModule(new ApplicationModule(InstrumentationRegistry.getTargetContext()))
                 .domainModule(new DomainModule())
                 .dataModule(new DataModule())
                 .build()
@@ -48,7 +47,7 @@ public class WeatherUseCaseTest {
 
     @Test
     public void testFetch() throws Exception {
-        assertThat(weatherUseCase.fetch("400040").toBlocking().single(), notNullValue());
+        assertThat(weatherUseCase.fetch("400040").blockingGet(), notNullValue());
     }
 
     @Test

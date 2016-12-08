@@ -4,7 +4,6 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.SmallTest;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.kazakago.cleanarchitecture.CleanApplication;
 import com.kazakago.cleanarchitecture.di.component.DaggerTestApplicationComponent;
 import com.kazakago.cleanarchitecture.di.module.ApplicationModule;
 import com.kazakago.cleanarchitecture.di.module.DataModule;
@@ -35,7 +34,7 @@ public class AboutUseCaseTest {
     @Before
     public void setUp() throws Exception {
         DaggerTestApplicationComponent.builder()
-                .applicationModule(new ApplicationModule(CleanApplication.getInstance(InstrumentationRegistry.getTargetContext())))
+                .applicationModule(new ApplicationModule(InstrumentationRegistry.getTargetContext()))
                 .domainModule(new DomainModule())
                 .dataModule(new DataModule())
                 .build()
