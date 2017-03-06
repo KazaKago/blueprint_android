@@ -1,6 +1,7 @@
 package com.kazakago.cleanarchitecture.data.mapper;
 
-import com.android.annotations.Nullable;
+import android.support.annotation.Nullable;
+
 import com.kazakago.cleanarchitecture.data.entity.city.PrefEntity;
 import com.kazakago.cleanarchitecture.domain.model.city.CityModel;
 
