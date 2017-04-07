@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
-//Retrolambda
-apply plugin: 'me.tatarka.retrolambda'
+//Kotlin
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 //Realm
 apply plugin: 'realm-android'
 //Spoon
@@ -16,15 +17,9 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         //Vector Drawable Support
         vectorDrawables.useSupportLibrary = true
-        //Need for Android-Test
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    }
-    compileOptions {
-        //Need for Retrolambda
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
     }
     buildTypes {
         release {
@@ -42,17 +37,18 @@ android {
         //Need for Android Data-Binding
         enabled = true
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
 }
 
 repositories {
-    maven {
-        //Need for Stetho-Realm
-        url 'https://github.com/uPhyca/stetho-realm/raw/master/maven-repo'
-    }
-    maven {
-        //Need for Icepick
-        url "https://clojars.org/repo/"
-    }
+    mavenCentral()
+    //Need for Stetho-Realm
+    maven { url 'https://github.com/uPhyca/stetho-realm/raw/master/maven-repo' }
+    //Need for Icepick
+    maven { url "https://clojars.org/repo/" }
 }
 
 spoon {
@@ -70,6 +66,8 @@ spoon {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    //Kotlin
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     //v7 AppCompat Support Library
     compile 'com.android.support:appcompat-v7:25.3.1'
     //Design Support Library
@@ -83,12 +81,15 @@ dependencies {
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
     //Dagger2
     compile 'com.google.dagger:dagger:2.10'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.10'
+    kapt 'com.google.dagger:dagger-compiler:2.10'
     //Icepick
     compile 'frankiesardo:icepick:3.2.0'
     provided 'frankiesardo:icepick-processor:3.2.0'
     //Picasso
     compile 'com.squareup.picasso:picasso:2.5.2'
+    //Orma
+    compile 'com.github.gfx.android.orma:orma:4.2.3'
+    kapt 'com.github.gfx.android.orma:orma-processor:4.2.3'
 
     //Stetho
     debugCompile 'com.facebook.stetho:stetho:1.4.2'
@@ -101,7 +102,7 @@ dependencies {
     testCompile 'org.hamcrest:hamcrest-library:1.3'
     //Dagger2
     testCompile 'com.google.dagger:dagger:2.10'
-    testAnnotationProcessor 'com.google.dagger:dagger-compiler:2.10'
+    kaptTest 'com.google.dagger:dagger-compiler:2.10'
 
     //Espresso
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -113,5 +114,5 @@ dependencies {
     androidTestCompile 'org.hamcrest:hamcrest-library:1.3'
     //Dagger2
     androidTestCompile 'com.google.dagger:dagger:2.10'
-    androidTestAnnotationProcessor 'com.google.dagger:dagger-compiler:2.10'
+    kaptAndroidTest 'com.google.dagger:dagger-compiler:2.10'
 }

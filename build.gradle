@@ -1,13 +1,14 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+    ext.kotlin_version = '1.1.1'
     repositories {
         jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.1'
-        //Retrolambda
-        classpath 'me.tatarka:gradle-retrolambda:3.6.0'
+        //Kotlin
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         //Realm
         classpath 'io.realm:realm-gradle-plugin:2.2.1'
         //Spoon
