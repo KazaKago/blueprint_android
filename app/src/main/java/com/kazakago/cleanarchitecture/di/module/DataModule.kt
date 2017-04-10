@@ -14,12 +14,12 @@ import javax.inject.Singleton
 @Module
 class DataModule {
 
-    @Singleton
-    @Provides
-    fun provideOrmaDatabase(context: Context): OrmaDatabase {
-        return OrmaDatabase.builder(context)
-                .build()
-    }
+//    @Singleton
+//    @Provides
+//    fun provideOrmaDatabase(context: Context): OrmaDatabase {
+//        return OrmaDatabase.builder(context)
+//                .build()
+//    }
 
     @Provides
     @Singleton
