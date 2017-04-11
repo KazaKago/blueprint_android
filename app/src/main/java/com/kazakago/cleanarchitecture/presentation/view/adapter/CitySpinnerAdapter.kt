@@ -34,17 +34,18 @@ class CitySpinnerAdapter(private val context: Context) : BaseAdapter() {
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        var view = convertView
-        val binding: SpinnerCityBinding
-        if (view == null) {
+        var binding: SpinnerCityBinding? = null
+        val view: View = convertView?.let {
+            binding = it.tag as? SpinnerCityBinding
+            it
+        } ?: run {
             binding = DataBindingUtil.inflate<SpinnerCityBinding>(LayoutInflater.from(context), R.layout.spinner_city, parent, false)
-            view = binding.root
+            val view = binding!!.root
             view.tag = binding
-        } else {
-            binding = view.tag as SpinnerCityBinding
+            view
         }
 
-        binding.viewModel = getItem(position)
+        binding?.viewModel = getItem(position)
         return view
     }
 

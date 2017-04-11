@@ -47,8 +47,6 @@ repositories {
     mavenCentral()
     //Need for Stetho-Realm
     maven { url 'https://github.com/uPhyca/stetho-realm/raw/master/maven-repo' }
-    //Need for Icepick
-    maven { url "https://clojars.org/repo/" }
 }
 
 spoon {
@@ -72,6 +70,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     //Design Support Library
     compile 'com.android.support:design:25.3.1'
+    //Data-Binding for Kotlin
+    kapt 'com.android.databinding:compiler:2.3.1'
     //Rx
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'io.reactivex.rxjava2:rxjava:2.0.8'
@@ -82,9 +82,9 @@ dependencies {
     //Dagger2
     compile 'com.google.dagger:dagger:2.10'
     kapt 'com.google.dagger:dagger-compiler:2.10'
-    //Icepick
-    compile 'frankiesardo:icepick:3.2.0'
-    provided 'frankiesardo:icepick-processor:3.2.0'
+    //Android-State
+    compile 'com.evernote:android-state:1.0.6'
+    kapt 'com.evernote:android-state-processor:1.0.6'
     //Picasso
     compile 'com.squareup.picasso:picasso:2.5.2'
     //Orma

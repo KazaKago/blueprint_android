@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.databinding.ObservableField
 import android.net.Uri
+import android.view.View
 import com.kazakago.cleanarchitecture.CleanApplication
 import com.kazakago.cleanarchitecture.R
 import com.kazakago.cleanarchitecture.domain.usecase.AboutUseCase
@@ -30,15 +31,15 @@ class AboutFragmentViewModel(private val context: Context) {
         CleanApplication.applicationComponent.inject(this)
     }
 
-    fun onClickPlayStore() {
+    fun onClickPlayStore(view: View) {
         toPlayStore()
     }
 
-    fun onClickMail() {
+    fun onClickMail(view: View) {
         toMailApp()
     }
 
-    fun onClickWebSite() {
+    fun onClickWebSite(view: View) {
         toWebSite()
     }
 

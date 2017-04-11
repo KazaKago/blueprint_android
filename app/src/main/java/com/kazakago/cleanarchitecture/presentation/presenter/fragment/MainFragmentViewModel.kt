@@ -7,6 +7,8 @@ import android.os.Handler
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
+import com.evernote.android.state.State
+import com.evernote.android.state.StateSaver
 import com.kazakago.cleanarchitecture.CleanApplication
 import com.kazakago.cleanarchitecture.R
 import com.kazakago.cleanarchitecture.domain.model.weather.WeatherModel
@@ -18,8 +20,6 @@ import com.kazakago.cleanarchitecture.presentation.presenter.adapter.CityViewMod
 import com.kazakago.cleanarchitecture.presentation.presenter.adapter.ForecastViewModel
 import com.kazakago.cleanarchitecture.presentation.view.adapter.CitySpinnerAdapter
 import com.kazakago.cleanarchitecture.presentation.view.adapter.ForecastRecyclerAdapter
-import icepick.Icepick
-import icepick.State
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -52,7 +52,6 @@ class MainFragmentViewModel(private val context: Context) : ForecastRecyclerAdap
     lateinit var cityUseCase: CityUseCase
 
     @State
-    @JvmField
     var selectedPosition: Int = 0
 
     init {
@@ -60,7 +59,7 @@ class MainFragmentViewModel(private val context: Context) : ForecastRecyclerAdap
     }
 
     fun onCreate(savedInstanceState: Bundle?) {
-        Icepick.restoreInstanceState(this, savedInstanceState)
+        StateSaver.restoreInstanceState(this, savedInstanceState)
         forecastRecyclerAdapter.get().forecastRecyclerAdapterListener = this
         refreshCityView()
     }
@@ -81,10 +80,10 @@ class MainFragmentViewModel(private val context: Context) : ForecastRecyclerAdap
     }
 
     fun onSaveInstanceState(outState: Bundle?) {
-        Icepick.saveInstanceState(this, outState)
+        outState?.let { StateSaver.saveInstanceState(this, it) }
     }
 
-    fun onClickRefresh() {
+    fun onClickRefresh(view: View) {
         fetchWeather()
     }
 
