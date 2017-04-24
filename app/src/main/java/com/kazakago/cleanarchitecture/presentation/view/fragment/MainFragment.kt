@@ -75,8 +75,8 @@ class MainFragment : Fragment(), MainFragmentViewModelListener {
 
     /* MainFragmentViewModelListener */
 
-    override fun setActionBarTitle(title: String?) {
-        mainFragmentListener?.setActionBarTitle(title!!)
+    override fun setActionBarTitle(title: String) {
+        mainFragmentListener?.setActionBarTitle(title)
     }
 
     override fun setCitySpinnerSelection(position: Int) {

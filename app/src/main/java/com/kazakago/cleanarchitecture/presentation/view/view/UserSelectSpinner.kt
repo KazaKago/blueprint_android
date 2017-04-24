@@ -9,7 +9,7 @@ import android.widget.AdapterView
 /**
  * Perform 'onItemSelected' event, only user selected Spinner.
  */
-class UserSelectSpinner(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : AppCompatSpinner(context, attrs, defStyle) {
+class UserSelectSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : AppCompatSpinner(context, attrs, defStyle) {
 
     private var isUserOpen = false
 
@@ -17,24 +17,26 @@ class UserSelectSpinner(context: Context, attrs: AttributeSet? = null, defStyle:
         registerEvents()
     }
 
+    private var listener: AdapterView.OnItemSelectedListener? = null
+
     private fun registerEvents() {
         super.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
 
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 if (isUserOpen) {
-                    onItemSelectedListener?.onItemSelected(parent, view, position, id)
+                    listener?.onItemSelected(parent, view, position, id)
                     isUserOpen = false
                 }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
-                onItemSelectedListener?.onNothingSelected(parent)
+                listener?.onNothingSelected(parent)
             }
         })
     }
 
     override fun setOnItemSelectedListener(listener: AdapterView.OnItemSelectedListener?) {
-        onItemSelectedListener = listener
+        this.listener = listener
     }
 
     override fun performClick(): Boolean {

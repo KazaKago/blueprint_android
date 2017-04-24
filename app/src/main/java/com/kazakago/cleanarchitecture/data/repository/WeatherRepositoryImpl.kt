@@ -3,7 +3,6 @@ package com.kazakago.cleanarchitecture.data.repository
 import com.kazakago.cleanarchitecture.data.api.WeatherApi
 import com.kazakago.cleanarchitecture.data.api.WeatherRetrofit
 import com.kazakago.cleanarchitecture.data.dao.WeatherDao
-import com.kazakago.cleanarchitecture.data.entity.weather.WeatherEntity
 import com.kazakago.cleanarchitecture.data.mapper.WeatherMapper
 import com.kazakago.cleanarchitecture.domain.model.weather.WeatherModel
 import com.kazakago.cleanarchitecture.domain.repository.WeatherRepository
@@ -18,8 +17,7 @@ import io.realm.Realm
 class WeatherRepositoryImpl : WeatherRepository {
 
     override fun fetch(cityId: String): Single<WeatherModel> {
-        val retrofit = WeatherRetrofit.instance
-        val weatherApi = retrofit.create(WeatherApi::class.java)
+        val weatherApi = WeatherRetrofit.instance.create(WeatherApi::class.java)
         return weatherApi[cityId]
                 .map {
                     WeatherMapper.execute(it)

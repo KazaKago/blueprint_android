@@ -128,16 +128,15 @@ class MainFragmentViewModel(private val context: Context) : ForecastRecyclerAdap
         publicTime.set(context.getString(R.string.public_time, formattedTime(weather?.publicTime)))
         forecastRecyclerAdapter.get().forecastViewModelList = weather?.forecasts?.map { ForecastViewModel(context, it) } ?: ArrayList()
         forecastRecyclerAdapter.get().notifyDataSetChanged()
-        listener?.setActionBarTitle(weather?.title)
+        listener?.setActionBarTitle(weather?.title ?: "")
     }
 
     private fun formattedTime(timeStr: String?): String? {
-        try {
-            val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSSZ", Locale.getDefault())
-            return formattedTime(formatter.parse(timeStr).time)
-        } catch (e: ParseException) {
-            e.printStackTrace()
-            return null
+        return timeStr?.let {
+            try {
+                val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSSZ", Locale.getDefault())
+                return formattedTime(formatter.parse(it).time)
+            } catch (e: ParseException) { null }
         }
     }
 

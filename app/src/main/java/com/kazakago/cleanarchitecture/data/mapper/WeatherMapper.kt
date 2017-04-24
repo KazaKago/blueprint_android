@@ -1,9 +1,8 @@
 package com.kazakago.cleanarchitecture.data.mapper
 
-import com.kazakago.cleanarchitecture.data.entity.weather.DescriptionEntity
-import com.kazakago.cleanarchitecture.data.entity.weather.LocationEntity
-import com.kazakago.cleanarchitecture.data.entity.weather.WeatherEntity
+import com.kazakago.cleanarchitecture.data.entity.weather.*
 import com.kazakago.cleanarchitecture.domain.model.weather.*
+import io.realm.RealmList
 
 /**
  * Created by tamura_k on 2016/12/08.
@@ -94,49 +93,55 @@ object WeatherMapper {
             description.publicTime = it.publicTime
             description
         }
-//        weather.forecasts = model.forecasts.map {
-//            val forecast = ForecastEntity()
-//            forecast.telop = it.telop
-//            forecast.date = it.date
-//            forecast.dateLabel = it.dateLabel
-//            forecast.image = it.image?.let {
-//                val image = ImageEntity()
-//                image.title = it.title
-//                image.height = it.height
-//                image.link = it.link
-//                image.url = it.url
-//                image.width = it.width
-//                image
-//            }
-//            forecast
-//        }
-//        weather.pinpointLocations = model.pinpointLocations.map {
-//            val pinpointLocation = LinkEntity()
-//            pinpointLocation.name = it.name
-//            pinpointLocation.link = it.link
-//            pinpointLocation
-//        }
-//        weather.copyright = model.copyright?.let {
-//            val copyright = CopyrightEntity()
-//            copyright.title = it.title
-//            copyright.link = it.link
-//            copyright.image = it.image?.let {
-//                val image = ImageEntity()
-//                image.title = it.title
-//                image.height = it.height
-//                image.link = it.link
-//                image.url = it.url
-//                image.width = it.width
-//                image
-//            }
-//            copyright.provider = it.provider.map {
-//                val provider = LinkEntity()
-//                provider.name = it.name
-//                provider.link = it.link
-//                provider
-//            }
-//            copyright
-//        }
+        val forecastRealmList = RealmList<ForecastEntity>()
+        model.forecasts.forEach {
+            val forecast = ForecastEntity()
+            forecast.telop = it.telop
+            forecast.date = it.date
+            forecast.dateLabel = it.dateLabel
+            forecast.image = it.image?.let {
+                val image = ImageEntity()
+                image.title = it.title
+                image.height = it.height
+                image.link = it.link
+                image.url = it.url
+                image.width = it.width
+                image
+            }
+            forecastRealmList.add(forecast)
+        }
+        weather.forecasts = forecastRealmList
+        val pinpointLocationsRealmList = RealmList<LinkEntity>()
+        model.pinpointLocations.forEach {
+            val pinpointLocation = LinkEntity()
+            pinpointLocation.name = it.name
+            pinpointLocation.link = it.link
+            pinpointLocationsRealmList.add(pinpointLocation)
+        }
+        weather.pinpointLocations = pinpointLocationsRealmList
+        weather.copyright = model.copyright?.let {
+            val copyright = CopyrightEntity()
+            copyright.title = it.title
+            copyright.link = it.link
+            copyright.image = it.image?.let {
+                val image = ImageEntity()
+                image.title = it.title
+                image.height = it.height
+                image.link = it.link
+                image.url = it.url
+                image.width = it.width
+                image
+            }
+            val providerRealmList = RealmList<LinkEntity>()
+            it.provider.forEach {
+                val provider = LinkEntity()
+                provider.name = it.name
+                provider.link = it.link
+                providerRealmList.add(provider)
+            }
+            copyright.provider = providerRealmList
+            copyright
+        }
         return weather
     }
 }

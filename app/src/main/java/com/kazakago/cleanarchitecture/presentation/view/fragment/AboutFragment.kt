@@ -32,6 +32,8 @@ class AboutFragment : Fragment(), AboutFragmentViewModelListener {
         super.onCreate(savedInstanceState)
         viewModel = AboutFragmentViewModel(activity)
         viewModel.listener = this
+
+        viewModel.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {

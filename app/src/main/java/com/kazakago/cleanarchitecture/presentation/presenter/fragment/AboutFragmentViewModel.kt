@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.databinding.ObservableField
 import android.net.Uri
+import android.os.Bundle
 import android.view.View
 import com.kazakago.cleanarchitecture.CleanApplication
 import com.kazakago.cleanarchitecture.R
@@ -18,9 +19,9 @@ import javax.inject.Inject
  */
 class AboutFragmentViewModel(private val context: Context) {
 
-    val verText = ObservableField<String>(context.getString(R.string.about_ver, aboutUseCase.currentVersion))
-    val developByText = ObservableField<String>(context.getString(R.string.about_develop_by, context.getString(R.string.developer_name)))
-    val copyrightText = ObservableField<String>(context.getString(R.string.about_copyright, aboutUseCase.currentYear, context.getString(R.string.developer_name)))
+    val verText = ObservableField<String>()
+    val developByText = ObservableField<String>()
+    val copyrightText = ObservableField<String>()
 
     var listener: AboutFragmentViewModelListener? = null
 
@@ -29,6 +30,12 @@ class AboutFragmentViewModel(private val context: Context) {
 
     init {
         CleanApplication.applicationComponent.inject(this)
+    }
+
+    fun onCreate(savedInstanceState: Bundle?){
+        verText.set(context.getString(R.string.about_ver, aboutUseCase.currentVersion))
+        developByText.set(context.getString(R.string.about_develop_by, context.getString(R.string.developer_name)))
+        copyrightText.set(context.getString(R.string.about_copyright, aboutUseCase.currentYear, context.getString(R.string.developer_name)))
     }
 
     fun onClickPlayStore(view: View) {
