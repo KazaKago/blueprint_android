@@ -9,13 +9,13 @@ import com.squareup.picasso.Picasso
 object ViewBindingUtils {
 
     @BindingAdapter("imageUrl")
-    fun loadImage(view: ImageView, url: String) {
-        Picasso.with(view.context).load(url).into(view)
+    fun ImageView.imageUrl(url: String) {
+        Picasso.with(this.context).load(url).into(this)
     }
 
     @BindingAdapter("imageUrl", "error")
-    fun loadImage(view: ImageView, url: String, error: Drawable) {
-        Picasso.with(view.context).load(url).error(error).into(view)
+    fun ImageView.imageUrl(url: String, error: Drawable) {
+        Picasso.with(this.context).load(url).error(error).into(this)
     }
 
 }
