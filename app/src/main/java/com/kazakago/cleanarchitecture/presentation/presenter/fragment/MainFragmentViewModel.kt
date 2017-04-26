@@ -60,7 +60,7 @@ class MainFragmentViewModel(private val context: Context) : ForecastRecyclerAdap
 
     fun onCreate(savedInstanceState: Bundle?) {
         StateSaver.restoreInstanceState(this, savedInstanceState)
-        forecastRecyclerAdapter.get().forecastRecyclerAdapterListener = this
+        forecastRecyclerAdapter.get().setForecastRecyclerAdapterListener(this)
         refreshCityView()
     }
 
@@ -126,7 +126,7 @@ class MainFragmentViewModel(private val context: Context) : ForecastRecyclerAdap
         prefecture.set(weather?.location?.prefecture)
         city.set(weather?.location?.city)
         publicTime.set(context.getString(R.string.public_time, formattedTime(weather?.publicTime)))
-        forecastRecyclerAdapter.get().forecastViewModelList = weather?.forecasts?.map { ForecastViewModel(context, it) } ?: ArrayList()
+        forecastRecyclerAdapter.get().setForecastViewModelList(weather?.forecasts?.map { ForecastViewModel(context, it) } ?: ArrayList())
         forecastRecyclerAdapter.get().notifyDataSetChanged()
         listener?.setActionBarTitle(weather?.title ?: "")
     }

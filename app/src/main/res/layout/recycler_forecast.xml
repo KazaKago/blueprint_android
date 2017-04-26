@@ -58,7 +58,6 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:contentDescription="@null"
-                app:imageUrl="@{viewModel.imageUrl}"
                 tools:src="@mipmap/ic_launcher"/>
 
             <TextView
