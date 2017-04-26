@@ -7,10 +7,9 @@ import android.os.Handler
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
-import com.evernote.android.state.State
-import com.evernote.android.state.StateSaver
 import com.kazakago.cleanarchitecture.CleanApplication
 import com.kazakago.cleanarchitecture.R
+import com.kazakago.cleanarchitecture.domain.model.city.CityModel
 import com.kazakago.cleanarchitecture.domain.model.weather.WeatherModel
 import com.kazakago.cleanarchitecture.domain.usecase.CityUseCase
 import com.kazakago.cleanarchitecture.domain.usecase.WeatherUseCase
@@ -22,6 +21,7 @@ import com.kazakago.cleanarchitecture.presentation.view.adapter.CitySpinnerAdapt
 import com.kazakago.cleanarchitecture.presentation.view.adapter.ForecastRecyclerAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -35,6 +35,12 @@ import javax.inject.Inject
  */
 class MainFragmentViewModel(private val context: Context) : ForecastRecyclerAdapterListener {
 
+    enum class Key {
+        CITY_LIST,
+        WEATHER,
+        SELECTED_POSITION,
+    }
+
     var area = ObservableField<String>()
     var prefecture = ObservableField<String>()
     var city = ObservableField<String>()
@@ -42,45 +48,53 @@ class MainFragmentViewModel(private val context: Context) : ForecastRecyclerAdap
     var citySpinnerAdapter = ObservableField<CitySpinnerAdapter>(CitySpinnerAdapter(context))
     var forecastRecyclerAdapter = ObservableField<ForecastRecyclerAdapter>(ForecastRecyclerAdapter(context))
 
-    private var compositeDisposable: CompositeDisposable? = null
-
-    var listener: MainFragmentViewModelListener? = null
-
     @Inject
     lateinit var weatherUseCase: WeatherUseCase
     @Inject
     lateinit var cityUseCase: CityUseCase
-
-    @State
+    var listener: MainFragmentViewModelListener? = null
+    private var compositeDisposable: CompositeDisposable? = null
+    var cityList: ArrayList<CityModel>? = null
+    var weather: WeatherModel? = null
     var selectedPosition: Int = 0
 
     init {
         CleanApplication.applicationComponent.inject(this)
+        forecastRecyclerAdapter.get().listener = this
     }
 
     fun onCreate(savedInstanceState: Bundle?) {
-        StateSaver.restoreInstanceState(this, savedInstanceState)
-        forecastRecyclerAdapter.get().setForecastRecyclerAdapterListener(this)
-        refreshCityView()
-    }
-
-    fun onCreateView(savedInstanceState: Bundle?) {
-        if (savedInstanceState != null) {
-            Handler().post { listener?.setCitySpinnerSelection(selectedPosition) }
+        compositeDisposable = CompositeDisposable()
+        savedInstanceState?.let {
+            cityList = it.getParcelableArrayList<CityModel>(Key.CITY_LIST.name)
+            weather = it.getParcelable(Key.WEATHER.name)
+            selectedPosition = it.getInt(Key.SELECTED_POSITION.name)
         }
     }
 
-    fun onStart() {
-        compositeDisposable = CompositeDisposable()
-        refreshWeather()
+    fun onCreateView(savedInstanceState: Bundle?) {
+        cityList?.let {
+            refreshCityList()
+            weather?.let {
+                refreshWeather()
+            } ?: run {
+                fetchWeather()
+            }
+        } ?: run {
+            fetchCityList {
+                fetchWeather()
+            }
+        }
     }
 
-    fun onStop() {
+    fun onDestroy() {
         compositeDisposable?.dispose()
     }
 
     fun onSaveInstanceState(outState: Bundle?) {
-        outState?.let { StateSaver.saveInstanceState(this, it) }
+        outState?.putParcelableArrayList(Key.CITY_LIST.name, cityList)
+        outState?.putParcelable(Key.WEATHER.name, weather)
+        outState?.putInt(Key.SELECTED_POSITION.name, selectedPosition)
     }
 
     fun onClickRefresh(view: View) {
@@ -92,43 +106,63 @@ class MainFragmentViewModel(private val context: Context) : ForecastRecyclerAdap
         fetchWeather()
     }
 
-    private fun fetchWeather() {
-        val cityId = citySpinnerAdapter.get().getItem(selectedPosition).id.get()
-        compositeDisposable?.add(weatherUseCase.fetch(cityId)
+    private fun fetchCityList(completion: (() -> Unit)? = null) {
+        compositeDisposable?.add(cityUseCase.findAll()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        { weather ->
-                            refreshWeather(weather)
-                            showToast(context.getString(R.string.refresh_complete))
+                .toList()
+                .subscribeBy(
+                        onSuccess = {
+                            cityList = ArrayList(it)
+                            refreshCityList()
+                            completion?.invoke()
+                        },
+                        onError = {
+                            showToast(it.localizedMessage)
+                            completion?.invoke()
                         }
-                ) { error ->
-                    refreshWeather()
-                    showToast(error.localizedMessage)
-                })
+                ))
     }
 
-    private fun refreshCityView() {
-        val cityList = cityUseCase.findAll()
-                .map { cityModel -> CityViewModel(context, cityModel) }
-                .toList()
-                .blockingGet()
-        citySpinnerAdapter.get().cityViewModelList = cityList
+    private fun refreshCityList() {
+        cityList?.map { CityViewModel(context, it) }?.let {
+            citySpinnerAdapter.get().cityViewModelList = it
+            citySpinnerAdapter.get().notifyDataSetChanged()
+            Handler().post { listener?.setCitySpinnerSelection(selectedPosition) }
+        }
+    }
+
+    private fun fetchWeather(completion: (() -> Unit)? = null) {
+        cityList?.get(selectedPosition)?.id?.let {
+            compositeDisposable?.add(weatherUseCase.fetch(it)
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeBy(
+                            onSuccess = {
+                                weather = it
+                                refreshWeather()
+                                showToast(context.getString(R.string.refresh_complete))
+                                completion?.invoke()
+                            },
+                            onError = {
+                                refreshWeather()
+                                showToast(it.localizedMessage)
+                                completion?.invoke()
+                            }
+                    ))
+        }
     }
 
     private fun refreshWeather() {
-        val cityId = citySpinnerAdapter.get().getItem(selectedPosition).id.get()
-        refreshWeather(weatherUseCase.find(cityId))
-    }
-
-    private fun refreshWeather(weather: WeatherModel?) {
-        area.set(weather?.location?.area)
-        prefecture.set(weather?.location?.prefecture)
-        city.set(weather?.location?.city)
-        publicTime.set(context.getString(R.string.public_time, formattedTime(weather?.publicTime)))
-        forecastRecyclerAdapter.get().setForecastViewModelList(weather?.forecasts?.map { ForecastViewModel(context, it) } ?: ArrayList())
-        forecastRecyclerAdapter.get().notifyDataSetChanged()
-        listener?.setActionBarTitle(weather?.title ?: "")
+        weather?.let {
+            area.set(it.location?.area)
+            prefecture.set(it.location?.prefecture)
+            city.set(it.location?.city)
+            publicTime.set(context.getString(R.string.public_time, formattedTime(it.publicTime)))
+            forecastRecyclerAdapter.get().forecastList = it.forecasts.map { ForecastViewModel(context, it) }
+            forecastRecyclerAdapter.get().notifyDataSetChanged()
+            listener?.setActionBarTitle(it.title ?: "")
+        }
     }
 
     private fun formattedTime(timeStr: String?): String? {
@@ -136,7 +170,9 @@ class MainFragmentViewModel(private val context: Context) : ForecastRecyclerAdap
             try {
                 val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSSZ", Locale.getDefault())
                 return formattedTime(formatter.parse(it).time)
-            } catch (e: ParseException) { null }
+            } catch (e: ParseException) {
+                null
+            }
         }
     }
 

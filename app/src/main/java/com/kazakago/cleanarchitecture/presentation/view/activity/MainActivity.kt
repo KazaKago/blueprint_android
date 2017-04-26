@@ -22,6 +22,7 @@ import com.kazakago.cleanarchitecture.presentation.view.fragment.MainFragment
 class MainActivity : AppCompatActivity(), MainFragmentListener, MainActivityViewModelListener {
 
     companion object {
+        @JvmStatic
         fun newInstance(context: Context): Intent {
             val intent = Intent(context, MainActivity::class.java)
             return intent

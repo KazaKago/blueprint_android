@@ -1,7 +1,7 @@
 package com.kazakago.cleanarchitecture.data.util
 
 import android.content.Context
-import android.content.pm.PackageManager.NameNotFoundException
+import android.content.pm.PackageManager
 
 /**
  * PlayStore Related Utilities
@@ -14,7 +14,7 @@ object StoreUtils {
         try {
             val packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
             return "market://details?id=" + packageInfo.packageName
-        } catch (e: NameNotFoundException) {
+        } catch (e: PackageManager.NameNotFoundException) {
             e.printStackTrace()
             return ""
         }
@@ -24,7 +24,7 @@ object StoreUtils {
         try {
             val packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
             return "http://play.google.com/store/apps/details?id=" + packageInfo.packageName
-        } catch (e: NameNotFoundException) {
+        } catch (e: PackageManager.NameNotFoundException) {
             e.printStackTrace()
             return ""
         }

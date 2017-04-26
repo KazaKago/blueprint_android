@@ -1,13 +1,16 @@
 package com.kazakago.cleanarchitecture.domain.model.weather
 
-import java.util.*
+import android.os.Parcel
+import android.os.Parcelable
+import paperparcel.PaperParcel
 
 /**
  * Weather Model
  *
  * Created by tamura_k on 2016/05/31.
  */
-class WeatherModel {
+@PaperParcel
+class WeatherModel : Parcelable {
 
     //地域ID
     var cityId: String? = null
@@ -27,6 +30,19 @@ class WeatherModel {
     //ピンポイント予報の発表地点の配列
     var pinpointLocations: List<LinkModel> = ArrayList()
     //コピーライト
-    var copyright: Copyright? = null
+    var copyright: CopyrightModel? = null
+
+    companion object {
+        @JvmField
+        val CREATOR = PaperParcelWeatherModel.CREATOR
+    }
+
+    override fun writeToParcel(dest: Parcel, flags: Int) {
+        PaperParcelWeatherModel.writeToParcel(this, dest, flags)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
 
 }

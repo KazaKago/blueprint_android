@@ -19,6 +19,7 @@ import com.kazakago.cleanarchitecture.presentation.presenter.fragment.AboutFragm
 class AboutFragment : Fragment(), AboutFragmentViewModelListener {
 
     companion object {
+        @JvmStatic
         fun newInstance(): AboutFragment {
             val fragment = AboutFragment()
             return fragment

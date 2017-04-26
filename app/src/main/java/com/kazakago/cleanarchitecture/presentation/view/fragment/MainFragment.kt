@@ -22,6 +22,7 @@ import com.kazakago.cleanarchitecture.presentation.presenter.fragment.MainFragme
 class MainFragment : Fragment(), MainFragmentViewModelListener {
 
     companion object {
+        @JvmStatic
         fun newInstance(): MainFragment {
             val fragment = MainFragment()
             return fragment
@@ -58,14 +59,9 @@ class MainFragment : Fragment(), MainFragmentViewModelListener {
         return binding?.root
     }
 
-    override fun onStart() {
-        super.onStart()
-        viewModel.onStart()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        viewModel.onStop()
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.onDestroy()
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {

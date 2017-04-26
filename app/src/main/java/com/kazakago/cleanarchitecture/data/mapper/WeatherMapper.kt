@@ -51,7 +51,7 @@ object WeatherMapper {
             pinpointLocation
         }
         weather.copyright = entity.copyright?.let {
-            val copyright = Copyright()
+            val copyright = CopyrightModel()
             copyright.title = it.title
             copyright.link = it.link
             copyright.image = it.image?.let {

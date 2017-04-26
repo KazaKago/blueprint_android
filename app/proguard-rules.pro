@@ -45,16 +45,6 @@
 -keepattributes Signature
 -keepattributes Exceptions
 
-# Icepick
-# https://github.com/frankiesardo/icepick
--dontwarn icepick.**
--keep class icepick.** { *; }
--keep class **$$Icepick { *; }
--keepclasseswithmembernames class * {
-    @icepick.* <fields>;
-}
--keepnames class * { @icepick.State *;}
-
 # Picasso
 # https://github.com/square/picasso
 -dontwarn com.squareup.okhttp.**
@@ -66,13 +56,6 @@
 -keep class sun.misc.Unsafe { *; }
 -keep class com.google.gson.stream.** { *; }
 
-# ModelMapper
-# https://github.com/jhalterman/modelmapper/issues/165
--keep class java.beans.** { *; }
--keep class sun.misc.Unsafe { *; }
--dontwarn java.beans.**
--dontwarn org.modelmapper.**
-
-# MyClass for Gson & ModelMapper
+# MyClass for Gson
 -keep class com.kazakago.cleanarchitecture.data.entity.** { *; }
 -keep class com.kazakago.cleanarchitecture.domain.model.** { *; }

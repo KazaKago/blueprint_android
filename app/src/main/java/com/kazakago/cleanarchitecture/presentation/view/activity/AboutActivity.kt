@@ -20,6 +20,7 @@ import com.kazakago.cleanarchitecture.presentation.view.fragment.AboutFragment
 class AboutActivity : AppCompatActivity(), AboutActivityViewModelListener {
 
     companion object {
+        @JvmStatic
         fun newInstance(context: Context): Intent {
             val intent = Intent(context, AboutActivity::class.java)
             return intent
