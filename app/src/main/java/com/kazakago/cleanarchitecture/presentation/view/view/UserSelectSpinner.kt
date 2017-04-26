@@ -22,14 +22,14 @@ class UserSelectSpinner @JvmOverloads constructor(context: Context, attrs: Attri
     private fun registerEvents() {
         super.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
 
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 if (isUserOpen) {
                     listener?.onItemSelected(parent, view, position, id)
                     isUserOpen = false
                 }
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>) {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
                 listener?.onNothingSelected(parent)
             }
         })

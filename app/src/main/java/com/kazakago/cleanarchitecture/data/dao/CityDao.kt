@@ -26,8 +26,8 @@ class CityDao(private val context: Context) {
     }
 
     @Throws(IOException::class)
-    private fun readJson(): String? {
-        var text: String? = null
+    private fun readJson(): String {
+        var text = ""
         context.assets.open(PATH_CITY_JSON).use {
             BufferedReader(InputStreamReader(it)).use {
                 var str = it.readLine()
