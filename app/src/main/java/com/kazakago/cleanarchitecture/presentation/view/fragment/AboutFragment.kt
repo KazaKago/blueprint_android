@@ -1,12 +1,10 @@
 package com.kazakago.cleanarchitecture.presentation.view.fragment
 
-import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.kazakago.cleanarchitecture.R
 import com.kazakago.cleanarchitecture.databinding.FragmentAboutBinding
 import com.kazakago.cleanarchitecture.presentation.listener.presenter.fragment.AboutFragmentViewModelListener
 import com.kazakago.cleanarchitecture.presentation.presenter.fragment.AboutFragmentViewModel
@@ -39,7 +37,7 @@ class AboutFragment : Fragment(), AboutFragmentViewModelListener {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (binding == null) {
-            binding = DataBindingUtil.inflate<FragmentAboutBinding>(inflater, R.layout.fragment_about, container, false)
+            binding = FragmentAboutBinding.inflate(inflater, container, false)
             binding?.viewModel = viewModel
         }
         return binding?.root

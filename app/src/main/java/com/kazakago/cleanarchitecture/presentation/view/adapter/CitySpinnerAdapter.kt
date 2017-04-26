@@ -1,12 +1,10 @@
 package com.kazakago.cleanarchitecture.presentation.view.adapter
 
 import android.content.Context
-import android.databinding.DataBindingUtil
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import com.kazakago.cleanarchitecture.R
 import com.kazakago.cleanarchitecture.databinding.SpinnerCityBinding
 import com.kazakago.cleanarchitecture.databinding.SpinnerCityDropdownBinding
 import com.kazakago.cleanarchitecture.presentation.presenter.adapter.CityViewModel
@@ -33,36 +31,30 @@ class CitySpinnerAdapter(private val context: Context) : BaseAdapter() {
         return position.toLong()
     }
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
         var binding: SpinnerCityBinding? = null
-        val view: View = convertView?.let {
+        convertView?.let {
             binding = it.tag as? SpinnerCityBinding
-            it
         } ?: run {
-            binding = DataBindingUtil.inflate<SpinnerCityBinding>(LayoutInflater.from(context), R.layout.spinner_city, parent, false)
-            val view = binding!!.root
-            view.tag = binding
-            view
+            binding = SpinnerCityBinding.inflate(LayoutInflater.from(context), parent, false)
+            binding?.root?.tag = binding
         }
 
         binding?.viewModel = getItem(position)
-        return view
+        return binding?.root
     }
 
-    override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup?): View {
+    override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup?): View? {
         var binding: SpinnerCityDropdownBinding? = null
-        val view: View = convertView?.let {
+        convertView?.let {
             binding = it.tag as? SpinnerCityDropdownBinding
-            it
         } ?: run {
-            binding = DataBindingUtil.inflate<SpinnerCityDropdownBinding>(LayoutInflater.from(context), R.layout.spinner_city_dropdown, parent, false)
-            val view = binding!!.root
-            view.tag = binding
-            view
+            binding = SpinnerCityDropdownBinding.inflate(LayoutInflater.from(context), parent, false)
+            binding?.root?.tag = binding
         }
 
         binding?.viewModel = getItem(position)
-        return view
+        return binding?.root
     }
 
 }

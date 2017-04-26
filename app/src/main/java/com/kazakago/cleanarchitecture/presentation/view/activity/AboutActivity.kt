@@ -27,11 +27,12 @@ class AboutActivity : AppCompatActivity(), AboutActivityViewModelListener {
         }
     }
 
+    private lateinit var binding: ActivityAboutBinding
     private lateinit var viewModel: AboutActivityViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = DataBindingUtil.setContentView<ActivityAboutBinding>(this, R.layout.activity_about)
+        binding = DataBindingUtil.setContentView<ActivityAboutBinding>(this, R.layout.activity_about)
         viewModel = AboutActivityViewModel(this)
         viewModel.listener = this
         binding.viewModel = viewModel
@@ -44,8 +45,8 @@ class AboutActivity : AppCompatActivity(), AboutActivityViewModelListener {
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
             android.R.id.home -> viewModel.onClickBackIcon()
         }
         return super.onOptionsItemSelected(item)

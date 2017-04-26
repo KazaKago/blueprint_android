@@ -161,7 +161,7 @@ class MainFragmentViewModel(private val context: Context) : ForecastRecyclerAdap
             publicTime.set(context.getString(R.string.public_time, formattedTime(it.publicTime)))
             forecastRecyclerAdapter.get().forecastList = it.forecasts.map { ForecastViewModel(context, it) }
             forecastRecyclerAdapter.get().notifyDataSetChanged()
-            listener?.setActionBarTitle(it.title ?: "")
+            listener?.setActionBarTitle(it.title)
         }
     }
 

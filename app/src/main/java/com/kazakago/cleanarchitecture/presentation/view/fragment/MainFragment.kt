@@ -1,14 +1,11 @@
 package com.kazakago.cleanarchitecture.presentation.view.fragment
 
 import android.content.Context
-import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-import com.kazakago.cleanarchitecture.R
 import com.kazakago.cleanarchitecture.databinding.FragmentMainBinding
 import com.kazakago.cleanarchitecture.presentation.listener.presenter.fragment.MainFragmentViewModelListener
 import com.kazakago.cleanarchitecture.presentation.listener.view.fragment.MainFragmentListener
@@ -52,7 +49,7 @@ class MainFragment : Fragment(), MainFragmentViewModelListener {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (binding == null) {
-            binding = DataBindingUtil.inflate<FragmentMainBinding>(inflater, R.layout.fragment_main, container, false)
+            binding = FragmentMainBinding.inflate(inflater, container, false)
             binding?.viewModel = viewModel
         }
         viewModel.onCreateView(savedInstanceState)
@@ -71,7 +68,7 @@ class MainFragment : Fragment(), MainFragmentViewModelListener {
 
     /* MainFragmentViewModelListener */
 
-    override fun setActionBarTitle(title: String) {
+    override fun setActionBarTitle(title: String?) {
         mainFragmentListener?.setActionBarTitle(title)
     }
 

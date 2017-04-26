@@ -29,11 +29,12 @@ class MainActivity : AppCompatActivity(), MainFragmentListener, MainActivityView
         }
     }
 
+    private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainActivityViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         viewModel = MainActivityViewModel(this)
         viewModel.listener = this
         binding.viewModel = viewModel
@@ -45,13 +46,13 @@ class MainActivity : AppCompatActivity(), MainFragmentListener, MainActivityView
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
             R.id.action_about -> viewModel.onClickAboutMenu()
         }
         return super.onOptionsItemSelected(item)
@@ -67,7 +68,7 @@ class MainActivity : AppCompatActivity(), MainFragmentListener, MainActivityView
 
     /* MainFragmentListener */
 
-    override fun setActionBarTitle(title: String) {
+    override fun setActionBarTitle(title: String?) {
         supportActionBar?.title = title
     }
 
