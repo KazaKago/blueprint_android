@@ -97,11 +97,11 @@ class MainFragmentViewModel(private val context: Context) : ForecastRecyclerAdap
         outState?.putInt(Key.SELECTED_POSITION.name, selectedPosition)
     }
 
-    fun onClickRefresh(view: View) {
+    fun onClickRefresh(view: View?) {
         fetchWeather()
     }
 
-    fun onCitySelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+    fun onCitySelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         selectedPosition = position
         fetchWeather()
     }
@@ -176,7 +176,7 @@ class MainFragmentViewModel(private val context: Context) : ForecastRecyclerAdap
         }
     }
 
-    private fun formattedTime(timestamp: Long?): String {
+    private fun formattedTime(timestamp: Long): String {
         val dateFormat = android.text.format.DateFormat.getDateFormat(context)
         val timeFormat = android.text.format.DateFormat.getTimeFormat(context)
         return dateFormat.format(timestamp) + " " + timeFormat.format(timestamp)

@@ -38,15 +38,15 @@ class AboutFragmentViewModel(private val context: Context) {
         copyrightText.set(context.getString(R.string.about_copyright, aboutUseCase.currentYear, context.getString(R.string.developer_name)))
     }
 
-    fun onClickPlayStore(view: View) {
+    fun onClickPlayStore(view: View?) {
         toPlayStore()
     }
 
-    fun onClickMail(view: View) {
+    fun onClickMail(view: View?) {
         toMailApp()
     }
 
-    fun onClickWebSite(view: View) {
+    fun onClickWebSite(view: View?) {
         toWebSite()
     }
 
