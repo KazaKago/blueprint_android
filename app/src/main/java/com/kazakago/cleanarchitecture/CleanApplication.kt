@@ -6,6 +6,7 @@ import com.kazakago.cleanarchitecture.di.component.DaggerApplicationComponent
 import com.kazakago.cleanarchitecture.di.module.ApplicationModule
 import com.kazakago.cleanarchitecture.di.module.DataModule
 import com.kazakago.cleanarchitecture.di.module.DomainModule
+import com.kazakago.cleanarchitecture.di.module.WebModule
 import io.realm.Realm
 import io.realm.RealmConfiguration
 
@@ -17,6 +18,7 @@ import io.realm.RealmConfiguration
 open class CleanApplication : Application() {
 
     companion object {
+        @JvmStatic
         lateinit var applicationComponent: ApplicationComponent
     }
 
@@ -31,6 +33,7 @@ open class CleanApplication : Application() {
                 .applicationModule(ApplicationModule(this))
                 .domainModule(DomainModule())
                 .dataModule(DataModule())
+                .webModule(WebModule())
                 .build()
     }
 

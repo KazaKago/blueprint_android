@@ -15,10 +15,6 @@ import java.io.InputStreamReader
  */
 class CityDao(private val context: Context) {
 
-    companion object {
-        val PATH_CITY_JSON = "json/city.json"
-    }
-
     @Throws(IOException::class)
     fun find(): List<PrefEntity> {
         val cityJson = readJson()
@@ -28,7 +24,7 @@ class CityDao(private val context: Context) {
     @Throws(IOException::class)
     private fun readJson(): String {
         var text = ""
-        context.assets.open(PATH_CITY_JSON).use {
+        context.assets.open("json/city.json").use {
             BufferedReader(InputStreamReader(it)).use {
                 var str = it.readLine()
                 while (str != null) {

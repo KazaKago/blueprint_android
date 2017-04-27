@@ -8,8 +8,12 @@ import android.os.Bundle
 import android.view.View
 import com.kazakago.cleanarchitecture.CleanApplication
 import com.kazakago.cleanarchitecture.R
-import com.kazakago.cleanarchitecture.domain.usecase.AboutUseCase
+import com.kazakago.cleanarchitecture.domain.usecase.appInfo.GetAppVersionUseCase
+import com.kazakago.cleanarchitecture.domain.usecase.appInfo.GetMailAddressUrlUseCase
+import com.kazakago.cleanarchitecture.domain.usecase.appInfo.GetOfficialSiteUrlUseCase
+import com.kazakago.cleanarchitecture.domain.usecase.appInfo.GetPlayStoreUrlUseCase
 import com.kazakago.cleanarchitecture.presentation.listener.presenter.fragment.AboutFragmentViewModelListener
+import java.util.*
 import javax.inject.Inject
 
 /**
@@ -26,16 +30,22 @@ class AboutFragmentViewModel(private val context: Context) {
     var listener: AboutFragmentViewModelListener? = null
 
     @Inject
-    lateinit var aboutUseCase: AboutUseCase
+    lateinit var getAppVersionUseCase: GetAppVersionUseCase
+    @Inject
+    lateinit var getPlayStoreUrlUseCase: GetPlayStoreUrlUseCase
+    @Inject
+    lateinit var getMailAddressUrlUseCase: GetMailAddressUrlUseCase
+    @Inject
+    lateinit var getOfficialSiteUrlUseCase: GetOfficialSiteUrlUseCase
 
     init {
         CleanApplication.applicationComponent.inject(this)
     }
 
     fun onCreate(savedInstanceState: Bundle?){
-        verText.set(context.getString(R.string.about_ver, aboutUseCase.currentVersion))
+        verText.set(context.getString(R.string.about_ver, getAppVersionUseCase.execute(Unit)))
         developByText.set(context.getString(R.string.about_develop_by, context.getString(R.string.developer_name)))
-        copyrightText.set(context.getString(R.string.about_copyright, aboutUseCase.currentYear, context.getString(R.string.developer_name)))
+        copyrightText.set(context.getString(R.string.about_copyright, Calendar.getInstance().get(Calendar.YEAR), context.getString(R.string.developer_name)))
     }
 
     fun onClickPlayStore(view: View?) {
@@ -51,17 +61,17 @@ class AboutFragmentViewModel(private val context: Context) {
     }
 
     private fun toPlayStore() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(aboutUseCase.playStoreUrl))
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(getPlayStoreUrlUseCase.execute(Unit)))
         listener?.startActivity(intent)
     }
 
     private fun toMailApp() {
-        val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + aboutUseCase.mailUrl))
+        val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + getMailAddressUrlUseCase.execute(Unit)))
         listener?.startActivity(intent)
     }
 
     private fun toWebSite() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(aboutUseCase.webSiteUrl))
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(getOfficialSiteUrlUseCase.execute(Unit)))
         listener?.startActivity(intent)
     }
 

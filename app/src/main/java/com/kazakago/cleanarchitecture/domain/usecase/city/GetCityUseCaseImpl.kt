@@ -1,19 +1,17 @@
-package com.kazakago.cleanarchitecture.domain.usecase
+package com.kazakago.cleanarchitecture.domain.usecase.city
 
 import com.kazakago.cleanarchitecture.domain.model.city.CityModel
 import com.kazakago.cleanarchitecture.domain.repository.CityRepository
 import io.reactivex.Observable
-import java.io.IOException
 
 /**
  * City UseCase Implement
  *
  * @author Kensuke
  */
-class CityUseCaseImpl(private val cityRepository: CityRepository) : CityUseCase {
+class GetCityUseCaseImpl(private val cityRepository: CityRepository) : GetCityUseCase {
 
-    @Throws(IOException::class)
-    override fun findAll(): Observable<CityModel> {
+    override fun execute(input: Unit): Observable<CityModel> {
         return cityRepository.findAll()
     }
 

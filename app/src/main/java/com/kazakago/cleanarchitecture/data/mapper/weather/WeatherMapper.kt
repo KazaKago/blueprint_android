@@ -1,34 +1,35 @@
-package com.kazakago.cleanarchitecture.data.mapper
+package com.kazakago.cleanarchitecture.data.mapper.weather
 
 import com.kazakago.cleanarchitecture.data.entity.weather.*
+import com.kazakago.cleanarchitecture.domain.mapper.EntityMapper
 import com.kazakago.cleanarchitecture.domain.model.weather.*
 import io.realm.RealmList
 
 /**
  * Created by tamura_k on 2016/12/08.
  */
-object WeatherMapper {
+object WeatherMapper : EntityMapper<WeatherEntity, WeatherModel>() {
 
-    fun execute(entity: WeatherEntity): WeatherModel {
+    override fun map(source: WeatherEntity): WeatherModel {
         val weather = WeatherModel()
-        weather.cityId = entity.cityId
-        weather.location = entity.location?.let {
+        weather.cityId = source.cityId
+        weather.location = source.location?.let {
             val location = LocationModel()
             location.area = it.area
             location.prefecture = it.prefecture
             location.city = it.city
             location
         }
-        weather.title = entity.title
-        weather.link = entity.link
-        weather.publicTime = entity.publicTime
-        weather.description = entity.description?.let {
+        weather.title = source.title
+        weather.link = source.link
+        weather.publicTime = source.publicTime
+        weather.description = source.description?.let {
             val description = DescriptionModel()
             description.text = it.text
             description.publicTime = it.publicTime
             description
         }
-        weather.forecasts = entity.forecasts.map {
+        weather.forecasts = source.forecasts.map {
             val forecast = ForecastModel()
             forecast.telop = it.telop
             forecast.date = it.date
@@ -44,13 +45,13 @@ object WeatherMapper {
             }
             forecast
         }
-        weather.pinpointLocations = entity.pinpointLocations.map {
+        weather.pinpointLocations = source.pinpointLocations.map {
             val pinpointLocation = LinkModel()
             pinpointLocation.name = it.name
             pinpointLocation.link = it.link
             pinpointLocation
         }
-        weather.copyright = entity.copyright?.let {
+        weather.copyright = source.copyright?.let {
             val copyright = CopyrightModel()
             copyright.title = it.title
             copyright.link = it.link
@@ -74,27 +75,27 @@ object WeatherMapper {
         return weather
     }
 
-    fun execute(model: WeatherModel): WeatherEntity {
+    override fun reverse(destination: WeatherModel): WeatherEntity {
         val weather = WeatherEntity()
-        weather.cityId = model.cityId
-        weather.location = model.location?.let {
+        weather.cityId = destination.cityId
+        weather.location = destination.location?.let {
             val location = LocationEntity()
             location.area = it.area
             location.prefecture = it.prefecture
             location.city = it.city
             location
         }
-        weather.title = model.title
-        weather.link = model.link
-        weather.publicTime = model.publicTime
-        weather.description = model.description?.let {
+        weather.title = destination.title
+        weather.link = destination.link
+        weather.publicTime = destination.publicTime
+        weather.description = destination.description?.let {
             val description = DescriptionEntity()
             description.text = it.text
             description.publicTime = it.publicTime
             description
         }
         val forecastRealmList = RealmList<ForecastEntity>()
-        model.forecasts.forEach {
+        destination.forecasts.forEach {
             val forecast = ForecastEntity()
             forecast.telop = it.telop
             forecast.date = it.date
@@ -112,14 +113,14 @@ object WeatherMapper {
         }
         weather.forecasts = forecastRealmList
         val pinpointLocationsRealmList = RealmList<LinkEntity>()
-        model.pinpointLocations.forEach {
+        destination.pinpointLocations.forEach {
             val pinpointLocation = LinkEntity()
             pinpointLocation.name = it.name
             pinpointLocation.link = it.link
             pinpointLocationsRealmList.add(pinpointLocation)
         }
         weather.pinpointLocations = pinpointLocationsRealmList
-        weather.copyright = model.copyright?.let {
+        weather.copyright = destination.copyright?.let {
             val copyright = CopyrightEntity()
             copyright.title = it.title
             copyright.link = it.link
@@ -144,4 +145,5 @@ object WeatherMapper {
         }
         return weather
     }
+
 }

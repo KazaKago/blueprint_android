@@ -1,18 +1,16 @@
-package com.kazakago.cleanarchitecture.domain.usecase
+package com.kazakago.cleanarchitecture.domain.repository
 
 import com.kazakago.cleanarchitecture.domain.model.weather.WeatherModel
 
 import io.reactivex.Single
 
 /**
- * Weather UseCase
-
+ * Weather API Repository
+ *
  * @author Kensuke
  */
-interface WeatherUseCase {
+interface WeatherApiRepository {
 
     fun fetch(cityId: String): Single<WeatherModel>
-
-    fun find(cityId: String): WeatherModel?
 
 }

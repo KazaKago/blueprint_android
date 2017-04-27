@@ -5,14 +5,14 @@ package com.kazakago.cleanarchitecture.domain.repository
 
  * @author Kensuke
  */
-interface AboutRepository {
+interface AppInfoRepository {
 
     val playStoreUrl: String
 
-    val mailUrl: String
+    val mailAddressUrl: String
 
-    val webSiteUrl: String
+    val officialSiteUrl: String
 
-    val currentVersion: String
+    val appVersion: String
 
 }

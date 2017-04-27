@@ -1,7 +1,6 @@
-package com.kazakago.cleanarchitecture.data.api
+package com.kazakago.cleanarchitecture.web.api
 
-import com.kazakago.cleanarchitecture.data.entity.weather.WeatherEntity
-
+import com.kazakago.cleanarchitecture.web.entity.weather.WeatherApiEntity
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -15,6 +14,6 @@ import retrofit2.http.Query
 interface WeatherApi {
 
     @GET("json/v1")
-    operator fun get(@Query("city") cityId: String): Single<WeatherEntity>
+    operator fun get(@Query("city") cityId: String): Single<WeatherApiEntity>
 
 }

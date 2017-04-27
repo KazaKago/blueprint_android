@@ -11,8 +11,8 @@ import com.kazakago.cleanarchitecture.CleanApplication
 import com.kazakago.cleanarchitecture.R
 import com.kazakago.cleanarchitecture.domain.model.city.CityModel
 import com.kazakago.cleanarchitecture.domain.model.weather.WeatherModel
-import com.kazakago.cleanarchitecture.domain.usecase.CityUseCase
-import com.kazakago.cleanarchitecture.domain.usecase.WeatherUseCase
+import com.kazakago.cleanarchitecture.domain.usecase.city.GetCityUseCase
+import com.kazakago.cleanarchitecture.domain.usecase.weather.GetWeatherUseCase
 import com.kazakago.cleanarchitecture.presentation.listener.presenter.fragment.MainFragmentViewModelListener
 import com.kazakago.cleanarchitecture.presentation.listener.view.adapter.ForecastRecyclerAdapterListener
 import com.kazakago.cleanarchitecture.presentation.presenter.adapter.CityViewModel
@@ -27,6 +27,7 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 /**
  * Main Fragment ViewModel
@@ -49,9 +50,9 @@ class MainFragmentViewModel(private val context: Context) : ForecastRecyclerAdap
     var forecastRecyclerAdapter = ObservableField<ForecastRecyclerAdapter>(ForecastRecyclerAdapter(context))
 
     @Inject
-    lateinit var weatherUseCase: WeatherUseCase
+    lateinit var getWeatherUseCase: GetWeatherUseCase
     @Inject
-    lateinit var cityUseCase: CityUseCase
+    lateinit var getCityUseCase: GetCityUseCase
     var listener: MainFragmentViewModelListener? = null
     private var compositeDisposable: CompositeDisposable? = null
     var cityList: ArrayList<CityModel>? = null
@@ -103,11 +104,17 @@ class MainFragmentViewModel(private val context: Context) : ForecastRecyclerAdap
 
     fun onCitySelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         selectedPosition = position
+        refreshTitle()
         fetchWeather()
     }
 
+    private fun refreshTitle() {
+        val city = cityList?.get(selectedPosition)
+        listener?.setActionBarTitle(city?.name)
+    }
+
     private fun fetchCityList(completion: (() -> Unit)? = null) {
-        compositeDisposable?.add(cityUseCase.findAll()
+        compositeDisposable?.add(getCityUseCase.execute(Unit)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .toList()
@@ -127,24 +134,26 @@ class MainFragmentViewModel(private val context: Context) : ForecastRecyclerAdap
     private fun refreshCityList() {
         cityList?.map { CityViewModel(context, it) }?.let {
             citySpinnerAdapter.get().cityViewModelList = it
-            citySpinnerAdapter.get().notifyDataSetChanged()
             Handler().post { listener?.setCitySpinnerSelection(selectedPosition) }
+        } ?: run {
+            citySpinnerAdapter.get().cityViewModelList = ArrayList()
         }
+        citySpinnerAdapter.get().notifyDataSetChanged()
     }
 
     private fun fetchWeather(completion: (() -> Unit)? = null) {
         cityList?.get(selectedPosition)?.id?.let {
-            compositeDisposable?.add(weatherUseCase.fetch(it)
+            compositeDisposable?.add(getWeatherUseCase.execute(it)
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeBy(
                             onSuccess = {
                                 weather = it
                                 refreshWeather()
-                                showToast(context.getString(R.string.refresh_complete))
                                 completion?.invoke()
                             },
                             onError = {
+                                weather = null
                                 refreshWeather()
                                 showToast(it.localizedMessage)
                                 completion?.invoke()
@@ -154,15 +163,17 @@ class MainFragmentViewModel(private val context: Context) : ForecastRecyclerAdap
     }
 
     private fun refreshWeather() {
+        area.set(weather?.location?.area)
+        prefecture.set(weather?.location?.prefecture)
+        city.set(weather?.location?.city)
         weather?.let {
-            area.set(it.location?.area)
-            prefecture.set(it.location?.prefecture)
-            city.set(it.location?.city)
             publicTime.set(context.getString(R.string.public_time, formattedTime(it.publicTime)))
             forecastRecyclerAdapter.get().forecastList = it.forecasts.map { ForecastViewModel(context, it) }
-            forecastRecyclerAdapter.get().notifyDataSetChanged()
-            listener?.setActionBarTitle(it.title)
+        } ?: run {
+            publicTime.set(null)
+            forecastRecyclerAdapter.get().forecastList = ArrayList()
         }
+        forecastRecyclerAdapter.get().notifyDataSetChanged()
     }
 
     private fun formattedTime(timeStr: String?): String? {
@@ -182,7 +193,7 @@ class MainFragmentViewModel(private val context: Context) : ForecastRecyclerAdap
         return dateFormat.format(timestamp) + " " + timeFormat.format(timestamp)
     }
 
-    private fun showToast(message: String) {
+    private fun showToast(message: String?) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
