@@ -1,6 +1,7 @@
 package com.kazakago.cleanarchitecture.presentation.presenter.activity
 
 import android.content.Context
+import android.os.Bundle
 
 import com.kazakago.cleanarchitecture.presentation.listener.presenter.activity.AboutActivityViewModelListener
 
@@ -12,6 +13,12 @@ import com.kazakago.cleanarchitecture.presentation.listener.presenter.activity.A
 class AboutActivityViewModel(private val context: Context) {
 
     var listener: AboutActivityViewModelListener? = null
+
+    fun onCreate(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) {
+            listener?.replaceAboutFragment()
+        }
+    }
 
     fun onClickBackIcon() {
         listener?.onPerformFinish()

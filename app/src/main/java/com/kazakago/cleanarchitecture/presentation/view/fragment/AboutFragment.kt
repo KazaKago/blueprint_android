@@ -24,8 +24,8 @@ class AboutFragment : Fragment(), AboutFragmentViewModelListener {
         }
     }
 
-    private var binding: FragmentAboutBinding? = null
     private lateinit var viewModel: AboutFragmentViewModel
+    private var binding: FragmentAboutBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +40,7 @@ class AboutFragment : Fragment(), AboutFragmentViewModelListener {
             binding = FragmentAboutBinding.inflate(inflater, container, false)
             binding?.viewModel = viewModel
         }
+
         return binding?.root
     }
 

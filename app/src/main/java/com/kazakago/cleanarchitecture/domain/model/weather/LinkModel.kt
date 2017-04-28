@@ -1,8 +1,7 @@
 package com.kazakago.cleanarchitecture.domain.model.weather
 
-import android.os.Parcel
-import android.os.Parcelable
 import paperparcel.PaperParcel
+import paperparcel.PaperParcelable
 
 /**
  * Link Model
@@ -10,7 +9,7 @@ import paperparcel.PaperParcel
  * Created by tamura_k on 2016/06/03.
  */
 @PaperParcel
-class LinkModel : Parcelable {
+class LinkModel : PaperParcelable {
 
     //市区町村名
     var name: String? = null
@@ -20,14 +19,6 @@ class LinkModel : Parcelable {
     companion object {
         @JvmField
         val CREATOR = PaperParcelLinkModel.CREATOR
-    }
-
-    override fun writeToParcel(dest: Parcel, flags: Int) {
-        PaperParcelLinkModel.writeToParcel(this, dest, flags)
-    }
-
-    override fun describeContents(): Int {
-        return 0
     }
 
 }

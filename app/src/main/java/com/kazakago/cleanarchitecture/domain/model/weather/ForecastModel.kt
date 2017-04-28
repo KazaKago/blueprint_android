@@ -1,8 +1,7 @@
 package com.kazakago.cleanarchitecture.domain.model.weather
 
-import android.os.Parcel
-import android.os.Parcelable
 import paperparcel.PaperParcel
+import paperparcel.PaperParcelable
 
 /**
  * Forecasts Model
@@ -10,7 +9,7 @@ import paperparcel.PaperParcel
  * Created by tamura_k on 2016/06/03.
  */
 @PaperParcel
-class ForecastModel : Parcelable {
+class ForecastModel : PaperParcelable {
 
     //予報日
     var date: String? = null
@@ -26,14 +25,6 @@ class ForecastModel : Parcelable {
     companion object {
         @JvmField
         val CREATOR = PaperParcelForecastModel.CREATOR
-    }
-
-    override fun writeToParcel(dest: Parcel, flags: Int) {
-        PaperParcelForecastModel.writeToParcel(this, dest, flags)
-    }
-
-    override fun describeContents(): Int {
-        return 0
     }
 
 }

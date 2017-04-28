@@ -7,6 +7,8 @@ package com.kazakago.cleanarchitecture.presentation.listener.presenter.activity
  */
 interface AboutActivityViewModelListener {
 
+    fun replaceAboutFragment()
+
     fun onPerformFinish()
 
 }

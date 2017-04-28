@@ -26,17 +26,13 @@ class MainFragment : Fragment(), MainFragmentViewModelListener {
         }
     }
 
-    private var binding: FragmentMainBinding? = null
     private lateinit var viewModel: MainFragmentViewModel
-    private var mainFragmentListener: MainFragmentListener? = null
+    private var binding: FragmentMainBinding? = null
+    private var listener: MainFragmentListener? = null
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        try {
-            mainFragmentListener = context as MainFragmentListener?
-        } catch (e: ClassCastException) {
-            throw ClassCastException(context?.toString() + " must implement " + MainFragmentListener::class.java.simpleName)
-        }
+        listener = context as MainFragmentListener
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,6 +48,7 @@ class MainFragment : Fragment(), MainFragmentViewModelListener {
             binding = FragmentMainBinding.inflate(inflater, container, false)
             binding?.viewModel = viewModel
         }
+
         viewModel.onCreateView(savedInstanceState)
         return binding?.root
     }
@@ -69,7 +66,7 @@ class MainFragment : Fragment(), MainFragmentViewModelListener {
     /* MainFragmentViewModelListener */
 
     override fun setActionBarTitle(title: String?) {
-        mainFragmentListener?.setActionBarTitle(title)
+        listener?.setActionBarTitle(title)
     }
 
     override fun setCitySpinnerSelection(position: Int) {

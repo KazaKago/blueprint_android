@@ -7,6 +7,8 @@ import android.os.Handler
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
+import com.evernote.android.state.State
+import com.evernote.android.state.StateSaver
 import com.kazakago.cleanarchitecture.CleanApplication
 import com.kazakago.cleanarchitecture.R
 import com.kazakago.cleanarchitecture.domain.model.city.CityModel
@@ -36,12 +38,6 @@ import kotlin.collections.ArrayList
  */
 class MainFragmentViewModel(private val context: Context) : ForecastRecyclerAdapterListener {
 
-    enum class Key {
-        CITY_LIST,
-        WEATHER,
-        SELECTED_POSITION,
-    }
-
     var area = ObservableField<String>()
     var prefecture = ObservableField<String>()
     var city = ObservableField<String>()
@@ -49,14 +45,18 @@ class MainFragmentViewModel(private val context: Context) : ForecastRecyclerAdap
     var citySpinnerAdapter = ObservableField<CitySpinnerAdapter>(CitySpinnerAdapter(context))
     var forecastRecyclerAdapter = ObservableField<ForecastRecyclerAdapter>(ForecastRecyclerAdapter(context))
 
+    var listener: MainFragmentViewModelListener? = null
+    private var compositeDisposable: CompositeDisposable? = null
+
     @Inject
     lateinit var getWeatherUseCase: GetWeatherUseCase
     @Inject
     lateinit var getCityUseCase: GetCityUseCase
-    var listener: MainFragmentViewModelListener? = null
-    private var compositeDisposable: CompositeDisposable? = null
+    @State
     var cityList: ArrayList<CityModel>? = null
+    @State
     var weather: WeatherModel? = null
+    @State
     var selectedPosition: Int = 0
 
     init {
@@ -65,12 +65,8 @@ class MainFragmentViewModel(private val context: Context) : ForecastRecyclerAdap
     }
 
     fun onCreate(savedInstanceState: Bundle?) {
+        StateSaver.restoreInstanceState(this, savedInstanceState)
         compositeDisposable = CompositeDisposable()
-        savedInstanceState?.let {
-            cityList = it.getParcelableArrayList<CityModel>(Key.CITY_LIST.name)
-            weather = it.getParcelable(Key.WEATHER.name)
-            selectedPosition = it.getInt(Key.SELECTED_POSITION.name)
-        }
     }
 
     fun onCreateView(savedInstanceState: Bundle?) {
@@ -93,9 +89,7 @@ class MainFragmentViewModel(private val context: Context) : ForecastRecyclerAdap
     }
 
     fun onSaveInstanceState(outState: Bundle?) {
-        outState?.putParcelableArrayList(Key.CITY_LIST.name, cityList)
-        outState?.putParcelable(Key.WEATHER.name, weather)
-        outState?.putInt(Key.SELECTED_POSITION.name, selectedPosition)
+        outState?.let { StateSaver.saveInstanceState(this, it) }
     }
 
     fun onClickRefresh(view: View?) {
@@ -139,6 +133,7 @@ class MainFragmentViewModel(private val context: Context) : ForecastRecyclerAdap
             citySpinnerAdapter.get().cityViewModelList = ArrayList()
         }
         citySpinnerAdapter.get().notifyDataSetChanged()
+        refreshTitle()
     }
 
     private fun fetchWeather(completion: (() -> Unit)? = null) {

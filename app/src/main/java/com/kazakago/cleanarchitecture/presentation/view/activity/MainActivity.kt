@@ -29,21 +29,19 @@ class MainActivity : AppCompatActivity(), MainFragmentListener, MainActivityView
         }
     }
 
-    private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainActivityViewModel
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         viewModel = MainActivityViewModel(this)
         viewModel.listener = this
+        binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         binding.viewModel = viewModel
 
         setSupportActionBar(binding.toolbar)
 
-        if (savedInstanceState == null) {
-            replaceMainFragment()
-        }
+        viewModel.onCreate(savedInstanceState = savedInstanceState)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -58,14 +56,6 @@ class MainActivity : AppCompatActivity(), MainFragmentListener, MainActivityView
         return super.onOptionsItemSelected(item)
     }
 
-    fun replaceMainFragment() {
-        val fragment = MainFragment.newInstance()
-
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.container_fragment, fragment)
-        fragmentTransaction.commit()
-    }
-
     /* MainFragmentListener */
 
     override fun setActionBarTitle(title: String?) {
@@ -73,6 +63,14 @@ class MainActivity : AppCompatActivity(), MainFragmentListener, MainActivityView
     }
 
     /* MainActivityViewModelListener */
+
+    override fun replaceMainFragment() {
+        val fragment = MainFragment.newInstance()
+
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.container_fragment, fragment)
+        fragmentTransaction.commit()
+    }
 
     override fun toAboutActivity() {
         val intent = AboutActivity.newInstance(this)

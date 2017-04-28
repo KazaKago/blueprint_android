@@ -1,8 +1,7 @@
 package com.kazakago.cleanarchitecture.domain.model.weather
 
-import android.os.Parcel
-import android.os.Parcelable
 import paperparcel.PaperParcel
+import paperparcel.PaperParcelable
 
 /**
  * Temperature Unit Model
@@ -10,7 +9,7 @@ import paperparcel.PaperParcel
  * Created by tamura_k on 2016/06/03.
  */
 @PaperParcel
-class TemperatureUnitModel : Parcelable {
+class TemperatureUnitModel : PaperParcelable {
 
     //摂氏
     var celsius: Float? = null
@@ -20,14 +19,6 @@ class TemperatureUnitModel : Parcelable {
     companion object {
         @JvmField
         val CREATOR = PaperParcelTemperatureUnitModel.CREATOR
-    }
-
-    override fun writeToParcel(dest: Parcel, flags: Int) {
-        PaperParcelTemperatureUnitModel.writeToParcel(this, dest, flags)
-    }
-
-    override fun describeContents(): Int {
-        return 0
     }
 
 }

@@ -27,22 +27,20 @@ class AboutActivity : AppCompatActivity(), AboutActivityViewModelListener {
         }
     }
 
-    private lateinit var binding: ActivityAboutBinding
     private lateinit var viewModel: AboutActivityViewModel
+    private lateinit var binding: ActivityAboutBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView<ActivityAboutBinding>(this, R.layout.activity_about)
         viewModel = AboutActivityViewModel(this)
         viewModel.listener = this
+        binding = DataBindingUtil.setContentView<ActivityAboutBinding>(this, R.layout.activity_about)
         binding.viewModel = viewModel
 
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        if (savedInstanceState == null) {
-            replaceAboutFragment()
-        }
+        viewModel.onCreate(savedInstanceState = savedInstanceState)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -52,15 +50,15 @@ class AboutActivity : AppCompatActivity(), AboutActivityViewModelListener {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun replaceAboutFragment() {
+    /* AboutActivityViewModelListener */
+
+    override fun replaceAboutFragment() {
         val fragment = AboutFragment.newInstance()
 
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.container_fragment, fragment)
         fragmentTransaction.commit()
     }
-
-    /* AboutActivityViewModelListener */
 
     override fun onPerformFinish() {
         finish()
