@@ -41,6 +41,22 @@ object WeatherApiMapper : EntityMapper<WeatherApiEntity, WeatherModel>() {
                 image.width = it.width
                 image
             }
+            forecast.temperature = it.temperature?.let {
+                val temperature = TemperatureModel()
+                temperature.max = it.max?.let {
+                    val temperatureUnit = TemperatureUnitModel()
+                    temperatureUnit.celsius = it.celsius
+                    temperatureUnit.fahrenheit = it.fahrenheit
+                    temperatureUnit
+                }
+                temperature.min = it.min?.let {
+                    val temperatureUnit = TemperatureUnitModel()
+                    temperatureUnit.celsius = it.celsius
+                    temperatureUnit.fahrenheit = it.fahrenheit
+                    temperatureUnit
+                }
+                temperature
+            }
             forecast
         }
         weather.pinpointLocations = source.pinpointLocations.map {

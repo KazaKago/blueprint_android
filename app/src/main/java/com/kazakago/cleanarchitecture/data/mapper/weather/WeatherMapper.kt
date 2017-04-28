@@ -43,6 +43,22 @@ object WeatherMapper : EntityMapper<WeatherEntity, WeatherModel>() {
                 image.width = it.width
                 image
             }
+            forecast.temperature = it.temperature?.let {
+                val temperature = TemperatureModel()
+                temperature.max = it.max?.let {
+                    val temperatureUnit = TemperatureUnitModel()
+                    temperatureUnit.celsius = it.celsius
+                    temperatureUnit.fahrenheit = it.fahrenheit
+                    temperatureUnit
+                }
+                temperature.min = it.min?.let {
+                    val temperatureUnit = TemperatureUnitModel()
+                    temperatureUnit.celsius = it.celsius
+                    temperatureUnit.fahrenheit = it.fahrenheit
+                    temperatureUnit
+                }
+                temperature
+            }
             forecast
         }
         weather.pinpointLocations = source.pinpointLocations.map {
@@ -108,6 +124,22 @@ object WeatherMapper : EntityMapper<WeatherEntity, WeatherModel>() {
                 image.url = it.url
                 image.width = it.width
                 image
+            }
+            forecast.temperature = it.temperature?.let {
+                val temperature = TemperatureEntity()
+                temperature.max = it.max?.let {
+                    val temperatureUnit = TemperatureUnitEntity()
+                    temperatureUnit.celsius = it.celsius
+                    temperatureUnit.fahrenheit = it.fahrenheit
+                    temperatureUnit
+                }
+                temperature.min = it.min?.let {
+                    val temperatureUnit = TemperatureUnitEntity()
+                    temperatureUnit.celsius = it.celsius
+                    temperatureUnit.fahrenheit = it.fahrenheit
+                    temperatureUnit
+                }
+                temperature
             }
             forecastRealmList.add(forecast)
         }
