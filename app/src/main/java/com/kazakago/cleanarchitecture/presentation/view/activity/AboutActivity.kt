@@ -37,9 +37,6 @@ class AboutActivity : AppCompatActivity(), AboutActivityViewModelListener {
         binding = DataBindingUtil.setContentView<ActivityAboutBinding>(this, R.layout.activity_about)
         binding.viewModel = viewModel
 
-        setSupportActionBar(binding.toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         viewModel.onCreate(savedInstanceState = savedInstanceState)
     }
 
@@ -51,6 +48,11 @@ class AboutActivity : AppCompatActivity(), AboutActivityViewModelListener {
     }
 
     /* AboutActivityViewModelListener */
+
+    override fun initView() {
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
 
     override fun replaceAboutFragment() {
         val fragment = AboutFragment.newInstance()

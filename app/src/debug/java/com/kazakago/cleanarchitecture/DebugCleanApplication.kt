@@ -12,7 +12,10 @@ class DebugCleanApplication : CleanApplication() {
 
     override fun onCreate() {
         super.onCreate()
+        initializeStetho()
+    }
 
+    private fun initializeStetho() {
         Stetho.initialize(
                 Stetho.newInitializerBuilder(this)
                         .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))

@@ -15,7 +15,7 @@ import com.kazakago.cleanarchitecture.domain.repository.AppInfoRepository
 class AppInfoRepositoryImpl(private val context: Context) : AppInfoRepository {
 
     override val playStoreUrl: String
-        get() = StoreUtils.getStoreAppLink(context)
+        get() = StoreUtils.getStoreAppLink(context = context)
 
     override val mailAddressUrl: String
         get() = context.getString(R.string.developer_mail_address)
@@ -24,6 +24,6 @@ class AppInfoRepositoryImpl(private val context: Context) : AppInfoRepository {
         get() = context.getString(R.string.developer_website_url)
 
     override val appVersion: String
-        get() = VersionUtils.getVersionName(context)
+        get() = VersionUtils.getVersionName(context = context)
 
 }

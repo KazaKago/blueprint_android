@@ -62,17 +62,17 @@ class AboutFragmentViewModel(private val context: Context) {
 
     private fun toPlayStore() {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(getPlayStoreUrlUseCase.execute(Unit)))
-        listener?.startActivity(intent)
+        listener?.startActivity(intent = intent)
     }
 
     private fun toMailApp() {
         val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + getMailAddressUrlUseCase.execute(Unit)))
-        listener?.startActivity(intent)
+        listener?.startActivity(intent = intent)
     }
 
     private fun toWebSite() {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(getOfficialSiteUrlUseCase.execute(Unit)))
-        listener?.startActivity(intent)
+        listener?.startActivity(intent = intent)
     }
 
 }

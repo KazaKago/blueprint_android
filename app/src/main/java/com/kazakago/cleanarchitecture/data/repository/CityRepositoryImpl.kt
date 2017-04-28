@@ -18,8 +18,8 @@ class CityRepositoryImpl(private val context: Context) : CityRepository {
 
     @Throws(IOException::class)
     override fun findAll(): Observable<CityModel> {
-        val cityDao = CityDao(context)
-        val cityList = cityDao.find().flatMap { CityMapper.map(it) }
+        val cityDao = CityDao(context = context)
+        val cityList = cityDao.find().flatMap { CityMapper.map(source = it) }
         return Observable.fromIterable(cityList)
     }
 

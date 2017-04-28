@@ -37,10 +37,10 @@ class MainFragment : Fragment(), MainFragmentViewModelListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = MainFragmentViewModel(activity)
+        viewModel = MainFragmentViewModel(context = activity)
         viewModel.listener = this
 
-        viewModel.onCreate(savedInstanceState)
+        viewModel.onCreate(savedInstanceState = savedInstanceState)
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -49,7 +49,7 @@ class MainFragment : Fragment(), MainFragmentViewModelListener {
             binding?.viewModel = viewModel
         }
 
-        viewModel.onCreateView(savedInstanceState)
+        viewModel.onCreateView(savedInstanceState = savedInstanceState)
         return binding?.root
     }
 
@@ -60,13 +60,13 @@ class MainFragment : Fragment(), MainFragmentViewModelListener {
 
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
-        viewModel.onSaveInstanceState(outState)
+        viewModel.onSaveInstanceState(outState = outState)
     }
 
     /* MainFragmentViewModelListener */
 
     override fun setActionBarTitle(title: String?) {
-        listener?.setActionBarTitle(title)
+        listener?.setActionBarTitle(title = title)
     }
 
     override fun setCitySpinnerSelection(position: Int) {

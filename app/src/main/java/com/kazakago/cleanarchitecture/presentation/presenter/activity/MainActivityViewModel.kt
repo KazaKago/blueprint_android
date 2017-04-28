@@ -14,6 +14,7 @@ class MainActivityViewModel(private val context: Context) {
     var listener: MainActivityViewModelListener? = null
 
     fun onCreate(savedInstanceState: Bundle?) {
+        listener?.initView()
         if (savedInstanceState == null) {
             listener?.replaceMainFragment()
         }

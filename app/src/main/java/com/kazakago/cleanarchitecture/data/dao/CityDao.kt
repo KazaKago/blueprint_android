@@ -18,7 +18,7 @@ class CityDao(private val context: Context) {
     @Throws(IOException::class)
     fun find(): List<PrefEntity> {
         val cityJson = readJson()
-        return parseJson(cityJson)
+        return parseJson(jsonStr = cityJson)
     }
 
     @Throws(IOException::class)

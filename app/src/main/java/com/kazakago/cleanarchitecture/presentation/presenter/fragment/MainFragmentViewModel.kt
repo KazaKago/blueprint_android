@@ -119,7 +119,7 @@ class MainFragmentViewModel(private val context: Context) : ForecastRecyclerAdap
                             completion?.invoke()
                         },
                         onError = {
-                            showToast(it.localizedMessage)
+                            showToast(message = it.localizedMessage)
                             completion?.invoke()
                         }
                 ))
@@ -128,7 +128,7 @@ class MainFragmentViewModel(private val context: Context) : ForecastRecyclerAdap
     private fun refreshCityList() {
         cityList?.map { CityViewModel(context, it) }?.let {
             citySpinnerAdapter.get().cityViewModelList = it
-            Handler().post { listener?.setCitySpinnerSelection(selectedPosition) }
+            Handler().post { listener?.setCitySpinnerSelection(position = selectedPosition) }
         } ?: run {
             citySpinnerAdapter.get().cityViewModelList = ArrayList()
         }
@@ -138,7 +138,7 @@ class MainFragmentViewModel(private val context: Context) : ForecastRecyclerAdap
 
     private fun fetchWeather(completion: (() -> Unit)? = null) {
         cityList?.get(selectedPosition)?.id?.let {
-            compositeDisposable?.add(getWeatherUseCase.execute(it)
+            compositeDisposable?.add(getWeatherUseCase.execute(input = it)
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeBy(
@@ -150,7 +150,7 @@ class MainFragmentViewModel(private val context: Context) : ForecastRecyclerAdap
                             onError = {
                                 weather = null
                                 refreshWeather()
-                                showToast(it.localizedMessage)
+                                showToast(message = it.localizedMessage)
                                 completion?.invoke()
                             }
                     ))
@@ -162,8 +162,8 @@ class MainFragmentViewModel(private val context: Context) : ForecastRecyclerAdap
         prefecture.set(weather?.location?.prefecture)
         city.set(weather?.location?.city)
         weather?.let {
-            publicTime.set(context.getString(R.string.public_time, formattedTime(it.publicTime)))
-            forecastRecyclerAdapter.get().forecastList = it.forecasts.map { ForecastViewModel(context, it) }
+            publicTime.set(context.getString(R.string.public_time, formattedTime(timeStr = it.publicTime)))
+            forecastRecyclerAdapter.get().forecastList = it.forecasts.map { ForecastViewModel(context = context, forecast = it) }
         } ?: run {
             publicTime.set(null)
             forecastRecyclerAdapter.get().forecastList = ArrayList()
@@ -175,7 +175,7 @@ class MainFragmentViewModel(private val context: Context) : ForecastRecyclerAdap
         return timeStr?.let {
             try {
                 val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSSZ", Locale.getDefault())
-                return formattedTime(formatter.parse(it).time)
+                return formattedTime(timestamp = formatter.parse(it).time)
             } catch (e: ParseException) {
                 null
             }
@@ -195,7 +195,7 @@ class MainFragmentViewModel(private val context: Context) : ForecastRecyclerAdap
     /* ForecastRecyclerAdapterListener */
 
     override fun onItemClick(forecastViewModel: ForecastViewModel) {
-        showToast(forecastViewModel.telop.get())
+        showToast(message = forecastViewModel.telop.get())
     }
 
 }

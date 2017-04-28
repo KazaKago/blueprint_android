@@ -10,11 +10,11 @@ abstract class EntityMapper<T, R> {
     abstract fun reverse(destination: R): T
 
     fun map(sources: List<T>): List<R> {
-        return sources.map { map(it) }
+        return sources.map { map(source = it) }
     }
 
     fun reverse(destinations: List<R>): List<T> {
-        return destinations.map { reverse(it) }
+        return destinations.map { reverse(destination = it) }
     }
 
 }

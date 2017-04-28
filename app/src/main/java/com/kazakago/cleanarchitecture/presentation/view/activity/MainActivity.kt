@@ -39,9 +39,7 @@ class MainActivity : AppCompatActivity(), MainFragmentListener, MainActivityView
         binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         binding.viewModel = viewModel
 
-        setSupportActionBar(binding.toolbar)
-
-        viewModel.onCreate(savedInstanceState = savedInstanceState)
+        viewModel.onCreate(savedInstanceState)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -63,6 +61,10 @@ class MainActivity : AppCompatActivity(), MainFragmentListener, MainActivityView
     }
 
     /* MainActivityViewModelListener */
+
+    override fun initView() {
+        setSupportActionBar(binding.toolbar)
+    }
 
     override fun replaceMainFragment() {
         val fragment = MainFragment.newInstance()

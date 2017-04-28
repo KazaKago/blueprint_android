@@ -18,14 +18,14 @@ class GetWeatherUseCaseImpl(private val weatherApiRepository: WeatherApiReposito
             weatherApiRepository.fetch(input).subscribeBy(
                     onSuccess = {
                         it.cityId = input
-                        if (weatherRepository.exist(input)) {
-                            weatherRepository.delete(input)
+                        if (weatherRepository.exist(cityId = input)) {
+                            weatherRepository.delete(cityId = input)
                         }
-                        weatherRepository.insert(it)
+                        weatherRepository.insert(weather = it)
                         subscriber.onSuccess(it)
                     },
                     onError = {
-                        weatherRepository.find(input)?.let {
+                        weatherRepository.find(cityId = input)?.let {
                             subscriber.onSuccess(it)
                         } ?: subscriber.onError(it)
                     })

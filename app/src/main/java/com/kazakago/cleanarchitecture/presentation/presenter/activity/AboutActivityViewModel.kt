@@ -15,6 +15,7 @@ class AboutActivityViewModel(private val context: Context) {
     var listener: AboutActivityViewModelListener? = null
 
     fun onCreate(savedInstanceState: Bundle?) {
+        listener?.initView()
         if (savedInstanceState == null) {
             listener?.replaceAboutFragment()
         }

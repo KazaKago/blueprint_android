@@ -15,15 +15,15 @@ class WeatherRepositoryImpl : WeatherRepository {
 
     override fun find(cityId: String): WeatherModel? {
         Realm.getDefaultInstance().use {
-            val weatherDao = WeatherDao(it)
-            return weatherDao.find(cityId)?.let { WeatherMapper.map(it) }
+            val weatherDao = WeatherDao(realm = it)
+            return weatherDao.find(cityId = cityId)?.let { WeatherMapper.map(source = it) }
         }
     }
 
     override fun exist(cityId: String): Boolean {
         Realm.getDefaultInstance().use {
-            val weatherDao = WeatherDao(it)
-            return weatherDao.exist(cityId)
+            val weatherDao = WeatherDao(realm = it)
+            return weatherDao.exist(cityId = cityId)
         }
     }
 
@@ -31,8 +31,8 @@ class WeatherRepositoryImpl : WeatherRepository {
         val weatherEntity = WeatherMapper.reverse(weather)
         Realm.getDefaultInstance().use {
             it.beginTransaction()
-            val weatherDao = WeatherDao(it)
-            weatherDao.insert(weatherEntity)
+            val weatherDao = WeatherDao(realm = it)
+            weatherDao.insert(weather = weatherEntity)
             it.commitTransaction()
         }
     }
@@ -40,8 +40,8 @@ class WeatherRepositoryImpl : WeatherRepository {
     override fun delete(cityId: String) {
         Realm.getDefaultInstance().use {
             it.beginTransaction()
-            val weatherDao = WeatherDao(it)
-            weatherDao.delete(cityId)
+            val weatherDao = WeatherDao(realm = it)
+            weatherDao.delete(cityId = cityId)
             it.commitTransaction()
         }
     }

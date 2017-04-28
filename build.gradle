@@ -10,7 +10,7 @@ buildscript {
         //Kotlin
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         //Realm
-        classpath 'io.realm:realm-gradle-plugin:2.2.1'
+        classpath 'io.realm:realm-gradle-plugin:3.1.3'
         //Spoon
         classpath 'com.stanfy.spoon:spoon-gradle-plugin:1.2.2'
 
