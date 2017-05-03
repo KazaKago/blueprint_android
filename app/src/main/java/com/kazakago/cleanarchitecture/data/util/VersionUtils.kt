@@ -6,7 +6,6 @@ import android.content.pm.PackageManager
 /**
  * Version Related Utilities.
  *
- *
  * Created by tamura_k on 2016/03/18.
  */
 object VersionUtils {

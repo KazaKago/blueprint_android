@@ -32,10 +32,10 @@ class CitySpinnerAdapter(private val context: Context) : BaseAdapter() {
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
-        var binding: SpinnerCityBinding? = null
-        convertView?.let {
-            binding = it.tag as? SpinnerCityBinding
-        } ?: run {
+        val binding: SpinnerCityBinding?
+        if (convertView != null) {
+            binding = convertView.tag as? SpinnerCityBinding
+        } else {
             binding = SpinnerCityBinding.inflate(LayoutInflater.from(context), parent, false)
             binding?.root?.tag = binding
         }
@@ -45,10 +45,10 @@ class CitySpinnerAdapter(private val context: Context) : BaseAdapter() {
     }
 
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup?): View? {
-        var binding: SpinnerCityDropdownBinding? = null
-        convertView?.let {
-            binding = it.tag as? SpinnerCityDropdownBinding
-        } ?: run {
+        val binding: SpinnerCityDropdownBinding?
+        if (convertView != null) {
+            binding = convertView.tag as? SpinnerCityDropdownBinding
+        } else {
             binding = SpinnerCityDropdownBinding.inflate(LayoutInflater.from(context), parent, false)
             binding?.root?.tag = binding
         }
