@@ -1,14 +1,14 @@
 package com.kazakago.cleanarchitecture.data.mapper.weather
 
 import com.kazakago.cleanarchitecture.data.entity.weather.*
-import com.kazakago.cleanarchitecture.domain.mapper.EntityMapper
+import com.kazakago.cleanarchitecture.domain.mapper.ReversibleEntityMapper
 import com.kazakago.cleanarchitecture.domain.model.weather.*
 import io.realm.RealmList
 
 /**
  * Created by tamura_k on 2016/12/08.
  */
-object WeatherMapper : EntityMapper<WeatherEntity, WeatherModel>() {
+object WeatherMapper : ReversibleEntityMapper<WeatherEntity, WeatherModel> {
 
     override fun map(source: WeatherEntity): WeatherModel {
         val weather = WeatherModel()

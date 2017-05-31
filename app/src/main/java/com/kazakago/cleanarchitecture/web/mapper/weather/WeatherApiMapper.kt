@@ -7,7 +7,7 @@ import com.kazakago.cleanarchitecture.web.entity.weather.WeatherApiEntity
 /**
  * Created by tamura_k on 2016/12/08.
  */
-object WeatherApiMapper : EntityMapper<WeatherApiEntity, WeatherModel>() {
+object WeatherApiMapper : EntityMapper<WeatherApiEntity, WeatherModel> {
 
     override fun map(source: WeatherApiEntity): WeatherModel {
         val weather = WeatherModel()
@@ -87,10 +87,6 @@ object WeatherApiMapper : EntityMapper<WeatherApiEntity, WeatherModel>() {
             copyright
         }
         return weather
-    }
-
-    override fun reverse(destination: WeatherModel): WeatherApiEntity {
-        TODO("not implemented")
     }
 
 }

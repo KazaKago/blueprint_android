@@ -3,8 +3,8 @@ package com.kazakago.cleanarchitecture.domain.mapper
 /**
  * Created by tamura_k on 2017/04/27.
  */
-interface EntityMapper<in T, out R> {
+interface ReversibleEntityMapper<T, R> : EntityMapper<T, R> {
 
-    fun map(source: T): R
+    fun reverse(destination: R): T
 
 }

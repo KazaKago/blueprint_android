@@ -7,7 +7,7 @@ import com.kazakago.cleanarchitecture.domain.model.city.CityModel
 /**
  * Created by tamura_k on 2016/12/08.
  */
-object CityMapper: EntityMapper<PrefEntity, List<CityModel>>() {
+object CityMapper : EntityMapper<PrefEntity, List<CityModel>> {
 
     override fun map(source: PrefEntity): List<CityModel> {
         val prefTitle = source.title
@@ -17,10 +17,6 @@ object CityMapper: EntityMapper<PrefEntity, List<CityModel>>() {
             city.name = prefTitle + " " + it.title
             city
         }
-    }
-
-    override fun reverse(destination: List<CityModel>): PrefEntity {
-        TODO("not implemented")
     }
 
 }
