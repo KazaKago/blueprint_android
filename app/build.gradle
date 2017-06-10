@@ -9,7 +9,7 @@ apply plugin: 'spoon'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '25.0.3'
+    buildToolsVersion '26.0.0'
 
     defaultConfig {
         applicationId "com.kazakago.cleanarchitecture"
@@ -90,8 +90,8 @@ dependencies {
     compile 'nz.bradcampbell:paperparcel-kotlin:2.0.1'
     kapt 'nz.bradcampbell:paperparcel-compiler:2.0.1'
     //Android-State
-    compile 'com.evernote:android-state:1.0.6'
-    kapt 'com.evernote:android-state-processor:1.0.6'
+    compile 'com.evernote:android-state:1.1.0'
+    kapt 'com.evernote:android-state-processor:1.1.0'
 
     //Stetho
     debugCompile 'com.facebook.stetho:stetho:1.5.0'
