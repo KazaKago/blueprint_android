@@ -29,19 +29,21 @@
 -keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
     rx.internal.util.atomic.LinkedQueueNode consumerNode;
 }
+-dontnote rx.internal.util.PlatformDependent
 
 # Retrolambda
 # https://github.com/evant/gradle-retrolambda
 -dontwarn java.lang.invoke.*
+-dontwarn **$$Lambda$*
 
 # Okio
-# https://github.com/square/okio/issues/60
+# https://github.com/square/okio
 -dontwarn okio.**
 
 # Retrofit
 # https://square.github.io/retrofit/
--dontwarn retrofit2.**
--keep class retrofit2.** { *; }
+-dontnote retrofit2.Platform
+-dontwarn retrofit2.Platform$Java8
 -keepattributes Signature
 -keepattributes Exceptions
 
@@ -55,6 +57,9 @@
 -keepattributes *Annotation*
 -keep class sun.misc.Unsafe { *; }
 -keep class com.google.gson.stream.** { *; }
+-keep class * implements com.google.gson.TypeAdapterFactory
+-keep class * implements com.google.gson.JsonSerializer
+-keep class * implements com.google.gson.JsonDeserializer
 
 # MyClass for Gson
 -keep class com.kazakago.cleanarchitecture.data.entity.** { *; }
