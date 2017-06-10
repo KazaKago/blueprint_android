@@ -31,16 +31,10 @@
 }
 -dontnote rx.internal.util.PlatformDependent
 
-# Retrolambda
-# https://github.com/evant/gradle-retrolambda
--dontwarn java.lang.invoke.*
--dontwarn **$$Lambda$*
-
-# Okio
-# https://github.com/square/okio
--dontwarn okio.**
-
 # Retrofit
+# https://github.com/square/retrofit
+-dontwarn okio.**
+-dontwarn javax.annotation.**
 # https://square.github.io/retrofit/
 -dontnote retrofit2.Platform
 -dontwarn retrofit2.Platform$Java8
@@ -62,5 +56,6 @@
 -keep class * implements com.google.gson.JsonDeserializer
 
 # MyClass for Gson
--keep class com.kazakago.cleanarchitecture.data.entity.** { *; }
 -keep class com.kazakago.cleanarchitecture.domain.model.** { *; }
+-keep class com.kazakago.cleanarchitecture.data.entity.** { *; }
+-keep class com.kazakago.cleanarchitecture.web.entity.** { *; }
