@@ -7,16 +7,20 @@ apply plugin: 'realm-android'
 //Spoon
 apply plugin: 'spoon'
 
+def VERSION_CODE = 1
+def VERSION_NAME = "1.0.0"
+def PACKAGE_NAME = "com.kazakago.cleanarchitecture"
+
 android {
     compileSdkVersion 25
     buildToolsVersion '26.0.0'
 
     defaultConfig {
-        applicationId "com.kazakago.cleanarchitecture"
+        applicationId PACKAGE_NAME
         minSdkVersion 17
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionCode VERSION_CODE
+        versionName VERSION_NAME
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         //Vector Drawable Support
         vectorDrawables.useSupportLibrary = true
@@ -31,6 +35,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             applicationIdSuffix ".debug"
             versionNameSuffix " debug"
+        }
+    }
+    productFlavors {
+        production {
+        }
+        staging {
+            applicationId "${PACKAGE_NAME}.staging"
+            versionName "${VERSION_NAME} staging"
         }
     }
     dataBinding {
