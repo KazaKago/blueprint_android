@@ -29,31 +29,17 @@
 -keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
     rx.internal.util.atomic.LinkedQueueNode consumerNode;
 }
-
-# Retrolambda
-# https://github.com/evant/gradle-retrolambda
--dontwarn java.lang.invoke.*
-
-# Okio
-# https://github.com/square/okio/issues/60
--dontwarn okio.**
+-dontnote rx.internal.util.PlatformDependent
 
 # Retrofit
+# https://github.com/square/retrofit
+-dontwarn okio.**
+-dontwarn javax.annotation.**
 # https://square.github.io/retrofit/
--dontwarn retrofit2.**
--keep class retrofit2.** { *; }
+-dontnote retrofit2.Platform
+-dontwarn retrofit2.Platform$Java8
 -keepattributes Signature
 -keepattributes Exceptions
-
-# Icepick
-# https://github.com/frankiesardo/icepick
--dontwarn icepick.**
--keep class icepick.** { *; }
--keep class **$$Icepick { *; }
--keepclasseswithmembernames class * {
-    @icepick.* <fields>;
-}
--keepnames class * { @icepick.State *;}
 
 # Picasso
 # https://github.com/square/picasso
@@ -65,14 +51,11 @@
 -keepattributes *Annotation*
 -keep class sun.misc.Unsafe { *; }
 -keep class com.google.gson.stream.** { *; }
+-keep class * implements com.google.gson.TypeAdapterFactory
+-keep class * implements com.google.gson.JsonSerializer
+-keep class * implements com.google.gson.JsonDeserializer
 
-# ModelMapper
-# https://github.com/jhalterman/modelmapper/issues/165
--keep class java.beans.** { *; }
--keep class sun.misc.Unsafe { *; }
--dontwarn java.beans.**
--dontwarn org.modelmapper.**
-
-# MyClass for Gson & ModelMapper
--keep class com.kazakago.cleanarchitecture.data.entity.** { *; }
+# MyClass for Gson
 -keep class com.kazakago.cleanarchitecture.domain.model.** { *; }
+-keep class com.kazakago.cleanarchitecture.data.entity.** { *; }
+-keep class com.kazakago.cleanarchitecture.web.entity.** { *; }
