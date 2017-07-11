@@ -86,8 +86,8 @@ dependencies {
     kapt 'com.android.databinding:compiler:2.3.1'
     //Rx
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    compile 'io.reactivex.rxjava2:rxjava:2.1.0'
-    compile 'io.reactivex.rxjava2:rxkotlin:2.0.3'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.1'
+    compile 'io.reactivex.rxjava2:rxkotlin:2.1.0'
     //Retrofit
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
@@ -102,8 +102,8 @@ dependencies {
     compile 'nz.bradcampbell:paperparcel-kotlin:2.0.1'
     kapt 'nz.bradcampbell:paperparcel-compiler:2.0.1'
     //Android-State
-    compile 'com.evernote:android-state:1.1.0'
-    kapt 'com.evernote:android-state-processor:1.1.0'
+    compile 'com.evernote:android-state:1.1.1'
+    kapt 'com.evernote:android-state-processor:1.1.1'
 
     //Stetho
     debugCompile 'com.facebook.stetho:stetho:1.5.0'
