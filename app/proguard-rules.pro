@@ -44,3 +44,7 @@
 -keep class com.kazakago.cleanarchitecture.domain.model.** { *; }
 -keep class com.kazakago.cleanarchitecture.data.entity.** { *; }
 -keep class com.kazakago.cleanarchitecture.web.entity.** { *; }
+
+# Kodein
+# https://salomonbrys.github.io/Kodein/
+-keepattributes Signature
