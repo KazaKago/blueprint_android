@@ -4,8 +4,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 //Realm
 apply plugin: 'realm-android'
-//Spoon
-apply plugin: 'spoon'
 
 def VERSION_CODE = 1
 def VERSION_NAME = "1.0.0"
@@ -61,19 +59,6 @@ repositories {
     maven { url 'https://github.com/uPhyca/stetho-realm/raw/master/maven-repo' }
 }
 
-spoon {
-    // for debug output
-    debug true
-    // To execute the tests device by device
-    sequential true
-    // To grant permissions to Android M >= devices
-    grantAllPermissions true
-    // Disable animated gif generation
-    noAnimations true
-    // Set maximum execution time per test in seconds (10min default)
-    adbTimeout 60
-}
-
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     //Kotlin
@@ -119,8 +104,6 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    //Spoon
-    androidTestCompile 'com.squareup.spoon:spoon-client:1.7.1'
     //Hamcrest
     androidTestCompile 'org.hamcrest:hamcrest-library:1.3'
 }

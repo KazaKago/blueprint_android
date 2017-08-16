@@ -1,13 +1,9 @@
 package com.kazakago.cleanarchitecture.presentation.view.activity
 
 import android.support.test.rule.ActivityTestRule
-
-import com.squareup.spoon.Spoon
-
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
-import org.junit.Test
 
 /**
  * AboutActivityTest
@@ -29,12 +25,6 @@ class AboutActivityTest {
     @After
     @Throws(Exception::class)
     fun tearDown() {
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testInitialState() {
-        Spoon.screenshot(activity, "initial_state")
     }
 
 }
