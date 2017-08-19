@@ -7,7 +7,7 @@ package com.kazakago.cleanarchitecture.web.entity.weather
  */
 data class TemperatureApiEntity(
         //最高気温
-        var max: TemperatureUnitApiEntity? = null,
+        val max: TemperatureUnitApiEntity,
         //最低気温
-        var min: TemperatureUnitApiEntity? = null
+        val min: TemperatureUnitApiEntity
 )

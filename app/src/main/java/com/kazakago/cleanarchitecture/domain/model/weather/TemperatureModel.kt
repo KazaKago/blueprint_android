@@ -9,12 +9,12 @@ import paperparcel.PaperParcelable
  * Created by tamura_k on 2016/06/03.
  */
 @PaperParcel
-class TemperatureModel : PaperParcelable {
-
-    //最高気温
-    var max: TemperatureUnitModel? = null
-    //最低気温
-    var min: TemperatureUnitModel? = null
+data class TemperatureModel(
+        //最高気温
+        val max: TemperatureUnitModel,
+        //最低気温
+        val min: TemperatureUnitModel
+) : PaperParcelable {
 
     companion object {
         @JvmField

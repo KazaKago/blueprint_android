@@ -9,12 +9,12 @@ import paperparcel.PaperParcelable
  * Created by tamura_k on 2016/06/03.
  */
 @PaperParcel
-class TemperatureUnitModel : PaperParcelable {
-
-    //摂氏
-    var celsius: Float? = null
-    //華氏
-    var fahrenheit: Float? = null
+data class TemperatureUnitModel(
+        //摂氏
+        val celsius: Float,
+        //華氏
+        val fahrenheit: Float
+) : PaperParcelable {
 
     companion object {
         @JvmField

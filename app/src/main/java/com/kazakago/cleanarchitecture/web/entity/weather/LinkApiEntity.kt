@@ -7,7 +7,7 @@ package com.kazakago.cleanarchitecture.web.entity.weather
  */
 data class LinkApiEntity(
         //市区町村名
-        var name: String? = null,
+        val name: String,
         //対応するlivedoor 天気情報のURL
-        var link: String? = null
+        val link: String
 )

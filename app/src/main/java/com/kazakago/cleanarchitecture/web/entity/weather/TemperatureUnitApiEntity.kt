@@ -7,7 +7,7 @@ package com.kazakago.cleanarchitecture.web.entity.weather
  */
 data class TemperatureUnitApiEntity(
         //摂氏
-        var celsius: Float? = null,
+        val celsius: Float,
         //華氏
-        var fahrenheit: Float? = null
+        val fahrenheit: Float
 )

@@ -9,12 +9,12 @@ import paperparcel.PaperParcelable
  * Created by tamura_k on 2016/06/03.
  */
 @PaperParcel
-class LinkModel : PaperParcelable {
-
-    //市区町村名
-    var name: String? = null
-    //対応するlivedoor 天気情報のURL
-    var link: String? = null
+data class LinkModel(
+        //市区町村名
+        val name: String,
+        //対応するlivedoor 天気情報のURL
+        val link: String
+) : PaperParcelable {
 
     companion object {
         @JvmField

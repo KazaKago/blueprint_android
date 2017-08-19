@@ -7,11 +7,11 @@ package com.kazakago.cleanarchitecture.web.entity.weather
  */
 data class CopyrightApiEntity(
         //コピーライトの文言
-        var title: String? = null,
+        val title: String,
         //livedoor 天気情報のURL
-        var link: String? = null,
+        val link: String,
         //livedoor 天気情報へのURL、アイコンなど
-        var image: ImageApiEntity? = null,
+        val image: ImageApiEntity,
         //livedoor 天気情報で使用している気象データの配信元
-        var provider: List<LinkApiEntity> = ArrayList()
+        val provider: List<LinkApiEntity>
 )

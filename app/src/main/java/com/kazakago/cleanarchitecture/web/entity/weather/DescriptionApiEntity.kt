@@ -7,7 +7,7 @@ package com.kazakago.cleanarchitecture.web.entity.weather
  */
 data class DescriptionApiEntity(
         //天気概況文
-        var text: String? = null,
+        val text: String,
         //天気概況文の発表時刻
-        var publicTime: String? = null
+        val publicTime: String
 )

@@ -7,13 +7,13 @@ package com.kazakago.cleanarchitecture.web.entity.weather
  */
 data class ImageApiEntity(
         //天気（晴れ、曇り、雨など）
-        var title: String? = null,
+        val title: String,
         //リクエストされたデータの地域に該当するlivedoor 天気情報のURL
-        var link: String? = null,
+        val link: String,
         //天気アイコンのURL
-        var url: String? = null,
+        val url: String,
         //天気アイコンの幅
-        var width: Int? = null,
+        val width: Int,
         //天気アイコンの高さ
-        var height: Int? = null
+        val height: Int
 )

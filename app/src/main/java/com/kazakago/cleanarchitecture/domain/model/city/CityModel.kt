@@ -9,10 +9,10 @@ import paperparcel.PaperParcelable
  * Created by tamura_k on 2016/06/03.
  */
 @PaperParcel
-class CityModel : PaperParcelable {
-
-    var id: String? = null
-    var name: String? = null
+data class CityModel(
+        val id: String,
+        val name: String
+) : PaperParcelable {
 
     companion object {
         @JvmField
