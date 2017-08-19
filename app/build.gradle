@@ -4,21 +4,19 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 //Realm
 apply plugin: 'realm-android'
-//Spoon
-apply plugin: 'spoon'
 
 def VERSION_CODE = 1
 def VERSION_NAME = "1.0.0"
 def PACKAGE_NAME = "com.kazakago.cleanarchitecture"
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '26.0.0'
+    compileSdkVersion 26
+    buildToolsVersion '26.0.1'
 
     defaultConfig {
         applicationId PACKAGE_NAME
         minSdkVersion 17
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode VERSION_CODE
         versionName VERSION_NAME
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -61,49 +59,36 @@ repositories {
     maven { url 'https://github.com/uPhyca/stetho-realm/raw/master/maven-repo' }
 }
 
-spoon {
-    // for debug output
-    debug true
-    // To execute the tests device by device
-    sequential true
-    // To grant permissions to Android M >= devices
-    grantAllPermissions true
-    // Disable animated gif generation
-    noAnimations true
-    // Set maximum execution time per test in seconds (10min default)
-    adbTimeout 60
-}
-
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     //Kotlin
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     //v7 AppCompat Support Library
-    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:appcompat-v7:26.0.1'
     //Design Support Library
-    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:design:26.0.1'
     //Data-Binding for Kotlin
     kapt 'com.android.databinding:compiler:2.3.1'
     //Rx
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    compile 'io.reactivex.rxjava2:rxjava:2.1.1'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.3'
     compile 'io.reactivex.rxjava2:rxkotlin:2.1.0'
     //Retrofit
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-    //Dagger2
-    compile 'com.google.dagger:dagger:2.11'
-    kapt 'com.google.dagger:dagger-compiler:2.11'
+    //Kodein
+    compile 'com.github.salomonbrys.kodein:kodein:4.1.0'
+    compile 'com.github.salomonbrys.kodein:kodein-android:4.1.0'
     //Picasso
     compile 'com.squareup.picasso:picasso:2.5.2'
     //PaperParcel
-    compile 'nz.bradcampbell:paperparcel:2.0.1'
-    compile 'nz.bradcampbell:paperparcel-kotlin:2.0.1'
-    kapt 'nz.bradcampbell:paperparcel-compiler:2.0.1'
+    compile 'nz.bradcampbell:paperparcel:2.0.2'
+    compile 'nz.bradcampbell:paperparcel-kotlin:2.0.2'
+    kapt 'nz.bradcampbell:paperparcel-compiler:2.0.2'
     //Android-State
-    compile 'com.evernote:android-state:1.1.1'
-    kapt 'com.evernote:android-state-processor:1.1.1'
+    compile 'com.evernote:android-state:1.1.3'
+    kapt 'com.evernote:android-state-processor:1.1.3'
 
     //Stetho
     debugCompile 'com.facebook.stetho:stetho:1.5.0'
@@ -114,19 +99,11 @@ dependencies {
     testCompile 'junit:junit:4.12'
     //Hamcrest
     testCompile 'org.hamcrest:hamcrest-library:1.3'
-    //Dagger2
-    testCompile 'com.google.dagger:dagger:2.11'
-    kaptTest 'com.google.dagger:dagger-compiler:2.11'
 
     //Espresso
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    //Spoon
-    androidTestCompile 'com.squareup.spoon:spoon-client:1.7.1'
     //Hamcrest
     androidTestCompile 'org.hamcrest:hamcrest-library:1.3'
-    //Dagger2
-    androidTestCompile 'com.google.dagger:dagger:2.11'
-    kaptAndroidTest 'com.google.dagger:dagger-compiler:2.11'
 }

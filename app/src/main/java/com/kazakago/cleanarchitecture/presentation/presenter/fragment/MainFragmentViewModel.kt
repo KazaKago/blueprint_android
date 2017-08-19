@@ -9,7 +9,10 @@ import android.widget.AdapterView
 import android.widget.Toast
 import com.evernote.android.state.State
 import com.evernote.android.state.StateSaver
-import com.kazakago.cleanarchitecture.CleanApplication
+import com.github.salomonbrys.kodein.LazyKodein
+import com.github.salomonbrys.kodein.LazyKodeinAware
+import com.github.salomonbrys.kodein.android.appKodein
+import com.github.salomonbrys.kodein.instance
 import com.kazakago.cleanarchitecture.R
 import com.kazakago.cleanarchitecture.domain.model.city.CityModel
 import com.kazakago.cleanarchitecture.domain.model.weather.WeatherModel
@@ -28,7 +31,6 @@ import io.reactivex.schedulers.Schedulers
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
-import javax.inject.Inject
 import kotlin.collections.ArrayList
 
 /**
@@ -36,7 +38,9 @@ import kotlin.collections.ArrayList
  *
  * @author Kensuke
  */
-class MainFragmentViewModel(private val context: Context) : ForecastRecyclerAdapterListener {
+class MainFragmentViewModel(private val context: Context) : LazyKodeinAware, ForecastRecyclerAdapterListener {
+
+    override val kodein = LazyKodein(context.appKodein)
 
     var area = ObservableField<String>()
     var prefecture = ObservableField<String>()
@@ -46,12 +50,10 @@ class MainFragmentViewModel(private val context: Context) : ForecastRecyclerAdap
     var forecastRecyclerAdapter = ObservableField<ForecastRecyclerAdapter>(ForecastRecyclerAdapter(context))
 
     var listener: MainFragmentViewModelListener? = null
-    private var compositeDisposable: CompositeDisposable? = null
 
-    @Inject
-    lateinit var getWeatherUseCase: GetWeatherUseCase
-    @Inject
-    lateinit var getCityUseCase: GetCityUseCase
+    private val getWeatherUseCase: GetWeatherUseCase by instance()
+    private val getCityUseCase: GetCityUseCase by instance()
+    private var compositeDisposable: CompositeDisposable? = null
     @State
     var cityList: ArrayList<CityModel>? = null
     @State
@@ -60,8 +62,18 @@ class MainFragmentViewModel(private val context: Context) : ForecastRecyclerAdap
     var selectedPosition: Int = 0
 
     init {
-        CleanApplication.applicationComponent.inject(this)
         forecastRecyclerAdapter.get().listener = this
+    }
+
+    enum class ProductFlaver(val rawValue: String) {
+        local("local"),
+        staging("staging"),
+        production("production"),
+    }
+
+    enum class BuildType(val rawValue: String) {
+        debug("debug"),
+        release("release"),
     }
 
     fun onCreate(savedInstanceState: Bundle?) {

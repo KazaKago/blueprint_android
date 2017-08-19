@@ -1,12 +1,14 @@
 package com.kazakago.cleanarchitecture
 
 import android.app.Application
-import com.kazakago.cleanarchitecture.di.component.ApplicationComponent
-import com.kazakago.cleanarchitecture.di.component.DaggerApplicationComponent
-import com.kazakago.cleanarchitecture.di.module.ApplicationModule
-import com.kazakago.cleanarchitecture.di.module.DataModule
-import com.kazakago.cleanarchitecture.di.module.DomainModule
-import com.kazakago.cleanarchitecture.di.module.WebModule
+import com.github.salomonbrys.kodein.Kodein
+import com.github.salomonbrys.kodein.KodeinAware
+import com.github.salomonbrys.kodein.android.autoAndroidModule
+import com.github.salomonbrys.kodein.lazy
+import com.kazakago.cleanarchitecture.di.applicationModule
+import com.kazakago.cleanarchitecture.di.dataModule
+import com.kazakago.cleanarchitecture.di.domainModule
+import com.kazakago.cleanarchitecture.di.webModule
 import io.realm.Realm
 import io.realm.RealmConfiguration
 
@@ -15,26 +17,19 @@ import io.realm.RealmConfiguration
  *
  * @author kensuke
  */
-open class CleanApplication : Application() {
+open class CleanApplication : Application(), KodeinAware {
 
-    companion object {
-        @JvmStatic
-        lateinit var applicationComponent: ApplicationComponent
+    override val kodein: Kodein by Kodein.lazy {
+        import(autoAndroidModule(this@CleanApplication))
+        import(applicationModule(this@CleanApplication))
+        import(domainModule())
+        import(dataModule())
+        import(webModule())
     }
 
     override fun onCreate() {
         super.onCreate()
-        initializeInjector()
         initializeRealm()
-    }
-
-    private fun initializeInjector() {
-        applicationComponent = DaggerApplicationComponent.builder()
-                .applicationModule(ApplicationModule(this))
-                .domainModule(DomainModule())
-                .dataModule(DataModule())
-                .webModule(WebModule())
-                .build()
     }
 
     private fun initializeRealm() {
