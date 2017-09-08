@@ -7,8 +7,6 @@ import com.kazakago.cleanarchitecture.domain.repository.AppInfoRepository
  */
 class GetOfficialSiteUrlUseCaseImpl(private val appInfoRepository: AppInfoRepository) : GetOfficialSiteUrlUseCase {
 
-    override fun execute(input: Unit): String {
-        return appInfoRepository.officialSiteUrl
-    }
+    override fun execute(input: Unit): String = appInfoRepository.officialSiteUrl
 
 }

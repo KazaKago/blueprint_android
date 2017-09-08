@@ -65,17 +65,6 @@ class MainFragmentViewModel(private val context: Context) : LazyKodeinAware, For
         forecastRecyclerAdapter.get().listener = this
     }
 
-    enum class ProductFlaver(val rawValue: String) {
-        local("local"),
-        staging("staging"),
-        production("production"),
-    }
-
-    enum class BuildType(val rawValue: String) {
-        debug("debug"),
-        release("release"),
-    }
-
     fun onCreate(savedInstanceState: Bundle?) {
         StateSaver.restoreInstanceState(this, savedInstanceState)
         compositeDisposable = CompositeDisposable()

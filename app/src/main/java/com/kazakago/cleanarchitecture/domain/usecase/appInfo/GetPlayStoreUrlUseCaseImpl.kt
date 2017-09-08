@@ -7,8 +7,6 @@ import com.kazakago.cleanarchitecture.domain.repository.AppInfoRepository
  */
 class GetPlayStoreUrlUseCaseImpl(private val appInfoRepository: AppInfoRepository) : GetPlayStoreUrlUseCase {
 
-    override fun execute(input: Unit): String {
-        return appInfoRepository.playStoreUrl
-    }
+    override fun execute(input: Unit): String = appInfoRepository.playStoreUrl
 
 }

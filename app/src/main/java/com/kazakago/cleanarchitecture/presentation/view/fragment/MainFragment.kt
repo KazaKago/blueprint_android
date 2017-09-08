@@ -20,10 +20,7 @@ class MainFragment : Fragment(), MainFragmentViewModelListener {
 
     companion object {
         @JvmStatic
-        fun newInstance(): MainFragment {
-            val fragment = MainFragment()
-            return fragment
-        }
+        fun newInstance(): MainFragment = MainFragment()
     }
 
     private lateinit var viewModel: MainFragmentViewModel

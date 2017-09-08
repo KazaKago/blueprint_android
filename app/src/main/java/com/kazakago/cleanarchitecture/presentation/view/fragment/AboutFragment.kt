@@ -18,10 +18,7 @@ class AboutFragment : Fragment(), AboutFragmentViewModelListener {
 
     companion object {
         @JvmStatic
-        fun newInstance(): AboutFragment {
-            val fragment = AboutFragment()
-            return fragment
-        }
+        fun newInstance(): AboutFragment = AboutFragment()
     }
 
     private lateinit var viewModel: AboutFragmentViewModel

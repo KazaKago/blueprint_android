@@ -7,8 +7,6 @@ import com.kazakago.cleanarchitecture.domain.repository.AppInfoRepository
  */
 class GetAppVersionUseCaseImpl(private val appInfoRepository: AppInfoRepository) : GetAppVersionUseCase {
 
-    override fun execute(input: Unit): String {
-        return appInfoRepository.appVersion
-    }
+    override fun execute(input: Unit): String = appInfoRepository.appVersion
 
 }

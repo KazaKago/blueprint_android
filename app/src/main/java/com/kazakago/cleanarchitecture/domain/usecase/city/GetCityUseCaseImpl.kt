@@ -11,8 +11,6 @@ import io.reactivex.Observable
  */
 class GetCityUseCaseImpl(private val cityRepository: CityRepository) : GetCityUseCase {
 
-    override fun execute(input: Unit): Observable<CityModel> {
-        return cityRepository.findAll()
-    }
+    override fun execute(input: Unit): Observable<CityModel> = cityRepository.findAll()
 
 }

@@ -22,9 +22,7 @@ class ForecastRecyclerAdapter(private val context: Context) : RecyclerView.Adapt
     var forecastList: List<ForecastViewModel> = ArrayList()
     var listener: ForecastRecyclerAdapterListener? = null
 
-    override fun getItemCount(): Int {
-        return forecastList.size
-    }
+    override fun getItemCount(): Int = forecastList.size
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         val binding = RecyclerForecastBinding.inflate(LayoutInflater.from(context), parent, false)

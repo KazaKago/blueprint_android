@@ -21,10 +21,7 @@ class AboutActivity : AppCompatActivity(), AboutActivityViewModelListener {
 
     companion object {
         @JvmStatic
-        fun newInstance(context: Context): Intent {
-            val intent = Intent(context, AboutActivity::class.java)
-            return intent
-        }
+        fun newInstance(context: Context): Intent = Intent(context, AboutActivity::class.java)
     }
 
     private lateinit var viewModel: AboutActivityViewModel
@@ -34,7 +31,7 @@ class AboutActivity : AppCompatActivity(), AboutActivityViewModelListener {
         super.onCreate(savedInstanceState)
         viewModel = AboutActivityViewModel(this)
         viewModel.listener = this
-        binding = DataBindingUtil.setContentView<ActivityAboutBinding>(this, R.layout.activity_about)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_about)
         binding.viewModel = viewModel
 
         viewModel.onCreate(savedInstanceState = savedInstanceState)

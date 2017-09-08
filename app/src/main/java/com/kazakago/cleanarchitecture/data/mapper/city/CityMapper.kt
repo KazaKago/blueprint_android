@@ -12,10 +12,9 @@ object CityMapper : EntityMapper<PrefEntity, List<CityModel>> {
     override fun map(source: PrefEntity): List<CityModel> {
         val prefTitle = source.title
         return source.cityList.map {
-            val city = CityModel()
-            city.id = it.id
-            city.name = prefTitle + " " + it.title
-            city
+            CityModel(
+                    id = it.id,
+                    name = prefTitle + " " + it.title)
         }
     }
 

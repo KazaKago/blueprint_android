@@ -23,10 +23,7 @@ class MainActivity : AppCompatActivity(), MainFragmentListener, MainActivityView
 
     companion object {
         @JvmStatic
-        fun newInstance(context: Context): Intent {
-            val intent = Intent(context, MainActivity::class.java)
-            return intent
-        }
+        fun newInstance(context: Context): Intent = Intent(context, MainActivity::class.java)
     }
 
     private lateinit var viewModel: MainActivityViewModel
@@ -36,7 +33,7 @@ class MainActivity : AppCompatActivity(), MainFragmentListener, MainActivityView
         super.onCreate(savedInstanceState)
         viewModel = MainActivityViewModel(this)
         viewModel.listener = this
-        binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.viewModel = viewModel
 
         viewModel.onCreate(savedInstanceState)

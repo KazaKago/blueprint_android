@@ -19,17 +19,11 @@ class CitySpinnerAdapter(private val context: Context) : BaseAdapter() {
 
     var cityViewModelList: List<CityViewModel> = ArrayList()
 
-    override fun getCount(): Int {
-        return cityViewModelList.size
-    }
+    override fun getCount(): Int = cityViewModelList.size
 
-    override fun getItem(position: Int): CityViewModel {
-        return cityViewModelList[position]
-    }
+    override fun getItem(position: Int): CityViewModel = cityViewModelList[position]
 
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
+    override fun getItemId(position: Int): Long = position.toLong()
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
         val binding: SpinnerCityBinding?
