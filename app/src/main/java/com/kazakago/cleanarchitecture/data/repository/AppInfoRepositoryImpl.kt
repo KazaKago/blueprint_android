@@ -7,11 +7,6 @@ import com.kazakago.cleanarchitecture.data.util.StoreUtils
 import com.kazakago.cleanarchitecture.data.util.VersionUtils
 import com.kazakago.cleanarchitecture.domain.repository.AppInfoRepository
 
-/**
- * AppInfo Repository Implement
- *
- * Created by tamura_k on 2016/05/27.
- */
 class AppInfoRepositoryImpl(private val context: Context) : AppInfoRepository {
 
     override val playStoreUrl: String

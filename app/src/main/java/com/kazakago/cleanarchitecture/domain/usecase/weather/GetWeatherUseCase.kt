@@ -5,9 +5,4 @@ import com.kazakago.cleanarchitecture.domain.usecase.UseCase
 
 import io.reactivex.Single
 
-/**
- * Weather UseCase
- *
- * @author Kensuke
- */
 interface GetWeatherUseCase : UseCase<String, Single<WeatherModel>>

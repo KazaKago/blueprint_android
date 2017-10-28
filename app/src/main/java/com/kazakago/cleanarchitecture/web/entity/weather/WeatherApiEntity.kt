@@ -1,10 +1,5 @@
 package com.kazakago.cleanarchitecture.web.entity.weather
 
-/**
- * Weather API Entity
- *
- * Created by tamura_k on 2016/05/31.
- */
 data class WeatherApiEntity(
         //予報を発表した地域を定義
         val location: LocationApiEntity,

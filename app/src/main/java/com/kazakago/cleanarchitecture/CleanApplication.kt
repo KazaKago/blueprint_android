@@ -12,11 +12,6 @@ import com.kazakago.cleanarchitecture.di.webModule
 import io.realm.Realm
 import io.realm.RealmConfiguration
 
-/**
- * アプリケーションクラス
- *
- * @author kensuke
- */
 open class CleanApplication : Application(), KodeinAware {
 
     override val kodein: Kodein by Kodein.lazy {

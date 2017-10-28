@@ -9,11 +9,6 @@ import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
 
-/**
- * City Data Access Object.
- *
- * Created by weath on 2016/06/14.
- */
 class CityDao(private val context: Context) {
 
     @Throws(IOException::class)

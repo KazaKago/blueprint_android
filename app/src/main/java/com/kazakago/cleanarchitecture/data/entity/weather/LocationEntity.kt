@@ -2,11 +2,6 @@ package com.kazakago.cleanarchitecture.data.entity.weather
 
 import io.realm.RealmObject
 
-/**
- * Location Entity
- *
- * Created by tamura_k on 2016/05/31.
- */
 open class LocationEntity : RealmObject() {
 
     //地方名（例・九州地方）

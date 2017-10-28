@@ -2,11 +2,6 @@ package com.kazakago.cleanarchitecture.data.entity.weather
 
 import io.realm.RealmObject
 
-/**
- * Image Entity
- *
- * Created by tamura_k on 2016/06/03.
- */
 open class ImageEntity : RealmObject() {
 
     //天気（晴れ、曇り、雨など）

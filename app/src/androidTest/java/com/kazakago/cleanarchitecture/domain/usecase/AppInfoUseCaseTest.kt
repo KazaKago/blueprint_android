@@ -22,11 +22,6 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
-/**
- * AboutUseCase Test
- *
- * Created by tamura_k on 2016/06/14.
- */
 @RunWith(AndroidJUnit4::class)
 @SmallTest
 class AppInfoUseCaseTest : KodeinAware {

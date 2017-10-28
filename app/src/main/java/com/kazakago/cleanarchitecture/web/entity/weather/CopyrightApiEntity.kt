@@ -1,10 +1,5 @@
 package com.kazakago.cleanarchitecture.web.entity.weather
 
-/**
- * Copyright API Entity
- *
- * Created by tamura_k on 2016/06/03.
- */
 data class CopyrightApiEntity(
         //コピーライトの文言
         val title: String,

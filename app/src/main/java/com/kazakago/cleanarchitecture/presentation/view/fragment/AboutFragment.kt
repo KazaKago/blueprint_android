@@ -9,11 +9,6 @@ import com.kazakago.cleanarchitecture.databinding.FragmentAboutBinding
 import com.kazakago.cleanarchitecture.presentation.listener.presenter.fragment.AboutFragmentViewModelListener
 import com.kazakago.cleanarchitecture.presentation.presenter.fragment.AboutFragmentViewModel
 
-/**
- * About Fragment
-
- * @author Kensuke
- */
 class AboutFragment : Fragment(), AboutFragmentViewModelListener {
 
     companion object {

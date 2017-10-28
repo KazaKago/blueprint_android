@@ -2,11 +2,6 @@ package com.kazakago.cleanarchitecture.data.entity.weather
 
 import io.realm.RealmObject
 
-/**
- * Forecasts Entity
- *
- * Created by tamura_k on 2016/06/03.
- */
 open class ForecastEntity : RealmObject() {
 
     //予報日
@@ -16,8 +11,8 @@ open class ForecastEntity : RealmObject() {
     //天気（晴れ、曇り、雨など）
     var telop: String? = null
     //画像
-    var image: ImageEntity? = null
+    var image = ImageEntity()
     //気温
-    var temperature: TemperatureEntity? = null
+    var temperature = TemperatureEntity()
 
 }

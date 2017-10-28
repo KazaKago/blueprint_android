@@ -6,11 +6,6 @@ import com.kazakago.cleanarchitecture.domain.model.weather.WeatherModel
 import com.kazakago.cleanarchitecture.domain.repository.WeatherRepository
 import io.realm.Realm
 
-/**
- * Weather Repository Implement
- *
- * Created by tamura_k on 2016/05/27.
- */
 class WeatherRepositoryImpl : WeatherRepository {
 
     override fun find(cityId: String): WeatherModel? {

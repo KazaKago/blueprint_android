@@ -6,11 +6,6 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-/**
- * WeatherRetrofit from livedoor
- *
- * Created by tamura_k on 2016/06/03.
- */
 object WeatherRetrofit {
 
     val instance: Retrofit

@@ -7,11 +7,6 @@ import com.kazakago.cleanarchitecture.web.api.WeatherRetrofit
 import com.kazakago.cleanarchitecture.web.mapper.weather.WeatherApiMapper
 import io.reactivex.Single
 
-/**
- * Weather API Repository Implement
- *
- * Created by tamura_k on 2016/05/27.
- */
 class WeatherApiRepositoryImpl : WeatherApiRepository {
 
     override fun fetch(cityId: String): Single<WeatherModel> {

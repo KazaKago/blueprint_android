@@ -12,11 +12,6 @@ import com.kazakago.cleanarchitecture.presentation.listener.presenter.activity.A
 import com.kazakago.cleanarchitecture.presentation.presenter.activity.AboutActivityViewModel
 import com.kazakago.cleanarchitecture.presentation.view.fragment.AboutFragment
 
-/**
- * About Activity
- *
- * @author Kensuke
- */
 class AboutActivity : AppCompatActivity(), AboutActivityViewModelListener {
 
     companion object {

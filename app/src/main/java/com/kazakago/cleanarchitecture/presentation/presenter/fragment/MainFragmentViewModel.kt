@@ -33,11 +33,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-/**
- * Main Fragment ViewModel
- *
- * @author Kensuke
- */
 class MainFragmentViewModel(private val context: Context) : LazyKodeinAware, ForecastRecyclerAdapterListener {
 
     override val kodein = LazyKodein(context.appKodein)

@@ -3,12 +3,6 @@ package com.kazakago.cleanarchitecture.data.dao
 import com.kazakago.cleanarchitecture.data.entity.weather.WeatherEntity
 import io.realm.Realm
 
-/**
- * Weather Data Access Object.
- *
- *
- * Created by tamura_k on 2016/06/03.
- */
 class WeatherDao(private val realm: Realm) {
 
     fun find(cityId: String): WeatherEntity? {

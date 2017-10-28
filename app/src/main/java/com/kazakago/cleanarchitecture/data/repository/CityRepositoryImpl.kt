@@ -8,12 +8,6 @@ import com.kazakago.cleanarchitecture.domain.repository.CityRepository
 import io.reactivex.Observable
 import java.io.IOException
 
-/**
- * City Repository Implement
- *
- *
- * Created by tamura_k on 2016/05/27.
- */
 class CityRepositoryImpl(private val context: Context) : CityRepository {
 
     @Throws(IOException::class)

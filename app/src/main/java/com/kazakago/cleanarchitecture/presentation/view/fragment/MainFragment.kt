@@ -11,11 +11,6 @@ import com.kazakago.cleanarchitecture.presentation.listener.presenter.fragment.M
 import com.kazakago.cleanarchitecture.presentation.listener.view.fragment.MainFragmentListener
 import com.kazakago.cleanarchitecture.presentation.presenter.fragment.MainFragmentViewModel
 
-/**
- * Main Fragment
- *
- * @author Kensuke
- */
 class MainFragment : Fragment(), MainFragmentViewModelListener {
 
     companion object {

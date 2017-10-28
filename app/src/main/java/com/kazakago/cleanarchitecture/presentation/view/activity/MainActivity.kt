@@ -14,11 +14,6 @@ import com.kazakago.cleanarchitecture.presentation.listener.view.fragment.MainFr
 import com.kazakago.cleanarchitecture.presentation.presenter.activity.MainActivityViewModel
 import com.kazakago.cleanarchitecture.presentation.view.fragment.MainFragment
 
-/**
- * Main Activity
- *
- * @author Kensuke
- */
 class MainActivity : AppCompatActivity(), MainFragmentListener, MainActivityViewModelListener {
 
     companion object {

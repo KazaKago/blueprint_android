@@ -5,11 +5,6 @@ import android.databinding.ObservableField
 import com.kazakago.cleanarchitecture.R
 import com.kazakago.cleanarchitecture.domain.model.weather.ForecastModel
 
-/**
- * Forecast ViewModel
- *
- * Created by tamura_k on 2016/06/01.
- */
 class ForecastViewModel(private val context: Context, forecast: ForecastModel) {
 
     val dateLabel = ObservableField<String>(forecast.dateLabel)

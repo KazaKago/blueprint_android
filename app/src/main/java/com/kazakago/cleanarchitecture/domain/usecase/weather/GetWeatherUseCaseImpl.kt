@@ -6,11 +6,6 @@ import com.kazakago.cleanarchitecture.domain.repository.WeatherRepository
 import io.reactivex.Single
 import io.reactivex.rxkotlin.subscribeBy
 
-/**
- * Weather UseCase Implement
- *
- * @author Kensuke
- */
 class GetWeatherUseCaseImpl(private val weatherApiRepository: WeatherApiRepository, private val weatherRepository: WeatherRepository) : GetWeatherUseCase {
 
     override fun execute(input: String): Single<WeatherModel> {

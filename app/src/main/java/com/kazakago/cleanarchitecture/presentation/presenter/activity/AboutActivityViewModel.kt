@@ -5,11 +5,6 @@ import android.os.Bundle
 
 import com.kazakago.cleanarchitecture.presentation.listener.presenter.activity.AboutActivityViewModelListener
 
-/**
- * About Activity ViewModel
- *
- * @author Kensuke
- */
 class AboutActivityViewModel(private val context: Context) {
 
     var listener: AboutActivityViewModelListener? = null

@@ -20,11 +20,6 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
-/**
- * WeatherUseCase Test
- *
- * Created by tamura_k on 2016/06/15.
- */
 @RunWith(AndroidJUnit4::class)
 @SmallTest
 class WeatherUseCaseTest: KodeinAware {

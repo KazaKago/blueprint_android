@@ -4,11 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import com.kazakago.cleanarchitecture.presentation.listener.presenter.activity.MainActivityViewModelListener
 
-/**
- * Main Activity ViewModel
- *
- * @author Kensuke
- */
 class MainActivityViewModel(private val context: Context) {
 
     var listener: MainActivityViewModelListener? = null

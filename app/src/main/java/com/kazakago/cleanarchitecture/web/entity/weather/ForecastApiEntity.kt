@@ -1,10 +1,5 @@
 package com.kazakago.cleanarchitecture.web.entity.weather
 
-/**
- * Forecasts API Entity
- *
- * Created by tamura_k on 2016/06/03.
- */
 data class ForecastApiEntity(
         //予報日
         val date: String,

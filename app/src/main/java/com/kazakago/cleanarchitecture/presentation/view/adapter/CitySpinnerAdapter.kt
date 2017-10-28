@@ -10,11 +10,6 @@ import com.kazakago.cleanarchitecture.databinding.SpinnerCityDropdownBinding
 import com.kazakago.cleanarchitecture.presentation.presenter.adapter.CityViewModel
 import java.util.*
 
-/**
- * City Spinner Adapter
- *
- * Created by tamura_k on 2016/05/31.
- */
 class CitySpinnerAdapter(private val context: Context) : BaseAdapter() {
 
     var cityViewModelList: List<CityViewModel> = ArrayList()

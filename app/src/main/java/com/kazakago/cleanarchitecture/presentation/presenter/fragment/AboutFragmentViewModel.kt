@@ -18,11 +18,6 @@ import com.kazakago.cleanarchitecture.domain.usecase.appInfo.GetPlayStoreUrlUseC
 import com.kazakago.cleanarchitecture.presentation.listener.presenter.fragment.AboutFragmentViewModelListener
 import java.util.*
 
-/**
- * About Fragment ViewModel
- *
- * @author Kensuke
- */
 class AboutFragmentViewModel(private val context: Context): LazyKodeinAware {
 
     override val kodein = LazyKodein(context.appKodein)

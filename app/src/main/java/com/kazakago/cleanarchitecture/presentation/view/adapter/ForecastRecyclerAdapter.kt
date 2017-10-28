@@ -10,11 +10,6 @@ import com.kazakago.cleanarchitecture.presentation.listener.view.adapter.Forecas
 import com.kazakago.cleanarchitecture.presentation.presenter.adapter.ForecastViewModel
 import java.util.*
 
-/**
- * Forecast RecyclerView Adapter
- *
- * Created by tamura_k on 2016/05/31.
- */
 class ForecastRecyclerAdapter(private val context: Context) : RecyclerView.Adapter<ForecastRecyclerAdapter.ViewHolder>() {
 
     data class ViewHolder(val binding: RecyclerForecastBinding) : RecyclerView.ViewHolder(binding.root)

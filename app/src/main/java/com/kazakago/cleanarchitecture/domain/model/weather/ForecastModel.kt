@@ -3,11 +3,6 @@ package com.kazakago.cleanarchitecture.domain.model.weather
 import paperparcel.PaperParcel
 import paperparcel.PaperParcelable
 
-/**
- * Forecasts Model
- *
- * Created by tamura_k on 2016/06/03.
- */
 @PaperParcel
 data class ForecastModel(
         //予報日
