@@ -71,7 +71,7 @@ object WeatherMapper : ReversibleEntityMapper<WeatherEntity, WeatherModel> {
                                 LinkModel(
                                         name = it.name,
                                         link = it.link)
-                            } ?: emptyList()
+                            } ?: listOf()
                     )
                 })
         weather.cityId = source.cityId
@@ -79,90 +79,73 @@ object WeatherMapper : ReversibleEntityMapper<WeatherEntity, WeatherModel> {
     }
 
     override fun reverse(destination: WeatherModel): WeatherEntity {
-        val weather = WeatherEntity()
-        weather.cityId = destination.cityId
-        weather.location = destination.location.let {
-            val location = LocationEntity()
-            location.area = it.area
-            location.prefecture = it.prefecture
-            location.city = it.city
-            location
-        }
-        weather.title = destination.title
-        weather.link = destination.link
-        weather.publicTime = destination.publicTime
-        weather.description = destination.description.let {
-            val description = DescriptionEntity()
-            description.text = it.text
-            description.publicTime = it.publicTime
-            description
-        }
-        val forecastRealmList = RealmList<ForecastEntity>()
-        destination.forecasts.forEach {
-            val forecast = ForecastEntity()
-            forecast.telop = it.telop
-            forecast.date = it.date
-            forecast.dateLabel = it.dateLabel
-            forecast.image = it.image.let {
-                val image = ImageEntity()
-                image.title = it.title
-                image.height = it.height
-                image.link = it.link
-                image.url = it.url
-                image.width = it.width
-                image
-            }
-            forecast.temperature = it.temperature.let {
-                val temperature = TemperatureEntity()
-                temperature.max = it.max?.let {
-                    val temperatureUnit = TemperatureUnitEntity()
-                    temperatureUnit.celsius = it.celsius
-                    temperatureUnit.fahrenheit = it.fahrenheit
-                    temperatureUnit
-                }
-                temperature.min = it.min?.let {
-                    val temperatureUnit = TemperatureUnitEntity()
-                    temperatureUnit.celsius = it.celsius
-                    temperatureUnit.fahrenheit = it.fahrenheit
-                    temperatureUnit
-                }
-                temperature
-            }
-            forecastRealmList.add(forecast)
-        }
-        weather.forecasts = forecastRealmList
-        val pinpointLocationsRealmList = RealmList<LinkEntity>()
-        destination.pinpointLocations.forEach {
-            val pinpointLocation = LinkEntity()
-            pinpointLocation.name = it.name
-            pinpointLocation.link = it.link
-            pinpointLocationsRealmList.add(pinpointLocation)
-        }
-        weather.pinpointLocations = pinpointLocationsRealmList
-        weather.copyright = destination.copyright.let {
-            val copyright = CopyrightEntity()
-            copyright.title = it.title
-            copyright.link = it.link
-            copyright.image = it.image.let {
-                val image = ImageEntity()
-                image.title = it.title
-                image.height = it.height
-                image.link = it.link
-                image.url = it.url
-                image.width = it.width
-                image
-            }
-            val providerRealmList = RealmList<LinkEntity>()
-            it.provider.forEach {
-                val provider = LinkEntity()
-                provider.name = it.name
-                provider.link = it.link
-                providerRealmList.add(provider)
-            }
-            copyright.provider = providerRealmList
-            copyright
-        }
-        return weather
+        return WeatherEntity(
+                cityId = destination.cityId,
+                location = destination.location.let {
+                    LocationEntity(
+                            area = it.area,
+                            prefecture = it.prefecture,
+                            city = it.city)
+                },
+                title = destination.title,
+                link = destination.link,
+                publicTime = destination.publicTime,
+                description = destination.description.let {
+                    DescriptionEntity(
+                            text = it.text,
+                            publicTime = it.publicTime)
+                },
+                forecasts = destination.forecasts.map {
+                    ForecastEntity(
+                            telop = it.telop,
+                            date = it.date,
+                            dateLabel = it.dateLabel,
+                            image = it.image.let {
+                                ImageEntity(
+                                        title = it.title,
+                                        height = it.height,
+                                        link = it.link,
+                                        url = it.url,
+                                        width = it.width)
+                            },
+                            temperature = it.temperature.let {
+                                TemperatureEntity(
+                                        max = it.max?.let {
+                                            TemperatureUnitEntity(
+                                                    celsius = it.celsius,
+                                                    fahrenheit = it.fahrenheit)
+                                        },
+                                        min = it.min?.let {
+                                            TemperatureUnitEntity(
+                                                    celsius = it.celsius,
+                                                    fahrenheit = it.fahrenheit)
+                                        }
+                                )
+                            })
+                }.let { RealmList<ForecastEntity>().apply { addAll(it) } },
+                pinpointLocations = destination.pinpointLocations.map {
+                    LinkEntity(
+                            name = it.name,
+                            link = it.link)
+                }.let { RealmList<LinkEntity>().apply { addAll(it) } },
+                copyright = destination.copyright.let {
+                    CopyrightEntity(
+                            title = it.title,
+                            link = it.link,
+                            image = it.image.let {
+                                ImageEntity(
+                                        title = it.title,
+                                        height = it.height,
+                                        link = it.link,
+                                        url = it.url,
+                                        width = it.width)
+                            },
+                            provider = it.provider.map {
+                                LinkEntity(
+                                        name = it.name,
+                                        link = it.link)
+                            }.let { RealmList<LinkEntity>().apply { addAll(it) } })
+                })
     }
 
 }
