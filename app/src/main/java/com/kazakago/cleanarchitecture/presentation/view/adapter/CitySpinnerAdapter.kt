@@ -26,7 +26,7 @@ class CitySpinnerAdapter(private val context: Context) : BaseAdapter() {
             binding = convertView.tag as? SpinnerCityBinding
         } else {
             binding = SpinnerCityBinding.inflate(LayoutInflater.from(context), parent, false)
-            binding?.root?.tag = binding
+            binding.root?.tag = binding
         }
 
         binding?.viewModel = getItem(position)
@@ -39,7 +39,7 @@ class CitySpinnerAdapter(private val context: Context) : BaseAdapter() {
             binding = convertView.tag as? SpinnerCityDropdownBinding
         } else {
             binding = SpinnerCityDropdownBinding.inflate(LayoutInflater.from(context), parent, false)
-            binding?.root?.tag = binding
+            binding.root?.tag = binding
         }
 
         binding?.viewModel = getItem(position)

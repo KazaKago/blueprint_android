@@ -11,7 +11,9 @@ class WeatherApiRepositoryImpl : WeatherApiRepository {
 
     override fun fetch(cityId: String): Single<WeatherModel> {
         val weatherApi = WeatherRetrofit.instance.create(WeatherApi::class.java)
-        return weatherApi[cityId].map { WeatherApiMapper.map(source = it) }
+        return weatherApi[cityId].map {
+            WeatherApiMapper.map(source = it)
+        }
     }
 
 }

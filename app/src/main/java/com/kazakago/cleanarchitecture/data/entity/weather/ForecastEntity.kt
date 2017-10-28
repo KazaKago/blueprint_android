@@ -11,8 +11,8 @@ open class ForecastEntity : RealmObject() {
     //天気（晴れ、曇り、雨など）
     var telop: String? = null
     //画像
-    var image = ImageEntity()
+    var image: ImageEntity? = null
     //気温
-    var temperature = TemperatureEntity()
+    var temperature: TemperatureEntity? = null
 
 }

@@ -28,7 +28,7 @@ class AboutFragment : Fragment(), AboutFragmentViewModelListener {
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        if (binding == null) {
+        if (binding == null && inflater != null) {
             binding = FragmentAboutBinding.inflate(inflater, container, false)
             binding?.viewModel = viewModel
         }

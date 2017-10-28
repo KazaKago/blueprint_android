@@ -5,8 +5,6 @@ import paperparcel.PaperParcelable
 
 @PaperParcel
 data class WeatherModel(
-        //地域ID
-        val cityId: String,
         //予報を発表した地域を定義
         val location: LocationModel,
         //タイトル・見出し
@@ -29,5 +27,8 @@ data class WeatherModel(
         @JvmField
         val CREATOR = PaperParcelWeatherModel.CREATOR
     }
+
+    //地域ID
+    lateinit var cityId: String
 
 }

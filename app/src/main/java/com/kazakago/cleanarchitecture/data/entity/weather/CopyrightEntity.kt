@@ -10,7 +10,7 @@ open class CopyrightEntity : RealmObject() {
     //livedoor 天気情報のURL
     var link: String? = null
     //livedoor 天気情報へのURL、アイコンなど
-    var image = ImageEntity()
+    var image: ImageEntity? = null
     //livedoor 天気情報で使用している気象データの配信元
     var provider = RealmList<LinkEntity>()
 

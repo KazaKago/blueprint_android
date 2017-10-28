@@ -8,7 +8,6 @@ object WeatherApiMapper : EntityMapper<WeatherApiEntity, WeatherModel> {
 
     override fun map(source: WeatherApiEntity): WeatherModel {
         return WeatherModel(
-                cityId = cityId,
                 location = source.location.let {
                     LocationModel(
                             area = it.area,

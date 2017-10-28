@@ -32,7 +32,7 @@ class CityDao(private val context: Context) {
         return text
     }
 
-    private fun parseJson(jsonStr: String?): List<PrefEntity> {
+    private fun parseJson(jsonStr: String): List<PrefEntity> {
         val moshi = Moshi.Builder()
                 .add(KotlinJsonAdapterFactory())
                 .build()

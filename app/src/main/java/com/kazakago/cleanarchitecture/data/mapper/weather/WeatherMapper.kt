@@ -8,21 +8,20 @@ import io.realm.RealmList
 object WeatherMapper : ReversibleEntityMapper<WeatherEntity, WeatherModel> {
 
     override fun map(source: WeatherEntity): WeatherModel {
-        return WeatherModel(
-                cityId = source.cityId ?: "",
+        val weather = WeatherModel(
                 location = source.location.let {
                     LocationModel(
-                            area = it.area ?: "",
-                            prefecture = it.prefecture ?: "",
-                            city = it.city ?: "")
+                            area = it?.area ?: "",
+                            prefecture = it?.prefecture ?: "",
+                            city = it?.city ?: "")
                 },
                 title = source.title ?: "",
                 link = source.link ?: "",
                 publicTime = source.publicTime ?: "",
                 description = source.description.let {
                     DescriptionModel(
-                            text = it.text ?: "",
-                            publicTime = it.publicTime ?: "")
+                            text = it?.text ?: "",
+                            publicTime = it?.publicTime ?: "")
                 },
                 forecasts = source.forecasts.map {
                     ForecastModel(
@@ -31,23 +30,23 @@ object WeatherMapper : ReversibleEntityMapper<WeatherEntity, WeatherModel> {
                             dateLabel = it.dateLabel ?: "",
                             image = it.image.let {
                                 ImageModel(
-                                        title = it.title ?: "",
-                                        height = it.height ?: 0,
-                                        link = it.link ?: "",
-                                        url = it.url ?: "",
-                                        width = it.width ?: 0)
+                                        title = it?.title ?: "",
+                                        height = it?.height ?: 0,
+                                        link = it?.link ?: "",
+                                        url = it?.url ?: "",
+                                        width = it?.width ?: 0)
                             },
                             temperature = it.temperature.let {
                                 TemperatureModel(
-                                        max = it.max.let {
+                                        max = it?.max.let {
                                             TemperatureUnitModel(
-                                                    celsius = it.celsius ?: 0f,
-                                                    fahrenheit = it.fahrenheit ?: 0f)
+                                                    celsius = it?.celsius ?: 0f,
+                                                    fahrenheit = it?.fahrenheit ?: 0f)
                                         },
-                                        min = it.min.let {
+                                        min = it?.min.let {
                                             TemperatureUnitModel(
-                                                    celsius = it.celsius ?: 0f,
-                                                    fahrenheit = it.fahrenheit ?: 0f)
+                                                    celsius = it?.celsius ?: 0f,
+                                                    fahrenheit = it?.fahrenheit ?: 0f)
                                         })
                             })
                 },
@@ -58,23 +57,25 @@ object WeatherMapper : ReversibleEntityMapper<WeatherEntity, WeatherModel> {
                 },
                 copyright = source.copyright.let {
                     CopyrightModel(
-                            title = it.title ?: "",
-                            link = it.link ?: "",
-                            image = it.image.let {
+                            title = it?.title ?: "",
+                            link = it?.link ?: "",
+                            image = it?.image.let {
                                 ImageModel(
-                                        title = it.title ?: "",
-                                        height = it.height ?: 0,
-                                        link = it.link ?: "",
-                                        url = it.url ?: "",
-                                        width = it.width ?: 0)
+                                        title = it?.title ?: "",
+                                        height = it?.height ?: 0,
+                                        link = it?.link ?: "",
+                                        url = it?.url ?: "",
+                                        width = it?.width ?: 0)
                             },
-                            provider = it.provider.map {
+                            provider = it?.provider?.map {
                                 LinkModel(
                                         name = it.name ?: "",
                                         link = it.link ?: "")
-                            }
+                            } ?: emptyList()
                     )
                 })
+        weather.cityId = source.cityId ?: ""
+        return weather
     }
 
     override fun reverse(destination: WeatherModel): WeatherEntity {
