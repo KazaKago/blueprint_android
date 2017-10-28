@@ -38,15 +38,15 @@ object WeatherMapper : ReversibleEntityMapper<WeatherEntity, WeatherModel> {
                             },
                             temperature = it.temperature.let {
                                 TemperatureModel(
-                                        max = it?.max.let {
+                                        max = it?.max?.let {
                                             TemperatureUnitModel(
-                                                    celsius = it?.celsius ?: 0f,
-                                                    fahrenheit = it?.fahrenheit ?: 0f)
+                                                    celsius = it.celsius,
+                                                    fahrenheit = it.fahrenheit)
                                         },
-                                        min = it?.min.let {
+                                        min = it?.min?.let {
                                             TemperatureUnitModel(
-                                                    celsius = it?.celsius ?: 0f,
-                                                    fahrenheit = it?.fahrenheit ?: 0f)
+                                                    celsius = it.celsius,
+                                                    fahrenheit = it.fahrenheit)
                                         })
                             })
                 },
@@ -114,13 +114,13 @@ object WeatherMapper : ReversibleEntityMapper<WeatherEntity, WeatherModel> {
             }
             forecast.temperature = it.temperature.let {
                 val temperature = TemperatureEntity()
-                temperature.max = it.max.let {
+                temperature.max = it.max?.let {
                     val temperatureUnit = TemperatureUnitEntity()
                     temperatureUnit.celsius = it.celsius
                     temperatureUnit.fahrenheit = it.fahrenheit
                     temperatureUnit
                 }
-                temperature.min = it.min.let {
+                temperature.min = it.min?.let {
                     val temperatureUnit = TemperatureUnitEntity()
                     temperatureUnit.celsius = it.celsius
                     temperatureUnit.fahrenheit = it.fahrenheit

@@ -6,9 +6,9 @@ import paperparcel.PaperParcelable
 @PaperParcel
 data class TemperatureModel(
         //最高気温
-        val max: TemperatureUnitModel,
+        val max: TemperatureUnitModel?,
         //最低気温
-        val min: TemperatureUnitModel
+        val min: TemperatureUnitModel?
 ) : PaperParcelable {
 
     companion object {

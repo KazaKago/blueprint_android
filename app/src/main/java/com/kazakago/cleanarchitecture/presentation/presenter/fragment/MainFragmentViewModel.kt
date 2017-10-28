@@ -48,7 +48,7 @@ class MainFragmentViewModel(private val context: Context) : LazyKodeinAware, For
 
     private val getWeatherUseCase: GetWeatherUseCase by instance()
     private val getCityUseCase: GetCityUseCase by instance()
-    private var compositeDisposable: CompositeDisposable? = null
+    private lateinit var compositeDisposable: CompositeDisposable
     @State
     var cityList: ArrayList<CityModel>? = null
     @State
@@ -81,7 +81,7 @@ class MainFragmentViewModel(private val context: Context) : LazyKodeinAware, For
     }
 
     fun onDestroy() {
-        compositeDisposable?.dispose()
+        compositeDisposable.dispose()
     }
 
     fun onSaveInstanceState(outState: Bundle?) {
@@ -104,7 +104,7 @@ class MainFragmentViewModel(private val context: Context) : LazyKodeinAware, For
     }
 
     private fun fetchCityList(completion: (() -> Unit)? = null) {
-        compositeDisposable?.add(getCityUseCase.execute(Unit)
+        compositeDisposable.add(getCityUseCase.execute(Unit)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .toList()
@@ -134,7 +134,7 @@ class MainFragmentViewModel(private val context: Context) : LazyKodeinAware, For
 
     private fun fetchWeather(completion: (() -> Unit)? = null) {
         cityList?.get(selectedPosition)?.id?.let {
-            compositeDisposable?.add(getWeatherUseCase.execute(input = it)
+            compositeDisposable.add(getWeatherUseCase.execute(input = it)
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeBy(

@@ -37,12 +37,12 @@ object WeatherApiMapper : EntityMapper<WeatherApiEntity, WeatherModel> {
                             },
                             temperature = it.temperature.let {
                                 TemperatureModel(
-                                        max = it.max.let {
+                                        max = it.max?.let {
                                             TemperatureUnitModel(
                                                     celsius = it.celsius,
                                                     fahrenheit = it.fahrenheit)
                                         },
-                                        min = it.min.let {
+                                        min = it.min?.let {
                                             TemperatureUnitModel(
                                                     celsius = it.celsius,
                                                     fahrenheit = it.fahrenheit)
