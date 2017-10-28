@@ -15,9 +15,9 @@ object WeatherMapper : ReversibleEntityMapper<WeatherEntity, WeatherModel> {
                             prefecture = it?.prefecture ?: "",
                             city = it?.city ?: "")
                 },
-                title = source.title ?: "",
-                link = source.link ?: "",
-                publicTime = source.publicTime ?: "",
+                title = source.title,
+                link = source.link,
+                publicTime = source.publicTime,
                 description = source.description.let {
                     DescriptionModel(
                             text = it?.text ?: "",
@@ -25,9 +25,9 @@ object WeatherMapper : ReversibleEntityMapper<WeatherEntity, WeatherModel> {
                 },
                 forecasts = source.forecasts.map {
                     ForecastModel(
-                            telop = it.telop ?: "",
-                            date = it.date ?: "",
-                            dateLabel = it.dateLabel ?: "",
+                            telop = it.telop,
+                            date = it.date,
+                            dateLabel = it.dateLabel,
                             image = it.image.let {
                                 ImageModel(
                                         title = it?.title ?: "",
@@ -52,8 +52,8 @@ object WeatherMapper : ReversibleEntityMapper<WeatherEntity, WeatherModel> {
                 },
                 pinpointLocations = source.pinpointLocations.map {
                     LinkModel(
-                            name = it.name ?: "",
-                            link = it.link ?: "")
+                            name = it.name,
+                            link = it.link)
                 },
                 copyright = source.copyright.let {
                     CopyrightModel(
@@ -69,12 +69,12 @@ object WeatherMapper : ReversibleEntityMapper<WeatherEntity, WeatherModel> {
                             },
                             provider = it?.provider?.map {
                                 LinkModel(
-                                        name = it.name ?: "",
-                                        link = it.link ?: "")
+                                        name = it.name,
+                                        link = it.link)
                             } ?: emptyList()
                     )
                 })
-        weather.cityId = source.cityId ?: ""
+        weather.cityId = source.cityId
         return weather
     }
 
