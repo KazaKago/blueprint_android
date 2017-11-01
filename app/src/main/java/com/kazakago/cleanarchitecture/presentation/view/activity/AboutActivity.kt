@@ -16,16 +16,14 @@ class AboutActivity : AppCompatActivity(), AboutActivityViewModelListener {
 
     companion object {
         @JvmStatic
-        fun newInstance(context: Context): Intent = Intent(context, AboutActivity::class.java)
+        fun createIntent(context: Context): Intent = Intent(context, AboutActivity::class.java)
     }
 
-    private lateinit var viewModel: AboutActivityViewModel
+    private val viewModel: AboutActivityViewModel by lazy { AboutActivityViewModel(context = this, listener = this) }
     private lateinit var binding: ActivityAboutBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = AboutActivityViewModel(this)
-        viewModel.listener = this
         binding = DataBindingUtil.setContentView(this, R.layout.activity_about)
         binding.viewModel = viewModel
 
@@ -47,7 +45,7 @@ class AboutActivity : AppCompatActivity(), AboutActivityViewModelListener {
     }
 
     override fun replaceAboutFragment() {
-        val fragment = AboutFragment.newInstance()
+        val fragment = AboutFragment.createInstance()
 
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.container_fragment, fragment)

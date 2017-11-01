@@ -13,27 +13,21 @@ class AboutFragment : Fragment(), AboutFragmentViewModelListener {
 
     companion object {
         @JvmStatic
-        fun newInstance(): AboutFragment = AboutFragment()
+        fun createInstance(): AboutFragment = AboutFragment()
     }
 
-    private lateinit var viewModel: AboutFragmentViewModel
-    private var binding: FragmentAboutBinding? = null
+    private val viewModel: AboutFragmentViewModel by lazy { AboutFragmentViewModel(context = activity, listener = this) }
+    private lateinit var binding: FragmentAboutBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = AboutFragmentViewModel(context = activity)
-        viewModel.listener = this
-
         viewModel.onCreate(savedInstanceState = savedInstanceState)
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        if (binding == null && inflater != null) {
-            binding = FragmentAboutBinding.inflate(inflater, container, false)
-            binding?.viewModel = viewModel
-        }
-
-        return binding?.root
+        binding = FragmentAboutBinding.inflate(inflater!!, container, false)
+        binding.viewModel = viewModel
+        return binding.root
     }
 
     /* AboutFragmentViewModelListener */

@@ -18,15 +18,13 @@ import com.kazakago.cleanarchitecture.domain.usecase.appInfo.GetPlayStoreUrlUseC
 import com.kazakago.cleanarchitecture.presentation.listener.presenter.fragment.AboutFragmentViewModelListener
 import java.util.*
 
-class AboutFragmentViewModel(private val context: Context): LazyKodeinAware {
+class AboutFragmentViewModel(private val context: Context, private var listener: AboutFragmentViewModelListener): LazyKodeinAware {
 
     override val kodein = LazyKodein(context.appKodein)
 
     val verText = ObservableField<String>()
     val developByText = ObservableField<String>()
     val copyrightText = ObservableField<String>()
-
-    var listener: AboutFragmentViewModelListener? = null
 
     private val getAppVersionUseCase: GetAppVersionUseCase by instance()
     private val getPlayStoreUrlUseCase: GetPlayStoreUrlUseCase by instance()
@@ -53,17 +51,17 @@ class AboutFragmentViewModel(private val context: Context): LazyKodeinAware {
 
     private fun toPlayStore() {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(getPlayStoreUrlUseCase.execute(Unit)))
-        listener?.startActivity(intent = intent)
+        listener.startActivity(intent = intent)
     }
 
     private fun toMailApp() {
         val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + getMailAddressUrlUseCase.execute(Unit)))
-        listener?.startActivity(intent = intent)
+        listener.startActivity(intent = intent)
     }
 
     private fun toWebSite() {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(getOfficialSiteUrlUseCase.execute(Unit)))
-        listener?.startActivity(intent = intent)
+        listener.startActivity(intent = intent)
     }
 
 }

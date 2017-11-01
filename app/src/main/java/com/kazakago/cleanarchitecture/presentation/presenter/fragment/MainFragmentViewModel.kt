@@ -33,7 +33,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class MainFragmentViewModel(private val context: Context) : LazyKodeinAware, ForecastRecyclerAdapterListener {
+class MainFragmentViewModel(private val context: Context, private var listener: MainFragmentViewModelListener) : LazyKodeinAware, ForecastRecyclerAdapterListener {
 
     override val kodein = LazyKodein(context.appKodein)
 
@@ -43,8 +43,6 @@ class MainFragmentViewModel(private val context: Context) : LazyKodeinAware, For
     var publicTime = ObservableField<String>()
     var citySpinnerAdapter = ObservableField<CitySpinnerAdapter>(CitySpinnerAdapter(context))
     var forecastRecyclerAdapter = ObservableField<ForecastRecyclerAdapter>(ForecastRecyclerAdapter(context))
-
-    var listener: MainFragmentViewModelListener? = null
 
     private val getWeatherUseCase: GetWeatherUseCase by instance()
     private val getCityUseCase: GetCityUseCase by instance()
@@ -65,7 +63,7 @@ class MainFragmentViewModel(private val context: Context) : LazyKodeinAware, For
         compositeDisposable = CompositeDisposable()
     }
 
-    fun onCreateView(savedInstanceState: Bundle?) {
+    fun onViewCreated(savedInstanceState: Bundle?) {
         cityList?.let {
             refreshCityList()
             weather?.let {
@@ -100,7 +98,7 @@ class MainFragmentViewModel(private val context: Context) : LazyKodeinAware, For
 
     private fun refreshTitle() {
         val city = cityList?.get(selectedPosition)
-        listener?.setActionBarTitle(city?.name)
+        listener.setActionBarTitle(city?.name)
     }
 
     private fun fetchCityList(completion: (() -> Unit)? = null) {
@@ -124,7 +122,7 @@ class MainFragmentViewModel(private val context: Context) : LazyKodeinAware, For
     private fun refreshCityList() {
         cityList?.map { CityViewModel(context, it) }?.let {
             citySpinnerAdapter.get().cityViewModelList = it
-            Handler().post { listener?.setCitySpinnerSelection(position = selectedPosition) }
+            Handler().post { listener.setCitySpinnerSelection(position = selectedPosition) }
         } ?: run {
             citySpinnerAdapter.get().cityViewModelList = ArrayList()
         }
