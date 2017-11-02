@@ -8,14 +8,12 @@ import com.kazakago.cleanarchitecture.BR
 import com.kazakago.cleanarchitecture.databinding.RecyclerForecastBinding
 import com.kazakago.cleanarchitecture.presentation.listener.view.adapter.ForecastRecyclerAdapterListener
 import com.kazakago.cleanarchitecture.presentation.presenter.adapter.ForecastViewModel
-import java.util.*
 
-class ForecastRecyclerAdapter(private val context: Context) : RecyclerView.Adapter<ForecastRecyclerAdapter.ViewHolder>() {
+class ForecastRecyclerAdapter(private val context: Context, private val listener: ForecastRecyclerAdapterListener) : RecyclerView.Adapter<ForecastRecyclerAdapter.ViewHolder>() {
 
     data class ViewHolder(val binding: RecyclerForecastBinding) : RecyclerView.ViewHolder(binding.root)
 
-    var forecastList: List<ForecastViewModel> = ArrayList()
-    var listener: ForecastRecyclerAdapterListener? = null
+    var forecastList: List<ForecastViewModel> = listOf()
 
     override fun getItemCount(): Int = forecastList.size
 
@@ -30,7 +28,7 @@ class ForecastRecyclerAdapter(private val context: Context) : RecyclerView.Adapt
         holder?.binding?.setVariable(BR.viewModel, item)
         holder?.binding?.executePendingBindings()
         holder?.binding?.root?.setOnClickListener {
-            listener?.onItemClick(item)
+            listener.onItemClick(item)
         }
     }
 

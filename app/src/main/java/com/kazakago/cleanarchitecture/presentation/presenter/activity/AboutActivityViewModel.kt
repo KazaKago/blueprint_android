@@ -5,7 +5,7 @@ import android.os.Bundle
 
 import com.kazakago.cleanarchitecture.presentation.listener.presenter.activity.AboutActivityViewModelListener
 
-class AboutActivityViewModel(private val context: Context, private var listener: AboutActivityViewModelListener) {
+class AboutActivityViewModel(private val context: Context, private val listener: AboutActivityViewModelListener) {
 
     fun onCreate(savedInstanceState: Bundle?) {
         listener.initView()

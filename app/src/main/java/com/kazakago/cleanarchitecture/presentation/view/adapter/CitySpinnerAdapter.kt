@@ -8,11 +8,10 @@ import android.widget.BaseAdapter
 import com.kazakago.cleanarchitecture.databinding.SpinnerCityBinding
 import com.kazakago.cleanarchitecture.databinding.SpinnerCityDropdownBinding
 import com.kazakago.cleanarchitecture.presentation.presenter.adapter.CityViewModel
-import java.util.*
 
 class CitySpinnerAdapter(private val context: Context) : BaseAdapter() {
 
-    var cityViewModelList: List<CityViewModel> = ArrayList()
+    var cityViewModelList: List<CityViewModel> = listOf()
 
     override fun getCount(): Int = cityViewModelList.size
 

@@ -33,7 +33,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class MainFragmentViewModel(private val context: Context, private var listener: MainFragmentViewModelListener) : LazyKodeinAware, ForecastRecyclerAdapterListener {
+class MainFragmentViewModel(private val context: Context, private val listener: MainFragmentViewModelListener) : LazyKodeinAware, ForecastRecyclerAdapterListener {
 
     override val kodein = LazyKodein(context.appKodein)
 
@@ -42,7 +42,7 @@ class MainFragmentViewModel(private val context: Context, private var listener: 
     var city = ObservableField<String>()
     var publicTime = ObservableField<String>()
     var citySpinnerAdapter = ObservableField<CitySpinnerAdapter>(CitySpinnerAdapter(context))
-    var forecastRecyclerAdapter = ObservableField<ForecastRecyclerAdapter>(ForecastRecyclerAdapter(context))
+    var forecastRecyclerAdapter = ObservableField<ForecastRecyclerAdapter>(ForecastRecyclerAdapter(context, this))
 
     private val getWeatherUseCase: GetWeatherUseCase by instance()
     private val getCityUseCase: GetCityUseCase by instance()
@@ -53,10 +53,6 @@ class MainFragmentViewModel(private val context: Context, private var listener: 
     var weather: WeatherModel? = null
     @State
     var selectedPosition: Int = 0
-
-    init {
-        forecastRecyclerAdapter.get().listener = this
-    }
 
     fun onCreate(savedInstanceState: Bundle?) {
         StateSaver.restoreInstanceState(this, savedInstanceState)

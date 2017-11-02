@@ -18,7 +18,7 @@ import com.kazakago.cleanarchitecture.domain.usecase.appInfo.GetPlayStoreUrlUseC
 import com.kazakago.cleanarchitecture.presentation.listener.presenter.fragment.AboutFragmentViewModelListener
 import java.util.*
 
-class AboutFragmentViewModel(private val context: Context, private var listener: AboutFragmentViewModelListener): LazyKodeinAware {
+class AboutFragmentViewModel(private val context: Context, private val listener: AboutFragmentViewModelListener): LazyKodeinAware {
 
     override val kodein = LazyKodein(context.appKodein)
 
@@ -31,7 +31,7 @@ class AboutFragmentViewModel(private val context: Context, private var listener:
     private val getMailAddressUrlUseCase: GetMailAddressUrlUseCase by instance()
     private val getOfficialSiteUrlUseCase: GetOfficialSiteUrlUseCase by instance()
 
-    fun onCreate(savedInstanceState: Bundle?){
+    fun onViewCreated(savedInstanceState: Bundle?){
         verText.set(context.getString(R.string.about_ver, getAppVersionUseCase.execute(Unit)))
         developByText.set(context.getString(R.string.about_develop_by, context.getString(R.string.developer_name)))
         copyrightText.set(context.getString(R.string.about_copyright, Calendar.getInstance().get(Calendar.YEAR), context.getString(R.string.developer_name)))
