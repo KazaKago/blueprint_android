@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.widget.AdapterView
-import android.widget.Toast
 import com.evernote.android.state.State
 import com.evernote.android.state.StateSaver
 import com.github.salomonbrys.kodein.LazyKodein
@@ -109,7 +108,7 @@ class MainFragmentViewModel(private val context: Context, private val listener: 
                             completion?.invoke()
                         },
                         onError = {
-                            showToast(message = it.localizedMessage)
+                            listener.showToast(message = it.localizedMessage)
                             completion?.invoke()
                         }
                 ))
@@ -140,7 +139,7 @@ class MainFragmentViewModel(private val context: Context, private val listener: 
                             onError = {
                                 weather = null
                                 refreshWeather()
-                                showToast(message = it.localizedMessage)
+                                listener.showToast(message = it.localizedMessage)
                                 completion?.invoke()
                             }
                     ))
@@ -178,14 +177,10 @@ class MainFragmentViewModel(private val context: Context, private val listener: 
         return dateFormat.format(timestamp) + " " + timeFormat.format(timestamp)
     }
 
-    private fun showToast(message: String?) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-    }
-
     /* ForecastRecyclerAdapterListener */
 
     override fun onItemClick(forecastViewModel: ForecastViewModel) {
-        showToast(message = forecastViewModel.telop.get())
+        listener.showToast(message = forecastViewModel.telop.get())
     }
 
 }

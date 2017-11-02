@@ -6,4 +6,6 @@ interface MainFragmentViewModelListener {
 
     fun setCitySpinnerSelection(position: Int)
 
+    fun showToast(message: String?)
+
 }

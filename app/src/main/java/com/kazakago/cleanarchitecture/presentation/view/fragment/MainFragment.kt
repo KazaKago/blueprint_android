@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.kazakago.cleanarchitecture.databinding.FragmentMainBinding
 import com.kazakago.cleanarchitecture.presentation.listener.presenter.fragment.MainFragmentViewModelListener
 import com.kazakago.cleanarchitecture.presentation.listener.view.fragment.MainFragmentListener
@@ -61,6 +62,10 @@ class MainFragment : Fragment(), MainFragmentViewModelListener {
 
     override fun setCitySpinnerSelection(position: Int) {
         binding.citySpinner.setSelection(position)
+    }
+
+    override fun showToast(message: String?) {
+        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
     }
 
 }
