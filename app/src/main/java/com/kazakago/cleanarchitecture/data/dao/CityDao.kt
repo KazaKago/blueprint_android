@@ -1,18 +1,14 @@
 package com.kazakago.cleanarchitecture.data.dao
 
 import android.content.Context
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.kazakago.cleanarchitecture.data.entity.city.PrefEntity
+import com.squareup.moshi.KotlinJsonAdapterFactory
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.Types
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
 
-/**
- * City Data Access Object.
- *
- * Created by weath on 2016/06/14.
- */
 class CityDao(private val context: Context) {
 
     @Throws(IOException::class)
@@ -36,12 +32,13 @@ class CityDao(private val context: Context) {
         return text
     }
 
-    private fun parseJson(jsonStr: String?): List<PrefEntity> {
-        val gson = Gson()
-        val entityList = gson.fromJson<List<PrefEntity>>(jsonStr, object : TypeToken<List<PrefEntity>>() {
-        }.type)
-
-        return entityList
+    private fun parseJson(jsonStr: String): List<PrefEntity> {
+        val moshi = Moshi.Builder()
+                .add(KotlinJsonAdapterFactory())
+                .build()
+        val type = Types.newParameterizedType(List::class.java, PrefEntity::class.java)
+        val adapter = moshi.adapter<List<PrefEntity>>(type)
+        return adapter.fromJson(jsonStr).orEmpty()
     }
 
 }

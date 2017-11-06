@@ -7,9 +7,6 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.AdapterView
 
-/**
- * Perform 'onItemSelected' event, only user selected Spinner.
- */
 class UserSelectSpinner @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = R.attr.spinnerStyle) : AppCompatSpinner(context, attrs, defStyle) {
 
     private var isUserOpen = false

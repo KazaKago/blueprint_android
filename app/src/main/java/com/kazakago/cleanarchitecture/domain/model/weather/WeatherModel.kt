@@ -3,37 +3,32 @@ package com.kazakago.cleanarchitecture.domain.model.weather
 import paperparcel.PaperParcel
 import paperparcel.PaperParcelable
 
-/**
- * Weather Model
- *
- * Created by tamura_k on 2016/05/31.
- */
 @PaperParcel
-class WeatherModel : PaperParcelable {
-
-    //地域ID
-    var cityId: String? = null
-
-    //予報を発表した地域を定義
-    var location: LocationModel? = null
-    //タイトル・見出し
-    var title: String? = null
-    //リクエストされたデータの地域に該当するlivedoor 天気情報のURL
-    var link: String? = null
-    //予報の発表日時
-    var publicTime: String? = null
-    //天気概況文
-    var description: DescriptionModel? = null
-    //府県天気予報の予報日毎の配列
-    var forecasts: List<ForecastModel> = ArrayList()
-    //ピンポイント予報の発表地点の配列
-    var pinpointLocations: List<LinkModel> = ArrayList()
-    //コピーライト
-    var copyright: CopyrightModel? = null
+data class WeatherModel(
+        //予報を発表した地域を定義
+        val location: LocationModel,
+        //タイトル・見出し
+        val title: String,
+        //リクエストされたデータの地域に該当するlivedoor 天気情報のURL
+        val link: String,
+        //予報の発表日時
+        val publicTime: String,
+        //天気概況文
+        val description: DescriptionModel,
+        //府県天気予報の予報日毎の配列
+        val forecasts: List<ForecastModel>,
+        //ピンポイント予報の発表地点の配列
+        val pinpointLocations: List<LinkModel>,
+        //コピーライト
+        val copyright: CopyrightModel
+) : PaperParcelable {
 
     companion object {
         @JvmField
         val CREATOR = PaperParcelWeatherModel.CREATOR
     }
+
+    //地域ID
+    lateinit var cityId: String
 
 }

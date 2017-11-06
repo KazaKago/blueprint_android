@@ -7,16 +7,13 @@ import com.kazakago.cleanarchitecture.web.api.WeatherRetrofit
 import com.kazakago.cleanarchitecture.web.mapper.weather.WeatherApiMapper
 import io.reactivex.Single
 
-/**
- * Weather API Repository Implement
- *
- * Created by tamura_k on 2016/05/27.
- */
 class WeatherApiRepositoryImpl : WeatherApiRepository {
 
     override fun fetch(cityId: String): Single<WeatherModel> {
         val weatherApi = WeatherRetrofit.instance.create(WeatherApi::class.java)
-        return weatherApi[cityId].map { WeatherApiMapper.map(source = it) }
+        return weatherApi[cityId].map {
+            WeatherApiMapper.map(source = it)
+        }
     }
 
 }

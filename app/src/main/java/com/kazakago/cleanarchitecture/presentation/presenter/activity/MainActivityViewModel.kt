@@ -4,24 +4,17 @@ import android.content.Context
 import android.os.Bundle
 import com.kazakago.cleanarchitecture.presentation.listener.presenter.activity.MainActivityViewModelListener
 
-/**
- * Main Activity ViewModel
- *
- * @author Kensuke
- */
-class MainActivityViewModel(private val context: Context) {
-
-    var listener: MainActivityViewModelListener? = null
+class MainActivityViewModel(private val context: Context, private val listener: MainActivityViewModelListener) {
 
     fun onCreate(savedInstanceState: Bundle?) {
-        listener?.initView()
+        listener.initView()
         if (savedInstanceState == null) {
-            listener?.replaceMainFragment()
+            listener.replaceMainFragment()
         }
     }
 
     fun onClickAboutMenu() {
-        listener?.toAboutActivity()
+        listener.toAboutActivity()
     }
 
 }

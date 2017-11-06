@@ -1,19 +1,14 @@
 package com.kazakago.cleanarchitecture.web.entity.weather
 
-/**
- * Forecasts API Entity
- *
- * Created by tamura_k on 2016/06/03.
- */
 data class ForecastApiEntity(
         //予報日
-        var date: String? = null,
+        val date: String = "",
         //予報日(今日、明日、明後日のいずれか)
-        var dateLabel: String? = null,
+        val dateLabel: String = "",
         //天気（晴れ、曇り、雨など）
-        var telop: String? = null,
+        val telop: String = "",
         //画像
-        var image: ImageApiEntity? = null,
+        val image: ImageApiEntity = ImageApiEntity(),
         //気温
-        var temperature: TemperatureApiEntity? = null
+        val temperature: TemperatureApiEntity = TemperatureApiEntity()
 )

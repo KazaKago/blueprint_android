@@ -6,28 +6,21 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.kazakago.cleanarchitecture.databinding.FragmentMainBinding
 import com.kazakago.cleanarchitecture.presentation.listener.presenter.fragment.MainFragmentViewModelListener
 import com.kazakago.cleanarchitecture.presentation.listener.view.fragment.MainFragmentListener
 import com.kazakago.cleanarchitecture.presentation.presenter.fragment.MainFragmentViewModel
 
-/**
- * Main Fragment
- *
- * @author Kensuke
- */
 class MainFragment : Fragment(), MainFragmentViewModelListener {
 
     companion object {
         @JvmStatic
-        fun newInstance(): MainFragment {
-            val fragment = MainFragment()
-            return fragment
-        }
+        fun createInstance(): MainFragment = MainFragment()
     }
 
-    private lateinit var viewModel: MainFragmentViewModel
-    private var binding: FragmentMainBinding? = null
+    private val viewModel: MainFragmentViewModel by lazy { MainFragmentViewModel(context = activity, listener = this) }
+    private lateinit var binding: FragmentMainBinding
     private var listener: MainFragmentListener? = null
 
     override fun onAttach(context: Context?) {
@@ -37,20 +30,18 @@ class MainFragment : Fragment(), MainFragmentViewModelListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = MainFragmentViewModel(context = activity)
-        viewModel.listener = this
-
         viewModel.onCreate(savedInstanceState = savedInstanceState)
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        if (binding == null) {
-            binding = FragmentMainBinding.inflate(inflater, container, false)
-            binding?.viewModel = viewModel
-        }
+        binding = FragmentMainBinding.inflate(inflater!!, container, false)
+        binding.viewModel = viewModel
+        return binding.root
+    }
 
-        viewModel.onCreateView(savedInstanceState = savedInstanceState)
-        return binding?.root
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.onViewCreated(savedInstanceState = savedInstanceState)
     }
 
     override fun onDestroy() {
@@ -70,7 +61,11 @@ class MainFragment : Fragment(), MainFragmentViewModelListener {
     }
 
     override fun setCitySpinnerSelection(position: Int) {
-        binding?.citySpinner?.setSelection(position)
+        binding.citySpinner.setSelection(position)
+    }
+
+    override fun showToast(message: String?) {
+        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
     }
 
 }

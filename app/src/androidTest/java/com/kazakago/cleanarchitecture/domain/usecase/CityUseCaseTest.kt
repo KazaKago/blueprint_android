@@ -21,12 +21,6 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
-/**
- * CityUseCase Test
- *
- *
- * Created by tamura_k on 2016/06/14.
- */
 @RunWith(AndroidJUnit4::class)
 @SmallTest
 class CityUseCaseTest: KodeinAware {

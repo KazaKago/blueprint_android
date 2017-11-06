@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.widget.AdapterView
-import android.widget.Toast
 import com.evernote.android.state.State
 import com.evernote.android.state.StateSaver
 import com.github.salomonbrys.kodein.LazyKodein
@@ -33,12 +32,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-/**
- * Main Fragment ViewModel
- *
- * @author Kensuke
- */
-class MainFragmentViewModel(private val context: Context) : LazyKodeinAware, ForecastRecyclerAdapterListener {
+class MainFragmentViewModel(private val context: Context, private val listener: MainFragmentViewModelListener) : LazyKodeinAware, ForecastRecyclerAdapterListener {
 
     override val kodein = LazyKodein(context.appKodein)
 
@@ -47,13 +41,11 @@ class MainFragmentViewModel(private val context: Context) : LazyKodeinAware, For
     var city = ObservableField<String>()
     var publicTime = ObservableField<String>()
     var citySpinnerAdapter = ObservableField<CitySpinnerAdapter>(CitySpinnerAdapter(context))
-    var forecastRecyclerAdapter = ObservableField<ForecastRecyclerAdapter>(ForecastRecyclerAdapter(context))
-
-    var listener: MainFragmentViewModelListener? = null
+    var forecastRecyclerAdapter = ObservableField<ForecastRecyclerAdapter>(ForecastRecyclerAdapter(context, this))
 
     private val getWeatherUseCase: GetWeatherUseCase by instance()
     private val getCityUseCase: GetCityUseCase by instance()
-    private var compositeDisposable: CompositeDisposable? = null
+    private lateinit var compositeDisposable: CompositeDisposable
     @State
     var cityList: ArrayList<CityModel>? = null
     @State
@@ -61,27 +53,12 @@ class MainFragmentViewModel(private val context: Context) : LazyKodeinAware, For
     @State
     var selectedPosition: Int = 0
 
-    init {
-        forecastRecyclerAdapter.get().listener = this
-    }
-
-    enum class ProductFlaver(val rawValue: String) {
-        local("local"),
-        staging("staging"),
-        production("production"),
-    }
-
-    enum class BuildType(val rawValue: String) {
-        debug("debug"),
-        release("release"),
-    }
-
     fun onCreate(savedInstanceState: Bundle?) {
         StateSaver.restoreInstanceState(this, savedInstanceState)
         compositeDisposable = CompositeDisposable()
     }
 
-    fun onCreateView(savedInstanceState: Bundle?) {
+    fun onViewCreated(savedInstanceState: Bundle?) {
         cityList?.let {
             refreshCityList()
             weather?.let {
@@ -97,7 +74,7 @@ class MainFragmentViewModel(private val context: Context) : LazyKodeinAware, For
     }
 
     fun onDestroy() {
-        compositeDisposable?.dispose()
+        compositeDisposable.dispose()
     }
 
     fun onSaveInstanceState(outState: Bundle?) {
@@ -116,11 +93,11 @@ class MainFragmentViewModel(private val context: Context) : LazyKodeinAware, For
 
     private fun refreshTitle() {
         val city = cityList?.get(selectedPosition)
-        listener?.setActionBarTitle(city?.name)
+        listener.setActionBarTitle(city?.name)
     }
 
     private fun fetchCityList(completion: (() -> Unit)? = null) {
-        compositeDisposable?.add(getCityUseCase.execute(Unit)
+        compositeDisposable.add(getCityUseCase.execute(Unit)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .toList()
@@ -131,7 +108,7 @@ class MainFragmentViewModel(private val context: Context) : LazyKodeinAware, For
                             completion?.invoke()
                         },
                         onError = {
-                            showToast(message = it.localizedMessage)
+                            listener.showToast(message = it.localizedMessage)
                             completion?.invoke()
                         }
                 ))
@@ -140,7 +117,7 @@ class MainFragmentViewModel(private val context: Context) : LazyKodeinAware, For
     private fun refreshCityList() {
         cityList?.map { CityViewModel(context, it) }?.let {
             citySpinnerAdapter.get().cityViewModelList = it
-            Handler().post { listener?.setCitySpinnerSelection(position = selectedPosition) }
+            Handler().post { listener.setCitySpinnerSelection(position = selectedPosition) }
         } ?: run {
             citySpinnerAdapter.get().cityViewModelList = ArrayList()
         }
@@ -150,7 +127,7 @@ class MainFragmentViewModel(private val context: Context) : LazyKodeinAware, For
 
     private fun fetchWeather(completion: (() -> Unit)? = null) {
         cityList?.get(selectedPosition)?.id?.let {
-            compositeDisposable?.add(getWeatherUseCase.execute(input = it)
+            compositeDisposable.add(getWeatherUseCase.execute(input = it)
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeBy(
@@ -162,7 +139,7 @@ class MainFragmentViewModel(private val context: Context) : LazyKodeinAware, For
                             onError = {
                                 weather = null
                                 refreshWeather()
-                                showToast(message = it.localizedMessage)
+                                listener.showToast(message = it.localizedMessage)
                                 completion?.invoke()
                             }
                     ))
@@ -200,14 +177,10 @@ class MainFragmentViewModel(private val context: Context) : LazyKodeinAware, For
         return dateFormat.format(timestamp) + " " + timeFormat.format(timestamp)
     }
 
-    private fun showToast(message: String?) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-    }
-
     /* ForecastRecyclerAdapterListener */
 
     override fun onItemClick(forecastViewModel: ForecastViewModel) {
-        showToast(message = forecastViewModel.telop.get())
+        listener.showToast(message = forecastViewModel.telop.get())
     }
 
 }

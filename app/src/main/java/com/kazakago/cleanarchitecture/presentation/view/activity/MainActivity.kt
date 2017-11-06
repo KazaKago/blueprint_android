@@ -14,32 +14,22 @@ import com.kazakago.cleanarchitecture.presentation.listener.view.fragment.MainFr
 import com.kazakago.cleanarchitecture.presentation.presenter.activity.MainActivityViewModel
 import com.kazakago.cleanarchitecture.presentation.view.fragment.MainFragment
 
-/**
- * Main Activity
- *
- * @author Kensuke
- */
 class MainActivity : AppCompatActivity(), MainFragmentListener, MainActivityViewModelListener {
 
     companion object {
         @JvmStatic
-        fun newInstance(context: Context): Intent {
-            val intent = Intent(context, MainActivity::class.java)
-            return intent
-        }
+        fun createIntent(context: Context): Intent = Intent(context, MainActivity::class.java)
     }
 
-    private lateinit var viewModel: MainActivityViewModel
+    private val viewModel: MainActivityViewModel by lazy { MainActivityViewModel(context = this, listener = this) }
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = MainActivityViewModel(this)
-        viewModel.listener = this
-        binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.viewModel = viewModel
 
-        viewModel.onCreate(savedInstanceState)
+        viewModel.onCreate(savedInstanceState = savedInstanceState)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -67,7 +57,7 @@ class MainActivity : AppCompatActivity(), MainFragmentListener, MainActivityView
     }
 
     override fun replaceMainFragment() {
-        val fragment = MainFragment.newInstance()
+        val fragment = MainFragment.createInstance()
 
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.container_fragment, fragment)
@@ -75,7 +65,7 @@ class MainActivity : AppCompatActivity(), MainFragmentListener, MainActivityView
     }
 
     override fun toAboutActivity() {
-        val intent = AboutActivity.newInstance(this)
+        val intent = AboutActivity.createIntent(context = this)
         startActivity(intent)
     }
 

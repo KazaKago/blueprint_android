@@ -1,25 +1,20 @@
 package com.kazakago.cleanarchitecture.web.entity.weather
 
-/**
- * Weather API Entity
- *
- * Created by tamura_k on 2016/05/31.
- */
 data class WeatherApiEntity(
         //予報を発表した地域を定義
-        var location: LocationApiEntity? = null,
+        val location: LocationApiEntity = LocationApiEntity(),
         //タイトル・見出し
-        var title: String? = null,
+        val title: String = "",
         //リクエストされたデータの地域に該当するlivedoor 天気情報のURL
-        var link: String? = null,
+        val link: String = "",
         //予報の発表日時
-        var publicTime: String? = null,
+        val publicTime: String = "",
         //天気概況文
-        var description: DescriptionApiEntity? = null,
+        val description: DescriptionApiEntity = DescriptionApiEntity(),
         //府県天気予報の予報日毎の配列
-        var forecasts: List<ForecastApiEntity> = ArrayList(),
+        val forecasts: List<ForecastApiEntity> = listOf(),
         //ピンポイント予報の発表地点の配列
-        var pinpointLocations: List<LinkApiEntity> = ArrayList(),
+        val pinpointLocations: List<LinkApiEntity> = listOf(),
         //コピーライト
-        var copyright: CopyrightApiEntity? = null
+        val copyright: CopyrightApiEntity = CopyrightApiEntity()
 )

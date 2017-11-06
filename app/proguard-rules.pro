@@ -16,35 +16,41 @@
 #   public *;
 #}
 
-# Retrofit
-# https://github.com/square/retrofit
+## Retrofit
+## https://github.com/square/retrofit
 -dontwarn okio.**
 -dontwarn javax.annotation.**
-# https://square.github.io/retrofit/
+## https://square.github.io/retrofit/
 -dontnote retrofit2.Platform
 -dontwarn retrofit2.Platform$Java8
 -keepattributes Signature
 -keepattributes Exceptions
+##
 
-# Picasso
-# https://github.com/square/picasso
+## Picasso
+## https://github.com/square/picasso
 -dontwarn com.squareup.okhttp.**
+##
 
-# Gson
-# https://github.com/google/gson/blob/master/examples/android-proguard-example/proguard.cfg
--keepattributes Signature
--keepattributes *Annotation*
--keep class sun.misc.Unsafe { *; }
--keep class com.google.gson.stream.** { *; }
--keep class * implements com.google.gson.TypeAdapterFactory
--keep class * implements com.google.gson.JsonSerializer
--keep class * implements com.google.gson.JsonDeserializer
-
-# MyClass for Gson
--keep class com.kazakago.cleanarchitecture.domain.model.** { *; }
--keep class com.kazakago.cleanarchitecture.data.entity.** { *; }
+## Moshi
+## https://github.com/square/moshi
+-dontwarn okio.**
+-dontwarn javax.annotation.Nullable
+-dontwarn javax.annotation.ParametersAreNonnullByDefault
+-keepclasseswithmembers class * {
+    @com.squareup.moshi.* <methods>;
+}
+-keep @com.squareup.moshi.JsonQualifier interface *
+-keepclassmembers class kotlin.Metadata {
+    public <methods>;
+}
+## https://github.com/square/moshi/issues/345
+-dontwarn org.jetbrains.annotations.**
 -keep class com.kazakago.cleanarchitecture.web.entity.** { *; }
+-keep class com.kazakago.cleanarchitecture.data.entity.** { *; }
+##
 
-# Kodein
-# https://salomonbrys.github.io/Kodein/
+## Kodein
+## https://salomonbrys.github.io/Kodein/
 -keepattributes Signature
+##

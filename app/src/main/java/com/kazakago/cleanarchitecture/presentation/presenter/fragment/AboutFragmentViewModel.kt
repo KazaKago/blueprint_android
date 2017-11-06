@@ -18,12 +18,7 @@ import com.kazakago.cleanarchitecture.domain.usecase.appInfo.GetPlayStoreUrlUseC
 import com.kazakago.cleanarchitecture.presentation.listener.presenter.fragment.AboutFragmentViewModelListener
 import java.util.*
 
-/**
- * About Fragment ViewModel
- *
- * @author Kensuke
- */
-class AboutFragmentViewModel(private val context: Context): LazyKodeinAware {
+class AboutFragmentViewModel(private val context: Context, private val listener: AboutFragmentViewModelListener): LazyKodeinAware {
 
     override val kodein = LazyKodein(context.appKodein)
 
@@ -31,14 +26,12 @@ class AboutFragmentViewModel(private val context: Context): LazyKodeinAware {
     val developByText = ObservableField<String>()
     val copyrightText = ObservableField<String>()
 
-    var listener: AboutFragmentViewModelListener? = null
-
     private val getAppVersionUseCase: GetAppVersionUseCase by instance()
     private val getPlayStoreUrlUseCase: GetPlayStoreUrlUseCase by instance()
     private val getMailAddressUrlUseCase: GetMailAddressUrlUseCase by instance()
     private val getOfficialSiteUrlUseCase: GetOfficialSiteUrlUseCase by instance()
 
-    fun onCreate(savedInstanceState: Bundle?){
+    fun onViewCreated(savedInstanceState: Bundle?){
         verText.set(context.getString(R.string.about_ver, getAppVersionUseCase.execute(Unit)))
         developByText.set(context.getString(R.string.about_develop_by, context.getString(R.string.developer_name)))
         copyrightText.set(context.getString(R.string.about_copyright, Calendar.getInstance().get(Calendar.YEAR), context.getString(R.string.developer_name)))
@@ -58,17 +51,17 @@ class AboutFragmentViewModel(private val context: Context): LazyKodeinAware {
 
     private fun toPlayStore() {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(getPlayStoreUrlUseCase.execute(Unit)))
-        listener?.startActivity(intent = intent)
+        listener.startActivity(intent = intent)
     }
 
     private fun toMailApp() {
         val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + getMailAddressUrlUseCase.execute(Unit)))
-        listener?.startActivity(intent = intent)
+        listener.startActivity(intent = intent)
     }
 
     private fun toWebSite() {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(getOfficialSiteUrlUseCase.execute(Unit)))
-        listener?.startActivity(intent = intent)
+        listener.startActivity(intent = intent)
     }
 
 }

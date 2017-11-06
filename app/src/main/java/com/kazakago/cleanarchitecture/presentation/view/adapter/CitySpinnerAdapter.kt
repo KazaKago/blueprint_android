@@ -8,28 +8,16 @@ import android.widget.BaseAdapter
 import com.kazakago.cleanarchitecture.databinding.SpinnerCityBinding
 import com.kazakago.cleanarchitecture.databinding.SpinnerCityDropdownBinding
 import com.kazakago.cleanarchitecture.presentation.presenter.adapter.CityViewModel
-import java.util.*
 
-/**
- * City Spinner Adapter
- *
- * Created by tamura_k on 2016/05/31.
- */
 class CitySpinnerAdapter(private val context: Context) : BaseAdapter() {
 
-    var cityViewModelList: List<CityViewModel> = ArrayList()
+    var cityViewModelList: List<CityViewModel> = listOf()
 
-    override fun getCount(): Int {
-        return cityViewModelList.size
-    }
+    override fun getCount(): Int = cityViewModelList.size
 
-    override fun getItem(position: Int): CityViewModel {
-        return cityViewModelList[position]
-    }
+    override fun getItem(position: Int): CityViewModel = cityViewModelList[position]
 
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
+    override fun getItemId(position: Int): Long = position.toLong()
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
         val binding: SpinnerCityBinding?
@@ -37,7 +25,7 @@ class CitySpinnerAdapter(private val context: Context) : BaseAdapter() {
             binding = convertView.tag as? SpinnerCityBinding
         } else {
             binding = SpinnerCityBinding.inflate(LayoutInflater.from(context), parent, false)
-            binding?.root?.tag = binding
+            binding.root?.tag = binding
         }
 
         binding?.viewModel = getItem(position)
@@ -50,7 +38,7 @@ class CitySpinnerAdapter(private val context: Context) : BaseAdapter() {
             binding = convertView.tag as? SpinnerCityDropdownBinding
         } else {
             binding = SpinnerCityDropdownBinding.inflate(LayoutInflater.from(context), parent, false)
-            binding?.root?.tag = binding
+            binding.root?.tag = binding
         }
 
         binding?.viewModel = getItem(position)
