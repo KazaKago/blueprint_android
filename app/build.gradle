@@ -92,8 +92,8 @@ dependencies {
     implementation 'nz.bradcampbell:paperparcel-kotlin:2.0.4'
     kapt 'nz.bradcampbell:paperparcel-compiler:2.0.4'
     //Android-State
-    implementation 'com.evernote:android-state:1.1.5'
-    kapt 'com.evernote:android-state-processor:1.1.5'
+    implementation 'com.evernote:android-state:1.1.6'
+    kapt 'com.evernote:android-state-processor:1.1.6'
 
     //Stetho
     debugImplementation 'com.facebook.stetho:stetho:1.5.0'
@@ -102,12 +102,8 @@ dependencies {
 
     //JUnit
     testImplementation 'junit:junit:4.12'
-    //Hamcrest
-    testImplementation 'org.hamcrest:hamcrest-library:1.3'
 
     //Espresso
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    //Hamcrest
-    androidTestImplementation 'org.hamcrest:hamcrest-library:1.3'
 }

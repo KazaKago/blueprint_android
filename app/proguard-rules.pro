@@ -16,22 +16,24 @@
 #   public *;
 #}
 
-# Retrofit
-# https://github.com/square/retrofit
+## Retrofit
+## https://github.com/square/retrofit
 -dontwarn okio.**
 -dontwarn javax.annotation.**
-# https://square.github.io/retrofit/
+## https://square.github.io/retrofit/
 -dontnote retrofit2.Platform
 -dontwarn retrofit2.Platform$Java8
 -keepattributes Signature
 -keepattributes Exceptions
+##
 
-# Picasso
-# https://github.com/square/picasso
+## Picasso
+## https://github.com/square/picasso
 -dontwarn com.squareup.okhttp.**
+##
 
-# Moshi
-# https://github.com/square/moshi
+## Moshi
+## https://github.com/square/moshi
 -dontwarn okio.**
 -dontwarn javax.annotation.Nullable
 -dontwarn javax.annotation.ParametersAreNonnullByDefault
@@ -42,7 +44,13 @@
 -keepclassmembers class kotlin.Metadata {
     public <methods>;
 }
+## https://github.com/square/moshi/issues/345
+-dontwarn org.jetbrains.annotations.**
+-keep class com.kazakago.cleanarchitecture.web.entity.** { *; }
+-keep class com.kazakago.cleanarchitecture.data.entity.** { *; }
+##
 
-# Kodein
-# https://salomonbrys.github.io/Kodein/
+## Kodein
+## https://salomonbrys.github.io/Kodein/
 -keepattributes Signature
+##
