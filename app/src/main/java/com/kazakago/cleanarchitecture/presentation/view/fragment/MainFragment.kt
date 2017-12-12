@@ -19,7 +19,7 @@ class MainFragment : Fragment(), MainFragmentViewModelListener {
         fun createInstance(): MainFragment = MainFragment()
     }
 
-    private val viewModel: MainFragmentViewModel by lazy { MainFragmentViewModel(context = activity, listener = this) }
+    private val viewModel: MainFragmentViewModel by lazy { MainFragmentViewModel(context = activity!!, listener = this) }
     private lateinit var binding: FragmentMainBinding
     private var listener: MainFragmentListener? = null
 
@@ -33,13 +33,13 @@ class MainFragment : Fragment(), MainFragmentViewModelListener {
         viewModel.onCreate(savedInstanceState = savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentMainBinding.inflate(inflater!!, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FragmentMainBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         return binding.root
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.onViewCreated(savedInstanceState = savedInstanceState)
     }
@@ -49,7 +49,7 @@ class MainFragment : Fragment(), MainFragmentViewModelListener {
         viewModel.onDestroy()
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
+    override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         viewModel.onSaveInstanceState(outState = outState)
     }

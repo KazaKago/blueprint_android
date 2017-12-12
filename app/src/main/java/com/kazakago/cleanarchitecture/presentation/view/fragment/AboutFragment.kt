@@ -16,16 +16,16 @@ class AboutFragment : Fragment(), AboutFragmentViewModelListener {
         fun createInstance(): AboutFragment = AboutFragment()
     }
 
-    private val viewModel: AboutFragmentViewModel by lazy { AboutFragmentViewModel(context = activity, listener = this) }
+    private val viewModel: AboutFragmentViewModel by lazy { AboutFragmentViewModel(context = activity!!, listener = this) }
     private lateinit var binding: FragmentAboutBinding
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentAboutBinding.inflate(inflater!!, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FragmentAboutBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         return binding.root
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.onViewCreated(savedInstanceState = savedInstanceState)
     }
