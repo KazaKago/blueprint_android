@@ -1,9 +1,11 @@
 package com.kazakago.cleanarchitecture.presentation.listener.presenter.fragment
 
-import android.content.Intent
+import android.net.Uri
 
 interface AboutFragmentViewModelListener {
 
-    fun startActivity(intent: Intent)
+    fun openActionView(uri: Uri)
+
+    fun openSendTo(uri: Uri)
 
 }

@@ -1,99 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
 
-    <data>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-        <variable
-            name="viewModel"
-            type="com.kazakago.cleanarchitecture.presentation.presenter.adapter.ForecastViewModel"/>
+        <TextView
+            android:id="@+id/dateLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?android:textColorSecondary"
+            android:textSize="@dimen/text_size_small"
+            tools:text="今日"/>
 
-    </data>
+        <TextView
+            android:id="@+id/dateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:textColor="?android:textColorSecondary"
+            android:textSize="@dimen/text_size_small"
+            tools:text="2016-06-06"/>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin">
+        android:layout_marginTop="4dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/weatherImageView"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="@null"
+            tools:src="@mipmap/ic_launcher"/>
+
+        <TextView
+            android:id="@+id/telopTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginStart="8dp"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="@dimen/text_size_medium"
+            tools:text="曇り時々晴れ"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{viewModel.dateLabel}"
-                android:textColor="?android:textColorSecondary"
-                android:textSize="@dimen/text_size_small"
-                tools:text="今日"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:text="@{viewModel.date}"
-                android:textColor="?android:textColorSecondary"
-                android:textSize="@dimen/text_size_small"
-                tools:text="2016-06-06"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <Space
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_weight="1"/>
 
-            <ImageView
-                android:id="@+id/weatherImage"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:contentDescription="@null"
-                app:imageUrl="@{viewModel.imageUrl}"
-                tools:src="@mipmap/ic_launcher"/>
+        <TextView
+            android:id="@+id/maxTemperatureTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/md_pink_700"
+            android:textSize="@dimen/text_size_medium_small"
+            tools:text="最高:20℃"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@{viewModel.telop}"
-                android:textColor="?android:textColorPrimary"
-                android:textSize="@dimen/text_size_medium"
-                tools:text="曇り時々晴れ"/>
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{viewModel.maxTemperature}"
-                android:textColor="@color/md_pink_700"
-                android:textSize="@dimen/text_size_medium_small"
-                tools:text="最高:20℃"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@{viewModel.minTemperature}"
-                android:textColor="@color/md_indigo_700"
-                android:textSize="@dimen/text_size_medium_small"
-                tools:text="最低:13℃"/>
-
-        </LinearLayout>
+        <TextView
+            android:id="@+id/minTemperatureTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/md_indigo_700"
+            android:textSize="@dimen/text_size_medium_small"
+            tools:text="最低:13℃"/>
 
     </LinearLayout>
 
-</layout>
+</LinearLayout>

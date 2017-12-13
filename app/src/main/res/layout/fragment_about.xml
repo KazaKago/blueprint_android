@@ -1,173 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".controller.view.fragment.AboutFragment">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.view.fragment.AboutFragment">
 
-    <data>
-
-        <variable
-            name="viewModel"
-            type="com.kazakago.cleanarchitecture.presentation.presenter.fragment.AboutFragmentViewModel"/>
-
-    </data>
-
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <ImageView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:contentDescription="@null"
+                app:srcCompat="@drawable/ic_launcher_96dp"/>
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@null"
-                    app:srcCompat="@drawable/ic_launcher_96dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/app_name"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="@dimen/text_size_large"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@{viewModel.verText}"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="@dimen/text_size_small"
-                    tools:text="@string/about_ver"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{viewModel.developByText}"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="@dimen/text_size_small"
-                    tools:text="@string/about_develop_by"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:gravity="center_vertical"
-                android:onClick="@{viewModel::onClickPlayStore}"
-                android:orientation="horizontal"
-                android:paddingBottom="16dp"
-                android:paddingEnd="32dp"
-                android:paddingStart="32dp"
-                android:paddingTop="16dp">
+                android:layout_marginTop="8dp"
+                android:text="@string/app_name"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="@dimen/text_size_large"/>
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@null"
-                    android:tint="?attr/colorAccent"
-                    app:srcCompat="@drawable/ic_googleplay_24dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:text="@string/about_play_store"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="@dimen/text_size_medium_small"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/versionTextView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:gravity="center_vertical"
-                android:onClick="@{viewModel::onClickMail}"
-                android:orientation="horizontal"
-                android:paddingBottom="16dp"
-                android:paddingEnd="32dp"
-                android:paddingStart="32dp"
-                android:paddingTop="16dp">
+                android:layout_marginTop="8dp"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="@dimen/text_size_small"
+                tools:text="@string/about_ver"/>
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@null"
-                    android:tint="?attr/colorAccent"
-                    app:srcCompat="@drawable/ic_mail_outline_24dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:text="@string/about_email"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="@dimen/text_size_medium_small"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/developByTextView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:gravity="center_vertical"
-                android:onClick="@{viewModel::onClickWebSite}"
-                android:orientation="horizontal"
-                android:paddingBottom="16dp"
-                android:paddingEnd="32dp"
-                android:paddingStart="32dp"
-                android:paddingTop="16dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@null"
-                    android:tint="?attr/colorAccent"
-                    app:srcCompat="@drawable/ic_public_24dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:text="@string/about_web_site"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="@dimen/text_size_medium_small"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{viewModel.copyrightText}"
-                    android:textColor="?android:attr/textColorTertiary"
-                    android:textSize="@dimen/text_size_micro"
-                    tools:text="@string/about_copyright"/>
-
-            </LinearLayout>
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="@dimen/text_size_small"
+                tools:text="@string/about_develop_by"/>
 
         </LinearLayout>
 
-    </ScrollView>
+        <LinearLayout
+            android:id="@+id/playStoreLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="16dp"
+            android:paddingEnd="32dp"
+            android:paddingStart="32dp"
+            android:paddingTop="16dp">
 
-</layout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                android:tint="?attr/colorAccent"
+                app:srcCompat="@drawable/ic_googleplay_24dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:text="@string/about_play_store"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="@dimen/text_size_medium_small"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/mailLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="16dp"
+            android:paddingEnd="32dp"
+            android:paddingStart="32dp"
+            android:paddingTop="16dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                android:tint="?attr/colorAccent"
+                app:srcCompat="@drawable/ic_mail_outline_24dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:text="@string/about_email"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="@dimen/text_size_medium_small"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/webSiteLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="16dp"
+            android:paddingEnd="32dp"
+            android:paddingStart="32dp"
+            android:paddingTop="16dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                android:tint="?attr/colorAccent"
+                app:srcCompat="@drawable/ic_public_24dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:text="@string/about_web_site"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="@dimen/text_size_medium_small"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/copyrightTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:attr/textColorTertiary"
+                android:textSize="@dimen/text_size_micro"
+                tools:text="@string/about_copyright"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

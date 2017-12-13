@@ -1,48 +1,67 @@
 package com.kazakago.cleanarchitecture.presentation.view.adapter
 
 import android.content.Context
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import com.kazakago.cleanarchitecture.databinding.SpinnerCityBinding
-import com.kazakago.cleanarchitecture.databinding.SpinnerCityDropdownBinding
-import com.kazakago.cleanarchitecture.presentation.presenter.adapter.CityViewModel
+import android.widget.TextView
+import com.kazakago.cleanarchitecture.R
+import com.kazakago.cleanarchitecture.domain.model.city.CityModel
 
 class CitySpinnerAdapter(private val context: Context) : BaseAdapter() {
 
-    var cityViewModelList: List<CityViewModel> = listOf()
+    inner class ViewHolder(context: Context, parent: ViewGroup) : AbsViewHolder<CityModel>(context, parent, R.layout.spinner_city) {
 
-    override fun getCount(): Int = cityViewModelList.size
+        private val nameTextView = itemView.findViewById<TextView>(R.id.nameTextView)
 
-    override fun getItem(position: Int): CityViewModel = cityViewModelList[position]
+        override fun setItem(item: CityModel) {
+            nameTextView.text = item.name
+        }
+    }
+
+    inner class DropDownViewHolder(context: Context, parent: ViewGroup) : AbsViewHolder<CityModel>(context, parent, R.layout.spinner_city_dropdown) {
+
+        private val nameTextView = itemView.findViewById<TextView>(R.id.nameTextView)
+
+        override fun setItem(item: CityModel) {
+            nameTextView.text = item.name
+        }
+    }
+
+    var cityModelList: List<CityModel> = listOf()
+
+    override fun getCount(): Int = cityModelList.size
+
+    override fun getItem(position: Int): CityModel = cityModelList[position]
 
     override fun getItemId(position: Int): Long = position.toLong()
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
-        val binding: SpinnerCityBinding?
-        if (convertView != null) {
-            binding = convertView.tag as? SpinnerCityBinding
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View? {
+        var mutableConvertView = convertView
+        val viewHolder: ViewHolder
+        if (mutableConvertView == null) {
+            viewHolder = ViewHolder(context, parent)
+            mutableConvertView = viewHolder.itemView
+            mutableConvertView.tag = viewHolder
         } else {
-            binding = SpinnerCityBinding.inflate(LayoutInflater.from(context), parent, false)
-            binding.root?.tag = binding
+            viewHolder = mutableConvertView.tag as ViewHolder
         }
-
-        binding?.viewModel = getItem(position)
-        return binding?.root
+        viewHolder.setItem(cityModelList[position])
+        return mutableConvertView
     }
 
-    override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup?): View? {
-        val binding: SpinnerCityDropdownBinding?
-        if (convertView != null) {
-            binding = convertView.tag as? SpinnerCityDropdownBinding
+    override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View? {
+        var mutableConvertView = convertView
+        val viewHolder: DropDownViewHolder
+        if (mutableConvertView == null) {
+            viewHolder = DropDownViewHolder(context, parent)
+            mutableConvertView = viewHolder.itemView
+            mutableConvertView.tag = viewHolder
         } else {
-            binding = SpinnerCityDropdownBinding.inflate(LayoutInflater.from(context), parent, false)
-            binding.root?.tag = binding
+            viewHolder = mutableConvertView.tag as DropDownViewHolder
         }
-
-        binding?.viewModel = getItem(position)
-        return binding?.root
+        viewHolder.setItem(cityModelList[position])
+        return mutableConvertView
     }
 
 }

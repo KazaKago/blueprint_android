@@ -1,11 +1,8 @@
 package com.kazakago.cleanarchitecture.presentation.presenter.fragment
 
-import android.content.Context
-import android.content.Intent
-import android.databinding.ObservableField
+import android.app.Application
+import android.arch.lifecycle.*
 import android.net.Uri
-import android.os.Bundle
-import android.view.View
 import com.github.salomonbrys.kodein.LazyKodein
 import com.github.salomonbrys.kodein.LazyKodeinAware
 import com.github.salomonbrys.kodein.android.appKodein
@@ -18,50 +15,37 @@ import com.kazakago.cleanarchitecture.domain.usecase.appInfo.GetPlayStoreUrlUseC
 import com.kazakago.cleanarchitecture.presentation.listener.presenter.fragment.AboutFragmentViewModelListener
 import java.util.*
 
-class AboutFragmentViewModel(private val context: Context, private val listener: AboutFragmentViewModelListener): LazyKodeinAware {
+class AboutFragmentViewModel(application: Application) : AndroidViewModel(application), LifecycleObserver, LazyKodeinAware {
 
-    override val kodein = LazyKodein(context.appKodein)
+    override val kodein = LazyKodein(application.appKodein)
 
-    val verText = ObservableField<String>()
-    val developByText = ObservableField<String>()
-    val copyrightText = ObservableField<String>()
+    val versionText = MutableLiveData<String>()
+    val developByText = MutableLiveData<String>()
+    val copyrightText = MutableLiveData<String>()
 
+    var listener: AboutFragmentViewModelListener? = null
     private val getAppVersionUseCase: GetAppVersionUseCase by instance()
     private val getPlayStoreUrlUseCase: GetPlayStoreUrlUseCase by instance()
     private val getMailAddressUrlUseCase: GetMailAddressUrlUseCase by instance()
     private val getOfficialSiteUrlUseCase: GetOfficialSiteUrlUseCase by instance()
 
-    fun onViewCreated(savedInstanceState: Bundle?){
-        verText.set(context.getString(R.string.about_ver, getAppVersionUseCase.execute(Unit)))
-        developByText.set(context.getString(R.string.about_develop_by, context.getString(R.string.developer_name)))
-        copyrightText.set(context.getString(R.string.about_copyright, Calendar.getInstance().get(Calendar.YEAR), context.getString(R.string.developer_name)))
+    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    fun onCreate() {
+        versionText.value = getApplication<Application>().getString(R.string.about_ver, getAppVersionUseCase.execute(Unit))
+        developByText.value = getApplication<Application>().getString(R.string.about_develop_by, getApplication<Application>().getString(R.string.developer_name))
+        copyrightText.value = getApplication<Application>().getString(R.string.about_copyright, Calendar.getInstance().get(Calendar.YEAR), getApplication<Application>().getString(R.string.developer_name))
     }
 
-    fun onClickPlayStore(view: View?) {
-        toPlayStore()
+    fun onClickPlayStore() {
+        listener?.openActionView(Uri.parse(getPlayStoreUrlUseCase.execute(Unit)))
     }
 
-    fun onClickMail(view: View?) {
-        toMailApp()
+    fun onClickMail() {
+        listener?.openSendTo(Uri.parse("mailto:" + getMailAddressUrlUseCase.execute(Unit)))
     }
 
-    fun onClickWebSite(view: View?) {
-        toWebSite()
-    }
-
-    private fun toPlayStore() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(getPlayStoreUrlUseCase.execute(Unit)))
-        listener.startActivity(intent = intent)
-    }
-
-    private fun toMailApp() {
-        val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + getMailAddressUrlUseCase.execute(Unit)))
-        listener.startActivity(intent = intent)
-    }
-
-    private fun toWebSite() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(getOfficialSiteUrlUseCase.execute(Unit)))
-        listener.startActivity(intent = intent)
+    fun onClickWebSite() {
+        listener?.openActionView(Uri.parse(getOfficialSiteUrlUseCase.execute(Unit)))
     }
 
 }

@@ -1,13 +1,18 @@
 package com.kazakago.cleanarchitecture.presentation.view.fragment
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.kazakago.cleanarchitecture.databinding.FragmentAboutBinding
+import com.kazakago.cleanarchitecture.R
 import com.kazakago.cleanarchitecture.presentation.listener.presenter.fragment.AboutFragmentViewModelListener
 import com.kazakago.cleanarchitecture.presentation.presenter.fragment.AboutFragmentViewModel
+import kotlinx.android.synthetic.main.fragment_about.*
 
 class AboutFragment : Fragment(), AboutFragmentViewModelListener {
 
@@ -16,20 +21,56 @@ class AboutFragment : Fragment(), AboutFragmentViewModelListener {
         fun createInstance(): AboutFragment = AboutFragment()
     }
 
-    private val viewModel: AboutFragmentViewModel by lazy { AboutFragmentViewModel(context = activity!!, listener = this) }
-    private lateinit var binding: FragmentAboutBinding
+    private val viewModel by lazy { ViewModelProviders.of(this).get(AboutFragmentViewModel::class.java) }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        lifecycle.addObserver(viewModel)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentAboutBinding.inflate(inflater, container, false)
-        binding.viewModel = viewModel
-        return binding.root
+        val view = inflater.inflate(R.layout.fragment_about, container, false)
+        viewModel.listener = this
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.onViewCreated(savedInstanceState = savedInstanceState)
+        viewModel.versionText.observe(this, Observer {
+            versionTextView.text = it
+        })
+        viewModel.developByText.observe(this, Observer {
+            developByTextView.text = it
+        })
+        viewModel.copyrightText.observe(this, Observer {
+            copyrightTextView.text = it
+        })
+        playStoreLayout.setOnClickListener {
+            viewModel.onClickPlayStore()
+        }
+        webSiteLayout.setOnClickListener {
+            viewModel.onClickWebSite()
+        }
+        mailLayout.setOnClickListener {
+            viewModel.onClickMail()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewModel.listener = null
     }
 
     /* AboutFragmentViewModelListener */
+
+    override fun openActionView(uri: Uri) {
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        startActivity(intent)
+    }
+
+    override fun openSendTo(uri: Uri) {
+        val intent = Intent(Intent.ACTION_SENDTO, uri)
+        startActivity(intent)
+    }
 
 }

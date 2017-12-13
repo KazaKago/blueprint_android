@@ -1,9 +1,9 @@
 package com.kazakago.cleanarchitecture.presentation.listener.view.adapter
 
-import com.kazakago.cleanarchitecture.presentation.presenter.adapter.ForecastViewModel
+import com.kazakago.cleanarchitecture.domain.model.weather.ForecastModel
 
 interface ForecastRecyclerAdapterListener {
 
-    fun onItemClick(forecastViewModel: ForecastViewModel)
+    fun onItemClick(forecastModel: ForecastModel)
 
 }

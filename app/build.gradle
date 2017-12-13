@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 //Kotlin
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
 //Realm
 apply plugin: 'realm-android'
 
@@ -46,10 +47,6 @@ android {
             versionName "${VERSION_NAME} staging"
         }
     }
-    dataBinding {
-        //Need for Android Data-Binding
-        enabled = true
-    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -69,8 +66,11 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:27.0.2'
     //Design Support Library
     implementation 'com.android.support:design:27.0.2'
-    //Data-Binding for Kotlin
-    kapt 'com.android.databinding:compiler:3.0.1'
+    //Architecture Components
+    implementation 'android.arch.lifecycle:extensions:1.0.0'
+    kapt 'android.arch.lifecycle:compiler:1.0.0'
+    implementation 'android.arch.persistence.room:runtime:1.0.0'
+    kapt 'android.arch.persistence.room:compiler:1.0.0'
     //Rx
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.7'

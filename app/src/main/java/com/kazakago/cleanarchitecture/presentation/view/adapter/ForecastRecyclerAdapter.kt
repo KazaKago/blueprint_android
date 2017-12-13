@@ -2,34 +2,51 @@ package com.kazakago.cleanarchitecture.presentation.view.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.kazakago.cleanarchitecture.BR
-import com.kazakago.cleanarchitecture.databinding.RecyclerForecastBinding
+import android.widget.ImageView
+import android.widget.TextView
+import com.kazakago.cleanarchitecture.R
+import com.kazakago.cleanarchitecture.domain.model.weather.ForecastModel
 import com.kazakago.cleanarchitecture.presentation.listener.view.adapter.ForecastRecyclerAdapterListener
-import com.kazakago.cleanarchitecture.presentation.presenter.adapter.ForecastViewModel
+import com.squareup.picasso.Picasso
 
-class ForecastRecyclerAdapter(private val context: Context, private val listener: ForecastRecyclerAdapterListener) : RecyclerView.Adapter<ForecastRecyclerAdapter.ViewHolder>() {
+class ForecastRecyclerAdapter(private val context: Context) : RecyclerView.Adapter<ForecastRecyclerAdapter.ViewHolder>() {
 
-    data class ViewHolder(val binding: RecyclerForecastBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ViewHolder(context: Context, parent: ViewGroup) : AbsViewHolder<ForecastModel>(context, parent, R.layout.recycler_forecast) {
 
-    var forecastList: List<ForecastViewModel> = listOf()
+        private val dateLabelTextView = itemView.findViewById<TextView>(R.id.dateLabelTextView)
+        private val dateTextView = itemView.findViewById<TextView>(R.id.dateTextView)
+        private val weatherImageView = itemView.findViewById<ImageView>(R.id.weatherImageView)
+        private val telopTextView = itemView.findViewById<TextView>(R.id.telopTextView)
+        private val maxTemperatureTextView = itemView.findViewById<TextView>(R.id.maxTemperatureTextView)
+        private val minTemperatureTextView = itemView.findViewById<TextView>(R.id.minTemperatureTextView)
+
+        override fun setItem(item: ForecastModel) {
+            Picasso.with(context).load(item.image.url)
+                    .into(weatherImageView)
+            dateLabelTextView.text = item.dateLabel
+            dateTextView.text = item.date
+            telopTextView.text = item.telop
+            maxTemperatureTextView.text = context.getString(R.string.temperature_max, item.temperature.max?.celsius?.toString() ?: "--")
+            minTemperatureTextView.text = context.getString(R.string.temperature_min, item.temperature.min?.celsius?.toString() ?: "--")
+            itemView?.setOnClickListener {
+                listener?.onItemClick(item)
+            }
+        }
+
+    }
+
+    var listener: ForecastRecyclerAdapterListener? = null
+    var forecastList: List<ForecastModel> = listOf()
 
     override fun getItemCount(): Int = forecastList.size
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-        val binding = RecyclerForecastBinding.inflate(LayoutInflater.from(context), parent, false)
-        return ViewHolder(binding)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder(context, parent)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        val item = forecastList[position]
-
-        holder?.binding?.setVariable(BR.viewModel, item)
-        holder?.binding?.executePendingBindings()
-        holder?.binding?.root?.setOnClickListener {
-            listener.onItemClick(item)
-        }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.setItem(forecastList[position])
     }
 
 }

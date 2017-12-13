@@ -1,99 +1,56 @@
 package com.kazakago.cleanarchitecture.presentation.presenter.fragment
 
-import android.content.Context
-import android.databinding.ObservableField
-import android.os.Bundle
-import android.os.Handler
-import android.view.View
-import android.widget.AdapterView
-import com.evernote.android.state.State
-import com.evernote.android.state.StateSaver
+import android.app.Application
+import android.arch.lifecycle.AndroidViewModel
+import android.arch.lifecycle.LifecycleObserver
+import android.arch.lifecycle.MutableLiveData
 import com.github.salomonbrys.kodein.LazyKodein
 import com.github.salomonbrys.kodein.LazyKodeinAware
 import com.github.salomonbrys.kodein.android.appKodein
 import com.github.salomonbrys.kodein.instance
-import com.kazakago.cleanarchitecture.R
 import com.kazakago.cleanarchitecture.domain.model.city.CityModel
+import com.kazakago.cleanarchitecture.domain.model.weather.ForecastModel
 import com.kazakago.cleanarchitecture.domain.model.weather.WeatherModel
 import com.kazakago.cleanarchitecture.domain.usecase.city.GetCityUseCase
 import com.kazakago.cleanarchitecture.domain.usecase.weather.GetWeatherUseCase
 import com.kazakago.cleanarchitecture.presentation.listener.presenter.fragment.MainFragmentViewModelListener
 import com.kazakago.cleanarchitecture.presentation.listener.view.adapter.ForecastRecyclerAdapterListener
-import com.kazakago.cleanarchitecture.presentation.presenter.adapter.CityViewModel
-import com.kazakago.cleanarchitecture.presentation.presenter.adapter.ForecastViewModel
-import com.kazakago.cleanarchitecture.presentation.view.adapter.CitySpinnerAdapter
-import com.kazakago.cleanarchitecture.presentation.view.adapter.ForecastRecyclerAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import java.text.ParseException
-import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.collections.ArrayList
 
-class MainFragmentViewModel(private val context: Context, private val listener: MainFragmentViewModelListener) : LazyKodeinAware, ForecastRecyclerAdapterListener {
+class MainFragmentViewModel(application: Application) : AndroidViewModel(application), LifecycleObserver, LazyKodeinAware, ForecastRecyclerAdapterListener {
 
-    override val kodein = LazyKodein(context.appKodein)
+    override val kodein = LazyKodein(application.appKodein)
 
-    var area = ObservableField<String>()
-    var prefecture = ObservableField<String>()
-    var city = ObservableField<String>()
-    var publicTime = ObservableField<String>()
-    var citySpinnerAdapter = ObservableField<CitySpinnerAdapter>(CitySpinnerAdapter(context))
-    var forecastRecyclerAdapter = ObservableField<ForecastRecyclerAdapter>(ForecastRecyclerAdapter(context, this))
-
+    var listener: MainFragmentViewModelListener? = null
+    private val compositeDisposable = CompositeDisposable()
     private val getWeatherUseCase: GetWeatherUseCase by instance()
     private val getCityUseCase: GetCityUseCase by instance()
-    private lateinit var compositeDisposable: CompositeDisposable
-    @State
-    var cityList: ArrayList<CityModel>? = null
-    @State
-    var weather: WeatherModel? = null
-    @State
-    var selectedPosition: Int = 0
 
-    fun onCreate(savedInstanceState: Bundle?) {
-        StateSaver.restoreInstanceState(this, savedInstanceState)
-        compositeDisposable = CompositeDisposable()
-    }
+    val cityList = MutableLiveData<List<CityModel>>()
+    val weather = MutableLiveData<WeatherModel>()
+    val selectedPosition = MutableLiveData<Int>()
 
-    fun onViewCreated(savedInstanceState: Bundle?) {
-        cityList?.let {
-            refreshCityList()
-            weather?.let {
-                refreshWeather()
-            } ?: run {
-                fetchWeather()
-            }
-        } ?: run {
-            fetchCityList {
-                fetchWeather()
-            }
+    init {
+        fetchCityList {
+            fetchWeather()
         }
     }
 
-    fun onDestroy() {
+    override fun onCleared() {
+        super.onCleared()
         compositeDisposable.dispose()
     }
 
-    fun onSaveInstanceState(outState: Bundle?) {
-        outState?.let { StateSaver.saveInstanceState(this, it) }
-    }
-
-    fun onClickRefresh(view: View?) {
+    fun onClickRefresh() {
         fetchWeather()
     }
 
-    fun onCitySelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        selectedPosition = position
-        refreshTitle()
+    fun onCitySelected(position: Int) {
+        selectedPosition.value = position
         fetchWeather()
-    }
-
-    private fun refreshTitle() {
-        val city = cityList?.get(selectedPosition)
-        listener.setActionBarTitle(city?.name)
     }
 
     private fun fetchCityList(completion: (() -> Unit)? = null) {
@@ -103,84 +60,39 @@ class MainFragmentViewModel(private val context: Context, private val listener: 
                 .toList()
                 .subscribeBy(
                         onSuccess = {
-                            cityList = ArrayList(it)
-                            refreshCityList()
+                            cityList.value = it
                             completion?.invoke()
                         },
                         onError = {
-                            listener.showToast(message = it.localizedMessage)
+                            listener?.showToast(it.localizedMessage)
                             completion?.invoke()
                         }
                 ))
     }
 
-    private fun refreshCityList() {
-        cityList?.map { CityViewModel(context, it) }?.let {
-            citySpinnerAdapter.get().cityViewModelList = it
-            Handler().post { listener.setCitySpinnerSelection(position = selectedPosition) }
-        } ?: run {
-            citySpinnerAdapter.get().cityViewModelList = ArrayList()
-        }
-        citySpinnerAdapter.get().notifyDataSetChanged()
-        refreshTitle()
-    }
-
     private fun fetchWeather(completion: (() -> Unit)? = null) {
-        cityList?.get(selectedPosition)?.id?.let {
-            compositeDisposable.add(getWeatherUseCase.execute(input = it)
+        cityList.value?.get(selectedPosition.value ?: 0)?.id?.let {
+            compositeDisposable.add(getWeatherUseCase.execute(it)
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeBy(
                             onSuccess = {
-                                weather = it
-                                refreshWeather()
+                                weather.value = it
                                 completion?.invoke()
                             },
                             onError = {
-                                weather = null
-                                refreshWeather()
-                                listener.showToast(message = it.localizedMessage)
+                                weather.value = null
+                                listener?.showToast(it.localizedMessage)
                                 completion?.invoke()
                             }
                     ))
         }
     }
 
-    private fun refreshWeather() {
-        area.set(weather?.location?.area)
-        prefecture.set(weather?.location?.prefecture)
-        city.set(weather?.location?.city)
-        weather?.let {
-            publicTime.set(context.getString(R.string.public_time, formattedTime(timeStr = it.publicTime)))
-            forecastRecyclerAdapter.get().forecastList = it.forecasts.map { ForecastViewModel(context = context, forecast = it) }
-        } ?: run {
-            publicTime.set(null)
-            forecastRecyclerAdapter.get().forecastList = ArrayList()
-        }
-        forecastRecyclerAdapter.get().notifyDataSetChanged()
-    }
-
-    private fun formattedTime(timeStr: String?): String? {
-        return timeStr?.let {
-            try {
-                val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSSZ", Locale.getDefault())
-                return formattedTime(timestamp = formatter.parse(it).time)
-            } catch (e: ParseException) {
-                null
-            }
-        }
-    }
-
-    private fun formattedTime(timestamp: Long): String {
-        val dateFormat = android.text.format.DateFormat.getDateFormat(context)
-        val timeFormat = android.text.format.DateFormat.getTimeFormat(context)
-        return dateFormat.format(timestamp) + " " + timeFormat.format(timestamp)
-    }
-
     /* ForecastRecyclerAdapterListener */
 
-    override fun onItemClick(forecastViewModel: ForecastViewModel) {
-        listener.showToast(message = forecastViewModel.telop.get())
+    override fun onItemClick(forecastModel: ForecastModel) {
+        listener?.showToast(forecastModel.telop)
     }
 
 }
