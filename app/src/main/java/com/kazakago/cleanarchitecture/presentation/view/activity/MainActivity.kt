@@ -8,13 +8,12 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.kazakago.cleanarchitecture.R
-import com.kazakago.cleanarchitecture.presentation.listener.presenter.activity.MainActivityViewModelListener
-import com.kazakago.cleanarchitecture.presentation.listener.view.fragment.MainFragmentListener
+import com.kazakago.cleanarchitecture.presentation.listener.activity.MainActivityViewModelListener
 import com.kazakago.cleanarchitecture.presentation.presenter.activity.MainActivityViewModel
 import com.kazakago.cleanarchitecture.presentation.view.fragment.MainFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), MainFragmentListener, MainActivityViewModelListener {
+class MainActivity : AppCompatActivity(), MainFragment.Listener, MainActivityViewModelListener {
 
     companion object {
         @JvmStatic

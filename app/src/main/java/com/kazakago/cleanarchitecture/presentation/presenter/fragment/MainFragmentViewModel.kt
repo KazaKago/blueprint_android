@@ -14,24 +14,24 @@ import com.kazakago.cleanarchitecture.domain.model.weather.WeatherModel
 import com.kazakago.cleanarchitecture.domain.usecase.city.GetCityUseCase
 import com.kazakago.cleanarchitecture.domain.usecase.weather.GetWeatherUseCase
 import com.kazakago.cleanarchitecture.presentation.listener.presenter.fragment.MainFragmentViewModelListener
-import com.kazakago.cleanarchitecture.presentation.listener.view.adapter.ForecastRecyclerAdapterListener
+import com.kazakago.cleanarchitecture.presentation.view.adapter.ForecastRecyclerAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 
-class MainFragmentViewModel(application: Application) : AndroidViewModel(application), LifecycleObserver, LazyKodeinAware, ForecastRecyclerAdapterListener {
+class MainFragmentViewModel(application: Application) : AndroidViewModel(application), LifecycleObserver, LazyKodeinAware, ForecastRecyclerAdapter.Listener {
 
     override val kodein = LazyKodein(application.appKodein)
+
+    val cityList = MutableLiveData<List<CityModel>>()
+    val weather = MutableLiveData<WeatherModel>()
+    val selectedPosition = MutableLiveData<Int>()
 
     var listener: MainFragmentViewModelListener? = null
     private val compositeDisposable = CompositeDisposable()
     private val getWeatherUseCase: GetWeatherUseCase by instance()
     private val getCityUseCase: GetCityUseCase by instance()
-
-    val cityList = MutableLiveData<List<CityModel>>()
-    val weather = MutableLiveData<WeatherModel>()
-    val selectedPosition = MutableLiveData<Int>()
 
     init {
         fetchCityList {
@@ -89,7 +89,7 @@ class MainFragmentViewModel(application: Application) : AndroidViewModel(applica
         }
     }
 
-    /* ForecastRecyclerAdapterListener */
+    /* ForecastRecyclerAdapter.Listener */
 
     override fun onItemClick(forecastModel: ForecastModel) {
         listener?.showToast(forecastModel.telop)

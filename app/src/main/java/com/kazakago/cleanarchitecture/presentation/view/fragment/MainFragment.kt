@@ -13,13 +13,18 @@ import android.widget.Toast
 import com.kazakago.cleanarchitecture.R
 import com.kazakago.cleanarchitecture.presentation.extension.formattedTime
 import com.kazakago.cleanarchitecture.presentation.listener.presenter.fragment.MainFragmentViewModelListener
-import com.kazakago.cleanarchitecture.presentation.listener.view.fragment.MainFragmentListener
 import com.kazakago.cleanarchitecture.presentation.presenter.fragment.MainFragmentViewModel
 import com.kazakago.cleanarchitecture.presentation.view.adapter.CitySpinnerAdapter
 import com.kazakago.cleanarchitecture.presentation.view.adapter.ForecastRecyclerAdapter
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment(), MainFragmentViewModelListener {
+
+    interface Listener {
+
+        fun setActionBarTitle(title: String?)
+
+    }
 
     companion object {
         @JvmStatic
@@ -29,16 +34,21 @@ class MainFragment : Fragment(), MainFragmentViewModelListener {
     private val viewModel by lazy { ViewModelProviders.of(this).get(MainFragmentViewModel::class.java) }
     private lateinit var citySpinnerAdapter: CitySpinnerAdapter
     private lateinit var forecastRecyclerAdapter: ForecastRecyclerAdapter
-    private var listener: MainFragmentListener? = null
+    private var listener: Listener? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        listener = context as? Listener
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         lifecycle.addObserver(viewModel)
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        listener = context as MainFragmentListener
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

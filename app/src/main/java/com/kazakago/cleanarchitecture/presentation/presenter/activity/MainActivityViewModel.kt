@@ -3,7 +3,7 @@ package com.kazakago.cleanarchitecture.presentation.presenter.activity
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LifecycleObserver
-import com.kazakago.cleanarchitecture.presentation.listener.presenter.activity.MainActivityViewModelListener
+import com.kazakago.cleanarchitecture.presentation.listener.activity.MainActivityViewModelListener
 
 class MainActivityViewModel(application: Application) : AndroidViewModel(application), LifecycleObserver {
 

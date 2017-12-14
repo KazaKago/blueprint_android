@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.kazakago.cleanarchitecture.R
-import com.kazakago.cleanarchitecture.presentation.listener.presenter.activity.AboutActivityViewModelListener
+import com.kazakago.cleanarchitecture.presentation.listener.activity.AboutActivityViewModelListener
 import com.kazakago.cleanarchitecture.presentation.presenter.activity.AboutActivityViewModel
 import com.kazakago.cleanarchitecture.presentation.view.fragment.AboutFragment
 import kotlinx.android.synthetic.main.activity_about.*

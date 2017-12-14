@@ -7,10 +7,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.kazakago.cleanarchitecture.R
 import com.kazakago.cleanarchitecture.domain.model.weather.ForecastModel
-import com.kazakago.cleanarchitecture.presentation.listener.view.adapter.ForecastRecyclerAdapterListener
 import com.squareup.picasso.Picasso
 
 class ForecastRecyclerAdapter(private val context: Context) : RecyclerView.Adapter<ForecastRecyclerAdapter.ViewHolder>() {
+
+    interface Listener {
+
+        fun onItemClick(forecastModel: ForecastModel)
+
+    }
 
     inner class ViewHolder(context: Context, parent: ViewGroup) : AbsViewHolder<ForecastModel>(context, parent, R.layout.recycler_forecast) {
 
@@ -36,7 +41,7 @@ class ForecastRecyclerAdapter(private val context: Context) : RecyclerView.Adapt
 
     }
 
-    var listener: ForecastRecyclerAdapterListener? = null
+    var listener: Listener? = null
     var forecastList: List<ForecastModel> = listOf()
 
     override fun getItemCount(): Int = forecastList.size

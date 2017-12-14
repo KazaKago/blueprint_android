@@ -1,7 +1,9 @@
 package com.kazakago.cleanarchitecture.presentation.presenter.fragment
 
 import android.app.Application
-import android.arch.lifecycle.*
+import android.arch.lifecycle.AndroidViewModel
+import android.arch.lifecycle.LifecycleObserver
+import android.arch.lifecycle.MutableLiveData
 import android.net.Uri
 import com.github.salomonbrys.kodein.LazyKodein
 import com.github.salomonbrys.kodein.LazyKodeinAware
@@ -29,8 +31,7 @@ class AboutFragmentViewModel(application: Application) : AndroidViewModel(applic
     private val getMailAddressUrlUseCase: GetMailAddressUrlUseCase by instance()
     private val getOfficialSiteUrlUseCase: GetOfficialSiteUrlUseCase by instance()
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    fun onCreate() {
+    init {
         versionText.value = getApplication<Application>().getString(R.string.about_ver, getAppVersionUseCase.execute(Unit))
         developByText.value = getApplication<Application>().getString(R.string.about_develop_by, getApplication<Application>().getString(R.string.developer_name))
         copyrightText.value = getApplication<Application>().getString(R.string.about_copyright, Calendar.getInstance().get(Calendar.YEAR), getApplication<Application>().getString(R.string.developer_name))
