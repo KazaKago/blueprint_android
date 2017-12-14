@@ -1,15 +1,22 @@
 package com.kazakago.cleanarchitecture.data.entity.weather
 
-import io.realm.RealmList
-import io.realm.RealmObject
+import android.arch.persistence.room.Embedded
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 
-open class CopyrightEntity(
+@Entity
+class CopyrightEntity(
+        @PrimaryKey(autoGenerate = true)
+        val copyrightId: Int,
+
         //コピーライトの文言
-        var title: String = "",
+        val title: String?,
         //livedoor 天気情報のURL
-        var link: String = "",
+        val link: String?,
         //livedoor 天気情報へのURL、アイコンなど
-        var image: ImageEntity? = null,
+        @Embedded
+        val image: ImageEntity?,
         //livedoor 天気情報で使用している気象データの配信元
-        var provider: RealmList<LinkEntity> = RealmList()
-) : RealmObject()
+        @Embedded
+        val provider: List<LinkEntity>?
+)

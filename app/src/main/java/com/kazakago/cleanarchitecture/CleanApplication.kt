@@ -9,10 +9,8 @@ import com.kazakago.cleanarchitecture.di.applicationModule
 import com.kazakago.cleanarchitecture.di.dataModule
 import com.kazakago.cleanarchitecture.di.domainModule
 import com.kazakago.cleanarchitecture.di.webModule
-import io.realm.Realm
-import io.realm.RealmConfiguration
 
-open class CleanApplication : MultiDexApplication(), KodeinAware {
+class CleanApplication : MultiDexApplication(), KodeinAware {
 
     override val kodein: Kodein by Kodein.lazy {
         import(autoAndroidModule(this@CleanApplication))
@@ -20,17 +18,6 @@ open class CleanApplication : MultiDexApplication(), KodeinAware {
         import(domainModule())
         import(dataModule())
         import(webModule())
-    }
-
-    override fun onCreate() {
-        super.onCreate()
-        initializeRealm()
-    }
-
-    private fun initializeRealm() {
-        Realm.init(this)
-        val realmConfiguration = RealmConfiguration.Builder().build()
-        Realm.setDefaultConfiguration(realmConfiguration)
     }
 
 }

@@ -10,6 +10,6 @@ interface WeatherRepository {
 
     fun insert(weather: WeatherModel)
 
-    fun delete(cityId: String)
+    fun delete(weather: WeatherModel)
 
 }

@@ -1,12 +1,17 @@
 package com.kazakago.cleanarchitecture.data.entity.weather
 
-import io.realm.RealmObject
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 
-open class LocationEntity(
+@Entity
+class LocationEntity(
+        @PrimaryKey
+        val locationId: Int,
+
         //地方名（例・九州地方）
-        var area: String = "",
+        val area: String?,
         //都道府県名（例・福岡県）
-        var prefecture: String = "",
+        val prefecture: String?,
         //1次細分区名（例・八幡）
-        var city: String = ""
-) : RealmObject()
+        val city: String?
+)

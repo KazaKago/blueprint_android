@@ -1,16 +1,21 @@
 package com.kazakago.cleanarchitecture.data.entity.weather
 
-import io.realm.RealmObject
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 
-open class ImageEntity(
+@Entity
+class ImageEntity(
+        @PrimaryKey(autoGenerate = true)
+        val imageId: Int,
+
         //天気（晴れ、曇り、雨など）
-        var title: String = "",
+        val title: String?,
         //リクエストされたデータの地域に該当するlivedoor 天気情報のURL
-        var link: String = "",
+        val link: String?,
         //天気アイコンのURL
-        var url: String = "",
+        val url: String?,
         //天気アイコンの幅
-        var width: Int = 0,
+        val width: Int?,
         //天気アイコンの高さ
-        var height: Int = 0
-) : RealmObject()
+        val height: Int?
+)

@@ -1,10 +1,7 @@
 apply plugin: 'com.android.application'
-//Kotlin
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
-//Realm
-apply plugin: 'realm-android'
 
 def VERSION_CODE = 1
 def VERSION_NAME = "1.0.0"
@@ -53,11 +50,6 @@ android {
     }
 }
 
-repositories {
-    //Need for Stetho-Realm
-    maven { url 'https://github.com/uPhyca/stetho-realm/raw/master/maven-repo' }
-}
-
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     //Kotlin
@@ -91,14 +83,6 @@ dependencies {
     implementation 'nz.bradcampbell:paperparcel:2.0.4'
     implementation 'nz.bradcampbell:paperparcel-kotlin:2.0.4'
     kapt 'nz.bradcampbell:paperparcel-compiler:2.0.4'
-    //Android-State
-    implementation 'com.evernote:android-state:1.1.6'
-    kapt 'com.evernote:android-state-processor:1.1.6'
-
-    //Stetho
-    debugImplementation 'com.facebook.stetho:stetho:1.5.0'
-    //Stetho-Realm
-    debugImplementation 'com.uphyca:stetho_realm:2.0.0'
 
     //JUnit
     testImplementation 'junit:junit:4.12'

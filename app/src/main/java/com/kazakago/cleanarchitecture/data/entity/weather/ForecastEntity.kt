@@ -1,16 +1,24 @@
 package com.kazakago.cleanarchitecture.data.entity.weather
 
-import io.realm.RealmObject
+import android.arch.persistence.room.Embedded
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 
-open class ForecastEntity(
+@Entity
+class ForecastEntity(
+        @PrimaryKey(autoGenerate = true)
+        val forecastId: Int,
+
         //予報日
-        var date: String = "",
+        val date: String?,
         //予報日(今日、明日、明後日のいずれか)
-        var dateLabel: String = "",
+        val dateLabel: String?,
         //天気（晴れ、曇り、雨など）
-        var telop: String = "",
+        val telop: String?,
         //画像
-        var image: ImageEntity? = null,
+        @Embedded
+        val image: ImageEntity?,
         //気温
-        var temperature: TemperatureEntity? = null
-) : RealmObject()
+        @Embedded
+        val temperature: TemperatureEntity?
+)

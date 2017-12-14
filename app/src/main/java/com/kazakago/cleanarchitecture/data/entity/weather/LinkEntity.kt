@@ -1,10 +1,15 @@
 package com.kazakago.cleanarchitecture.data.entity.weather
 
-import io.realm.RealmObject
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 
-open class LinkEntity(
+@Entity
+class LinkEntity(
+        @PrimaryKey(autoGenerate = true)
+        val linkId: Int,
+
         //市区町村名
-        var name: String = "",
+        val name: String?,
         //対応するlivedoor 天気情報のURL
-        var link: String = ""
-) : RealmObject()
+        val link: String?
+)

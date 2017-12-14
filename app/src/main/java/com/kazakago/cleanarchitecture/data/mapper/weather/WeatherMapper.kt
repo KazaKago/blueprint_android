@@ -3,7 +3,6 @@ package com.kazakago.cleanarchitecture.data.mapper.weather
 import com.kazakago.cleanarchitecture.data.entity.weather.*
 import com.kazakago.cleanarchitecture.domain.mapper.ReversibleEntityMapper
 import com.kazakago.cleanarchitecture.domain.model.weather.*
-import io.realm.RealmList
 
 object WeatherMapper : ReversibleEntityMapper<WeatherEntity, WeatherModel> {
 
@@ -122,12 +121,12 @@ object WeatherMapper : ReversibleEntityMapper<WeatherEntity, WeatherModel> {
                                         }
                                 )
                             })
-                }.let { RealmList<ForecastEntity>().apply { addAll(it) } },
+                },
                 pinpointLocations = destination.pinpointLocations.map {
                     LinkEntity(
                             name = it.name,
                             link = it.link)
-                }.let { RealmList<LinkEntity>().apply { addAll(it) } },
+                },
                 copyright = destination.copyright.let {
                     CopyrightEntity(
                             title = it.title,
@@ -144,7 +143,7 @@ object WeatherMapper : ReversibleEntityMapper<WeatherEntity, WeatherModel> {
                                 LinkEntity(
                                         name = it.name,
                                         link = it.link)
-                            }.let { RealmList<LinkEntity>().apply { addAll(it) } })
+                            })
                 })
     }
 

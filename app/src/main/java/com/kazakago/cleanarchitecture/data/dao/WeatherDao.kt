@@ -1,47 +1,25 @@
 package com.kazakago.cleanarchitecture.data.dao
 
+import android.arch.persistence.room.Dao
+import android.arch.persistence.room.Delete
+import android.arch.persistence.room.Insert
+import android.arch.persistence.room.Query
 import com.kazakago.cleanarchitecture.data.entity.weather.WeatherEntity
-import io.realm.Realm
 
-class WeatherDao(private val realm: Realm) {
+@Dao
+interface WeatherDao {
 
-    fun find(cityId: String): WeatherEntity? {
-        return realm.where(WeatherEntity::class.java)
-                .equalTo("cityId", cityId)
-                .findFirst()
-    }
+    @Query("SELECT * FROM WeatherEntity WHERE cityId == (:cityId)")
+    fun find(cityId: String): WeatherEntity?
 
     fun exist(cityId: String): Boolean {
-        return 0 <= realm.where(WeatherEntity::class.java)
-                .equalTo("cityId", cityId)
-                .count()
+        return true
     }
 
-    fun insert(weather: WeatherEntity) {
-        realm.copyToRealm(weather)
-    }
+    @Insert
+    fun insert(weather: WeatherEntity)
 
-    fun delete(cityId: String) {
-        find(cityId)?.let {
-            it.forecasts.forEach {
-                it.temperature?.let {
-                    it.max?.deleteFromRealm()
-                    it.min?.deleteFromRealm()
-                    it.deleteFromRealm()
-                }
-                it.image?.deleteFromRealm()
-            }
-            it.forecasts.deleteAllFromRealm()
-            it.copyright?.let {
-                it.provider.deleteAllFromRealm()
-                it.image?.deleteFromRealm()
-                it.deleteFromRealm()
-            }
-            it.location?.deleteFromRealm()
-            it.description?.deleteFromRealm()
-            it.pinpointLocations.deleteAllFromRealm()
-            it.deleteFromRealm()
-        }
-    }
+    @Delete
+    fun delete(weather: WeatherEntity)
 
 }

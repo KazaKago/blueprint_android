@@ -1,10 +1,15 @@
 package com.kazakago.cleanarchitecture.data.entity.weather
 
-import io.realm.RealmObject
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 
-open class TemperatureEntity(
+@Entity
+class TemperatureEntity(
+        @PrimaryKey(autoGenerate = true)
+        val temperatureId: Int,
+
         //最高気温
-        var max: TemperatureUnitEntity? = null,
+        val max: TemperatureUnitEntity?,
         //最低気温
-        var min: TemperatureUnitEntity? = null
-) : RealmObject()
+        val min: TemperatureUnitEntity?
+)
