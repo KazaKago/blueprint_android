@@ -21,13 +21,10 @@ import kotlinx.android.synthetic.main.fragment_main.*
 class MainFragment : Fragment(), MainFragmentViewModelListener {
 
     interface Listener {
-
         fun setActionBarTitle(title: String?)
-
     }
 
     companion object {
-        @JvmStatic
         fun createInstance(): MainFragment = MainFragment()
     }
 

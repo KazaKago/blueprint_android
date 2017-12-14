@@ -16,7 +16,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity(), MainFragment.Listener, MainActivityViewModelListener {
 
     companion object {
-        @JvmStatic
         fun createIntent(context: Context): Intent = Intent(context, MainActivity::class.java)
     }
 

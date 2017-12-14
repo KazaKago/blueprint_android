@@ -17,7 +17,6 @@ import kotlinx.android.synthetic.main.fragment_about.*
 class AboutFragment : Fragment(), AboutFragmentViewModelListener {
 
     companion object {
-        @JvmStatic
         fun createInstance(): AboutFragment = AboutFragment()
     }
 

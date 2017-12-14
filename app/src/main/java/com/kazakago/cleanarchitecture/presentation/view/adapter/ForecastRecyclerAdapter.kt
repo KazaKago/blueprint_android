@@ -12,9 +12,7 @@ import com.squareup.picasso.Picasso
 class ForecastRecyclerAdapter(private val context: Context) : RecyclerView.Adapter<ForecastRecyclerAdapter.ViewHolder>() {
 
     interface Listener {
-
         fun onItemClick(forecastModel: ForecastModel)
-
     }
 
     inner class ViewHolder(context: Context, parent: ViewGroup) : AbsViewHolder<ForecastModel>(context, parent, R.layout.recycler_forecast) {
