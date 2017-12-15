@@ -6,16 +6,17 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.kazakago.cleanarchitecture.R
-import com.kazakago.cleanarchitecture.domain.model.weather.ForecastModel
+import com.kazakago.cleanarchitecture.web.extension.formattedText
+import com.kazakago.cleanarchitecture.domain.model.weather.Forecast
 import com.squareup.picasso.Picasso
 
 class ForecastRecyclerAdapter(private val context: Context) : RecyclerView.Adapter<ForecastRecyclerAdapter.ViewHolder>() {
 
     interface Listener {
-        fun onItemClick(forecastModel: ForecastModel)
+        fun onItemClick(forecast: Forecast)
     }
 
-    inner class ViewHolder(context: Context, parent: ViewGroup) : AbsViewHolder<ForecastModel>(context, parent, R.layout.recycler_forecast) {
+    inner class ViewHolder(context: Context, parent: ViewGroup) : AbsViewHolder<Forecast>(context, parent, R.layout.recycler_forecast) {
 
         private val dateLabelTextView = itemView.findViewById<TextView>(R.id.dateLabelTextView)
         private val dateTextView = itemView.findViewById<TextView>(R.id.dateTextView)
@@ -24,14 +25,14 @@ class ForecastRecyclerAdapter(private val context: Context) : RecyclerView.Adapt
         private val maxTemperatureTextView = itemView.findViewById<TextView>(R.id.maxTemperatureTextView)
         private val minTemperatureTextView = itemView.findViewById<TextView>(R.id.minTemperatureTextView)
 
-        override fun setItem(item: ForecastModel) {
-            Picasso.with(context).load(item.image.url)
+        override fun setItem(item: Forecast) {
+            Picasso.with(context).load(item.imageUrl)
                     .into(weatherImageView)
             dateLabelTextView.text = item.dateLabel
-            dateTextView.text = item.date
+            dateTextView.text = item.date.formattedText(context)
             telopTextView.text = item.telop
-            maxTemperatureTextView.text = context.getString(R.string.temperature_max, item.temperature.max?.celsius?.toString() ?: "--")
-            minTemperatureTextView.text = context.getString(R.string.temperature_min, item.temperature.min?.celsius?.toString() ?: "--")
+            maxTemperatureTextView.text = context.getString(R.string.temperature_max, item.maxTemperature?.toString() ?: "--")
+            minTemperatureTextView.text = context.getString(R.string.temperature_min, item.minTemperature?.toString() ?: "--")
             itemView?.setOnClickListener {
                 listener?.onItemClick(item)
             }
@@ -40,7 +41,7 @@ class ForecastRecyclerAdapter(private val context: Context) : RecyclerView.Adapt
     }
 
     var listener: Listener? = null
-    var forecastList: List<ForecastModel> = listOf()
+    var forecastList: List<Forecast> = listOf()
 
     override fun getItemCount(): Int = forecastList.size
 

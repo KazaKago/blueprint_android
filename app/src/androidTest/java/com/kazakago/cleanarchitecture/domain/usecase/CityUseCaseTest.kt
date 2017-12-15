@@ -11,7 +11,7 @@ import com.kazakago.cleanarchitecture.di.applicationModule
 import com.kazakago.cleanarchitecture.di.dataModule
 import com.kazakago.cleanarchitecture.di.domainModule
 import com.kazakago.cleanarchitecture.di.webModule
-import com.kazakago.cleanarchitecture.domain.model.city.CityModel
+import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.domain.usecase.city.GetCityUseCase
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.greaterThan
@@ -50,7 +50,7 @@ class CityUseCaseTest: KodeinAware {
         val cityList = getCityUseCase.execute(Unit)
                 .toList()
                 .blockingGet()
-        assertThat<List<CityModel>>(cityList, hasSize<Any>(greaterThan(0)))
+        assertThat<List<City>>(cityList, hasSize<Any>(greaterThan(0)))
     }
 
 }

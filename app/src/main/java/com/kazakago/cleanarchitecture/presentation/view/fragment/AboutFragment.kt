@@ -10,7 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.kazakago.cleanarchitecture.R
-import com.kazakago.cleanarchitecture.presentation.listener.presenter.fragment.AboutFragmentViewModelListener
+import com.kazakago.cleanarchitecture.presentation.listener.fragment.AboutFragmentViewModelListener
 import com.kazakago.cleanarchitecture.presentation.presenter.fragment.AboutFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_about.*
 

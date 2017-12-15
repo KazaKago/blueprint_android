@@ -1,4 +1,4 @@
-package com.kazakago.cleanarchitecture.presentation.listener.presenter.fragment
+package com.kazakago.cleanarchitecture.presentation.listener.fragment
 
 import android.net.Uri
 

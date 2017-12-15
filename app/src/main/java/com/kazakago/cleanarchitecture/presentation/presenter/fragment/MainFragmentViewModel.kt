@@ -8,12 +8,12 @@ import com.github.salomonbrys.kodein.LazyKodein
 import com.github.salomonbrys.kodein.LazyKodeinAware
 import com.github.salomonbrys.kodein.android.appKodein
 import com.github.salomonbrys.kodein.instance
-import com.kazakago.cleanarchitecture.domain.model.city.CityModel
-import com.kazakago.cleanarchitecture.domain.model.weather.ForecastModel
-import com.kazakago.cleanarchitecture.domain.model.weather.WeatherModel
+import com.kazakago.cleanarchitecture.domain.model.city.City
+import com.kazakago.cleanarchitecture.domain.model.weather.Forecast
+import com.kazakago.cleanarchitecture.domain.model.weather.Weather
 import com.kazakago.cleanarchitecture.domain.usecase.city.GetCityUseCase
 import com.kazakago.cleanarchitecture.domain.usecase.weather.GetWeatherUseCase
-import com.kazakago.cleanarchitecture.presentation.listener.presenter.fragment.MainFragmentViewModelListener
+import com.kazakago.cleanarchitecture.presentation.listener.fragment.MainFragmentViewModelListener
 import com.kazakago.cleanarchitecture.presentation.view.adapter.ForecastRecyclerAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -24,8 +24,8 @@ class MainFragmentViewModel(application: Application) : AndroidViewModel(applica
 
     override val kodein = LazyKodein(application.appKodein)
 
-    val cityList = MutableLiveData<List<CityModel>>()
-    val weather = MutableLiveData<WeatherModel>()
+    val cityList = MutableLiveData<List<City>>()
+    val weather = MutableLiveData<Weather>()
     val selectedPosition = MutableLiveData<Int>()
 
     var listener: MainFragmentViewModelListener? = null
@@ -91,8 +91,8 @@ class MainFragmentViewModel(application: Application) : AndroidViewModel(applica
 
     /* ForecastRecyclerAdapter.Listener */
 
-    override fun onItemClick(forecastModel: ForecastModel) {
-        listener?.showToast(forecastModel.telop)
+    override fun onItemClick(forecast: Forecast) {
+        listener?.showToast(forecast.telop)
     }
 
 }

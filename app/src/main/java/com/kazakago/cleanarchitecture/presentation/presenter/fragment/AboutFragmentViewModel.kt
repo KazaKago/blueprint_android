@@ -14,7 +14,7 @@ import com.kazakago.cleanarchitecture.domain.usecase.appInfo.GetAppVersionUseCas
 import com.kazakago.cleanarchitecture.domain.usecase.appInfo.GetMailAddressUrlUseCase
 import com.kazakago.cleanarchitecture.domain.usecase.appInfo.GetOfficialSiteUrlUseCase
 import com.kazakago.cleanarchitecture.domain.usecase.appInfo.GetPlayStoreUrlUseCase
-import com.kazakago.cleanarchitecture.presentation.listener.presenter.fragment.AboutFragmentViewModelListener
+import com.kazakago.cleanarchitecture.presentation.listener.fragment.AboutFragmentViewModelListener
 import java.util.*
 
 class AboutFragmentViewModel(application: Application) : AndroidViewModel(application), LifecycleObserver, LazyKodeinAware {

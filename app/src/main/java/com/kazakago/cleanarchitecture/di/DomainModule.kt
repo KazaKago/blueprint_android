@@ -11,10 +11,10 @@ import com.kazakago.cleanarchitecture.domain.usecase.weather.GetWeatherUseCase
 import com.kazakago.cleanarchitecture.domain.usecase.weather.GetWeatherUseCaseImpl
 
 fun domainModule() = Kodein.Module {
-    bind<GetWeatherUseCase>() with provider { GetWeatherUseCaseImpl(weatherApiRepository = instance(), weatherRepository = instance()) }
-    bind<GetCityUseCase>() with provider { GetCityUseCaseImpl(cityRepository = instance()) }
-    bind<GetAppVersionUseCase>() with provider { GetAppVersionUseCaseImpl(appInfoRepository = instance()) }
-    bind<GetMailAddressUrlUseCase>() with provider { GetMailAddressUrlUseCaseImpl(appInfoRepository = instance()) }
-    bind<GetOfficialSiteUrlUseCase>() with provider { GetOfficialSiteUrlUseCaseImpl(appInfoRepository = instance()) }
-    bind<GetPlayStoreUrlUseCase>() with provider { GetPlayStoreUrlUseCaseImpl(appInfoRepository = instance()) }
+    bind<GetWeatherUseCase>() with provider { GetWeatherUseCaseImpl(instance(), instance()) }
+    bind<GetCityUseCase>() with provider { GetCityUseCaseImpl(instance()) }
+    bind<GetAppVersionUseCase>() with provider { GetAppVersionUseCaseImpl(instance()) }
+    bind<GetMailAddressUrlUseCase>() with provider { GetMailAddressUrlUseCaseImpl(instance()) }
+    bind<GetOfficialSiteUrlUseCase>() with provider { GetOfficialSiteUrlUseCaseImpl(instance()) }
+    bind<GetPlayStoreUrlUseCase>() with provider { GetPlayStoreUrlUseCaseImpl(instance()) }
 }

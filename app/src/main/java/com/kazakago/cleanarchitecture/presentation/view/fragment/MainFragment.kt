@@ -11,8 +11,8 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Toast
 import com.kazakago.cleanarchitecture.R
-import com.kazakago.cleanarchitecture.presentation.extension.formattedTime
-import com.kazakago.cleanarchitecture.presentation.listener.presenter.fragment.MainFragmentViewModelListener
+import com.kazakago.cleanarchitecture.presentation.extension.formattedText
+import com.kazakago.cleanarchitecture.presentation.listener.fragment.MainFragmentViewModelListener
 import com.kazakago.cleanarchitecture.presentation.presenter.fragment.MainFragmentViewModel
 import com.kazakago.cleanarchitecture.presentation.view.adapter.CitySpinnerAdapter
 import com.kazakago.cleanarchitecture.presentation.view.adapter.ForecastRecyclerAdapter
@@ -65,20 +65,20 @@ class MainFragment : Fragment(), MainFragmentViewModelListener {
         forecastRecyclerView.adapter = forecastRecyclerAdapter
 
         viewModel.cityList.observe(this, Observer {
-            citySpinnerAdapter.cityModelList = it ?: listOf()
+            citySpinnerAdapter.cityList = it ?: listOf()
             citySpinnerAdapter.notifyDataSetChanged()
         })
         viewModel.selectedPosition.observe(this, Observer {
             it?.let {
                 citySpinner.setSelection(it)
-                listener?.setActionBarTitle(citySpinnerAdapter.cityModelList[it].name)
+                listener?.setActionBarTitle(citySpinnerAdapter.cityList[it].name)
             }
         })
         viewModel.weather.observe(this, Observer {
             areaTextView.text = it?.location?.area
             prefectureTextView.text = it?.location?.prefecture
             cityTextView.text = it?.location?.city
-            publicTimeTextView.text = getString(R.string.public_time, it?.publicTime?.formattedTime(context!!) ?: "")
+            publicTimeTextView.text = getString(R.string.public_time, it?.publicTime?.formattedText(context!!) ?: "")
             forecastRecyclerAdapter.forecastList = it?.forecasts ?: listOf()
             forecastRecyclerAdapter.notifyDataSetChanged()
         })

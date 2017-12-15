@@ -6,33 +6,33 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import com.kazakago.cleanarchitecture.R
-import com.kazakago.cleanarchitecture.domain.model.city.CityModel
+import com.kazakago.cleanarchitecture.domain.model.city.City
 
 class CitySpinnerAdapter(private val context: Context) : BaseAdapter() {
 
-    inner class ViewHolder(context: Context, parent: ViewGroup) : AbsViewHolder<CityModel>(context, parent, R.layout.spinner_city) {
+    inner class ViewHolder(context: Context, parent: ViewGroup) : AbsViewHolder<City>(context, parent, R.layout.spinner_city) {
 
         private val nameTextView = itemView.findViewById<TextView>(R.id.nameTextView)
 
-        override fun setItem(item: CityModel) {
+        override fun setItem(item: City) {
             nameTextView.text = item.name
         }
     }
 
-    inner class DropDownViewHolder(context: Context, parent: ViewGroup) : AbsViewHolder<CityModel>(context, parent, R.layout.spinner_city_dropdown) {
+    inner class DropDownViewHolder(context: Context, parent: ViewGroup) : AbsViewHolder<City>(context, parent, R.layout.spinner_city_dropdown) {
 
         private val nameTextView = itemView.findViewById<TextView>(R.id.nameTextView)
 
-        override fun setItem(item: CityModel) {
+        override fun setItem(item: City) {
             nameTextView.text = item.name
         }
     }
 
-    var cityModelList: List<CityModel> = listOf()
+    var cityList: List<City> = listOf()
 
-    override fun getCount(): Int = cityModelList.size
+    override fun getCount(): Int = cityList.size
 
-    override fun getItem(position: Int): CityModel = cityModelList[position]
+    override fun getItem(position: Int): City = cityList[position]
 
     override fun getItemId(position: Int): Long = position.toLong()
 
@@ -46,7 +46,7 @@ class CitySpinnerAdapter(private val context: Context) : BaseAdapter() {
         } else {
             viewHolder = mutableConvertView.tag as ViewHolder
         }
-        viewHolder.setItem(cityModelList[position])
+        viewHolder.setItem(cityList[position])
         return mutableConvertView
     }
 
@@ -60,7 +60,7 @@ class CitySpinnerAdapter(private val context: Context) : BaseAdapter() {
         } else {
             viewHolder = mutableConvertView.tag as DropDownViewHolder
         }
-        viewHolder.setItem(cityModelList[position])
+        viewHolder.setItem(cityList[position])
         return mutableConvertView
     }
 

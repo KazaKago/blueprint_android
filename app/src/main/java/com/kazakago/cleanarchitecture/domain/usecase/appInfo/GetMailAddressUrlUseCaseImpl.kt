@@ -1,6 +1,6 @@
 package com.kazakago.cleanarchitecture.domain.usecase.appInfo
 
-import com.kazakago.cleanarchitecture.domain.repository.AppInfoRepository
+import com.kazakago.cleanarchitecture.domain.repository.appinfo.AppInfoRepository
 
 class GetMailAddressUrlUseCaseImpl(private val appInfoRepository: AppInfoRepository) : GetMailAddressUrlUseCase {
 

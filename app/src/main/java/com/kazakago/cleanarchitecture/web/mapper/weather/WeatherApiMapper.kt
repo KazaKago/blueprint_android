@@ -1,77 +1,39 @@
 package com.kazakago.cleanarchitecture.web.mapper.weather
 
 import com.kazakago.cleanarchitecture.domain.mapper.EntityMapper
-import com.kazakago.cleanarchitecture.domain.model.weather.*
+import com.kazakago.cleanarchitecture.domain.model.weather.Description
+import com.kazakago.cleanarchitecture.domain.model.weather.Forecast
+import com.kazakago.cleanarchitecture.domain.model.weather.Location
+import com.kazakago.cleanarchitecture.domain.model.weather.Weather
 import com.kazakago.cleanarchitecture.web.entity.weather.WeatherApiEntity
+import com.kazakago.cleanarchitecture.web.extension.parseTime
 
-object WeatherApiMapper : EntityMapper<WeatherApiEntity, WeatherModel> {
+object WeatherApiMapper : EntityMapper<WeatherApiEntity, Weather> {
 
-    override fun map(source: WeatherApiEntity): WeatherModel {
-        return WeatherModel(
+    override fun map(source: WeatherApiEntity): Weather {
+        return Weather(
                 location = source.location.let {
-                    LocationModel(
+                    Location(
                             area = it.area,
                             prefecture = it.prefecture,
                             city = it.city)
                 },
                 title = source.title,
                 link = source.link,
-                publicTime = source.publicTime,
+                publicTime = source.publicTime.parseTime(),
                 description = source.description.let {
-                    DescriptionModel(
+                    Description(
                             text = it.text,
-                            publicTime = it.publicTime)
+                            publicTime = it.publicTime.parseTime())
                 },
                 forecasts = source.forecasts.map {
-                    ForecastModel(
+                    Forecast(
                             telop = it.telop,
-                            date = it.date,
+                            date = it.date.parseTime(),
                             dateLabel = it.dateLabel,
-                            image = it.image.let {
-                                ImageModel(
-                                        title = it.title,
-                                        height = it.height,
-                                        link = it.link,
-                                        url = it.url,
-                                        width = it.width)
-                            },
-                            temperature = it.temperature.let {
-                                TemperatureModel(
-                                        max = it.max?.let {
-                                            TemperatureUnitModel(
-                                                    celsius = it.celsius,
-                                                    fahrenheit = it.fahrenheit)
-                                        },
-                                        min = it.min?.let {
-                                            TemperatureUnitModel(
-                                                    celsius = it.celsius,
-                                                    fahrenheit = it.fahrenheit)
-                                        })
-                            })
-                },
-                pinpointLocations = source.pinpointLocations.map {
-                    LinkModel(
-                            name = it.name,
-                            link = it.link)
-                },
-                copyright = source.copyright.let {
-                    CopyrightModel(
-                            title = it.title,
-                            link = it.link,
-                            image = it.image.let {
-                                ImageModel(
-                                        title = it.title,
-                                        height = it.height,
-                                        link = it.link,
-                                        url = it.url,
-                                        width = it.width)
-                            },
-                            provider = it.provider.map {
-                                LinkModel(
-                                        name = it.name,
-                                        link = it.link)
-                            }
-                    )
+                            imageUrl = it.image.link,
+                            maxTemperature = it.temperature.max?.celsius,
+                            minTemperature = it.temperature.min?.celsius)
                 })
     }
 

@@ -11,7 +11,7 @@ import com.kazakago.cleanarchitecture.di.applicationModule
 import com.kazakago.cleanarchitecture.di.dataModule
 import com.kazakago.cleanarchitecture.di.domainModule
 import com.kazakago.cleanarchitecture.di.webModule
-import com.kazakago.cleanarchitecture.domain.model.weather.WeatherModel
+import com.kazakago.cleanarchitecture.domain.model.weather.Weather
 import com.kazakago.cleanarchitecture.domain.usecase.weather.GetWeatherUseCase
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.notNullValue
@@ -46,7 +46,7 @@ class WeatherUseCaseTest: KodeinAware {
     @Test
     @Throws(Exception::class)
     fun testGetWeather() {
-        assertThat<WeatherModel>(getWeatherUseCase.execute("400040").blockingGet(), notNullValue())
+        assertThat<Weather>(getWeatherUseCase.execute("400040").blockingGet(), notNullValue())
     }
 
 }
