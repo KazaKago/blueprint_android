@@ -1,8 +1,8 @@
-package com.kazakago.cleanarchitecture.web.entity.weather
+package com.kazakago.cleanarchitecture.web.response.entity.weather
 
-data class WeatherApiEntity(
+data class WeatherResponse(
         //予報を発表した地域を定義
-        val location: LocationApiEntity = LocationApiEntity(),
+        val location: LocationResponse = LocationResponse(),
         //タイトル・見出し
         val title: String = "",
         //リクエストされたデータの地域に該当するlivedoor 天気情報のURL
@@ -10,11 +10,11 @@ data class WeatherApiEntity(
         //予報の発表日時
         val publicTime: String = "",
         //天気概況文
-        val description: DescriptionApiEntity = DescriptionApiEntity(),
+        val description: DescriptionResponse = DescriptionResponse(),
         //府県天気予報の予報日毎の配列
-        val forecasts: List<ForecastApiEntity> = listOf(),
+        val forecasts: List<ForecastResponse> = listOf(),
         //ピンポイント予報の発表地点の配列
-        val pinpointLocations: List<LinkApiEntity> = listOf(),
+        val pinpointLocations: List<LinkResponse> = listOf(),
         //コピーライト
-        val copyright: CopyrightApiEntity = CopyrightApiEntity()
+        val copyright: CopyrightResponse = CopyrightResponse()
 )

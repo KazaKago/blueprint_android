@@ -1,6 +1,6 @@
-package com.kazakago.cleanarchitecture.web.entity.weather
+package com.kazakago.cleanarchitecture.web.response.entity.weather
 
-data class TemperatureUnitApiEntity(
+data class TemperatureUnitResponse(
         //摂氏
         val celsius: Float = 0f,
         //華氏

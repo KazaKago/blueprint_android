@@ -1,6 +1,6 @@
-package com.kazakago.cleanarchitecture.web.entity.weather
+package com.kazakago.cleanarchitecture.web.response.entity.weather
 
-data class ImageApiEntity(
+data class ImageResponse(
         //天気（晴れ、曇り、雨など）
         val title: String = "",
         //リクエストされたデータの地域に該当するlivedoor 天気情報のURL

@@ -14,7 +14,7 @@ import com.kazakago.cleanarchitecture.data.database.entity.weather.WeatherEntity
     WeatherEntity::class,
     LocationEntity::class,
     ForecastEntity::class,
-    DescriptionEntity::class], version = 1)
+    DescriptionEntity::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     companion object {

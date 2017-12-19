@@ -1,6 +1,6 @@
-package com.kazakago.cleanarchitecture.web.entity.weather
+package com.kazakago.cleanarchitecture.web.response.entity.weather
 
-data class ForecastApiEntity(
+data class ForecastResponse(
         //予報日
         val date: String = "",
         //予報日(今日、明日、明後日のいずれか)
@@ -8,7 +8,7 @@ data class ForecastApiEntity(
         //天気（晴れ、曇り、雨など）
         val telop: String = "",
         //画像
-        val image: ImageApiEntity = ImageApiEntity(),
+        val image: ImageResponse = ImageResponse(),
         //気温
-        val temperature: TemperatureApiEntity = TemperatureApiEntity()
+        val temperature: TemperatureResponse = TemperatureResponse()
 )

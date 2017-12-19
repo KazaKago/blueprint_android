@@ -1,6 +1,6 @@
-package com.kazakago.cleanarchitecture.web.entity.weather
+package com.kazakago.cleanarchitecture.web.response.entity.weather
 
-data class LocationApiEntity(
+data class LocationResponse(
         //地方名（例・九州地方）
         val area: String = "",
         //都道府県名（例・福岡県）

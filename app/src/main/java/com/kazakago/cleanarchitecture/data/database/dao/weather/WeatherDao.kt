@@ -12,40 +12,40 @@ import com.kazakago.cleanarchitecture.data.database.entity.weather.WeatherEntity
 @Dao
 interface WeatherDao {
 
-    @Query("SELECT * FROM WeatherEntity WHERE cityId == (:cityId)")
+    @Query("SELECT * FROM Weather WHERE city_id == (:cityId) LIMIT 1")
     fun findWeather(cityId: String): WeatherEntity?
 
     @Insert
-    fun insertWeather(weather: WeatherEntity)
+    fun insert(weather: WeatherEntity)
 
     @Delete
-    fun deleteWeather(weather: WeatherEntity)
+    fun delete(weather: WeatherEntity)
 
-    @Query("SELECT * FROM LocationEntity WHERE id == (:id)")
-    fun findLocation(id: Long): LocationEntity?
+    @Query("SELECT * FROM Location WHERE city_id == (:cityId) LIMIT 1")
+    fun findLocation(cityId: String): LocationEntity?
 
     @Insert
-    fun insertLocation(location: LocationEntity)
+    fun insert(location: LocationEntity)
 
     @Delete
-    fun deleteLocation(location: LocationEntity)
+    fun delete(location: LocationEntity)
 
-    @Query("SELECT * FROM ForecastEntity WHERE id == (:id)")
-    fun findForecast(id: Long): ForecastEntity?
+    @Query("SELECT * FROM Description WHERE city_id == (:cityId) LIMIT 1")
+    fun findDescription(cityId: String): DescriptionEntity?
 
     @Insert
-    fun insertForecast(forecast: ForecastEntity)
+    fun insert(description: DescriptionEntity)
 
     @Delete
-    fun deleteForecast(forecast: ForecastEntity)
+    fun delete(description: DescriptionEntity)
 
-    @Query("SELECT * FROM DescriptionEntity WHERE id == (:id)")
-    fun findDescription(id: Long): DescriptionEntity?
+    @Query("SELECT * FROM Forecast WHERE city_id == (:cityId)")
+    fun findForecasts(cityId: String): List<ForecastEntity>
 
     @Insert
-    fun insertDescription(description: DescriptionEntity)
+    fun insert(forecasts: List<ForecastEntity>)
 
     @Delete
-    fun deleteDescription(description: DescriptionEntity)
+    fun delete(forecasts: List<ForecastEntity>)
 
 }

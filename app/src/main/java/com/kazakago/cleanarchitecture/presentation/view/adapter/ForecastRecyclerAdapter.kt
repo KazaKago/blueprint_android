@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.kazakago.cleanarchitecture.R
-import com.kazakago.cleanarchitecture.web.extension.formattedText
 import com.kazakago.cleanarchitecture.domain.model.weather.Forecast
+import com.kazakago.cleanarchitecture.presentation.extension.formattedText
 import com.squareup.picasso.Picasso
 
 class ForecastRecyclerAdapter(private val context: Context) : RecyclerView.Adapter<ForecastRecyclerAdapter.ViewHolder>() {

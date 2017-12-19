@@ -11,7 +11,7 @@ data class City(
 
     companion object {
         @JvmField
-        val CREATOR = PaperParcelCityModel.CREATOR
+        val CREATOR = PaperParcelCity.CREATOR
     }
 
 }
