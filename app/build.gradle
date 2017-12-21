@@ -18,8 +18,6 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         //Vector Drawable Support
         vectorDrawables.useSupportLibrary = true
-        //MultiDex
-        multiDexEnabled true
     }
     buildTypes {
         release {

@@ -44,6 +44,8 @@
 -keepclassmembers class kotlin.Metadata {
     public <methods>;
 }
+
+## Moshi-Kotlin
 ## https://github.com/square/moshi/issues/345
 -dontwarn org.jetbrains.annotations.**
 -keep class com.kazakago.cleanarchitecture.web.response.entity.** { *; }
@@ -56,5 +58,5 @@
 ##
 
 ## Architecture Components
--keep class kotlin.** { *; }
+-keep class kotlin.Metadata { *; }
 ##
