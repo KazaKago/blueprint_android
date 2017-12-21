@@ -1,10 +1,7 @@
 package com.kazakago.cleanarchitecture.domain.model.weather
 
-import paperparcel.PaperParcel
-import paperparcel.PaperParcelable
 import java.util.*
 
-@PaperParcel
 data class Forecast(
         //予報日
         var date: Date,
@@ -18,11 +15,4 @@ data class Forecast(
         var maxTemperature: Float?,
         //最低気温
         var minTemperature: Float?
-) : PaperParcelable {
-
-    companion object {
-        @JvmField
-        val CREATOR = PaperParcelForecast.CREATOR
-    }
-
-}
+)

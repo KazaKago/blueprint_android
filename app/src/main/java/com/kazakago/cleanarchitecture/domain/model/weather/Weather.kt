@@ -1,10 +1,7 @@
 package com.kazakago.cleanarchitecture.domain.model.weather
 
-import paperparcel.PaperParcel
-import paperparcel.PaperParcelable
 import java.util.*
 
-@PaperParcel
 data class Weather(
         //予報を発表した地域を定義
         val location: Location,
@@ -18,14 +15,7 @@ data class Weather(
         val description: Description,
         //府県天気予報の予報日毎の配列
         val forecasts: List<Forecast>
-) : PaperParcelable {
-
-    companion object {
-        @JvmField
-        val CREATOR = PaperParcelWeather.CREATOR
-    }
-
+) {
     //地域ID
     lateinit var cityId: String
-
 }

@@ -79,10 +79,6 @@ dependencies {
     implementation 'com.github.salomonbrys.kodein:kodein-android:4.1.0'
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.5.2'
-    //PaperParcel
-    implementation 'nz.bradcampbell:paperparcel:2.0.4'
-    implementation 'nz.bradcampbell:paperparcel-kotlin:2.0.4'
-    kapt 'nz.bradcampbell:paperparcel-compiler:2.0.4'
 
     //JUnit
     testImplementation 'junit:junit:4.12'
