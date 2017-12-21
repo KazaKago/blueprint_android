@@ -20,7 +20,7 @@ data class DescriptionEntity(
         @ColumnInfo(name = "public_time")
         val publicTime: Long
 ) {
-        @PrimaryKey(autoGenerate = true)
-        @ColumnInfo(name = "id")
-        var id: Int = 0
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    var id: Int = 0
 }

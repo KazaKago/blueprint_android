@@ -22,7 +22,7 @@ data class LocationEntity(
         @ColumnInfo(name = "city")
         val city: String
 ) {
-        @PrimaryKey(autoGenerate = true)
-        @ColumnInfo(name = "id")
-        var id: Int = 0
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    var id: Int = 0
 }

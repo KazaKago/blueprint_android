@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Toast
 import com.kazakago.cleanarchitecture.R
-import com.kazakago.cleanarchitecture.presentation.extension.formattedText
+import com.kazakago.cleanarchitecture.presentation.extension.formattedDateTimeText
 import com.kazakago.cleanarchitecture.presentation.listener.fragment.MainFragmentViewModelListener
 import com.kazakago.cleanarchitecture.presentation.presenter.fragment.MainFragmentViewModel
 import com.kazakago.cleanarchitecture.presentation.view.adapter.CitySpinnerAdapter
@@ -79,7 +79,7 @@ class MainFragment : Fragment(), MainFragmentViewModelListener {
             areaTextView.text = it?.location?.area
             prefectureTextView.text = it?.location?.prefecture
             cityTextView.text = it?.location?.city
-            publicTimeTextView.text = getString(R.string.public_time, it?.publicTime?.formattedText(context!!) ?: "")
+            publicTimeTextView.text = getString(R.string.public_time, it?.publicTime?.formattedDateTimeText(context!!) ?: "")
             forecastRecyclerAdapter.forecastList = it?.forecasts ?: listOf()
             forecastRecyclerAdapter.notifyDataSetChanged()
         })

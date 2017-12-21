@@ -28,7 +28,7 @@ data class ForecastEntity(
         @ColumnInfo(name = "min_temperature")
         val minTemperature: Float?
 ) {
-        @PrimaryKey(autoGenerate = true)
-        @ColumnInfo(name = "id")
-        var id: Int = 0
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    var id: Int = 0
 }

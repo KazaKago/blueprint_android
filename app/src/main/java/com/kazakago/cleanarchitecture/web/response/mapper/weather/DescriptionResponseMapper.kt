@@ -1,7 +1,7 @@
 package com.kazakago.cleanarchitecture.web.response.mapper.weather
 
 import com.kazakago.cleanarchitecture.domain.model.weather.Description
-import com.kazakago.cleanarchitecture.web.extension.parseTime
+import com.kazakago.cleanarchitecture.web.extension.parseDateTime
 import com.kazakago.cleanarchitecture.web.response.entity.weather.DescriptionResponse
 import com.kazakago.cleanarchitecture.web.response.mapper.ResponseMapper
 
@@ -10,7 +10,7 @@ object DescriptionResponseMapper : ResponseMapper<DescriptionResponse, Descripti
     override fun map(source: DescriptionResponse): Description {
         return Description(
                 text = source.text,
-                publicTime = source.publicTime.parseTime())
+                publicTime = source.publicTime.parseDateTime())
     }
 
 }

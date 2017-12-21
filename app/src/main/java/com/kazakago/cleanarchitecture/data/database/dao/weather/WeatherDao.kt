@@ -40,7 +40,7 @@ interface WeatherDao {
     fun delete(description: DescriptionEntity)
 
     @Query("SELECT * FROM Forecast WHERE city_id == (:cityId)")
-    fun findForecasts(cityId: String): List<ForecastEntity>
+    fun findForecasts(cityId: String): List<ForecastEntity>?
 
     @Insert
     fun insert(forecasts: List<ForecastEntity>)

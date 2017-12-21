@@ -6,10 +6,10 @@ import java.util.*
 
 object DescriptionEntityMapper {
 
-    fun map(source: DescriptionEntity?): Description {
+    fun map(source: DescriptionEntity): Description {
         return Description(
-                text = source?.text ?: "",
-                publicTime = Date(source?.publicTime ?: 0))
+                text = source.text,
+                publicTime = Date(source.publicTime))
     }
 
     fun reverse(cityId: String, destination: Description): DescriptionEntity {

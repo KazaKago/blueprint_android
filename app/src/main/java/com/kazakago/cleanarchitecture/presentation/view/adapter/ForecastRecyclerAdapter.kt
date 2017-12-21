@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.kazakago.cleanarchitecture.R
 import com.kazakago.cleanarchitecture.domain.model.weather.Forecast
-import com.kazakago.cleanarchitecture.presentation.extension.formattedText
+import com.kazakago.cleanarchitecture.presentation.extension.formattedDateText
 import com.squareup.picasso.Picasso
 
 class ForecastRecyclerAdapter(private val context: Context) : RecyclerView.Adapter<ForecastRecyclerAdapter.ViewHolder>() {
@@ -29,7 +29,7 @@ class ForecastRecyclerAdapter(private val context: Context) : RecyclerView.Adapt
             Picasso.with(context).load(item.imageUrl)
                     .into(weatherImageView)
             dateLabelTextView.text = item.dateLabel
-            dateTextView.text = item.date.formattedText(context)
+            dateTextView.text = item.date.formattedDateText(context)
             telopTextView.text = item.telop
             maxTemperatureTextView.text = context.getString(R.string.temperature_max, item.maxTemperature?.toString() ?: "--")
             minTemperatureTextView.text = context.getString(R.string.temperature_min, item.minTemperature?.toString() ?: "--")

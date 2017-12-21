@@ -8,16 +8,17 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 object WeatherRetrofit {
 
-    val instance: Retrofit
-        get() {
-            val moshi = Moshi.Builder()
-                    .add(KotlinJsonAdapterFactory())
-                    .build()
-            return Retrofit.Builder()
-                    .baseUrl("http://weather.livedoor.com/forecast/webservice/")
-                    .addConverterFactory(MoshiConverterFactory.create(moshi))
-                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .build()
-        }
+    private val moshi = Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
+    private val retrofit = Retrofit.Builder()
+            .baseUrl("http://weather.livedoor.com/forecast/webservice/")
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .build()
+
+    fun getWeatherApi(): WeatherApi {
+        return retrofit.create(WeatherApi::class.java)
+    }
 
 }

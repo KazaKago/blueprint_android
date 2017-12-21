@@ -6,14 +6,14 @@ import java.util.*
 
 object ForecastEntityMapper {
 
-    fun map(source: ForecastEntity?): Forecast {
+    fun map(source: ForecastEntity): Forecast {
         return Forecast(
-                telop = source?.telop ?: "",
-                date = Date(source?.date ?: 0),
-                dateLabel = source?.dateLabel ?: "",
-                imageUrl = source?.imageUrl ?: "",
-                maxTemperature = source?.maxTemperature,
-                minTemperature = source?.minTemperature)
+                telop = source.telop,
+                date = Date(source.date),
+                dateLabel = source.dateLabel,
+                imageUrl = source.imageUrl,
+                maxTemperature = source.maxTemperature,
+                minTemperature = source.minTemperature)
     }
 
     fun reverse(cityId: String, destination: Forecast): ForecastEntity {

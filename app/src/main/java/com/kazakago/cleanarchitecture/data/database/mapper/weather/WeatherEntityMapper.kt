@@ -9,16 +9,16 @@ import java.util.*
 
 object WeatherEntityMapper {
 
-    fun map(weather: WeatherEntity?, location: LocationEntity?, description: DescriptionEntity?, forecasts: List<ForecastEntity>?): Weather {
+    fun map(weather: WeatherEntity, location: LocationEntity, description: DescriptionEntity, forecasts: List<ForecastEntity>): Weather {
         return Weather(
                 location = LocationEntityMapper.map(location),
-                title = weather?.title ?: "",
-                link = weather?.link ?: "",
-                publicTime = Date(weather?.publicTime ?: 0),
+                title = weather.title,
+                link = weather.link,
+                publicTime = Date(weather.publicTime),
                 description = DescriptionEntityMapper.map(description),
-                forecasts = forecasts?.map { ForecastEntityMapper.map(it) } ?: emptyList()
+                forecasts = forecasts.map { ForecastEntityMapper.map(it) }
         ).apply {
-            cityId = weather?.cityId ?: ""
+            cityId = weather.cityId
         }
     }
 
