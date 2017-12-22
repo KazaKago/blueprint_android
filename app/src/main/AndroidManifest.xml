@@ -3,16 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kazakago.cleanarchitecture">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-
     <application
         android:name=".CleanApplication"
-        android:allowBackup="false"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:allowBackup="false">
     </application>
 
 </manifest>

@@ -57,9 +57,9 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     //Kodein
     implementation 'com.github.salomonbrys.kodein:kodein:4.1.0'
-    implementation 'com.github.salomonbrys.kodein:kodein-android:4.1.0'
-    //v7 AppCompat Support Library
-    implementation 'com.android.support:appcompat-v7:27.0.2'
+    implementation('com.github.salomonbrys.kodein:kodein-android:4.1.0') {
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+    }
 
     //JUnit
     testImplementation 'junit:junit:4.12'

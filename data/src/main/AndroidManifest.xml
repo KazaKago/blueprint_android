@@ -1,1 +1,2 @@
-<manifest package="com.kazakago.cleanarchitecture.data"/>
+<manifest
+    package="com.kazakago.cleanarchitecture.data"/>
