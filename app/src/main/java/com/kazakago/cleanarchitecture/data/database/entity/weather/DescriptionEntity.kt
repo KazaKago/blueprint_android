@@ -1,11 +1,9 @@
 package com.kazakago.cleanarchitecture.data.database.entity.weather
 
-import android.arch.persistence.room.ColumnInfo
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.ForeignKey
-import android.arch.persistence.room.PrimaryKey
+import android.arch.persistence.room.*
 
 @Entity(tableName = "description",
+        indices = [Index(value = ["city_id"])],
         foreignKeys = [(ForeignKey(entity = WeatherEntity::class,
                 parentColumns = ["city_id"],
                 childColumns = ["city_id"],
