@@ -1,0 +1,54 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        minSdkVersion 17
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        //Vector Drawable Support
+        vectorDrawables.useSupportLibrary = true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //Module
+    implementation project(':domain')
+    //Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    //v7 AppCompat Support Library
+    implementation 'com.android.support:appcompat-v7:27.0.2'
+    //Design Support Library
+    implementation 'com.android.support:design:27.0.2'
+    //Lifecycle & LiveData & ViewModel
+    implementation 'android.arch.lifecycle:extensions:1.0.0'
+    kapt 'android.arch.lifecycle:compiler:1.0.0'
+    //Rx
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.7'
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
+    //Kodein
+    implementation 'com.github.salomonbrys.kodein:kodein:4.1.0'
+    implementation 'com.github.salomonbrys.kodein:kodein-android:4.1.0'
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+
+    //JUnit
+    testImplementation 'junit:junit:4.12'
+
+    //Espresso
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+}
