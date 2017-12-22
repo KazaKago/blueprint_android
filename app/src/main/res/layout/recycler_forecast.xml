@@ -6,10 +6,7 @@
     android:layout_height="wrap_content"
     android:background="?attr/selectableItemBackground"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin">
+    android:padding="16dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -47,7 +44,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:contentDescription="@null"
-            tools:src="@mipmap/ic_launcher"/>
+            tools:src="@drawable/ic_googleplay_24dp"/>
 
         <TextView
             android:id="@+id/telopTextView"
