@@ -20,10 +20,11 @@ class AboutFragment : Fragment(), AboutFragmentViewModelListener {
         fun createInstance(): AboutFragment = AboutFragment()
     }
 
-    private val viewModel by lazy { ViewModelProviders.of(this).get(AboutFragmentViewModel::class.java) }
+    private lateinit var viewModel: AboutFragmentViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel = ViewModelProviders.of(this).get(AboutFragmentViewModel::class.java)
         lifecycle.addObserver(viewModel)
     }
 

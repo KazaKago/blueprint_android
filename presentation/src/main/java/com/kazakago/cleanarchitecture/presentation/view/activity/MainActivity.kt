@@ -19,11 +19,12 @@ class MainActivity : AppCompatActivity(), MainFragment.Listener, MainActivityVie
         fun createIntent(context: Context): Intent = Intent(context, MainActivity::class.java)
     }
 
-    private val viewModel by lazy { ViewModelProviders.of(this).get(MainActivityViewModel::class.java) }
+    private lateinit var viewModel: MainActivityViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
         lifecycle.addObserver(viewModel)
         viewModel.listener = this
 

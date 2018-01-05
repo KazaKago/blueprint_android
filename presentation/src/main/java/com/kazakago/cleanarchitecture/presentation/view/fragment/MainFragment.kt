@@ -28,7 +28,7 @@ class MainFragment : Fragment(), MainFragmentViewModelListener {
         fun createInstance(): MainFragment = MainFragment()
     }
 
-    private val viewModel by lazy { ViewModelProviders.of(this).get(MainFragmentViewModel::class.java) }
+    private lateinit var viewModel: MainFragmentViewModel
     private lateinit var citySpinnerAdapter: CitySpinnerAdapter
     private lateinit var forecastRecyclerAdapter: ForecastRecyclerAdapter
     private var listener: Listener? = null
@@ -45,13 +45,13 @@ class MainFragment : Fragment(), MainFragmentViewModelListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel = ViewModelProviders.of(this).get(MainFragmentViewModel::class.java)
         lifecycle.addObserver(viewModel)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
         viewModel.listener = this
-        fragmentManager
         return view
     }
 
