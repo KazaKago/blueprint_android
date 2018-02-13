@@ -1,7 +1,9 @@
 package com.kazakago.cleanarchitecture.web.response.entity.weather
 
 import com.squareup.moshi.Json
+import se.ansman.kotshi.JsonSerializable
 
+@JsonSerializable
 data class ImageResponse(
         //天気（晴れ、曇り、雨など）
         @Json(name = "title")

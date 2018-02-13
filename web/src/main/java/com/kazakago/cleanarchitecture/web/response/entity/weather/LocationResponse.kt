@@ -1,7 +1,9 @@
 package com.kazakago.cleanarchitecture.web.response.entity.weather
 
 import com.squareup.moshi.Json
+import se.ansman.kotshi.JsonSerializable
 
+@JsonSerializable
 data class LocationResponse(
         //地方名（例・九州地方）
         @Json(name = "area")

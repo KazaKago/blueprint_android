@@ -1,7 +1,9 @@
 package com.kazakago.cleanarchitecture.web.response.entity.weather
 
 import com.squareup.moshi.Json
+import se.ansman.kotshi.JsonSerializable
 
+@JsonSerializable
 data class CopyrightResponse(
         //コピーライトの文言
         @Json(name = "title")

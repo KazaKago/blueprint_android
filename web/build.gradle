@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION
@@ -29,7 +30,7 @@ dependencies {
     //Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     //Rx
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.7'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.9'
     implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
@@ -37,7 +38,9 @@ dependencies {
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     //Moshi
     implementation 'com.squareup.moshi:moshi:1.5.0'
-    implementation 'com.squareup.moshi:moshi-kotlin:1.5.0'
+    //Koshi
+    implementation 'se.ansman.kotshi:api:1.0.0'
+    kapt 'se.ansman.kotshi:compiler:1.0.0'
 
     //JUnit
     testImplementation 'junit:junit:4.12'

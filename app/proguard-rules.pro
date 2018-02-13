@@ -44,10 +44,6 @@
 -keepclassmembers class kotlin.Metadata {
     public <methods>;
 }
-## https://github.com/square/moshi/issues/345
--dontwarn org.jetbrains.annotations.**
--keep class com.kazakago.cleanarchitecture.web.response.entity.** { *; }
--keep class com.kazakago.cleanarchitecture.data.file.entity.** { *; }
 ##
 
 ## Kodein

@@ -2,8 +2,7 @@ package com.kazakago.cleanarchitecture.data.file.dao.city
 
 import android.content.Context
 import com.kazakago.cleanarchitecture.data.file.entity.city.PrefEntity
-import com.squareup.moshi.KotlinJsonAdapterFactory
-import com.squareup.moshi.Moshi
+import com.kazakago.cleanarchitecture.data.parser.MoshiBuilder
 import com.squareup.moshi.Types
 import java.io.BufferedReader
 import java.io.IOException
@@ -33,9 +32,7 @@ class CityDao(private val context: Context) {
     }
 
     private fun parseJson(jsonStr: String): List<PrefEntity> {
-        val moshi = Moshi.Builder()
-                .add(KotlinJsonAdapterFactory())
-                .build()
+        val moshi = MoshiBuilder().build()
         val type = Types.newParameterizedType(List::class.java, PrefEntity::class.java)
         val adapter = moshi.adapter<List<PrefEntity>>(type)
         return adapter.fromJson(jsonStr).orEmpty()
