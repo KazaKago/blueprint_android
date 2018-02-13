@@ -5,6 +5,7 @@ import com.kazakago.cleanarchitecture.data.database.entity.weather.ForecastEntit
 import com.kazakago.cleanarchitecture.data.database.entity.weather.LocationEntity
 import com.kazakago.cleanarchitecture.data.database.entity.weather.WeatherEntity
 import com.kazakago.cleanarchitecture.domain.model.weather.Weather
+import java.net.URL
 import java.util.*
 
 object WeatherEntityMapper {
@@ -13,7 +14,7 @@ object WeatherEntityMapper {
         return Weather(
                 location = LocationEntityMapper.map(location),
                 title = weather.title,
-                link = weather.link,
+                link = URL(weather.link),
                 publicTime = Date(weather.publicTime),
                 description = DescriptionEntityMapper.map(description),
                 forecasts = forecasts.map { ForecastEntityMapper.map(it) }
@@ -27,7 +28,7 @@ object WeatherEntityMapper {
                 weatherEntity = WeatherEntity(
                         cityId = destination.cityId,
                         title = destination.title,
-                        link = destination.link,
+                        link = destination.link.toString(),
                         publicTime = destination.publicTime.time),
                 locationEntity = LocationEntityMapper.reverse(destination.cityId, destination.location),
                 descriptionEntity = DescriptionEntityMapper.reverse(destination.cityId, destination.description),

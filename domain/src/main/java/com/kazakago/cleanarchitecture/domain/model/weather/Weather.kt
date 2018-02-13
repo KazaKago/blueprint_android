@@ -1,5 +1,6 @@
 package com.kazakago.cleanarchitecture.domain.model.weather
 
+import java.net.URL
 import java.util.*
 
 data class Weather(
@@ -8,7 +9,7 @@ data class Weather(
         //タイトル・見出し
         val title: String,
         //リクエストされたデータの地域に該当するlivedoor 天気情報のURL
-        val link: String,
+        val link: URL,
         //予報の発表日時
         val publicTime: Date,
         //天気概況文

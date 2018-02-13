@@ -5,8 +5,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.domain.model.weather.Forecast
+import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.extension.formattedDateText
 import com.squareup.picasso.Picasso
 
@@ -26,7 +26,7 @@ class ForecastRecyclerAdapter(private val context: Context) : RecyclerView.Adapt
         private val minTemperatureTextView = itemView.findViewById<TextView>(R.id.minTemperatureTextView)
 
         override fun setItem(item: Forecast) {
-            Picasso.with(context).load(item.imageUrl)
+            Picasso.with(context).load(item.imageUrl.toString())
                     .into(weatherImageView)
             dateLabelTextView.text = item.dateLabel
             dateTextView.text = item.date.formattedDateText(context)

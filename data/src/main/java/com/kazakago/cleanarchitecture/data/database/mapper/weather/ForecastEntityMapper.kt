@@ -2,6 +2,7 @@ package com.kazakago.cleanarchitecture.data.database.mapper.weather
 
 import com.kazakago.cleanarchitecture.data.database.entity.weather.ForecastEntity
 import com.kazakago.cleanarchitecture.domain.model.weather.Forecast
+import java.net.URL
 import java.util.*
 
 object ForecastEntityMapper {
@@ -11,7 +12,7 @@ object ForecastEntityMapper {
                 telop = source.telop,
                 date = Date(source.date),
                 dateLabel = source.dateLabel,
-                imageUrl = source.imageUrl,
+                imageUrl = URL(source.imageUrl),
                 maxTemperature = source.maxTemperature,
                 minTemperature = source.minTemperature)
     }
@@ -22,7 +23,7 @@ object ForecastEntityMapper {
                 telop = destination.telop,
                 date = destination.date.time,
                 dateLabel = destination.dateLabel,
-                imageUrl = destination.imageUrl,
+                imageUrl = destination.imageUrl.toString(),
                 maxTemperature = destination.maxTemperature,
                 minTemperature = destination.minTemperature)
     }

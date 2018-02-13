@@ -1,5 +1,6 @@
 package com.kazakago.cleanarchitecture.domain.model.weather
 
+import java.net.URL
 import java.util.*
 
 data class Forecast(
@@ -10,7 +11,7 @@ data class Forecast(
         //天気（晴れ、曇り、雨など）
         var telop: String,
         //画像URL
-        var imageUrl: String,
+        var imageUrl: URL,
         //最高気温
         var maxTemperature: Float?,
         //最低気温
