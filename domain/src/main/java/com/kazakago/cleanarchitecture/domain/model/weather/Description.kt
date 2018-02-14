@@ -1,5 +1,6 @@
 package com.kazakago.cleanarchitecture.domain.model.weather
 
+import java.io.Serializable
 import java.util.*
 
 data class Description(
@@ -7,4 +8,4 @@ data class Description(
         val text: String,
         //天気概況文の発表時刻
         val publicTime: Date
-)
+) : Serializable

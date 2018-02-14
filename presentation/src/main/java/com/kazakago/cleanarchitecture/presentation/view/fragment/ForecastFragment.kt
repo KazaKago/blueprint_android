@@ -8,28 +8,36 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.Toast
+import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.extension.formattedDateTimeText
-import com.kazakago.cleanarchitecture.presentation.listener.fragment.MainFragmentViewModelListener
-import com.kazakago.cleanarchitecture.presentation.presenter.fragment.MainFragmentViewModel
-import com.kazakago.cleanarchitecture.presentation.view.adapter.CitySpinnerAdapter
+import com.kazakago.cleanarchitecture.presentation.listener.fragment.ForecastFragmentViewModelListener
+import com.kazakago.cleanarchitecture.presentation.presenter.fragment.ForecastFragmentViewModel
 import com.kazakago.cleanarchitecture.presentation.view.adapter.ForecastRecyclerAdapter
-import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.android.synthetic.main.fragment_forecast.*
 
-class MainFragment : Fragment(), MainFragmentViewModelListener {
+class ForecastFragment : Fragment(), ForecastFragmentViewModelListener {
 
     interface Listener {
         fun setActionBarTitle(title: String?)
     }
 
     companion object {
-        fun createInstance(): MainFragment = MainFragment()
+        fun createInstance(city: City): ForecastFragment {
+            val fragment = ForecastFragment()
+            val bundle = Bundle()
+            bundle.putSerializable(Key.City.name, city)
+            fragment.arguments = bundle
+            return fragment
+        }
     }
 
-    private lateinit var viewModel: MainFragmentViewModel
-    private lateinit var citySpinnerAdapter: CitySpinnerAdapter
+    private enum class Key {
+        City
+    }
+
+    private lateinit var viewModel: ForecastFragmentViewModel
     private lateinit var forecastRecyclerAdapter: ForecastRecyclerAdapter
     private var listener: Listener? = null
 
@@ -45,12 +53,12 @@ class MainFragment : Fragment(), MainFragmentViewModelListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MainFragmentViewModel::class.java)
-        lifecycle.addObserver(viewModel)
+        val city = arguments?.getSerializable(Key.City.name) as City
+        viewModel = ViewModelProviders.of(this, ForecastFragmentViewModel.Factory(activity!!.application, city)).get(ForecastFragmentViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_main, container, false)
+        val view = inflater.inflate(R.layout.fragment_forecast, container, false)
         viewModel.listener = this
         return view
     }
@@ -58,23 +66,10 @@ class MainFragment : Fragment(), MainFragmentViewModelListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        citySpinnerAdapter = CitySpinnerAdapter(activity!!)
-        citySpinner.adapter = citySpinnerAdapter
-
         forecastRecyclerAdapter = ForecastRecyclerAdapter(activity!!)
         forecastRecyclerAdapter.listener = viewModel
         forecastRecyclerView.adapter = forecastRecyclerAdapter
 
-        viewModel.cityList.observe(this, Observer {
-            citySpinnerAdapter.cityList = it ?: listOf()
-            citySpinnerAdapter.notifyDataSetChanged()
-        })
-        viewModel.selectedPosition.observe(this, Observer {
-            it?.let {
-                citySpinner.setSelection(it)
-                listener?.setActionBarTitle(citySpinnerAdapter.cityList[it].name)
-            }
-        })
         viewModel.weather.observe(this, Observer {
             areaTextView.text = it?.location?.area
             prefectureTextView.text = it?.location?.prefecture
@@ -83,17 +78,9 @@ class MainFragment : Fragment(), MainFragmentViewModelListener {
             forecastRecyclerAdapter.forecastList = it?.forecasts ?: listOf()
             forecastRecyclerAdapter.notifyDataSetChanged()
         })
-        refreshButton.setOnClickListener {
-            viewModel.onClickRefresh()
-        }
-        citySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                viewModel.onCitySelected(position)
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {
-            }
-        }
+        viewModel.isLoading.observe(this, Observer {
+            loadingProgressBar.visibility = if (it == true) View.VISIBLE else View.INVISIBLE
+        })
     }
 
     override fun onDestroyView() {
@@ -101,7 +88,7 @@ class MainFragment : Fragment(), MainFragmentViewModelListener {
         viewModel.listener = null
     }
 
-    /* MainFragmentViewModelListener */
+    /* ForecastFragmentViewModelListener */
 
     override fun showToast(message: String?) {
         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()

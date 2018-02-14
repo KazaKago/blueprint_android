@@ -1,6 +1,6 @@
 package com.kazakago.cleanarchitecture.presentation.listener.activity
 
-interface MainActivityViewModelListener {
+interface CityListActivityViewModelListener {
 
     fun toAboutActivity()
 

@@ -23,8 +23,7 @@ class AboutActivity : AppCompatActivity(), AboutActivityViewModelListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
-        viewModel = ViewModelProviders.of(this).get(AboutActivityViewModel::class.java)
-        lifecycle.addObserver(viewModel)
+        viewModel = ViewModelProviders.of(this, AboutActivityViewModel.Factory(application)).get(AboutActivityViewModel::class.java)
         viewModel.listener = this
 
         setSupportActionBar(toolbar)

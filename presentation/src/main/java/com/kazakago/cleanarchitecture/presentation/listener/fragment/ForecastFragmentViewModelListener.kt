@@ -1,6 +1,6 @@
 package com.kazakago.cleanarchitecture.presentation.listener.fragment
 
-interface MainFragmentViewModelListener {
+interface ForecastFragmentViewModelListener {
 
     fun showToast(message: String?)
 

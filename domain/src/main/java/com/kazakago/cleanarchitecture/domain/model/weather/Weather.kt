@@ -1,5 +1,6 @@
 package com.kazakago.cleanarchitecture.domain.model.weather
 
+import java.io.Serializable
 import java.net.URL
 import java.util.*
 
@@ -16,7 +17,7 @@ data class Weather(
         val description: Description,
         //府県天気予報の予報日毎の配列
         val forecasts: List<Forecast>
-) {
+) : Serializable {
     //地域ID
     lateinit var cityId: String
 }

@@ -8,9 +8,9 @@ import org.junit.Rule
 class MainActivityTest {
 
     @Rule
-    var activityRule = ActivityTestRule(MainActivity::class.java)
+    var activityRule = ActivityTestRule(ForecastActivity::class.java)
 
-    private lateinit var activity: MainActivity
+    private lateinit var activity: ForecastActivity
 
     @Before
     @Throws(Exception::class)

@@ -8,30 +8,29 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.kazakago.cleanarchitecture.presentation.R
-import com.kazakago.cleanarchitecture.presentation.listener.activity.MainActivityViewModelListener
-import com.kazakago.cleanarchitecture.presentation.presenter.activity.MainActivityViewModel
-import com.kazakago.cleanarchitecture.presentation.view.fragment.MainFragment
-import kotlinx.android.synthetic.main.activity_main.*
+import com.kazakago.cleanarchitecture.presentation.listener.activity.CityListActivityViewModelListener
+import com.kazakago.cleanarchitecture.presentation.presenter.activity.CityListActivityViewModel
+import com.kazakago.cleanarchitecture.presentation.view.fragment.CityListFragment
+import kotlinx.android.synthetic.main.activity_forecast.*
 
-class MainActivity : AppCompatActivity(), MainFragment.Listener, MainActivityViewModelListener {
+class CityListActivity : AppCompatActivity(), CityListActivityViewModelListener {
 
     companion object {
-        fun createIntent(context: Context): Intent = Intent(context, MainActivity::class.java)
+        fun createIntent(context: Context): Intent = Intent(context, CityListActivity::class.java)
     }
 
-    private lateinit var viewModel: MainActivityViewModel
+    private lateinit var viewModel: CityListActivityViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
-        lifecycle.addObserver(viewModel)
+        setContentView(R.layout.activity_city_list)
+        viewModel = ViewModelProviders.of(this, CityListActivityViewModel.Factory(application)).get(CityListActivityViewModel::class.java)
         viewModel.listener = this
 
         setSupportActionBar(toolbar)
 
         if (savedInstanceState == null) {
-            replaceMainFragment()
+            replaceCityListFragment()
         }
     }
 
@@ -41,7 +40,7 @@ class MainActivity : AppCompatActivity(), MainFragment.Listener, MainActivityVie
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.main, menu)
+        menuInflater.inflate(R.menu.city_list, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -52,21 +51,15 @@ class MainActivity : AppCompatActivity(), MainFragment.Listener, MainActivityVie
         return super.onOptionsItemSelected(item)
     }
 
-    private fun replaceMainFragment() {
-        val fragment = MainFragment.createInstance()
+    private fun replaceCityListFragment() {
+        val fragment = CityListFragment.createInstance()
 
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragmentContainer, fragment)
         fragmentTransaction.commit()
     }
 
-    /* MainFragmentListener */
-
-    override fun setActionBarTitle(title: String?) {
-        supportActionBar?.title = title
-    }
-
-    /* MainActivityViewModelListener */
+    /* CityListActivityViewModelListener */
 
     override fun toAboutActivity() {
         val intent = AboutActivity.createIntent(this)

@@ -2,8 +2,9 @@ package com.kazakago.cleanarchitecture.presentation.presenter.fragment
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.ViewModel
+import android.arch.lifecycle.ViewModelProvider
 import android.net.Uri
 import com.github.salomonbrys.kodein.LazyKodein
 import com.github.salomonbrys.kodein.LazyKodeinAware
@@ -17,7 +18,14 @@ import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.listener.fragment.AboutFragmentViewModelListener
 import java.util.*
 
-class AboutFragmentViewModel(application: Application) : AndroidViewModel(application), LifecycleObserver, LazyKodeinAware {
+class AboutFragmentViewModel(application: Application) : AndroidViewModel(application), LazyKodeinAware {
+
+    class Factory(private val application: Application): ViewModelProvider.Factory {
+        @Suppress("UNCHECKED_CAST")
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            return AboutFragmentViewModel(application) as T
+        }
+    }
 
     override val kodein = LazyKodein(application.appKodein)
 
