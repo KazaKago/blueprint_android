@@ -12,11 +12,7 @@ class DebugCleanApplication : CleanApplication() {
     }
 
     private fun initializeStetho() {
-        Stetho.initialize(
-                Stetho.newInitializerBuilder(this)
-                        .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
-                        .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
-                        .build())
+        Stetho.initializeWithDefaults(this)
     }
 
     private fun initializeLeakCanary() {
