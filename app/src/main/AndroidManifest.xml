@@ -4,7 +4,7 @@
     package="com.kazakago.cleanarchitecture">
 
     <application
-        android:name=".DebugCleanApplication"
+        android:name=".CleanApplication"
         android:allowBackup="false">
     </application>
 
