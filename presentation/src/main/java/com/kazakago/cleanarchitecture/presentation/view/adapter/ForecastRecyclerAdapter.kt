@@ -3,12 +3,11 @@ package com.kazakago.cleanarchitecture.presentation.view.adapter
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import com.kazakago.cleanarchitecture.domain.model.weather.Forecast
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.extension.formattedDateText
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.recycler_forecast.view.*
 
 class ForecastRecyclerAdapter(private val context: Context) : RecyclerView.Adapter<ForecastRecyclerAdapter.ViewHolder>() {
 
@@ -16,34 +15,12 @@ class ForecastRecyclerAdapter(private val context: Context) : RecyclerView.Adapt
         fun onItemClick(forecast: Forecast)
     }
 
-    inner class ViewHolder(context: Context, parent: ViewGroup) : AbsViewHolder<Forecast>(context, parent, R.layout.recycler_forecast) {
-
-        private val dateLabelTextView = itemView.findViewById<TextView>(R.id.dateLabelTextView)
-        private val dateTextView = itemView.findViewById<TextView>(R.id.dateTextView)
-        private val weatherImageView = itemView.findViewById<ImageView>(R.id.weatherImageView)
-        private val telopTextView = itemView.findViewById<TextView>(R.id.telopTextView)
-        private val maxTemperatureTextView = itemView.findViewById<TextView>(R.id.maxTemperatureTextView)
-        private val minTemperatureTextView = itemView.findViewById<TextView>(R.id.minTemperatureTextView)
-
-        override fun setItem(item: Forecast) {
-            Picasso.with(context).load(item.imageUrl.toString())
-                    .into(weatherImageView)
-            dateLabelTextView.text = item.dateLabel
-            dateTextView.text = item.date.formattedDateText(context)
-            telopTextView.text = item.telop
-            maxTemperatureTextView.text = context.getString(R.string.temperature_max, item.maxTemperature?.toString() ?: "--")
-            minTemperatureTextView.text = context.getString(R.string.temperature_min, item.minTemperature?.toString() ?: "--")
-            itemView?.setOnClickListener {
-                listener?.onItemClick(item)
-            }
-        }
-
-    }
-
     var listener: Listener? = null
     var forecastList: List<Forecast> = listOf()
 
-    override fun getItemCount(): Int = forecastList.size
+    override fun getItemCount(): Int {
+        return forecastList.size
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(context, parent)
@@ -51,6 +28,21 @@ class ForecastRecyclerAdapter(private val context: Context) : RecyclerView.Adapt
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.setItem(forecastList[position])
+    }
+
+    inner class ViewHolder(context: Context, parent: ViewGroup) : AbsViewHolder<Forecast>(context, parent, R.layout.recycler_forecast) {
+        override fun setItem(item: Forecast) {
+            Picasso.with(context).load(item.imageUrl.toString())
+                    .into(itemView.weatherImageView)
+            itemView.dateLabelTextView.text = item.dateLabel
+            itemView.dateTextView.text = item.date.formattedDateText(context)
+            itemView.telopTextView.text = item.telop
+            itemView.maxTemperatureTextView.text = context.getString(R.string.temperature_max, item.maxTemperature?.toString() ?: "--")
+            itemView.minTemperatureTextView.text = context.getString(R.string.temperature_min, item.minTemperature?.toString() ?: "--")
+            itemView.setOnClickListener {
+                listener?.onItemClick(item)
+            }
+        }
     }
 
 }
