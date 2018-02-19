@@ -5,7 +5,7 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 
-class MainActivityTest {
+class ForecastActivityTest {
 
     @Rule
     var activityRule = ActivityTestRule(ForecastActivity::class.java)
