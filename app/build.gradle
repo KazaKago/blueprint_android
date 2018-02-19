@@ -55,6 +55,11 @@ dependencies {
         exclude group: 'com.android.support', module: 'appcompat-v7'
     }
 
+    // Stetho
+    debugImplementation 'com.facebook.stetho:stetho:1.5.0'
+    // LeakCanary
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+
     //JUnit
     testImplementation 'junit:junit:4.12'
 

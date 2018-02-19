@@ -10,7 +10,7 @@ import com.kazakago.cleanarchitecture.di.dataModule
 import com.kazakago.cleanarchitecture.di.domainModule
 import com.kazakago.cleanarchitecture.di.webModule
 
-class CleanApplication : Application(), KodeinAware {
+open class CleanApplication : Application(), KodeinAware {
 
     override val kodein: Kodein by Kodein.lazy {
         import(autoAndroidModule(this@CleanApplication))
