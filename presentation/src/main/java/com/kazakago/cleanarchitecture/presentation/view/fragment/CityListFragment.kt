@@ -19,7 +19,9 @@ import kotlinx.android.synthetic.main.fragment_forecast.*
 class CityListFragment : Fragment(), CityListFragmentViewModelListener {
 
     companion object {
-        fun createInstance(): CityListFragment = CityListFragment()
+        fun createInstance(): CityListFragment {
+            return CityListFragment()
+        }
     }
 
     private lateinit var viewModel: CityListFragmentViewModel

@@ -13,8 +13,8 @@ class CityRecyclerAdapter(private val context: Context) : RecyclerView.Adapter<C
         fun onItemClick(city: City)
     }
 
-    var listener: Listener? = null
     var cityList: List<City> = listOf()
+    var listener: Listener? = null
 
     override fun getItemCount(): Int {
         return cityList.size

@@ -16,7 +16,9 @@ import kotlinx.android.synthetic.main.activity_forecast.*
 class CityListActivity : AppCompatActivity(), CityListActivityViewModelListener {
 
     companion object {
-        fun createIntent(context: Context): Intent = Intent(context, CityListActivity::class.java)
+        fun createIntent(context: Context): Intent {
+            return Intent(context, CityListActivity::class.java)
+        }
     }
 
     private lateinit var viewModel: CityListActivityViewModel

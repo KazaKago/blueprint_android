@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.presentation.R
-import com.kazakago.cleanarchitecture.presentation.extension.formattedDateTimeText
 import com.kazakago.cleanarchitecture.presentation.listener.fragment.ForecastFragmentViewModelListener
 import com.kazakago.cleanarchitecture.presentation.presenter.fragment.ForecastFragmentViewModel
 import com.kazakago.cleanarchitecture.presentation.view.adapter.ForecastRecyclerAdapter
@@ -71,11 +70,7 @@ class ForecastFragment : Fragment(), ForecastFragmentViewModelListener {
         forecastRecyclerView.adapter = forecastRecyclerAdapter
 
         viewModel.weather.observe(this, Observer {
-            areaTextView.text = it?.location?.area
-            prefectureTextView.text = it?.location?.prefecture
-            cityTextView.text = it?.location?.city
-            publicTimeTextView.text = getString(R.string.public_time, it?.publicTime?.formattedDateTimeText(context!!) ?: "")
-            forecastRecyclerAdapter.forecastList = it?.forecasts ?: listOf()
+            forecastRecyclerAdapter.weather = it
             forecastRecyclerAdapter.notifyDataSetChanged()
         })
         viewModel.isLoading.observe(this, Observer {

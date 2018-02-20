@@ -15,7 +15,9 @@ import kotlinx.android.synthetic.main.activity_about.*
 class AboutActivity : AppCompatActivity(), AboutActivityViewModelListener {
 
     companion object {
-        fun createIntent(context: Context): Intent = Intent(context, AboutActivity::class.java)
+        fun createIntent(context: Context): Intent {
+            return Intent(context, AboutActivity::class.java)
+        }
     }
 
     private lateinit var viewModel: AboutActivityViewModel
