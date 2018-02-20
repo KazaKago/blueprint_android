@@ -25,15 +25,17 @@ class CityRecyclerAdapter(private val context: Context) : RecyclerView.Adapter<C
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.setItem(cityList[position])
+        holder.item = cityList[position]
     }
 
-    inner class ViewHolder(context: Context, parent: ViewGroup) : AbsViewHolder<City>(context, parent, R.layout.recycler_city) {
-        override fun setItem(item: City) {
-            itemView.cityTextView.text = item.name
+    inner class ViewHolder(context: Context, parent: ViewGroup) : AbsItemViewHolder<City>(context, parent, R.layout.recycler_city) {
+        init {
             itemView.setOnClickListener {
-                listener?.onItemClick(item)
+                item?.let { listener?.onItemClick(it) }
             }
+        }
+        override fun onSetItem(item: City?) {
+            itemView.cityTextView.text = item?.name
         }
     }
 

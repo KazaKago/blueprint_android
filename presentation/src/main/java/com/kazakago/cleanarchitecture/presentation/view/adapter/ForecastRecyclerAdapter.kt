@@ -27,21 +27,23 @@ class ForecastRecyclerAdapter(private val context: Context) : RecyclerView.Adapt
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.setItem(forecastList[position])
+        holder.item = forecastList[position]
     }
 
-    inner class ViewHolder(context: Context, parent: ViewGroup) : AbsViewHolder<Forecast>(context, parent, R.layout.recycler_forecast) {
-        override fun setItem(item: Forecast) {
-            Picasso.with(context).load(item.imageUrl.toString())
-                    .into(itemView.weatherImageView)
-            itemView.dateLabelTextView.text = item.dateLabel
-            itemView.dateTextView.text = item.date.formattedDateText(context)
-            itemView.telopTextView.text = item.telop
-            itemView.maxTemperatureTextView.text = context.getString(R.string.temperature_max, item.maxTemperature?.toString() ?: "--")
-            itemView.minTemperatureTextView.text = context.getString(R.string.temperature_min, item.minTemperature?.toString() ?: "--")
+    inner class ViewHolder(context: Context, parent: ViewGroup) : AbsItemViewHolder<Forecast>(context, parent, R.layout.recycler_forecast) {
+        init {
             itemView.setOnClickListener {
-                listener?.onItemClick(item)
+                item?.let { listener?.onItemClick(it) }
             }
+        }
+        override fun onSetItem(item: Forecast?) {
+            Picasso.with(context).load(item?.imageUrl.toString())
+                    .into(itemView.weatherImageView)
+            itemView.dateLabelTextView.text = item?.dateLabel
+            itemView.dateTextView.text = item?.date?.formattedDateText(context)
+            itemView.telopTextView.text = item?.telop
+            itemView.maxTemperatureTextView.text = context.getString(R.string.temperature_max, item?.maxTemperature?.toString() ?: "--")
+            itemView.minTemperatureTextView.text = context.getString(R.string.temperature_min, item?.minTemperature?.toString() ?: "--")
         }
     }
 
