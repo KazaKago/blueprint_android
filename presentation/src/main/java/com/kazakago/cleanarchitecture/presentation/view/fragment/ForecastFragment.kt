@@ -53,7 +53,7 @@ class ForecastFragment : Fragment(), ForecastFragmentViewModelListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val city = arguments?.getSerializable(Key.City.name) as City
-        viewModel = ViewModelProviders.of(this, ForecastFragmentViewModel.Factory(activity!!.application, city)).get(ForecastFragmentViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, ForecastFragmentViewModel.Factory(requireActivity().application, city)).get(ForecastFragmentViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -65,7 +65,7 @@ class ForecastFragment : Fragment(), ForecastFragmentViewModelListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        forecastRecyclerAdapter = ForecastRecyclerAdapter(activity!!)
+        forecastRecyclerAdapter = ForecastRecyclerAdapter(requireActivity())
         forecastRecyclerAdapter.listener = viewModel
         forecastRecyclerView.adapter = forecastRecyclerAdapter
 

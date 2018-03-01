@@ -26,7 +26,7 @@ class AboutFragment : Fragment(), AboutFragmentViewModelListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, AboutFragmentViewModel.Factory(activity!!.application)).get(AboutFragmentViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, AboutFragmentViewModel.Factory(requireActivity().application)).get(AboutFragmentViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

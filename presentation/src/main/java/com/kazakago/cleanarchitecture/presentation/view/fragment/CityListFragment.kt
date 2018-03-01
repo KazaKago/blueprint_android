@@ -29,7 +29,7 @@ class CityListFragment : Fragment(), CityListFragmentViewModelListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, CityListFragmentViewModel.Factory(activity!!.application)).get(CityListFragmentViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, CityListFragmentViewModel.Factory(requireActivity().application)).get(CityListFragmentViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -41,7 +41,7 @@ class CityListFragment : Fragment(), CityListFragmentViewModelListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        cityRecyclerAdapter = CityRecyclerAdapter(activity!!)
+        cityRecyclerAdapter = CityRecyclerAdapter(requireActivity())
         cityRecyclerAdapter.listener = viewModel
         forecastRecyclerView.adapter = cityRecyclerAdapter
 
@@ -63,7 +63,7 @@ class CityListFragment : Fragment(), CityListFragmentViewModelListener {
     }
 
     override fun toForecastActivity(city: City) {
-        val intent = ForecastActivity.createIntent(activity!!, city)
+        val intent = ForecastActivity.createIntent(requireActivity(), city)
         startActivity(intent)
     }
 

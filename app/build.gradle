@@ -2,13 +2,13 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion COMPILE_SDK_VERSION
+    compileSdkVersion 27
     defaultConfig {
-        applicationId PACKAGE_NAME
-        minSdkVersion MIN_SDK_VERSION
-        targetSdkVersion TARGET_SDK_VERSION
-        versionCode VERSION_CODE
-        versionName VERSION_NAME
+        applicationId "com.kazakago.cleanarchitecture"
+        minSdkVersion 17
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -30,8 +30,8 @@ android {
         }
         staging {
             dimension "app"
-            applicationId "${PACKAGE_NAME}.staging"
-            versionName "${VERSION_NAME} staging"
+            applicationId defaultConfig.applicationId + ".staging"
+            versionName defaultConfig.versionName + " staging"
         }
     }
     compileOptions {
