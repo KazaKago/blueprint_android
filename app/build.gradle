@@ -33,6 +33,11 @@ android {
             applicationId defaultConfig.applicationId + ".staging"
             versionName defaultConfig.versionName + " staging"
         }
+        develop {
+            dimension "app"
+            applicationId defaultConfig.applicationId + ".devlop"
+            versionName defaultConfig.versionName + " develop"
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
