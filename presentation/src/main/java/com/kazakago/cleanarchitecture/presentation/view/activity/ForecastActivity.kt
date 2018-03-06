@@ -14,7 +14,7 @@ import com.kazakago.cleanarchitecture.presentation.presenter.activity.ForecastAc
 import com.kazakago.cleanarchitecture.presentation.view.fragment.ForecastFragment
 import kotlinx.android.synthetic.main.activity_forecast.*
 
-class ForecastActivity : AppCompatActivity(), ForecastFragment.Listener, ForecastActivityViewModelListener {
+class ForecastActivity : AppCompatActivity(), ForecastActivityViewModelListener {
 
     companion object {
         fun createIntent(context: Context, city: City): Intent {
@@ -67,12 +67,6 @@ class ForecastActivity : AppCompatActivity(), ForecastFragment.Listener, Forecas
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragmentContainer, fragment)
         fragmentTransaction.commit()
-    }
-
-    /* ForecastFragmentListener */
-
-    override fun setActionBarTitle(title: String?) {
-        supportActionBar?.title = title
     }
 
     /* ForecastActivityViewModelListener */

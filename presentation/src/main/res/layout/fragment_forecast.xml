@@ -15,12 +15,11 @@
         app:layoutManager="LinearLayoutManager"
         tools:listitem="@layout/recycler_forecast_content"/>
 
-    <ProgressBar
+    <android.support.v4.widget.ContentLoadingProgressBar
         android:id="@+id/loadingProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:visibility="invisible"
-        tools:visibility="visible"/>
+        android:visibility="gone"/>
 
 </FrameLayout>

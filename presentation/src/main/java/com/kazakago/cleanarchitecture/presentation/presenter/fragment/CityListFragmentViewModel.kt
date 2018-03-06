@@ -11,6 +11,7 @@ import com.github.salomonbrys.kodein.android.appKodein
 import com.github.salomonbrys.kodein.instance
 import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.domain.usecase.city.GetCityUseCase
+import com.kazakago.cleanarchitecture.presentation.extension.compositeLocalizedMessage
 import com.kazakago.cleanarchitecture.presentation.listener.fragment.CityListFragmentViewModelListener
 import com.kazakago.cleanarchitecture.presentation.view.adapter.CityRecyclerAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -55,7 +56,7 @@ class CityListFragmentViewModel(application: Application) : AndroidViewModel(app
                         },
                         onError = {
                             cityList.value = listOf()
-                            listener?.showToast(it.localizedMessage)
+                            listener?.showToast(it.compositeLocalizedMessage())
                         }
                 ))
     }

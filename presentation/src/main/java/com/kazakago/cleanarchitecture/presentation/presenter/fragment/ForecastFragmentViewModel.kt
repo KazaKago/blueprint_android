@@ -13,6 +13,7 @@ import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.domain.model.weather.Forecast
 import com.kazakago.cleanarchitecture.domain.model.weather.Weather
 import com.kazakago.cleanarchitecture.domain.usecase.weather.GetWeatherUseCase
+import com.kazakago.cleanarchitecture.presentation.extension.compositeLocalizedMessage
 import com.kazakago.cleanarchitecture.presentation.listener.fragment.ForecastFragmentViewModelListener
 import com.kazakago.cleanarchitecture.presentation.view.adapter.ForecastRecyclerAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -64,7 +65,7 @@ class ForecastFragmentViewModel(application: Application, private val city: City
                         },
                         onError = {
                             weather.value = null
-                            listener?.showToast(it.localizedMessage)
+                            listener?.showToast(it.compositeLocalizedMessage())
                         }
                 ))
     }

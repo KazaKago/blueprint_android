@@ -4,6 +4,7 @@ import com.kazakago.cleanarchitecture.data.database.entity.weather.DescriptionEn
 import com.kazakago.cleanarchitecture.data.database.entity.weather.ForecastEntity
 import com.kazakago.cleanarchitecture.data.database.entity.weather.LocationEntity
 import com.kazakago.cleanarchitecture.data.database.entity.weather.WeatherEntity
+import com.kazakago.cleanarchitecture.domain.model.city.CityId
 import com.kazakago.cleanarchitecture.domain.model.weather.Weather
 import java.net.URL
 import java.util.*
@@ -19,20 +20,20 @@ object WeatherEntityMapper {
                 description = DescriptionEntityMapper.map(description),
                 forecasts = forecasts.map { ForecastEntityMapper.map(it) }
         ).apply {
-            cityId = weather.cityId
+            cityId = CityId(weather.cityId)
         }
     }
 
     fun reverse(destination: Weather): ReverseMappingResult {
         return ReverseMappingResult(
                 weatherEntity = WeatherEntity(
-                        cityId = destination.cityId,
+                        cityId = destination.cityId.value,
                         title = destination.title,
                         link = destination.link.toString(),
                         publicTime = destination.publicTime.time),
-                locationEntity = LocationEntityMapper.reverse(destination.cityId, destination.location),
-                descriptionEntity = DescriptionEntityMapper.reverse(destination.cityId, destination.description),
-                forecastEntities = destination.forecasts.map { ForecastEntityMapper.reverse(destination.cityId, it) })
+                locationEntity = LocationEntityMapper.reverse(destination.cityId.value, destination.location),
+                descriptionEntity = DescriptionEntityMapper.reverse(destination.cityId.value, destination.description),
+                forecastEntities = destination.forecasts.map { ForecastEntityMapper.reverse(destination.cityId.value, it) })
     }
 
     class ReverseMappingResult(

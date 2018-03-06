@@ -3,6 +3,7 @@ package com.kazakago.cleanarchitecture.data.repository.weather
 import android.content.Context
 import com.kazakago.cleanarchitecture.data.database.dao.AppDatabase
 import com.kazakago.cleanarchitecture.data.database.mapper.weather.WeatherEntityMapper
+import com.kazakago.cleanarchitecture.domain.model.city.CityId
 import com.kazakago.cleanarchitecture.domain.model.weather.Weather
 import com.kazakago.cleanarchitecture.domain.repository.weather.WeatherRepository
 
@@ -10,12 +11,12 @@ class WeatherRepositoryImpl(private val context: Context) : WeatherRepository {
 
     private val database = AppDatabase.create(context)
 
-    override fun find(cityId: String): Weather? {
+    override fun find(cityId: CityId): Weather? {
         val weatherDao = database.weatherDao()
-        val weather = weatherDao.findWeather(cityId) ?: return null
-        val location = weatherDao.findLocation(cityId) ?: return null
-        val description = weatherDao.findDescription(cityId) ?: return null
-        val forecasts = weatherDao.findForecasts(cityId) ?: return null
+        val weather = weatherDao.findWeather(cityId.value) ?: return null
+        val location = weatherDao.findLocation(cityId.value) ?: return null
+        val description = weatherDao.findDescription(cityId.value) ?: return null
+        val forecasts = weatherDao.findForecasts(cityId.value) ?: return null
         return WeatherEntityMapper.map(weather, location, description, forecasts)
     }
 

@@ -1,5 +1,6 @@
 package com.kazakago.cleanarchitecture.domain.model.weather
 
+import com.kazakago.cleanarchitecture.domain.model.city.CityId
 import java.io.Serializable
 import java.net.URL
 import java.util.*
@@ -19,5 +20,5 @@ data class Weather(
         val forecasts: List<Forecast>
 ) : Serializable {
     //地域ID
-    lateinit var cityId: String
+    lateinit var cityId: CityId
 }

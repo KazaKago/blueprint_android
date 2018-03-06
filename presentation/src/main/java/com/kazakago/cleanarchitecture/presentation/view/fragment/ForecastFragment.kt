@@ -2,7 +2,6 @@ package com.kazakago.cleanarchitecture.presentation.view.fragment
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -17,10 +16,6 @@ import com.kazakago.cleanarchitecture.presentation.view.adapter.ForecastRecycler
 import kotlinx.android.synthetic.main.fragment_forecast.*
 
 class ForecastFragment : Fragment(), ForecastFragmentViewModelListener {
-
-    interface Listener {
-        fun setActionBarTitle(title: String?)
-    }
 
     companion object {
         fun createInstance(city: City): ForecastFragment {
@@ -38,17 +33,6 @@ class ForecastFragment : Fragment(), ForecastFragmentViewModelListener {
 
     private lateinit var viewModel: ForecastFragmentViewModel
     private lateinit var forecastRecyclerAdapter: ForecastRecyclerAdapter
-    private var listener: Listener? = null
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        listener = context as? Listener
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        listener = null
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
