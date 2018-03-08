@@ -1,7 +1,7 @@
 package com.kazakago.cleanarchitecture.presentation.view.fragment
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import android.arch.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -11,9 +11,9 @@ import android.widget.Toast
 import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.listener.fragment.CityListFragmentViewModelListener
-import com.kazakago.cleanarchitecture.presentation.presenter.fragment.CityListFragmentViewModel
 import com.kazakago.cleanarchitecture.presentation.view.activity.ForecastActivity
 import com.kazakago.cleanarchitecture.presentation.view.adapter.CityRecyclerAdapter
+import com.kazakago.cleanarchitecture.presentation.viewmodel.fragment.CityListFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_forecast.*
 
 class CityListFragment : Fragment(), CityListFragmentViewModelListener {
@@ -29,7 +29,7 @@ class CityListFragment : Fragment(), CityListFragmentViewModelListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, CityListFragmentViewModel.Factory(requireActivity().application)).get(CityListFragmentViewModel::class.java)
+        viewModel = ViewModelProvider(this, CityListFragmentViewModel.Factory(requireActivity().application)).get(CityListFragmentViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

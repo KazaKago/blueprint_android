@@ -1,7 +1,7 @@
 package com.kazakago.cleanarchitecture.presentation.view.activity
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -10,8 +10,8 @@ import android.view.MenuItem
 import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.listener.activity.ForecastActivityViewModelListener
-import com.kazakago.cleanarchitecture.presentation.presenter.activity.ForecastActivityViewModel
 import com.kazakago.cleanarchitecture.presentation.view.fragment.ForecastFragment
+import com.kazakago.cleanarchitecture.presentation.viewmodel.activity.ForecastActivityViewModel
 import kotlinx.android.synthetic.main.activity_forecast.*
 
 class ForecastActivity : AppCompatActivity(), ForecastActivityViewModelListener {
@@ -34,7 +34,7 @@ class ForecastActivity : AppCompatActivity(), ForecastActivityViewModelListener 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forecast)
         val city = intent.getSerializableExtra(Key.City.name) as City
-        viewModel = ViewModelProviders.of(this, ForecastActivityViewModel.Factory(application, city)).get(ForecastActivityViewModel::class.java)
+        viewModel = ViewModelProvider(this, ForecastActivityViewModel.Factory(application, city)).get(ForecastActivityViewModel::class.java)
         viewModel.listener = this
 
         setSupportActionBar(toolbar)

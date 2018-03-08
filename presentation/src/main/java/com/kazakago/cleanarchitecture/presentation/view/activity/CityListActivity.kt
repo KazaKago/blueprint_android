@@ -1,6 +1,6 @@
 package com.kazakago.cleanarchitecture.presentation.view.activity
 
-import android.arch.lifecycle.ViewModelProviders
+import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -9,8 +9,8 @@ import android.view.Menu
 import android.view.MenuItem
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.listener.activity.CityListActivityViewModelListener
-import com.kazakago.cleanarchitecture.presentation.presenter.activity.CityListActivityViewModel
 import com.kazakago.cleanarchitecture.presentation.view.fragment.CityListFragment
+import com.kazakago.cleanarchitecture.presentation.viewmodel.activity.CityListActivityViewModel
 import kotlinx.android.synthetic.main.activity_forecast.*
 
 class CityListActivity : AppCompatActivity(), CityListActivityViewModelListener {
@@ -26,7 +26,7 @@ class CityListActivity : AppCompatActivity(), CityListActivityViewModelListener 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_city_list)
-        viewModel = ViewModelProviders.of(this, CityListActivityViewModel.Factory(application)).get(CityListActivityViewModel::class.java)
+        viewModel = ViewModelProvider(this, CityListActivityViewModel.Factory(application)).get(CityListActivityViewModel::class.java)
         viewModel.listener = this
 
         setSupportActionBar(toolbar)

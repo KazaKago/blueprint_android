@@ -1,4 +1,4 @@
-package com.kazakago.cleanarchitecture.presentation.presenter.activity
+package com.kazakago.cleanarchitecture.presentation.viewmodel.activity
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel

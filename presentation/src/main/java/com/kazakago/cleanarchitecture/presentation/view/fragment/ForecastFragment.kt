@@ -1,7 +1,7 @@
 package com.kazakago.cleanarchitecture.presentation.view.fragment
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import android.arch.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -11,8 +11,8 @@ import android.widget.Toast
 import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.listener.fragment.ForecastFragmentViewModelListener
-import com.kazakago.cleanarchitecture.presentation.presenter.fragment.ForecastFragmentViewModel
 import com.kazakago.cleanarchitecture.presentation.view.adapter.ForecastRecyclerAdapter
+import com.kazakago.cleanarchitecture.presentation.viewmodel.fragment.ForecastFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_forecast.*
 
 class ForecastFragment : Fragment(), ForecastFragmentViewModelListener {
@@ -37,7 +37,7 @@ class ForecastFragment : Fragment(), ForecastFragmentViewModelListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val city = arguments?.getSerializable(Key.City.name) as City
-        viewModel = ViewModelProviders.of(this, ForecastFragmentViewModel.Factory(requireActivity().application, city)).get(ForecastFragmentViewModel::class.java)
+        viewModel = ViewModelProvider(this, ForecastFragmentViewModel.Factory(requireActivity().application, city)).get(ForecastFragmentViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

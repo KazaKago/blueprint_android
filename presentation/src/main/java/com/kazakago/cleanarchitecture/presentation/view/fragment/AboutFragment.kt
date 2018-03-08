@@ -1,7 +1,7 @@
 package com.kazakago.cleanarchitecture.presentation.view.fragment
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import android.arch.lifecycle.ViewModelProvider
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -11,7 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.listener.fragment.AboutFragmentViewModelListener
-import com.kazakago.cleanarchitecture.presentation.presenter.fragment.AboutFragmentViewModel
+import com.kazakago.cleanarchitecture.presentation.viewmodel.fragment.AboutFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_about.*
 
 class AboutFragment : Fragment(), AboutFragmentViewModelListener {
@@ -26,7 +26,7 @@ class AboutFragment : Fragment(), AboutFragmentViewModelListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, AboutFragmentViewModel.Factory(requireActivity().application)).get(AboutFragmentViewModel::class.java)
+        viewModel = ViewModelProvider(this, AboutFragmentViewModel.Factory(requireActivity().application)).get(AboutFragmentViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

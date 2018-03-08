@@ -1,4 +1,4 @@
-package com.kazakago.cleanarchitecture.presentation.presenter.fragment
+package com.kazakago.cleanarchitecture.presentation.viewmodel.fragment
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel

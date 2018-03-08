@@ -1,6 +1,6 @@
 package com.kazakago.cleanarchitecture.presentation.view.activity
 
-import android.arch.lifecycle.ViewModelProviders
+import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -8,8 +8,8 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.listener.activity.AboutActivityViewModelListener
-import com.kazakago.cleanarchitecture.presentation.presenter.activity.AboutActivityViewModel
 import com.kazakago.cleanarchitecture.presentation.view.fragment.AboutFragment
+import com.kazakago.cleanarchitecture.presentation.viewmodel.activity.AboutActivityViewModel
 import kotlinx.android.synthetic.main.activity_about.*
 
 class AboutActivity : AppCompatActivity(), AboutActivityViewModelListener {
@@ -25,7 +25,7 @@ class AboutActivity : AppCompatActivity(), AboutActivityViewModelListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
-        viewModel = ViewModelProviders.of(this, AboutActivityViewModel.Factory(application)).get(AboutActivityViewModel::class.java)
+        viewModel = ViewModelProvider(this, AboutActivityViewModel.Factory(application)).get(AboutActivityViewModel::class.java)
         viewModel.listener = this
 
         setSupportActionBar(toolbar)
