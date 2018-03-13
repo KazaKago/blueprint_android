@@ -1,13 +1,10 @@
 package com.kazakago.cleanarchitecture.domain.repository.appinfo
 
+import com.kazakago.cleanarchitecture.domain.model.appinfo.AppInfo
+import io.reactivex.Single
+
 interface AppInfoRepository {
 
-    val playStoreUrl: String
-
-    val mailAddressUrl: String
-
-    val officialSiteUrl: String
-
-    val appVersion: String
+    fun getAppInfo(): Single<AppInfo>
 
 }

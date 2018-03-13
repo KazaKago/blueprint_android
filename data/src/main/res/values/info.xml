@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="developer_website_url" translatable="false">http://weathercock.tmrnk.com/</string>
+    <string name="developer_name" translatable="false">KazaKago</string>
+    <string name="developer_website_url" translatable="false">http://kazakago.hatenablog.jp/</string>
     <string name="developer_mail_address" translatable="false">weathercock_perch@yahoo.co.jp</string>
 
 </resources>

@@ -47,9 +47,7 @@ class CityUseCaseTest: KodeinAware {
     @Test
     @Throws(Exception::class)
     fun testFindAll() {
-        val cityList = getCityUseCase.execute(Unit)
-                .toList()
-                .blockingGet()
+        val cityList = getCityUseCase.execute(Unit).blockingGet()
         assertThat<List<City>>(cityList, hasSize<Any>(greaterThan(0)))
     }
 

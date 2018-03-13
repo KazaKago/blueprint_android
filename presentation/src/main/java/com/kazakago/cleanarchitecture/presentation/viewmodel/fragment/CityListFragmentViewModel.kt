@@ -49,7 +49,6 @@ class CityListFragmentViewModel(application: Application) : AndroidViewModel(app
         compositeDisposable.add(getCityUseCase.execute(Unit)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .toList()
                 .subscribeBy(
                         onSuccess = {
                             cityList.value = it

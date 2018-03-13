@@ -69,6 +69,8 @@ class ForecastActivity : AppCompatActivity(), ForecastActivityViewModelListener 
         fragmentTransaction.commit()
     }
 
-    /* ForecastActivityViewModelListener */
+    //region ForecastActivityViewModelListener
+
+    //endregion
 
 }

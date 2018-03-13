@@ -56,7 +56,7 @@ class CityListFragment : Fragment(), CityListFragmentViewModelListener {
         viewModel.listener = null
     }
 
-    /* CityListFragmentViewModelListener */
+    //region CityListFragmentViewModelListener
 
     override fun showToast(message: String?) {
         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
@@ -66,5 +66,7 @@ class CityListFragment : Fragment(), CityListFragmentViewModelListener {
         val intent = ForecastActivity.createIntent(requireActivity(), city)
         startActivity(intent)
     }
+
+    //endregion
 
 }

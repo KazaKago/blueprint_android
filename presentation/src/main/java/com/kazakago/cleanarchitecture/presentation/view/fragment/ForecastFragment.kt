@@ -67,10 +67,12 @@ class ForecastFragment : Fragment(), ForecastFragmentViewModelListener {
         viewModel.listener = null
     }
 
-    /* ForecastFragmentViewModelListener */
+    //region ForecastFragmentViewModelListener
 
     override fun showToast(message: String?) {
         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
     }
+
+    //endregion
 
 }

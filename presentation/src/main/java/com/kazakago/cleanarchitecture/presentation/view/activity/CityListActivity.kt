@@ -61,11 +61,13 @@ class CityListActivity : AppCompatActivity(), CityListActivityViewModelListener 
         fragmentTransaction.commit()
     }
 
-    /* CityListActivityViewModelListener */
+    //region CityListActivityViewModelListener
 
     override fun toAboutActivity() {
         val intent = AboutActivity.createIntent(this)
         startActivity(intent)
     }
+
+    //endregion
 
 }

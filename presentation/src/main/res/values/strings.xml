@@ -1,7 +1,6 @@
 <resources>
     <!-- General -->
     <string name="app_name">CleanArchitectureSample</string>
-    <string name="developer_name" translatable="false">KazaKago</string>
 
     <!-- Main -->
     <string name="refresh">更新</string>

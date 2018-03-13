@@ -56,6 +56,8 @@ class AboutActivity : AppCompatActivity(), AboutActivityViewModelListener {
         fragmentTransaction.commit()
     }
 
-    /* AboutActivityViewModelListener */
+    //region AboutActivityViewModelListener
+
+    //endregion
 
 }

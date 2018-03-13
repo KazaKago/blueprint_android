@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.listener.fragment.AboutFragmentViewModelListener
 import com.kazakago.cleanarchitecture.presentation.viewmodel.fragment.AboutFragmentViewModel
@@ -62,7 +63,7 @@ class AboutFragment : Fragment(), AboutFragmentViewModelListener {
         viewModel.listener = null
     }
 
-    /* AboutFragmentViewModelListener */
+    //region AboutFragmentViewModelListener
 
     override fun openActionView(uri: Uri) {
         val intent = Intent(Intent.ACTION_VIEW, uri)
@@ -73,5 +74,11 @@ class AboutFragment : Fragment(), AboutFragmentViewModelListener {
         val intent = Intent(Intent.ACTION_SENDTO, uri)
         startActivity(intent)
     }
+
+    override fun showToast(message: String?) {
+        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
+    }
+
+    //endregion
 
 }

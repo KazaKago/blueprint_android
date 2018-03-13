@@ -70,10 +70,12 @@ class ForecastFragmentViewModel(application: Application, private val city: City
                 ))
     }
 
-    /* ForecastRecyclerAdapter.Listener */
+    //region ForecastRecyclerAdapter.Listener
 
     override fun onItemClick(forecast: Forecast) {
         listener?.showToast(forecast.telop)
     }
+
+    //endregion
 
 }

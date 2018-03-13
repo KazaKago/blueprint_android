@@ -8,4 +8,6 @@ interface AboutFragmentViewModelListener {
 
     fun openSendTo(uri: Uri)
 
+    fun showToast(message: String?)
+
 }

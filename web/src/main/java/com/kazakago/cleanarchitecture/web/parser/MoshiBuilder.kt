@@ -5,7 +5,7 @@ import com.squareup.moshi.Moshi
 class MoshiBuilder {
 
     private val builder = Moshi.Builder()
-            .add(WebJsonAdapterFactory)
+            .add(WebJsonAdapterFactory.INSTANCE)
 
     fun build(): Moshi {
         return builder.build()

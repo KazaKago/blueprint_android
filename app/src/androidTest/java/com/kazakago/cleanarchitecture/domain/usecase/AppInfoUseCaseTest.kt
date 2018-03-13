@@ -11,10 +11,7 @@ import com.kazakago.cleanarchitecture.di.applicationModule
 import com.kazakago.cleanarchitecture.di.dataModule
 import com.kazakago.cleanarchitecture.di.domainModule
 import com.kazakago.cleanarchitecture.di.webModule
-import com.kazakago.cleanarchitecture.domain.usecase.appInfo.GetAppVersionUseCase
-import com.kazakago.cleanarchitecture.domain.usecase.appInfo.GetMailAddressUrlUseCase
-import com.kazakago.cleanarchitecture.domain.usecase.appInfo.GetOfficialSiteUrlUseCase
-import com.kazakago.cleanarchitecture.domain.usecase.appInfo.GetPlayStoreUrlUseCase
+import com.kazakago.cleanarchitecture.domain.usecase.appinfo.GetAppInfoUseCase
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.notNullValue
 import org.junit.After
@@ -33,10 +30,7 @@ class AppInfoUseCaseTest : KodeinAware {
         import(webModule())
     }
 
-    private val getAppVersionUseCase: GetAppVersionUseCase by lazy.instance()
-    private val getMailAddressUrlUseCase: GetMailAddressUrlUseCase by lazy.instance()
-    private val getOfficialSiteUrlUseCase: GetOfficialSiteUrlUseCase by lazy.instance()
-    private val getPlayStoreUrlUseCase: GetPlayStoreUrlUseCase by lazy.instance()
+    private val getAppInfoUseCase: GetAppInfoUseCase by lazy.instance()
 
     @Before
     @Throws(Exception::class)
@@ -51,25 +45,7 @@ class AppInfoUseCaseTest : KodeinAware {
     @Test
     @Throws(Exception::class)
     fun testGetAppVersion() {
-        assertThat(getAppVersionUseCase.execute(Unit), notNullValue())
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testGetMailAddressUrl() {
-        assertThat(getMailAddressUrlUseCase.execute(Unit), notNullValue())
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testGetOfficialSiteUrl() {
-        assertThat(getOfficialSiteUrlUseCase.execute(Unit), notNullValue())
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testGetPlayStoreUrl() {
-        assertThat(getPlayStoreUrlUseCase.execute(Unit), notNullValue())
+        assertThat(getAppInfoUseCase.execute(Unit), notNullValue())
     }
 
 }

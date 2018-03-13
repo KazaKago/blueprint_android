@@ -1,12 +1,10 @@
 package com.kazakago.cleanarchitecture.domain.repository.city
 
 import com.kazakago.cleanarchitecture.domain.model.city.City
-import io.reactivex.Observable
-import java.io.IOException
+import io.reactivex.Single
 
 interface CityRepository {
 
-    @Throws(IOException::class)
-    fun findAll(): Observable<City>
+    fun findAll(): Single<List<City>>
 
 }
