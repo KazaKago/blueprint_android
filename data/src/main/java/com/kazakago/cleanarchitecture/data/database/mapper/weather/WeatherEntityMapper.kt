@@ -31,9 +31,9 @@ object WeatherEntityMapper {
                         title = destination.title,
                         link = destination.link.toString(),
                         publicTime = destination.publicTime.time),
-                locationEntity = LocationEntityMapper.reverse(destination.cityId.value, destination.location),
-                descriptionEntity = DescriptionEntityMapper.reverse(destination.cityId.value, destination.description),
-                forecastEntities = destination.forecasts.map { ForecastEntityMapper.reverse(destination.cityId.value, it) })
+                locationEntity = LocationEntityMapper.reverse(destination.cityId, destination.location),
+                descriptionEntity = DescriptionEntityMapper.reverse(destination.cityId, destination.description),
+                forecastEntities = destination.forecasts.map { ForecastEntityMapper.reverse(destination.cityId, it) })
     }
 
     class ReverseMappingResult(

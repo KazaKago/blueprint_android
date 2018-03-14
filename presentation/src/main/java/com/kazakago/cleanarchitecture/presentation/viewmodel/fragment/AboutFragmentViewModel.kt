@@ -74,7 +74,7 @@ class AboutFragmentViewModel(application: Application) : AndroidViewModel(applic
     }
 
     fun onClickMail() {
-        appInfo?.getEmailUri()?.toUri()?.let {
+        appInfo?.getMailAddressUri()?.toUri()?.let {
             listener?.openSendTo(it)
         }
     }

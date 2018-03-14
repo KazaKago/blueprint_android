@@ -1,6 +1,7 @@
 package com.kazakago.cleanarchitecture.data.database.mapper.weather
 
 import com.kazakago.cleanarchitecture.data.database.entity.weather.ForecastEntity
+import com.kazakago.cleanarchitecture.domain.model.city.CityId
 import com.kazakago.cleanarchitecture.domain.model.weather.Forecast
 import java.net.URL
 import java.util.*
@@ -17,9 +18,9 @@ object ForecastEntityMapper {
                 minTemperature = source.minTemperature)
     }
 
-    fun reverse(cityId: String, destination: Forecast): ForecastEntity {
+    fun reverse(cityId: CityId, destination: Forecast): ForecastEntity {
         return ForecastEntity(
-                cityId = cityId,
+                cityId = cityId.value,
                 telop = destination.telop,
                 date = destination.date.time,
                 dateLabel = destination.dateLabel,

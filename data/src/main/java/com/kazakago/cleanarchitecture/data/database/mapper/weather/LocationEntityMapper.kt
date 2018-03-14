@@ -1,6 +1,7 @@
 package com.kazakago.cleanarchitecture.data.database.mapper.weather
 
 import com.kazakago.cleanarchitecture.data.database.entity.weather.LocationEntity
+import com.kazakago.cleanarchitecture.domain.model.city.CityId
 import com.kazakago.cleanarchitecture.domain.model.weather.Location
 
 object LocationEntityMapper {
@@ -12,9 +13,9 @@ object LocationEntityMapper {
                 city = source.city)
     }
 
-    fun reverse(cityId: String, destination: Location): LocationEntity {
+    fun reverse(cityId: CityId, destination: Location): LocationEntity {
         return LocationEntity(
-                cityId = cityId,
+                cityId = cityId.value,
                 area = destination.area,
                 prefecture = destination.prefecture,
                 city = destination.city)

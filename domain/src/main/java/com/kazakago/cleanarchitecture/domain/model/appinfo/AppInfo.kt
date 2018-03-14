@@ -13,7 +13,7 @@ data class AppInfo(
         val officialSite: URL
 ) : Serializable {
 
-    fun getEmailUri(): URI {
+    fun getMailAddressUri(): URI {
         return URI("mailto:$mailAddress")
     }
 
