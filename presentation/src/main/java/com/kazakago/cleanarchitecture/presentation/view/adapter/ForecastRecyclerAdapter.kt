@@ -8,6 +8,7 @@ import com.kazakago.cleanarchitecture.domain.model.weather.Weather
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.extension.formattedDateText
 import com.kazakago.cleanarchitecture.presentation.extension.formattedDateTimeText
+import com.kazakago.cleanarchitecture.presentation.extension.toUri
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.recycler_forecast_content.view.*
 import kotlinx.android.synthetic.main.recycler_forecast_summary.view.*
@@ -78,7 +79,7 @@ class ForecastRecyclerAdapter(private val context: Context) : RecyclerView.Adapt
         }
 
         override fun onSetItem(item: Forecast?) {
-            Picasso.with(context).load(item?.imageUrl.toString())
+            Picasso.get().load(item?.imageUrl?.toUri())
                     .into(itemView.weatherImageView)
             itemView.dateLabelTextView.text = item?.dateLabel
             itemView.dateTextView.text = item?.date?.formattedDateText(context)

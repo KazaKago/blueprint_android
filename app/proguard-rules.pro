@@ -18,39 +18,33 @@
 
 ## Retrofit
 ## https://github.com/square/retrofit
--dontwarn okio.**
--dontwarn javax.annotation.**
-## https://square.github.io/retrofit/
--dontnote retrofit2.Platform
--dontwarn retrofit2.Platform$Java8
 -keepattributes Signature
--keepattributes Exceptions
+-keepclassmembernames,allowobfuscation interface * {
+    @retrofit2.http.* <methods>;
+}
+-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
 ##
 
 ## Picasso
 ## https://github.com/square/picasso
--dontwarn com.squareup.okhttp.**
+-dontwarn okhttp3.**
+-dontwarn okio.**
+-dontwarn javax.annotation.**
+-dontwarn org.conscrypt.**
+-keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
 ##
 
 ## Moshi
 ## https://github.com/square/moshi
 -dontwarn okio.**
--dontwarn javax.annotation.Nullable
--dontwarn javax.annotation.ParametersAreNonnullByDefault
+-dontwarn javax.annotation.**
 -keepclasseswithmembers class * {
     @com.squareup.moshi.* <methods>;
 }
 -keep @com.squareup.moshi.JsonQualifier interface *
--keepclassmembers class kotlin.Metadata {
-    public <methods>;
-}
 ##
 
 ## Kodein
 ## https://salomonbrys.github.io/Kodein/
 -keepattributes Signature
-##
-
-## Architecture Components
--keep class kotlin.Metadata { *; }
 ##
