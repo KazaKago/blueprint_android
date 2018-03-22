@@ -11,7 +11,7 @@ import com.kazakago.cleanarchitecture.di.applicationModule
 import com.kazakago.cleanarchitecture.di.dataModule
 import com.kazakago.cleanarchitecture.di.domainModule
 import com.kazakago.cleanarchitecture.di.webModule
-import com.kazakago.cleanarchitecture.domain.usecase.appinfo.GetAppInfoUseCase
+import com.kazakago.cleanarchitecture.domain.usecase.about.GetAppInfoUseCase
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.notNullValue
 import org.junit.After

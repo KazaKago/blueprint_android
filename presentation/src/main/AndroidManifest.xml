@@ -8,7 +8,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activity.CityListActivity">
+        <activity android:name=".hierarchy.city.CityListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -16,9 +16,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.activity.ForecastActivity"/>
+            android:name=".hierarchy.forecast.ForecastActivity"/>
         <activity
-            android:name=".view.activity.AboutActivity"
+            android:name=".hierarchy.about.AboutActivity"
             android:label="@string/about_title"/>
     </application>
 
