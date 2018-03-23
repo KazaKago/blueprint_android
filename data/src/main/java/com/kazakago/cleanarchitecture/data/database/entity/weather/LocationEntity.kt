@@ -11,7 +11,7 @@ import android.arch.persistence.room.*
                 onDelete = ForeignKey.CASCADE)])
 data class LocationEntity(
         @ColumnInfo(name = "city_id")
-        var cityId: String,
+        val cityId: String,
 
         @ColumnInfo(name = "area")
         val area: String,
@@ -22,5 +22,5 @@ data class LocationEntity(
 ) {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    var id: Int = 0
+    var id: Long = 0
 }
