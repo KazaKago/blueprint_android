@@ -6,18 +6,22 @@ import com.kazakago.cleanarchitecture.data.database.mapper.weather.WeatherEntity
 import com.kazakago.cleanarchitecture.domain.model.city.CityId
 import com.kazakago.cleanarchitecture.domain.model.weather.Weather
 import com.kazakago.cleanarchitecture.domain.repository.weather.WeatherRepository
+import io.reactivex.Single
+import io.reactivex.rxkotlin.Singles
 
 class WeatherRepositoryImpl(private val context: Context) : WeatherRepository {
 
     private val database = AppDatabase.create(context)
 
-    override fun find(cityId: CityId): Weather? {
+    override fun find(cityId: CityId): Single<Weather> {
         val weatherDao = database.weatherDao()
-        val weather = weatherDao.findWeather(cityId.value) ?: return null
-        val location = weatherDao.findLocation(cityId.value) ?: return null
-        val description = weatherDao.findDescription(cityId.value) ?: return null
-        val forecasts = weatherDao.findForecasts(cityId.value) ?: return null
-        return WeatherEntityMapper.map(weather, location, description, forecasts)
+        return Singles.zip(weatherDao.findWeather(cityId.value),
+                weatherDao.findLocation(cityId.value),
+                weatherDao.findDescription(cityId.value),
+                weatherDao.findForecasts(cityId.value),
+                { weather, location, description, forecasts ->
+                    WeatherEntityMapper.map(weather, location, description, forecasts)
+                })
     }
 
     override fun insert(weather: Weather) {
