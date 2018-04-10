@@ -6,11 +6,10 @@ import android.view.ViewGroup
 import com.kazakago.cleanarchitecture.domain.model.weather.Forecast
 import com.kazakago.cleanarchitecture.domain.model.weather.Weather
 import com.kazakago.cleanarchitecture.presentation.R
+import com.kazakago.cleanarchitecture.presentation.adapter.AbsItemViewHolder
 import com.kazakago.cleanarchitecture.presentation.extension.formattedDateText
 import com.kazakago.cleanarchitecture.presentation.extension.formattedDateTimeText
-import com.kazakago.cleanarchitecture.presentation.extension.toUri
-import com.kazakago.cleanarchitecture.presentation.adapter.AbsItemViewHolder
-import com.squareup.picasso.Picasso
+import com.kazakago.cleanarchitecture.presentation.extension.setImageUrl
 import kotlinx.android.synthetic.main.recycler_forecast_content.view.*
 import kotlinx.android.synthetic.main.recycler_forecast_summary.view.*
 
@@ -80,8 +79,7 @@ class ForecastRecyclerAdapter(private val context: Context) : RecyclerView.Adapt
         }
 
         override fun onSetItem(item: Forecast?) {
-            Picasso.get().load(item?.imageUrl?.toUri())
-                    .into(itemView.weatherImageView)
+            itemView.weatherImageView.setImageUrl(item?.imageUrl)
             itemView.dateLabelTextView.text = item?.dateLabel
             itemView.dateTextView.text = item?.date?.formattedDateText(context)
             itemView.telopTextView.text = item?.telop
