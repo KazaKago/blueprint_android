@@ -37,9 +37,6 @@ class WeatherRepositoryImpl(private val context: Context) : WeatherRepository {
         val reverseMappingResult = WeatherEntityMapper.reverse(weather)
         val weatherDao = database.weatherDao()
         weatherDao.delete(reverseMappingResult.weatherEntity)
-        weatherDao.delete(reverseMappingResult.locationEntity)
-        weatherDao.delete(reverseMappingResult.descriptionEntity)
-        weatherDao.delete(reverseMappingResult.forecastEntities)
     }
 
 }
