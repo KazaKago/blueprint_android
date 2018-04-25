@@ -11,7 +11,7 @@ import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.presentation.R
 import kotlinx.android.synthetic.main.activity_forecast.*
 
-class ForecastActivity : AppCompatActivity(), ForecastActivityViewModelListener {
+class ForecastActivity : AppCompatActivity() {
 
     companion object {
         fun createIntent(context: Context, city: City): Intent {
@@ -32,11 +32,13 @@ class ForecastActivity : AppCompatActivity(), ForecastActivityViewModelListener 
         setContentView(R.layout.activity_forecast)
         val city = intent.getSerializableExtra(Key.City.name) as City
         viewModel = ViewModelProvider(this, ForecastActivityViewModel.Factory(application, city)).get(ForecastActivityViewModel::class.java)
-        viewModel.listener = this
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        viewModel.finish.observe(this, Observer {
+            finish()
+        })
         viewModel.title.observe(this, Observer {
             title = it
         })
@@ -53,11 +55,6 @@ class ForecastActivity : AppCompatActivity(), ForecastActivityViewModelListener 
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        viewModel.listener = null
-    }
-
     private fun replaceForecastFragment(city: City) {
         val fragment = ForecastFragment.createInstance(city)
 
@@ -65,9 +62,5 @@ class ForecastActivity : AppCompatActivity(), ForecastActivityViewModelListener 
         fragmentTransaction.replace(R.id.fragmentContainer, fragment)
         fragmentTransaction.commit()
     }
-
-    //region ForecastActivityViewModelListener
-
-    //endregion
 
 }

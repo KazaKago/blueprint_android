@@ -4,6 +4,7 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
+import com.kazakago.cleanarchitecture.presentation.livedata.NoValueSingleLiveEvent
 
 class CityListActivityViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -14,10 +15,10 @@ class CityListActivityViewModel(application: Application) : AndroidViewModel(app
         }
     }
 
-    var listener: CityListActivityViewModelListener? = null
+    val toAbout = NoValueSingleLiveEvent()
 
     fun onClickAboutMenu() {
-        listener?.toAboutActivity()
+        toAbout.call()
     }
 
 }

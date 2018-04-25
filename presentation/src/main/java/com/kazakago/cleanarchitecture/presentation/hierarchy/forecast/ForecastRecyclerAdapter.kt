@@ -62,7 +62,7 @@ class ForecastRecyclerAdapter(private val context: Context) : RecyclerView.Adapt
 
     inner class SummaryViewHolder(context: Context, parent: ViewGroup) : AbsItemViewHolder<Weather>(context, parent, R.layout.recycler_forecast_summary) {
 
-        override fun onSetItem(item: Weather?) {
+        override fun onBind(item: Weather?) {
             itemView.areaTextView.text = item?.location?.area
             itemView.prefectureTextView.text = item?.location?.prefecture
             itemView.cityTextView.text = item?.location?.city
@@ -78,7 +78,7 @@ class ForecastRecyclerAdapter(private val context: Context) : RecyclerView.Adapt
             }
         }
 
-        override fun onSetItem(item: Forecast?) {
+        override fun onBind(item: Forecast?) {
             itemView.weatherImageView.setImageUrl(item?.imageUrl)
             itemView.dateLabelTextView.text = item?.dateLabel
             itemView.dateTextView.text = item?.date?.formattedDateText(context)

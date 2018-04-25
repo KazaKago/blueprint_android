@@ -4,6 +4,7 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
+import com.kazakago.cleanarchitecture.presentation.livedata.NoValueSingleLiveEvent
 
 class AboutActivityViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -14,10 +15,10 @@ class AboutActivityViewModel(application: Application) : AndroidViewModel(applic
         }
     }
 
-    var listener: AboutActivityViewModelListener? = null
+    val finish = NoValueSingleLiveEvent()
 
     fun onClickBackIcon() {
-        listener?.finish()
+        finish.call()
     }
 
 }

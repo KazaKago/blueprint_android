@@ -1,5 +1,6 @@
 package com.kazakago.cleanarchitecture.presentation.hierarchy.about
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
 import android.content.Intent
@@ -9,7 +10,7 @@ import android.view.MenuItem
 import com.kazakago.cleanarchitecture.presentation.R
 import kotlinx.android.synthetic.main.activity_about.*
 
-class AboutActivity : AppCompatActivity(), AboutActivityViewModelListener {
+class AboutActivity : AppCompatActivity() {
 
     companion object {
         fun createIntent(context: Context): Intent {
@@ -23,19 +24,17 @@ class AboutActivity : AppCompatActivity(), AboutActivityViewModelListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
         viewModel = ViewModelProvider(this, AboutActivityViewModel.Factory(application)).get(AboutActivityViewModel::class.java)
-        viewModel.listener = this
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        viewModel.finish.observe(this, Observer {
+            finish()
+        })
+
         if (savedInstanceState == null) {
             replaceAboutFragment()
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        viewModel.listener = null
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -52,9 +51,5 @@ class AboutActivity : AppCompatActivity(), AboutActivityViewModelListener {
         fragmentTransaction.replace(R.id.fragmentContainer, fragment)
         fragmentTransaction.commit()
     }
-
-    //region AboutActivityViewModelListener
-
-    //endregion
 
 }

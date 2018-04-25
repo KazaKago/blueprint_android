@@ -11,9 +11,8 @@ import android.widget.Toast
 import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.hierarchy.forecast.ForecastActivity
-import kotlinx.android.synthetic.main.fragment_forecast.*
 
-class CityListFragment : Fragment(), CityListFragmentViewModelListener {
+class CityListFragment : Fragment() {
 
     companion object {
         fun createInstance(): CityListFragment {
@@ -30,9 +29,7 @@ class CityListFragment : Fragment(), CityListFragmentViewModelListener {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_city_list, container, false)
-        viewModel.listener = this
-        return view
+        return inflater.inflate(R.layout.fragment_city_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,24 +43,17 @@ class CityListFragment : Fragment(), CityListFragmentViewModelListener {
             cityRecyclerAdapter.cityList = it ?: listOf()
             cityRecyclerAdapter.notifyDataSetChanged()
         })
+        viewModel.showToast.observe(this, Observer {
+            Toast.makeText(activity, it, Toast.LENGTH_SHORT).show()
+        })
+        viewModel.toForecast.observe(this, Observer {
+            it?.let { toForecastActivity(it) }
+        })
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        viewModel.listener = null
-    }
-
-    //region CityListFragmentViewModelListener
-
-    override fun showToast(message: String?) {
-        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
-    }
-
-    override fun toForecastActivity(city: City) {
+    private fun toForecastActivity(city: City) {
         val intent = ForecastActivity.createIntent(requireActivity(), city)
         startActivity(intent)
     }
-
-    //endregion
 
 }

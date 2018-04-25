@@ -14,6 +14,7 @@ import com.kazakago.cleanarchitecture.domain.model.weather.Forecast
 import com.kazakago.cleanarchitecture.domain.model.weather.Weather
 import com.kazakago.cleanarchitecture.domain.usecase.weather.GetWeatherUseCase
 import com.kazakago.cleanarchitecture.presentation.extension.compositeLocalizedMessage
+import com.kazakago.cleanarchitecture.presentation.livedata.SingleLiveEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
@@ -32,8 +33,8 @@ class ForecastFragmentViewModel(application: Application, private val city: City
 
     val weather = MutableLiveData<Weather>()
     val isLoading = MutableLiveData<Boolean>()
+    val showToast = SingleLiveEvent<String>()
 
-    var listener: ForecastFragmentViewModelListener? = null
     private val compositeDisposable = CompositeDisposable()
     private val getWeatherUseCase: GetWeatherUseCase by instance()
 
@@ -63,7 +64,7 @@ class ForecastFragmentViewModel(application: Application, private val city: City
                         },
                         onError = {
                             weather.value = null
-                            listener?.showToast(it.compositeLocalizedMessage())
+                            showToast.call(it.compositeLocalizedMessage())
                         }
                 ))
     }
@@ -71,7 +72,7 @@ class ForecastFragmentViewModel(application: Application, private val city: City
     //region ForecastRecyclerAdapter.Listener
 
     override fun onItemClick(forecast: Forecast) {
-        listener?.showToast(forecast.telop)
+        showToast.call(forecast.telop)
     }
 
     //endregion

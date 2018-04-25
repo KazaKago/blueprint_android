@@ -5,6 +5,7 @@ import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
+import android.net.Uri
 import com.github.salomonbrys.kodein.LazyKodein
 import com.github.salomonbrys.kodein.LazyKodeinAware
 import com.github.salomonbrys.kodein.android.appKodein
@@ -16,6 +17,7 @@ import com.kazakago.cleanarchitecture.domain.usecase.about.GetDeveloperInfoUseCa
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.extension.compositeLocalizedMessage
 import com.kazakago.cleanarchitecture.presentation.extension.toUri
+import com.kazakago.cleanarchitecture.presentation.livedata.SingleLiveEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.Singles
@@ -37,8 +39,10 @@ class AboutFragmentViewModel(application: Application) : AndroidViewModel(applic
     val versionText = MutableLiveData<String>()
     val developByText = MutableLiveData<String>()
     val copyrightText = MutableLiveData<String>()
+    val openActionView = SingleLiveEvent<Uri>()
+    val openSendTo = SingleLiveEvent<Uri>()
+    val showToast = SingleLiveEvent<String>()
 
-    var listener: AboutFragmentViewModelListener? = null
     private val compositeDisposable = CompositeDisposable()
     private val getAppInfoUseCase: GetAppInfoUseCase by instance()
     private val getDeveloperInfoUseCase: GetDeveloperInfoUseCase by instance()
@@ -66,27 +70,21 @@ class AboutFragmentViewModel(application: Application) : AndroidViewModel(applic
                             copyrightText.value = getApplication<Application>().getString(R.string.about_copyright, Calendar.getInstance().get(Calendar.YEAR), it.second.name)
                         },
                         onError = {
-                            listener?.showToast(it.compositeLocalizedMessage())
+                            showToast.call(it.compositeLocalizedMessage())
                         }
                 ))
     }
 
     fun onClickPlayStore() {
-        appInfo?.playStoreUri?.toUri()?.let {
-            listener?.openActionView(it)
-        }
+        openActionView.call(appInfo?.playStoreUri?.toUri())
     }
 
     fun onClickMail() {
-        developerInfo?.getMailAddressUri()?.toUri()?.let {
-            listener?.openSendTo(it)
-        }
+        openSendTo.call(developerInfo?.getMailAddressUri()?.toUri())
     }
 
     fun onClickWebSite() {
-        developerInfo?.siteUrl?.toUri()?.let {
-            listener?.openActionView(it)
-        }
+        openActionView.call(developerInfo?.siteUrl?.toUri())
     }
 
 }

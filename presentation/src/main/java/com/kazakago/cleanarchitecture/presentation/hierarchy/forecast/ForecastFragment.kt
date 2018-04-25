@@ -12,7 +12,7 @@ import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.presentation.R
 import kotlinx.android.synthetic.main.fragment_forecast.*
 
-class ForecastFragment : Fragment(), ForecastFragmentViewModelListener {
+class ForecastFragment : Fragment() {
 
     companion object {
         fun createInstance(city: City): ForecastFragment {
@@ -38,9 +38,7 @@ class ForecastFragment : Fragment(), ForecastFragmentViewModelListener {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_forecast, container, false)
-        viewModel.listener = this
-        return view
+        return inflater.inflate(R.layout.fragment_forecast, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,6 +48,9 @@ class ForecastFragment : Fragment(), ForecastFragmentViewModelListener {
         forecastRecyclerAdapter.listener = viewModel
         forecastRecyclerView.adapter = forecastRecyclerAdapter
 
+        viewModel.showToast.observe(this, Observer {
+            Toast.makeText(activity, it, Toast.LENGTH_SHORT).show()
+        })
         viewModel.weather.observe(this, Observer {
             forecastRecyclerAdapter.weather = it
             forecastRecyclerAdapter.notifyDataSetChanged()
@@ -58,18 +59,5 @@ class ForecastFragment : Fragment(), ForecastFragmentViewModelListener {
             loadingProgressBar.visibility = if (it == true) View.VISIBLE else View.INVISIBLE
         })
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        viewModel.listener = null
-    }
-
-    //region ForecastFragmentViewModelListener
-
-    override fun showToast(message: String?) {
-        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
-    }
-
-    //endregion
 
 }

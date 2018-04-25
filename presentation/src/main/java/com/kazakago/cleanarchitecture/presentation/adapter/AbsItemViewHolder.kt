@@ -8,10 +8,10 @@ abstract class AbsItemViewHolder<T>(context: Context, parent: ViewGroup, @Layout
 
     var item: T? = null
         set(value) {
-            onSetItem(value)
+            onBind(value)
             field = value
         }
 
-    protected abstract fun onSetItem(item: T?)
+    protected abstract fun onBind(item: T?)
 
 }

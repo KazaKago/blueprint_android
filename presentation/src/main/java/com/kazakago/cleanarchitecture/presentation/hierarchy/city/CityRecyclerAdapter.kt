@@ -35,7 +35,7 @@ class CityRecyclerAdapter(private val context: Context) : RecyclerView.Adapter<C
                 item?.let { listener?.onItemClick(it) }
             }
         }
-        override fun onSetItem(item: City?) {
+        override fun onBind(item: City?) {
             itemView.cityTextView.text = item?.name
         }
     }

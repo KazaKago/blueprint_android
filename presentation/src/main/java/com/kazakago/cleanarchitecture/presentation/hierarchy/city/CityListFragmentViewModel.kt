@@ -12,6 +12,7 @@ import com.github.salomonbrys.kodein.instance
 import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.domain.usecase.city.GetCityUseCase
 import com.kazakago.cleanarchitecture.presentation.extension.compositeLocalizedMessage
+import com.kazakago.cleanarchitecture.presentation.livedata.SingleLiveEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
@@ -19,7 +20,7 @@ import io.reactivex.schedulers.Schedulers
 
 class CityListFragmentViewModel(application: Application) : AndroidViewModel(application), LazyKodeinAware, CityRecyclerAdapter.Listener {
 
-    class Factory(private val application: Application): ViewModelProvider.Factory {
+    class Factory(private val application: Application) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return CityListFragmentViewModel(application) as T
@@ -29,8 +30,9 @@ class CityListFragmentViewModel(application: Application) : AndroidViewModel(app
     override val kodein = LazyKodein(application.appKodein)
 
     val cityList = MutableLiveData<List<City>>()
+    val showToast = SingleLiveEvent<String>()
+    val toForecast = SingleLiveEvent<City>()
 
-    var listener: CityListFragmentViewModelListener? = null
     private val compositeDisposable = CompositeDisposable()
     private val getCityUseCase: GetCityUseCase by instance()
 
@@ -53,15 +55,17 @@ class CityListFragmentViewModel(application: Application) : AndroidViewModel(app
                         },
                         onError = {
                             cityList.value = listOf()
-                            listener?.showToast(it.compositeLocalizedMessage())
+                            showToast.call(it.compositeLocalizedMessage())
                         }
                 ))
     }
 
-    /* CityRecyclerAdapter.Listener */
+    //region CityRecyclerAdapter.Listener
 
     override fun onItemClick(city: City) {
-        listener?.toForecastActivity(city)
+        toForecast.call(city)
     }
+
+    //endregion
 
 }

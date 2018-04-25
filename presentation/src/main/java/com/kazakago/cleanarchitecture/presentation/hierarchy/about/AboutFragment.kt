@@ -13,7 +13,7 @@ import android.widget.Toast
 import com.kazakago.cleanarchitecture.presentation.R
 import kotlinx.android.synthetic.main.fragment_about.*
 
-class AboutFragment : Fragment(), AboutFragmentViewModelListener {
+class AboutFragment : Fragment() {
 
     companion object {
         fun createInstance(): AboutFragment {
@@ -29,9 +29,7 @@ class AboutFragment : Fragment(), AboutFragmentViewModelListener {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_about, container, false)
-        viewModel.listener = this
-        return view
+        return inflater.inflate(R.layout.fragment_about, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,6 +43,15 @@ class AboutFragment : Fragment(), AboutFragmentViewModelListener {
         viewModel.copyrightText.observe(this, Observer {
             copyrightTextView.text = it
         })
+        viewModel.openActionView.observe(this, Observer {
+            it?.let { openActionView(it) }
+        })
+        viewModel.openSendTo.observe(this, Observer {
+            it?.let { openSendTo(it) }
+        })
+        viewModel.showToast.observe(this, Observer {
+            Toast.makeText(activity, it, Toast.LENGTH_SHORT).show()
+        })
         playStoreLayout.setOnClickListener {
             viewModel.onClickPlayStore()
         }
@@ -56,27 +63,14 @@ class AboutFragment : Fragment(), AboutFragmentViewModelListener {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        viewModel.listener = null
-    }
-
-    //region AboutFragmentViewModelListener
-
-    override fun openActionView(uri: Uri) {
+    private fun openActionView(uri: Uri) {
         val intent = Intent(Intent.ACTION_VIEW, uri)
         startActivity(intent)
     }
 
-    override fun openSendTo(uri: Uri) {
+    private fun openSendTo(uri: Uri) {
         val intent = Intent(Intent.ACTION_SENDTO, uri)
         startActivity(intent)
     }
-
-    override fun showToast(message: String?) {
-        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
-    }
-
-    //endregion
 
 }

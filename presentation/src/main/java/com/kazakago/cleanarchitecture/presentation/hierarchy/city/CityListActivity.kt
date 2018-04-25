@@ -1,5 +1,6 @@
 package com.kazakago.cleanarchitecture.presentation.hierarchy.city
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
 import android.content.Intent
@@ -11,7 +12,7 @@ import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.hierarchy.about.AboutActivity
 import kotlinx.android.synthetic.main.activity_forecast.*
 
-class CityListActivity : AppCompatActivity(), CityListActivityViewModelListener {
+class CityListActivity : AppCompatActivity() {
 
     companion object {
         fun createIntent(context: Context): Intent {
@@ -25,18 +26,16 @@ class CityListActivity : AppCompatActivity(), CityListActivityViewModelListener 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_city_list)
         viewModel = ViewModelProvider(this, CityListActivityViewModel.Factory(application)).get(CityListActivityViewModel::class.java)
-        viewModel.listener = this
 
         setSupportActionBar(toolbar)
+
+        viewModel.toAbout.observe(this, Observer {
+            toAboutActivity()
+        })
 
         if (savedInstanceState == null) {
             replaceCityListFragment()
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        viewModel.listener = null
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -59,13 +58,9 @@ class CityListActivity : AppCompatActivity(), CityListActivityViewModelListener 
         fragmentTransaction.commit()
     }
 
-    //region CityListActivityViewModelListener
-
-    override fun toAboutActivity() {
+    private fun toAboutActivity() {
         val intent = AboutActivity.createIntent(this)
         startActivity(intent)
     }
-
-    //endregion
 
 }
