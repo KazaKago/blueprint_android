@@ -1,4 +1,4 @@
-package com.kazakago.cleanarchitecture.di
+package com.kazakago.cleanarchitecture.web.di
 
 import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.bind

@@ -7,10 +7,10 @@ import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.KodeinAware
 import com.github.salomonbrys.kodein.instance
 import com.github.salomonbrys.kodein.lazy
-import com.kazakago.cleanarchitecture.di.applicationModule
-import com.kazakago.cleanarchitecture.di.dataModule
-import com.kazakago.cleanarchitecture.di.domainModule
-import com.kazakago.cleanarchitecture.di.webModule
+import com.kazakago.cleanarchitecture.presentation.di.presentationModule
+import com.kazakago.cleanarchitecture.data.di.dataModule
+import com.kazakago.cleanarchitecture.domain.di.domainModule
+import com.kazakago.cleanarchitecture.web.di.webModule
 import com.kazakago.cleanarchitecture.domain.usecase.about.GetAppInfoUseCase
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.notNullValue
@@ -24,7 +24,7 @@ import org.junit.runner.RunWith
 class AppInfoUseCaseTest : KodeinAware {
 
     override val kodein: Kodein by Kodein.lazy {
-        import(applicationModule(InstrumentationRegistry.getTargetContext()))
+        import(presentationModule(InstrumentationRegistry.getTargetContext()))
         import(domainModule())
         import(dataModule())
         import(webModule())
