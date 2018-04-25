@@ -11,6 +11,7 @@ import android.widget.Toast
 import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.hierarchy.forecast.ForecastActivity
+import kotlinx.android.synthetic.main.fragment_city_list.*
 
 class CityListFragment : Fragment() {
 
@@ -37,7 +38,7 @@ class CityListFragment : Fragment() {
 
         cityRecyclerAdapter = CityRecyclerAdapter(requireActivity())
         cityRecyclerAdapter.listener = viewModel
-        forecastRecyclerView.adapter = cityRecyclerAdapter
+        cityRecyclerView.adapter = cityRecyclerAdapter
 
         viewModel.cityList.observe(this, Observer {
             cityRecyclerAdapter.cityList = it ?: listOf()
