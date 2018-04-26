@@ -1,7 +1,6 @@
 package com.kazakago.cleanarchitecture.presentation.hierarchy.about
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.kazakago.cleanarchitecture.presentation.R
 import kotlinx.android.synthetic.main.activity_about.*
+import org.koin.android.architecture.ext.viewModel
 
 class AboutActivity : AppCompatActivity() {
 
@@ -18,12 +18,11 @@ class AboutActivity : AppCompatActivity() {
         }
     }
 
-    private lateinit var viewModel: AboutActivityViewModel
+    private val viewModel by viewModel<AboutActivityViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
-        viewModel = ViewModelProvider(this, AboutActivityViewModel.Factory(application)).get(AboutActivityViewModel::class.java)
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

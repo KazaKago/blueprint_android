@@ -1,7 +1,6 @@
 package com.kazakago.cleanarchitecture.presentation.hierarchy.forecast
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +10,7 @@ import android.widget.Toast
 import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.presentation.R
 import kotlinx.android.synthetic.main.fragment_forecast.*
+import org.koin.android.architecture.ext.getViewModel
 
 class ForecastFragment : Fragment() {
 
@@ -34,7 +34,7 @@ class ForecastFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val city = arguments?.getSerializable(Key.City.name) as City
-        viewModel = ViewModelProvider(this, ForecastFragmentViewModel.Factory(requireActivity().application, city)).get(ForecastFragmentViewModel::class.java)
+        viewModel = getViewModel { mapOf("city" to city) }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

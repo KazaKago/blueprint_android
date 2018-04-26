@@ -1,7 +1,6 @@
 package com.kazakago.cleanarchitecture.presentation.hierarchy.city
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +11,7 @@ import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.hierarchy.forecast.ForecastActivity
 import kotlinx.android.synthetic.main.fragment_city_list.*
+import org.koin.android.architecture.ext.viewModel
 
 class CityListFragment : Fragment() {
 
@@ -21,13 +21,8 @@ class CityListFragment : Fragment() {
         }
     }
 
-    private lateinit var viewModel: CityListFragmentViewModel
+    private val viewModel by viewModel<CityListFragmentViewModel>()
     private lateinit var cityRecyclerAdapter: CityRecyclerAdapter
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this, CityListFragmentViewModel.Factory(requireActivity().application)).get(CityListFragmentViewModel::class.java)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_city_list, container, false)

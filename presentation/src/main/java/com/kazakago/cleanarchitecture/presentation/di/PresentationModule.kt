@@ -1,10 +1,19 @@
 package com.kazakago.cleanarchitecture.presentation.di
 
-import android.content.Context
-import com.github.salomonbrys.kodein.Kodein
-import com.github.salomonbrys.kodein.bind
-import com.github.salomonbrys.kodein.instance
+import com.kazakago.cleanarchitecture.presentation.hierarchy.about.AboutActivityViewModel
+import com.kazakago.cleanarchitecture.presentation.hierarchy.about.AboutFragmentViewModel
+import com.kazakago.cleanarchitecture.presentation.hierarchy.city.CityListActivityViewModel
+import com.kazakago.cleanarchitecture.presentation.hierarchy.city.CityListFragmentViewModel
+import com.kazakago.cleanarchitecture.presentation.hierarchy.forecast.ForecastActivityViewModel
+import com.kazakago.cleanarchitecture.presentation.hierarchy.forecast.ForecastFragmentViewModel
+import org.koin.android.architecture.ext.viewModel
+import org.koin.dsl.module.applicationContext
 
-fun presentationModule(context: Context) = Kodein.Module {
-    bind<Context>() with instance(context)
+val presentationModule = applicationContext {
+    viewModel { CityListActivityViewModel(get()) }
+    viewModel { CityListFragmentViewModel(get(), get()) }
+    viewModel { ForecastActivityViewModel(get(), it["city"]) }
+    viewModel { ForecastFragmentViewModel(get(), get(), it["city"]) }
+    viewModel { AboutActivityViewModel(get()) }
+    viewModel { AboutFragmentViewModel(get(), get(), get()) }
 }

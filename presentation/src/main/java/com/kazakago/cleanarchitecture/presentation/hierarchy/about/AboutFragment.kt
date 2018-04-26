@@ -1,7 +1,6 @@
 package com.kazakago.cleanarchitecture.presentation.hierarchy.about
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -12,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.kazakago.cleanarchitecture.presentation.R
 import kotlinx.android.synthetic.main.fragment_about.*
+import org.koin.android.architecture.ext.viewModel
 
 class AboutFragment : Fragment() {
 
@@ -21,12 +21,7 @@ class AboutFragment : Fragment() {
         }
     }
 
-    private lateinit var viewModel: AboutFragmentViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this, AboutFragmentViewModel.Factory(requireActivity().application)).get(AboutFragmentViewModel::class.java)
-    }
+    private val viewModel by viewModel<AboutFragmentViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_about, container, false)

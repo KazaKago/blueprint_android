@@ -1,7 +1,6 @@
 package com.kazakago.cleanarchitecture.presentation.hierarchy.city
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -11,6 +10,7 @@ import android.view.MenuItem
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.hierarchy.about.AboutActivity
 import kotlinx.android.synthetic.main.activity_forecast.*
+import org.koin.android.architecture.ext.viewModel
 
 class CityListActivity : AppCompatActivity() {
 
@@ -20,12 +20,11 @@ class CityListActivity : AppCompatActivity() {
         }
     }
 
-    private lateinit var viewModel: CityListActivityViewModel
+    private val viewModel by viewModel<CityListActivityViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_city_list)
-        viewModel = ViewModelProvider(this, CityListActivityViewModel.Factory(application)).get(CityListActivityViewModel::class.java)
 
         setSupportActionBar(toolbar)
 
