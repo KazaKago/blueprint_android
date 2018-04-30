@@ -14,36 +14,36 @@ interface WeatherDao {
     fun findWeather(cityId: String): Single<WeatherEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(weather: WeatherEntity)
+    fun insert(weather: WeatherEntity): Long
 
     @Delete
-    fun delete(weather: WeatherEntity)
+    fun delete(weather: WeatherEntity): Int
 
     @Query("SELECT * FROM Location WHERE city_id == (:cityId) LIMIT 1")
     fun findLocation(cityId: String): Single<LocationEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(location: LocationEntity)
+    fun insert(location: LocationEntity): Long
 
     @Delete
-    fun delete(location: LocationEntity)
+    fun delete(location: LocationEntity): Int
 
     @Query("SELECT * FROM Description WHERE city_id == (:cityId) LIMIT 1")
     fun findDescription(cityId: String): Single<DescriptionEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(description: DescriptionEntity)
+    fun insert(description: DescriptionEntity): Long
 
     @Delete
-    fun delete(description: DescriptionEntity)
+    fun delete(description: DescriptionEntity): Int
 
     @Query("SELECT * FROM Forecast WHERE city_id == (:cityId)")
     fun findForecasts(cityId: String): Single<List<ForecastEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(forecasts: List<ForecastEntity>)
+    fun insert(forecasts: List<ForecastEntity>): List<Long>
 
     @Delete
-    fun delete(forecasts: List<ForecastEntity>)
+    fun delete(forecasts: List<ForecastEntity>): Int
 
 }

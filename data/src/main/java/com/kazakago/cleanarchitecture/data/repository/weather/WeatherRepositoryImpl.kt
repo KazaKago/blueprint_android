@@ -26,9 +26,9 @@ class WeatherRepositoryImpl(private val context: Context) : WeatherRepository {
     }
 
     override fun insert(weather: Weather): Completable {
+        val weatherDao = database.weatherDao()
         return Completable.create {
             val reverseMappingResult = WeatherEntityMapper.reverse(weather)
-            val weatherDao = database.weatherDao()
             weatherDao.insert(reverseMappingResult.weatherEntity)
             weatherDao.insert(reverseMappingResult.locationEntity)
             weatherDao.insert(reverseMappingResult.descriptionEntity)
@@ -38,9 +38,9 @@ class WeatherRepositoryImpl(private val context: Context) : WeatherRepository {
     }
 
     override fun delete(weather: Weather): Completable {
+        val weatherDao = database.weatherDao()
         return Completable.create {
             val reverseMappingResult = WeatherEntityMapper.reverse(weather)
-            val weatherDao = database.weatherDao()
             weatherDao.delete(reverseMappingResult.weatherEntity)
             it.onComplete()
         }
