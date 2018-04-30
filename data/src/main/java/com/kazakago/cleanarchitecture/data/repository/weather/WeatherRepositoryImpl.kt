@@ -6,6 +6,7 @@ import com.kazakago.cleanarchitecture.data.database.mapper.weather.WeatherEntity
 import com.kazakago.cleanarchitecture.domain.model.city.CityId
 import com.kazakago.cleanarchitecture.domain.model.weather.Weather
 import com.kazakago.cleanarchitecture.domain.repository.weather.WeatherRepository
+import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.rxkotlin.Singles
 
@@ -24,19 +25,25 @@ class WeatherRepositoryImpl(private val context: Context) : WeatherRepository {
                 })
     }
 
-    override fun insert(weather: Weather) {
-        val reverseMappingResult = WeatherEntityMapper.reverse(weather)
-        val weatherDao = database.weatherDao()
-        weatherDao.insert(reverseMappingResult.weatherEntity)
-        weatherDao.insert(reverseMappingResult.locationEntity)
-        weatherDao.insert(reverseMappingResult.descriptionEntity)
-        weatherDao.insert(reverseMappingResult.forecastEntities)
+    override fun insert(weather: Weather): Completable {
+        return Completable.create {
+            val reverseMappingResult = WeatherEntityMapper.reverse(weather)
+            val weatherDao = database.weatherDao()
+            weatherDao.insert(reverseMappingResult.weatherEntity)
+            weatherDao.insert(reverseMappingResult.locationEntity)
+            weatherDao.insert(reverseMappingResult.descriptionEntity)
+            weatherDao.insert(reverseMappingResult.forecastEntities)
+            it.onComplete()
+        }
     }
 
-    override fun delete(weather: Weather) {
-        val reverseMappingResult = WeatherEntityMapper.reverse(weather)
-        val weatherDao = database.weatherDao()
-        weatherDao.delete(reverseMappingResult.weatherEntity)
+    override fun delete(weather: Weather): Completable {
+        return Completable.create {
+            val reverseMappingResult = WeatherEntityMapper.reverse(weather)
+            val weatherDao = database.weatherDao()
+            weatherDao.delete(reverseMappingResult.weatherEntity)
+            it.onComplete()
+        }
     }
 
 }

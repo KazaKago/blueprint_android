@@ -11,8 +11,7 @@ class CityRepositoryImpl(private val context: Context) : CityRepository {
 
     override fun findAll(): Single<List<City>> {
         val cityDao = CityDao(context)
-        val cityList = cityDao.find().flatMap { CityMapper.map(it) }
-        return Single.just(cityList)
+        return cityDao.find().map { it.flatMap { CityMapper.map(it) } }
     }
 
 }

@@ -12,7 +12,7 @@ class GetWeatherUseCaseImpl(private val weatherApiRepository: WeatherApiReposito
         return weatherApiRepository.fetch(input)
                 .doOnSuccess {
                     it.cityId = input
-                    weatherRepository.insert(it)
+                    weatherRepository.insert(it).blockingAwait()
                 }
                 .onErrorResumeNext {
                     weatherRepository.find(input)
