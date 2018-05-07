@@ -44,9 +44,6 @@ class AboutFragment : Fragment() {
         viewModel.openSendTo.observe(this, Observer {
             it?.let { openSendTo(it) }
         })
-        viewModel.showToast.observe(this, Observer {
-            Toast.makeText(activity, it, Toast.LENGTH_SHORT).show()
-        })
         playStoreLayout.setOnClickListener {
             viewModel.onClickPlayStore()
         }

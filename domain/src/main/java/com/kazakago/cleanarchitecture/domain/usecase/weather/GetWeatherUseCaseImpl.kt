@@ -4,19 +4,22 @@ import com.kazakago.cleanarchitecture.domain.model.city.CityId
 import com.kazakago.cleanarchitecture.domain.model.weather.Weather
 import com.kazakago.cleanarchitecture.domain.repository.weather.WeatherApiRepository
 import com.kazakago.cleanarchitecture.domain.repository.weather.WeatherRepository
-import io.reactivex.Single
 
 class GetWeatherUseCaseImpl(private val weatherApiRepository: WeatherApiRepository, private val weatherRepository: WeatherRepository) : GetWeatherUseCase {
 
-    override fun execute(input: CityId): Single<Weather> {
-        return weatherApiRepository.fetch(input)
-                .doOnSuccess {
-                    it.cityId = input
-                    weatherRepository.insert(it).blockingAwait()
-                }
-                .onErrorResumeNext {
-                    weatherRepository.find(input)
-                }
+    override fun execute(input: CityId): Weather {
+        return try {
+            val weather = weatherApiRepository.fetch(input)
+            weather.cityId = input
+            weatherRepository.insert(weather)
+            weather
+        } catch (exception: Exception) {
+            try {
+                weatherRepository.find(input)
+            } catch (_: Exception) {
+                throw exception
+            }
+        }
     }
 
 }

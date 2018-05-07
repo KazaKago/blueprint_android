@@ -23,18 +23,23 @@ android {
     }
 }
 
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //Module
     implementation project(':domain')
     //Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    //kotlinx.coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.5"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.22.5"
     //Koin for Android Architecture Components
     implementation 'org.koin:koin-android-architecture:0.9.2'
-    //Rx
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.13'
-    implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
-    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
     //v7 AppCompat Support Library
     implementation 'com.android.support:appcompat-v7:27.1.1'
     //Design Support Library
