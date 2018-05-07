@@ -25,7 +25,6 @@ class ForecastFragmentViewModel(application: Application,
     private val compositeDisposable = CompositeDisposable()
 
     init {
-        isLoading.value = false
         fetchWeather()
     }
 
