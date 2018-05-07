@@ -42,6 +42,10 @@ dependencies {
     implementation 'se.ansman.kotshi:api:1.0.3'
     kapt 'se.ansman.kotshi:compiler:1.0.3'
 
+    //Chuck
+    debugImplementation 'com.readystatesoftware.chuck:library:1.1.0'
+    releaseImplementation 'com.readystatesoftware.chuck:library-no-op:1.1.0'
+
     //JUnit
     testImplementation 'junit:junit:4.12'
 
