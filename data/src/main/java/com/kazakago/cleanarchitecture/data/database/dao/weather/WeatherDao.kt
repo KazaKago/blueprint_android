@@ -5,13 +5,12 @@ import com.kazakago.cleanarchitecture.data.database.entity.weather.DescriptionEn
 import com.kazakago.cleanarchitecture.data.database.entity.weather.ForecastEntity
 import com.kazakago.cleanarchitecture.data.database.entity.weather.LocationEntity
 import com.kazakago.cleanarchitecture.data.database.entity.weather.WeatherEntity
-import io.reactivex.Single
 
 @Dao
 interface WeatherDao {
 
     @Query("SELECT * FROM Weather WHERE city_id == (:cityId) LIMIT 1")
-    fun findWeather(cityId: String): Single<WeatherEntity>
+    fun findWeather(cityId: String): WeatherEntity
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(weather: WeatherEntity): Long
@@ -20,7 +19,7 @@ interface WeatherDao {
     fun delete(weather: WeatherEntity): Int
 
     @Query("SELECT * FROM Location WHERE city_id == (:cityId) LIMIT 1")
-    fun findLocation(cityId: String): Single<LocationEntity>
+    fun findLocation(cityId: String): LocationEntity
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(location: LocationEntity): Long
@@ -29,7 +28,7 @@ interface WeatherDao {
     fun delete(location: LocationEntity): Int
 
     @Query("SELECT * FROM Description WHERE city_id == (:cityId) LIMIT 1")
-    fun findDescription(cityId: String): Single<DescriptionEntity>
+    fun findDescription(cityId: String): DescriptionEntity
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(description: DescriptionEntity): Long
@@ -38,7 +37,7 @@ interface WeatherDao {
     fun delete(description: DescriptionEntity): Int
 
     @Query("SELECT * FROM Forecast WHERE city_id == (:cityId)")
-    fun findForecasts(cityId: String): Single<List<ForecastEntity>>
+    fun findForecasts(cityId: String): List<ForecastEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(forecasts: List<ForecastEntity>): List<Long>

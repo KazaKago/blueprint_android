@@ -7,12 +7,10 @@ import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.domain.model.weather.Forecast
 import com.kazakago.cleanarchitecture.domain.model.weather.Weather
 import com.kazakago.cleanarchitecture.domain.usecase.weather.GetWeatherUseCase
-import com.kazakago.cleanarchitecture.presentation.extension.compositeLocalizedMessage
 import com.kazakago.cleanarchitecture.presentation.livedata.SingleLiveEvent
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.launch
 
 class ForecastFragmentViewModel(application: Application,
                                 private val getWeatherUseCase: GetWeatherUseCase,
@@ -22,37 +20,19 @@ class ForecastFragmentViewModel(application: Application,
     val isLoading = MutableLiveData<Boolean>()
     val showToast = SingleLiveEvent<String>()
 
-    private val compositeDisposable = CompositeDisposable()
-
     init {
-        isLoading.value = false
         fetchWeather()
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        compositeDisposable.dispose()
-    }
-
-    private fun fetchWeather() {
-        compositeDisposable.add(getWeatherUseCase.execute(city.id)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe {
-                    isLoading.value = true
-                }
-                .doFinally {
-                    isLoading.value = false
-                }
-                .subscribeBy(
-                        onSuccess = {
-                            weather.value = it
-                        },
-                        onError = {
-                            weather.value = null
-                            showToast.call(it.compositeLocalizedMessage())
-                        }
-                ))
+    private fun fetchWeather() = launch(UI) {
+        isLoading.value = true
+        try {
+            weather.value = async { getWeatherUseCase.execute(city.id) }.await()
+        } catch (exception: Exception) {
+            weather.value = null
+            showToast.call(exception.localizedMessage)
+        }
+        isLoading.value = false
     }
 
     //region ForecastRecyclerAdapter.Listener

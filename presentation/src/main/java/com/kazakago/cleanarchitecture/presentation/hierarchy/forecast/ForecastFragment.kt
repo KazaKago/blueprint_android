@@ -56,7 +56,7 @@ class ForecastFragment : Fragment() {
             forecastRecyclerAdapter.notifyDataSetChanged()
         })
         viewModel.isLoading.observe(this, Observer {
-            loadingProgressBar.visibility = if (it == true) View.VISIBLE else View.INVISIBLE
+            if (it == true) loadingProgressBar.show() else loadingProgressBar.hide()
         })
     }
 

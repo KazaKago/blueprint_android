@@ -5,5 +5,5 @@ import com.kazakago.cleanarchitecture.web.repository.weather.WeatherApiRepositor
 import org.koin.dsl.module.applicationContext
 
 val webModule = applicationContext {
-    bean<WeatherApiRepository> { WeatherApiRepositoryImpl() }
+    bean<WeatherApiRepository> { WeatherApiRepositoryImpl(get()) }
 }

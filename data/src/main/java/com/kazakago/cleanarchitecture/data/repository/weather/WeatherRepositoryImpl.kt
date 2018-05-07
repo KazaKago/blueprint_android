@@ -6,44 +6,33 @@ import com.kazakago.cleanarchitecture.data.database.mapper.weather.WeatherEntity
 import com.kazakago.cleanarchitecture.domain.model.city.CityId
 import com.kazakago.cleanarchitecture.domain.model.weather.Weather
 import com.kazakago.cleanarchitecture.domain.repository.weather.WeatherRepository
-import io.reactivex.Completable
-import io.reactivex.Single
-import io.reactivex.rxkotlin.Singles
 
 class WeatherRepositoryImpl(private val context: Context) : WeatherRepository {
 
     private val database = AppDatabase.create(context)
 
-    override fun find(cityId: CityId): Single<Weather> {
+    override fun find(cityId: CityId): Weather {
         val weatherDao = database.weatherDao()
-        return Singles.zip(weatherDao.findWeather(cityId.value),
-                weatherDao.findLocation(cityId.value),
-                weatherDao.findDescription(cityId.value),
-                weatherDao.findForecasts(cityId.value),
-                { weather, location, description, forecasts ->
-                    WeatherEntityMapper.map(weather, location, description, forecasts)
-                })
+        val weather = weatherDao.findWeather(cityId.value)
+        val location = weatherDao.findLocation(cityId.value)
+        val description = weatherDao.findDescription(cityId.value)
+        val forecasts = weatherDao.findForecasts(cityId.value)
+        return WeatherEntityMapper.map(weather, location, description, forecasts)
     }
 
-    override fun insert(weather: Weather): Completable {
+    override fun insert(weather: Weather) {
         val weatherDao = database.weatherDao()
-        return Completable.create {
-            val reverseMappingResult = WeatherEntityMapper.reverse(weather)
-            weatherDao.insert(reverseMappingResult.weatherEntity)
-            weatherDao.insert(reverseMappingResult.locationEntity)
-            weatherDao.insert(reverseMappingResult.descriptionEntity)
-            weatherDao.insert(reverseMappingResult.forecastEntities)
-            it.onComplete()
-        }
+        val reverseMappingResult = WeatherEntityMapper.reverse(weather)
+        weatherDao.insert(reverseMappingResult.weatherEntity)
+        weatherDao.insert(reverseMappingResult.locationEntity)
+        weatherDao.insert(reverseMappingResult.descriptionEntity)
+        weatherDao.insert(reverseMappingResult.forecastEntities)
     }
 
-    override fun delete(weather: Weather): Completable {
+    override fun delete(weather: Weather) {
         val weatherDao = database.weatherDao()
-        return Completable.create {
-            val reverseMappingResult = WeatherEntityMapper.reverse(weather)
-            weatherDao.delete(reverseMappingResult.weatherEntity)
-            it.onComplete()
-        }
+        val reverseMappingResult = WeatherEntityMapper.reverse(weather)
+        weatherDao.delete(reverseMappingResult.weatherEntity)
     }
 
 }

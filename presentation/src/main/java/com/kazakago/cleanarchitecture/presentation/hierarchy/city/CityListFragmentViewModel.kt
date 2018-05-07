@@ -5,12 +5,10 @@ import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
 import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.domain.usecase.city.GetCityUseCase
-import com.kazakago.cleanarchitecture.presentation.extension.compositeLocalizedMessage
 import com.kazakago.cleanarchitecture.presentation.livedata.SingleLiveEvent
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.launch
 
 class CityListFragmentViewModel(application: Application,
                                 private val getCityUseCase: GetCityUseCase) : AndroidViewModel(application), CityRecyclerAdapter.Listener {
@@ -19,30 +17,17 @@ class CityListFragmentViewModel(application: Application,
     val showToast = SingleLiveEvent<String>()
     val toForecast = SingleLiveEvent<City>()
 
-    private val compositeDisposable = CompositeDisposable()
-
     init {
         fetchCityList()
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        compositeDisposable.dispose()
-    }
-
-    private fun fetchCityList() {
-        compositeDisposable.add(getCityUseCase.execute(Unit)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(
-                        onSuccess = {
-                            cityList.value = it
-                        },
-                        onError = {
-                            cityList.value = listOf()
-                            showToast.call(it.compositeLocalizedMessage())
-                        }
-                ))
+    private fun fetchCityList() = launch(UI) {
+        try {
+            cityList.value = async { getCityUseCase.execute(Unit) }.await()
+        } catch (exception: Exception) {
+            cityList.value = listOf()
+            showToast.call(exception.localizedMessage)
+        }
     }
 
     //region CityRecyclerAdapter.Listener

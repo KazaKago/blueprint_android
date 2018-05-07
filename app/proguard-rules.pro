@@ -16,6 +16,12 @@
 #   public *;
 #}
 
+## kotlinx.coroutines
+## https://github.com/Kotlin/kotlinx.coroutines
+-keepclassmembernames class kotlinx.** {
+    volatile <fields>;
+}
+
 ## Retrofit
 ## https://github.com/square/retrofit
 -keepattributes Signature

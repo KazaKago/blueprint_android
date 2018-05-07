@@ -5,13 +5,13 @@ import com.kazakago.cleanarchitecture.data.file.dao.city.CityDao
 import com.kazakago.cleanarchitecture.data.file.mapper.city.CityMapper
 import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.domain.repository.city.CityRepository
-import io.reactivex.Single
 
 class CityRepositoryImpl(private val context: Context) : CityRepository {
 
-    override fun findAll(): Single<List<City>> {
+    override fun findAll(): List<City> {
         val cityDao = CityDao(context)
-        return cityDao.find().map { it.flatMap { CityMapper.map(it) } }
+        val prefEntityList = cityDao.find()
+        return prefEntityList.flatMap { CityMapper.map(it) }
     }
 
 }

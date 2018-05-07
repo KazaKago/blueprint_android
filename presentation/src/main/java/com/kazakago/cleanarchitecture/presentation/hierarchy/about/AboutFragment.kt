@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.kazakago.cleanarchitecture.presentation.R
 import kotlinx.android.synthetic.main.fragment_about.*
 import org.koin.android.architecture.ext.viewModel
@@ -43,9 +42,6 @@ class AboutFragment : Fragment() {
         })
         viewModel.openSendTo.observe(this, Observer {
             it?.let { openSendTo(it) }
-        })
-        viewModel.showToast.observe(this, Observer {
-            Toast.makeText(activity, it, Toast.LENGTH_SHORT).show()
         })
         playStoreLayout.setOnClickListener {
             viewModel.onClickPlayStore()
