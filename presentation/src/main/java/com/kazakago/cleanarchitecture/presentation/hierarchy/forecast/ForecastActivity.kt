@@ -25,7 +25,7 @@ class ForecastActivity : AppCompatActivity() {
         City
     }
 
-    private lateinit var viewModel: ForecastActivityViewModel
+    private lateinit var viewModel: ForecastViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +45,7 @@ class ForecastActivity : AppCompatActivity() {
         })
 
         if (savedInstanceState == null) {
-            replaceForecastFragment(city)
+            replaceForecastFragment()
         }
     }
 
@@ -56,8 +56,8 @@ class ForecastActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun replaceForecastFragment(city: City) {
-        val fragment = ForecastFragment.createInstance(city)
+    private fun replaceForecastFragment() {
+        val fragment = ForecastFragment.createInstance()
 
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragmentContainer, fragment)

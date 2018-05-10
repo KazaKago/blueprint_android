@@ -18,7 +18,7 @@ class AboutActivity : AppCompatActivity() {
         }
     }
 
-    private val viewModel by viewModel<AboutActivityViewModel>()
+    private val viewModel by viewModel<AboutViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

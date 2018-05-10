@@ -11,7 +11,7 @@ import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.hierarchy.forecast.ForecastActivity
 import kotlinx.android.synthetic.main.fragment_city_list.*
-import org.koin.android.architecture.ext.viewModel
+import org.koin.android.architecture.ext.sharedViewModel
 
 class CityListFragment : Fragment() {
 
@@ -21,7 +21,7 @@ class CityListFragment : Fragment() {
         }
     }
 
-    private val viewModel by viewModel<CityListFragmentViewModel>()
+    private val viewModel by sharedViewModel<CityListViewModel>()
     private lateinit var cityRecyclerAdapter: CityRecyclerAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

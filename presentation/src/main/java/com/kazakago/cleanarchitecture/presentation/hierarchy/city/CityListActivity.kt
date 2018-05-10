@@ -20,7 +20,7 @@ class CityListActivity : AppCompatActivity() {
         }
     }
 
-    private val viewModel by viewModel<CityListActivityViewModel>()
+    private val viewModel by viewModel<CityListViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

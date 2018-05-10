@@ -7,21 +7,29 @@ import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.domain.model.weather.Forecast
 import com.kazakago.cleanarchitecture.domain.model.weather.Weather
 import com.kazakago.cleanarchitecture.domain.usecase.weather.GetWeatherUseCase
+import com.kazakago.cleanarchitecture.presentation.livedata.NoValueSingleLiveEvent
 import com.kazakago.cleanarchitecture.presentation.livedata.SingleLiveEvent
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
 
-class ForecastFragmentViewModel(application: Application,
-                                private val getWeatherUseCase: GetWeatherUseCase,
-                                private val city: City) : AndroidViewModel(application), ForecastRecyclerAdapter.Listener {
+class ForecastViewModel(application: Application,
+                        private val getWeatherUseCase: GetWeatherUseCase,
+                        private val city: City) : AndroidViewModel(application), ForecastRecyclerAdapter.Listener {
 
+    val title = MutableLiveData<CharSequence>()
+    val finish = NoValueSingleLiveEvent()
     val weather = MutableLiveData<Weather>()
     val isLoading = MutableLiveData<Boolean>()
     val showToast = SingleLiveEvent<String>()
 
     init {
+        title.value = city.name
         fetchWeather()
+    }
+
+    fun onClickBackIcon() {
+        finish.call()
     }
 
     private fun fetchWeather() = launch(UI) {

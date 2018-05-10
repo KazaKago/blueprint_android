@@ -10,13 +10,15 @@ import com.kazakago.cleanarchitecture.domain.usecase.about.GetAppInfoUseCase
 import com.kazakago.cleanarchitecture.domain.usecase.about.GetDeveloperInfoUseCase
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.extension.toUri
+import com.kazakago.cleanarchitecture.presentation.livedata.NoValueSingleLiveEvent
 import com.kazakago.cleanarchitecture.presentation.livedata.SingleLiveEvent
 import java.util.*
 
-class AboutFragmentViewModel(application: Application,
-                             private val getAppInfoUseCase: GetAppInfoUseCase,
-                             private val getDeveloperInfoUseCase: GetDeveloperInfoUseCase) : AndroidViewModel(application) {
+class AboutViewModel(application: Application,
+                     private val getAppInfoUseCase: GetAppInfoUseCase,
+                     private val getDeveloperInfoUseCase: GetDeveloperInfoUseCase) : AndroidViewModel(application) {
 
+    val finish = NoValueSingleLiveEvent()
     val versionText = MutableLiveData<String>()
     val developByText = MutableLiveData<String>()
     val copyrightText = MutableLiveData<String>()
@@ -28,6 +30,10 @@ class AboutFragmentViewModel(application: Application,
 
     init {
         getAboutInfo()
+    }
+
+    fun onClickBackIcon() {
+        finish.call()
     }
 
     private fun getAboutInfo() {

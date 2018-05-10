@@ -5,20 +5,26 @@ import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
 import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.domain.usecase.city.GetCityUseCase
+import com.kazakago.cleanarchitecture.presentation.livedata.NoValueSingleLiveEvent
 import com.kazakago.cleanarchitecture.presentation.livedata.SingleLiveEvent
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
 
-class CityListFragmentViewModel(application: Application,
-                                private val getCityUseCase: GetCityUseCase) : AndroidViewModel(application), CityRecyclerAdapter.Listener {
+class CityListViewModel(application: Application,
+                        private val getCityUseCase: GetCityUseCase) : AndroidViewModel(application), CityRecyclerAdapter.Listener {
 
+    val toAbout = NoValueSingleLiveEvent()
     val cityList = MutableLiveData<List<City>>()
     val showToast = SingleLiveEvent<String>()
     val toForecast = SingleLiveEvent<City>()
 
     init {
         fetchCityList()
+    }
+
+    fun onClickAboutMenu() {
+        toAbout.call()
     }
 
     private fun fetchCityList() = launch(UI) {

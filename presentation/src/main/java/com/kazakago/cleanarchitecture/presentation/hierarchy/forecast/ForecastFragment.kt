@@ -7,35 +7,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.presentation.R
 import kotlinx.android.synthetic.main.fragment_forecast.*
-import org.koin.android.architecture.ext.getViewModel
+import org.koin.android.architecture.ext.sharedViewModel
 
 class ForecastFragment : Fragment() {
 
     companion object {
-        fun createInstance(city: City): ForecastFragment {
-            val fragment = ForecastFragment()
-            val bundle = Bundle()
-            bundle.putSerializable(Key.City.name, city)
-            fragment.arguments = bundle
-            return fragment
+        fun createInstance(): ForecastFragment {
+            return ForecastFragment()
         }
     }
 
-    private enum class Key {
-        City
-    }
-
-    private lateinit var viewModel: ForecastFragmentViewModel
+    private val viewModel by sharedViewModel<ForecastViewModel>()
     private lateinit var forecastRecyclerAdapter: ForecastRecyclerAdapter
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val city = arguments?.getSerializable(Key.City.name) as City
-        viewModel = getViewModel { mapOf("city" to city) }
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_forecast, container, false)

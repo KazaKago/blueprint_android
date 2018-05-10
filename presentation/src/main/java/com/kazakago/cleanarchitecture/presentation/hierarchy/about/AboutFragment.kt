@@ -8,10 +8,9 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.kazakago.cleanarchitecture.presentation.R
 import kotlinx.android.synthetic.main.fragment_about.*
-import org.koin.android.architecture.ext.viewModel
+import org.koin.android.architecture.ext.sharedViewModel
 
 class AboutFragment : Fragment() {
 
@@ -21,7 +20,7 @@ class AboutFragment : Fragment() {
         }
     }
 
-    private val viewModel by viewModel<AboutFragmentViewModel>()
+    private val viewModel by sharedViewModel<AboutViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_about, container, false)
