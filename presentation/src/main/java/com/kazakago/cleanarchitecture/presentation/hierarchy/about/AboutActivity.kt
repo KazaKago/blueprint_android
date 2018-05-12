@@ -27,7 +27,7 @@ class AboutActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        viewModel.finish.observe(this, Observer {
+        viewModel.finish.observe(this, "", Observer {
             finish()
         })
 

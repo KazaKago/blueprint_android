@@ -28,7 +28,7 @@ class CityListActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
 
-        viewModel.toAbout.observe(this, Observer {
+        viewModel.toAbout.observe(this, "", Observer {
             toAboutActivity()
         })
 

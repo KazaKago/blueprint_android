@@ -33,7 +33,7 @@ class ForecastFragment : Fragment() {
         forecastRecyclerAdapter.listener = viewModel
         forecastRecyclerView.adapter = forecastRecyclerAdapter
 
-        viewModel.showToast.observe(this, Observer {
+        viewModel.showToast.observe(this, "", Observer {
             Toast.makeText(activity, it, Toast.LENGTH_SHORT).show()
         })
         viewModel.weather.observe(this, Observer {

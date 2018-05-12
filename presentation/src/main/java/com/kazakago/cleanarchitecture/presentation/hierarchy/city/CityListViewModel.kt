@@ -5,8 +5,8 @@ import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
 import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.domain.usecase.city.GetCityUseCase
-import com.kazakago.cleanarchitecture.presentation.livedata.NoValueSingleLiveEvent
-import com.kazakago.cleanarchitecture.presentation.livedata.SingleLiveEvent
+import com.kazakago.cleanarchitecture.presentation.livedata.LiveEvent
+import com.kazakago.cleanarchitecture.presentation.livedata.VoidLiveEvent
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
@@ -14,10 +14,10 @@ import kotlinx.coroutines.experimental.launch
 class CityListViewModel(application: Application,
                         private val getCityUseCase: GetCityUseCase) : AndroidViewModel(application), CityRecyclerAdapter.Listener {
 
-    val toAbout = NoValueSingleLiveEvent()
+    val toAbout = VoidLiveEvent()
     val cityList = MutableLiveData<List<City>>()
-    val showToast = SingleLiveEvent<String>()
-    val toForecast = SingleLiveEvent<City>()
+    val showToast = LiveEvent<String>()
+    val toForecast = LiveEvent<City>()
 
     init {
         fetchCityList()

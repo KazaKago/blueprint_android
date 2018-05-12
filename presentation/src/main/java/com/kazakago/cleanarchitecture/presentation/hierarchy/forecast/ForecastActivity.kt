@@ -37,7 +37,7 @@ class ForecastActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        viewModel.finish.observe(this, Observer {
+        viewModel.finish.observe(this, "", Observer {
             finish()
         })
         viewModel.title.observe(this, Observer {

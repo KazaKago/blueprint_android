@@ -39,10 +39,10 @@ class CityListFragment : Fragment() {
             cityRecyclerAdapter.cityList = it ?: listOf()
             cityRecyclerAdapter.notifyDataSetChanged()
         })
-        viewModel.showToast.observe(this, Observer {
+        viewModel.showToast.observe(this, "", Observer {
             Toast.makeText(activity, it, Toast.LENGTH_SHORT).show()
         })
-        viewModel.toForecast.observe(this, Observer {
+        viewModel.toForecast.observe(this, "", Observer {
             it?.let { toForecastActivity(it) }
         })
     }

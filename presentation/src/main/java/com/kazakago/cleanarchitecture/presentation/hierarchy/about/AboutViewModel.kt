@@ -10,20 +10,20 @@ import com.kazakago.cleanarchitecture.domain.usecase.about.GetAppInfoUseCase
 import com.kazakago.cleanarchitecture.domain.usecase.about.GetDeveloperInfoUseCase
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.extension.toUri
-import com.kazakago.cleanarchitecture.presentation.livedata.NoValueSingleLiveEvent
-import com.kazakago.cleanarchitecture.presentation.livedata.SingleLiveEvent
+import com.kazakago.cleanarchitecture.presentation.livedata.LiveEvent
+import com.kazakago.cleanarchitecture.presentation.livedata.VoidLiveEvent
 import java.util.*
 
 class AboutViewModel(application: Application,
                      private val getAppInfoUseCase: GetAppInfoUseCase,
                      private val getDeveloperInfoUseCase: GetDeveloperInfoUseCase) : AndroidViewModel(application) {
 
-    val finish = NoValueSingleLiveEvent()
+    val finish = VoidLiveEvent()
     val versionText = MutableLiveData<String>()
     val developByText = MutableLiveData<String>()
     val copyrightText = MutableLiveData<String>()
-    val openActionView = SingleLiveEvent<Uri>()
-    val openSendTo = SingleLiveEvent<Uri>()
+    val openActionView = LiveEvent<Uri>()
+    val openSendTo = LiveEvent<Uri>()
 
     private lateinit var appInfo: AppInfo
     private lateinit var developerInfo: DeveloperInfo

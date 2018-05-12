@@ -37,10 +37,10 @@ class AboutFragment : Fragment() {
         viewModel.copyrightText.observe(this, Observer {
             copyrightTextView.text = it
         })
-        viewModel.openActionView.observe(this, Observer {
+        viewModel.openActionView.observe(this, "", Observer {
             it?.let { openActionView(it) }
         })
-        viewModel.openSendTo.observe(this, Observer {
+        viewModel.openSendTo.observe(this, "", Observer {
             it?.let { openSendTo(it) }
         })
         playStoreLayout.setOnClickListener {
