@@ -1,9 +1,9 @@
 package com.kazakago.cleanarchitecture.web.response.entity.weather
 
 import com.squareup.moshi.Json
-import se.ansman.kotshi.JsonSerializable
+import com.squareup.moshi.JsonClass
 
-@JsonSerializable
+@JsonClass(generateAdapter = true)
 data class ForecastResponse(
         @Json(name = "date")
         val date: String,

@@ -48,6 +48,11 @@
     @com.squareup.moshi.* <methods>;
 }
 -keep @com.squareup.moshi.JsonQualifier interface *
+-keep class **JsonAdapter {
+    <init>(...);
+    <fields>;
+}
+-keepnames @com.squareup.moshi.JsonClass class *
 ##
 
 ## Kodein
