@@ -9,14 +9,19 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 class RetrofitBuilder(context: Context, baseUrl: String) {
 
+    private val chuckInterceptor = ChuckInterceptor(context)
+            .showNotification(false)
+
     private val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(ChuckInterceptor(context))
+            .addInterceptor(chuckInterceptor)
             .build()
+
+    private val moshiConverter = MoshiConverterFactory.create(MoshiBuilder().build())
 
     private val builder = Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(okHttpClient)
-            .addConverterFactory(MoshiConverterFactory.create(MoshiBuilder().build()))
+            .addConverterFactory(moshiConverter)
 
     fun build(): Retrofit {
         return builder.build()
