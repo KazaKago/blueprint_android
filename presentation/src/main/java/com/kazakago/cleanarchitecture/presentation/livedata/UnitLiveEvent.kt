@@ -2,7 +2,7 @@ package com.kazakago.cleanarchitecture.presentation.livedata
 
 import android.support.annotation.MainThread
 
-class VoidLiveEvent : LiveEvent<Unit>() {
+class UnitLiveEvent : LiveEvent<Unit>() {
 
     @Deprecated(
             message = "use call()",

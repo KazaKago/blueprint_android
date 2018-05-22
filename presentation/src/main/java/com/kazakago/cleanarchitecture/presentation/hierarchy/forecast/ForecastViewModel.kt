@@ -8,7 +8,7 @@ import com.kazakago.cleanarchitecture.domain.model.weather.Forecast
 import com.kazakago.cleanarchitecture.domain.model.weather.Weather
 import com.kazakago.cleanarchitecture.domain.usecase.weather.GetWeatherUseCase
 import com.kazakago.cleanarchitecture.presentation.livedata.LiveEvent
-import com.kazakago.cleanarchitecture.presentation.livedata.VoidLiveEvent
+import com.kazakago.cleanarchitecture.presentation.livedata.UnitLiveEvent
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
@@ -18,7 +18,7 @@ class ForecastViewModel(application: Application,
                         private val city: City) : AndroidViewModel(application), ForecastRecyclerAdapter.Listener {
 
     val title = MutableLiveData<CharSequence>()
-    val finish = VoidLiveEvent()
+    val finish = UnitLiveEvent()
     val weather = MutableLiveData<Weather>()
     val isLoading = MutableLiveData<Boolean>()
     val showToast = LiveEvent<String>()

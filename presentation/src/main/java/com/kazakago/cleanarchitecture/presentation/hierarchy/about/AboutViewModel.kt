@@ -11,14 +11,14 @@ import com.kazakago.cleanarchitecture.domain.usecase.about.GetDeveloperInfoUseCa
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.extension.toUri
 import com.kazakago.cleanarchitecture.presentation.livedata.LiveEvent
-import com.kazakago.cleanarchitecture.presentation.livedata.VoidLiveEvent
+import com.kazakago.cleanarchitecture.presentation.livedata.UnitLiveEvent
 import java.util.*
 
 class AboutViewModel(application: Application,
                      private val getAppInfoUseCase: GetAppInfoUseCase,
                      private val getDeveloperInfoUseCase: GetDeveloperInfoUseCase) : AndroidViewModel(application) {
 
-    val finish = VoidLiveEvent()
+    val finish = UnitLiveEvent()
     val versionText = MutableLiveData<String>()
     val developByText = MutableLiveData<String>()
     val copyrightText = MutableLiveData<String>()
