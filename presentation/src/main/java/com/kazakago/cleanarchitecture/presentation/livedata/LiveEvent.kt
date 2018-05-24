@@ -1,14 +1,14 @@
 package com.kazakago.cleanarchitecture.presentation.livedata
 
 import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import android.support.annotation.MainThread
 import java.util.concurrent.CopyOnWriteArrayList
 
-open class LiveEvent<T> : LiveData<T>() {
+open class LiveEvent<T> : MutableLiveData<T>() {
 
-    private val pending = CopyOnWriteArrayList<String>()
+    private val dispatchedTagList = CopyOnWriteArrayList<String>()
 
     @MainThread
     @Deprecated(
@@ -22,8 +22,9 @@ open class LiveEvent<T> : LiveData<T>() {
     @MainThread
     open fun observe(owner: LifecycleOwner, tag: String, observer: Observer<T>) {
         super.observe(owner, Observer<T> {
-            if (!pending.contains(tag)) {
-                pending.add(tag)
+            val internalTag = owner::class.java.name + "#" + tag
+            if (!dispatchedTagList.contains(internalTag)) {
+                dispatchedTagList.add(internalTag)
                 observer.onChanged(it)
             }
         })
@@ -31,13 +32,18 @@ open class LiveEvent<T> : LiveData<T>() {
 
     @MainThread
     open fun call(t: T?) {
-        pending.clear()
         value = t
     }
 
-    open fun post(t: T?) {
-        pending.clear()
-        postValue(t)
+    @MainThread
+    override fun setValue(value: T?) {
+        dispatchedTagList.clear()
+        super.setValue(value)
+    }
+
+    override fun postValue(t: T?) {
+        dispatchedTagList.clear()
+        super.postValue(t)
     }
 
 }
