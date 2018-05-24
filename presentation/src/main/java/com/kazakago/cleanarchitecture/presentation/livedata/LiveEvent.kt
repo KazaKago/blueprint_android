@@ -1,12 +1,12 @@
 package com.kazakago.cleanarchitecture.presentation.livedata
 
 import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 import android.support.annotation.MainThread
 import java.util.concurrent.CopyOnWriteArrayList
 
-open class LiveEvent<T> : MutableLiveData<T>() {
+open class LiveEvent<T> : LiveData<T>() {
 
     private val dispatchedTagList = CopyOnWriteArrayList<String>()
 
@@ -32,18 +32,8 @@ open class LiveEvent<T> : MutableLiveData<T>() {
 
     @MainThread
     open fun call(t: T?) {
+        dispatchedTagList.clear()
         value = t
-    }
-
-    @MainThread
-    override fun setValue(value: T?) {
-        dispatchedTagList.clear()
-        super.setValue(value)
-    }
-
-    override fun postValue(t: T?) {
-        dispatchedTagList.clear()
-        super.postValue(t)
     }
 
 }
