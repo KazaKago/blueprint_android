@@ -5,6 +5,6 @@ import java.net.URI
 
 data class AppInfo(
         val versionName: String,
-        val versionCode: Int,
+        val versionCode: Long,
         val playStoreUri: URI
 ) : Serializable

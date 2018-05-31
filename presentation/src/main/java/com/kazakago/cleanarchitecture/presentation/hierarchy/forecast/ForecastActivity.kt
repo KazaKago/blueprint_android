@@ -1,15 +1,16 @@
 package com.kazakago.cleanarchitecture.presentation.hierarchy.forecast
 
-import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.presentation.R
 import kotlinx.android.synthetic.main.activity_forecast.*
-import org.koin.android.architecture.ext.getViewModel
+import org.koin.android.architecture.ext.android.getViewModel
+import org.koin.core.parameter.parametersOf
 
 class ForecastActivity : AppCompatActivity() {
 
@@ -32,7 +33,7 @@ class ForecastActivity : AppCompatActivity() {
         setContentView(R.layout.activity_forecast)
 
         val city = intent.getSerializableExtra(Key.City.name) as City
-        viewModel = getViewModel { mapOf("city" to city) }
+        viewModel = getViewModel { parametersOf(city) }
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

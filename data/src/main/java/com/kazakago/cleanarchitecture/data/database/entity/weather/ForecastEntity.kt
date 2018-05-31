@@ -1,6 +1,6 @@
 package com.kazakago.cleanarchitecture.data.database.entity.weather
 
-import android.arch.persistence.room.*
+import androidx.room.*
 
 @Entity(tableName = "forecast",
         indices = [(Index(value = ["city_id"]))],

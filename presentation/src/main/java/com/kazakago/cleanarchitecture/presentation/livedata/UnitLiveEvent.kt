@@ -1,6 +1,6 @@
 package com.kazakago.cleanarchitecture.presentation.livedata
 
-import android.support.annotation.MainThread
+import androidx.annotation.MainThread
 
 class UnitLiveEvent : LiveEvent<Unit>() {
 

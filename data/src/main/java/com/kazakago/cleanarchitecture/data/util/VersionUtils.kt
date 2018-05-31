@@ -9,9 +9,9 @@ object VersionUtils {
         return packageInfo.versionName
     }
 
-    fun getVersionCode(context: Context): Int {
+    fun getVersionCode(context: Context): Long {
         val packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
-        return packageInfo.versionCode
+        return packageInfo.longVersionCode
     }
 
 }

@@ -3,11 +3,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 'android-P'
     defaultConfig {
         minSdkVersion 17
-        targetSdkVersion 27
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        targetSdkVersion 'P'
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -28,10 +28,10 @@ dependencies {
     //Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     //Koin
-    implementation "org.koin:koin-core:0.9.2"
-    //Room
-    implementation 'android.arch.persistence.room:runtime:1.1.0'
-    kapt 'android.arch.persistence.room:compiler:1.1.0'
+    implementation "org.koin:koin-core:1.0.0-alpha-12"
+    //AndroidX Room
+    implementation 'androidx.room:room-runtime:2.0.0-alpha1'
+    kapt 'androidx.room:room-compiler:2.0.0-alpha1'
     //Moshi
     implementation 'com.squareup.moshi:moshi:1.6.0'
     kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.6.0'
@@ -40,6 +40,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
     //Espresso
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'androidx.test:runner:1.1.0-alpha3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha3'
 }
