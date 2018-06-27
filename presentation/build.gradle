@@ -4,10 +4,10 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 'android-P'
+    compileSdkVersion 28
     defaultConfig {
         minSdkVersion 17
-        targetSdkVersion 'P'
+        targetSdkVersion 28
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -36,14 +36,14 @@ dependencies {
     //Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     //kotlinx.coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.5"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.22.5"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.23.3"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.23.3"
     //Koin for AndroidX
     implementation "org.koin:koin-androidx:1.0.0-alpha-12"
     //AndroidX AppCompat
-    implementation 'androidx.appcompat:appcompat:1.0.0-alpha2'
+    implementation 'androidx.appcompat:appcompat:1.0.0-alpha3'
     //AndroidX Material
-    implementation 'com.google.android.material:material:1.0.0-alpha1'
+    implementation 'com.google.android.material:material:1.0.0-alpha3'
     //AndroidX Lifecycle Extension
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-alpha1'
     kapt 'androidx.lifecycle:lifecycle-compiler:2.0.0-alpha1'
