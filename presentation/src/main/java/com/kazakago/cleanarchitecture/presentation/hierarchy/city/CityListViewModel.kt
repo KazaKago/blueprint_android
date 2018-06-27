@@ -2,11 +2,11 @@ package com.kazakago.cleanarchitecture.presentation.hierarchy.city
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
 import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.domain.usecase.city.GetCityUseCase
-import com.kazakago.cleanarchitecture.presentation.livedata.LiveEvent
-import com.kazakago.cleanarchitecture.presentation.livedata.UnitLiveEvent
+import com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata.NonNullLiveData
+import com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata.NonNullLiveEvent
+import com.kazakago.cleanarchitecture.presentation.livedata.liveevent.UnitLiveEvent
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
@@ -15,9 +15,9 @@ class CityListViewModel(application: Application,
                         private val getCityUseCase: GetCityUseCase) : AndroidViewModel(application), CityRecyclerAdapter.Listener {
 
     val toAbout = UnitLiveEvent()
-    val cityList = MutableLiveData<List<City>>()
-    val showToast = LiveEvent<String>()
-    val toForecast = LiveEvent<City>()
+    val cityList = NonNullLiveData<List<City>>(emptyList())
+    val showToast = NonNullLiveEvent<String>()
+    val toForecast = NonNullLiveEvent<City>()
 
     init {
         fetchCityList()
