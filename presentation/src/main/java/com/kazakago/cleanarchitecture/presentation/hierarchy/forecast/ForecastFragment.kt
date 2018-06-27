@@ -1,15 +1,16 @@
 package com.kazakago.cleanarchitecture.presentation.hierarchy.forecast
 
-import android.arch.lifecycle.Observer
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.kazakago.cleanarchitecture.presentation.R
+import com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata.NonNullObserver
 import kotlinx.android.synthetic.main.fragment_forecast.*
-import org.koin.android.architecture.ext.sharedViewModel
+import org.koin.android.architecture.ext.android.sharedViewModel
 
 class ForecastFragment : Fragment() {
 
@@ -33,15 +34,15 @@ class ForecastFragment : Fragment() {
         forecastRecyclerAdapter.listener = viewModel
         forecastRecyclerView.adapter = forecastRecyclerAdapter
 
-        viewModel.showToast.observe(this, "", Observer {
+        viewModel.showToast.observe(this, "", NonNullObserver {
             Toast.makeText(activity, it, Toast.LENGTH_SHORT).show()
         })
         viewModel.weather.observe(this, Observer {
             forecastRecyclerAdapter.weather = it
             forecastRecyclerAdapter.notifyDataSetChanged()
         })
-        viewModel.isLoading.observe(this, Observer {
-            if (it == true) loadingProgressBar.show() else loadingProgressBar.hide()
+        viewModel.isLoading.observe(this, NonNullObserver {
+            if (it) loadingProgressBar.show() else loadingProgressBar.hide()
         })
     }
 

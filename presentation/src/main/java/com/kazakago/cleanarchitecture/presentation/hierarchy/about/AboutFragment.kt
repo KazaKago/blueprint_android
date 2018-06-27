@@ -1,16 +1,17 @@
 package com.kazakago.cleanarchitecture.presentation.hierarchy.about
 
-import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.kazakago.cleanarchitecture.presentation.R
+import com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata.NonNullObserver
 import kotlinx.android.synthetic.main.fragment_about.*
-import org.koin.android.architecture.ext.sharedViewModel
+import org.koin.android.architecture.ext.android.sharedViewModel
 
 class AboutFragment : Fragment() {
 
@@ -37,11 +38,11 @@ class AboutFragment : Fragment() {
         viewModel.copyrightText.observe(this, Observer {
             copyrightTextView.text = it
         })
-        viewModel.openActionView.observe(this, "", Observer {
-            it?.let { openActionView(it) }
+        viewModel.openActionView.observe(this, "", NonNullObserver {
+            openActionView(it)
         })
-        viewModel.openSendTo.observe(this, "", Observer {
-            it?.let { openSendTo(it) }
+        viewModel.openSendTo.observe(this, "", NonNullObserver {
+            openSendTo(it)
         })
         playStoreLayout.setOnClickListener {
             viewModel.onClickPlayStore()

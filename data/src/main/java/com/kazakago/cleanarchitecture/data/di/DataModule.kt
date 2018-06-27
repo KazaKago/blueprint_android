@@ -6,9 +6,9 @@ import com.kazakago.cleanarchitecture.data.repository.weather.WeatherRepositoryI
 import com.kazakago.cleanarchitecture.domain.repository.about.AboutRepository
 import com.kazakago.cleanarchitecture.domain.repository.city.CityRepository
 import com.kazakago.cleanarchitecture.domain.repository.weather.WeatherRepository
-import org.koin.dsl.module.applicationContext
+import org.koin.dsl.module.module
 
-val dataModule = applicationContext {
+val dataModule = module {
     bean<CityRepository> { CityRepositoryImpl(get()) }
     bean<WeatherRepository> { WeatherRepositoryImpl(get()) }
     bean<AboutRepository> { AboutRepositoryImpl(get()) }

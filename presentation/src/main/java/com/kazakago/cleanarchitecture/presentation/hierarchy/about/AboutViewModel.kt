@@ -1,17 +1,17 @@
 package com.kazakago.cleanarchitecture.presentation.hierarchy.about
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.MutableLiveData
 import android.net.Uri
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
 import com.kazakago.cleanarchitecture.domain.model.about.AppInfo
 import com.kazakago.cleanarchitecture.domain.model.about.DeveloperInfo
 import com.kazakago.cleanarchitecture.domain.usecase.about.GetAppInfoUseCase
 import com.kazakago.cleanarchitecture.domain.usecase.about.GetDeveloperInfoUseCase
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.extension.toUri
-import com.kazakago.cleanarchitecture.presentation.livedata.LiveEvent
-import com.kazakago.cleanarchitecture.presentation.livedata.UnitLiveEvent
+import com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata.NonNullLiveEvent
+import com.kazakago.cleanarchitecture.presentation.livedata.liveevent.UnitLiveEvent
 import java.util.*
 
 class AboutViewModel(application: Application,
@@ -22,8 +22,8 @@ class AboutViewModel(application: Application,
     val versionText = MutableLiveData<String>()
     val developByText = MutableLiveData<String>()
     val copyrightText = MutableLiveData<String>()
-    val openActionView = LiveEvent<Uri>()
-    val openSendTo = LiveEvent<Uri>()
+    val openActionView = NonNullLiveEvent<Uri>()
+    val openSendTo = NonNullLiveEvent<Uri>()
 
     private lateinit var appInfo: AppInfo
     private lateinit var developerInfo: DeveloperInfo

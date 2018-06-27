@@ -19,3 +19,23 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+## kotlinx.coroutines
+## https://github.com/Kotlin/kotlinx.coroutines
+-keepclassmembernames class kotlinx.** {
+    volatile <fields>;
+}
+
+## Picasso
+## https://github.com/square/picasso
+-dontwarn okhttp3.**
+-dontwarn okio.**
+-dontwarn javax.annotation.**
+-dontwarn org.conscrypt.**
+-keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
+##
+
+## Kodein
+## https://salomonbrys.github.io/Kodein/
+-keepattributes Signature
+##

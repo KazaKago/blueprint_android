@@ -1,8 +1,8 @@
 package com.kazakago.cleanarchitecture.presentation.hierarchy.city
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.adapter.AbsItemViewHolder

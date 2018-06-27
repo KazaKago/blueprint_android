@@ -1,16 +1,16 @@
 package com.kazakago.cleanarchitecture.presentation.hierarchy.city
 
-import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.hierarchy.about.AboutActivity
 import kotlinx.android.synthetic.main.activity_forecast.*
-import org.koin.android.architecture.ext.viewModel
+import org.koin.android.architecture.ext.android.viewModel
 
 class CityListActivity : AppCompatActivity() {
 

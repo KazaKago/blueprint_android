@@ -1,6 +1,6 @@
 package com.kazakago.cleanarchitecture.data.database.dao.weather
 
-import android.arch.persistence.room.*
+import androidx.room.*
 import com.kazakago.cleanarchitecture.data.database.entity.weather.DescriptionEntity
 import com.kazakago.cleanarchitecture.data.database.entity.weather.ForecastEntity
 import com.kazakago.cleanarchitecture.data.database.entity.weather.LocationEntity
