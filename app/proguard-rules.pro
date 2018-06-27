@@ -16,45 +16,6 @@
 #   public *;
 #}
 
-## kotlinx.coroutines
-## https://github.com/Kotlin/kotlinx.coroutines
--keepclassmembernames class kotlinx.** {
-    volatile <fields>;
-}
-
-## Retrofit
-## https://github.com/square/retrofit
--keepattributes Signature
--keepclassmembernames,allowobfuscation interface * {
-    @retrofit2.http.* <methods>;
-}
--dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
-##
-
-## Picasso
-## https://github.com/square/picasso
--dontwarn okhttp3.**
--dontwarn okio.**
--dontwarn javax.annotation.**
--dontwarn org.conscrypt.**
--keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
-##
-
-## Moshi
-## https://github.com/square/moshi
--dontwarn okio.**
--dontwarn javax.annotation.**
--keepclasseswithmembers class * {
-    @com.squareup.moshi.* <methods>;
-}
--keep @com.squareup.moshi.JsonQualifier interface *
--keep class **JsonAdapter {
-    <init>(...);
-    <fields>;
-}
--keepnames @com.squareup.moshi.JsonClass class *
-##
-
 ## Kodein
 ## https://salomonbrys.github.io/Kodein/
 -keepattributes Signature
