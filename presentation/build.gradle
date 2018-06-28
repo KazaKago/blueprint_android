@@ -43,6 +43,8 @@ dependencies {
     implementation "org.koin:koin-androidx:1.0.0-alpha-12"
     //AndroidX AppCompat
     implementation 'androidx.appcompat:appcompat:1.0.0-alpha3'
+    //AndroidX ConstraintLayout
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
     //AndroidX Material
     implementation 'com.google.android.material:material:1.0.0-alpha3'
     //AndroidX Lifecycle Extension
