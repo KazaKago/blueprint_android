@@ -34,8 +34,3 @@
 -dontwarn org.conscrypt.**
 -keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
 ##
-
-## Kodein
-## https://salomonbrys.github.io/Kodein/
--keepattributes Signature
-##

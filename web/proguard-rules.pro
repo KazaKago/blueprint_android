@@ -43,8 +43,3 @@
 }
 -keepnames @com.squareup.moshi.JsonClass class *
 ##
-
-## Kodein
-## https://salomonbrys.github.io/Kodein/
--keepattributes Signature
-##
