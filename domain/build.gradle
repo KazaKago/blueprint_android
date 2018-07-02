@@ -7,6 +7,9 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     //Koin
     implementation "org.koin:koin-core:1.0.0-alpha-12"
+
+    //JUnit
+    testImplementation 'junit:junit:4.12'
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
