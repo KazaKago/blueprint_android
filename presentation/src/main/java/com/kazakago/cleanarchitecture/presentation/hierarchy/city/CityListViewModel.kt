@@ -7,9 +7,10 @@ import com.kazakago.cleanarchitecture.domain.usecase.city.GetCityUseCase
 import com.kazakago.cleanarchitecture.presentation.livedata.liveevent.UnitLiveEvent
 import com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata.NonNullLiveData
 import com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata.NonNullLiveEvent
+import kotlinx.coroutines.experimental.DefaultDispatcher
 import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.experimental.withContext
 
 class CityListViewModel(application: Application,
                         private val getCityUseCase: GetCityUseCase) : AndroidViewModel(application) {
@@ -33,7 +34,7 @@ class CityListViewModel(application: Application,
 
     private fun fetchCityList() = launch(UI) {
         try {
-            cityList.value = async { getCityUseCase.execute(Unit) }.await()
+            cityList.value = withContext(DefaultDispatcher) { getCityUseCase.execute(Unit) }
         } catch (exception: Exception) {
             cityList.value = listOf()
             showToast.call(exception.localizedMessage)

@@ -1,4 +1,4 @@
-package com.kazakago.cleanarchitecture
+package com.kazakago.cleanarchitecture.presentation
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
