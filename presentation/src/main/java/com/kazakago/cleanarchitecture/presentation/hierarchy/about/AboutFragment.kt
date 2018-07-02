@@ -29,6 +29,7 @@ class AboutFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         viewModel.versionText.observe(this, Observer {
             versionTextView.text = it
         })

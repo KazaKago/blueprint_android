@@ -10,12 +10,8 @@ import kotlinx.android.synthetic.main.recycler_city.view.*
 
 class CityRecyclerAdapter(private val context: Context) : RecyclerView.Adapter<CityRecyclerAdapter.ViewHolder>() {
 
-    interface Listener {
-        fun onItemClick(city: City)
-    }
-
     var cityList: List<City> = listOf()
-    var listener: Listener? = null
+    var onItemClick: ((city: City) -> Unit)? = null
 
     override fun getItemCount(): Int {
         return cityList.size
@@ -30,14 +26,17 @@ class CityRecyclerAdapter(private val context: Context) : RecyclerView.Adapter<C
     }
 
     inner class ViewHolder(context: Context, parent: ViewGroup) : AbsItemViewHolder<City>(context, parent, R.layout.recycler_city) {
+
         init {
             itemView.setOnClickListener {
-                item?.let { listener?.onItemClick(it) }
+                item?.let { onItemClick?.invoke(it) }
             }
         }
+
         override fun onBind(item: City?) {
             itemView.cityTextView.text = item?.name
         }
+
     }
 
 }

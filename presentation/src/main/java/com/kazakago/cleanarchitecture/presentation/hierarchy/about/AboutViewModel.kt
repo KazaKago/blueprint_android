@@ -10,8 +10,8 @@ import com.kazakago.cleanarchitecture.domain.usecase.about.GetAppInfoUseCase
 import com.kazakago.cleanarchitecture.domain.usecase.about.GetDeveloperInfoUseCase
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.extension.toUri
-import com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata.NonNullLiveEvent
 import com.kazakago.cleanarchitecture.presentation.livedata.liveevent.UnitLiveEvent
+import com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata.NonNullLiveEvent
 import java.util.*
 
 class AboutViewModel(application: Application,
@@ -36,13 +36,6 @@ class AboutViewModel(application: Application,
         finish.call()
     }
 
-    private fun getAboutInfo() {
-        appInfo = getAppInfoUseCase.execute(Unit)
-        developerInfo = getDeveloperInfoUseCase.execute(Unit)
-        versionText.value = getApplication<Application>().getString(R.string.about_ver, appInfo.versionName)
-        copyrightText.value = getApplication<Application>().getString(R.string.about_copyright, Calendar.getInstance().get(Calendar.YEAR), developerInfo.name)
-    }
-
     fun onClickPlayStore() {
         openActionView.call(appInfo.playStoreUri.toUri())
     }
@@ -53,6 +46,13 @@ class AboutViewModel(application: Application,
 
     fun onClickWebSite() {
         openActionView.call(developerInfo.siteUrl.toUri())
+    }
+
+    private fun getAboutInfo() {
+        appInfo = getAppInfoUseCase.execute(Unit)
+        developerInfo = getDeveloperInfoUseCase.execute(Unit)
+        versionText.value = getApplication<Application>().getString(R.string.about_ver, appInfo.versionName)
+        copyrightText.value = getApplication<Application>().getString(R.string.about_copyright, Calendar.getInstance().get(Calendar.YEAR), developerInfo.name)
     }
 
 }

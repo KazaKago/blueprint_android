@@ -15,17 +15,13 @@ import kotlinx.android.synthetic.main.recycler_forecast_summary.view.*
 
 class ForecastRecyclerAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    interface Listener {
-        fun onItemClick(forecast: Forecast)
-    }
-
     private enum class ViewType {
         Summary,
         Content;
     }
 
     var weather: Weather? = null
-    var listener: Listener? = null
+    var onItemClick: ((forecast: Forecast) -> Unit)? = null
 
     override fun getItemCount(): Int {
         return weather?.let { it.forecasts.size + 1 } ?: 0
@@ -74,7 +70,7 @@ class ForecastRecyclerAdapter(private val context: Context) : RecyclerView.Adapt
 
         init {
             itemView.setOnClickListener {
-                item?.let { listener?.onItemClick(it) }
+                item?.let { onItemClick?.invoke(it) }
             }
         }
 

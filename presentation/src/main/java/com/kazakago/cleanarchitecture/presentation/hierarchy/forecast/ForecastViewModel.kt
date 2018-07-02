@@ -7,16 +7,16 @@ import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.domain.model.weather.Forecast
 import com.kazakago.cleanarchitecture.domain.model.weather.Weather
 import com.kazakago.cleanarchitecture.domain.usecase.weather.GetWeatherUseCase
+import com.kazakago.cleanarchitecture.presentation.livedata.liveevent.UnitLiveEvent
 import com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata.NonNullLiveData
 import com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata.NonNullLiveEvent
-import com.kazakago.cleanarchitecture.presentation.livedata.liveevent.UnitLiveEvent
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
 
 class ForecastViewModel(application: Application,
                         private val getWeatherUseCase: GetWeatherUseCase,
-                        private val city: City) : AndroidViewModel(application), ForecastRecyclerAdapter.Listener {
+                        private val city: City) : AndroidViewModel(application) {
 
     val title = MutableLiveData<CharSequence>()
     val finish = UnitLiveEvent()
@@ -33,6 +33,10 @@ class ForecastViewModel(application: Application,
         finish.call()
     }
 
+    fun onClickForecast(forecast: Forecast) {
+        showToast.call(forecast.telop)
+    }
+
     private fun fetchWeather() = launch(UI) {
         isLoading.value = true
         try {
@@ -43,14 +47,5 @@ class ForecastViewModel(application: Application,
         }
         isLoading.value = false
     }
-
-
-    //region ForecastRecyclerAdapter.Listener
-
-    override fun onItemClick(forecast: Forecast) {
-        showToast.call(forecast.telop)
-    }
-
-    //endregion
 
 }

@@ -31,7 +31,9 @@ class ForecastFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         forecastRecyclerAdapter = ForecastRecyclerAdapter(requireActivity())
-        forecastRecyclerAdapter.listener = viewModel
+        forecastRecyclerAdapter.onItemClick = {
+            viewModel.onClickForecast(it)
+        }
         forecastRecyclerView.adapter = forecastRecyclerAdapter
 
         viewModel.showToast.observe(this, "", NonNullObserver {

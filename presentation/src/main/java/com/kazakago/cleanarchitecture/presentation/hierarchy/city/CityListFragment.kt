@@ -32,7 +32,9 @@ class CityListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         cityRecyclerAdapter = CityRecyclerAdapter(requireActivity())
-        cityRecyclerAdapter.listener = viewModel
+        cityRecyclerAdapter.onItemClick = {
+            viewModel.onClickCity(it)
+        }
         cityRecyclerView.adapter = cityRecyclerAdapter
 
         viewModel.cityList.observe(this, NonNullObserver {

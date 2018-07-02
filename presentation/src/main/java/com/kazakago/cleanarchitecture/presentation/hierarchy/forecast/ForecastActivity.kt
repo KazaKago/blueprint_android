@@ -17,12 +17,12 @@ class ForecastActivity : AppCompatActivity() {
     companion object {
         fun createIntent(context: Context, city: City): Intent {
             val intent = Intent(context, ForecastActivity::class.java)
-            intent.putExtra(Key.City.name, city)
+            intent.putExtra(Parameter.City.name, city)
             return intent
         }
     }
 
-    private enum class Key {
+    private enum class Parameter {
         City
     }
 
@@ -32,7 +32,7 @@ class ForecastActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forecast)
 
-        val city = intent.getSerializableExtra(Key.City.name) as City
+        val city = intent.getSerializableExtra(Parameter.City.name) as City
         viewModel = getViewModel { parametersOf(city) }
 
         setSupportActionBar(toolbar)
