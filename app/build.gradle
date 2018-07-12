@@ -58,7 +58,7 @@ dependencies {
     //Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     //Koin for Android
-    implementation "org.koin:koin-android:1.0.0-alpha-12"
+    implementation "org.koin:koin-android:1.0.0-beta-3"
 
     //Stetho
     debugImplementation 'com.facebook.stetho:stetho:1.5.0'

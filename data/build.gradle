@@ -29,7 +29,7 @@ dependencies {
     //Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     //Koin
-    implementation "org.koin:koin-core:1.0.0-alpha-12"
+    implementation "org.koin:koin-core:1.0.0-beta-3"
     //AndroidX Room
     implementation 'androidx.room:room-runtime:2.0.0-beta01'
     kapt 'androidx.room:room-compiler:2.0.0-beta01'

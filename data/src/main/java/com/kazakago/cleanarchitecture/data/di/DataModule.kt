@@ -9,7 +9,7 @@ import com.kazakago.cleanarchitecture.domain.repository.weather.WeatherRepositor
 import org.koin.dsl.module.module
 
 val dataModule = module {
-    bean<CityRepository> { CityRepositoryImpl(get()) }
-    bean<WeatherRepository> { WeatherRepositoryImpl(get()) }
-    bean<AboutRepository> { AboutRepositoryImpl(get()) }
+    single<CityRepository> { CityRepositoryImpl(get()) }
+    single<WeatherRepository> { WeatherRepositoryImpl(get()) }
+    single<AboutRepository> { AboutRepositoryImpl(get()) }
 }

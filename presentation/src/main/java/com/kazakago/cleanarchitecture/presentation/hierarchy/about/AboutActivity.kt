@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.kazakago.cleanarchitecture.presentation.R
 import kotlinx.android.synthetic.main.activity_about.*
-import org.koin.android.architecture.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AboutActivity : AppCompatActivity() {
 

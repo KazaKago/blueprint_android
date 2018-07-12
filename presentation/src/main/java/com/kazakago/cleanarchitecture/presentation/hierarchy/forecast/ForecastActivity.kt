@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.presentation.R
 import kotlinx.android.synthetic.main.activity_forecast.*
-import org.koin.android.architecture.ext.android.getViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class ForecastActivity : AppCompatActivity() {
@@ -26,14 +26,13 @@ class ForecastActivity : AppCompatActivity() {
         City
     }
 
-    private lateinit var viewModel: ForecastViewModel
+    private val viewModel by viewModel<ForecastViewModel> {
+        parametersOf(intent.getSerializableExtra(Parameter.City.name) as City)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forecast)
-
-        val city = intent.getSerializableExtra(Parameter.City.name) as City
-        viewModel = getViewModel { parametersOf(city) }
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

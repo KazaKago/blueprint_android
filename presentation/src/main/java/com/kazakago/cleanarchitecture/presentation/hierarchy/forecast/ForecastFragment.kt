@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata.NonNullObserver
 import kotlinx.android.synthetic.main.fragment_forecast.*
-import org.koin.android.architecture.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class ForecastFragment : Fragment() {
 
