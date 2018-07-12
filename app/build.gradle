@@ -35,7 +35,7 @@ android {
         }
         develop {
             dimension "app"
-            applicationId defaultConfig.applicationId + ".devlop"
+            applicationId defaultConfig.applicationId + ".develop"
             versionName defaultConfig.versionName + " develop"
         }
     }
