@@ -43,7 +43,7 @@ dependencies {
     //AndroidX AppCompat
     api 'androidx.appcompat:appcompat:1.0.0-beta01'
     //AndroidX ConstraintLayout
-    api 'androidx.constraintlayout:constraintlayout:1.1.2'
+    api 'androidx.constraintlayout:constraintlayout:2.0.0-alpha1'
     //AndroidX Material
     api 'com.google.android.material:material:1.0.0-beta01'
     //AndroidX Lifecycle Extension
