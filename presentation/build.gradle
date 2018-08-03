@@ -34,7 +34,7 @@ dependencies {
     //Module
     implementation project(':domain')
     //Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     //kotlinx.coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.23.4"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.23.4"
