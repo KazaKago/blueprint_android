@@ -16,7 +16,9 @@ class DebugCleanApplication : CleanApplication() {
     }
 
     private fun initializeLeakCanary() {
-        LeakCanary.install(this)
+        if (!LeakCanary.isInAnalyzerProcess(this)) {
+            LeakCanary.install(this)
+        }
     }
 
 }
