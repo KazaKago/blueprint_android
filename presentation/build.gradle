@@ -36,16 +36,16 @@ dependencies {
     //Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     //kotlinx.coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.25.3"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.25.3"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.26.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.26.0"
     //Koin for AndroidX
-    implementation "org.koin:koin-androidx-viewmodel:1.0.0-beta-7"
+    implementation "org.koin:koin-androidx-viewmodel:1.0.0-RC-3"
     //AndroidX AppCompat
     api 'androidx.appcompat:appcompat:1.0.0-rc02'
     //AndroidX ConstraintLayout
     api 'androidx.constraintlayout:constraintlayout:1.1.3'
     //AndroidX Material
-    api 'com.google.android.material:material:1.0.0-rc01'
+    api 'com.google.android.material:material:1.0.0-rc02'
     //AndroidX Lifecycle Extension
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-rc01'
     kapt 'androidx.lifecycle:lifecycle-compiler:2.0.0-rc01'

@@ -10,10 +10,11 @@ import com.kazakago.cleanarchitecture.domain.usecase.weather.GetWeatherUseCase
 import com.kazakago.cleanarchitecture.presentation.livedata.liveevent.UnitLiveEvent
 import com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata.NonNullLiveData
 import com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata.NonNullLiveEvent
-import kotlinx.coroutines.experimental.DefaultDispatcher
-import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.Dispatchers
+import kotlinx.coroutines.experimental.GlobalScope
+import kotlinx.coroutines.experimental.android.Main
+import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
-import kotlinx.coroutines.experimental.withContext
 
 class ForecastViewModel(application: Application,
                         private val getWeatherUseCase: GetWeatherUseCase,
@@ -38,10 +39,10 @@ class ForecastViewModel(application: Application,
         showToast.call(forecast.telop)
     }
 
-    private fun fetchWeather() = launch(UI) {
+    private fun fetchWeather() = GlobalScope.launch(Dispatchers.Main) {
         isLoading.value = true
         try {
-            weather.value = withContext(DefaultDispatcher) { getWeatherUseCase.execute(city.id) }
+            weather.value = async(Dispatchers.Default) { getWeatherUseCase.execute(city.id) }.await()
         } catch (exception: Exception) {
             weather.value = null
             showToast.call(exception.localizedMessage)
