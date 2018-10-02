@@ -29,13 +29,13 @@ dependencies {
     //Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     //Koin
-    implementation "org.koin:koin-core:1.0.0"
+    implementation "org.koin:koin-core:1.0.1"
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-moshi:2.4.0'
     //Moshi
-    implementation 'com.squareup.moshi:moshi:1.6.0'
-    kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.6.0'
+    implementation 'com.squareup.moshi:moshi:1.7.0'
+    kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.7.0'
 
     //Chuck
     debugImplementation 'com.readystatesoftware.chuck:library:1.1.0'

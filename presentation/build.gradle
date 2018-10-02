@@ -36,10 +36,10 @@ dependencies {
     //Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     //kotlinx.coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.26.1"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.26.1"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.30.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.30.0"
     //Koin for AndroidX
-    implementation "org.koin:koin-androidx-viewmodel:1.0.0"
+    implementation "org.koin:koin-androidx-viewmodel:1.0.1"
     //AndroidX AppCompat
     api 'androidx.appcompat:appcompat:1.0.0'
     //AndroidX ConstraintLayout
