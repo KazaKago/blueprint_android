@@ -49,6 +49,8 @@ dependencies {
     //AndroidX Lifecycle Extension
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     kapt 'androidx.lifecycle:lifecycle-compiler:2.0.0'
+    //PlayServices OSS Licenses
+    implementation 'com.google.android.gms:play-services-oss-licenses:16.0.1'
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
 

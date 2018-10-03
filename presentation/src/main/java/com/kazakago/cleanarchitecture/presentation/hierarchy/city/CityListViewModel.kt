@@ -17,6 +17,7 @@ class CityListViewModel(application: Application,
                         private val getCityUseCase: GetCityUseCase) : AndroidViewModel(application) {
 
     val goAbout = UnitLiveEvent()
+    val goOssLicenses = UnitLiveEvent()
     val goForecast = NonNullLiveEvent<City>()
     val cityList = NonNullLiveData<List<City>>(emptyList())
     val showToast = NonNullLiveEvent<String>()
@@ -27,6 +28,10 @@ class CityListViewModel(application: Application,
 
     fun onClickAbout() {
         goAbout.call()
+    }
+
+    fun onClickLicenses() {
+        goOssLicenses.call()
     }
 
     fun onClickCity(city: City) {

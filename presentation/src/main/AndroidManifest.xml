@@ -20,6 +20,12 @@
         <activity
             android:name=".hierarchy.about.AboutActivity"
             android:label="@string/about_title"/>
+        <activity
+            android:name="com.google.android.gms.oss.licenses.OssLicensesActivity"
+            android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar"/>
+        <activity
+            android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
+            android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar"/>
     </application>
 
 </manifest>

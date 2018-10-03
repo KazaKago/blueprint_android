@@ -9,6 +9,7 @@
     <string name="temperature_max">最高:%1$s℃</string>
     <string name="temperature_min">最低:%1$s℃</string>
     <string name="action_about">アプリについて</string>
+    <string name="action_licenses">オープンソースライセンス</string>
 
     <!-- About -->
     <string name="about_title">アプリについて</string>

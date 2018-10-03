@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.hierarchy.about.AboutActivity
 import kotlinx.android.synthetic.main.activity_forecast.*
@@ -31,6 +32,9 @@ class CityListActivity : AppCompatActivity() {
         viewModel.goAbout.observe(this, "", Observer {
             goAboutActivity()
         })
+        viewModel.goOssLicenses.observe(this, "", Observer {
+            goOssLicensesActivity()
+        })
 
         if (savedInstanceState == null) {
             replaceCityListFragment()
@@ -45,6 +49,7 @@ class CityListActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_about -> viewModel.onClickAbout()
+            R.id.action_licenses -> viewModel.onClickLicenses()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -59,6 +64,11 @@ class CityListActivity : AppCompatActivity() {
 
     private fun goAboutActivity() {
         val intent = AboutActivity.createIntent(this)
+        startActivity(intent)
+    }
+
+    private fun goOssLicensesActivity() {
+        val intent = Intent(this, OssLicensesMenuActivity::class.java)
         startActivity(intent)
     }
 
