@@ -22,24 +22,39 @@
 
 ## Retrofit
 ## https://github.com/square/retrofit
--keepattributes Signature
--keepclassmembernames,allowobfuscation interface * {
+-keepattributes Signature, InnerClasses
+-keepclassmembers,allowshrinking,allowobfuscation interface * {
     @retrofit2.http.* <methods>;
 }
 -dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+-dontwarn javax.annotation.**
+-dontwarn kotlin.Unit
+-dontwarn retrofit2.-KotlinExtensions
+
+-dontwarn javax.annotation.**
+-keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
+-dontwarn org.codehaus.mojo.animal_sniffer.*
+-dontwarn okhttp3.internal.platform.ConscryptPlatform
+
+-dontwarn org.codehaus.mojo.animal_sniffer.*
 ##
 
 ## Moshi
 ## https://github.com/square/moshi
--dontwarn okio.**
 -dontwarn javax.annotation.**
 -keepclasseswithmembers class * {
     @com.squareup.moshi.* <methods>;
 }
 -keep @com.squareup.moshi.JsonQualifier interface *
--keep class **JsonAdapter {
-    <init>(...);
+-keepclassmembers @com.squareup.moshi.JsonClass class * extends java.lang.Enum {
     <fields>;
 }
 -keepnames @com.squareup.moshi.JsonClass class *
+-if @com.squareup.moshi.JsonClass class *
+-keep class <1>JsonAdapter {
+    <init>(...);
+    <fields>;
+}
+
+-dontwarn org.codehaus.mojo.animal_sniffer.*
 ##

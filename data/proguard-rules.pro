@@ -22,15 +22,20 @@
 
 ## Moshi
 ## https://github.com/square/moshi
--dontwarn okio.**
 -dontwarn javax.annotation.**
 -keepclasseswithmembers class * {
     @com.squareup.moshi.* <methods>;
 }
 -keep @com.squareup.moshi.JsonQualifier interface *
--keep class **JsonAdapter {
-    <init>(...);
+-keepclassmembers @com.squareup.moshi.JsonClass class * extends java.lang.Enum {
     <fields>;
 }
 -keepnames @com.squareup.moshi.JsonClass class *
+-if @com.squareup.moshi.JsonClass class *
+-keep class <1>JsonAdapter {
+    <init>(...);
+    <fields>;
+}
+
+-dontwarn org.codehaus.mojo.animal_sniffer.*
 ##
