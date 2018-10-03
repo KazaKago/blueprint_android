@@ -1,13 +1,24 @@
 package com.kazakago.cleanarchitecture.web.api.weather
 
+import android.content.Context
+import com.kazakago.cleanarchitecture.web.api.RetrofitBuilder
 import com.kazakago.cleanarchitecture.web.response.entity.weather.WeatherResponse
-import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.HttpException
+import java.net.URL
 
-interface WeatherApi {
+class WeatherApi(context: Context) {
 
-    @GET("json/v1")
-    operator fun get(@Query("city") cityId: String): Call<WeatherResponse>
+    private val apiService = RetrofitBuilder(context, URL("http://weather.livedoor.com/forecast/webservice/"))
+            .build()
+            .create(WeatherService::class.java)!!
+
+    fun fetch(cityId: String): WeatherResponse {
+        val weatherApiResponse = apiService.fetch(cityId).execute()
+        if (weatherApiResponse.isSuccessful) {
+            return weatherApiResponse.body()!!
+        } else {
+            throw HttpException(weatherApiResponse)
+        }
+    }
 
 }

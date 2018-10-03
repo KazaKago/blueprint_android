@@ -6,8 +6,9 @@ import com.readystatesoftware.chuck.ChuckInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.net.URL
 
-class RetrofitBuilder(context: Context, baseUrl: String) {
+class RetrofitBuilder(context: Context, baseUrl: URL) {
 
     private val chuckInterceptor = ChuckInterceptor(context)
             .showNotification(false)
@@ -19,7 +20,7 @@ class RetrofitBuilder(context: Context, baseUrl: String) {
     private val moshiConverter = MoshiConverterFactory.create(MoshiBuilder().build())
 
     private val builder = Retrofit.Builder()
-            .baseUrl(baseUrl)
+            .baseUrl(baseUrl.toString())
             .client(okHttpClient)
             .addConverterFactory(moshiConverter)
 

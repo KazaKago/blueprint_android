@@ -4,20 +4,14 @@ import android.content.Context
 import com.kazakago.cleanarchitecture.domain.model.city.CityId
 import com.kazakago.cleanarchitecture.domain.model.weather.Weather
 import com.kazakago.cleanarchitecture.domain.repository.weather.WeatherApiRepository
-import com.kazakago.cleanarchitecture.web.api.weather.WeatherRetrofit
+import com.kazakago.cleanarchitecture.web.api.weather.WeatherApi
 import com.kazakago.cleanarchitecture.web.response.mapper.weather.WeatherResponseMapper
-import retrofit2.HttpException
 
 class WeatherApiRepositoryImpl(private val context: Context) : WeatherApiRepository {
 
     override fun fetch(cityId: CityId): Weather {
-        val weatherApi = WeatherRetrofit.getWeatherApi(context)
-        val weatherApiResponse = weatherApi[cityId.value].execute()
-        if (weatherApiResponse.isSuccessful) {
-            return WeatherResponseMapper.map(weatherApiResponse.body()!!)
-        } else {
-            throw HttpException(weatherApiResponse)
-        }
+        val weatherResponse = WeatherApi(context).fetch(cityId.value)
+        return WeatherResponseMapper.map(weatherResponse)
     }
 
 }
