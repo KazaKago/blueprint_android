@@ -16,21 +16,21 @@ import kotlinx.coroutines.experimental.launch
 class CityListViewModel(application: Application,
                         private val getCityUseCase: GetCityUseCase) : AndroidViewModel(application) {
 
-    val toAbout = UnitLiveEvent()
+    val goAbout = UnitLiveEvent()
+    val goForecast = NonNullLiveEvent<City>()
     val cityList = NonNullLiveData<List<City>>(emptyList())
     val showToast = NonNullLiveEvent<String>()
-    val toForecast = NonNullLiveEvent<City>()
 
     init {
         fetchCityList()
     }
 
-    fun onClickAboutMenu() {
-        toAbout.call()
+    fun onClickAbout() {
+        goAbout.call()
     }
 
     fun onClickCity(city: City) {
-        toForecast.call(city)
+        goForecast.call(city)
     }
 
     private fun fetchCityList() = GlobalScope.launch(Dispatchers.Main) {

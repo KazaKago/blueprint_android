@@ -28,8 +28,8 @@ class CityListActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
 
-        viewModel.toAbout.observe(this, "", Observer {
-            toAboutActivity()
+        viewModel.goAbout.observe(this, "", Observer {
+            goAboutActivity()
         })
 
         if (savedInstanceState == null) {
@@ -44,7 +44,7 @@ class CityListActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_about -> viewModel.onClickAboutMenu()
+            R.id.action_about -> viewModel.onClickAbout()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -57,7 +57,7 @@ class CityListActivity : AppCompatActivity() {
         fragmentTransaction.commit()
     }
 
-    private fun toAboutActivity() {
+    private fun goAboutActivity() {
         val intent = AboutActivity.createIntent(this)
         startActivity(intent)
     }
