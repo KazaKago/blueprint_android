@@ -9,7 +9,7 @@ import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.adapter.AbsItemViewHolder
 import com.kazakago.cleanarchitecture.presentation.extension.formattedDateText
 import com.kazakago.cleanarchitecture.presentation.extension.formattedDateTimeText
-import com.kazakago.cleanarchitecture.presentation.extension.setImageUrl
+import com.kazakago.cleanarchitecture.presentation.extension.loadImageUrl
 import kotlinx.android.synthetic.main.recycler_forecast_content.view.*
 import kotlinx.android.synthetic.main.recycler_forecast_summary.view.*
 
@@ -75,7 +75,7 @@ class ForecastRecyclerAdapter(private val context: Context) : RecyclerView.Adapt
         }
 
         override fun onBind(item: Forecast?) {
-            itemView.weatherImageView.setImageUrl(item?.imageUrl)
+            itemView.weatherImageView.loadImageUrl(item?.imageUrl)
             itemView.dateLabelTextView.text = item?.dateLabel
             itemView.dateTextView.text = item?.date?.formattedDateText(context)
             itemView.telopTextView.text = item?.telop
