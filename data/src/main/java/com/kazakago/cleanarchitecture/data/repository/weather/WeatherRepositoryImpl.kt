@@ -13,9 +13,9 @@ class WeatherRepositoryImpl(private val context: Context) : WeatherRepository {
 
     override fun find(cityId: CityId): Weather {
         val weatherDao = database.weatherDao()
-        val weather = weatherDao.findWeather(cityId.value) ?: throw NullPointerException()
-        val location = weatherDao.findLocation(cityId.value) ?: throw NullPointerException()
-        val description = weatherDao.findDescription(cityId.value) ?: throw NullPointerException()
+        val weather = weatherDao.findWeather(cityId.value)!!
+        val location = weatherDao.findLocation(cityId.value)!!
+        val description = weatherDao.findDescription(cityId.value)!!
         val forecasts = weatherDao.findForecasts(cityId.value)
         return WeatherEntityMapper.map(weather, location, description, forecasts)
     }
