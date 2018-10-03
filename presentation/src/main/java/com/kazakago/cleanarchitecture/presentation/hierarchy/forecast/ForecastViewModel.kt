@@ -42,7 +42,7 @@ class ForecastViewModel(application: Application,
     private fun fetchWeather() = GlobalScope.launch(Dispatchers.Main) {
         isLoading.value = true
         try {
-            weather.value = async(Dispatchers.Default) { getWeatherUseCase.execute(city.id) }.await()
+            weather.value = GlobalScope.async(Dispatchers.Default) { getWeatherUseCase.execute(city.id) }.await()
         } catch (exception: Exception) {
             weather.value = null
             showToast.call(exception.localizedMessage)

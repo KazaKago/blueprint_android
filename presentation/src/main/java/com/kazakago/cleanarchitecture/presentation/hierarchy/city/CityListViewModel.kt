@@ -35,7 +35,7 @@ class CityListViewModel(application: Application,
 
     private fun fetchCityList() = GlobalScope.launch(Dispatchers.Main) {
         try {
-            cityList.value = async(Dispatchers.Default) { getCityUseCase.execute(Unit) }.await()
+            cityList.value = GlobalScope.async(Dispatchers.Default) { getCityUseCase.execute(Unit) }.await()
         } catch (exception: Exception) {
             cityList.value = listOf()
             showToast.call(exception.localizedMessage)
