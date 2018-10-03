@@ -5,10 +5,10 @@ import android.widget.ImageView
 import com.squareup.picasso.Picasso
 import java.net.URL
 
-fun ImageView.setImageUrl(imageUrl: URL?) {
-    setImageUrl(imageUrl?.toUri())
+fun ImageView.loadImageUrl(imageUrl: URL?) {
+    loadImageUrl(imageUrl?.toUri())
 }
 
-fun ImageView.setImageUrl(imageUri: Uri?) {
+fun ImageView.loadImageUrl(imageUri: Uri?) {
     Picasso.get().load(imageUri).into(this)
 }
