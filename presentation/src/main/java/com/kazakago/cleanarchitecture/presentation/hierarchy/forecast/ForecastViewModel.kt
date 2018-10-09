@@ -7,7 +7,6 @@ import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.domain.model.weather.Forecast
 import com.kazakago.cleanarchitecture.domain.model.weather.Weather
 import com.kazakago.cleanarchitecture.domain.usecase.weather.GetWeatherUseCase
-import com.kazakago.cleanarchitecture.presentation.livedata.liveevent.UnitLiveEvent
 import com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata.NonNullLiveData
 import com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata.NonNullLiveEvent
 import kotlinx.coroutines.experimental.Dispatchers
@@ -21,7 +20,6 @@ class ForecastViewModel(application: Application,
                         private val city: City) : AndroidViewModel(application) {
 
     val title = MutableLiveData<CharSequence>()
-    val finish = UnitLiveEvent()
     val weather = MutableLiveData<Weather>()
     val isLoading = NonNullLiveData(false)
     val showToast = NonNullLiveEvent<String>()
@@ -29,10 +27,6 @@ class ForecastViewModel(application: Application,
     init {
         title.value = city.name
         fetchWeather()
-    }
-
-    fun onClickBackIcon() {
-        finish.call()
     }
 
     fun onClickForecast(forecast: Forecast) {

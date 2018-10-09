@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.hierarchy.about.AboutActivity
@@ -29,13 +28,6 @@ class CityListActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
 
-        viewModel.goAbout.observe(this, "", Observer {
-            goAboutActivity()
-        })
-        viewModel.goOssLicenses.observe(this, "", Observer {
-            goOssLicensesActivity()
-        })
-
         if (savedInstanceState == null) {
             replaceCityListFragment()
         }
@@ -48,8 +40,8 @@ class CityListActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_about -> viewModel.onClickAbout()
-            R.id.action_licenses -> viewModel.onClickLicenses()
+            R.id.action_about -> goAboutActivity()
+            R.id.action_licenses -> goOssLicensesActivity()
         }
         return super.onOptionsItemSelected(item)
     }

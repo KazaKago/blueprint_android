@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import com.kazakago.cleanarchitecture.presentation.R
 import kotlinx.android.synthetic.main.activity_about.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -27,10 +26,6 @@ class AboutActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        viewModel.finish.observe(this, "", Observer {
-            finish()
-        })
-
         if (savedInstanceState == null) {
             replaceAboutFragment()
         }
@@ -38,7 +33,7 @@ class AboutActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            android.R.id.home -> viewModel.onClickBackIcon()
+            android.R.id.home -> finish()
         }
         return super.onOptionsItemSelected(item)
     }

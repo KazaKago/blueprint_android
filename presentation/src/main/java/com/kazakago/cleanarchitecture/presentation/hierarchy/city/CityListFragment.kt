@@ -33,7 +33,7 @@ class CityListFragment : Fragment() {
 
         cityRecyclerAdapter = CityRecyclerAdapter(requireActivity())
         cityRecyclerAdapter.onItemClick = {
-            viewModel.onClickCity(it)
+            goForecastActivity(it)
         }
         cityRecyclerView.adapter = cityRecyclerAdapter
 
@@ -42,7 +42,7 @@ class CityListFragment : Fragment() {
             cityRecyclerAdapter.notifyDataSetChanged()
         })
         viewModel.showToast.observe(this, "", NonNullObserver {
-            Toast.makeText(activity, it, Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
         })
         viewModel.goForecast.observe(this, "", NonNullObserver {
             goForecastActivity(it)

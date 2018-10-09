@@ -10,7 +10,6 @@ import com.kazakago.cleanarchitecture.domain.usecase.about.GetAppInfoUseCase
 import com.kazakago.cleanarchitecture.domain.usecase.about.GetDeveloperInfoUseCase
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.extension.toUri
-import com.kazakago.cleanarchitecture.presentation.livedata.liveevent.UnitLiveEvent
 import com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata.NonNullLiveEvent
 import java.util.*
 
@@ -18,7 +17,6 @@ class AboutViewModel(application: Application,
                      private val getAppInfoUseCase: GetAppInfoUseCase,
                      private val getDeveloperInfoUseCase: GetDeveloperInfoUseCase) : AndroidViewModel(application) {
 
-    val finish = UnitLiveEvent()
     val versionText = MutableLiveData<String>()
     val developByText = MutableLiveData<String>()
     val copyrightText = MutableLiveData<String>()
@@ -30,10 +28,6 @@ class AboutViewModel(application: Application,
 
     init {
         getAboutInfo()
-    }
-
-    fun onClickBackIcon() {
-        finish.call()
     }
 
     fun onClickPlayStore() {

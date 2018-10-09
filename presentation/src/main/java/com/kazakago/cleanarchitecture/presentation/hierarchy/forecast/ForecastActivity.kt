@@ -39,9 +39,6 @@ class ForecastActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        viewModel.finish.observe(this, "", Observer {
-            finish()
-        })
         viewModel.title.observe(this, Observer {
             title = it
         })
@@ -53,7 +50,7 @@ class ForecastActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            android.R.id.home -> viewModel.onClickBackIcon()
+            android.R.id.home -> finish()
         }
         return super.onOptionsItemSelected(item)
     }
