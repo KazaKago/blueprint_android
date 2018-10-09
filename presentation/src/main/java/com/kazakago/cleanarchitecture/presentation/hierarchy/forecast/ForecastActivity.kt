@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.presentation.R
+import com.kazakago.cleanarchitecture.presentation.extension.StringKey
+import com.kazakago.cleanarchitecture.presentation.extension.value
 import kotlinx.android.synthetic.main.activity_forecast.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -17,17 +19,17 @@ class ForecastActivity : AppCompatActivity() {
     companion object {
         fun createIntent(context: Context, city: City): Intent {
             val intent = Intent(context, ForecastActivity::class.java)
-            intent.putExtra(Parameter.City.name, city)
+            intent.putExtra(RequestParameterKey.City.value(), city)
             return intent
         }
     }
 
-    private enum class Parameter {
+    private enum class RequestParameterKey : StringKey {
         City
     }
 
     private val viewModel by viewModel<ForecastViewModel> {
-        parametersOf(intent.getSerializableExtra(Parameter.City.name) as City)
+        parametersOf(intent.getSerializableExtra(RequestParameterKey.City.value()) as City)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

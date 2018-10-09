@@ -45,11 +45,11 @@ class CityListFragment : Fragment() {
             Toast.makeText(activity, it, Toast.LENGTH_SHORT).show()
         })
         viewModel.goForecast.observe(this, "", NonNullObserver {
-            toForecastActivity(it)
+            goForecastActivity(it)
         })
     }
 
-    private fun toForecastActivity(city: City) {
+    private fun goForecastActivity(city: City) {
         val intent = ForecastActivity.createIntent(requireActivity(), city)
         startActivity(intent)
     }
