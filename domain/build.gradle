@@ -5,6 +5,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    //kotlinx.coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.30.2"
     //Koin
     implementation "org.koin:koin-core:1.0.1"
 
@@ -14,3 +16,9 @@ dependencies {
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
+
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}

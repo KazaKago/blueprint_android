@@ -16,8 +16,8 @@ class CityDao(private val context: Context) {
 
     private fun readJson(): String {
         var text = ""
-        context.assets.open("json/city.json").use {
-            BufferedReader(InputStreamReader(it)).use {
+        context.assets.open("json/city.json").use { inputStream ->
+            BufferedReader(InputStreamReader(inputStream)).use {
                 var str = it.readLine()
                 while (str != null) {
                     text += str + "\n"

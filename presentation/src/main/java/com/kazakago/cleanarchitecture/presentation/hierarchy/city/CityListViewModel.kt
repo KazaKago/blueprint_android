@@ -8,8 +8,6 @@ import com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata.NonN
 import com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata.NonNullLiveEvent
 import kotlinx.coroutines.experimental.Dispatchers
 import kotlinx.coroutines.experimental.GlobalScope
-import kotlinx.coroutines.experimental.android.Main
-import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
 
 class CityListViewModel(application: Application,
@@ -25,7 +23,7 @@ class CityListViewModel(application: Application,
 
     private fun fetchCityList() = GlobalScope.launch(Dispatchers.Main) {
         try {
-            cityList.value = GlobalScope.async(Dispatchers.Default) { getCityUseCase.execute(Unit) }.await()
+            cityList.value = getCityUseCase.execute(Unit)
         } catch (exception: Exception) {
             cityList.value = listOf()
             showToast.call(exception.localizedMessage)

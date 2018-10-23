@@ -1,6 +1,6 @@
 package com.kazakago.cleanarchitecture.domain.usecase.city
 
 import com.kazakago.cleanarchitecture.domain.model.city.City
-import com.kazakago.cleanarchitecture.domain.usecase.UseCase
+import com.kazakago.cleanarchitecture.domain.usecase.SuspendingUseCase
 
-interface GetCityUseCase : UseCase<Unit, List<City>>
+interface GetCityUseCase : SuspendingUseCase<Unit, List<City>>

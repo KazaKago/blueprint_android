@@ -11,8 +11,6 @@ import com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata.NonN
 import com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata.NonNullLiveEvent
 import kotlinx.coroutines.experimental.Dispatchers
 import kotlinx.coroutines.experimental.GlobalScope
-import kotlinx.coroutines.experimental.android.Main
-import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
 
 class ForecastViewModel(application: Application,
@@ -36,7 +34,7 @@ class ForecastViewModel(application: Application,
     private fun fetchWeather() = GlobalScope.launch(Dispatchers.Main) {
         isLoading.value = true
         try {
-            weather.value = GlobalScope.async(Dispatchers.Default) { getWeatherUseCase.execute(city.id) }.await()
+            weather.value = getWeatherUseCase.execute(city.id)
         } catch (exception: Exception) {
             weather.value = null
             showToast.call(exception.localizedMessage)

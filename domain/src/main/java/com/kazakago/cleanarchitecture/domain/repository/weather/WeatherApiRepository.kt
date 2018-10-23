@@ -5,6 +5,6 @@ import com.kazakago.cleanarchitecture.domain.model.weather.Weather
 
 interface WeatherApiRepository {
 
-    fun fetch(cityId: CityId): Weather
+    suspend fun fetch(cityId: CityId): Weather
 
 }
