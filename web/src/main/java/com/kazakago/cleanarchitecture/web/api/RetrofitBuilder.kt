@@ -1,7 +1,7 @@
 package com.kazakago.cleanarchitecture.web.api
 
 import android.content.Context
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.kazakago.cleanarchitecture.web.parser.MoshiBuilder
 import com.readystatesoftware.chuck.ChuckInterceptor
 import okhttp3.OkHttpClient

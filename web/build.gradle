@@ -22,12 +22,6 @@ android {
     }
 }
 
-kotlin {
-    experimental {
-        coroutines "enable"
-    }
-}
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //Module
@@ -35,14 +29,14 @@ dependencies {
     //Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     //kotlinx.coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.30.2"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.0"
     //Koin
     implementation "org.koin:koin-core:1.0.1"
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-moshi:2.4.0'
     //Kotlin Coroutine Adapter
-    implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:1.0.0'
+    implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
     //Moshi
     implementation 'com.squareup.moshi:moshi:1.7.0'
     kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.7.0'
@@ -55,6 +49,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
     //Espresso
-    androidTestImplementation 'androidx.test:runner:1.1.0-beta02'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-beta02'
+    androidTestImplementation 'androidx.test:runner:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
 }

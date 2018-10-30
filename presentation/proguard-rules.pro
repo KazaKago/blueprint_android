@@ -21,7 +21,9 @@
 #-renamesourcefileattribute SourceFile
 
 ## kotlinx.coroutines
-## https://github.com/Kotlin/kotlinx.coroutines
+## https://github.com/Kotlin/kotlinx.coroutines#r8-and-proguard
+-keepnames class kotlinx.coroutines.internal.MainDispatcherFactory {}
+-keepnames class kotlinx.coroutines.CoroutineExceptionHandler {}
 -keepclassmembernames class kotlinx.** {
     volatile <fields>;
 }

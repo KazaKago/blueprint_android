@@ -1,12 +1,15 @@
 apply plugin: 'java-library'
 apply plugin: 'kotlin'
 
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     //kotlinx.coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.30.2"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.0"
     //Koin
     implementation "org.koin:koin-core:1.0.1"
 
@@ -14,11 +17,3 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 }
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
-
-kotlin {
-    experimental {
-        coroutines "enable"
-    }
-}

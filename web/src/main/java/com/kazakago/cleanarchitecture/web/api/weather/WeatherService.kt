@@ -1,7 +1,7 @@
 package com.kazakago.cleanarchitecture.web.api.weather
 
 import com.kazakago.cleanarchitecture.web.response.entity.weather.WeatherResponse
-import kotlinx.coroutines.experimental.Deferred
+import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Query
 
