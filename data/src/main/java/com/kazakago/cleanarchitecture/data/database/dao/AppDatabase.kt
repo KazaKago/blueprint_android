@@ -10,11 +10,13 @@ import com.kazakago.cleanarchitecture.data.database.entity.weather.ForecastEntit
 import com.kazakago.cleanarchitecture.data.database.entity.weather.LocationEntity
 import com.kazakago.cleanarchitecture.data.database.entity.weather.WeatherEntity
 
-@Database(entities = [
-    WeatherEntity::class,
-    LocationEntity::class,
-    ForecastEntity::class,
-    DescriptionEntity::class], version = 1, exportSchema = false)
+@Database(
+    entities = [
+        WeatherEntity::class,
+        LocationEntity::class,
+        ForecastEntity::class,
+        DescriptionEntity::class], version = 1, exportSchema = false
+)
 abstract class AppDatabase : RoomDatabase() {
 
     companion object {

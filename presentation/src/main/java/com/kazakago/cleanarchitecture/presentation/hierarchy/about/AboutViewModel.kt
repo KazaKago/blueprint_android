@@ -13,9 +13,11 @@ import com.kazakago.cleanarchitecture.presentation.extension.toUri
 import com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata.NonNullLiveEvent
 import java.util.*
 
-class AboutViewModel(application: Application,
-                     private val getAppInfoUseCase: GetAppInfoUseCase,
-                     private val getDeveloperInfoUseCase: GetDeveloperInfoUseCase) : AndroidViewModel(application) {
+class AboutViewModel(
+    application: Application,
+    private val getAppInfoUseCase: GetAppInfoUseCase,
+    private val getDeveloperInfoUseCase: GetDeveloperInfoUseCase
+) : AndroidViewModel(application) {
 
     val versionText = MutableLiveData<String>()
     val developByText = MutableLiveData<String>()

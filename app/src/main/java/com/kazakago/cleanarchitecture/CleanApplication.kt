@@ -15,12 +15,14 @@ open class CleanApplication : Application() {
     }
 
     private fun initializeKoin() {
-        startKoin(this, listOf(
+        startKoin(
+            this, listOf(
                 presentationModule,
                 domainModule,
                 dataModule,
                 webModule
-        ))
+            )
+        )
     }
 
 }

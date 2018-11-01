@@ -5,8 +5,8 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class TemperatureUnitResponse(
-        @Json(name = "celsius")
-        val celsius: Float,
-        @Json(name = "fahrenheit")
-        val fahrenheit: Float
+    @Json(name = "celsius")
+    val celsius: Float,
+    @Json(name = "fahrenheit")
+    val fahrenheit: Float
 )

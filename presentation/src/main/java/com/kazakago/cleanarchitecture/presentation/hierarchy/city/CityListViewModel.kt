@@ -10,8 +10,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class CityListViewModel(application: Application,
-                        private val getCityUseCase: GetCityUseCase) : AndroidViewModel(application) {
+class CityListViewModel(
+    application: Application,
+    private val getCityUseCase: GetCityUseCase
+) : AndroidViewModel(application) {
 
     val goForecast = NonNullLiveEvent<City>()
     val cityList = NonNullLiveData<List<City>>(emptyList())

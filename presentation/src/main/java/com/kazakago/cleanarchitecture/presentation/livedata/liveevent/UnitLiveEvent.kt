@@ -11,9 +11,10 @@ class UnitLiveEvent : LiveEvent<Unit>() {
 
     @MainThread
     @Deprecated(
-            message = "use call()",
-            replaceWith = ReplaceWith("call()"),
-            level = DeprecationLevel.HIDDEN)
+        message = "use call()",
+        replaceWith = ReplaceWith("call()"),
+        level = DeprecationLevel.HIDDEN
+    )
     override fun call(t: Unit?) {
         super.call(t)
     }

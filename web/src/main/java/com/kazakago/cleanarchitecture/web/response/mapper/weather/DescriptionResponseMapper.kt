@@ -9,8 +9,9 @@ object DescriptionResponseMapper : ResponseMapper<DescriptionResponse, Descripti
 
     override fun map(source: DescriptionResponse): Description {
         return Description(
-                text = source.text,
-                publicTime = source.publicTime.parseDateTime())
+            text = source.text,
+            publicTime = source.publicTime.parseDateTime()
+        )
     }
 
 }

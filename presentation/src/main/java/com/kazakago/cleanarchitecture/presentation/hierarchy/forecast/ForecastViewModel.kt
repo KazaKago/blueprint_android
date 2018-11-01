@@ -13,9 +13,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class ForecastViewModel(application: Application,
-                        private val getWeatherUseCase: GetWeatherUseCase,
-                        private val city: City) : AndroidViewModel(application) {
+class ForecastViewModel(
+    application: Application,
+    private val getWeatherUseCase: GetWeatherUseCase,
+    private val city: City
+) : AndroidViewModel(application) {
 
     val title = MutableLiveData<CharSequence>()
     val weather = MutableLiveData<Weather>()

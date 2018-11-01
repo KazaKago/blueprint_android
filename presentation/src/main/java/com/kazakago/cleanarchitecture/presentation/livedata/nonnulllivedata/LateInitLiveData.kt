@@ -9,18 +9,20 @@ open class LateInitLiveData<T> : MutableLiveData<T>() {
 
     @MainThread
     @Deprecated(
-            message = "use observe for NonNull.",
-            replaceWith = ReplaceWith("observe(owner, NonNullObserver)"),
-            level = DeprecationLevel.HIDDEN)
+        message = "use observe for NonNull.",
+        replaceWith = ReplaceWith("observe(owner, NonNullObserver)"),
+        level = DeprecationLevel.HIDDEN
+    )
     override fun observe(owner: LifecycleOwner, observer: Observer<in T>) {
         super.observe(owner, observer)
     }
 
     @MainThread
     @Deprecated(
-            message = "use observeForever for NonNull.",
-            replaceWith = ReplaceWith("observeForever(nonNullObserver)"),
-            level = DeprecationLevel.HIDDEN)
+        message = "use observeForever for NonNull.",
+        replaceWith = ReplaceWith("observeForever(nonNullObserver)"),
+        level = DeprecationLevel.HIDDEN
+    )
     override fun observeForever(observer: Observer<in T>) {
         super.observeForever(observer)
     }

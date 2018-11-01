@@ -10,8 +10,9 @@ object CityMapper {
         val prefTitle = source.title
         return source.cityList.map {
             City(
-                    id = CityId(it.id),
-                    name = prefTitle + " " + it.title)
+                id = CityId(it.id),
+                name = prefTitle + " " + it.title
+            )
         }
     }
 

@@ -12,15 +12,19 @@ import java.net.URL
 class AboutRepositoryImpl(private val context: Context) : AboutRepository {
 
     override fun getAppInfo(): AppInfo {
-        return AppInfo(VersionUtils.getVersionName(context),
-                VersionUtils.getVersionCode(context),
-                StoreUtils.getStoreAppLink(context))
+        return AppInfo(
+            VersionUtils.getVersionName(context),
+            VersionUtils.getVersionCode(context),
+            StoreUtils.getStoreAppLink(context)
+        )
     }
 
     override fun getDeveloperInfo(): DeveloperInfo {
-        return DeveloperInfo(context.getString(R.string.developer_name),
-                context.getString(R.string.developer_mail_address),
-                URL(context.getString(R.string.developer_website_url)))
+        return DeveloperInfo(
+            context.getString(R.string.developer_name),
+            context.getString(R.string.developer_mail_address),
+            URL(context.getString(R.string.developer_website_url))
+        )
     }
 
 }

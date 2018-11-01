@@ -8,9 +8,10 @@ object LocationResponseMapper : ResponseMapper<LocationResponse, Location> {
 
     override fun map(source: LocationResponse): Location {
         return Location(
-                area = source.area,
-                prefecture = source.prefecture,
-                city = source.city)
+            area = source.area,
+            prefecture = source.prefecture,
+            city = source.city
+        )
     }
 
 }

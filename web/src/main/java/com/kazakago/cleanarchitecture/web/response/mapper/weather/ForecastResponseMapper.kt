@@ -10,12 +10,13 @@ object ForecastResponseMapper : ResponseMapper<ForecastResponse, Forecast> {
 
     override fun map(source: ForecastResponse): Forecast {
         return Forecast(
-                telop = source.telop,
-                date = source.date.parseDate(),
-                dateLabel = source.dateLabel,
-                imageUrl = URL(source.image.url),
-                maxTemperature = source.temperature.max?.celsius,
-                minTemperature = source.temperature.min?.celsius)
+            telop = source.telop,
+            date = source.date.parseDate(),
+            dateLabel = source.dateLabel,
+            imageUrl = URL(source.image.url),
+            maxTemperature = source.temperature.max?.celsius,
+            minTemperature = source.temperature.min?.celsius
+        )
     }
 
 }

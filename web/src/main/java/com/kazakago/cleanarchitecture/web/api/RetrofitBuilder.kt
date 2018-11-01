@@ -12,21 +12,21 @@ import java.net.URL
 class RetrofitBuilder(context: Context, baseUrl: URL) {
 
     private val chuckInterceptor = ChuckInterceptor(context)
-            .showNotification(false)
+        .showNotification(false)
 
     private val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(chuckInterceptor)
-            .build()
+        .addInterceptor(chuckInterceptor)
+        .build()
 
     private val moshiConverter = MoshiConverterFactory.create(MoshiBuilder().build())
 
     private val coroutineCallAdapter = CoroutineCallAdapterFactory()
 
     private val builder = Retrofit.Builder()
-            .baseUrl(baseUrl.toString())
-            .client(okHttpClient)
-            .addConverterFactory(moshiConverter)
-            .addCallAdapterFactory(coroutineCallAdapter)
+        .baseUrl(baseUrl.toString())
+        .client(okHttpClient)
+        .addConverterFactory(moshiConverter)
+        .addCallAdapterFactory(coroutineCallAdapter)
 
     fun build(): Retrofit {
         return builder.build()

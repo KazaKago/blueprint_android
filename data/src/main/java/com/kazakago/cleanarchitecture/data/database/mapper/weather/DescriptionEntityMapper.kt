@@ -9,15 +9,17 @@ object DescriptionEntityMapper {
 
     fun map(source: DescriptionEntity): Description {
         return Description(
-                text = source.text,
-                publicTime = Date(source.publicTime))
+            text = source.text,
+            publicTime = Date(source.publicTime)
+        )
     }
 
     fun reverse(cityId: CityId, destination: Description): DescriptionEntity {
         return DescriptionEntity(
-                cityId = cityId.value,
-                text = destination.text,
-                publicTime = destination.publicTime.time)
+            cityId = cityId.value,
+            text = destination.text,
+            publicTime = destination.publicTime.time
+        )
     }
 
 }

@@ -5,10 +5,10 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class LocationResponse(
-        @Json(name = "area")
-        val area: String,
-        @Json(name = "prefecture")
-        val prefecture: String,
-        @Json(name = "city")
-        val city: String
+    @Json(name = "area")
+    val area: String,
+    @Json(name = "prefecture")
+    val prefecture: String,
+    @Json(name = "city")
+    val city: String
 )

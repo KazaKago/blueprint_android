@@ -12,9 +12,10 @@ open class NonNullLiveEvent<T> : LiveData<T>() {
 
     @MainThread
     @Deprecated(
-            message = "Multiple observers registered but only one will be notified of changes. set tags for each observer.",
-            replaceWith = ReplaceWith("observe(owner, \"\", nonNullObserver)"),
-            level = DeprecationLevel.HIDDEN)
+        message = "Multiple observers registered but only one will be notified of changes. set tags for each observer.",
+        replaceWith = ReplaceWith("observe(owner, \"\", nonNullObserver)"),
+        level = DeprecationLevel.HIDDEN
+    )
     override fun observe(owner: LifecycleOwner, observer: Observer<in T>) {
         observe(owner, "", NonNullObserver { observer.onChanged(it) })
     }
