@@ -21,6 +21,16 @@ open class LiveEvent<T> : LiveData<T>() {
     }
 
     @MainThread
+    @Deprecated(
+        message = "Multiple observers registered but only one will be notified of changes. set tags for each observer.",
+        replaceWith = ReplaceWith("observeForever(\"\", observer)"),
+        level = DeprecationLevel.HIDDEN
+    )
+    override fun observeForever(observer: Observer<in T>) {
+        super.observeForever(observer)
+    }
+
+    @MainThread
     open fun observe(owner: LifecycleOwner, tag: String, observer: Observer<in T>) {
         super.observe(owner, Observer<T> {
             val internalTag = owner::class.java.name + "#" + tag
@@ -29,6 +39,16 @@ open class LiveEvent<T> : LiveData<T>() {
                 observer.onChanged(it)
             }
         })
+    }
+
+    @MainThread
+    open fun observeForever(tag: String, observer: Observer<in T>) {
+        super.observeForever {
+            if (!dispatchedTagList.contains(tag)) {
+                dispatchedTagList.add(tag)
+                observer.onChanged(it)
+            }
+        }
     }
 
     @MainThread

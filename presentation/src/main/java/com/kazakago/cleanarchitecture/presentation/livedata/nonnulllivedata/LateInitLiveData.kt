@@ -7,6 +7,8 @@ import androidx.lifecycle.Observer
 
 open class LateInitLiveData<T> : MutableLiveData<T>() {
 
+    private val observers = mutableMapOf<NonNullObserver<T>, Observer<T>>()
+
     @MainThread
     @Deprecated(
         message = "use observe for NonNull.",
@@ -28,13 +30,36 @@ open class LateInitLiveData<T> : MutableLiveData<T>() {
     }
 
     @MainThread
+    @Deprecated(
+        message = "use observe for NonNull.",
+        replaceWith = ReplaceWith("removeObserver(nonNullObserver)"),
+        level = DeprecationLevel.HIDDEN
+    )
+    override fun removeObserver(observer: Observer<in T>) {
+        super.removeObserver(observer)
+    }
+
+    @MainThread
     open fun observe(owner: LifecycleOwner, nonNullObserver: NonNullObserver<T>) {
-        super.observe(owner, Observer { nonNullObserver.onChanged(it!!) })
+        val observer = Observer<T> { nonNullObserver.onChanged(it!!) }
+        observers[nonNullObserver] = observer
+        super.observe(owner, observer)
     }
 
     @MainThread
     open fun observeForever(nonNullObserver: NonNullObserver<T>) {
-        super.observeForever { nonNullObserver.onChanged(it!!) }
+        val observer = Observer<T> { nonNullObserver.onChanged(it!!) }
+        observers[nonNullObserver] = observer
+        super.observeForever(observer)
+    }
+
+    @MainThread
+    open fun removeObserver(nonNullObserver: NonNullObserver<T>) {
+        val observer = observers[nonNullObserver]
+        if (observer != null) {
+            observers.remove(nonNullObserver)
+            super.removeObserver(observer)
+        }
     }
 
     override fun getValue(): T {
