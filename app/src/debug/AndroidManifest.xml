@@ -4,10 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.kazakago.cleanarchitecture">
 
-    <!--Required for Hyperion-Android bug on API 28 and above-->
-    <!--https://github.com/willowtreeapps/Hyperion-Android/issues/141-->
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
-
     <application
         android:name=".DebugCleanApplication"
         tools:replace="android:name"/>
