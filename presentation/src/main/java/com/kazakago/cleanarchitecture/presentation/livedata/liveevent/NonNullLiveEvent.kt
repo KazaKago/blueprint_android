@@ -1,15 +1,15 @@
-package com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata
+package com.kazakago.cleanarchitecture.presentation.livedata.liveevent
 
 import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import java.util.concurrent.CopyOnWriteArrayList
+import com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata.NonNullObserver
 
 open class NonNullLiveEvent<T> : LiveData<T>() {
 
     private val observers = mutableMapOf<NonNullObserver<T>, Observer<T>>()
-    private val dispatchedTagList = CopyOnWriteArrayList<String>()
+    private val dispatchedTagSet = mutableSetOf<String>()
 
     @MainThread
     @Deprecated(
@@ -45,8 +45,8 @@ open class NonNullLiveEvent<T> : LiveData<T>() {
     open fun observe(owner: LifecycleOwner, tag: String, nonNullObserver: NonNullObserver<T>) {
         val observer = Observer<T> {
             val internalTag = owner::class.java.name + "#" + tag
-            if (!dispatchedTagList.contains(internalTag)) {
-                dispatchedTagList.add(internalTag)
+            if (!dispatchedTagSet.contains(internalTag)) {
+                dispatchedTagSet.add(internalTag)
                 nonNullObserver.onChanged(it!!)
             }
         }
@@ -57,8 +57,8 @@ open class NonNullLiveEvent<T> : LiveData<T>() {
     @MainThread
     open fun observeForever(tag: String, nonNullObserver: NonNullObserver<T>) {
         val observer = Observer<T> {
-            if (!dispatchedTagList.contains(tag)) {
-                dispatchedTagList.add(tag)
+            if (!dispatchedTagSet.contains(tag)) {
+                dispatchedTagSet.add(tag)
                 nonNullObserver.onChanged(it!!)
             }
         }
@@ -77,7 +77,7 @@ open class NonNullLiveEvent<T> : LiveData<T>() {
 
     @MainThread
     open fun call(t: T) {
-        dispatchedTagList.clear()
+        dispatchedTagSet.clear()
         value = t
     }
 

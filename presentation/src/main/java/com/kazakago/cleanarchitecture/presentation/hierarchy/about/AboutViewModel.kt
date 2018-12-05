@@ -10,7 +10,7 @@ import com.kazakago.cleanarchitecture.domain.usecase.about.GetAppInfoUseCase
 import com.kazakago.cleanarchitecture.domain.usecase.about.GetDeveloperInfoUseCase
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.extension.toUri
-import com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata.NonNullLiveEvent
+import com.kazakago.cleanarchitecture.presentation.livedata.liveevent.NonNullLiveEvent
 import java.util.*
 
 class AboutViewModel(
