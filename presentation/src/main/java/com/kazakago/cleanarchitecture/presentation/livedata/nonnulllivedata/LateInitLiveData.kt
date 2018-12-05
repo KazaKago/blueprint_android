@@ -2,10 +2,10 @@ package com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata
 
 import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 
-open class LateInitLiveData<T> : MutableLiveData<T>() {
+open class LateInitLiveData<T> : LiveData<T>() {
 
     private val observers = mutableMapOf<NonNullObserver<T>, Observer<T>>()
 
@@ -67,11 +67,11 @@ open class LateInitLiveData<T> : MutableLiveData<T>() {
     }
 
     @MainThread
-    override fun setValue(value: T) {
+    public override fun setValue(value: T) {
         super.setValue(value)
     }
 
-    override fun postValue(value: T) {
+    public override fun postValue(value: T) {
         super.postValue(value)
     }
 

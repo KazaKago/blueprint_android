@@ -30,6 +30,15 @@ open class LiveEvent<T> : LiveData<T>() {
     }
 
     @MainThread
+    @Deprecated(
+        message = "should not use getValue() in LiveEvent.",
+        level = DeprecationLevel.HIDDEN
+    )
+    override fun getValue(): T? {
+        return super.getValue()
+    }
+
+    @MainThread
     open fun observe(owner: LifecycleOwner, tag: String, observer: Observer<in T>) {
         super.observe(owner, Observer<T> {
             val internalTag = owner::class.java.name + "#" + tag

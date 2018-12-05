@@ -4,8 +4,8 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.domain.usecase.city.GetCityUseCase
-import com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata.NonNullLiveData
 import com.kazakago.cleanarchitecture.presentation.livedata.liveevent.NonNullLiveEvent
+import com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata.NonNullLiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
