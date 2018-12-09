@@ -44,9 +44,6 @@ class CityListFragment : Fragment() {
         viewModel.showToast.observe(this, "", NonNullObserver {
             Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
         })
-        viewModel.goForecast.observe(this, "", NonNullObserver {
-            goForecastActivity(it)
-        })
     }
 
     private fun goForecastActivity(city: City) {

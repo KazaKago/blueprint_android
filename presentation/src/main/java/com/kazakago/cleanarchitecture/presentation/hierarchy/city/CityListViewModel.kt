@@ -21,7 +21,6 @@ class CityListViewModel(
     override val coroutineContext: CoroutineContext
         get() = job + Dispatchers.Main
 
-    val goForecast = NonNullLiveEvent<City>()
     val cityList = NonNullLiveData<List<City>>(emptyList())
     val showToast = NonNullLiveEvent<String>()
 
