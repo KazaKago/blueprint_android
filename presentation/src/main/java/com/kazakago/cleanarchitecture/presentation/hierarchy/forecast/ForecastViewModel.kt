@@ -1,7 +1,6 @@
 package com.kazakago.cleanarchitecture.presentation.hierarchy.forecast
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.domain.model.weather.Forecast
@@ -9,21 +8,14 @@ import com.kazakago.cleanarchitecture.domain.model.weather.Weather
 import com.kazakago.cleanarchitecture.domain.usecase.weather.GetWeatherUseCase
 import com.kazakago.cleanarchitecture.presentation.livedata.liveevent.NonNullLiveEvent
 import com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata.NonNullLiveData
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+import com.kazakago.cleanarchitecture.presentation.viewmodel.CoroutineAndroidViewModel
 import kotlinx.coroutines.launch
-import kotlin.coroutines.CoroutineContext
 
 class ForecastViewModel(
     application: Application,
     private val getWeatherUseCase: GetWeatherUseCase,
     private val city: City
-) : AndroidViewModel(application), CoroutineScope {
-
-    private val job = Job()
-    override val coroutineContext: CoroutineContext
-        get() = job + Dispatchers.Main
+) : CoroutineAndroidViewModel(application) {
 
     val title = MutableLiveData<CharSequence>()
     val weather = MutableLiveData<Weather>()
@@ -35,16 +27,11 @@ class ForecastViewModel(
         fetchWeather()
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        job.cancel()
-    }
-
     fun onClickForecast(forecast: Forecast) {
         showToast.call(forecast.telop)
     }
 
-    private fun fetchWeather() = launch(context = coroutineContext) {
+    private fun fetchWeather() = launch {
         isLoading.value = true
         try {
             weather.value = getWeatherUseCase.execute(city.id)
