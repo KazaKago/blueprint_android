@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.transaction
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.hierarchy.about.AboutActivity
@@ -47,11 +48,10 @@ class CityListActivity : AppCompatActivity() {
     }
 
     private fun replaceCityListFragment() {
-        val fragment = CityListFragment.createInstance()
-
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragmentContainer, fragment)
-        fragmentTransaction.commit()
+        supportFragmentManager.transaction {
+            val fragment = CityListFragment.createInstance()
+            replace(R.id.fragmentContainer, fragment)
+        }
     }
 
     private fun goAboutActivity() {
