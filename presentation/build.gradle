@@ -30,19 +30,20 @@ dependencies {
     //Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     //kotlinx.coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.1"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.1'
     //Koin for AndroidX
-    implementation "org.koin:koin-androidx-viewmodel:1.0.2"
+    implementation 'org.koin:koin-androidx-viewmodel:1.0.2'
     //AndroidX AppCompat
     api 'androidx.appcompat:appcompat:1.0.2'
     //AndroidX ConstraintLayout
     api 'androidx.constraintlayout:constraintlayout:1.1.3'
     //AndroidX Material
     api 'com.google.android.material:material:1.0.0'
-    //AndroidX Lifecycle Extension
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
-    kapt 'androidx.lifecycle:lifecycle-compiler:2.0.0'
+    //AndroidX Lifecycle
+    api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0-alpha01'
+    api 'androidx.lifecycle:lifecycle-livedata:2.1.0-alpha01'
+    api 'androidx.lifecycle:lifecycle-common-java8:2.1.0-alpha01'
     //PlayServices OSS Licenses
     implementation 'com.google.android.gms:play-services-oss-licenses:16.0.1'
     //Picasso
@@ -52,6 +53,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
     //Espresso
-    androidTestImplementation 'androidx.test:runner:1.1.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 }
