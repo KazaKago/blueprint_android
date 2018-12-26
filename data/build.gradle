@@ -29,13 +29,13 @@ dependencies {
     //Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     //kotlinx.coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.0'
     //Koin
     implementation 'org.koin:koin-core:1.0.2'
     //AndroidX Room
     implementation 'androidx.room:room-runtime:2.1.0-alpha03'
-    kapt 'androidx.room:room-compiler:2.1.0-alpha03'
     implementation 'androidx.room:room-coroutines:2.1.0-alpha03'
+    kapt 'androidx.room:room-compiler:2.1.0-alpha03'
     //AndroidX KTX
     implementation 'androidx.core:core-ktx:1.0.1'
     //Moshi
