@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.transaction
 import com.kazakago.cleanarchitecture.presentation.R
 import kotlinx.android.synthetic.main.activity_about.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -39,11 +40,10 @@ class AboutActivity : AppCompatActivity() {
     }
 
     private fun replaceAboutFragment() {
-        val fragment = AboutFragment.createInstance()
-
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragmentContainer, fragment)
-        fragmentTransaction.commit()
+        supportFragmentManager.transaction {
+            val fragment = AboutFragment.createInstance()
+            replace(R.id.fragmentContainer, fragment)
+        }
     }
 
 }

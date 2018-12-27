@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.transaction
 import androidx.lifecycle.Observer
 import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.presentation.R
@@ -56,11 +57,10 @@ class ForecastActivity : AppCompatActivity() {
     }
 
     private fun replaceForecastFragment() {
-        val fragment = ForecastFragment.createInstance()
-
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragmentContainer, fragment)
-        fragmentTransaction.commit()
+        supportFragmentManager.transaction {
+            val fragment = ForecastFragment.createInstance()
+            replace(R.id.fragmentContainer, fragment)
+        }
     }
 
 }
