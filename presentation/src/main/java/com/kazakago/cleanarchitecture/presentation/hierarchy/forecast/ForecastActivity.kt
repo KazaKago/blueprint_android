@@ -19,17 +19,17 @@ class ForecastActivity : AppCompatActivity() {
     companion object {
         fun createIntent(context: Context, city: City): Intent {
             val intent = Intent(context, ForecastActivity::class.java)
-            intent.putExtra(RequestParameterKey.City.value(), city)
+            intent.putExtra(ParameterKey.City.value(), city)
             return intent
         }
     }
 
-    private enum class RequestParameterKey : StringKey {
+    private enum class ParameterKey : StringKey {
         City
     }
 
     private val viewModel by viewModel<ForecastViewModel> {
-        parametersOf(intent.getSerializableExtra(RequestParameterKey.City.value()) as City)
+        parametersOf(intent.getSerializableExtra(ParameterKey.City.value()) as City)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
