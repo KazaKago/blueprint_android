@@ -8,8 +8,8 @@ import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.domain.model.weather.Forecast
 import com.kazakago.cleanarchitecture.domain.model.weather.Weather
 import com.kazakago.cleanarchitecture.domain.usecase.weather.GetWeatherUseCase
-import com.kazakago.cleanarchitecture.presentation.livedata.liveevent.NonNullLiveEvent
-import com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata.NonNullLiveData
+import com.kazakago.cleanarchitecture.presentation.global.livedata.liveevent.NonNullLiveEvent
+import com.kazakago.cleanarchitecture.presentation.global.livedata.nonnulllivedata.NonNullLiveData
 import kotlinx.coroutines.launch
 
 class ForecastViewModel(

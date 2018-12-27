@@ -1,4 +1,4 @@
-package com.kazakago.cleanarchitecture.presentation.livedata.liveevent
+package com.kazakago.cleanarchitecture.presentation.global.livedata.liveevent
 
 import androidx.annotation.MainThread
 

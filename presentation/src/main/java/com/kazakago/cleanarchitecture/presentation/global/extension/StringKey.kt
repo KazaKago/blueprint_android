@@ -1,4 +1,4 @@
-package com.kazakago.cleanarchitecture.presentation.extension
+package com.kazakago.cleanarchitecture.presentation.global.extension
 
 interface StringKey
 

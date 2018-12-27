@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.presentation.R
-import com.kazakago.cleanarchitecture.presentation.adapter.AbsItemViewHolder
+import com.kazakago.cleanarchitecture.presentation.global.adapter.AbsItemViewHolder
 import kotlinx.android.synthetic.main.recycler_city.view.*
 
 class CityRecyclerAdapter(private val context: Context) : RecyclerView.Adapter<CityRecyclerAdapter.ViewHolder>() {

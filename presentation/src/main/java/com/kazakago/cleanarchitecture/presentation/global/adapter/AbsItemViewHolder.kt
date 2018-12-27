@@ -1,4 +1,4 @@
-package com.kazakago.cleanarchitecture.presentation.adapter
+package com.kazakago.cleanarchitecture.presentation.global.adapter
 
 import android.content.Context
 import android.view.ViewGroup

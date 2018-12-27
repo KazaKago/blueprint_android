@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kazakago.cleanarchitecture.domain.model.weather.Forecast
 import com.kazakago.cleanarchitecture.domain.model.weather.Weather
 import com.kazakago.cleanarchitecture.presentation.R
-import com.kazakago.cleanarchitecture.presentation.adapter.AbsItemViewHolder
-import com.kazakago.cleanarchitecture.presentation.extension.formattedDateText
-import com.kazakago.cleanarchitecture.presentation.extension.formattedDateTimeText
-import com.kazakago.cleanarchitecture.presentation.extension.loadImageUrl
+import com.kazakago.cleanarchitecture.presentation.global.adapter.AbsItemViewHolder
+import com.kazakago.cleanarchitecture.presentation.global.extension.formattedDateText
+import com.kazakago.cleanarchitecture.presentation.global.extension.formattedDateTimeText
+import com.kazakago.cleanarchitecture.presentation.global.extension.loadImageUrl
 import kotlinx.android.synthetic.main.recycler_forecast_content.view.*
 import kotlinx.android.synthetic.main.recycler_forecast_summary.view.*
 

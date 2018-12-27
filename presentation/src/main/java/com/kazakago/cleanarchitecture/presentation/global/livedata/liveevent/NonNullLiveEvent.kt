@@ -1,10 +1,10 @@
-package com.kazakago.cleanarchitecture.presentation.livedata.liveevent
+package com.kazakago.cleanarchitecture.presentation.global.livedata.liveevent
 
 import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata.NonNullObserver
+import com.kazakago.cleanarchitecture.presentation.global.livedata.nonnulllivedata.NonNullObserver
 
 open class NonNullLiveEvent<T> : LiveData<T>() {
 

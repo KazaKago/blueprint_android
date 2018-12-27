@@ -1,4 +1,4 @@
-package com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata
+package com.kazakago.cleanarchitecture.presentation.global.livedata.nonnulllivedata
 
 open class NonNullLiveData<T>(initialValue: T) : LateInitLiveData<T>() {
 

@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.kazakago.cleanarchitecture.presentation.R
-import com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata.NonNullObserver
+import com.kazakago.cleanarchitecture.presentation.global.livedata.nonnulllivedata.NonNullObserver
 import kotlinx.android.synthetic.main.fragment_about.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 

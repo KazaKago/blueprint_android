@@ -1,10 +1,10 @@
-package com.kazakago.cleanarchitecture.presentation.livedata.compositelivedata
+package com.kazakago.cleanarchitecture.presentation.global.livedata.compositelivedata
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata.NonNullLiveData
-import com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata.NonNullObserver
+import com.kazakago.cleanarchitecture.presentation.global.livedata.nonnulllivedata.NonNullLiveData
+import com.kazakago.cleanarchitecture.presentation.global.livedata.nonnulllivedata.NonNullObserver
 
 fun <A, B> compositeLiveDataOf(first: LiveData<A>, second: LiveData<B>) = PairLiveData(Pair(first, second))
 fun <A, B, C> compositeLiveDataOf(first: LiveData<A>, second: LiveData<B>, third: LiveData<C>) = TripleLiveData(Triple(first, second, third))

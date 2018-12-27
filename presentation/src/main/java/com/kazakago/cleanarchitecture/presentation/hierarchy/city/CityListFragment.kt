@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.hierarchy.forecast.ForecastActivity
-import com.kazakago.cleanarchitecture.presentation.livedata.nonnulllivedata.NonNullObserver
+import com.kazakago.cleanarchitecture.presentation.global.livedata.nonnulllivedata.NonNullObserver
 import kotlinx.android.synthetic.main.fragment_city_list.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 

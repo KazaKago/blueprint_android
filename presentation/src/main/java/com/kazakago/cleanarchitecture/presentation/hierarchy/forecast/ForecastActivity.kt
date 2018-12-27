@@ -8,8 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.presentation.R
-import com.kazakago.cleanarchitecture.presentation.extension.StringKey
-import com.kazakago.cleanarchitecture.presentation.extension.value
+import com.kazakago.cleanarchitecture.presentation.global.extension.StringKey
+import com.kazakago.cleanarchitecture.presentation.global.extension.value
 import kotlinx.android.synthetic.main.activity_forecast.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
