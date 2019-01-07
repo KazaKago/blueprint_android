@@ -8,8 +8,8 @@ import com.kazakago.cleanarchitecture.domain.model.weather.Weather
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.global.adapter.AbsItemViewHolder
 import com.kazakago.cleanarchitecture.presentation.global.extension.*
-import kotlinx.android.synthetic.main.recycler_forecast_content.view.*
-import kotlinx.android.synthetic.main.recycler_forecast_summary.view.*
+import kotlinx.android.synthetic.main.recycler_forecast_content.*
+import kotlinx.android.synthetic.main.recycler_forecast_summary.*
 
 class ForecastRecyclerAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -57,28 +57,28 @@ class ForecastRecyclerAdapter(private val context: Context) : RecyclerView.Adapt
     inner class SummaryViewHolder(context: Context, parent: ViewGroup) : AbsItemViewHolder<Weather>(context, parent, R.layout.recycler_forecast_summary) {
 
         override fun onBind(item: Weather?) {
-            itemView.areaTextView.text = item?.location?.area
-            itemView.prefectureTextView.text = item?.location?.prefecture
-            itemView.cityTextView.text = item?.location?.city
-            itemView.publicTimeTextView.text = context.getString(R.string.public_time, item?.publicTime?.formattedDateTimeText(context) ?: "")
+            areaTextView.text = item?.location?.area
+            prefectureTextView.text = item?.location?.prefecture
+            cityTextView.text = item?.location?.city
+            publicTimeTextView.text = context.getString(R.string.public_time, item?.publicTime?.formattedDateTimeText(context) ?: "")
         }
     }
 
     inner class ContentViewHolder(context: Context, parent: ViewGroup) : AbsItemViewHolder<Forecast>(context, parent, R.layout.recycler_forecast_content) {
 
         init {
-            itemView.setOnClickListener {
+            containerView.setOnClickListener {
                 item?.let { onItemClick?.invoke(it) }
             }
         }
 
         override fun onBind(item: Forecast?) {
-            itemView.weatherImageView.loadImageUrl(item?.imageUrl)
-            itemView.dateLabelTextView.text = item?.dateLabel
-            itemView.dateTextView.text = item?.date?.formattedDateText(context)
-            itemView.telopTextView.text = item?.telop
-            itemView.maxTemperatureTextView.text = context.getString(R.string.temperature_max, item?.maxTemperature?.toString() ?: "--")
-            itemView.minTemperatureTextView.text = context.getString(R.string.temperature_min, item?.minTemperature?.toString() ?: "--")
+            weatherImageView.loadImageUrl(item?.imageUrl)
+            dateLabelTextView.text = item?.dateLabel
+            dateTextView.text = item?.date?.formattedDateText(context)
+            telopTextView.text = item?.telop
+            maxTemperatureTextView.text = context.getString(R.string.temperature_max, item?.maxTemperature?.toString() ?: "--")
+            minTemperatureTextView.text = context.getString(R.string.temperature_min, item?.minTemperature?.toString() ?: "--")
         }
     }
 

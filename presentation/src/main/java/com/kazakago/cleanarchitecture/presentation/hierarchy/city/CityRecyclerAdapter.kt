@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.global.adapter.AbsItemViewHolder
-import kotlinx.android.synthetic.main.recycler_city.view.*
+import kotlinx.android.synthetic.main.recycler_city.*
 
 class CityRecyclerAdapter(private val context: Context) : RecyclerView.Adapter<CityRecyclerAdapter.ViewHolder>() {
 
@@ -28,13 +28,13 @@ class CityRecyclerAdapter(private val context: Context) : RecyclerView.Adapter<C
     inner class ViewHolder(context: Context, parent: ViewGroup) : AbsItemViewHolder<City>(context, parent, R.layout.recycler_city) {
 
         init {
-            itemView.setOnClickListener {
+            containerView.setOnClickListener {
                 item?.let { onItemClick?.invoke(it) }
             }
         }
 
         override fun onBind(item: City?) {
-            itemView.cityTextView.text = item?.name
+            cityTextView.text = item?.name
         }
 
     }
