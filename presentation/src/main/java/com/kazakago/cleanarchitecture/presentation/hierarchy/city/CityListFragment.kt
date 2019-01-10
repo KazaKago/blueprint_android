@@ -45,7 +45,7 @@ class CityListFragment : Fragment() {
 
     private fun updateCityList(cityList: List<City>) {
         cityRecyclerAdapter.updateAsync(cityList.map {
-            CityRecyclerItem(requireActivity(), it).apply {
+            CityRecyclerItem(it).apply {
                 onClickItem = { city ->
                     goForecastActivity(city)
                 }

@@ -51,9 +51,9 @@ class ForecastFragment : Fragment() {
 
     private fun updateWeather(weather: Weather) {
         forecastRecyclerAdapter.updateAsync(mutableListOf<Group>().apply {
-            add(ForecastRecyclerSummary(requireActivity(), weather))
+            add(ForecastRecyclerSummary(weather))
             addAll(weather.forecasts.map {
-                ForecastRecyclerContent(requireActivity(), it).apply {
+                ForecastRecyclerContent(it).apply {
                     onClickItem = { forecast ->
                         viewModel.onClickForecast(forecast)
                     }

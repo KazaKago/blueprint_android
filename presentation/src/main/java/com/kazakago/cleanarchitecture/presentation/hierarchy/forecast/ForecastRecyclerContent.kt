@@ -1,16 +1,15 @@
 package com.kazakago.cleanarchitecture.presentation.hierarchy.forecast
 
-import android.content.Context
 import androidx.annotation.LayoutRes
 import com.kazakago.cleanarchitecture.domain.model.weather.Forecast
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.global.extension.formattedDateText
 import com.kazakago.cleanarchitecture.presentation.global.extension.loadImageUrl
-import com.xwray.groupie.kotlinandroidextensions.Item
+import com.kazakago.cleanarchitecture.presentation.global.viewholder.ItemHolder
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.recycler_forecast_content.*
 
-data class ForecastRecyclerContent(private val context: Context, private val forecast: Forecast) : Item(forecast.hashCode().toLong()) {
+data class ForecastRecyclerContent(private val forecast: Forecast) : ItemHolder(forecast.hashCode().toLong()) {
 
     var onClickItem: ((forecast: Forecast) -> Unit)? = null
 
