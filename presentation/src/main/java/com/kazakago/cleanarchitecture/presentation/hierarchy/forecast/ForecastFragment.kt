@@ -7,8 +7,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.kazakago.cleanarchitecture.domain.model.weather.Weather
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.global.livedata.nonnulllivedata.NonNullObserver
+import com.xwray.groupie.Group
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.fragment_forecast.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -21,7 +25,7 @@ class ForecastFragment : Fragment() {
     }
 
     private val viewModel by sharedViewModel<ForecastViewModel>()
-    private lateinit var forecastRecyclerAdapter: ForecastRecyclerAdapter
+    private val forecastRecyclerAdapter = GroupAdapter<ViewHolder>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_forecast, container, false)
@@ -33,21 +37,31 @@ class ForecastFragment : Fragment() {
         descriptionButton.setOnClickListener {
             showForecastDescriptionDialog()
         }
-        forecastRecyclerAdapter = ForecastRecyclerAdapter(requireActivity())
-        forecastRecyclerAdapter.onItemClick = {
-            viewModel.onClickForecast(it)
-        }
         forecastRecyclerView.adapter = forecastRecyclerAdapter
 
         viewModel.showToast.observe(this, "", NonNullObserver {
             Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
         })
         viewModel.weather.observe(this, Observer {
-            forecastRecyclerAdapter.weather = it
-            forecastRecyclerAdapter.notifyDataSetChanged()
+            updateWeather(it)
         })
         viewModel.isLoading.observe(this, NonNullObserver {
             if (it) loadingProgressBar.show() else loadingProgressBar.hide()
+        })
+    }
+
+    private fun updateWeather(weather: Weather?) {
+        forecastRecyclerAdapter.updateAsync(mutableListOf<Group>().apply {
+            if (weather != null) {
+                add(ForecastRecyclerSummary(requireActivity(), weather))
+                addAll(weather.forecasts.map {
+                    ForecastRecyclerContent(requireActivity(), it).apply {
+                        onClickItem = { forecast ->
+                            viewModel.onClickForecast(forecast)
+                        }
+                    }
+                })
+            }
         })
     }
 

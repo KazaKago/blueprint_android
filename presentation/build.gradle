@@ -52,6 +52,9 @@ dependencies {
     implementation 'androidx.fragment:fragment-ktx:1.0.0'
     //PlayServices OSS Licenses
     implementation 'com.google.android.gms:play-services-oss-licenses:16.0.1'
+    //Groupie
+    implementation 'com.xwray:groupie:2.3.0'
+    implementation 'com.xwray:groupie-kotlin-android-extensions:2.3.0'
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
 
