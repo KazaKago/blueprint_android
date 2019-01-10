@@ -30,6 +30,9 @@ class ForecastFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        descriptionButton.setOnClickListener {
+            showForecastDescriptionDialog()
+        }
         forecastRecyclerAdapter = ForecastRecyclerAdapter(requireActivity())
         forecastRecyclerAdapter.onItemClick = {
             viewModel.onClickForecast(it)
@@ -46,6 +49,11 @@ class ForecastFragment : Fragment() {
         viewModel.isLoading.observe(this, NonNullObserver {
             if (it) loadingProgressBar.show() else loadingProgressBar.hide()
         })
+    }
+
+    private fun showForecastDescriptionDialog() {
+        val dialog = ForecastDescriptionDialog.createInstance()
+        dialog.show(fragmentManager, "")
     }
 
 }
