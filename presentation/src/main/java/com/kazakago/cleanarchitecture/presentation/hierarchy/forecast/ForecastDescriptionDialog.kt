@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.global.extension.formattedDateTimeText
+import com.kazakago.cleanarchitecture.presentation.global.livedata.nonnulllivedata.NonNullObserver
 import kotlinx.android.synthetic.main.dialog_forecast_description.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -28,7 +28,7 @@ class ForecastDescriptionDialog : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.weather.observe(this, Observer {
+        viewModel.weather.observe(this, NonNullObserver {
             publishDateTextView.text = getString(R.string.public_time, it.description.publicTime.formattedDateTimeText(requireActivity()))
             descriptionTextView.text = it.description.text
         })

@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import com.kazakago.cleanarchitecture.domain.model.weather.Weather
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.global.livedata.nonnulllivedata.NonNullObserver
@@ -42,7 +41,7 @@ class ForecastFragment : Fragment() {
         viewModel.showToast.observe(this, "", NonNullObserver {
             Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
         })
-        viewModel.weather.observe(this, Observer {
+        viewModel.weather.observe(this, NonNullObserver {
             updateWeather(it)
         })
         viewModel.isLoading.observe(this, NonNullObserver {
@@ -50,18 +49,16 @@ class ForecastFragment : Fragment() {
         })
     }
 
-    private fun updateWeather(weather: Weather?) {
+    private fun updateWeather(weather: Weather) {
         forecastRecyclerAdapter.updateAsync(mutableListOf<Group>().apply {
-            if (weather != null) {
-                add(ForecastRecyclerSummary(requireActivity(), weather))
-                addAll(weather.forecasts.map {
-                    ForecastRecyclerContent(requireActivity(), it).apply {
-                        onClickItem = { forecast ->
-                            viewModel.onClickForecast(forecast)
-                        }
+            add(ForecastRecyclerSummary(requireActivity(), weather))
+            addAll(weather.forecasts.map {
+                ForecastRecyclerContent(requireActivity(), it).apply {
+                    onClickItem = { forecast ->
+                        viewModel.onClickForecast(forecast)
                     }
-                })
-            }
+                }
+            })
         })
     }
 
