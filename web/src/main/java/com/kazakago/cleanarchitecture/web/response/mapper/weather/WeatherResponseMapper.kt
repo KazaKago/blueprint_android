@@ -15,7 +15,8 @@ object WeatherResponseMapper : ResponseMapper<WeatherResponse, Weather> {
             link = URL(source.link),
             publicTime = source.publicTime.parseDateTime(),
             description = DescriptionResponseMapper.map(source.description),
-            forecasts = source.forecasts.map { ForecastResponseMapper.map(it) })
+            forecasts = ForecastResponseMapper.map(source.forecasts)
+        )
     }
 
 }

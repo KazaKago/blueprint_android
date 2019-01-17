@@ -37,7 +37,7 @@ object WeatherEntityMapper {
             forecastEntities = destination.forecasts.map { ForecastEntityMapper.reverse(destination.cityId, it) })
     }
 
-    class ReverseMappingResult(
+    data class ReverseMappingResult(
         val weatherEntity: WeatherEntity,
         val locationEntity: LocationEntity,
         val descriptionEntity: DescriptionEntity,
