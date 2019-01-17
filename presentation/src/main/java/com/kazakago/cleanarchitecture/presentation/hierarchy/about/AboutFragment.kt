@@ -7,11 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.global.livedata.nonnulllivedata.NonNullObserver
 import kotlinx.android.synthetic.main.fragment_about.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import java.util.*
 
 class AboutFragment : Fragment() {
 
@@ -30,21 +30,6 @@ class AboutFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.versionText.observe(this, Observer {
-            versionTextView.text = it
-        })
-        viewModel.developByText.observe(this, Observer {
-            developByTextView.text = it
-        })
-        viewModel.copyrightText.observe(this, Observer {
-            copyrightTextView.text = it
-        })
-        viewModel.openActionView.observe(this, "", NonNullObserver {
-            openActionView(it)
-        })
-        viewModel.openSendTo.observe(this, "", NonNullObserver {
-            openSendTo(it)
-        })
         playStoreLayout.setOnClickListener {
             viewModel.onClickPlayStore()
         }
@@ -54,6 +39,20 @@ class AboutFragment : Fragment() {
         mailLayout.setOnClickListener {
             viewModel.onClickMail()
         }
+
+        viewModel.appInfo.observe(this, NonNullObserver {
+            versionTextView.text = getString(R.string.about_ver, it.versionName)
+        })
+        viewModel.developerInfo.observe(this, NonNullObserver {
+            copyrightTextView.text = getString(R.string.about_copyright, Calendar.getInstance().get(Calendar.YEAR), it.name)
+            developByTextView.text = getString(R.string.about_develop_by, it.name)
+        })
+        viewModel.openActionView.observe(this, "", NonNullObserver {
+            openActionView(it)
+        })
+        viewModel.openSendTo.observe(this, "", NonNullObserver {
+            openSendTo(it)
+        })
     }
 
     private fun openActionView(uri: Uri) {
