@@ -68,20 +68,20 @@ dependencies {
     //Stetho
     debugImplementation("com.facebook.stetho:stetho:1.5.0")
     //LeakCanary
-    debugImplementation("com.squareup.leakcanary:leakcanary-android:1.6.2")
-    debugImplementation("com.squareup.leakcanary:leakcanary-support-fragment:1.6.2")
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:1.6.3")
+    debugImplementation("com.squareup.leakcanary:leakcanary-support-fragment:1.6.3")
     //Hyperion
-    debugImplementation("com.willowtreeapps.hyperion:hyperion-core:0.9.26")
-    debugImplementation("com.willowtreeapps.hyperion:hyperion-attr:0.9.26")
-    debugImplementation("com.willowtreeapps.hyperion:hyperion-measurement:0.9.26")
-    debugImplementation("com.willowtreeapps.hyperion:hyperion-disk:0.9.26")
-    debugImplementation("com.willowtreeapps.hyperion:hyperion-recorder:0.9.26")
-    debugImplementation("com.willowtreeapps.hyperion:hyperion-phoenix:0.9.26")
-    debugImplementation("com.willowtreeapps.hyperion:hyperion-crash:0.9.26")
-    debugImplementation("com.willowtreeapps.hyperion:hyperion-shared-preferences:0.9.26")
-    debugImplementation("com.willowtreeapps.hyperion:hyperion-geiger-counter:0.9.26")
-    debugImplementation("com.willowtreeapps.hyperion:hyperion-timber:0.9.26")
-    debugImplementation("com.willowtreeapps.hyperion:hyperion-build-config:0.9.26")
+    debugImplementation("com.willowtreeapps.hyperion:hyperion-core:0.9.27")
+    debugImplementation("com.willowtreeapps.hyperion:hyperion-attr:0.9.27")
+    debugImplementation("com.willowtreeapps.hyperion:hyperion-measurement:0.9.27")
+    debugImplementation("com.willowtreeapps.hyperion:hyperion-disk:0.9.27")
+    debugImplementation("com.willowtreeapps.hyperion:hyperion-recorder:0.9.27")
+    debugImplementation("com.willowtreeapps.hyperion:hyperion-phoenix:0.9.27")
+    debugImplementation("com.willowtreeapps.hyperion:hyperion-crash:0.9.27")
+    debugImplementation("com.willowtreeapps.hyperion:hyperion-shared-preferences:0.9.27")
+    debugImplementation("com.willowtreeapps.hyperion:hyperion-geiger-counter:0.9.27")
+    debugImplementation("com.willowtreeapps.hyperion:hyperion-timber:0.9.27")
+    debugImplementation("com.willowtreeapps.hyperion:hyperion-build-config:0.9.27")
     //Hyperion-Chuck
     debugImplementation("com.github.Commit451:Hyperion-Chuck:1.0.0")
 
