@@ -37,9 +37,9 @@ dependencies {
     //Koin
     implementation("org.koin:koin-core:1.0.2")
     //AndroidX Room
-    implementation("androidx.room:room-runtime:2.1.0-alpha03")
-    implementation("androidx.room:room-coroutines:2.1.0-alpha03")
-    kapt("androidx.room:room-compiler:2.1.0-alpha03")
+    implementation("androidx.room:room-runtime:2.1.0-alpha04")
+    implementation("androidx.room:room-coroutines:2.1.0-alpha04")
+    kapt("androidx.room:room-compiler:2.1.0-alpha04")
     //AndroidX KTX
     implementation("androidx.core:core-ktx:1.0.1")
     //Moshi
