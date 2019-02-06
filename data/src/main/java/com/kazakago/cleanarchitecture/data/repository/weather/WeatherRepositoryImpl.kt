@@ -7,7 +7,7 @@ import com.kazakago.cleanarchitecture.domain.model.city.CityId
 import com.kazakago.cleanarchitecture.domain.model.weather.Weather
 import com.kazakago.cleanarchitecture.domain.repository.weather.WeatherRepository
 
-class WeatherRepositoryImpl(private val context: Context) : WeatherRepository {
+internal class WeatherRepositoryImpl(private val context: Context) : WeatherRepository {
 
     private val database = AppDatabase.create(context)
 

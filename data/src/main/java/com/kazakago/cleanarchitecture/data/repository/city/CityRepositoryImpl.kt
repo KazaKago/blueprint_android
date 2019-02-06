@@ -8,7 +8,7 @@ import com.kazakago.cleanarchitecture.domain.repository.city.CityRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class CityRepositoryImpl(private val context: Context) : CityRepository {
+internal class CityRepositoryImpl(private val context: Context) : CityRepository {
 
     override suspend fun findAll(): List<City> = withContext(Dispatchers.IO) {
         val cityDao = CityDao(context)

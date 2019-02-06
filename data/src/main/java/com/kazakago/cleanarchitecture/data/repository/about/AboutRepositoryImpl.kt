@@ -9,7 +9,7 @@ import com.kazakago.cleanarchitecture.domain.model.about.DeveloperInfo
 import com.kazakago.cleanarchitecture.domain.repository.about.AboutRepository
 import java.net.URL
 
-class AboutRepositoryImpl(private val context: Context) : AboutRepository {
+internal class AboutRepositoryImpl(private val context: Context) : AboutRepository {
 
     override fun getAppInfo(): AppInfo {
         return AppInfo(

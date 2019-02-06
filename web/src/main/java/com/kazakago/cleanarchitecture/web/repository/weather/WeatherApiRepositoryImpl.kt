@@ -7,7 +7,7 @@ import com.kazakago.cleanarchitecture.domain.repository.weather.WeatherApiReposi
 import com.kazakago.cleanarchitecture.web.api.weather.WeatherApi
 import com.kazakago.cleanarchitecture.web.response.mapper.weather.WeatherResponseMapper
 
-class WeatherApiRepositoryImpl(private val context: Context) : WeatherApiRepository {
+internal class WeatherApiRepositoryImpl(private val context: Context) : WeatherApiRepository {
 
     override suspend fun fetch(cityId: CityId): Weather {
         val weatherResponse = WeatherApi(context).fetch(cityId.value)
