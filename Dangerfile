@@ -5,5 +5,8 @@ github.dismiss_out_of_range_messages
 warn("PR is classed as Work in Progress") if github.pr_title.include? "[WIP]"
 
 # Android Lint
+android_lint.gradle_modules = ["app", "presentation", "data", "web"]
+android_lint.gradle_task = "lint"
+android_lint.report_file = "build/reports/lint-results.xml"
 android_lint.filtering = true
 android_lint.lint(inline_mode: true)
