@@ -15,8 +15,8 @@ class AboutViewModel(
     getDeveloperInfoUseCase: GetDeveloperInfoUseCase
 ) : AndroidViewModel(application) {
 
-    val appInfo = NonNullLiveData(getAppInfoUseCase.execute(Unit))
-    val developerInfo = NonNullLiveData(getDeveloperInfoUseCase.execute(Unit))
+    val appInfo = NonNullLiveData(getAppInfoUseCase(Unit))
+    val developerInfo = NonNullLiveData(getDeveloperInfoUseCase(Unit))
     val openActionView = NonNullLiveEvent<Uri>()
     val openSendTo = NonNullLiveEvent<Uri>()
 

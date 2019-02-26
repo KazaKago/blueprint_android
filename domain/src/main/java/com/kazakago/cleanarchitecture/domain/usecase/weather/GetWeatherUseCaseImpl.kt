@@ -7,7 +7,7 @@ import com.kazakago.cleanarchitecture.domain.repository.weather.WeatherRepositor
 
 internal class GetWeatherUseCaseImpl(private val weatherApiRepository: WeatherApiRepository, private val weatherRepository: WeatherRepository) : GetWeatherUseCase {
 
-    override suspend fun execute(input: CityId): Weather {
+    override suspend fun invoke(input: CityId): Weather {
         return try {
             val weather = weatherApiRepository.fetch(input)
             weather.cityId = input

@@ -23,7 +23,7 @@ class CityListViewModel(
 
     private fun fetchCityList() = viewModelScope.launch {
         try {
-            cityList.value = getCityUseCase.execute(Unit)
+            cityList.value = getCityUseCase(Unit)
         } catch (exception: Exception) {
             cityList.value = listOf()
             showToast.call(exception.localizedMessage)

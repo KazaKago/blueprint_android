@@ -34,7 +34,7 @@ class ForecastViewModel(
     private fun fetchWeather() = viewModelScope.launch {
         isLoading.value = true
         try {
-            weather.value = getWeatherUseCase.execute(city.value.id)
+            weather.value = getWeatherUseCase(city.value.id)
         } catch (exception: Exception) {
             showToast.call(exception.localizedMessage)
         }
