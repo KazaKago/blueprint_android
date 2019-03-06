@@ -85,7 +85,7 @@ open class NonNullLiveEvent<T> : LiveData<T>() {
     }
 
     @MainThread
-    open fun call(t: T) {
+    protected open fun call(t: T) {
         dispatchedTagSet.clear()
         value = t
     }

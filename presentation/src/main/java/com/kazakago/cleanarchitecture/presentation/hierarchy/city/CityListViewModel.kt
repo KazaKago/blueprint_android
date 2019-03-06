@@ -6,7 +6,9 @@ import androidx.lifecycle.viewModelScope
 import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.domain.usecase.city.GetCityUseCase
 import com.kazakago.cleanarchitecture.presentation.global.livedata.liveevent.NonNullLiveEvent
+import com.kazakago.cleanarchitecture.presentation.global.livedata.liveevent.NonNullMutableLiveEvent
 import com.kazakago.cleanarchitecture.presentation.global.livedata.nonnulllivedata.NonNullLiveData
+import com.kazakago.cleanarchitecture.presentation.global.livedata.nonnulllivedata.NonNullMutableLiveData
 import kotlinx.coroutines.launch
 
 class CityListViewModel(
@@ -14,8 +16,10 @@ class CityListViewModel(
     private val getCityUseCase: GetCityUseCase
 ) : AndroidViewModel(application) {
 
-    val cityList = NonNullLiveData<List<City>>(emptyList())
-    val showToast = NonNullLiveEvent<String>()
+    private val _cityList = NonNullMutableLiveData<List<City>>(emptyList())
+    val cityList: NonNullLiveData<List<City>> get() = _cityList
+    private val _showToast = NonNullMutableLiveEvent<String>()
+    val showToast: NonNullLiveEvent<String> get() = _showToast
 
     init {
         fetchCityList()
@@ -23,10 +27,10 @@ class CityListViewModel(
 
     private fun fetchCityList() = viewModelScope.launch {
         try {
-            cityList.value = getCityUseCase(Unit)
+            _cityList.value = getCityUseCase(Unit)
         } catch (exception: Exception) {
-            cityList.value = listOf()
-            showToast.call(exception.localizedMessage)
+            _cityList.value = listOf()
+            _showToast.call(exception.localizedMessage)
         }
     }
 

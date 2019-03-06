@@ -66,13 +66,4 @@ open class LateInitLiveData<T> : LiveData<T>() {
         return super.getValue() ?: throw UninitializedPropertyAccessException()
     }
 
-    @MainThread
-    public override fun setValue(value: T) {
-        super.setValue(value)
-    }
-
-    public override fun postValue(value: T) {
-        super.postValue(value)
-    }
-
 }

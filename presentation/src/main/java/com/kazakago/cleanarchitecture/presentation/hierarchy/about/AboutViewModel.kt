@@ -7,6 +7,7 @@ import com.kazakago.cleanarchitecture.domain.usecase.about.GetAppInfoUseCase
 import com.kazakago.cleanarchitecture.domain.usecase.about.GetDeveloperInfoUseCase
 import com.kazakago.cleanarchitecture.presentation.global.extension.toUri
 import com.kazakago.cleanarchitecture.presentation.global.livedata.liveevent.NonNullLiveEvent
+import com.kazakago.cleanarchitecture.presentation.global.livedata.liveevent.NonNullMutableLiveEvent
 import com.kazakago.cleanarchitecture.presentation.global.livedata.nonnulllivedata.NonNullLiveData
 
 class AboutViewModel(
@@ -17,19 +18,21 @@ class AboutViewModel(
 
     val appInfo = NonNullLiveData(getAppInfoUseCase(Unit))
     val developerInfo = NonNullLiveData(getDeveloperInfoUseCase(Unit))
-    val openActionView = NonNullLiveEvent<Uri>()
-    val openSendTo = NonNullLiveEvent<Uri>()
+    private val _openActionView = NonNullMutableLiveEvent<Uri>()
+    val openActionView: NonNullLiveEvent<Uri> get() = _openActionView
+    private val _openSendTo = NonNullMutableLiveEvent<Uri>()
+    val openSendTo: NonNullLiveEvent<Uri> get() = _openSendTo
 
     fun onClickPlayStore() {
-        openActionView.call(appInfo.value.playStoreUri.toUri())
+        _openActionView.call(appInfo.value.playStoreUri.toUri())
     }
 
     fun onClickMail() {
-        openSendTo.call(developerInfo.value.getMailAddressUri().toUri())
+        _openSendTo.call(developerInfo.value.getMailAddressUri().toUri())
     }
 
     fun onClickWebSite() {
-        openActionView.call(developerInfo.value.siteUrl.toUri())
+        _openActionView.call(developerInfo.value.siteUrl.toUri())
     }
 
 }

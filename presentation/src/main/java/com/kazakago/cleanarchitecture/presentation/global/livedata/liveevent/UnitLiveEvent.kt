@@ -2,7 +2,7 @@ package com.kazakago.cleanarchitecture.presentation.global.livedata.liveevent
 
 import androidx.annotation.MainThread
 
-class UnitLiveEvent : LiveEvent<Unit>() {
+open class UnitLiveEvent : LiveEvent<Unit>() {
 
     @MainThread
     @Deprecated(
@@ -15,7 +15,7 @@ class UnitLiveEvent : LiveEvent<Unit>() {
     }
 
     @MainThread
-    fun call() {
+    protected open fun call() {
         super.call(Unit)
     }
 
