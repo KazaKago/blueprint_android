@@ -20,15 +20,6 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
-## kotlinx.coroutines
-## https://github.com/Kotlin/kotlinx.coroutines#r8-and-proguard
--keepnames class kotlinx.coroutines.internal.MainDispatcherFactory {}
--keepnames class kotlinx.coroutines.CoroutineExceptionHandler {}
--keepclassmembernames class kotlinx.** {
-    volatile <fields>;
-}
-##
-
 ## Moshi
 ## https://github.com/square/moshi
 -dontwarn javax.annotation.**
@@ -45,6 +36,29 @@
     <init>(...);
     <fields>;
 }
-
--dontwarn org.codehaus.mojo.animal_sniffer.*
+-if @com.squareup.moshi.JsonClass class **$*
+-keep class <1>_<2>JsonAdapter {
+    <init>(...);
+    <fields>;
+}
+-if @com.squareup.moshi.JsonClass class **$*$*
+-keep class <1>_<2>_<3>JsonAdapter {
+    <init>(...);
+    <fields>;
+}
+-if @com.squareup.moshi.JsonClass class **$*$*$*
+-keep class <1>_<2>_<3>_<4>JsonAdapter {
+    <init>(...);
+    <fields>;
+}
+-if @com.squareup.moshi.JsonClass class **$*$*$*$*
+-keep class <1>_<2>_<3>_<4>_<5>JsonAdapter {
+    <init>(...);
+    <fields>;
+}
+-if @com.squareup.moshi.JsonClass class **$*$*$*$*$*
+-keep class <1>_<2>_<3>_<4>_<5>_<6>JsonAdapter {
+    <init>(...);
+    <fields>;
+}
 ##

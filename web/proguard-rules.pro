@@ -20,25 +20,19 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
-## kotlinx.coroutines
-## https://github.com/Kotlin/kotlinx.coroutines#r8-and-proguard
--keepnames class kotlinx.coroutines.internal.MainDispatcherFactory {}
--keepnames class kotlinx.coroutines.CoroutineExceptionHandler {}
--keepclassmembernames class kotlinx.** {
-    volatile <fields>;
-}
-##
-
 ## Retrofit
 ## https://github.com/square/retrofit
--keepattributes Signature, InnerClasses
+-keepattributes Signature, InnerClasses, EnclosingMethod
+-keepattributes RuntimeVisibleAnnotations, RuntimeVisibleParameterAnnotations
 -keepclassmembers,allowshrinking,allowobfuscation interface * {
     @retrofit2.http.* <methods>;
 }
 -dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
 -dontwarn javax.annotation.**
 -dontwarn kotlin.Unit
--dontwarn retrofit2.-KotlinExtensions
+-dontwarn retrofit2.KotlinExtensions
+-if interface * { @retrofit2.http.* <methods>; }
+-keep,allowobfuscation interface <1>
 
 -dontwarn javax.annotation.**
 -keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
@@ -64,6 +58,29 @@
     <init>(...);
     <fields>;
 }
-
--dontwarn org.codehaus.mojo.animal_sniffer.*
+-if @com.squareup.moshi.JsonClass class **$*
+-keep class <1>_<2>JsonAdapter {
+    <init>(...);
+    <fields>;
+}
+-if @com.squareup.moshi.JsonClass class **$*$*
+-keep class <1>_<2>_<3>JsonAdapter {
+    <init>(...);
+    <fields>;
+}
+-if @com.squareup.moshi.JsonClass class **$*$*$*
+-keep class <1>_<2>_<3>_<4>JsonAdapter {
+    <init>(...);
+    <fields>;
+}
+-if @com.squareup.moshi.JsonClass class **$*$*$*$*
+-keep class <1>_<2>_<3>_<4>_<5>JsonAdapter {
+    <init>(...);
+    <fields>;
+}
+-if @com.squareup.moshi.JsonClass class **$*$*$*$*$*
+-keep class <1>_<2>_<3>_<4>_<5>_<6>JsonAdapter {
+    <init>(...);
+    <fields>;
+}
 ##
