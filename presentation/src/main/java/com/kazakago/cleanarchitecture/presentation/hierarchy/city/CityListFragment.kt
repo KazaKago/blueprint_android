@@ -38,8 +38,8 @@ class CityListFragment : Fragment() {
         viewModel.cityList.observe(this, NonNullObserver {
             updateCityList(it)
         })
-        viewModel.showToast.observe(this, "", NonNullObserver {
-            Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
+        viewModel.showError.observe(this, "", NonNullObserver {
+            Toast.makeText(requireActivity(), it.localizedMessage, Toast.LENGTH_SHORT).show()
         })
     }
 

@@ -38,14 +38,17 @@ class ForecastFragment : Fragment() {
         }
         forecastRecyclerView.adapter = forecastRecyclerAdapter
 
-        viewModel.showToast.observe(this, "", NonNullObserver {
-            Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
-        })
         viewModel.weather.observe(this, NonNullObserver {
             updateWeather(it)
         })
+        viewModel.showForecast.observe(this, "", NonNullObserver {
+            Toast.makeText(requireActivity(), it.telop, Toast.LENGTH_SHORT).show()
+        })
         viewModel.isLoading.observe(this, NonNullObserver {
             if (it) loadingProgressBar.show() else loadingProgressBar.hide()
+        })
+        viewModel.showError.observe(this, "", NonNullObserver {
+            Toast.makeText(requireActivity(), it.localizedMessage, Toast.LENGTH_SHORT).show()
         })
     }
 

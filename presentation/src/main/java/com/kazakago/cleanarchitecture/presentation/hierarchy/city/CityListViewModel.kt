@@ -18,8 +18,8 @@ class CityListViewModel(
 
     private val _cityList = NonNullMutableLiveData<List<City>>(emptyList())
     val cityList: NonNullLiveData<List<City>> get() = _cityList
-    private val _showToast = NonNullMutableLiveEvent<String>()
-    val showToast: NonNullLiveEvent<String> get() = _showToast
+    private val _showError = NonNullMutableLiveEvent<Exception>()
+    val showError: NonNullLiveEvent<Exception> get() = _showError
 
     init {
         fetchCityList()
@@ -30,7 +30,7 @@ class CityListViewModel(
             _cityList.value = getCityUseCase(Unit)
         } catch (exception: Exception) {
             _cityList.value = listOf()
-            _showToast.call(exception.localizedMessage)
+            _showError.call(exception)
         }
     }
 

@@ -24,17 +24,19 @@ class ForecastViewModel(
     val city = NonNullLiveData(city)
     private val _weather = LateInitMutableLiveData<Weather>()
     val weather: LateInitLiveData<Weather> get() = _weather
+    private val _showForecast = NonNullMutableLiveEvent<Forecast>()
+    val showForecast: NonNullLiveEvent<Forecast> get() = _showForecast
     private val _isLoading = NonNullMutableLiveData(false)
     val isLoading: NonNullLiveData<Boolean> get() = _isLoading
-    private val _showToast = NonNullMutableLiveEvent<String>()
-    val showToast: NonNullLiveEvent<String> get() = _showToast
+    private val _showError = NonNullMutableLiveEvent<Exception>()
+    val showError: NonNullLiveEvent<Exception> get() = _showError
 
     init {
         fetchWeather()
     }
 
     fun onClickForecast(forecast: Forecast) {
-        _showToast.call(forecast.telop)
+        _showForecast.call(forecast)
     }
 
     private fun fetchWeather() = viewModelScope.launch {
@@ -42,7 +44,7 @@ class ForecastViewModel(
         try {
             _weather.value = getWeatherUseCase(city.value.id)
         } catch (exception: Exception) {
-            _showToast.call(exception.localizedMessage)
+            _showError.call(exception)
         }
         _isLoading.value = false
     }
