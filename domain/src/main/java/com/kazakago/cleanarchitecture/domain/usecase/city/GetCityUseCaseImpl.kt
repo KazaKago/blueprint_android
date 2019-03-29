@@ -5,7 +5,7 @@ import com.kazakago.cleanarchitecture.domain.repository.city.CityRepository
 
 internal class GetCityUseCaseImpl(private val cityRepository: CityRepository) : GetCityUseCase {
 
-    override suspend fun invoke(input: Unit): List<City> {
+    override suspend fun invoke(): List<City> {
         return cityRepository.findAll()
     }
 

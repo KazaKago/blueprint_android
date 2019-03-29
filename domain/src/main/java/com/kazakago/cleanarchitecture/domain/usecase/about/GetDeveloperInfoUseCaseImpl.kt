@@ -5,7 +5,7 @@ import com.kazakago.cleanarchitecture.domain.repository.about.AboutRepository
 
 internal class GetDeveloperInfoUseCaseImpl(private val aboutRepository: AboutRepository) : GetDeveloperInfoUseCase {
 
-    override fun invoke(input: Unit): DeveloperInfo {
+    override fun invoke(): DeveloperInfo {
         return aboutRepository.getDeveloperInfo()
     }
 

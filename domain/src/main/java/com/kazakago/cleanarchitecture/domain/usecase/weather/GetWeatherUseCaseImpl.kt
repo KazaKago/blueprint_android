@@ -7,15 +7,15 @@ import com.kazakago.cleanarchitecture.domain.repository.weather.WeatherRepositor
 
 internal class GetWeatherUseCaseImpl(private val weatherApiRepository: WeatherApiRepository, private val weatherRepository: WeatherRepository) : GetWeatherUseCase {
 
-    override suspend fun invoke(input: CityId): Weather {
+    override suspend fun invoke(cityId: CityId): Weather {
         return try {
-            val weather = weatherApiRepository.fetch(input)
-            weather.cityId = input
+            val weather = weatherApiRepository.fetch(cityId)
+            weather.cityId = cityId
             weatherRepository.insert(weather)
             weather
         } catch (exception: Exception) {
             try {
-                weatherRepository.find(input)
+                weatherRepository.find(cityId)
             } catch (_: Exception) {
                 throw exception
             }
