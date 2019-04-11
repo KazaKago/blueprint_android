@@ -4,10 +4,6 @@ import androidx.annotation.MainThread
 
 class NonNullMutableLiveData<T>(initialValue: T) : NonNullLiveData<T>(initialValue) {
 
-    init {
-        value = initialValue
-    }
-
     @MainThread
     public override fun setValue(value: T) {
         super.setValue(value)
