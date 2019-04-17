@@ -66,7 +66,7 @@ dependencies {
     implementation("org.koin:koin-android:1.0.2")
 
     //Stetho
-    debugImplementation("com.facebook.stetho:stetho:1.5.0")
+    debugImplementation("com.facebook.stetho:stetho:1.5.1")
     //LeakCanary
     debugImplementation("com.squareup.leakcanary:leakcanary-android:1.6.3")
     debugImplementation("com.squareup.leakcanary:leakcanary-support-fragment:1.6.3")

@@ -40,8 +40,8 @@ dependencies {
     //Kotlin
     implementation(kotlin("stdlib-jdk7", KotlinCompilerVersion.VERSION))
     //kotlinx.coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.2.0")
     //Koin for AndroidX
     implementation("org.koin:koin-androidx-viewmodel:1.0.2")
     //AndroidX AppCompat
@@ -51,9 +51,9 @@ dependencies {
     //AndroidX Material
     api("com.google.android.material:material:1.0.0")
     //AndroidX Lifecycle
-    api("androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0-alpha03")
-    api("androidx.lifecycle:lifecycle-livedata:2.1.0-alpha03")
-    api("androidx.lifecycle:lifecycle-common-java8:2.1.0-alpha03")
+    api("androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0-alpha04")
+    api("androidx.lifecycle:lifecycle-livedata:2.1.0-alpha04")
+    api("androidx.lifecycle:lifecycle-common-java8:2.1.0-alpha04")
     //AndroidX KTX
     implementation("androidx.core:core-ktx:1.0.1")
     implementation("androidx.fragment:fragment-ktx:1.0.0")
