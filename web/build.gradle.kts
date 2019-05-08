@@ -50,7 +50,7 @@ dependencies {
 
     //Stetho
     debugImplementation("com.facebook.stetho:stetho-okhttp3:1.5.1")
-    releaseImplementation("net.igenius:stetho-no-op:1.1")
+    releaseImplementation("com.github.mypplication:stetho-noop:1.1")
     //Chuck
     debugImplementation("com.readystatesoftware.chuck:library:1.1.0")
     releaseImplementation("com.readystatesoftware.chuck:library-no-op:1.1.0")
