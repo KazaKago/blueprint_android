@@ -1,6 +1,7 @@
 package com.kazakago.cleanarchitecture.web.api
 
 import android.content.Context
+import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.kazakago.cleanarchitecture.web.parser.MoshiBuilder
 import com.readystatesoftware.chuck.ChuckInterceptor
 import okhttp3.OkHttpClient
@@ -13,8 +14,11 @@ class RetrofitBuilder(context: Context, baseUrl: URL) {
     private val chuckInterceptor = ChuckInterceptor(context)
         .showNotification(false)
 
+    private val stethoInterceptor = StethoInterceptor()
+
     private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(chuckInterceptor)
+        .addNetworkInterceptor(stethoInterceptor)
         .build()
 
     private val moshiConverter = MoshiConverterFactory.create(MoshiBuilder().build())
