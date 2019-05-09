@@ -44,7 +44,7 @@ dependencies {
     implementation("androidx.room:room-coroutines:2.1.0-alpha04")
     kapt("androidx.room:room-compiler:2.1.0-alpha04")
     //AndroidX KTX
-    implementation("androidx.core:core-ktx:1.0.1")
+    implementation("androidx.core:core-ktx:1.0.2")
     //Moshi
     implementation("com.squareup.moshi:moshi:1.8.0")
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.8.0")

@@ -1,7 +1,6 @@
 import org.jetbrains.kotlin.config.KotlinCompilerVersion
 
 plugins {
-    id("java-library")
     kotlin("jvm")
 }
 

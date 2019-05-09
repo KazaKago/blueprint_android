@@ -40,7 +40,7 @@ dependencies {
     //Koin
     implementation("org.koin:koin-core:1.0.2")
     //AndroidX KTX
-    implementation("androidx.core:core-ktx:1.0.1")
+    implementation("androidx.core:core-ktx:1.0.2")
     //Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.5.0")
     implementation("com.squareup.retrofit2:converter-moshi:2.5.0")
