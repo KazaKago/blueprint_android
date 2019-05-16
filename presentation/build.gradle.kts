@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.config.KotlinCompilerVersion
 plugins {
     id("com.android.library")
     kotlin("android")
+    kotlin("kapt")
     kotlin("android.extensions")
 }
 
@@ -19,10 +20,6 @@ android {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
     }
     lintOptions {
         xmlReport = true
@@ -53,7 +50,7 @@ dependencies {
     //AndroidX Lifecycle
     api("androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0-beta01")
     api("androidx.lifecycle:lifecycle-livedata:2.1.0-beta01")
-    api("androidx.lifecycle:lifecycle-common-java8:2.1.0-beta01")
+    kapt("androidx.lifecycle:lifecycle-compiler:2.1.0-beta01")
     //AndroidX KTX
     implementation("androidx.core:core-ktx:1.0.2")
     implementation("androidx.fragment:fragment-ktx:1.0.0")
