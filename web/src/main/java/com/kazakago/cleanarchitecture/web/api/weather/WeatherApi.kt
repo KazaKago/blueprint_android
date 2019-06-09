@@ -2,7 +2,6 @@ package com.kazakago.cleanarchitecture.web.api.weather
 
 import android.content.Context
 import com.kazakago.cleanarchitecture.web.api.RetrofitBuilder
-import com.kazakago.cleanarchitecture.web.extension.awaitBody
 import com.kazakago.cleanarchitecture.web.response.entity.weather.WeatherResponse
 import java.net.URL
 
@@ -13,7 +12,7 @@ class WeatherApi(context: Context) {
         .create(WeatherService::class.java)
 
     suspend fun fetch(cityId: String): WeatherResponse {
-        return apiService.fetch(cityId).awaitBody()
+        return apiService.fetch(cityId).body()!!
     }
 
 }
