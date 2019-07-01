@@ -37,8 +37,8 @@ dependencies {
     //Kotlin
     implementation(kotlin("stdlib-jdk7", KotlinCompilerVersion.VERSION))
     //kotlinx.coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.2.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.2.2")
     //Koin for AndroidX
     implementation("org.koin:koin-androidx-viewmodel:1.0.2")
     //AndroidX AppCompat
@@ -55,7 +55,7 @@ dependencies {
     implementation("androidx.core:core-ktx:1.0.2")
     implementation("androidx.fragment:fragment-ktx:1.0.0")
     //PlayServices OSS Licenses
-    implementation("com.google.android.gms:play-services-oss-licenses:16.0.2")
+    implementation("com.google.android.gms:play-services-oss-licenses:17.0.0")
     //Groupie
     implementation("com.xwray:groupie:2.3.0")
     implementation("com.xwray:groupie-kotlin-android-extensions:2.3.0")
