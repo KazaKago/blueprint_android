@@ -48,9 +48,9 @@ dependencies {
     //AndroidX Material
     api("com.google.android.material:material:1.0.0")
     //AndroidX Lifecycle
-    api("androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0-beta01")
-    api("androidx.lifecycle:lifecycle-livedata:2.1.0-beta01")
-    kapt("androidx.lifecycle:lifecycle-compiler:2.1.0-beta01")
+    api("androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0-rc01")
+    api("androidx.lifecycle:lifecycle-livedata:2.1.0-rc01")
+    kapt("androidx.lifecycle:lifecycle-compiler:2.1.0-rc01")
     //AndroidX KTX
     implementation("androidx.core:core-ktx:1.0.2")
     implementation("androidx.fragment:fragment-ktx:1.0.0")

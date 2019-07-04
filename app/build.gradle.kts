@@ -65,7 +65,7 @@ dependencies {
     debugImplementation("com.facebook.stetho:stetho:1.5.1")
     releaseImplementation("com.github.mypplication:stetho-noop:1.1")
     //LeakCanary
-    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.0-alpha-1")
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.0-alpha-2")
     //Hyperion
     debugImplementation("com.willowtreeapps.hyperion:hyperion-core:0.9.27")
     debugImplementation("com.willowtreeapps.hyperion:hyperion-attr:0.9.27")
