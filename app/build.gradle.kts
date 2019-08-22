@@ -59,7 +59,7 @@ dependencies {
     //Kotlin
     implementation(kotlin("stdlib-jdk7", KotlinCompilerVersion.VERSION))
     //Koin for Android
-    implementation("org.koin:koin-android:1.0.2")
+    implementation("org.koin:koin-android:2.0.1")
 
     //Stetho
     debugImplementation("com.facebook.stetho:stetho:1.5.1")

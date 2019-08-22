@@ -8,7 +8,7 @@ import com.kazakago.cleanarchitecture.domain.usecase.city.GetCityUseCase
 import com.kazakago.cleanarchitecture.domain.usecase.city.GetCityUseCaseImpl
 import com.kazakago.cleanarchitecture.domain.usecase.weather.GetWeatherUseCase
 import com.kazakago.cleanarchitecture.domain.usecase.weather.GetWeatherUseCaseImpl
-import org.koin.dsl.module.module
+import org.koin.dsl.module
 
 val domainModule = module {
     single<GetWeatherUseCase> { GetWeatherUseCaseImpl(get(), get()) }

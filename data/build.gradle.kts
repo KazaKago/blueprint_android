@@ -34,7 +34,7 @@ dependencies {
     //kotlinx.coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.2")
     //Koin
-    implementation("org.koin:koin-core:1.0.2")
+    implementation("org.koin:koin-core:2.0.1")
     //AndroidX Room
     implementation("androidx.room:room-runtime:2.1.0")
     implementation("androidx.room:room-ktx:2.1.0")

@@ -11,7 +11,7 @@ dependencies {
     //kotlinx.coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.2")
     //Koin
-    implementation("org.koin:koin-core:1.0.2")
+    implementation("org.koin:koin-core:2.0.1")
 
     //JUnit
     testImplementation("junit:junit:4.12")
