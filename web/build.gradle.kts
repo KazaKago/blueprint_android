@@ -32,7 +32,7 @@ dependencies {
     //Kotlin
     implementation(kotlin("stdlib-jdk7", KotlinCompilerVersion.VERSION))
     //kotlinx.coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.0")
     //Koin
     implementation("org.koin:koin-core:2.0.1")
     //AndroidX KTX
