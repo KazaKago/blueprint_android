@@ -17,7 +17,7 @@
         android:textSize="@dimen/text_size_small"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Today"/>
+        tools:text="Today" />
 
     <TextView
         android:id="@+id/dateTextView"
@@ -29,7 +29,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/dateLabelTextView"
         app:layout_constraintStart_toEndOf="@+id/dateLabelTextView"
         app:layout_constraintTop_toTopOf="@+id/dateLabelTextView"
-        tools:text="2016-06-06"/>
+        tools:text="2016-06-06" />
 
     <ImageView
         android:id="@+id/weatherImageView"
@@ -40,7 +40,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/telopTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/telopTextView"
-        tools:srcCompat="@drawable/ic_googleplay_24dp"/>
+        tools:srcCompat="@drawable/ic_googleplay_24dp" />
 
     <TextView
         android:id="@+id/telopTextView"
@@ -56,7 +56,7 @@
         app:layout_constraintEnd_toStartOf="@+id/maxTemperatureTextView"
         app:layout_constraintStart_toEndOf="@+id/weatherImageView"
         app:layout_constraintTop_toBottomOf="@+id/dateLabelTextView"
-        tools:text="Sun"/>
+        tools:text="Sun" />
 
     <TextView
         android:id="@+id/maxTemperatureTextView"
@@ -68,7 +68,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/telopTextView"
         app:layout_constraintEnd_toStartOf="@+id/minTemperatureTextView"
         app:layout_constraintTop_toTopOf="@+id/telopTextView"
-        tools:text="Max:20℃"/>
+        tools:text="Max:20℃" />
 
     <TextView
         android:id="@+id/minTemperatureTextView"
@@ -80,6 +80,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/maxTemperatureTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/maxTemperatureTextView"
-        tools:text="Min:13℃"/>
+        tools:text="Min:13℃" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

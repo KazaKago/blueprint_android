@@ -16,7 +16,7 @@
         android:textSize="@dimen/text_size_medium"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Kanto"/>
+        tools:text="Kanto" />
 
     <TextView
         android:id="@+id/prefectureTextView"
@@ -27,7 +27,7 @@
         android:textSize="@dimen/text_size_medium"
         app:layout_constraintStart_toEndOf="@+id/areaTextView"
         app:layout_constraintTop_toTopOf="@+id/areaTextView"
-        tools:text="Tokyo"/>
+        tools:text="Tokyo" />
 
     <TextView
         android:id="@+id/cityTextView"
@@ -40,7 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/prefectureTextView"
         app:layout_constraintTop_toTopOf="@+id/prefectureTextView"
-        tools:text="Hino"/>
+        tools:text="Hino" />
 
     <TextView
         android:id="@+id/publicTimeTextView"
@@ -53,6 +53,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cityTextView"
-        tools:text="Published: 2016/06/06 00:00:00"/>
+        tools:text="Published: 2016/06/06 00:00:00" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

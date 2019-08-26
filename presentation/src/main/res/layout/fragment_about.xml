@@ -20,7 +20,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_launcher_96dp"/>
+            app:srcCompat="@drawable/ic_launcher_96dp" />
 
         <TextView
             android:id="@+id/appTitleTextView"
@@ -35,7 +35,7 @@
             android:textSize="@dimen/text_size_large"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appIconImageView"/>
+            app:layout_constraintTop_toBottomOf="@+id/appIconImageView" />
 
         <TextView
             android:id="@+id/versionTextView"
@@ -50,7 +50,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appTitleTextView"
-            tools:text="@string/about_ver"/>
+            tools:text="@string/about_ver" />
 
         <TextView
             android:id="@+id/developByTextView"
@@ -64,7 +64,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/versionTextView"
-            tools:text="@string/about_develop_by"/>
+            tools:text="@string/about_develop_by" />
 
         <LinearLayout
             android:id="@+id/playStoreLayout"
@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@null"
                 android:tint="?attr/colorAccent"
-                app:srcCompat="@drawable/ic_googleplay_24dp"/>
+                app:srcCompat="@drawable/ic_googleplay_24dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -95,7 +95,7 @@
                 android:layout_marginStart="32dp"
                 android:text="@string/about_play_store"
                 android:textColor="?android:attr/textColorSecondary"
-                android:textSize="@dimen/text_size_medium_small"/>
+                android:textSize="@dimen/text_size_medium_small" />
 
         </LinearLayout>
 
@@ -119,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@null"
                 android:tint="?attr/colorAccent"
-                app:srcCompat="@drawable/ic_mail_outline_24dp"/>
+                app:srcCompat="@drawable/ic_mail_outline_24dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -127,7 +127,7 @@
                 android:layout_marginStart="32dp"
                 android:text="@string/about_email"
                 android:textColor="?android:attr/textColorSecondary"
-                android:textSize="@dimen/text_size_medium_small"/>
+                android:textSize="@dimen/text_size_medium_small" />
 
         </LinearLayout>
 
@@ -151,7 +151,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@null"
                 android:tint="?attr/colorAccent"
-                app:srcCompat="@drawable/ic_public_24dp"/>
+                app:srcCompat="@drawable/ic_public_24dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -159,7 +159,7 @@
                 android:layout_marginStart="32dp"
                 android:text="@string/about_web_site"
                 android:textColor="?android:attr/textColorSecondary"
-                android:textSize="@dimen/text_size_medium_small"/>
+                android:textSize="@dimen/text_size_medium_small" />
 
         </LinearLayout>
 
@@ -175,7 +175,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/webSiteLayout"
-            tools:text="@string/about_copyright"/>
+            tools:text="@string/about_copyright" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
