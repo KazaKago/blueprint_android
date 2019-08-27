@@ -26,7 +26,7 @@ open class LiveEvent<T> : LiveData<T>() {
         level = DeprecationLevel.HIDDEN
     )
     override fun observeForever(observer: Observer<in T>) {
-        super.observeForever(observer)
+        observeForever("", observer)
     }
 
     @MainThread
@@ -60,7 +60,7 @@ open class LiveEvent<T> : LiveData<T>() {
     }
 
     @MainThread
-    protected open fun call(t: T?) {
+    protected open fun call(t: T) {
         dispatchedTagSet.clear()
         value = t
     }

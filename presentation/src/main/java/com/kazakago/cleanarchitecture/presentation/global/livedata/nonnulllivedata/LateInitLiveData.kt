@@ -41,14 +41,14 @@ open class LateInitLiveData<T> : LiveData<T>() {
 
     @MainThread
     open fun observe(owner: LifecycleOwner, nonNullObserver: NonNullObserver<T>) {
-        val observer = Observer<T> { nonNullObserver.onChanged(it!!) }
+        val observer = Observer<T> { nonNullObserver.onChanged(it) }
         observers[nonNullObserver] = observer
         super.observe(owner, observer)
     }
 
     @MainThread
     open fun observeForever(nonNullObserver: NonNullObserver<T>) {
-        val observer = Observer<T> { nonNullObserver.onChanged(it!!) }
+        val observer = Observer<T> { nonNullObserver.onChanged(it) }
         observers[nonNullObserver] = observer
         super.observeForever(observer)
     }

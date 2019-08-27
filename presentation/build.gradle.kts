@@ -49,7 +49,7 @@ dependencies {
     api("com.google.android.material:material:1.0.0")
     //AndroidX Lifecycle
     api("androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0-rc01")
-    api("androidx.lifecycle:lifecycle-livedata:2.1.0-rc01")
+    api("androidx.lifecycle:lifecycle-livedata-ktx:2.1.0-rc01")
     kapt("androidx.lifecycle:lifecycle-compiler:2.1.0-rc01")
     //AndroidX KTX
     implementation("androidx.core:core-ktx:1.0.2")
@@ -57,8 +57,8 @@ dependencies {
     //PlayServices OSS Licenses
     implementation("com.google.android.gms:play-services-oss-licenses:17.0.0")
     //Groupie
-    implementation("com.xwray:groupie:2.3.0")
-    implementation("com.xwray:groupie-kotlin-android-extensions:2.3.0")
+    implementation("com.xwray:groupie:2.5.1")
+    implementation("com.xwray:groupie-kotlin-android-extensions:2.5.1")
     //Picasso
     implementation("com.squareup.picasso:picasso:2.71828")
 

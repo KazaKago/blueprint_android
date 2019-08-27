@@ -8,7 +8,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.kazakago.cleanarchitecture.domain.model.weather.Weather
 import com.kazakago.cleanarchitecture.presentation.R
-import com.kazakago.cleanarchitecture.presentation.global.livedata.nonnulllivedata.NonNullObserver
+import com.kazakago.cleanarchitecture.presentation.global.livedata.liveevent.observe
+import com.kazakago.cleanarchitecture.presentation.global.livedata.nonnulllivedata.observe
 import com.xwray.groupie.Group
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
@@ -38,18 +39,18 @@ class ForecastFragment : Fragment() {
         }
         forecastRecyclerView.adapter = forecastRecyclerAdapter
 
-        viewModel.weather.observe(this, NonNullObserver {
+        viewModel.weather.observe(this) {
             updateWeather(it)
-        })
-        viewModel.showForecast.observe(this, "", NonNullObserver {
+        }
+        viewModel.showForecast.observe(this, "") {
             Toast.makeText(requireActivity(), it.telop, Toast.LENGTH_SHORT).show()
-        })
-        viewModel.isLoading.observe(this, NonNullObserver {
+        }
+        viewModel.isLoading.observe(this) {
             if (it) loadingProgressBar.show() else loadingProgressBar.hide()
-        })
-        viewModel.showError.observe(this, "", NonNullObserver {
+        }
+        viewModel.showError.observe(this, "") {
             Toast.makeText(requireActivity(), it.localizedMessage, Toast.LENGTH_SHORT).show()
-        })
+        }
     }
 
     private fun updateWeather(weather: Weather) {

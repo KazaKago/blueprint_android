@@ -8,7 +8,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.presentation.R
-import com.kazakago.cleanarchitecture.presentation.global.livedata.nonnulllivedata.NonNullObserver
+import com.kazakago.cleanarchitecture.presentation.global.livedata.liveevent.observe
+import com.kazakago.cleanarchitecture.presentation.global.livedata.nonnulllivedata.observe
 import com.kazakago.cleanarchitecture.presentation.hierarchy.forecast.ForecastActivity
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
@@ -35,12 +36,12 @@ class CityListFragment : Fragment() {
 
         cityRecyclerView.adapter = cityRecyclerAdapter
 
-        viewModel.cityList.observe(this, NonNullObserver {
+        viewModel.cityList.observe(this) {
             updateCityList(it)
-        })
-        viewModel.showError.observe(this, "", NonNullObserver {
+        }
+        viewModel.showError.observe(this, "") {
             Toast.makeText(requireActivity(), it.localizedMessage, Toast.LENGTH_SHORT).show()
-        })
+        }
     }
 
     private fun updateCityList(cityList: List<City>) {

@@ -10,7 +10,7 @@ open class UnitLiveEvent : LiveEvent<Unit>() {
         replaceWith = ReplaceWith("call()"),
         level = DeprecationLevel.HIDDEN
     )
-    override fun call(t: Unit?) {
+    override fun call(t: Unit) {
         super.call(t)
     }
 

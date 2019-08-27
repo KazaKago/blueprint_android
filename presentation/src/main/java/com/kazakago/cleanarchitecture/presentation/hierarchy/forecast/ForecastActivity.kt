@@ -10,7 +10,7 @@ import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.global.extension.StringKey
 import com.kazakago.cleanarchitecture.presentation.global.extension.value
-import com.kazakago.cleanarchitecture.presentation.global.livedata.nonnulllivedata.NonNullObserver
+import com.kazakago.cleanarchitecture.presentation.global.livedata.nonnulllivedata.observe
 import kotlinx.android.synthetic.main.activity_forecast.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -40,9 +40,9 @@ class ForecastActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        viewModel.city.observe(this, NonNullObserver {
+        viewModel.city.observe(this) {
             title = it.name
-        })
+        }
 
         if (savedInstanceState == null) {
             replaceForecastFragment()

@@ -6,8 +6,8 @@ import androidx.lifecycle.AndroidViewModel
 import com.kazakago.cleanarchitecture.domain.usecase.about.GetAppInfoUseCase
 import com.kazakago.cleanarchitecture.domain.usecase.about.GetDeveloperInfoUseCase
 import com.kazakago.cleanarchitecture.presentation.global.extension.toUri
-import com.kazakago.cleanarchitecture.presentation.global.livedata.liveevent.NonNullLiveEvent
-import com.kazakago.cleanarchitecture.presentation.global.livedata.liveevent.NonNullMutableLiveEvent
+import com.kazakago.cleanarchitecture.presentation.global.livedata.liveevent.LiveEvent
+import com.kazakago.cleanarchitecture.presentation.global.livedata.liveevent.MutableLiveEvent
 import com.kazakago.cleanarchitecture.presentation.global.livedata.nonnulllivedata.NonNullLiveData
 
 class AboutViewModel(
@@ -18,10 +18,10 @@ class AboutViewModel(
 
     val appInfo = NonNullLiveData(getAppInfoUseCase())
     val developerInfo = NonNullLiveData(getDeveloperInfoUseCase())
-    private val _openActionView = NonNullMutableLiveEvent<Uri>()
-    val openActionView: NonNullLiveEvent<Uri> get() = _openActionView
-    private val _openSendTo = NonNullMutableLiveEvent<Uri>()
-    val openSendTo: NonNullLiveEvent<Uri> get() = _openSendTo
+    private val _openActionView = MutableLiveEvent<Uri>()
+    val openActionView: LiveEvent<Uri> get() = _openActionView
+    private val _openSendTo = MutableLiveEvent<Uri>()
+    val openSendTo: LiveEvent<Uri> get() = _openSendTo
 
     fun onClickPlayStore() {
         _openActionView.call(appInfo.value.playStoreUri.toUri())
