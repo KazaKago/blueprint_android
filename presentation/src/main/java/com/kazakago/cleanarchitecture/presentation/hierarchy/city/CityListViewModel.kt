@@ -7,8 +7,8 @@ import com.kazakago.cleanarchitecture.domain.model.city.City
 import com.kazakago.cleanarchitecture.domain.usecase.city.GetCityUseCase
 import com.kazakago.cleanarchitecture.presentation.global.livedata.liveevent.LiveEvent
 import com.kazakago.cleanarchitecture.presentation.global.livedata.liveevent.MutableLiveEvent
-import com.kazakago.cleanarchitecture.presentation.global.livedata.nonnulllivedata.NonNullLiveData
-import com.kazakago.cleanarchitecture.presentation.global.livedata.nonnulllivedata.NonNullMutableLiveData
+import com.kazakago.cleanarchitecture.presentation.global.livedata.nullsafelivedata.MutableNullSafeLiveData
+import com.kazakago.cleanarchitecture.presentation.global.livedata.nullsafelivedata.NullSafeLiveData
 import kotlinx.coroutines.launch
 
 class CityListViewModel(
@@ -16,8 +16,8 @@ class CityListViewModel(
     private val getCityUseCase: GetCityUseCase
 ) : AndroidViewModel(application) {
 
-    private val _cityList = NonNullMutableLiveData<List<City>>(emptyList())
-    val cityList: NonNullLiveData<List<City>> get() = _cityList
+    private val _cityList = MutableNullSafeLiveData<List<City>>(emptyList())
+    val cityList: NullSafeLiveData<List<City>> get() = _cityList
     private val _showError = MutableLiveEvent<Exception>()
     val showError: LiveEvent<Exception> get() = _showError
 

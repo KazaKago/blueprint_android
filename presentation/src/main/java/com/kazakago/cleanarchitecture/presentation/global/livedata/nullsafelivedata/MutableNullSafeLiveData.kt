@@ -1,8 +1,12 @@
-package com.kazakago.cleanarchitecture.presentation.global.livedata.nonnulllivedata
+package com.kazakago.cleanarchitecture.presentation.global.livedata.nullsafelivedata
 
 import androidx.annotation.MainThread
 
-class LateInitMutableLiveData<T> : LateInitLiveData<T>() {
+class MutableNullSafeLiveData<T> : NullSafeLiveData<T> {
+
+    constructor(value: T) : super(value)
+
+    constructor() : super()
 
     @MainThread
     public override fun setValue(value: T) {

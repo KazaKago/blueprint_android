@@ -9,10 +9,8 @@ import com.kazakago.cleanarchitecture.domain.model.weather.Weather
 import com.kazakago.cleanarchitecture.domain.usecase.weather.GetWeatherUseCase
 import com.kazakago.cleanarchitecture.presentation.global.livedata.liveevent.LiveEvent
 import com.kazakago.cleanarchitecture.presentation.global.livedata.liveevent.MutableLiveEvent
-import com.kazakago.cleanarchitecture.presentation.global.livedata.nonnulllivedata.LateInitLiveData
-import com.kazakago.cleanarchitecture.presentation.global.livedata.nonnulllivedata.LateInitMutableLiveData
-import com.kazakago.cleanarchitecture.presentation.global.livedata.nonnulllivedata.NonNullLiveData
-import com.kazakago.cleanarchitecture.presentation.global.livedata.nonnulllivedata.NonNullMutableLiveData
+import com.kazakago.cleanarchitecture.presentation.global.livedata.nullsafelivedata.MutableNullSafeLiveData
+import com.kazakago.cleanarchitecture.presentation.global.livedata.nullsafelivedata.NullSafeLiveData
 import kotlinx.coroutines.launch
 
 class ForecastViewModel(
@@ -21,13 +19,14 @@ class ForecastViewModel(
     city: City
 ) : AndroidViewModel(application) {
 
-    val city = NonNullLiveData(city)
-    private val _weather = LateInitMutableLiveData<Weather>()
-    val weather: LateInitLiveData<Weather> get() = _weather
+    private val _city = NullSafeLiveData(city)
+    val city: NullSafeLiveData<City> get() = _city
+    private val _weather = MutableNullSafeLiveData<Weather>()
+    val weather: NullSafeLiveData<Weather> get() = _weather
     private val _showForecast = MutableLiveEvent<Forecast>()
     val showForecast: LiveEvent<Forecast> get() = _showForecast
-    private val _isLoading = NonNullMutableLiveData(false)
-    val isLoading: NonNullLiveData<Boolean> get() = _isLoading
+    private val _isLoading = MutableNullSafeLiveData(false)
+    val isLoading: NullSafeLiveData<Boolean> get() = _isLoading
     private val _showError = MutableLiveEvent<Exception>()
     val showError: LiveEvent<Exception> get() = _showError
 
