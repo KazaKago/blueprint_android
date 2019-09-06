@@ -13,7 +13,7 @@ import com.kazakago.cleanarchitecture.presentation.hierarchy.about.AboutActivity
 import kotlinx.android.synthetic.main.activity_forecast.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CityListActivity : AppCompatActivity() {
+class CityListActivity : AppCompatActivity(R.layout.activity_city_list) {
 
     companion object {
         fun createIntent(context: Context): Intent {
@@ -25,7 +25,6 @@ class CityListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_city_list)
 
         setSupportActionBar(toolbar)
 

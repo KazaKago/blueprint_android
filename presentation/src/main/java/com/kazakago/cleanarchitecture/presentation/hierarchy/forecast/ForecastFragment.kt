@@ -1,9 +1,7 @@
 package com.kazakago.cleanarchitecture.presentation.hierarchy.forecast
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
@@ -16,7 +14,7 @@ import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.fragment_forecast.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class ForecastFragment : Fragment() {
+class ForecastFragment : Fragment(R.layout.fragment_forecast) {
 
     companion object {
         fun createInstance(): ForecastFragment {
@@ -26,10 +24,6 @@ class ForecastFragment : Fragment() {
 
     private val viewModel by sharedViewModel<ForecastViewModel>()
     private val forecastRecyclerAdapter = GroupAdapter<ViewHolder>()
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_forecast, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -68,7 +62,7 @@ class ForecastFragment : Fragment() {
 
     private fun showForecastDescriptionDialog() {
         val dialog = ForecastDescriptionDialog.createInstance()
-        dialog.show(fragmentManager, "")
+        dialog.show(requireFragmentManager(), "")
     }
 
 }

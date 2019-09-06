@@ -3,9 +3,7 @@ package com.kazakago.cleanarchitecture.presentation.hierarchy.about
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import com.kazakago.cleanarchitecture.presentation.R
@@ -14,7 +12,7 @@ import kotlinx.android.synthetic.main.fragment_about.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.util.*
 
-class AboutFragment : Fragment() {
+class AboutFragment : Fragment(R.layout.fragment_about) {
 
     companion object {
         fun createInstance(): AboutFragment {
@@ -23,10 +21,6 @@ class AboutFragment : Fragment() {
     }
 
     private val viewModel by sharedViewModel<AboutViewModel>()
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_about, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

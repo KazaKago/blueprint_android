@@ -10,7 +10,7 @@ import com.kazakago.cleanarchitecture.presentation.R
 import kotlinx.android.synthetic.main.activity_about.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AboutActivity : AppCompatActivity() {
+class AboutActivity : AppCompatActivity(R.layout.activity_about) {
 
     companion object {
         fun createIntent(context: Context): Intent {
@@ -22,7 +22,6 @@ class AboutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_about)
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
