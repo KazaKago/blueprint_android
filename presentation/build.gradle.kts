@@ -42,18 +42,18 @@ dependencies {
     //Koin for AndroidX
     implementation("org.koin:koin-androidx-viewmodel:2.0.1")
     //AndroidX AppCompat
-    api("androidx.appcompat:appcompat:1.0.2")
+    api("androidx.appcompat:appcompat:1.1.0")
     //AndroidX ConstraintLayout
     api("androidx.constraintlayout:constraintlayout:1.1.3")
     //AndroidX Material
     api("com.google.android.material:material:1.0.0")
     //AndroidX Lifecycle
-    api("androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0-rc01")
-    api("androidx.lifecycle:lifecycle-livedata-ktx:2.1.0-rc01")
-    kapt("androidx.lifecycle:lifecycle-compiler:2.1.0-rc01")
+    api("androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0")
+    api("androidx.lifecycle:lifecycle-livedata-ktx:2.1.0")
+    kapt("androidx.lifecycle:lifecycle-compiler:2.1.0")
     //AndroidX KTX
-    implementation("androidx.core:core-ktx:1.0.2")
-    implementation("androidx.fragment:fragment-ktx:1.0.0")
+    implementation("androidx.core:core-ktx:1.1.0")
+    implementation("androidx.fragment:fragment-ktx:1.1.0")
     //PlayServices OSS Licenses
     implementation("com.google.android.gms:play-services-oss-licenses:17.0.0")
     //Groupie
