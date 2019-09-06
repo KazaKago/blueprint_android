@@ -10,10 +10,10 @@ import java.io.File
 import java.net.URL
 
 fun ImageView.loadImageUrl(imageUrl: URL?, onSuccess: (() -> Unit)? = null, onError: (() -> Unit)? = null) {
-    loadImageUrl(imageUrl?.toUri(), onSuccess, onError)
+    loadImageUri(imageUrl?.toUri(), onSuccess, onError)
 }
 
-fun ImageView.loadImageUrl(imageUri: Uri?, onSuccess: (() -> Unit)? = null, onError: (() -> Unit)? = null) {
+fun ImageView.loadImageUri(imageUri: Uri?, onSuccess: (() -> Unit)? = null, onError: (() -> Unit)? = null) {
     load(Picasso.get().load(imageUri), onSuccess, onError)
 }
 
