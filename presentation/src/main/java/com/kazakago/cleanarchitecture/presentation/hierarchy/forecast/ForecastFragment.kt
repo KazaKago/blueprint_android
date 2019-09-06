@@ -39,16 +39,16 @@ class ForecastFragment : Fragment() {
         }
         forecastRecyclerView.adapter = forecastRecyclerAdapter
 
-        viewModel.weather.observe(this) {
+        viewModel.weather.observe(viewLifecycleOwner) {
             updateWeather(it)
         }
-        viewModel.showForecast.observe(this, "") {
+        viewModel.showForecast.observe(viewLifecycleOwner, "") {
             Toast.makeText(requireActivity(), it.telop, Toast.LENGTH_SHORT).show()
         }
-        viewModel.isLoading.observe(this) {
+        viewModel.isLoading.observe(viewLifecycleOwner) {
             if (it) loadingProgressBar.show() else loadingProgressBar.hide()
         }
-        viewModel.showError.observe(this, "") {
+        viewModel.showError.observe(viewLifecycleOwner, "") {
             Toast.makeText(requireActivity(), it.localizedMessage, Toast.LENGTH_SHORT).show()
         }
     }

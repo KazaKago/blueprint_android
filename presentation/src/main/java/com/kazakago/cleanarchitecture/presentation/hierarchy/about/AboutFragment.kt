@@ -41,17 +41,17 @@ class AboutFragment : Fragment() {
             viewModel.onClickMail()
         }
 
-        viewModel.appInfo.observe(this) {
+        viewModel.appInfo.observe(viewLifecycleOwner) {
             versionTextView.text = getString(R.string.about_ver, it.versionName)
         }
-        viewModel.developerInfo.observe(this) {
+        viewModel.developerInfo.observe(viewLifecycleOwner) {
             copyrightTextView.text = getString(R.string.about_copyright, Calendar.getInstance().get(Calendar.YEAR), it.name)
             developByTextView.text = getString(R.string.about_develop_by, it.name)
         }
-        viewModel.openActionView.observe(this, "") {
+        viewModel.openActionView.observe(viewLifecycleOwner, "") {
             openActionView(it)
         }
-        viewModel.openSendTo.observe(this, "") {
+        viewModel.openSendTo.observe(viewLifecycleOwner, "") {
             openSendTo(it)
         }
     }

@@ -36,10 +36,10 @@ class CityListFragment : Fragment() {
 
         cityRecyclerView.adapter = cityRecyclerAdapter
 
-        viewModel.cityList.observe(this) {
+        viewModel.cityList.observe(viewLifecycleOwner) {
             updateCityList(it)
         }
-        viewModel.showError.observe(this, "") {
+        viewModel.showError.observe(viewLifecycleOwner, "") {
             Toast.makeText(requireActivity(), it.localizedMessage, Toast.LENGTH_SHORT).show()
         }
     }

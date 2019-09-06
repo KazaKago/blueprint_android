@@ -28,7 +28,7 @@ class ForecastDescriptionDialog : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.weather.observe(this) {
+        viewModel.weather.observe(viewLifecycleOwner) {
             publishDateTextView.text = getString(R.string.public_time, it.description.publicTime.formattedDateTimeText(requireActivity()))
             descriptionTextView.text = it.description.text
         }
