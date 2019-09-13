@@ -32,7 +32,7 @@ class AboutViewModel(
     }
 
     fun onClickMail() {
-        _openSendTo.call(developerInfo.value.getMailAddressUri().toUri())
+        _openSendTo.call(developerInfo.value.mailAddress.toURI().toUri())
     }
 
     fun onClickWebSite() {

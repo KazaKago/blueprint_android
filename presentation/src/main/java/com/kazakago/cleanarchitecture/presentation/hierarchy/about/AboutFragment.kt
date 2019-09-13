@@ -36,7 +36,7 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
         }
 
         viewModel.appInfo.observe(viewLifecycleOwner) {
-            versionTextView.text = getString(R.string.about_ver, it.versionName)
+            versionTextView.text = getString(R.string.about_ver, it.versionName.value)
         }
         viewModel.developerInfo.observe(viewLifecycleOwner) {
             copyrightTextView.text = getString(R.string.about_copyright, Calendar.getInstance().get(Calendar.YEAR), it.name)
