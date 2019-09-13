@@ -15,5 +15,6 @@ dependencies {
 
     //JUnit
     testImplementation("junit:junit:4.12")
+    testImplementation("org.koin:koin-test:2.0.1")
 }
 
