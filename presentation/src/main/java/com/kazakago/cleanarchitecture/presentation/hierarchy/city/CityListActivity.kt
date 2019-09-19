@@ -9,11 +9,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.kazakago.cleanarchitecture.presentation.R
+import com.kazakago.cleanarchitecture.presentation.databinding.ActivityCityListBinding
 import com.kazakago.cleanarchitecture.presentation.hierarchy.about.AboutActivity
-import kotlinx.android.synthetic.main.activity_forecast.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CityListActivity : AppCompatActivity(R.layout.activity_city_list) {
+class CityListActivity : AppCompatActivity() {
 
     companion object {
         fun createIntent(context: Context): Intent {
@@ -22,11 +22,14 @@ class CityListActivity : AppCompatActivity(R.layout.activity_city_list) {
     }
 
     private val viewModel by viewModel<CityListViewModel>()
+    private lateinit var binding: ActivityCityListBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityCityListBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
 
         if (savedInstanceState == null) {
             replaceCityListFragment()

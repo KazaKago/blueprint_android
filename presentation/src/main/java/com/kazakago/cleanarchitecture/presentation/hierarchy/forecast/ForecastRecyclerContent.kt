@@ -3,14 +3,14 @@ package com.kazakago.cleanarchitecture.presentation.hierarchy.forecast
 import androidx.annotation.LayoutRes
 import com.kazakago.cleanarchitecture.domain.model.weather.Forecast
 import com.kazakago.cleanarchitecture.presentation.R
+import com.kazakago.cleanarchitecture.presentation.databinding.RecyclerForecastContentBinding
 import com.kazakago.cleanarchitecture.presentation.global.extension.context
 import com.kazakago.cleanarchitecture.presentation.global.extension.formattedDateText
 import com.kazakago.cleanarchitecture.presentation.global.extension.loadImageUrl
-import com.xwray.groupie.kotlinandroidextensions.Item
-import com.xwray.groupie.kotlinandroidextensions.ViewHolder
-import kotlinx.android.synthetic.main.recycler_forecast_content.*
+import com.xwray.groupie.Item
+import com.xwray.groupie.ViewHolder
 
-data class ForecastRecyclerContent(private val forecast: Forecast) : Item(forecast.hashCode().toLong()) {
+data class ForecastRecyclerContent(private val forecast: Forecast) : Item<ViewHolder>(forecast.hashCode().toLong()) {
 
     var onClickItem: ((forecast: Forecast) -> Unit)? = null
 
@@ -20,15 +20,16 @@ data class ForecastRecyclerContent(private val forecast: Forecast) : Item(foreca
     }
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
-        viewHolder.containerView.setOnClickListener {
+        val binding = RecyclerForecastContentBinding.bind(viewHolder.root)
+        binding.root.setOnClickListener {
             onClickItem?.invoke(forecast)
         }
-        viewHolder.weatherImageView.loadImageUrl(forecast.imageUrl)
-        viewHolder.dateLabelTextView.text = forecast.dateLabel
-        viewHolder.dateTextView.text = forecast.date.formattedDateText(viewHolder.context())
-        viewHolder.telopTextView.text = forecast.telop
-        viewHolder.maxTemperatureTextView.text = viewHolder.context().getString(R.string.temperature_max, forecast.maxTemperature?.toString() ?: "--")
-        viewHolder.minTemperatureTextView.text = viewHolder.context().getString(R.string.temperature_min, forecast.minTemperature?.toString() ?: "--")
+        binding.weatherImageView.loadImageUrl(forecast.imageUrl)
+        binding.dateLabelTextView.text = forecast.dateLabel
+        binding.dateTextView.text = forecast.date.formattedDateText(binding.context())
+        binding.telopTextView.text = forecast.telop
+        binding.maxTemperatureTextView.text = binding.context().getString(R.string.temperature_max, forecast.maxTemperature?.toString() ?: "--")
+        binding.minTemperatureTextView.text = binding.context().getString(R.string.temperature_min, forecast.minTemperature?.toString() ?: "--")
     }
 
 }

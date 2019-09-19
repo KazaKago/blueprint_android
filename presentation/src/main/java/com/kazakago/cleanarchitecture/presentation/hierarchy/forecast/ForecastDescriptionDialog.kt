@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.lifecycle.observe
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kazakago.cleanarchitecture.presentation.R
+import com.kazakago.cleanarchitecture.presentation.databinding.DialogForecastDescriptionBinding
 import com.kazakago.cleanarchitecture.presentation.global.extension.formattedDateTimeText
-import kotlinx.android.synthetic.main.dialog_forecast_description.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class ForecastDescriptionDialog : BottomSheetDialogFragment() {
@@ -20,17 +20,19 @@ class ForecastDescriptionDialog : BottomSheetDialogFragment() {
     }
 
     private val viewModel by sharedViewModel<ForecastViewModel>()
+    private lateinit var binding: DialogForecastDescriptionBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.dialog_forecast_description, container, false)
+        binding = DialogForecastDescriptionBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.weather.observe(viewLifecycleOwner) {
-            publishDateTextView.text = getString(R.string.public_time, it.description.publicTime.formattedDateTimeText(requireActivity()))
-            descriptionTextView.text = it.description.text
+            binding.publishDateTextView.text = getString(R.string.public_time, it.description.publicTime.formattedDateTimeText(requireActivity()))
+            binding.descriptionTextView.text = it.description.text
         }
     }
 

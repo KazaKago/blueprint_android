@@ -4,7 +4,6 @@ plugins {
     id("com.android.library")
     kotlin("android")
     kotlin("kapt")
-    kotlin("android.extensions")
 }
 
 android {
@@ -21,13 +20,12 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
     }
+    viewBinding {
+        isEnabled = true
+    }
     lintOptions {
         xmlReport = true
     }
-}
-
-androidExtensions {
-    isExperimental = true
 }
 
 dependencies {
@@ -58,7 +56,6 @@ dependencies {
     implementation("com.google.android.gms:play-services-oss-licenses:17.0.0")
     //Groupie
     implementation("com.xwray:groupie:2.5.1")
-    implementation("com.xwray:groupie-kotlin-android-extensions:2.5.1")
     //Picasso
     implementation("com.squareup.picasso:picasso:2.71828")
 

@@ -1,20 +1,22 @@
 package com.kazakago.cleanarchitecture.presentation.hierarchy.forecast
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import com.kazakago.cleanarchitecture.domain.model.weather.Weather
 import com.kazakago.cleanarchitecture.presentation.R
+import com.kazakago.cleanarchitecture.presentation.databinding.FragmentForecastBinding
 import com.kazakago.cleanarchitecture.presentation.global.livedata.liveevent.observe
 import com.xwray.groupie.Group
 import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.kotlinandroidextensions.ViewHolder
-import kotlinx.android.synthetic.main.fragment_forecast.*
+import com.xwray.groupie.ViewHolder
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class ForecastFragment : Fragment(R.layout.fragment_forecast) {
+class ForecastFragment : Fragment() {
 
     companion object {
         fun createInstance(): ForecastFragment {
@@ -23,15 +25,21 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
     }
 
     private val viewModel by sharedViewModel<ForecastViewModel>()
+    private lateinit var binding: FragmentForecastBinding
     private val forecastRecyclerAdapter = GroupAdapter<ViewHolder>()
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FragmentForecastBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        descriptionButton.setOnClickListener {
+        binding.descriptionButton.setOnClickListener {
             showForecastDescriptionDialog()
         }
-        forecastRecyclerView.adapter = forecastRecyclerAdapter
+        binding.forecastRecyclerView.adapter = forecastRecyclerAdapter
 
         viewModel.weather.observe(viewLifecycleOwner) {
             updateWeather(it)
@@ -40,7 +48,7 @@ class ForecastFragment : Fragment(R.layout.fragment_forecast) {
             Toast.makeText(requireActivity(), it.telop, Toast.LENGTH_SHORT).show()
         }
         viewModel.isLoading.observe(viewLifecycleOwner) {
-            if (it) loadingProgressBar.show() else loadingProgressBar.hide()
+            if (it) binding.loadingProgressBar.show() else binding.loadingProgressBar.hide()
         }
         viewModel.showError.observe(viewLifecycleOwner, "") {
             Toast.makeText(requireActivity(), it.localizedMessage, Toast.LENGTH_SHORT).show()

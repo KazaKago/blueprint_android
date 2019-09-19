@@ -1,20 +1,21 @@
 package com.kazakago.cleanarchitecture.presentation.hierarchy.city
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import com.kazakago.cleanarchitecture.domain.model.city.City
-import com.kazakago.cleanarchitecture.presentation.R
+import com.kazakago.cleanarchitecture.presentation.databinding.FragmentCityListBinding
 import com.kazakago.cleanarchitecture.presentation.global.livedata.liveevent.observe
 import com.kazakago.cleanarchitecture.presentation.hierarchy.forecast.ForecastActivity
 import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.kotlinandroidextensions.ViewHolder
-import kotlinx.android.synthetic.main.fragment_city_list.*
+import com.xwray.groupie.ViewHolder
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class CityListFragment : Fragment(R.layout.fragment_city_list) {
+class CityListFragment : Fragment() {
 
     companion object {
         fun createInstance(): CityListFragment {
@@ -23,12 +24,18 @@ class CityListFragment : Fragment(R.layout.fragment_city_list) {
     }
 
     private val viewModel by sharedViewModel<CityListViewModel>()
+    private lateinit var binding: FragmentCityListBinding
     private val cityRecyclerAdapter = GroupAdapter<ViewHolder>()
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FragmentCityListBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        cityRecyclerView.adapter = cityRecyclerAdapter
+        binding.cityRecyclerView.adapter = cityRecyclerAdapter
 
         viewModel.cityList.observe(viewLifecycleOwner) {
             updateCityList(it)
