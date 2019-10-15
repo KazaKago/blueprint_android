@@ -35,8 +35,8 @@ dependencies {
     //Kotlin
     implementation(kotlin("stdlib-jdk7", KotlinCompilerVersion.VERSION))
     //kotlinx.coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.2")
     //Koin for AndroidX
     implementation("org.koin:koin-androidx-viewmodel:2.0.1")
     //AndroidX AppCompat
