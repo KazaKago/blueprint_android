@@ -72,7 +72,6 @@ dependencies {
     debugImplementation("com.facebook.flipper:flipper:0.27.0")
     debugImplementation("com.facebook.flipper:flipper-network-plugin:0.27.0")
     debugImplementation("com.facebook.soloader:soloader:0.8.0")
-    releaseImplementation("com.facebook.flipper:flipper-noop:0.27.0")
     //LeakCanary
     debugImplementation("com.squareup.leakcanary:leakcanary-android:2.0-beta-3")
     //Hyperion
