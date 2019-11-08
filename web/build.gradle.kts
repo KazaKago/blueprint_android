@@ -63,9 +63,11 @@ dependencies {
     implementation("com.squareup.moshi:moshi:1.8.0")
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.8.0")
 
-    //Stetho
-    debugImplementation("com.facebook.stetho:stetho-okhttp3:1.5.1")
-    releaseImplementation("com.github.mypplication:stetho-noop:1.1")
+    //Flipper
+    debugImplementation("com.facebook.flipper:flipper:0.27.0")
+    debugImplementation("com.facebook.flipper:flipper-network-plugin:0.27.0")
+    debugImplementation("com.facebook.soloader:soloader:0.8.0")
+    releaseImplementation("com.facebook.flipper:flipper-noop:0.27.0")
     //Chuck
     debugImplementation("com.readystatesoftware.chuck:library:1.1.0")
     releaseImplementation("com.readystatesoftware.chuck:library-no-op:1.1.0")
