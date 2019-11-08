@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import com.kazakago.cleanarchitecture.domain.model.weather.Weather
-import com.kazakago.cleanarchitecture.presentation.R
 import com.kazakago.cleanarchitecture.presentation.databinding.FragmentForecastBinding
 import com.kazakago.cleanarchitecture.presentation.global.livedata.liveevent.observe
 import com.xwray.groupie.Group
