@@ -20,6 +20,18 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
     }
+    flavorDimensions("app")
+    productFlavors {
+        create("production") {
+            setDimension("app")
+        }
+        create("staging") {
+            setDimension("app")
+        }
+        create("develop") {
+            setDimension("app")
+        }
+    }
     viewBinding {
         isEnabled = true
     }
