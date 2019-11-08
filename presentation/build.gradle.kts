@@ -32,6 +32,13 @@ android {
             setDimension("app")
         }
     }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
     viewBinding {
         isEnabled = true
     }
@@ -60,7 +67,7 @@ dependencies {
     //AndroidX Lifecycle
     api("androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0")
     api("androidx.lifecycle:lifecycle-livedata-ktx:2.1.0")
-    kapt("androidx.lifecycle:lifecycle-compiler:2.1.0")
+    api("androidx.lifecycle:lifecycle-common-java8:2.1.0")
     //AndroidX KTX
     implementation("androidx.core:core-ktx:1.1.0")
     implementation("androidx.fragment:fragment-ktx:1.1.0")
