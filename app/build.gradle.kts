@@ -45,6 +45,7 @@ android {
         }
     }
     compileOptions {
+        setCoreLibraryDesugaringEnabled(true)
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -64,7 +65,7 @@ dependencies {
     implementation(project(":web"))
     implementation(project(":data"))
     //Kotlin
-    implementation(kotlin("stdlib-jdk7", KotlinCompilerVersion.VERSION))
+    implementation(kotlin("stdlib-jdk8", KotlinCompilerVersion.VERSION))
     //Koin for Android
     implementation("org.koin:koin-android:2.0.1")
 

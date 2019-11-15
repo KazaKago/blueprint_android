@@ -33,6 +33,7 @@ android {
         }
     }
     compileOptions {
+        setCoreLibraryDesugaringEnabled(true)
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -49,7 +50,7 @@ dependencies {
     //Module
     implementation(project(":domain"))
     //Kotlin
-    implementation(kotlin("stdlib-jdk7", KotlinCompilerVersion.VERSION))
+    implementation(kotlin("stdlib-jdk8", KotlinCompilerVersion.VERSION))
     //kotlinx.coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2")
     //Koin
