@@ -5,7 +5,6 @@
 
     <application
         android:name=".CleanApplication"
-        android:allowBackup="false">
-    </application>
+        android:allowBackup="false" />
 
 </manifest>
