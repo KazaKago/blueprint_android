@@ -56,14 +56,14 @@ dependencies {
     //Koin
     implementation("org.koin:koin-core:2.0.1")
     //AndroidX Room
-    implementation("androidx.room:room-runtime:2.2.1")
-    implementation("androidx.room:room-ktx:2.2.1")
-    kapt("androidx.room:room-compiler:2.2.1")
+    implementation("androidx.room:room-runtime:2.2.2")
+    implementation("androidx.room:room-ktx:2.2.2")
+    kapt("androidx.room:room-compiler:2.2.2")
     //AndroidX KTX
     implementation("androidx.core:core-ktx:1.1.0")
     //Moshi
-    implementation("com.squareup.moshi:moshi:1.8.0")
-    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.8.0")
+    implementation("com.squareup.moshi:moshi:1.9.2")
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.9.2")
 
     //JUnit
     testImplementation("junit:junit:4.12")

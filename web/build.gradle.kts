@@ -61,12 +61,12 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.6.2")
     implementation("com.squareup.retrofit2:converter-moshi:2.6.2")
     //Moshi
-    implementation("com.squareup.moshi:moshi:1.8.0")
-    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.8.0")
+    implementation("com.squareup.moshi:moshi:1.9.2")
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.9.2")
 
     //Flipper
-    debugImplementation("com.facebook.flipper:flipper:0.27.0")
-    debugImplementation("com.facebook.flipper:flipper-network-plugin:0.27.0")
+    debugImplementation("com.facebook.flipper:flipper:0.28.0")
+    debugImplementation("com.facebook.flipper:flipper-network-plugin:0.28.0")
     //Chuck
     debugImplementation("com.readystatesoftware.chuck:library:1.1.0")
     releaseImplementation("com.readystatesoftware.chuck:library-no-op:1.1.0")
