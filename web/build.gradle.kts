@@ -65,8 +65,8 @@ dependencies {
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.9.2")
 
     //Flipper
-    debugImplementation("com.facebook.flipper:flipper:0.28.0")
-    debugImplementation("com.facebook.flipper:flipper-network-plugin:0.28.0")
+    debugImplementation("com.facebook.flipper:flipper:0.29.4")
+    debugImplementation("com.facebook.flipper:flipper-network-plugin:0.29.4")
     //Chuck
     debugImplementation("com.readystatesoftware.chuck:library:1.1.0")
     releaseImplementation("com.readystatesoftware.chuck:library-no-op:1.1.0")
