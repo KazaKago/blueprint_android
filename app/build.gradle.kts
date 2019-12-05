@@ -70,8 +70,8 @@ dependencies {
     implementation("org.koin:koin-android:2.0.1")
 
     //Flipper
-    debugImplementation("com.facebook.flipper:flipper:0.29.4")
-    debugImplementation("com.facebook.flipper:flipper-network-plugin:0.29.4")
+    debugImplementation("com.facebook.flipper:flipper:0.30.0")
+    debugImplementation("com.facebook.flipper:flipper-network-plugin:0.30.0")
     debugImplementation("com.facebook.soloader:soloader:0.8.0")
     //LeakCanary
     debugImplementation("com.squareup.leakcanary:leakcanary-android:2.0")
