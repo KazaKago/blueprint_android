@@ -60,10 +60,15 @@ android {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     //Module
-    implementation(project(":presentation"))
-    implementation(project(":domain"))
-    implementation(project(":web"))
-    implementation(project(":data"))
+    implementation(project(":presentation:view"))
+    implementation(project(":presentation:viewmodel"))
+    implementation(project(":domain:usecase"))
+    implementation(project(":domain:model"))
+    implementation(project(":domain:repository"))
+    implementation(project(":data:repository"))
+    implementation(project(":data:api"))
+    implementation(project(":data:database"))
+    implementation(project(":data:resource"))
     //Kotlin
     implementation(kotlin("stdlib-jdk8", KotlinCompilerVersion.VERSION))
     //Koin for Android
@@ -94,6 +99,6 @@ dependencies {
     testImplementation("junit:junit:4.12")
 
     //Espresso
-    androidTestImplementation("androidx.test:runner:1.2.0")
+    androidTestImplementation("androidx.test.ext:junit:1.1.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
 }
