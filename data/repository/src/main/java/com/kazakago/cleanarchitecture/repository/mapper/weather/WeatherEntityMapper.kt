@@ -13,15 +13,14 @@ object WeatherEntityMapper {
 
     fun map(weather: WeatherEntity, location: LocationEntity, description: DescriptionEntity, forecasts: List<ForecastEntity>): Weather {
         return Weather(
+            cityId = CityId(weather.cityId),
             location = LocationEntityMapper.map(location),
             title = weather.title,
             link = URL(weather.link),
             publicTime = Date(weather.publicTime),
             description = DescriptionEntityMapper.map(description),
             forecasts = forecasts.map { ForecastEntityMapper.map(it) }
-        ).apply {
-            cityId = CityId(weather.cityId)
-        }
+        )
     }
 
     fun reverse(destination: Weather): ReverseMappingResult {

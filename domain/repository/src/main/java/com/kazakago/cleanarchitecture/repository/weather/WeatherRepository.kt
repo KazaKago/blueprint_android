@@ -5,10 +5,6 @@ import com.kazakago.cleanarchitecture.model.weather.Weather
 
 interface WeatherRepository {
 
-    suspend fun find(cityId: CityId): Weather
-
-    suspend fun insert(weather: Weather)
-
-    suspend fun delete(weather: Weather)
+    suspend fun get(cityId: CityId): Weather
 
 }

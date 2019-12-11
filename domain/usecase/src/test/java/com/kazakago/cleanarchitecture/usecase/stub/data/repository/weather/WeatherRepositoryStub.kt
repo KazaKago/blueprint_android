@@ -6,14 +6,14 @@ import com.kazakago.cleanarchitecture.model.weather.Forecast
 import com.kazakago.cleanarchitecture.model.weather.Location
 import com.kazakago.cleanarchitecture.model.weather.Weather
 import com.kazakago.cleanarchitecture.repository.weather.WeatherRepository
-import kotlinx.coroutines.delay
 import java.net.URL
 import java.util.*
 
 class WeatherRepositoryStub : WeatherRepository {
 
-    override suspend fun find(cityId: CityId): Weather {
+    override suspend fun get(cityId: CityId): Weather {
         return Weather(
+            cityId = cityId,
             location = Location(
                 area = "area",
                 prefecture = "prefecture",
@@ -52,17 +52,7 @@ class WeatherRepositoryStub : WeatherRepository {
                     minTemperature = 20.0f
                 )
             )
-        ).apply {
-            this.cityId = cityId
-        }
-    }
-
-    override suspend fun insert(weather: Weather) {
-        delay(100)
-    }
-
-    override suspend fun delete(weather: Weather) {
-        delay(100)
+        )
     }
 
 }

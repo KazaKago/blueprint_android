@@ -11,7 +11,7 @@ import com.kazakago.cleanarchitecture.usecase.usecase.weather.GetWeatherUseCaseI
 import org.koin.dsl.module
 
 val domainModule = module {
-    single<GetWeatherUseCase> { GetWeatherUseCaseImpl(get(), get()) }
+    single<GetWeatherUseCase> { GetWeatherUseCaseImpl(get()) }
     single<GetCityUseCase> { GetCityUseCaseImpl(get()) }
     single<GetAppInfoUseCase> { GetAppInfoUseCaseImpl(get()) }
     single<GetDeveloperInfoUseCase> { GetDeveloperInfoUseCaseImpl(get()) }

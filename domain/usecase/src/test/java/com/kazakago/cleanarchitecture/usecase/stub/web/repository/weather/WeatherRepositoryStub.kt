@@ -5,14 +5,15 @@ import com.kazakago.cleanarchitecture.model.weather.Description
 import com.kazakago.cleanarchitecture.model.weather.Forecast
 import com.kazakago.cleanarchitecture.model.weather.Location
 import com.kazakago.cleanarchitecture.model.weather.Weather
-import com.kazakago.cleanarchitecture.repository.weather.WeatherApiRepository
+import com.kazakago.cleanarchitecture.repository.weather.WeatherRepository
 import java.net.URL
 import java.util.*
 
-class WeatherApiRepositoryStub : WeatherApiRepository {
+class WeatherRepositoryStub : WeatherRepository {
 
-    override suspend fun fetch(cityId: CityId): Weather {
+    override suspend fun get(cityId: CityId): Weather {
         return Weather(
+            cityId = cityId,
             location = Location(
                 area = "area",
                 prefecture = "prefecture",
@@ -51,9 +52,7 @@ class WeatherApiRepositoryStub : WeatherApiRepository {
                     minTemperature = 20.0f
                 )
             )
-        ).apply {
-            this.cityId = cityId
-        }
+        )
     }
 
 }
