@@ -3,14 +3,14 @@ package com.kazakago.cleanarchitecture.repository.mapper.weather
 import com.kazakago.cleanarchitecture.database.entity.weather.DescriptionEntity
 import com.kazakago.cleanarchitecture.model.city.CityId
 import com.kazakago.cleanarchitecture.model.weather.Description
-import java.util.*
+import java.time.LocalDateTime
 
 object DescriptionEntityMapper {
 
     fun map(source: DescriptionEntity): Description {
         return Description(
             text = source.text,
-            publicTime = Date(source.publicTime)
+            publicTime = LocalDateTime.parse(source.publicTime)
         )
     }
 
@@ -18,7 +18,7 @@ object DescriptionEntityMapper {
         return DescriptionEntity(
             cityId = cityId.value,
             text = destination.text,
-            publicTime = destination.publicTime.time
+            publicTime = destination.publicTime.toString()
         )
     }
 

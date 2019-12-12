@@ -18,7 +18,7 @@ data class ForecastEntity(
     val cityId: String,
 
     @ColumnInfo(name = "date")
-    val date: Long,
+    val date: String,
     @ColumnInfo(name = "dateLabel")
     val dateLabel: String,
     @ColumnInfo(name = "telop")

@@ -5,7 +5,7 @@ import com.kazakago.cleanarchitecture.model.weather.Weather
 import com.kazakago.cleanarchitecture.view.R
 import com.kazakago.cleanarchitecture.view.databinding.RecyclerForecastSummaryBinding
 import com.kazakago.cleanarchitecture.view.global.extension.context
-import com.kazakago.cleanarchitecture.view.global.extension.formattedDateTimeText
+import com.kazakago.cleanarchitecture.view.global.extension.formattedText
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 
@@ -21,7 +21,7 @@ data class ForecastRecyclerSummary(private val weather: Weather) : Item<ViewHold
         binding.areaTextView.text = weather.location.area
         binding.prefectureTextView.text = weather.location.prefecture
         binding.cityTextView.text = weather.location.city
-        binding.publicTimeTextView.text = binding.context().getString(R.string.public_time, weather.publicTime.formattedDateTimeText(binding.context()))
+        binding.publicTimeTextView.text = binding.context().getString(R.string.public_time, weather.publicTime.formattedText(binding.context()))
     }
 
 }

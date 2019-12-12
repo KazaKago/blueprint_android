@@ -8,7 +8,7 @@ import androidx.lifecycle.observe
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kazakago.cleanarchitecture.view.R
 import com.kazakago.cleanarchitecture.view.databinding.DialogForecastDescriptionBinding
-import com.kazakago.cleanarchitecture.view.global.extension.formattedDateTimeText
+import com.kazakago.cleanarchitecture.view.global.extension.formattedText
 import com.kazakago.cleanarchitecture.viewmodel.hierarchy.forecast.ForecastViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -32,7 +32,7 @@ class ForecastDescriptionDialog : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.weather.observe(viewLifecycleOwner) {
-            binding.publishDateTextView.text = getString(R.string.public_time, it.description.publicTime.formattedDateTimeText(requireActivity()))
+            binding.publishDateTextView.text = getString(R.string.public_time, it.description.publicTime.formattedText(requireActivity()))
             binding.descriptionTextView.text = it.description.text
         }
     }

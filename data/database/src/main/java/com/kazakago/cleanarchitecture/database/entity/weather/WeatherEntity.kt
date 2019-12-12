@@ -15,5 +15,5 @@ data class WeatherEntity(
     @ColumnInfo(name = "link")
     val link: String,
     @ColumnInfo(name = "public_time")
-    val publicTime: Long
+    val publicTime: String
 )

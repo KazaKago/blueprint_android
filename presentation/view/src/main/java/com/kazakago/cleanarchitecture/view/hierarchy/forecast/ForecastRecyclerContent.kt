@@ -5,7 +5,7 @@ import com.kazakago.cleanarchitecture.model.weather.Forecast
 import com.kazakago.cleanarchitecture.view.R
 import com.kazakago.cleanarchitecture.view.databinding.RecyclerForecastContentBinding
 import com.kazakago.cleanarchitecture.view.global.extension.context
-import com.kazakago.cleanarchitecture.view.global.extension.formattedDateText
+import com.kazakago.cleanarchitecture.view.global.extension.formattedText
 import com.kazakago.cleanarchitecture.view.global.extension.loadImageUrl
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
@@ -26,7 +26,7 @@ data class ForecastRecyclerContent(private val forecast: Forecast) : Item<ViewHo
         }
         binding.weatherImageView.loadImageUrl(forecast.imageUrl)
         binding.dateLabelTextView.text = forecast.dateLabel
-        binding.dateTextView.text = forecast.date.formattedDateText(binding.context())
+        binding.dateTextView.text = forecast.date.formattedText(binding.context())
         binding.telopTextView.text = forecast.telop
         binding.maxTemperatureTextView.text = binding.context().getString(R.string.temperature_max, forecast.maxTemperature?.toString() ?: "--")
         binding.minTemperatureTextView.text = binding.context().getString(R.string.temperature_min, forecast.minTemperature?.toString() ?: "--")

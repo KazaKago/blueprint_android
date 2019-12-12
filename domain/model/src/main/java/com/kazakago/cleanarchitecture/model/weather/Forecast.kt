@@ -2,10 +2,10 @@ package com.kazakago.cleanarchitecture.model.weather
 
 import java.io.Serializable
 import java.net.URL
-import java.util.*
+import java.time.LocalDate
 
 data class Forecast(
-    var date: Date,
+    var date: LocalDate,
     var dateLabel: String,
     var telop: String,
     var imageUrl: URL,

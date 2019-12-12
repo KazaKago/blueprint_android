@@ -4,14 +4,14 @@ import com.kazakago.cleanarchitecture.database.entity.weather.ForecastEntity
 import com.kazakago.cleanarchitecture.model.city.CityId
 import com.kazakago.cleanarchitecture.model.weather.Forecast
 import java.net.URL
-import java.util.*
+import java.time.LocalDate
 
 object ForecastEntityMapper {
 
     fun map(source: ForecastEntity): Forecast {
         return Forecast(
             telop = source.telop,
-            date = Date(source.date),
+            date = LocalDate.parse(source.date),
             dateLabel = source.dateLabel,
             imageUrl = URL(source.imageUrl),
             maxTemperature = source.maxTemperature,
@@ -23,7 +23,7 @@ object ForecastEntityMapper {
         return ForecastEntity(
             cityId = cityId.value,
             telop = destination.telop,
-            date = destination.date.time,
+            date = destination.date.toString(),
             dateLabel = destination.dateLabel,
             imageUrl = destination.imageUrl.toString(),
             maxTemperature = destination.maxTemperature,

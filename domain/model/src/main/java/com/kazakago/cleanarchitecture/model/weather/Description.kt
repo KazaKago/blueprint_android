@@ -1,9 +1,9 @@
 package com.kazakago.cleanarchitecture.model.weather
 
 import java.io.Serializable
-import java.util.*
+import java.time.LocalDateTime
 
 data class Description(
     val text: String,
-    val publicTime: Date
+    val publicTime: LocalDateTime
 ) : Serializable
