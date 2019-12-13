@@ -10,11 +10,14 @@ import java.net.URL
 
 internal class AboutRepositoryImpl(private val context: Context) : AboutRepository {
 
+    private val versionDao = VersionDao(context)
+    private val storeLinkDao = StoreLinkDao(context)
+
     override fun getAppInfo(): AppInfo {
         return AppInfo(
-            VersionName(VersionDao.getVersionName(context)),
-            VersionCode(VersionDao.getVersionCode(context)),
-            StoreLinkDao.getStoreAppLink(context)
+            VersionName(versionDao.getVersionName()),
+            VersionCode(versionDao.getVersionCode()),
+            storeLinkDao.getStoreAppLink()
         )
     }
 

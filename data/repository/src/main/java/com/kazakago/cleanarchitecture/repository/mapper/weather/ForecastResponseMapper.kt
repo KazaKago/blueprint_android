@@ -5,7 +5,7 @@ import com.kazakago.cleanarchitecture.model.weather.Forecast
 import com.kazakago.cleanarchitecture.repository.extension.parseDate
 import java.net.URL
 
-internal object ForecastResponseMapper {
+internal class ForecastResponseMapper {
 
     fun map(response: ForecastResponse): Forecast {
         return Forecast(

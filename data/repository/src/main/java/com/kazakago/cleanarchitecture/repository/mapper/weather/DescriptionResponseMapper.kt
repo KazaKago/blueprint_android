@@ -4,7 +4,7 @@ import com.kazakago.cleanarchitecture.api.entity.weather.DescriptionResponse
 import com.kazakago.cleanarchitecture.model.weather.Description
 import com.kazakago.cleanarchitecture.repository.extension.parseDateTime
 
-internal object DescriptionResponseMapper {
+internal class DescriptionResponseMapper {
 
     fun map(source: DescriptionResponse): Description {
         return Description(

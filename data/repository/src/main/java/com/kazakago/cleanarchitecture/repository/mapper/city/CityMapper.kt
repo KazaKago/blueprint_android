@@ -4,7 +4,7 @@ import com.kazakago.cleanarchitecture.model.city.City
 import com.kazakago.cleanarchitecture.model.city.CityId
 import com.kazakago.cleanarchitecture.resource.entity.city.PrefEntity
 
-internal object CityMapper {
+internal class CityMapper {
 
     fun map(source: PrefEntity): List<City> {
         val prefTitle = source.title

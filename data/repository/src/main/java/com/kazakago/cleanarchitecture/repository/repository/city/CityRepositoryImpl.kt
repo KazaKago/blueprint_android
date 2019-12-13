@@ -8,12 +8,14 @@ import com.kazakago.cleanarchitecture.resource.dao.city.CityDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-internal class CityRepositoryImpl(private val context: Context) : CityRepository {
+internal class CityRepositoryImpl(context: Context) : CityRepository {
+
+    private val cityDao = CityDao(context)
+    private val cityMapper = CityMapper()
 
     override suspend fun findAll(): List<City> = withContext(Dispatchers.IO) {
-        val cityDao = CityDao(context)
         val prefEntityList = cityDao.find()
-        prefEntityList.flatMap { CityMapper.map(it) }
+        prefEntityList.flatMap { cityMapper.map(it) }
     }
 
 }

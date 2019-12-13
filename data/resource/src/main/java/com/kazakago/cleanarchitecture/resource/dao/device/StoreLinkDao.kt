@@ -4,14 +4,14 @@ import android.content.Context
 import java.net.URI
 import java.net.URL
 
-object StoreLinkDao {
+class StoreLinkDao(private val context: Context) {
 
-    fun getStoreAppLink(context: Context): URI {
+    fun getStoreAppLink(): URI {
         val packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
         return URI("market://details?id=" + packageInfo.packageName)
     }
 
-    fun getBrowserAppLink(context: Context): URL {
+    fun getBrowserAppLink(): URL {
         val packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
         return URL("http://play.google.com/store/apps/details?id=" + packageInfo.packageName)
     }

@@ -6,7 +6,7 @@ import com.kazakago.cleanarchitecture.model.weather.Forecast
 import java.net.URL
 import java.time.LocalDate
 
-internal object ForecastEntityMapper {
+internal class ForecastEntityMapper {
 
     fun map(source: ForecastEntity): Forecast {
         return Forecast(

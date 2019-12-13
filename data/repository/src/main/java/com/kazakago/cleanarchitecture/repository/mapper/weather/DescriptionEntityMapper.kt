@@ -5,7 +5,7 @@ import com.kazakago.cleanarchitecture.model.city.CityId
 import com.kazakago.cleanarchitecture.model.weather.Description
 import java.time.LocalDateTime
 
-internal object DescriptionEntityMapper {
+internal class DescriptionEntityMapper {
 
     fun map(source: DescriptionEntity): Description {
         return Description(
