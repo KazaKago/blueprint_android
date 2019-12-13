@@ -8,7 +8,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.net.URL
 
-class RetrofitBuilder(context: Context, baseUrl: URL) {
+internal class RetrofitBuilder(context: Context, baseUrl: URL) {
 
     private val chuckInterceptor = ChuckInterceptor(context)
         .showNotification(false)

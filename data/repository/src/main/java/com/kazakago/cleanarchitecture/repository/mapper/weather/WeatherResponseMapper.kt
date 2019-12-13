@@ -6,7 +6,7 @@ import com.kazakago.cleanarchitecture.model.weather.Weather
 import com.kazakago.cleanarchitecture.repository.extension.parseDateTime
 import java.net.URL
 
-object WeatherResponseMapper {
+internal object WeatherResponseMapper {
 
     fun map(response: WeatherResponse, cityId: CityId): Weather {
         return Weather(

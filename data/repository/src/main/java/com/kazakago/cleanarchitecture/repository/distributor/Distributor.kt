@@ -3,7 +3,7 @@ package com.kazakago.cleanarchitecture.repository.distributor
 import java.time.Duration
 import java.time.LocalDateTime
 
-class Distributor(private val validTime: Duration) {
+internal class Distributor(private val validTime: Duration) {
 
     suspend fun <T> execute(load: (suspend () -> Stored<T>?), save: (suspend (content: Stored<T>) -> Unit), fetch: (suspend () -> T)): T {
         val storedContent = load()

@@ -4,7 +4,7 @@ import com.kazakago.cleanarchitecture.database.entity.weather.LocationEntity
 import com.kazakago.cleanarchitecture.model.city.CityId
 import com.kazakago.cleanarchitecture.model.weather.Location
 
-object LocationEntityMapper {
+internal object LocationEntityMapper {
 
     fun map(source: LocationEntity): Location {
         return Location(

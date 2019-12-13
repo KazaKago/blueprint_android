@@ -2,7 +2,7 @@ package com.kazakago.cleanarchitecture.resource.parser
 
 import com.squareup.moshi.Moshi
 
-class MoshiBuilder {
+internal class MoshiBuilder {
 
     private val builder = Moshi.Builder()
 

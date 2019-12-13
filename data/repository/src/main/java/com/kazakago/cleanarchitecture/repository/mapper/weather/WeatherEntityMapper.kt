@@ -10,7 +10,7 @@ import com.kazakago.cleanarchitecture.repository.distributor.Stored
 import java.net.URL
 import java.time.LocalDateTime
 
-object WeatherEntityMapper {
+internal object WeatherEntityMapper {
 
     fun map(weather: WeatherEntity, location: LocationEntity, description: DescriptionEntity, forecasts: List<ForecastEntity>): Stored<Weather> {
         return Stored(
