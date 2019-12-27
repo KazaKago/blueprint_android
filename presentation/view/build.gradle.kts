@@ -22,17 +22,17 @@ android {
     flavorDimensions("app")
     productFlavors {
         create("production") {
-            setDimension("app")
+            dimension = "app"
         }
         create("staging") {
-            setDimension("app")
+            dimension = "app"
         }
         create("develop") {
-            setDimension("app")
+            dimension = "app"
         }
     }
     compileOptions {
-        coreLibraryDesugaringEnabled = true
+//        coreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -64,7 +64,7 @@ dependencies {
     //AndroidX ConstraintLayout
     api("androidx.constraintlayout:constraintlayout:1.1.3")
     //AndroidX Material
-    api("com.google.android.material:material:1.0.0")
+    api("com.google.android.material:material:1.1.0-rc01")
     //AndroidX Lifecycle
     api("androidx.lifecycle:lifecycle-livedata-ktx:2.1.0")
     api("androidx.lifecycle:lifecycle-common-java8:2.1.0")

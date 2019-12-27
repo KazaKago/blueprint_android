@@ -23,17 +23,17 @@ android {
     flavorDimensions("app")
     productFlavors {
         create("production") {
-            setDimension("app")
+            dimension = "app"
         }
         create("staging") {
-            setDimension("app")
+            dimension = "app"
         }
         create("develop") {
-            setDimension("app")
+            dimension = "app"
         }
     }
     compileOptions {
-        coreLibraryDesugaringEnabled = true
+//        coreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -50,13 +50,13 @@ dependencies {
     //Kotlin
     implementation(kotlin("stdlib-jdk8", KotlinCompilerVersion.VERSION))
     //kotlinx.coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3")
     //AndroidX KTX
     implementation("androidx.core:core-ktx:1.1.0")
     //AndroidX Room
-    api("androidx.room:room-runtime:2.2.2")
-    implementation("androidx.room:room-ktx:2.2.2")
-    kapt("androidx.room:room-compiler:2.2.2")
+    api("androidx.room:room-runtime:2.2.3")
+    implementation("androidx.room:room-ktx:2.2.3")
+    kapt("androidx.room:room-compiler:2.2.3")
 
     //JUnit
     testImplementation("junit:junit:4.12")

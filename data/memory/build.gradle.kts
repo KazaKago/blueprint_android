@@ -16,8 +16,6 @@ tasks.withType(KotlinCompile::class).all {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    //Module
-    implementation(project(":domain:model"))
     //Kotlin
     implementation(kotlin("stdlib-jdk8", KotlinCompilerVersion.VERSION))
     //kotlinx.coroutines

@@ -3,26 +3,41 @@ package com.kazakago.cleanarchitecture.repository.repository.weather
 import android.content.Context
 import com.kazakago.cleanarchitecture.api.api.weather.WeatherApi
 import com.kazakago.cleanarchitecture.database.dao.AppDatabase
+import com.kazakago.cleanarchitecture.memory.memory.MemoryState
+import com.kazakago.cleanarchitecture.memory.memory.weather.WeatherMemory
 import com.kazakago.cleanarchitecture.model.city.CityId
+import com.kazakago.cleanarchitecture.model.state.StoreDistributor
+import com.kazakago.cleanarchitecture.model.state.StoreState
 import com.kazakago.cleanarchitecture.model.weather.Weather
-import com.kazakago.cleanarchitecture.repository.distributor.Distributor
-import com.kazakago.cleanarchitecture.repository.distributor.Stored
+import com.kazakago.cleanarchitecture.repository.mapper.city.CityIdEntityMapper
 import com.kazakago.cleanarchitecture.repository.mapper.weather.*
 import com.kazakago.cleanarchitecture.repository.weather.WeatherRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import java.time.Duration
 
 internal class WeatherRepositoryImpl(context: Context) : WeatherRepository {
 
     private val weatherApi = WeatherApi(context)
     private val weatherDao = AppDatabase.create(context).weatherDao()
+    private val cityIdEntityMapper = CityIdEntityMapper()
     private val weatherResponseMapper = WeatherResponseMapper(LocationResponseMapper(), DescriptionResponseMapper(), ForecastResponseMapper())
-    private val weatherEntityMapper = WeatherEntityMapper(LocationEntityMapper(), DescriptionEntityMapper(), ForecastEntityMapper())
+    private val weatherStateMapper = WeatherStateMapper(WeatherEntityMapper(LocationEntityMapper(), DescriptionEntityMapper(), ForecastEntityMapper()))
 
-    override suspend fun get(cityId: CityId, expired: Duration): Weather {
-        return Distributor(expired).execute(
-            load = { find(cityId) },
+    override suspend fun subscribe(cityId: CityId, expired: Duration): Flow<StoreState<Weather>> {
+        return find(cityId)
+            .onStart {
+                CoroutineScope(Dispatchers.IO).launch { distribute(cityId, expired) }
+            }
+    }
+
+    private suspend fun distribute(cityId: CityId, expired: Duration) {
+        StoreDistributor(expired).execute(
+            load = { find(cityId).first() },
             fetch = { fetch(cityId) },
-            save = { insert(it) }
+            save = { insert(cityId, it) }
         )
     }
 
@@ -31,21 +46,33 @@ internal class WeatherRepositoryImpl(context: Context) : WeatherRepository {
         return weatherResponseMapper.map(weatherResponse, cityId)
     }
 
-    private suspend fun find(cityId: CityId): Stored<Weather>? {
-        return weatherDao.findWeather(cityId.value)?.let {
-            val location = weatherDao.findLocation(cityId.value)!!
-            val description = weatherDao.findDescription(cityId.value)!!
-            val forecasts = weatherDao.findForecasts(cityId.value)
-            return weatherEntityMapper.map(it, location, description, forecasts)
-        }
+    private suspend fun find(cityId: CityId): Flow<StoreState<Weather>> {
+        return WeatherMemory.weatherState.asFlow()
+            .map {
+                it.getOrElse(cityIdEntityMapper.reverse(cityId)) { MemoryState.Fixed }
+            }
+            .map {
+                val weather = weatherDao.findWeather(cityId.value)
+                val location = weatherDao.findLocation(cityId.value)
+                val description = weatherDao.findDescription(cityId.value)
+                val forecasts = weatherDao.findForecasts(cityId.value)
+                weatherStateMapper.map(it, weather, location, description, forecasts)
+            }
     }
 
-    private suspend fun insert(weather: Stored<Weather>) {
-        val reverseMappingResult = weatherEntityMapper.reverse(weather)
-        weatherDao.insert(reverseMappingResult.weatherEntity)
-        weatherDao.insert(reverseMappingResult.locationEntity)
-        weatherDao.insert(reverseMappingResult.descriptionEntity)
-        weatherDao.insert(reverseMappingResult.forecastEntities)
+    private suspend fun insert(cityId: CityId, weather: StoreState<Weather>) {
+        val reverseMappingResult = weatherStateMapper.reverse(weather)
+        if (reverseMappingResult.weatherEntity != null && reverseMappingResult.locationEntity != null && reverseMappingResult.descriptionEntity != null && reverseMappingResult.forecastEntities != null) {
+            weatherDao.insertWeather(reverseMappingResult.weatherEntity)
+            weatherDao.insertLocation(reverseMappingResult.locationEntity)
+            weatherDao.insertDescription(reverseMappingResult.descriptionEntity)
+            weatherDao.insertForecasts(reverseMappingResult.forecastEntities)
+        } else {
+            weatherDao.findWeather(cityId.value)?.let { weatherDao.deleteWeather(it) }
+        }
+        val weatherMap = WeatherMemory.weatherState.value.toMutableMap()
+        weatherMap[cityIdEntityMapper.reverse(cityId)] = reverseMappingResult.memoryState
+        WeatherMemory.weatherState.send(weatherMap)
     }
 
 }

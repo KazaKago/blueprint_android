@@ -31,21 +31,21 @@ android {
     flavorDimensions("app")
     productFlavors {
         create("production") {
-            setDimension("app")
+            dimension = "app"
         }
         create("staging") {
-            setDimension("app")
+            dimension = "app"
             applicationId = defaultConfig.applicationId + ".staging"
             versionName = defaultConfig.versionName + " staging"
         }
         create("develop") {
-            setDimension("app")
+            dimension = "app"
             applicationId = defaultConfig.applicationId + ".develop"
             versionName = defaultConfig.versionName + " develop"
         }
     }
     compileOptions {
-        coreLibraryDesugaringEnabled = true
+//        coreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }

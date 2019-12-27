@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/data/api" />
             <option value="$PROJECT_DIR$/data/database" />
+            <option value="$PROJECT_DIR$/data/memory" />
             <option value="$PROJECT_DIR$/data/repository" />
             <option value="$PROJECT_DIR$/data/resource" />
             <option value="$PROJECT_DIR$/domain" />

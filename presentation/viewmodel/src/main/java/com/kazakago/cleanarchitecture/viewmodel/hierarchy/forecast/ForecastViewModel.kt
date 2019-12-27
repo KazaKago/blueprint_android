@@ -4,48 +4,34 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.kazakago.cleanarchitecture.model.city.City
-import com.kazakago.cleanarchitecture.model.weather.Forecast
+import com.kazakago.cleanarchitecture.model.city.CityId
+import com.kazakago.cleanarchitecture.model.state.StoreState
 import com.kazakago.cleanarchitecture.model.weather.Weather
-import com.kazakago.cleanarchitecture.usecase.usecase.weather.GetWeatherUseCase
-import com.kazakago.cleanarchitecture.viewmodel.global.livedata.liveevent.LiveEvent
-import com.kazakago.cleanarchitecture.viewmodel.global.livedata.liveevent.MutableLiveEvent
+import com.kazakago.cleanarchitecture.usecase.usecase.weather.SubscribeWeatherUseCase
 import com.kazakago.cleanarchitecture.viewmodel.global.livedata.nullsafelivedata.MutableNullSafeLiveData
 import com.kazakago.cleanarchitecture.viewmodel.global.livedata.nullsafelivedata.NullSafeLiveData
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class ForecastViewModel(
     application: Application,
-    private val getWeatherUseCase: GetWeatherUseCase,
+    private val subscribeWeatherUseCase: SubscribeWeatherUseCase,
     city: City
 ) : AndroidViewModel(application) {
 
     private val _city = NullSafeLiveData(city)
     val city: NullSafeLiveData<City> get() = _city
-    private val _weather = MutableNullSafeLiveData<Weather>()
-    val weather: NullSafeLiveData<Weather> get() = _weather
-    private val _showForecast = MutableLiveEvent<Forecast>()
-    val showForecast: LiveEvent<Forecast> get() = _showForecast
-    private val _isLoading = MutableNullSafeLiveData(false)
-    val isLoading: NullSafeLiveData<Boolean> get() = _isLoading
-    private val _showError = MutableLiveEvent<Exception>()
-    val showError: LiveEvent<Exception> get() = _showError
+    private val _weather = MutableNullSafeLiveData<StoreState<Weather>>()
+    val weather: NullSafeLiveData<StoreState<Weather>> get() = _weather
 
     init {
-        fetchWeather()
+        subscribeWeather(city.id)
     }
 
-    fun onClickForecast(forecast: Forecast) {
-        _showForecast.call(forecast)
-    }
-
-    private fun fetchWeather() = viewModelScope.launch {
-        _isLoading.value = true
-        try {
-            _weather.value = getWeatherUseCase(city.value.id)
-        } catch (exception: Exception) {
-            _showError.call(exception)
+    private fun subscribeWeather(cityId: CityId) = viewModelScope.launch {
+        subscribeWeatherUseCase(cityId).collect {
+            _weather.value = it
         }
-        _isLoading.value = false
     }
 
 }

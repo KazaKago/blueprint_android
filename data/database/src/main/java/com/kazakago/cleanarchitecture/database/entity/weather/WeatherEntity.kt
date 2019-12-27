@@ -16,6 +16,6 @@ data class WeatherEntity(
     val link: String,
     @ColumnInfo(name = "public_time")
     val publicTime: String,
-    @ColumnInfo(name = "stored_time")
-    val storedTime: String
+    @ColumnInfo(name = "created_at")
+    val createdAt: String
 )

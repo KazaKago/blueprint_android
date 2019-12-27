@@ -12,10 +12,10 @@ import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
 import org.koin.test.inject
 
-class GetWeatherUseCaseTest : KoinTest {
+class SubscribeWeatherUseCaseTest : KoinTest {
 
     private val getCityUseCase: GetCityUseCase by inject()
-    private val getWeatherUseCase: GetWeatherUseCase by inject()
+    private val subscribeWeatherUseCase: SubscribeWeatherUseCase by inject()
 
     @Before
     fun before() {
@@ -37,7 +37,7 @@ class GetWeatherUseCaseTest : KoinTest {
     @Test
     fun valid() = runBlocking {
         val cityList = getCityUseCase()
-        val weather = getWeatherUseCase(cityId = cityList.first().id)
+        val weather = subscribeWeatherUseCase(cityId = cityList.first().id)
 //        Assert.assertEquals(10, appInfo.versionCode.value)
 //        Assert.assertEquals("1.1.0", appInfo.versionName.value)
     }

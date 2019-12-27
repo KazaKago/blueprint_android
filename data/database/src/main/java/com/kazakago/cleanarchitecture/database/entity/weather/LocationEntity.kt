@@ -4,7 +4,7 @@ import androidx.room.*
 
 @Entity(
     tableName = "location",
-    indices = [(Index(value = ["city_id"]))],
+    indices = [Index(value = ["city_id"])],
     foreignKeys = [ForeignKey(
         entity = WeatherEntity::class,
         parentColumns = ["city_id"],

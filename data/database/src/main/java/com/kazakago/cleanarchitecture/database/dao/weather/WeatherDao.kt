@@ -9,40 +9,40 @@ import com.kazakago.cleanarchitecture.database.entity.weather.WeatherEntity
 @Dao
 interface WeatherDao {
 
-    @Query("SELECT * FROM Weather WHERE city_id == (:cityId) LIMIT 1")
+    @Query("SELECT * FROM weather WHERE city_id == (:cityId) LIMIT 1")
     suspend fun findWeather(cityId: String): WeatherEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(weather: WeatherEntity): Long
+    suspend fun insertWeather(weather: WeatherEntity): Long
 
     @Delete
-    suspend fun delete(weather: WeatherEntity): Int
+    suspend fun deleteWeather(weather: WeatherEntity): Int
 
-    @Query("SELECT * FROM Location WHERE city_id == (:cityId) LIMIT 1")
+    @Query("SELECT * FROM location WHERE city_id == (:cityId) LIMIT 1")
     suspend fun findLocation(cityId: String): LocationEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(location: LocationEntity): Long
+    suspend fun insertLocation(location: LocationEntity): Long
 
     @Delete
-    suspend fun delete(location: LocationEntity): Int
+    suspend fun deleteLocation(location: LocationEntity): Int
 
-    @Query("SELECT * FROM Description WHERE city_id == (:cityId) LIMIT 1")
+    @Query("SELECT * FROM description WHERE city_id == (:cityId) LIMIT 1")
     suspend fun findDescription(cityId: String): DescriptionEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(description: DescriptionEntity): Long
+    suspend fun insertDescription(description: DescriptionEntity): Long
 
     @Delete
-    suspend fun delete(description: DescriptionEntity): Int
+    suspend fun deleteDescription(description: DescriptionEntity): Int
 
-    @Query("SELECT * FROM Forecast WHERE city_id == (:cityId)")
-    suspend fun findForecasts(cityId: String): List<ForecastEntity>
+    @Query("SELECT * FROM forecast WHERE city_id == (:cityId)")
+    suspend fun findForecasts(cityId: String): List<ForecastEntity>?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(forecasts: List<ForecastEntity>): List<Long>
+    suspend fun insertForecasts(forecasts: List<ForecastEntity>): List<Long>
 
     @Delete
-    suspend fun delete(forecasts: List<ForecastEntity>): Int
+    suspend fun deleteForecasts(forecasts: List<ForecastEntity>): Int
 
 }

@@ -23,17 +23,17 @@ android {
     flavorDimensions("app")
     productFlavors {
         create("production") {
-            setDimension("app")
+            dimension = "app"
         }
         create("staging") {
-            setDimension("app")
+            dimension = "app"
         }
         create("develop") {
-            setDimension("app")
+            dimension = "app"
         }
     }
     compileOptions {
-        coreLibraryDesugaringEnabled = true
+//        coreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -50,12 +50,12 @@ dependencies {
     //Kotlin
     implementation(kotlin("stdlib-jdk8", KotlinCompilerVersion.VERSION))
     //kotlinx.coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3")
     //AndroidX KTX
     implementation("androidx.core:core-ktx:1.1.0")
     //Retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.6.2")
-    implementation("com.squareup.retrofit2:converter-moshi:2.6.2")
+    implementation("com.squareup.retrofit2:retrofit:2.7.0")
+    implementation("com.squareup.retrofit2:converter-moshi:2.7.0")
     //Moshi
     implementation("com.squareup.moshi:moshi:1.9.2")
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.9.2")
