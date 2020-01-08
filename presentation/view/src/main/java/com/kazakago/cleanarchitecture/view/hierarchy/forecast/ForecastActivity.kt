@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import androidx.lifecycle.observe
 import com.kazakago.cleanarchitecture.model.city.City
+import com.kazakago.cleanarchitecture.model.city.CityId
+import com.kazakago.cleanarchitecture.model.state.StoreValue
 import com.kazakago.cleanarchitecture.view.R
 import com.kazakago.cleanarchitecture.view.databinding.ActivityForecastBinding
 import com.kazakago.cleanarchitecture.view.global.extension.StringKey
@@ -19,19 +21,19 @@ import org.koin.core.parameter.parametersOf
 class ForecastActivity : AppCompatActivity() {
 
     companion object {
-        fun createIntent(context: Context, city: City): Intent {
+        fun createIntent(context: Context, cityId: CityId): Intent {
             val intent = Intent(context, ForecastActivity::class.java)
-            intent.putExtra(ParameterKey.City.value(), city)
+            intent.putExtra(ParameterKey.CityId.value(), cityId)
             return intent
         }
     }
 
     private enum class ParameterKey : StringKey {
-        City
+        CityId
     }
 
     private val viewModel by viewModel<ForecastViewModel> {
-        parametersOf(intent.getSerializableExtra(ParameterKey.City.value()) as City)
+        parametersOf(intent.getSerializableExtra(ParameterKey.CityId.value()) as CityId)
     }
     private lateinit var binding: ActivityForecastBinding
 
@@ -44,7 +46,7 @@ class ForecastActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         viewModel.city.observe(this) {
-            title = it.name
+            updateCityValue(it.value)
         }
 
         if (savedInstanceState == null) {
@@ -57,6 +59,13 @@ class ForecastActivity : AppCompatActivity() {
             android.R.id.home -> finish()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun updateCityValue(cityValue: StoreValue<City>) {
+        title = when (cityValue) {
+            is StoreValue.Stored -> cityValue.value.name
+            is StoreValue.NotStored -> ""
+        }
     }
 
     private fun replaceForecastFragment() {

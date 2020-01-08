@@ -1,14 +1,12 @@
-package com.kazakago.cleanarchitecture.repository.city
+package com.kazakago.cleanarchitecture.usecase.usecase.city
 
 import com.kazakago.cleanarchitecture.model.city.City
 import com.kazakago.cleanarchitecture.model.city.CityId
 import com.kazakago.cleanarchitecture.model.state.StoreState
 import kotlinx.coroutines.flow.Flow
 
-interface CityRepository {
+interface SubscribeCityUseCase {
 
-    fun subscribe(cityId: CityId): Flow<StoreState<City>>
-
-    fun subscribeAll(): Flow<StoreState<List<City>>>
+    operator fun invoke(cityId: CityId): Flow<StoreState<City>>
 
 }

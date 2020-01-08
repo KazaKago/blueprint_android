@@ -43,11 +43,11 @@ class ForecastFragment : Fragment() {
         binding.forecastRecyclerView.adapter = forecastRecyclerAdapter
 
         viewModel.weather.observe(viewLifecycleOwner) {
-            refreshState(it)
+            updateWeatherState(it)
         }
     }
 
-    private fun refreshState(weatherState: StoreState<Weather>) {
+    private fun updateWeatherState(weatherState: StoreState<Weather>) {
         when (weatherState) {
             is StoreState.Fixed -> {
                 binding.loadingProgressBar.hide()
@@ -60,10 +60,10 @@ class ForecastFragment : Fragment() {
                 showExceptionSnackbar(weatherState.exception)
             }
         }
-        updateWeather(weatherState.value)
+        updateWeatherValue(weatherState.value)
     }
 
-    private fun updateWeather(weatherValue: StoreValue<Weather>) {
+    private fun updateWeatherValue(weatherValue: StoreValue<Weather>) {
         when (weatherValue) {
             is StoreValue.Stored -> {
                 forecastRecyclerAdapter.updateAsync(

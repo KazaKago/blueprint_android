@@ -32,7 +32,7 @@ android {
         }
     }
     compileOptions {
-//        coreLibraryDesugaringEnabled = true
+        coreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -61,6 +61,9 @@ dependencies {
     implementation("org.koin:koin-core:2.0.1")
     //AndroidX KTX
     implementation("androidx.core:core-ktx:1.1.0")
+
+    //desugar_jdk_libs
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.4")
 
     //JUnit
     testImplementation("junit:junit:4.12")

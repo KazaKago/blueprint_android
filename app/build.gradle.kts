@@ -45,7 +45,7 @@ android {
         }
     }
     compileOptions {
-//        coreLibraryDesugaringEnabled = true
+        coreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -73,6 +73,9 @@ dependencies {
     implementation(kotlin("stdlib-jdk8", KotlinCompilerVersion.VERSION))
     //Koin for Android
     implementation("org.koin:koin-android:2.0.1")
+
+    //desugar_jdk_libs
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.4")
 
     //Flipper
     debugImplementation("com.facebook.flipper:flipper:0.30.0")

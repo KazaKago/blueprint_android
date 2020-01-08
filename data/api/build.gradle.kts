@@ -33,7 +33,7 @@ android {
         }
     }
     compileOptions {
-//        coreLibraryDesugaringEnabled = true
+        coreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -59,6 +59,9 @@ dependencies {
     //Moshi
     implementation("com.squareup.moshi:moshi:1.9.2")
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.9.2")
+
+    //desugar_jdk_libs
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.4")
 
     //Flipper
     debugImplementation("com.facebook.flipper:flipper:0.30.0")
