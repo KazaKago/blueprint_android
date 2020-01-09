@@ -1,15 +1,31 @@
-package com.kazakago.cleanarchitecture.model.state
+package com.kazakago.cleanarchitecture.repository.state
 
+import com.kazakago.cleanarchitecture.model.state.StoreState
+import com.kazakago.cleanarchitecture.model.state.StoreValue
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.launch
 import java.time.Duration
 import java.time.LocalDateTime
 
-class StoreDistributor(private val validTime: Duration) {
+internal class CacheObserver(private val validTime: Duration) {
 
-    suspend fun <T> execute(load: (suspend () -> StoreState<T>), save: (suspend (content: StoreState<T>) -> Unit), fetch: (suspend () -> T)) {
-        when (val storeState = load()) {
-            is StoreState.Fixed -> executeFixedState(storeState, save, fetch)
-            is StoreState.Loading -> executeLoadingState(storeState, save, fetch)
-            is StoreState.Error -> executeErrorState(storeState, save, fetch)
+    fun <T> subscribe(load: (() -> Flow<StoreState<T>>), save: (suspend (content: StoreState<T>) -> Unit), fetch: (suspend () -> T)): Flow<StoreState<T>> {
+        val loadFlow = load()
+        return loadFlow
+            .onStart {
+                CoroutineScope(Dispatchers.IO).launch { execute(loadFlow.first(), save, fetch) }
+            }
+    }
+
+    private suspend fun <T> execute(value: StoreState<T>, save: (suspend (content: StoreState<T>) -> Unit), fetch: (suspend () -> T)) {
+        when (value) {
+            is StoreState.Fixed -> executeFixedState(value, save, fetch)
+            is StoreState.Loading -> executeLoadingState(value, save, fetch)
+            is StoreState.Error -> executeErrorState(value, save, fetch)
         }
     }
 
