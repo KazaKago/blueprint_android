@@ -7,6 +7,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface SubscribeWeatherUseCase {
 
-    suspend operator fun invoke(cityId: CityId): Flow<StoreState<Weather>>
+    operator fun invoke(cityId: CityId): Flow<StoreState<Weather>>
 
 }

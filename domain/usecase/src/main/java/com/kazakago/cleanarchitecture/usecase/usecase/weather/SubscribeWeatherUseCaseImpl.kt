@@ -9,7 +9,7 @@ import java.time.Duration
 
 internal class SubscribeWeatherUseCaseImpl(private val weatherRepository: WeatherRepository) : SubscribeWeatherUseCase {
 
-    override suspend fun invoke(cityId: CityId): Flow<StoreState<Weather>> {
+    override fun invoke(cityId: CityId): Flow<StoreState<Weather>> {
         return weatherRepository.subscribe(cityId, Duration.ofHours(1))
     }
 

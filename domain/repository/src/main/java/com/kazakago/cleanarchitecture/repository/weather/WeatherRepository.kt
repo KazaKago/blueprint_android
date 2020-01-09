@@ -8,6 +8,6 @@ import java.time.Duration
 
 interface WeatherRepository {
 
-    suspend fun subscribe(cityId: CityId, expired: Duration): Flow<StoreState<Weather>>
+    fun subscribe(cityId: CityId, expired: Duration): Flow<StoreState<Weather>>
 
 }
