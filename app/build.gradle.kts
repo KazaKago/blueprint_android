@@ -31,15 +31,15 @@ android {
     flavorDimensions("app")
     productFlavors {
         create("production") {
-            setDimension("app")
+            dimension = "app"
         }
         create("staging") {
-            setDimension("app")
+            dimension = "app"
             applicationId = defaultConfig.applicationId + ".staging"
             versionName = defaultConfig.versionName + " staging"
         }
         create("develop") {
-            setDimension("app")
+            dimension = "app"
             applicationId = defaultConfig.applicationId + ".develop"
             versionName = defaultConfig.versionName + " develop"
         }
@@ -74,6 +74,9 @@ dependencies {
     //Koin for Android
     implementation("org.koin:koin-android:2.0.1")
 
+    //desugar_jdk_libs
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.4")
+
     //Flipper
     debugImplementation("com.facebook.flipper:flipper:0.30.0")
     debugImplementation("com.facebook.flipper:flipper-network-plugin:0.30.0")
@@ -96,7 +99,7 @@ dependencies {
     debugImplementation("com.github.Commit451:Hyperion-Chuck:1.0.0")
 
     //JUnit
-    testImplementation("junit:junit:4.12")
+    testImplementation("junit:junit:4.13")
 
     //Espresso
     androidTestImplementation("androidx.test.ext:junit:1.1.1")

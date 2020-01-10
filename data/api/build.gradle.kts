@@ -23,13 +23,13 @@ android {
     flavorDimensions("app")
     productFlavors {
         create("production") {
-            setDimension("app")
+            dimension = "app"
         }
         create("staging") {
-            setDimension("app")
+            dimension = "app"
         }
         create("develop") {
-            setDimension("app")
+            dimension = "app"
         }
     }
     compileOptions {
@@ -50,15 +50,18 @@ dependencies {
     //Kotlin
     implementation(kotlin("stdlib-jdk8", KotlinCompilerVersion.VERSION))
     //kotlinx.coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3")
     //AndroidX KTX
     implementation("androidx.core:core-ktx:1.1.0")
     //Retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.6.2")
-    implementation("com.squareup.retrofit2:converter-moshi:2.6.2")
+    implementation("com.squareup.retrofit2:retrofit:2.7.1")
+    implementation("com.squareup.retrofit2:converter-moshi:2.7.1")
     //Moshi
     implementation("com.squareup.moshi:moshi:1.9.2")
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.9.2")
+
+    //desugar_jdk_libs
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.4")
 
     //Flipper
     debugImplementation("com.facebook.flipper:flipper:0.30.0")
@@ -67,7 +70,7 @@ dependencies {
     debugImplementation("com.readystatesoftware.chuck:library:1.1.0")
     releaseImplementation("com.readystatesoftware.chuck:library-no-op:1.1.0")
     //JUnit
-    testImplementation("junit:junit:4.12")
+    testImplementation("junit:junit:4.13")
 
     //Espresso
     androidTestImplementation("androidx.test.ext:junit:1.1.1")

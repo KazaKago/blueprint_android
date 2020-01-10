@@ -22,13 +22,13 @@ android {
     flavorDimensions("app")
     productFlavors {
         create("production") {
-            setDimension("app")
+            dimension = "app"
         }
         create("staging") {
-            setDimension("app")
+            dimension = "app"
         }
         create("develop") {
-            setDimension("app")
+            dimension = "app"
         }
     }
     compileOptions {
@@ -52,8 +52,8 @@ dependencies {
     //Kotlin
     implementation(kotlin("stdlib-jdk8", KotlinCompilerVersion.VERSION))
     //kotlinx.coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3")
     //Koin
     implementation("org.koin:koin-androidx-viewmodel:2.0.1")
     //AndroidX KTX
@@ -63,8 +63,11 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.1.0")
     implementation("androidx.lifecycle:lifecycle-common-java8:2.1.0")
 
+    //desugar_jdk_libs
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.4")
+
     //JUnit
-    testImplementation("junit:junit:4.12")
+    testImplementation("junit:junit:4.13")
 
     //Espresso
     androidTestImplementation("androidx.test.ext:junit:1.1.1")

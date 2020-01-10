@@ -22,13 +22,13 @@ android {
     flavorDimensions("app")
     productFlavors {
         create("production") {
-            setDimension("app")
+            dimension = "app"
         }
         create("staging") {
-            setDimension("app")
+            dimension = "app"
         }
         create("develop") {
-            setDimension("app")
+            dimension = "app"
         }
     }
     compileOptions {
@@ -75,8 +75,11 @@ dependencies {
     //Picasso
     implementation("com.squareup.picasso:picasso:2.71828")
 
+    //desugar_jdk_libs
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.4")
+
     //JUnit
-    testImplementation("junit:junit:4.12")
+    testImplementation("junit:junit:4.13")
 
     //Espresso
     androidTestImplementation("androidx.test.ext:junit:1.1.1")

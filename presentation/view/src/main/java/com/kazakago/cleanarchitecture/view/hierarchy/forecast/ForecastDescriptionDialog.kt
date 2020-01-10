@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.observe
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.snackbar.Snackbar
 import com.kazakago.cleanarchitecture.view.R
 import com.kazakago.cleanarchitecture.view.databinding.DialogForecastDescriptionBinding
 import com.kazakago.cleanarchitecture.view.global.extension.formattedText
@@ -32,9 +33,19 @@ class ForecastDescriptionDialog : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.weather.observe(viewLifecycleOwner) {
-            binding.publishDateTextView.text = getString(R.string.public_time, it.description.publicTime.formattedText(requireActivity()))
+            binding.publishDateTextView.text = getString(R.string.public_time, it.publicTime.formattedText(requireActivity()))
             binding.descriptionTextView.text = it.description.text
         }
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            if (it) binding.loadingProgressBar.show() else binding.loadingProgressBar.hide()
+        }
+        viewModel.showError.observe(viewLifecycleOwner) {
+            showExceptionSnackbar(it)
+        }
+    }
+
+    private fun showExceptionSnackbar(exception: Exception) {
+        Snackbar.make(binding.root, exception.localizedMessage ?: "", Snackbar.LENGTH_LONG).show()
     }
 
 }

@@ -4,14 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
+import com.google.android.material.snackbar.Snackbar
+import com.kazakago.cleanarchitecture.model.weather.Forecast
 import com.kazakago.cleanarchitecture.model.weather.Weather
 import com.kazakago.cleanarchitecture.view.databinding.FragmentForecastBinding
-import com.kazakago.cleanarchitecture.viewmodel.global.livedata.liveevent.observe
 import com.kazakago.cleanarchitecture.viewmodel.hierarchy.forecast.ForecastViewModel
-import com.xwray.groupie.Group
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -44,28 +43,30 @@ class ForecastFragment : Fragment() {
         viewModel.weather.observe(viewLifecycleOwner) {
             updateWeather(it)
         }
-        viewModel.showForecast.observe(viewLifecycleOwner, "") {
-            Toast.makeText(requireActivity(), it.telop, Toast.LENGTH_SHORT).show()
-        }
         viewModel.isLoading.observe(viewLifecycleOwner) {
             if (it) binding.loadingProgressBar.show() else binding.loadingProgressBar.hide()
         }
-        viewModel.showError.observe(viewLifecycleOwner, "") {
-            Toast.makeText(requireActivity(), it.localizedMessage, Toast.LENGTH_SHORT).show()
+        viewModel.showError.observe(viewLifecycleOwner) {
+            showExceptionSnackbar(it)
         }
     }
 
     private fun updateWeather(weather: Weather) {
-        forecastRecyclerAdapter.updateAsync(mutableListOf<Group>().apply {
-            add(ForecastRecyclerSummary(weather))
-            addAll(weather.forecasts.map {
+        forecastRecyclerAdapter.updateAsync(
+            listOf(ForecastRecyclerSummary(weather)) + weather.forecasts.map {
                 ForecastRecyclerContent(it).apply {
-                    onClickItem = { forecast ->
-                        viewModel.onClickForecast(forecast)
-                    }
+                    onClickItem = ::showForecastSnackbar
                 }
-            })
-        })
+            }
+        )
+    }
+
+    private fun showExceptionSnackbar(exception: Exception) {
+        Snackbar.make(binding.root, exception.localizedMessage ?: "", Snackbar.LENGTH_LONG).show()
+    }
+
+    private fun showForecastSnackbar(forecast: Forecast) {
+        Snackbar.make(binding.root, forecast.telop, Snackbar.LENGTH_SHORT).show()
     }
 
     private fun showForecastDescriptionDialog() {

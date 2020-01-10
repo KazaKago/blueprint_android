@@ -4,14 +4,14 @@ import androidx.room.*
 
 @Entity(
     tableName = "forecast",
-    indices = [(Index(value = ["city_id"]))],
-    foreignKeys = [(ForeignKey(
+    indices = [Index(value = ["city_id"])],
+    foreignKeys = [ForeignKey(
         entity = WeatherEntity::class,
         parentColumns = ["city_id"],
         childColumns = ["city_id"],
         onUpdate = ForeignKey.CASCADE,
         onDelete = ForeignKey.CASCADE
-    ))]
+    )]
 )
 data class ForecastEntity(
     @ColumnInfo(name = "city_id")

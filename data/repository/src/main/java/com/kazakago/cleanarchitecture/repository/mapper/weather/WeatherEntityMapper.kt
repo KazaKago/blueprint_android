@@ -6,7 +6,6 @@ import com.kazakago.cleanarchitecture.database.entity.weather.LocationEntity
 import com.kazakago.cleanarchitecture.database.entity.weather.WeatherEntity
 import com.kazakago.cleanarchitecture.model.city.CityId
 import com.kazakago.cleanarchitecture.model.weather.Weather
-import com.kazakago.cleanarchitecture.repository.distributor.Stored
 import java.net.URL
 import java.time.LocalDateTime
 
@@ -16,9 +15,9 @@ internal class WeatherEntityMapper(
     private val forecastEntityMapper: ForecastEntityMapper
 ) {
 
-    fun map(weather: WeatherEntity, location: LocationEntity, description: DescriptionEntity, forecasts: List<ForecastEntity>): Stored<Weather> {
-        return Stored(
-            value = Weather(
+    fun map(weather: WeatherEntity, location: LocationEntity, description: DescriptionEntity, forecasts: List<ForecastEntity>): MappingResult {
+        return MappingResult(
+            weather = Weather(
                 cityId = CityId(weather.cityId),
                 location = locationEntityMapper.map(location),
                 title = weather.title,
@@ -27,24 +26,29 @@ internal class WeatherEntityMapper(
                 description = descriptionEntityMapper.map(description),
                 forecasts = forecasts.map { forecastEntityMapper.map(it) }
             ),
-            storedTime = LocalDateTime.parse(weather.storedTime)
+            createdAt = LocalDateTime.parse(weather.createdAt)
         )
     }
 
-    fun reverse(destination: Stored<Weather>): ReverseMappingResult {
+    fun reverse(destination: Weather, createdAt: LocalDateTime): ReverseMappingResult {
         return ReverseMappingResult(
             weatherEntity = WeatherEntity(
-                cityId = destination.value.cityId.value,
-                title = destination.value.title,
-                link = destination.value.link.toString(),
-                publicTime = destination.value.publicTime.toString(),
-                storedTime = destination.storedTime.toString()
+                cityId = destination.cityId.value,
+                title = destination.title,
+                link = destination.link.toString(),
+                publicTime = destination.publicTime.toString(),
+                createdAt = createdAt.toString()
             ),
-            locationEntity = locationEntityMapper.reverse(destination.value.cityId, destination.value.location),
-            descriptionEntity = descriptionEntityMapper.reverse(destination.value.cityId, destination.value.description),
-            forecastEntities = destination.value.forecasts.map { forecastEntityMapper.reverse(destination.value.cityId, it) }
+            locationEntity = locationEntityMapper.reverse(destination.cityId, destination.location),
+            descriptionEntity = descriptionEntityMapper.reverse(destination.cityId, destination.description),
+            forecastEntities = destination.forecasts.map { forecastEntityMapper.reverse(destination.cityId, it) }
         )
     }
+
+    data class MappingResult(
+        val weather: Weather,
+        val createdAt: LocalDateTime
+    )
 
     data class ReverseMappingResult(
         val weatherEntity: WeatherEntity,
