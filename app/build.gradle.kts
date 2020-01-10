@@ -99,7 +99,7 @@ dependencies {
     debugImplementation("com.github.Commit451:Hyperion-Chuck:1.0.0")
 
     //JUnit
-    testImplementation("junit:junit:4.12")
+    testImplementation("junit:junit:4.13")
 
     //Espresso
     androidTestImplementation("androidx.test.ext:junit:1.1.1")

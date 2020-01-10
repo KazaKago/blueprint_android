@@ -54,8 +54,8 @@ dependencies {
     //AndroidX KTX
     implementation("androidx.core:core-ktx:1.1.0")
     //Retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.7.0")
-    implementation("com.squareup.retrofit2:converter-moshi:2.7.0")
+    implementation("com.squareup.retrofit2:retrofit:2.7.1")
+    implementation("com.squareup.retrofit2:converter-moshi:2.7.1")
     //Moshi
     implementation("com.squareup.moshi:moshi:1.9.2")
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.9.2")
@@ -70,7 +70,7 @@ dependencies {
     debugImplementation("com.readystatesoftware.chuck:library:1.1.0")
     releaseImplementation("com.readystatesoftware.chuck:library-no-op:1.1.0")
     //JUnit
-    testImplementation("junit:junit:4.12")
+    testImplementation("junit:junit:4.13")
 
     //Espresso
     androidTestImplementation("androidx.test.ext:junit:1.1.1")

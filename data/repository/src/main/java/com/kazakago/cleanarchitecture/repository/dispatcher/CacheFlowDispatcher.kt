@@ -16,33 +16,25 @@ internal class CacheFlowDispatcher(private val validTime: Duration) {
         val loadFlow = load()
         return loadFlow
             .onStart {
-                CoroutineScope(Dispatchers.IO).launch { execute(loadFlow.first(), save, fetch) }
+                CoroutineScope(Dispatchers.IO).launch { checkState(loadFlow.first(), save, fetch) }
             }
     }
 
-    private suspend fun <T> execute(value: StoreState<T>, save: (suspend (content: StoreState<T>) -> Unit), fetch: (suspend () -> T)) {
-        when (value) {
-            is StoreState.Fixed -> executeFixedState(value, save, fetch)
-            is StoreState.Loading -> executeLoadingState(value, save, fetch)
-            is StoreState.Error -> executeErrorState(value, save, fetch)
+    private suspend fun <T> checkState(state: StoreState<T>, save: (suspend (content: StoreState<T>) -> Unit), fetch: (suspend () -> T)) {
+        when (state) {
+            is StoreState.Fixed -> checkValue(state.value, save, fetch)
+            is StoreState.Loading -> Unit //do nothing.
+            is StoreState.Error -> fetchNewValue(state.value, save, fetch)
         }
     }
 
-    private suspend fun <T> executeFixedState(storedState: StoreState.Fixed<T>, save: (suspend (content: StoreState<T>) -> Unit), fetch: (suspend () -> T)) {
-        when (val storeValue = storedState.value) {
+    private suspend fun <T> checkValue(storeValue: StoreValue<T>, save: (suspend (content: StoreState<T>) -> Unit), fetch: (suspend () -> T)) {
+        when (storeValue) {
             is StoreValue.Stored -> if (storeValue.isExpired(validTime)) {
                 fetchNewValue(storeValue, save, fetch)
             }
             is StoreValue.NotStored -> fetchNewValue(storeValue, save, fetch)
         }
-    }
-
-    private suspend fun <T> executeLoadingState(storedState: StoreState.Loading<T>, save: (suspend (content: StoreState<T>) -> Unit), fetch: (suspend () -> T)) {
-        //do nothing.
-    }
-
-    private suspend fun <T> executeErrorState(storedState: StoreState.Error<T>, save: (suspend (content: StoreState<T>) -> Unit), fetch: (suspend () -> T)) {
-        fetchNewValue(storedState.value, save, fetch)
     }
 
     private suspend fun <T> fetchNewValue(stateValue: StoreValue<T>, save: (suspend (content: StoreState<T>) -> Unit), fetch: (suspend () -> T)) {
