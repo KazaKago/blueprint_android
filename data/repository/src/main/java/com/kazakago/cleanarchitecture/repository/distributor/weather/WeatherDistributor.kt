@@ -1,4 +1,4 @@
-package com.kazakago.cleanarchitecture.repository.state.weather
+package com.kazakago.cleanarchitecture.repository.distributor.weather
 
 import android.content.Context
 import com.kazakago.cleanarchitecture.api.api.weather.WeatherApi
@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.map
 
-internal class WeatherStoreDistributor(context: Context) {
+internal class WeatherDistributor(context: Context) {
 
     private val weatherApi = WeatherApi(context)
     private val weatherDao = AppDatabase.create(context).weatherDao()

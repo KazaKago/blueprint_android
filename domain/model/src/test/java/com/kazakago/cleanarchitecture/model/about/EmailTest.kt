@@ -1,6 +1,5 @@
-package com.kazakago.cleanarchitecture.model
+package com.kazakago.cleanarchitecture.model.about
 
-import com.kazakago.cleanarchitecture.model.about.Email
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test

@@ -1,9 +1,9 @@
 package com.kazakago.cleanarchitecture.usecase.di
 
-import com.kazakago.cleanarchitecture.usecase.usecase.about.GetAppInfoUseCase
-import com.kazakago.cleanarchitecture.usecase.usecase.about.GetAppInfoUseCaseImpl
-import com.kazakago.cleanarchitecture.usecase.usecase.about.GetDeveloperInfoUseCase
-import com.kazakago.cleanarchitecture.usecase.usecase.about.GetDeveloperInfoUseCaseImpl
+import com.kazakago.cleanarchitecture.usecase.usecase.about.SubscribeAppInfoUseCase
+import com.kazakago.cleanarchitecture.usecase.usecase.about.SubscribeAppInfoUseCaseImpl
+import com.kazakago.cleanarchitecture.usecase.usecase.about.SubscribeDeveloperInfoUseCase
+import com.kazakago.cleanarchitecture.usecase.usecase.about.SubscribeDeveloperInfoUseCaseImpl
 import com.kazakago.cleanarchitecture.usecase.usecase.city.SubscribeCityListUseCase
 import com.kazakago.cleanarchitecture.usecase.usecase.city.SubscribeCityListUseCaseImpl
 import com.kazakago.cleanarchitecture.usecase.usecase.city.SubscribeCityUseCase
@@ -16,6 +16,6 @@ val domainModule = module {
     single<SubscribeWeatherUseCase> { SubscribeWeatherUseCaseImpl(get()) }
     single<SubscribeCityListUseCase> { SubscribeCityListUseCaseImpl(get()) }
     single<SubscribeCityUseCase> { SubscribeCityUseCaseImpl(get()) }
-    single<GetAppInfoUseCase> { GetAppInfoUseCaseImpl(get()) }
-    single<GetDeveloperInfoUseCase> { GetDeveloperInfoUseCaseImpl(get()) }
+    single<SubscribeAppInfoUseCase> { SubscribeAppInfoUseCaseImpl(get()) }
+    single<SubscribeDeveloperInfoUseCase> { SubscribeDeveloperInfoUseCaseImpl(get()) }
 }

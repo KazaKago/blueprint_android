@@ -1,11 +1,11 @@
-package com.kazakago.cleanarchitecture.repository.state
+package com.kazakago.cleanarchitecture.repository.dispatcher
 
 import com.kazakago.cleanarchitecture.model.state.StoreState
 import com.kazakago.cleanarchitecture.model.state.StoreValue
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-internal object Observer {
+internal object FlowDispatcher {
 
     fun <T> subscribe(fetch: (suspend () -> T)): Flow<StoreState<T>> {
         return flow {

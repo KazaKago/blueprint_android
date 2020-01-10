@@ -1,4 +1,4 @@
-package com.kazakago.cleanarchitecture.repository.state.city
+package com.kazakago.cleanarchitecture.repository.distributor.city
 
 import android.content.Context
 import com.kazakago.cleanarchitecture.model.city.City
@@ -8,7 +8,7 @@ import com.kazakago.cleanarchitecture.resource.dao.city.CityDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-internal class CityStoreDistributor(context: Context) {
+internal class CityDistributor(context: Context) {
 
     private val cityDao = CityDao(context)
     private val cityMapper = CityEntityMapper()

@@ -1,4 +1,4 @@
-package com.kazakago.cleanarchitecture.repository.state
+package com.kazakago.cleanarchitecture.repository.dispatcher
 
 import com.kazakago.cleanarchitecture.model.state.StoreState
 import com.kazakago.cleanarchitecture.model.state.StoreValue
@@ -9,9 +9,8 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import java.time.Duration
-import java.time.LocalDateTime
 
-internal class CacheObserver(private val validTime: Duration) {
+internal class CacheFlowDispatcher(private val validTime: Duration) {
 
     fun <T> subscribe(load: (() -> Flow<StoreState<T>>), save: (suspend (content: StoreState<T>) -> Unit), fetch: (suspend () -> T)): Flow<StoreState<T>> {
         val loadFlow = load()
@@ -31,7 +30,7 @@ internal class CacheObserver(private val validTime: Duration) {
 
     private suspend fun <T> executeFixedState(storedState: StoreState.Fixed<T>, save: (suspend (content: StoreState<T>) -> Unit), fetch: (suspend () -> T)) {
         when (val storeValue = storedState.value) {
-            is StoreValue.Stored -> if ((storeValue.storedTime + validTime) < LocalDateTime.now()) {
+            is StoreValue.Stored -> if (storeValue.isExpired(validTime)) {
                 fetchNewValue(storeValue, save, fetch)
             }
             is StoreValue.NotStored -> fetchNewValue(storeValue, save, fetch)
