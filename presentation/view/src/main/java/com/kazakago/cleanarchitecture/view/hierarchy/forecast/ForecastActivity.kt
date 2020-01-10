@@ -7,9 +7,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import androidx.lifecycle.observe
-import com.kazakago.cleanarchitecture.model.city.City
 import com.kazakago.cleanarchitecture.model.city.CityId
-import com.kazakago.cleanarchitecture.model.state.StoreValue
 import com.kazakago.cleanarchitecture.view.R
 import com.kazakago.cleanarchitecture.view.databinding.ActivityForecastBinding
 import com.kazakago.cleanarchitecture.view.global.extension.StringKey
@@ -46,7 +44,7 @@ class ForecastActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         viewModel.city.observe(this) {
-            updateCityValue(it.value)
+            title = it.name
         }
 
         if (savedInstanceState == null) {
@@ -59,13 +57,6 @@ class ForecastActivity : AppCompatActivity() {
             android.R.id.home -> finish()
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun updateCityValue(cityValue: StoreValue<City>) {
-        title = when (cityValue) {
-            is StoreValue.Stored -> cityValue.value.name
-            is StoreValue.NotStored -> ""
-        }
     }
 
     private fun replaceForecastFragment() {

@@ -9,6 +9,6 @@ import org.koin.dsl.module
 
 val presentationModule = module {
     viewModel { CityListViewModel(get(), get()) }
-    viewModel { (cityId: CityId) -> ForecastViewModel(get(), get(), get(), cityId) }
-    viewModel { AboutViewModel(get(), get(), get()) }
+    viewModel { (cityId: CityId) -> ForecastViewModel(get(), get(), cityId) }
+    viewModel { AboutViewModel(get(), get()) }
 }

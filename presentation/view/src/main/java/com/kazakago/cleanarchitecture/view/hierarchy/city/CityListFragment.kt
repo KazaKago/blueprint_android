@@ -9,8 +9,6 @@ import androidx.lifecycle.observe
 import com.google.android.material.snackbar.Snackbar
 import com.kazakago.cleanarchitecture.model.city.City
 import com.kazakago.cleanarchitecture.model.city.CityId
-import com.kazakago.cleanarchitecture.model.state.StoreState
-import com.kazakago.cleanarchitecture.model.state.StoreValue
 import com.kazakago.cleanarchitecture.view.databinding.FragmentCityListBinding
 import com.kazakago.cleanarchitecture.view.hierarchy.forecast.ForecastActivity
 import com.kazakago.cleanarchitecture.viewmodel.hierarchy.city.CityListViewModel
@@ -41,41 +39,24 @@ class CityListFragment : Fragment() {
         binding.cityRecyclerView.adapter = cityRecyclerAdapter
 
         viewModel.cityList.observe(viewLifecycleOwner) {
-            updateCityListState(it)
+            updateCityList(it)
+        }
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            if (it) binding.loadingProgressBar.show() else binding.loadingProgressBar.hide()
+        }
+        viewModel.showError.observe(viewLifecycleOwner) {
+            showExceptionSnackbar(it)
         }
     }
 
-    private fun updateCityListState(cityListState: StoreState<List<City>>) {
-        when (cityListState) {
-            is StoreState.Fixed -> {
-                binding.loadingProgressBar.hide()
+    private fun updateCityList(cityList: List<City>) {
+        cityRecyclerAdapter.updateAsync(cityList.map {
+            CityRecyclerItem(it).apply {
+                onClickItem = { city ->
+                    goForecastActivity(city.id)
+                }
             }
-            is StoreState.Loading -> {
-                binding.loadingProgressBar.show()
-            }
-            is StoreState.Error -> {
-                binding.loadingProgressBar.hide()
-                showExceptionSnackbar(cityListState.exception)
-            }
-        }
-        updateCityListValue(cityListState.value)
-    }
-
-    private fun updateCityListValue(cityListValue: StoreValue<List<City>>) {
-        when (cityListValue) {
-            is StoreValue.Stored -> {
-                cityRecyclerAdapter.updateAsync(cityListValue.value.map {
-                    CityRecyclerItem(it).apply {
-                        onClickItem = { city ->
-                            goForecastActivity(city.id)
-                        }
-                    }
-                })
-            }
-            is StoreValue.NotStored -> {
-                cityRecyclerAdapter.clear()
-            }
-        }
+        })
     }
 
     private fun showExceptionSnackbar(exception: Exception) {

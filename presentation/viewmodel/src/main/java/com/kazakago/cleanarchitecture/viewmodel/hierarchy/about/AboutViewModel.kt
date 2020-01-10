@@ -1,16 +1,14 @@
 package com.kazakago.cleanarchitecture.viewmodel.hierarchy.about
 
 import android.app.Application
-import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.kazakago.cleanarchitecture.model.about.AppInfo
 import com.kazakago.cleanarchitecture.model.about.DeveloperInfo
 import com.kazakago.cleanarchitecture.model.state.StoreState
 import com.kazakago.cleanarchitecture.model.state.StoreValue
-import com.kazakago.cleanarchitecture.usecase.usecase.about.SubscribeAppInfoUseCase
-import com.kazakago.cleanarchitecture.usecase.usecase.about.SubscribeDeveloperInfoUseCase
-import com.kazakago.cleanarchitecture.viewmodel.global.extension.toUri
+import com.kazakago.cleanarchitecture.usecase.output.about.AboutOutput
+import com.kazakago.cleanarchitecture.usecase.usecase.about.SubscribeAboutUseCase
 import com.kazakago.cleanarchitecture.viewmodel.global.livedata.liveevent.LiveEvent
 import com.kazakago.cleanarchitecture.viewmodel.global.livedata.liveevent.MutableLiveEvent
 import com.kazakago.cleanarchitecture.viewmodel.global.livedata.nullsafelivedata.MutableNullSafeLiveData
@@ -20,54 +18,53 @@ import kotlinx.coroutines.launch
 
 class AboutViewModel(
     application: Application,
-    private val subscribeAppInfoUseCase: SubscribeAppInfoUseCase,
-    private val subscribeDeveloperInfoUseCase: SubscribeDeveloperInfoUseCase
+    private val subscribeAboutUseCase: SubscribeAboutUseCase
 ) : AndroidViewModel(application) {
 
-    private val _appInfo = MutableNullSafeLiveData<StoreState<AppInfo>>()
-    val appInfo: NullSafeLiveData<StoreState<AppInfo>> get() = _appInfo
-    private val _developerInfo = MutableNullSafeLiveData<StoreState<DeveloperInfo>>()
-    val developerInfo: NullSafeLiveData<StoreState<DeveloperInfo>> get() = _developerInfo
-    private val _openActionView = MutableLiveEvent<Uri>()
-    val openActionView: LiveEvent<Uri> get() = _openActionView
-    private val _openSendTo = MutableLiveEvent<Uri>()
-    val openSendTo: LiveEvent<Uri> get() = _openSendTo
+    private val _appInfo = MutableNullSafeLiveData<AppInfo>()
+    val appInfo: NullSafeLiveData<AppInfo> get() = _appInfo
+    private val _developerInfo = MutableNullSafeLiveData<DeveloperInfo>()
+    val developerInfo: NullSafeLiveData<DeveloperInfo> get() = _developerInfo
+    private val _isLoading = MutableNullSafeLiveData(false)
+    val isLoading: NullSafeLiveData<Boolean> get() = _isLoading
+    private val _showError = MutableLiveEvent<Exception>()
+    val showError: LiveEvent<Exception> get() = _showError
 
     init {
-        subscribeAppInfo()
-        subscribeDeveloperInfo()
+        subscribeAbout()
     }
 
-    private fun subscribeAppInfo() = viewModelScope.launch {
-        subscribeAppInfoUseCase().collect {
-            _appInfo.value = it
+    private fun subscribeAbout() = viewModelScope.launch {
+        subscribeAboutUseCase().collect {
+            updateAboutState(it)
+            updateAboutValue(it.value)
         }
     }
 
-    private fun subscribeDeveloperInfo() = viewModelScope.launch {
-        subscribeDeveloperInfoUseCase().collect {
-            _developerInfo.value = it
+    private fun updateAboutState(state: StoreState<AboutOutput>) {
+        when (state) {
+            is StoreState.Fixed -> {
+                _isLoading.value = false
+            }
+            is StoreState.Loading -> {
+                _isLoading.value = true
+            }
+            is StoreState.Error -> {
+                _isLoading.value = false
+                _showError.call(state.exception)
+            }
         }
     }
 
-    fun onClickPlayStore() {
-        when (val storeValue = appInfo.value.value) {
-            is StoreValue.Stored -> _openActionView.call(storeValue.value.playStoreUri.toUri())
-            is StoreValue.NotStored -> Unit //do nothing
-        }
-    }
-
-    fun onClickMail() {
-        when (val storeValue = developerInfo.value.value) {
-            is StoreValue.Stored -> _openSendTo.call(storeValue.value.mailAddress.toURI().toUri())
-            is StoreValue.NotStored -> Unit //do nothing
-        }
-    }
-
-    fun onClickWebSite() {
-        when (val storeValue = developerInfo.value.value) {
-            is StoreValue.Stored -> _openActionView.call(storeValue.value.siteUrl.toUri())
-            is StoreValue.NotStored -> Unit //do nothing
+    private fun updateAboutValue(value: StoreValue<AboutOutput>) {
+        when (value) {
+            is StoreValue.Stored -> {
+                _appInfo.value = value.value.appInfo
+                _developerInfo.value = value.value.developerInfo
+            }
+            is StoreValue.NotStored -> {
+                //do nothing.
+            }
         }
     }
 

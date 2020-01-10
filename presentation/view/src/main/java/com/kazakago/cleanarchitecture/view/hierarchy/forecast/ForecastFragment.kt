@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import com.google.android.material.snackbar.Snackbar
-import com.kazakago.cleanarchitecture.model.state.StoreState
-import com.kazakago.cleanarchitecture.model.state.StoreValue
 import com.kazakago.cleanarchitecture.model.weather.Forecast
 import com.kazakago.cleanarchitecture.model.weather.Weather
 import com.kazakago.cleanarchitecture.view.databinding.FragmentForecastBinding
@@ -43,41 +41,24 @@ class ForecastFragment : Fragment() {
         binding.forecastRecyclerView.adapter = forecastRecyclerAdapter
 
         viewModel.weather.observe(viewLifecycleOwner) {
-            updateWeatherState(it)
+            updateWeather(it)
+        }
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            if (it) binding.loadingProgressBar.show() else binding.loadingProgressBar.hide()
+        }
+        viewModel.showError.observe(viewLifecycleOwner) {
+            showExceptionSnackbar(it)
         }
     }
 
-    private fun updateWeatherState(weatherState: StoreState<Weather>) {
-        when (weatherState) {
-            is StoreState.Fixed -> {
-                binding.loadingProgressBar.hide()
+    private fun updateWeather(weather: Weather) {
+        forecastRecyclerAdapter.updateAsync(
+            listOf(ForecastRecyclerSummary(weather)) + weather.forecasts.map {
+                ForecastRecyclerContent(it).apply {
+                    onClickItem = ::showForecastSnackbar
+                }
             }
-            is StoreState.Loading -> {
-                binding.loadingProgressBar.show()
-            }
-            is StoreState.Error -> {
-                binding.loadingProgressBar.hide()
-                showExceptionSnackbar(weatherState.exception)
-            }
-        }
-        updateWeatherValue(weatherState.value)
-    }
-
-    private fun updateWeatherValue(weatherValue: StoreValue<Weather>) {
-        when (weatherValue) {
-            is StoreValue.Stored -> {
-                forecastRecyclerAdapter.updateAsync(
-                    listOf(ForecastRecyclerSummary(weatherValue.value)) + weatherValue.value.forecasts.map {
-                        ForecastRecyclerContent(it).apply {
-                            onClickItem = ::showForecastSnackbar
-                        }
-                    }
-                )
-            }
-            is StoreValue.NotStored -> {
-                forecastRecyclerAdapter.clear()
-            }
-        }
+        )
     }
 
     private fun showExceptionSnackbar(exception: Exception) {

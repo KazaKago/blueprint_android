@@ -8,14 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
-import com.kazakago.cleanarchitecture.model.about.AppInfo
-import com.kazakago.cleanarchitecture.model.city.City
-import com.kazakago.cleanarchitecture.model.state.StoreState
-import com.kazakago.cleanarchitecture.model.state.StoreValue
+import com.google.android.material.snackbar.Snackbar
 import com.kazakago.cleanarchitecture.view.R
 import com.kazakago.cleanarchitecture.view.databinding.FragmentAboutBinding
-import com.kazakago.cleanarchitecture.view.hierarchy.city.CityRecyclerItem
-import com.kazakago.cleanarchitecture.viewmodel.global.livedata.liveevent.observe
+import com.kazakago.cleanarchitecture.viewmodel.global.extension.toUri
 import com.kazakago.cleanarchitecture.viewmodel.hierarchy.about.AboutViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.util.*
@@ -40,13 +36,13 @@ class AboutFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.playStoreLayout.setOnClickListener {
-            viewModel.onClickPlayStore()
+            openActionView(viewModel.appInfo.value.playStoreUri.toUri())
         }
         binding.webSiteLayout.setOnClickListener {
-            viewModel.onClickWebSite()
+            openActionView(viewModel.developerInfo.value.siteUrl.toUri())
         }
         binding.mailLayout.setOnClickListener {
-            viewModel.onClickMail()
+            openSendTo(viewModel.developerInfo.value.mailAddress.toURI().toUri())
         }
 
         viewModel.appInfo.observe(viewLifecycleOwner) {
@@ -56,45 +52,16 @@ class AboutFragment : Fragment() {
             binding.copyrightTextView.text = getString(R.string.about_copyright, Calendar.getInstance().get(Calendar.YEAR), it.name)
             binding.developByTextView.text = getString(R.string.about_develop_by, it.name)
         }
-        viewModel.openActionView.observe(viewLifecycleOwner, "") {
-            openActionView(it)
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            if (it) binding.loadingProgressBar.show() else binding.loadingProgressBar.hide()
         }
-        viewModel.openSendTo.observe(viewLifecycleOwner, "") {
-            openSendTo(it)
+        viewModel.showError.observe(viewLifecycleOwner) {
+            showExceptionSnackbar(it)
         }
     }
 
-    private fun updateAppInfoState(cityListState: StoreState<AppInfo>) {
-        when (cityListState) {
-            is StoreState.Fixed -> {
-                binding.loadingProgressBar.hide()
-            }
-            is StoreState.Loading -> {
-                binding.loadingProgressBar.show()
-            }
-            is StoreState.Error -> {
-                binding.loadingProgressBar.hide()
-                showExceptionSnackbar(cityListState.exception)
-            }
-        }
-        updateCityListValue(cityListState.value)
-    }
-
-    private fun updateCityListValue(cityListValue: StoreValue<List<City>>) {
-        when (cityListValue) {
-            is StoreValue.Stored -> {
-                cityRecyclerAdapter.updateAsync(cityListValue.value.map {
-                    CityRecyclerItem(it).apply {
-                        onClickItem = { city ->
-                            goForecastActivity(city.id)
-                        }
-                    }
-                })
-            }
-            is StoreValue.NotStored -> {
-                cityRecyclerAdapter.clear()
-            }
-        }
+    private fun showExceptionSnackbar(exception: Exception) {
+        Snackbar.make(binding.root, exception.localizedMessage ?: "", Snackbar.LENGTH_LONG).show()
     }
 
     private fun openActionView(uri: Uri) {
