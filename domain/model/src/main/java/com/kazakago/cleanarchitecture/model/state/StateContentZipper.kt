@@ -2,7 +2,7 @@ package com.kazakago.cleanarchitecture.model.state
 
 import com.os.operando.guild.kt.to
 
-fun <A, B, Z> StateContent<A>.zip(otherStateContent: StateContent<B>, transform: (value1: A, value2: B) -> Z): StateContent<Z> {
+fun <A, B, Z> StateContent<A>.zip(otherStateContent: StateContent<B>, transform: (content1: A, content2: B) -> Z): StateContent<Z> {
     return zipImpl(otherStateContent, transform)
 }
 

@@ -1,4 +1,4 @@
-package com.kazakago.cleanarchitecture.web
+package com.kazakago.cleanarchitecture.api
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
