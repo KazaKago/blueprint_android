@@ -5,10 +5,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.kazakago.cleanarchitecture.model.city.City
 import com.kazakago.cleanarchitecture.model.city.CityId
-import com.kazakago.cleanarchitecture.model.state.StoreState
-import com.kazakago.cleanarchitecture.model.state.StoreValue
+import com.kazakago.cleanarchitecture.model.state.State
+import com.kazakago.cleanarchitecture.model.state.StateContent
 import com.kazakago.cleanarchitecture.model.weather.Weather
 import com.kazakago.cleanarchitecture.usecase.output.weather.WeatherOutput
+import com.kazakago.cleanarchitecture.usecase.usecase.weather.RequestWeatherUseCase
 import com.kazakago.cleanarchitecture.usecase.usecase.weather.SubscribeWeatherUseCase
 import com.kazakago.cleanarchitecture.viewmodel.global.livedata.liveevent.LiveEvent
 import com.kazakago.cleanarchitecture.viewmodel.global.livedata.liveevent.MutableLiveEvent
@@ -20,7 +21,8 @@ import kotlinx.coroutines.launch
 class ForecastViewModel(
     application: Application,
     private val subscribeWeatherUseCase: SubscribeWeatherUseCase,
-    cityId: CityId
+    private val requestWeatherUseCase: RequestWeatherUseCase,
+    private val cityId: CityId
 ) : AndroidViewModel(application) {
 
     private val _city = MutableNullSafeLiveData<City>()
@@ -33,38 +35,42 @@ class ForecastViewModel(
     val showError: LiveEvent<Exception> get() = _showError
 
     init {
-        subscribeWeather(cityId)
+        subscribeWeather()
     }
 
-    private fun subscribeWeather(cityId: CityId) = viewModelScope.launch {
+    fun requestWeather() = viewModelScope.launch {
+        requestWeatherUseCase(cityId)
+    }
+
+    private fun subscribeWeather() = viewModelScope.launch {
         subscribeWeatherUseCase(cityId).collect {
             updateWeatherState(it)
-            updateWeatherValue(it.value)
+            updateWeatherValue(it.content)
         }
     }
 
-    private fun updateWeatherState(state: StoreState<WeatherOutput>) {
+    private fun updateWeatherState(state: State<WeatherOutput>) {
         when (state) {
-            is StoreState.Fixed -> {
+            is State.Fixed -> {
                 _isLoading.value = false
             }
-            is StoreState.Loading -> {
+            is State.Loading -> {
                 _isLoading.value = true
             }
-            is StoreState.Error -> {
+            is State.Error -> {
                 _isLoading.value = false
                 _showError.call(state.exception)
             }
         }
     }
 
-    private fun updateWeatherValue(value: StoreValue<WeatherOutput>) {
+    private fun updateWeatherValue(value: StateContent<WeatherOutput>) {
         when (value) {
-            is StoreValue.Stored -> {
-                _weather.value = value.value.weather
-                _city.value = value.value.city
+            is StateContent.Stored -> {
+                _weather.value = value.rawContent.weather
+                _city.value = value.rawContent.city
             }
-            is StoreValue.NotStored -> {
+            is StateContent.NotStored -> {
                 //do nothing.
             }
         }

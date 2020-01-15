@@ -1,20 +1,22 @@
 package com.kazakago.cleanarchitecture.repository.dispatcher
 
-import com.kazakago.cleanarchitecture.model.state.StoreState
-import com.kazakago.cleanarchitecture.model.state.StoreValue
+import com.kazakago.cleanarchitecture.model.state.State
+import com.kazakago.cleanarchitecture.model.state.StateContent
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-internal object FlowDispatcher {
+internal class FlowDispatcher<T>(
+    private val fetch: (suspend () -> T)
+) {
 
-    fun <T> subscribe(fetch: (suspend () -> T)): Flow<StoreState<T>> {
+    fun subscribe(): Flow<State<T>> {
         return flow {
             try {
-                emit(StoreState.Loading(StoreValue.NotStored()))
+                emit(State.Loading(StateContent.NotStored()))
                 val newValue = fetch()
-                emit(StoreState.Fixed(StoreValue.Stored(newValue)))
+                emit(State.Fixed(StateContent.Stored(newValue)))
             } catch (exception: Exception) {
-                emit(StoreState.Error(StoreValue.NotStored(), exception))
+                emit(State.Error(StateContent.NotStored(), exception))
             }
         }
     }

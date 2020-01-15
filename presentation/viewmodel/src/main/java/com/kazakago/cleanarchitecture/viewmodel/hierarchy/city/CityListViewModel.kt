@@ -4,8 +4,8 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.kazakago.cleanarchitecture.model.city.City
-import com.kazakago.cleanarchitecture.model.state.StoreState
-import com.kazakago.cleanarchitecture.model.state.StoreValue
+import com.kazakago.cleanarchitecture.model.state.State
+import com.kazakago.cleanarchitecture.model.state.StateContent
 import com.kazakago.cleanarchitecture.usecase.usecase.city.SubscribeCityListUseCase
 import com.kazakago.cleanarchitecture.viewmodel.global.livedata.liveevent.LiveEvent
 import com.kazakago.cleanarchitecture.viewmodel.global.livedata.liveevent.MutableLiveEvent
@@ -33,31 +33,31 @@ class CityListViewModel(
     private fun subscribeCityList() = viewModelScope.launch {
         subscribeCityListUseCase().collect {
             updateCityListState(it)
-            updateCityListValue(it.value)
+            updateCityListValue(it.content)
         }
     }
 
-    private fun updateCityListState(state: StoreState<List<City>>) {
+    private fun updateCityListState(state: State<List<City>>) {
         when (state) {
-            is StoreState.Fixed -> {
+            is State.Fixed -> {
                 _isLoading.value = false
             }
-            is StoreState.Loading -> {
+            is State.Loading -> {
                 _isLoading.value = true
             }
-            is StoreState.Error -> {
+            is State.Error -> {
                 _isLoading.value = false
                 _showError.call(state.exception)
             }
         }
     }
 
-    private fun updateCityListValue(value: StoreValue<List<City>>) {
-        when (value) {
-            is StoreValue.Stored -> {
-                _cityList.value = value.value
+    private fun updateCityListValue(content: StateContent<List<City>>) {
+        when (content) {
+            is StateContent.Stored -> {
+                _cityList.value = content.rawContent
             }
-            is StoreValue.NotStored -> {
+            is StateContent.NotStored -> {
                 //do nothing.
             }
         }

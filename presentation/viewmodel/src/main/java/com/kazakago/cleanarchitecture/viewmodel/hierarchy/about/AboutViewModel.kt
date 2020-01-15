@@ -5,8 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.kazakago.cleanarchitecture.model.about.AppInfo
 import com.kazakago.cleanarchitecture.model.about.DeveloperInfo
-import com.kazakago.cleanarchitecture.model.state.StoreState
-import com.kazakago.cleanarchitecture.model.state.StoreValue
+import com.kazakago.cleanarchitecture.model.state.State
+import com.kazakago.cleanarchitecture.model.state.StateContent
 import com.kazakago.cleanarchitecture.usecase.output.about.AboutOutput
 import com.kazakago.cleanarchitecture.usecase.usecase.about.SubscribeAboutUseCase
 import com.kazakago.cleanarchitecture.viewmodel.global.livedata.liveevent.LiveEvent
@@ -37,32 +37,32 @@ class AboutViewModel(
     private fun subscribeAbout() = viewModelScope.launch {
         subscribeAboutUseCase().collect {
             updateAboutState(it)
-            updateAboutValue(it.value)
+            updateAboutValue(it.content)
         }
     }
 
-    private fun updateAboutState(state: StoreState<AboutOutput>) {
+    private fun updateAboutState(state: State<AboutOutput>) {
         when (state) {
-            is StoreState.Fixed -> {
+            is State.Fixed -> {
                 _isLoading.value = false
             }
-            is StoreState.Loading -> {
+            is State.Loading -> {
                 _isLoading.value = true
             }
-            is StoreState.Error -> {
+            is State.Error -> {
                 _isLoading.value = false
                 _showError.call(state.exception)
             }
         }
     }
 
-    private fun updateAboutValue(value: StoreValue<AboutOutput>) {
-        when (value) {
-            is StoreValue.Stored -> {
-                _appInfo.value = value.value.appInfo
-                _developerInfo.value = value.value.developerInfo
+    private fun updateAboutValue(content: StateContent<AboutOutput>) {
+        when (content) {
+            is StateContent.Stored -> {
+                _appInfo.value = content.rawContent.appInfo
+                _developerInfo.value = content.rawContent.developerInfo
             }
-            is StoreValue.NotStored -> {
+            is StateContent.NotStored -> {
                 //do nothing.
             }
         }

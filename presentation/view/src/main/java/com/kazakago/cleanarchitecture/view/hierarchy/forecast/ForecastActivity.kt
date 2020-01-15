@@ -3,6 +3,7 @@ package com.kazakago.cleanarchitecture.view.hierarchy.forecast
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
@@ -52,8 +53,14 @@ class ForecastActivity : AppCompatActivity() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.forecast, menu);
+        return super.onCreateOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.action_refresh -> viewModel.requestWeather()
             android.R.id.home -> finish()
         }
         return super.onOptionsItemSelected(item)

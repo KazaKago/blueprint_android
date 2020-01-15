@@ -15,40 +15,33 @@ internal class WeatherEntityMapper(
     private val forecastEntityMapper: ForecastEntityMapper
 ) {
 
-    fun map(weather: WeatherEntity, location: LocationEntity, description: DescriptionEntity, forecasts: List<ForecastEntity>): MappingResult {
-        return MappingResult(
-            weather = Weather(
-                cityId = CityId(weather.cityId),
-                location = locationEntityMapper.map(location),
-                title = weather.title,
-                link = URL(weather.link),
-                publicTime = LocalDateTime.parse(weather.publicTime),
-                description = descriptionEntityMapper.map(description),
-                forecasts = forecasts.map { forecastEntityMapper.map(it) }
-            ),
+    fun map(weather: WeatherEntity, location: LocationEntity, description: DescriptionEntity, forecasts: List<ForecastEntity>): Weather {
+        return Weather(
+            cityId = CityId(weather.cityId),
+            location = locationEntityMapper.map(location),
+            title = weather.title,
+            link = URL(weather.link),
+            publicTime = LocalDateTime.parse(weather.publicTime),
+            description = descriptionEntityMapper.map(description),
+            forecasts = forecasts.map { forecastEntityMapper.map(it) },
             createdAt = LocalDateTime.parse(weather.createdAt)
         )
     }
 
-    fun reverse(destination: Weather, createdAt: LocalDateTime): ReverseMappingResult {
+    fun reverse(destination: Weather): ReverseMappingResult {
         return ReverseMappingResult(
             weatherEntity = WeatherEntity(
                 cityId = destination.cityId.value,
                 title = destination.title,
                 link = destination.link.toString(),
                 publicTime = destination.publicTime.toString(),
-                createdAt = createdAt.toString()
+                createdAt = destination.createdAt.toString()
             ),
             locationEntity = locationEntityMapper.reverse(destination.cityId, destination.location),
             descriptionEntity = descriptionEntityMapper.reverse(destination.cityId, destination.description),
             forecastEntities = destination.forecasts.map { forecastEntityMapper.reverse(destination.cityId, it) }
         )
     }
-
-    data class MappingResult(
-        val weather: Weather,
-        val createdAt: LocalDateTime
-    )
 
     data class ReverseMappingResult(
         val weatherEntity: WeatherEntity,

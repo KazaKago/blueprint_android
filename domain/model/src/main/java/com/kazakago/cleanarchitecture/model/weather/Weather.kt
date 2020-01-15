@@ -3,6 +3,7 @@ package com.kazakago.cleanarchitecture.model.weather
 import com.kazakago.cleanarchitecture.model.city.CityId
 import java.io.Serializable
 import java.net.URL
+import java.time.Duration
 import java.time.LocalDateTime
 
 data class Weather(
@@ -12,5 +13,16 @@ data class Weather(
     val link: URL,
     val publicTime: LocalDateTime,
     val description: Description,
-    val forecasts: List<Forecast>
-) : Serializable
+    val forecasts: List<Forecast>,
+    val createdAt: LocalDateTime = LocalDateTime.now()
+) : Serializable {
+
+    companion object {
+        private val EXPIRED = Duration.ofHours(1)
+    }
+
+    fun isExpired(): Boolean {
+        return ((createdAt + EXPIRED) <= LocalDateTime.now())
+    }
+
+}
