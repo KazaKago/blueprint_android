@@ -45,7 +45,7 @@ class ForecastViewModel(
     private fun subscribeWeather() = viewModelScope.launch {
         subscribeWeatherUseCase(cityId).collect {
             updateWeatherState(it)
-            updateWeatherValue(it.content)
+            updateWeatherContent(it.content)
         }
     }
 
@@ -64,11 +64,11 @@ class ForecastViewModel(
         }
     }
 
-    private fun updateWeatherValue(value: StateContent<WeatherOutput>) {
-        when (value) {
+    private fun updateWeatherContent(content: StateContent<WeatherOutput>) {
+        when (content) {
             is StateContent.Stored -> {
-                _weather.value = value.rawContent.weather
-                _city.value = value.rawContent.city
+                _weather.value = content.rawContent.weather
+                _city.value = content.rawContent.city
             }
             is StateContent.NotStored -> {
                 //do nothing.

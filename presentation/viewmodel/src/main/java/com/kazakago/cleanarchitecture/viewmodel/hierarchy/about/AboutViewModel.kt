@@ -37,7 +37,7 @@ class AboutViewModel(
     private fun subscribeAbout() = viewModelScope.launch {
         subscribeAboutUseCase().collect {
             updateAboutState(it)
-            updateAboutValue(it.content)
+            updateAboutContent(it.content)
         }
     }
 
@@ -56,7 +56,7 @@ class AboutViewModel(
         }
     }
 
-    private fun updateAboutValue(content: StateContent<AboutOutput>) {
+    private fun updateAboutContent(content: StateContent<AboutOutput>) {
         when (content) {
             is StateContent.Stored -> {
                 _appInfo.value = content.rawContent.appInfo

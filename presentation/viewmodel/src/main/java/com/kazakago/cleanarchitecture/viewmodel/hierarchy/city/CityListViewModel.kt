@@ -33,7 +33,7 @@ class CityListViewModel(
     private fun subscribeCityList() = viewModelScope.launch {
         subscribeCityListUseCase().collect {
             updateCityListState(it)
-            updateCityListValue(it.content)
+            updateCityListContent(it.content)
         }
     }
 
@@ -52,7 +52,7 @@ class CityListViewModel(
         }
     }
 
-    private fun updateCityListValue(content: StateContent<List<City>>) {
+    private fun updateCityListContent(content: StateContent<List<City>>) {
         when (content) {
             is StateContent.Stored -> {
                 _cityList.value = content.rawContent

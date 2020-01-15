@@ -33,8 +33,8 @@ fun <A, B, C, D, E, Z> Flow<State<A>>.combineState(otherFlow1: Flow<State<B>>, o
         content1_2.first to content1_2.second to content3
     }.combineStateImpl(otherFlow3) { content1_2_3, content4 ->
         content1_2_3.first to content1_2_3.second to content1_2_3.third to content4
-    }.combineStateImpl(otherFlow4) { content1_2_3, content5 ->
-        transform(content1_2_3.first, content1_2_3.second, content1_2_3.third, content1_2_3.fourth, content5)
+    }.combineStateImpl(otherFlow4) { content1_2_3_4, content5 ->
+        transform(content1_2_3_4.first, content1_2_3_4.second, content1_2_3_4.third, content1_2_3_4.fourth, content5)
     }
 }
 
