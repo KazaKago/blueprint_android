@@ -31,11 +31,7 @@ internal class CacheFlowDispatcher<T>(
     }
 
     suspend fun request() {
-        when (loadState().first()) {
-            is DataState.Fixed -> fetchNewValue()
-            is DataState.Loading -> Unit
-            is DataState.Error -> fetchNewValue()
-        }
+        checkState()
     }
 
     private suspend fun mapState(dataState: DataState): State<T> {
