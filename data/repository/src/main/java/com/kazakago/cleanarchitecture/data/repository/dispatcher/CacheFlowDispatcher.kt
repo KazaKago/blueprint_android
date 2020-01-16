@@ -36,7 +36,7 @@ internal class CacheFlowDispatcher<T>(
 
     private suspend fun mapState(dataState: DataState): State<T> {
         val loadedContent = loadContent()
-        val stateValue = if (loadedContent == null || !isStale(loadedContent)) {
+        val stateValue = if (loadedContent == null || isStale(loadedContent)) {
             StateContent.NotStored<T>()
         } else {
             StateContent.Stored(loadedContent)
