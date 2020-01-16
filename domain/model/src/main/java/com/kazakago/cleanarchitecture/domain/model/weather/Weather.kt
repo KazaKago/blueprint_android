@@ -13,13 +13,14 @@ data class Weather(
     val link: URL,
     val publicTime: LocalDateTime,
     val description: Description,
-    val forecasts: List<Forecast>,
-    val createdAt: LocalDateTime = LocalDateTime.now()
+    val forecasts: List<Forecast>
 ) : Serializable {
 
     companion object {
         private val EXPIRED = Duration.ofHours(1)
     }
+
+    var createdAt: LocalDateTime = LocalDateTime.now()
 
     fun isExpired(): Boolean {
         return ((createdAt + EXPIRED) <= LocalDateTime.now())

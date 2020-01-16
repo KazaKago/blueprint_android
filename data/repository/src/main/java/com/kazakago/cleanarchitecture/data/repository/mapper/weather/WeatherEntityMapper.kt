@@ -23,9 +23,10 @@ internal class WeatherEntityMapper(
             link = URL(weather.link),
             publicTime = LocalDateTime.parse(weather.publicTime),
             description = descriptionEntityMapper.map(description),
-            forecasts = forecasts.map { forecastEntityMapper.map(it) },
+            forecasts = forecasts.map { forecastEntityMapper.map(it) }
+        ).apply {
             createdAt = LocalDateTime.parse(weather.createdAt)
-        )
+        }
     }
 
     fun reverse(destination: Weather): ReverseMappingResult {
