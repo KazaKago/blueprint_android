@@ -16,9 +16,10 @@ class WeatherTest {
             link = mockk(),
             publicTime = mockk(),
             description = mockk(),
-            forecasts = mockk(),
-            createdAt = createdAt
-        )
+            forecasts = mockk()
+        ).apply {
+            this.createdAt = createdAt
+        }
     }
 
     @Test
