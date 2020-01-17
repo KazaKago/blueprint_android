@@ -1,12 +1,13 @@
 package com.kazakago.cleanarchitecture.presentation.view.hierarchy.forecast
 
 import androidx.annotation.LayoutRes
+import coil.api.load
 import com.kazakago.cleanarchitecture.domain.model.weather.Forecast
 import com.kazakago.cleanarchitecture.presentation.view.R
 import com.kazakago.cleanarchitecture.presentation.view.databinding.RecyclerForecastContentBinding
 import com.kazakago.cleanarchitecture.presentation.view.global.extension.context
 import com.kazakago.cleanarchitecture.presentation.view.global.extension.formattedText
-import com.kazakago.cleanarchitecture.presentation.view.global.extension.loadImageUrl
+import com.kazakago.cleanarchitecture.presentation.viewmodel.global.extension.toUri
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 
@@ -24,7 +25,7 @@ data class ForecastRecyclerContent(private val forecast: Forecast) : Item<ViewHo
         binding.root.setOnClickListener {
             onClickItem?.invoke(forecast)
         }
-        binding.weatherImageView.loadImageUrl(forecast.imageUrl)
+        binding.weatherImageView.load(forecast.imageUrl.toUri())
         binding.dateLabelTextView.text = forecast.dateLabel
         binding.dateTextView.text = forecast.date.formattedText(binding.context())
         binding.telopTextView.text = forecast.telop

@@ -72,8 +72,8 @@ dependencies {
     implementation("com.google.android.gms:play-services-oss-licenses:17.0.0")
     //Groupie
     implementation("com.xwray:groupie:2.5.1")
-    //Picasso
-    implementation("com.squareup.picasso:picasso:2.71828")
+    //Coil
+    implementation("io.coil-kt:coil:0.9.1")
 
     //desugar_jdk_libs
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.4")
