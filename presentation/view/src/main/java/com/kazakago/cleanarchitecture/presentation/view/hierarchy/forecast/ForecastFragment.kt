@@ -24,11 +24,12 @@ class ForecastFragment : Fragment() {
     }
 
     private val viewModel by sharedViewModel<ForecastViewModel>()
-    private lateinit var binding: FragmentForecastBinding
+    private var _binding: FragmentForecastBinding? = null
+    private val binding get() = _binding!!
     private val forecastRecyclerAdapter = GroupAdapter<ViewHolder>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentForecastBinding.inflate(inflater, container, false)
+        _binding = FragmentForecastBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -49,6 +50,11 @@ class ForecastFragment : Fragment() {
         viewModel.showError.observe(viewLifecycleOwner) {
             showExceptionSnackbar(it)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun updateWeather(weather: Weather) {

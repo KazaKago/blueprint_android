@@ -25,11 +25,12 @@ class CityListFragment : Fragment() {
     }
 
     private val viewModel by sharedViewModel<CityListViewModel>()
-    private lateinit var binding: FragmentCityListBinding
+    private var _binding: FragmentCityListBinding? = null
+    private val binding get() = _binding!!
     private val cityRecyclerAdapter = GroupAdapter<ViewHolder>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentCityListBinding.inflate(inflater, container, false)
+        _binding = FragmentCityListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -47,6 +48,11 @@ class CityListFragment : Fragment() {
         viewModel.showError.observe(viewLifecycleOwner) {
             showExceptionSnackbar(it)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun updateCityList(cityList: List<City>) {

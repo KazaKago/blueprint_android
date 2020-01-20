@@ -25,10 +25,11 @@ class AboutFragment : Fragment() {
     }
 
     private val viewModel by sharedViewModel<AboutViewModel>()
-    private lateinit var binding: FragmentAboutBinding
+    private var _binding: FragmentAboutBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentAboutBinding.inflate(inflater, container, false)
+        _binding = FragmentAboutBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -58,6 +59,11 @@ class AboutFragment : Fragment() {
         viewModel.showError.observe(viewLifecycleOwner) {
             showExceptionSnackbar(it)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun showExceptionSnackbar(exception: Exception) {

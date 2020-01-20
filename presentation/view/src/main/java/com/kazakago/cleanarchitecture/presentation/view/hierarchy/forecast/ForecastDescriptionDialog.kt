@@ -22,10 +22,10 @@ class ForecastDescriptionDialog : BottomSheetDialogFragment() {
     }
 
     private val viewModel by sharedViewModel<ForecastViewModel>()
-    private lateinit var binding: DialogForecastDescriptionBinding
-
+    private var _binding: DialogForecastDescriptionBinding? = null
+    private val binding get() = _binding!!
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DialogForecastDescriptionBinding.inflate(inflater, container, false)
+        _binding = DialogForecastDescriptionBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -42,6 +42,11 @@ class ForecastDescriptionDialog : BottomSheetDialogFragment() {
         viewModel.showError.observe(viewLifecycleOwner) {
             showExceptionSnackbar(it)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun showExceptionSnackbar(exception: Exception) {
