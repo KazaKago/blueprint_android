@@ -59,8 +59,6 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3")
     //Koin
     implementation("org.koin:koin-core:2.0.1")
-    //AndroidX KTX
-    implementation("androidx.core:core-ktx:1.1.0")
 
     //desugar_jdk_libs
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.4")

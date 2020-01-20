@@ -49,10 +49,6 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     //Kotlin
     implementation(kotlin("stdlib-jdk8", KotlinCompilerVersion.VERSION))
-    //kotlinx.coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3")
-    //AndroidX KTX
-    implementation("androidx.core:core-ktx:1.1.0")
     //AndroidX Room
     api("androidx.room:room-runtime:2.2.3")
     implementation("androidx.room:room-ktx:2.2.3")

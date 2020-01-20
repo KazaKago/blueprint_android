@@ -49,10 +49,6 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     //Kotlin
     implementation(kotlin("stdlib-jdk8", KotlinCompilerVersion.VERSION))
-    //kotlinx.coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3")
-    //AndroidX KTX
-    implementation("androidx.core:core-ktx:1.1.0")
     //Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.7.1")
     implementation("com.squareup.retrofit2:converter-moshi:2.7.1")

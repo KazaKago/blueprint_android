@@ -56,8 +56,6 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3")
     //Koin
     implementation("org.koin:koin-androidx-viewmodel:2.0.1")
-    //AndroidX KTX
-    implementation("androidx.core:core-ktx:1.1.0")
     //AndroidX Lifecycle
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.1.0")

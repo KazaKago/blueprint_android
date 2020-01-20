@@ -57,7 +57,6 @@ dependencies {
     //Koin
     implementation("org.koin:koin-androidx-viewmodel:2.0.1")
     //AndroidX KTX
-    implementation("androidx.core:core-ktx:1.1.0")
     implementation("androidx.fragment:fragment-ktx:1.1.0")
     //AndroidX AppCompat
     api("androidx.appcompat:appcompat:1.1.0")
