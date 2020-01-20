@@ -24,6 +24,7 @@ class ForecastDescriptionDialog : BottomSheetDialogFragment() {
     private val viewModel by sharedViewModel<ForecastViewModel>()
     private var _binding: DialogForecastDescriptionBinding? = null
     private val binding get() = _binding!!
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = DialogForecastDescriptionBinding.inflate(inflater, container, false)
         return binding.root
