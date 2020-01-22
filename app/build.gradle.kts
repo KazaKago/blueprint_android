@@ -83,7 +83,7 @@ dependencies {
     debugImplementation("com.facebook.flipper:flipper-network-plugin:0.30.0")
     debugImplementation("com.facebook.soloader:soloader:0.8.0")
     //LeakCanary
-    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.0")
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.1")
     //Hyperion
     debugImplementation("com.willowtreeapps.hyperion:hyperion-core:0.9.27")
     debugImplementation("com.willowtreeapps.hyperion:hyperion-attr:0.9.27")
