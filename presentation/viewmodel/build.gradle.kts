@@ -57,9 +57,9 @@ dependencies {
     //Koin
     implementation("org.koin:koin-androidx-viewmodel:2.0.1")
     //AndroidX Lifecycle
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.1.0")
-    implementation("androidx.lifecycle:lifecycle-common-java8:2.1.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
+    implementation("androidx.lifecycle:lifecycle-common-java8:2.2.0")
 
     //desugar_jdk_libs
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.4")
