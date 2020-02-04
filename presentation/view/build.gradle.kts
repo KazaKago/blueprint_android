@@ -63,16 +63,16 @@ dependencies {
     //AndroidX ConstraintLayout
     api("androidx.constraintlayout:constraintlayout:1.1.3")
     //AndroidX Material
-    api("com.google.android.material:material:1.0.0")
+    api("com.google.android.material:material:1.1.0")
     //AndroidX Lifecycle
     api("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
     api("androidx.lifecycle:lifecycle-common-java8:2.2.0")
     //PlayServices OSS Licenses
     implementation("com.google.android.gms:play-services-oss-licenses:17.0.0")
     //Groupie
-    implementation("com.xwray:groupie:2.5.1")
+    implementation("com.xwray:groupie:2.7.2")
     //Coil
-    implementation("io.coil-kt:coil:0.9.2")
+    implementation("io.coil-kt:coil:0.9.3")
 
     //desugar_jdk_libs
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.4")

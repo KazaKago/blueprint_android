@@ -8,10 +8,10 @@ import com.kazakago.cleanarchitecture.presentation.view.databinding.RecyclerFore
 import com.kazakago.cleanarchitecture.presentation.view.global.extension.context
 import com.kazakago.cleanarchitecture.presentation.view.global.extension.formattedText
 import com.kazakago.cleanarchitecture.presentation.viewmodel.global.extension.toUri
+import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
-import com.xwray.groupie.ViewHolder
 
-data class ForecastRecyclerContent(private val forecast: Forecast) : Item<ViewHolder>(forecast.hashCode().toLong()) {
+data class ForecastRecyclerContent(private val forecast: Forecast) : Item<GroupieViewHolder>(forecast.hashCode().toLong()) {
 
     var onClickItem: ((forecast: Forecast) -> Unit)? = null
 
@@ -20,7 +20,7 @@ data class ForecastRecyclerContent(private val forecast: Forecast) : Item<ViewHo
         return R.layout.recycler_forecast_content
     }
 
-    override fun bind(viewHolder: ViewHolder, position: Int) {
+    override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         val binding = RecyclerForecastContentBinding.bind(viewHolder.root)
         binding.root.setOnClickListener {
             onClickItem?.invoke(forecast)

@@ -5,10 +5,10 @@ import java.net.URL
 import java.time.LocalDate
 
 data class Forecast(
-    var date: LocalDate,
-    var dateLabel: String,
-    var telop: String,
-    var imageUrl: URL,
-    var maxTemperature: Float?,
-    var minTemperature: Float?
+    val date: LocalDate,
+    val dateLabel: String,
+    val telop: String,
+    val imageUrl: URL,
+    val maxTemperature: Float?,
+    val minTemperature: Float?
 ) : Serializable

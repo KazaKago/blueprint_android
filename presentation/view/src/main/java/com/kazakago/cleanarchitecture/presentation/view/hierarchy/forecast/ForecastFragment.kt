@@ -12,7 +12,7 @@ import com.kazakago.cleanarchitecture.domain.model.weather.Weather
 import com.kazakago.cleanarchitecture.presentation.view.databinding.FragmentForecastBinding
 import com.kazakago.cleanarchitecture.presentation.viewmodel.hierarchy.forecast.ForecastViewModel
 import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.ViewHolder
+import com.xwray.groupie.GroupieViewHolder
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class ForecastFragment : Fragment() {
@@ -26,7 +26,7 @@ class ForecastFragment : Fragment() {
     private val viewModel by sharedViewModel<ForecastViewModel>()
     private var _binding: FragmentForecastBinding? = null
     private val binding get() = _binding!!
-    private val forecastRecyclerAdapter = GroupAdapter<ViewHolder>()
+    private val forecastRecyclerAdapter = GroupAdapter<GroupieViewHolder>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentForecastBinding.inflate(inflater, container, false)

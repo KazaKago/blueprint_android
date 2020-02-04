@@ -13,7 +13,7 @@ import com.kazakago.cleanarchitecture.presentation.view.databinding.FragmentCity
 import com.kazakago.cleanarchitecture.presentation.view.hierarchy.forecast.ForecastActivity
 import com.kazakago.cleanarchitecture.presentation.viewmodel.hierarchy.city.CityListViewModel
 import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.ViewHolder
+import com.xwray.groupie.GroupieViewHolder
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class CityListFragment : Fragment() {
@@ -27,7 +27,7 @@ class CityListFragment : Fragment() {
     private val viewModel by sharedViewModel<CityListViewModel>()
     private var _binding: FragmentCityListBinding? = null
     private val binding get() = _binding!!
-    private val cityRecyclerAdapter = GroupAdapter<ViewHolder>()
+    private val cityRecyclerAdapter = GroupAdapter<GroupieViewHolder>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentCityListBinding.inflate(inflater, container, false)
