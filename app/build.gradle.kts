@@ -79,11 +79,11 @@ dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.4")
 
     //Flipper
-    debugImplementation("com.facebook.flipper:flipper:0.30.0")
-    debugImplementation("com.facebook.flipper:flipper-network-plugin:0.30.0")
-    debugImplementation("com.facebook.soloader:soloader:0.8.1")
+    debugImplementation("com.facebook.flipper:flipper:0.31.1")
+    debugImplementation("com.facebook.flipper:flipper-network-plugin:0.31.1")
+    debugImplementation("com.facebook.soloader:soloader:0.8.2")
     //LeakCanary
-    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.1")
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.2")
     //Hyperion
     debugImplementation("com.willowtreeapps.hyperion:hyperion-core:0.9.27")
     debugImplementation("com.willowtreeapps.hyperion:hyperion-attr:0.9.27")

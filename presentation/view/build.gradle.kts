@@ -57,7 +57,7 @@ dependencies {
     //Koin
     implementation("org.koin:koin-androidx-viewmodel:2.0.1")
     //AndroidX KTX
-    implementation("androidx.fragment:fragment-ktx:1.2.0")
+    implementation("androidx.fragment:fragment-ktx:1.2.1")
     //AndroidX AppCompat
     api("androidx.appcompat:appcompat:1.1.0")
     //AndroidX ConstraintLayout
@@ -72,7 +72,7 @@ dependencies {
     //Groupie
     implementation("com.xwray:groupie:2.7.2")
     //Coil
-    implementation("io.coil-kt:coil:0.9.3")
+    implementation("io.coil-kt:coil:0.9.5")
 
     //desugar_jdk_libs
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.4")
