@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.config.KotlinCompilerVersion
 plugins {
     id("com.android.library")
     kotlin("android")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -57,7 +58,7 @@ dependencies {
     //Koin
     implementation("org.koin:koin-androidx-viewmodel:2.0.1")
     //AndroidX KTX
-    implementation("androidx.fragment:fragment-ktx:1.2.1")
+    implementation("androidx.fragment:fragment-ktx:1.2.2")
     //AndroidX AppCompat
     api("androidx.appcompat:appcompat:1.1.0")
     //AndroidX ConstraintLayout
@@ -67,6 +68,9 @@ dependencies {
     //AndroidX Lifecycle
     api("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
     api("androidx.lifecycle:lifecycle-common-java8:2.2.0")
+    //AndroidX Navigation
+    implementation("androidx.navigation:navigation-fragment-ktx:2.2.1")
+    implementation("androidx.navigation:navigation-ui-ktx:2.2.1")
     //PlayServices OSS Licenses
     implementation("com.google.android.gms:play-services-oss-licenses:17.0.0")
     //Groupie

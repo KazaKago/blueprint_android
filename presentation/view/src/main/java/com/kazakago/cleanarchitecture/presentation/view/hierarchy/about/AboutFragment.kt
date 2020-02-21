@@ -12,21 +12,21 @@ import com.google.android.material.snackbar.Snackbar
 import com.kazakago.cleanarchitecture.presentation.view.R
 import com.kazakago.cleanarchitecture.presentation.view.databinding.FragmentAboutBinding
 import com.kazakago.cleanarchitecture.presentation.viewmodel.global.extension.toUri
+import com.kazakago.cleanarchitecture.presentation.viewmodel.global.livedata.liveevent.observe
 import com.kazakago.cleanarchitecture.presentation.viewmodel.hierarchy.about.AboutViewModel
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
 class AboutFragment : Fragment() {
 
-    companion object {
-        fun createInstance(): AboutFragment {
-            return AboutFragment()
-        }
-    }
-
-    private val viewModel by sharedViewModel<AboutViewModel>()
     private var _binding: FragmentAboutBinding? = null
     private val binding get() = _binding!!
+    private val viewModel by viewModel<AboutViewModel>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentAboutBinding.inflate(inflater, container, false)
@@ -56,7 +56,7 @@ class AboutFragment : Fragment() {
         viewModel.isLoading.observe(viewLifecycleOwner) {
             if (it) binding.loadingProgressBar.show() else binding.loadingProgressBar.hide()
         }
-        viewModel.showError.observe(viewLifecycleOwner) {
+        viewModel.showError.observe(viewLifecycleOwner, "") {
             showExceptionSnackbar(it)
         }
     }

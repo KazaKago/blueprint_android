@@ -5,25 +5,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
 import com.kazakago.cleanarchitecture.presentation.view.R
 import com.kazakago.cleanarchitecture.presentation.view.databinding.DialogForecastDescriptionBinding
 import com.kazakago.cleanarchitecture.presentation.view.global.extension.formattedText
+import com.kazakago.cleanarchitecture.presentation.viewmodel.global.livedata.liveevent.observe
 import com.kazakago.cleanarchitecture.presentation.viewmodel.hierarchy.forecast.ForecastViewModel
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class ForecastDescriptionDialog : BottomSheetDialogFragment() {
 
-    companion object {
-        fun createInstance(): ForecastDescriptionDialog {
-            return ForecastDescriptionDialog()
-        }
-    }
-
-    private val viewModel by sharedViewModel<ForecastViewModel>()
+    private val args: ForecastDescriptionDialogArgs by navArgs()
     private var _binding: DialogForecastDescriptionBinding? = null
     private val binding get() = _binding!!
+    private val viewModel by viewModel<ForecastViewModel> {
+        parametersOf(args.cityId)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = DialogForecastDescriptionBinding.inflate(inflater, container, false)
@@ -40,7 +40,7 @@ class ForecastDescriptionDialog : BottomSheetDialogFragment() {
         viewModel.isLoading.observe(viewLifecycleOwner) {
             if (it) binding.loadingProgressBar.show() else binding.loadingProgressBar.hide()
         }
-        viewModel.showError.observe(viewLifecycleOwner) {
+        viewModel.showError.observe(viewLifecycleOwner, "") {
             showExceptionSnackbar(it)
         }
     }
