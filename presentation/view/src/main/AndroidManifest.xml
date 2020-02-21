@@ -19,13 +19,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".hierarchy.city.CityListActivity" />
-        <activity
-            android:name=".hierarchy.forecast.ForecastActivity" />
-        <activity
-            android:name=".hierarchy.about.AboutActivity"
-            android:label="@string/about_title" />
-        <activity
             android:name="com.google.android.gms.oss.licenses.OssLicensesActivity"
             android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar" />
         <activity
