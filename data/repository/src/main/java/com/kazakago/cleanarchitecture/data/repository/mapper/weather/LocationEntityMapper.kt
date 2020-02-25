@@ -1,8 +1,8 @@
 package com.kazakago.cleanarchitecture.data.repository.mapper.weather
 
 import com.kazakago.cleanarchitecture.data.database.entity.weather.LocationEntity
-import com.kazakago.cleanarchitecture.domain.model.city.CityId
-import com.kazakago.cleanarchitecture.domain.model.weather.Location
+import com.kazakago.cleanarchitecture.domain.model.hierarchy.city.CityId
+import com.kazakago.cleanarchitecture.domain.model.hierarchy.weather.Location
 
 internal class LocationEntityMapper {
 

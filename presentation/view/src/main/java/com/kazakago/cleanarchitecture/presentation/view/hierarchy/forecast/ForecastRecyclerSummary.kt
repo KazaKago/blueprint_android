@@ -1,7 +1,7 @@
 package com.kazakago.cleanarchitecture.presentation.view.hierarchy.forecast
 
 import androidx.annotation.LayoutRes
-import com.kazakago.cleanarchitecture.domain.model.weather.Weather
+import com.kazakago.cleanarchitecture.domain.model.hierarchy.weather.Weather
 import com.kazakago.cleanarchitecture.presentation.view.R
 import com.kazakago.cleanarchitecture.presentation.view.databinding.RecyclerForecastSummaryBinding
 import com.kazakago.cleanarchitecture.presentation.view.global.extension.context

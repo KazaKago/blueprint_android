@@ -3,12 +3,12 @@ package com.kazakago.cleanarchitecture.presentation.viewmodel.hierarchy.about
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.kazakago.cleanarchitecture.domain.model.about.AppInfo
-import com.kazakago.cleanarchitecture.domain.model.about.DeveloperInfo
-import com.kazakago.cleanarchitecture.domain.model.state.State
-import com.kazakago.cleanarchitecture.domain.model.state.StateContent
+import com.kazakago.cleanarchitecture.domain.model.hierarchy.about.AppInfo
+import com.kazakago.cleanarchitecture.domain.model.hierarchy.about.DeveloperInfo
+import com.kazakago.cleanarchitecture.domain.model.global.state.State
+import com.kazakago.cleanarchitecture.domain.model.global.state.StateContent
 import com.kazakago.cleanarchitecture.domain.usecase.output.about.AboutOutput
-import com.kazakago.cleanarchitecture.domain.usecase.usecase.about.SubscribeAboutUseCase
+import com.kazakago.cleanarchitecture.domain.usecase.hierarchy.about.SubscribeAboutUseCase
 import com.kazakago.cleanarchitecture.presentation.viewmodel.global.livedata.liveevent.LiveEvent
 import com.kazakago.cleanarchitecture.presentation.viewmodel.global.livedata.liveevent.MutableLiveEvent
 import com.kazakago.cleanarchitecture.presentation.viewmodel.global.livedata.nullsafelivedata.MutableNullSafeLiveData

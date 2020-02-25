@@ -1,8 +1,8 @@
 package com.kazakago.cleanarchitecture.data.repository.mapper.weather
 
-import com.kazakago.cleanarchitecture.data.api.entity.weather.DescriptionResponse
-import com.kazakago.cleanarchitecture.data.repository.extension.parseDateTime
-import com.kazakago.cleanarchitecture.domain.model.weather.Description
+import com.kazakago.cleanarchitecture.data.api.response.weather.DescriptionResponse
+import com.kazakago.cleanarchitecture.data.repository.global.extension.parseDateTime
+import com.kazakago.cleanarchitecture.domain.model.hierarchy.weather.Description
 
 internal class DescriptionResponseMapper {
 

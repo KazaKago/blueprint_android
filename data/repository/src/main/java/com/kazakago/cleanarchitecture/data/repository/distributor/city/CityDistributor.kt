@@ -1,9 +1,9 @@
 package com.kazakago.cleanarchitecture.data.repository.distributor.city
 
 import android.content.Context
-import com.kazakago.cleanarchitecture.data.resource.dao.city.CityDao
-import com.kazakago.cleanarchitecture.domain.model.city.City
-import com.kazakago.cleanarchitecture.domain.model.city.CityId
+import com.kazakago.cleanarchitecture.data.resource.hierarchy.city.CityDao
+import com.kazakago.cleanarchitecture.domain.model.hierarchy.city.City
+import com.kazakago.cleanarchitecture.domain.model.hierarchy.city.CityId
 import com.kazakago.cleanarchitecture.data.repository.mapper.city.CityEntityMapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

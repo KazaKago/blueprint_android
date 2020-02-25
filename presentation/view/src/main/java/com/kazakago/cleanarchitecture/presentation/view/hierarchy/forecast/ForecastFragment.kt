@@ -7,8 +7,8 @@ import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
-import com.kazakago.cleanarchitecture.domain.model.weather.Forecast
-import com.kazakago.cleanarchitecture.domain.model.weather.Weather
+import com.kazakago.cleanarchitecture.domain.model.hierarchy.weather.Forecast
+import com.kazakago.cleanarchitecture.domain.model.hierarchy.weather.Weather
 import com.kazakago.cleanarchitecture.presentation.view.R
 import com.kazakago.cleanarchitecture.presentation.view.databinding.FragmentForecastBinding
 import com.kazakago.cleanarchitecture.presentation.viewmodel.global.livedata.liveevent.observe

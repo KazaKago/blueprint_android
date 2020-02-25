@@ -1,8 +1,8 @@
 package com.kazakago.cleanarchitecture.data.repository.mapper.weather
 
 import com.kazakago.cleanarchitecture.data.database.entity.weather.DescriptionEntity
-import com.kazakago.cleanarchitecture.domain.model.city.CityId
-import com.kazakago.cleanarchitecture.domain.model.weather.Description
+import com.kazakago.cleanarchitecture.domain.model.hierarchy.city.CityId
+import com.kazakago.cleanarchitecture.domain.model.hierarchy.weather.Description
 import java.time.LocalDateTime
 
 internal class DescriptionEntityMapper {

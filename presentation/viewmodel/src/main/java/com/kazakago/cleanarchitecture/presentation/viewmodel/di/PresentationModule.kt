@@ -1,6 +1,6 @@
 package com.kazakago.cleanarchitecture.presentation.viewmodel.di
 
-import com.kazakago.cleanarchitecture.domain.model.city.CityId
+import com.kazakago.cleanarchitecture.domain.model.hierarchy.city.CityId
 import com.kazakago.cleanarchitecture.presentation.viewmodel.hierarchy.about.AboutViewModel
 import com.kazakago.cleanarchitecture.presentation.viewmodel.hierarchy.city.CityListViewModel
 import com.kazakago.cleanarchitecture.presentation.viewmodel.hierarchy.forecast.ForecastViewModel

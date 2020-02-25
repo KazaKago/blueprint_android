@@ -1,8 +1,8 @@
 package com.kazakago.cleanarchitecture.data.repository.mapper.city
 
 import com.kazakago.cleanarchitecture.data.resource.entity.city.PrefEntity
-import com.kazakago.cleanarchitecture.domain.model.city.City
-import com.kazakago.cleanarchitecture.domain.model.city.CityId
+import com.kazakago.cleanarchitecture.domain.model.hierarchy.city.City
+import com.kazakago.cleanarchitecture.domain.model.hierarchy.city.CityId
 
 internal class CityEntityMapper {
 

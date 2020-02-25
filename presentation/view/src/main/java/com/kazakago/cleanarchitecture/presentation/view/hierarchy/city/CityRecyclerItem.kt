@@ -1,7 +1,7 @@
 package com.kazakago.cleanarchitecture.presentation.view.hierarchy.city
 
 import androidx.annotation.LayoutRes
-import com.kazakago.cleanarchitecture.domain.model.city.City
+import com.kazakago.cleanarchitecture.domain.model.hierarchy.city.City
 import com.kazakago.cleanarchitecture.presentation.view.R
 import com.kazakago.cleanarchitecture.presentation.view.databinding.RecyclerCityBinding
 import com.xwray.groupie.GroupieViewHolder

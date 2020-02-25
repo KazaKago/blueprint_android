@@ -1,9 +1,9 @@
 package com.kazakago.cleanarchitecture.data.repository.mapper.weather
 
-import com.kazakago.cleanarchitecture.data.api.entity.weather.WeatherResponse
-import com.kazakago.cleanarchitecture.data.repository.extension.parseDateTime
-import com.kazakago.cleanarchitecture.domain.model.city.CityId
-import com.kazakago.cleanarchitecture.domain.model.weather.Weather
+import com.kazakago.cleanarchitecture.data.api.response.weather.WeatherResponse
+import com.kazakago.cleanarchitecture.data.repository.global.extension.parseDateTime
+import com.kazakago.cleanarchitecture.domain.model.hierarchy.city.CityId
+import com.kazakago.cleanarchitecture.domain.model.hierarchy.weather.Weather
 import java.net.URL
 
 internal class WeatherResponseMapper(

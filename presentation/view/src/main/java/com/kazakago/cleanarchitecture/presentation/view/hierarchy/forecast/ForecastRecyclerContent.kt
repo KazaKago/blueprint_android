@@ -2,7 +2,7 @@ package com.kazakago.cleanarchitecture.presentation.view.hierarchy.forecast
 
 import androidx.annotation.LayoutRes
 import coil.api.load
-import com.kazakago.cleanarchitecture.domain.model.weather.Forecast
+import com.kazakago.cleanarchitecture.domain.model.hierarchy.weather.Forecast
 import com.kazakago.cleanarchitecture.presentation.view.R
 import com.kazakago.cleanarchitecture.presentation.view.databinding.RecyclerForecastContentBinding
 import com.kazakago.cleanarchitecture.presentation.view.global.extension.context

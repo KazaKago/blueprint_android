@@ -1,13 +1,13 @@
 package com.kazakago.cleanarchitecture.domain.usecase.di
 
-import com.kazakago.cleanarchitecture.domain.usecase.usecase.about.SubscribeAboutUseCase
-import com.kazakago.cleanarchitecture.domain.usecase.usecase.about.SubscribeAboutUseCaseImpl
-import com.kazakago.cleanarchitecture.domain.usecase.usecase.city.SubscribeCityListUseCase
-import com.kazakago.cleanarchitecture.domain.usecase.usecase.city.SubscribeCityListUseCaseImpl
-import com.kazakago.cleanarchitecture.domain.usecase.usecase.weather.RequestWeatherUseCase
-import com.kazakago.cleanarchitecture.domain.usecase.usecase.weather.RequestWeatherUseCaseImpl
-import com.kazakago.cleanarchitecture.domain.usecase.usecase.weather.SubscribeWeatherUseCase
-import com.kazakago.cleanarchitecture.domain.usecase.usecase.weather.SubscribeWeatherUseCaseImpl
+import com.kazakago.cleanarchitecture.domain.usecase.hierarchy.about.SubscribeAboutUseCase
+import com.kazakago.cleanarchitecture.domain.usecase.hierarchy.about.SubscribeAboutUseCaseImpl
+import com.kazakago.cleanarchitecture.domain.usecase.hierarchy.city.SubscribeCityListUseCase
+import com.kazakago.cleanarchitecture.domain.usecase.hierarchy.city.SubscribeCityListUseCaseImpl
+import com.kazakago.cleanarchitecture.domain.usecase.hierarchy.weather.RequestWeatherUseCase
+import com.kazakago.cleanarchitecture.domain.usecase.hierarchy.weather.RequestWeatherUseCaseImpl
+import com.kazakago.cleanarchitecture.domain.usecase.hierarchy.weather.SubscribeWeatherUseCase
+import com.kazakago.cleanarchitecture.domain.usecase.hierarchy.weather.SubscribeWeatherUseCaseImpl
 import org.koin.dsl.module
 
 val domainModule = module {

@@ -2,9 +2,9 @@ package com.kazakago.cleanarchitecture.data.repository.distributor.about
 
 import android.content.Context
 import com.kazakago.cleanarchitecture.data.repository.R
-import com.kazakago.cleanarchitecture.data.resource.dao.device.StoreLinkDao
-import com.kazakago.cleanarchitecture.data.resource.dao.device.VersionDao
-import com.kazakago.cleanarchitecture.domain.model.about.*
+import com.kazakago.cleanarchitecture.data.resource.hierarchy.device.StoreLinkDao
+import com.kazakago.cleanarchitecture.data.resource.hierarchy.device.VersionDao
+import com.kazakago.cleanarchitecture.domain.model.hierarchy.about.*
 import java.net.URL
 
 internal class AboutDistributor(private val context: Context) {

@@ -1,14 +1,14 @@
 package com.kazakago.cleanarchitecture.data.repository.distributor.weather
 
 import android.content.Context
-import com.kazakago.cleanarchitecture.data.api.api.weather.WeatherApi
-import com.kazakago.cleanarchitecture.data.database.dao.AppDatabase
-import com.kazakago.cleanarchitecture.data.memory.memory.DataState
-import com.kazakago.cleanarchitecture.data.memory.memory.weather.WeatherMemory
+import com.kazakago.cleanarchitecture.data.api.hierarchy.weather.WeatherApi
+import com.kazakago.cleanarchitecture.data.database.global.AppDatabase
+import com.kazakago.cleanarchitecture.data.memory.global.DataState
+import com.kazakago.cleanarchitecture.data.memory.hierarchy.weather.WeatherMemory
 import com.kazakago.cleanarchitecture.data.repository.mapper.city.CityIdEntityMapper
 import com.kazakago.cleanarchitecture.data.repository.mapper.weather.*
-import com.kazakago.cleanarchitecture.domain.model.city.CityId
-import com.kazakago.cleanarchitecture.domain.model.weather.Weather
+import com.kazakago.cleanarchitecture.domain.model.hierarchy.city.CityId
+import com.kazakago.cleanarchitecture.domain.model.hierarchy.weather.Weather
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.map

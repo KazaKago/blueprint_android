@@ -1,8 +1,8 @@
 package com.kazakago.cleanarchitecture.data.repository.mapper.weather
 
 import com.kazakago.cleanarchitecture.data.database.entity.weather.ForecastEntity
-import com.kazakago.cleanarchitecture.domain.model.city.CityId
-import com.kazakago.cleanarchitecture.domain.model.weather.Forecast
+import com.kazakago.cleanarchitecture.domain.model.hierarchy.city.CityId
+import com.kazakago.cleanarchitecture.domain.model.hierarchy.weather.Forecast
 import java.net.URL
 import java.time.LocalDate
 

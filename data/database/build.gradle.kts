@@ -50,9 +50,9 @@ dependencies {
     //Kotlin
     implementation(kotlin("stdlib-jdk8", KotlinCompilerVersion.VERSION))
     //AndroidX Room
-    api("androidx.room:room-runtime:2.2.3")
-    implementation("androidx.room:room-ktx:2.2.3")
-    kapt("androidx.room:room-compiler:2.2.3")
+    api("androidx.room:room-runtime:2.2.4")
+    implementation("androidx.room:room-ktx:2.2.4")
+    kapt("androidx.room:room-compiler:2.2.4")
 
     //desugar_jdk_libs
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.4")

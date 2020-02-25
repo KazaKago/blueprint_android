@@ -4,8 +4,8 @@ import com.kazakago.cleanarchitecture.data.database.entity.weather.DescriptionEn
 import com.kazakago.cleanarchitecture.data.database.entity.weather.ForecastEntity
 import com.kazakago.cleanarchitecture.data.database.entity.weather.LocationEntity
 import com.kazakago.cleanarchitecture.data.database.entity.weather.WeatherEntity
-import com.kazakago.cleanarchitecture.domain.model.city.CityId
-import com.kazakago.cleanarchitecture.domain.model.weather.Weather
+import com.kazakago.cleanarchitecture.domain.model.hierarchy.city.CityId
+import com.kazakago.cleanarchitecture.domain.model.hierarchy.weather.Weather
 import java.net.URL
 import java.time.LocalDateTime
 

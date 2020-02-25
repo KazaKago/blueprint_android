@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import com.kazakago.cleanarchitecture.domain.model.city.City
+import com.kazakago.cleanarchitecture.domain.model.hierarchy.city.City
 import com.kazakago.cleanarchitecture.presentation.view.R
 import com.kazakago.cleanarchitecture.presentation.view.databinding.FragmentCityListBinding
 import com.kazakago.cleanarchitecture.presentation.viewmodel.global.livedata.liveevent.observe

@@ -28,7 +28,7 @@
         tools:layout="@layout/fragment_forecast">
         <argument
             android:name="cityId"
-            app:argType="com.kazakago.cleanarchitecture.domain.model.city.CityId" />
+            app:argType="com.kazakago.cleanarchitecture.domain.model.hierarchy.city.CityId" />
         <argument
             android:name="title"
             app:argType="string" />
@@ -42,7 +42,7 @@
         tools:layout="@layout/dialog_forecast_description">
         <argument
             android:name="cityId"
-            app:argType="com.kazakago.cleanarchitecture.domain.model.city.CityId" />
+            app:argType="com.kazakago.cleanarchitecture.domain.model.hierarchy.city.CityId" />
     </dialog>
     <fragment
         android:id="@+id/aboutFragment"
