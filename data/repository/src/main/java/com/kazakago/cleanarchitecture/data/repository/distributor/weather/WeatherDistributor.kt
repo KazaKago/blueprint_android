@@ -24,7 +24,7 @@ internal class WeatherDistributor(context: Context) {
     fun subscribeState(cityId: CityId): Flow<DataState> {
         return WeatherMemory.weatherState.asFlow()
             .map {
-                it.getOrDefault(cityIdEntityMapper.reverse(cityId), DataState.Fixed)
+                it.getOrElse(cityIdEntityMapper.reverse(cityId)) { DataState.Fixed }
             }
     }
 

@@ -16,54 +16,53 @@ internal class CacheFlowDispatcher<T>(
     private val saveState: (suspend (state: DataState) -> Unit),
     private val loadContent: (suspend () -> T?),
     private val saveContent: (suspend (content: T) -> Unit),
-    private val fetchContent: (suspend () -> T),
-    private val isStale: (suspend (content: T) -> Boolean)
+    private val fetchContent: (suspend () -> T)
 ) {
 
-    fun subscribe(): Flow<State<T>> {
+    fun subscribe(isStale: (suspend (content: T) -> Boolean)): Flow<State<T>> {
         return loadState()
             .onStart {
-                CoroutineScope(Dispatchers.IO).launch { checkState() }
+                CoroutineScope(Dispatchers.IO).launch { checkState(isStale) }
             }
             .map {
-                mapState(it)
+                mapState(it, isStale)
             }
     }
 
-    suspend fun request() {
-        checkState()
+    suspend fun request(isStale: (suspend (content: T) -> Boolean) = { true }) {
+        checkState(isStale)
     }
 
-    private suspend fun mapState(dataState: DataState): State<T> {
+    private suspend fun mapState(dataState: DataState, isStale: (suspend (content: T) -> Boolean)): State<T> {
         val loadedContent = loadContent()
-        val stateValue = if (loadedContent == null || isStale(loadedContent)) {
+        val stateContent = if (loadedContent == null || isStale(loadedContent)) {
             StateContent.NotStored<T>()
         } else {
             StateContent.Stored(loadedContent)
         }
         return when (dataState) {
-            is DataState.Fixed -> State.Fixed(stateValue)
-            is DataState.Loading -> State.Loading(stateValue)
-            is DataState.Error -> State.Error(stateValue, dataState.exception)
+            is DataState.Fixed -> State.Fixed(stateContent)
+            is DataState.Loading -> State.Loading(stateContent)
+            is DataState.Error -> State.Error(stateContent, dataState.exception)
         }
     }
 
-    private suspend fun checkState() {
+    private suspend fun checkState(isStale: (suspend (content: T) -> Boolean)) {
         when (loadState().first()) {
-            is DataState.Fixed -> checkContent()
+            is DataState.Fixed -> checkContent(isStale)
             is DataState.Loading -> Unit
-            is DataState.Error -> fetchNewValue()
+            is DataState.Error -> fetchNewContent()
         }
     }
 
-    private suspend fun checkContent() {
-        val savedContent = loadContent()
-        if (savedContent == null || isStale(savedContent)) {
-            fetchNewValue()
+    private suspend fun checkContent(isStale: (suspend (content: T) -> Boolean)) {
+        val loadedContent = loadContent()
+        if (loadedContent == null || isStale(loadedContent)) {
+            fetchNewContent()
         }
     }
 
-    private suspend fun fetchNewValue() {
+    private suspend fun fetchNewContent() {
         try {
             saveState(DataState.Loading)
             val newContent = fetchContent()

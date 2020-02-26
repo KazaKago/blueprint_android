@@ -19,9 +19,8 @@ internal class WeatherRepositoryImpl(context: Context) : WeatherRepository {
             saveState = { weatherStoreDistributor.saveState(it, cityId) },
             loadContent = { weatherStoreDistributor.loadContent(cityId) },
             fetchContent = { weatherStoreDistributor.fetchContent(cityId) },
-            saveContent = { weatherStoreDistributor.saveContent(it) },
-            isStale = { it.isExpired() }
-        ).subscribe()
+            saveContent = { weatherStoreDistributor.saveContent(it) }
+        ).subscribe(isStale = { it.isExpired() })
     }
 
     override suspend fun request(cityId: CityId) {
@@ -30,8 +29,7 @@ internal class WeatherRepositoryImpl(context: Context) : WeatherRepository {
             saveState = { weatherStoreDistributor.saveState(it, cityId) },
             loadContent = { weatherStoreDistributor.loadContent(cityId) },
             fetchContent = { weatherStoreDistributor.fetchContent(cityId) },
-            saveContent = { weatherStoreDistributor.saveContent(it) },
-            isStale = { true }
+            saveContent = { weatherStoreDistributor.saveContent(it) }
         ).request()
     }
 
