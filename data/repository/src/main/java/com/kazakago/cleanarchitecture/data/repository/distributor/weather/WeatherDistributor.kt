@@ -4,11 +4,13 @@ import android.content.Context
 import com.kazakago.cleanarchitecture.data.api.hierarchy.weather.WeatherApi
 import com.kazakago.cleanarchitecture.data.database.global.AppDatabase
 import com.kazakago.cleanarchitecture.data.memory.global.DataState
+import com.kazakago.cleanarchitecture.data.memory.global.getOrPut
 import com.kazakago.cleanarchitecture.data.memory.hierarchy.weather.WeatherMemory
 import com.kazakago.cleanarchitecture.data.repository.mapper.city.CityIdEntityMapper
 import com.kazakago.cleanarchitecture.data.repository.mapper.weather.*
 import com.kazakago.cleanarchitecture.domain.model.hierarchy.city.CityId
 import com.kazakago.cleanarchitecture.domain.model.hierarchy.weather.Weather
+import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.map
@@ -22,16 +24,11 @@ internal class WeatherDistributor(context: Context) {
     private val weatherEntityMapper = WeatherEntityMapper(LocationEntityMapper(), DescriptionEntityMapper(), ForecastEntityMapper())
 
     fun subscribeState(cityId: CityId): Flow<DataState> {
-        return WeatherMemory.weatherState.asFlow()
-            .map {
-                it.getOrElse(cityIdEntityMapper.reverse(cityId)) { DataState.Fixed }
-            }
+        return WeatherMemory.weatherState.getOrPut(cityIdEntityMapper.reverse(cityId)).asFlow()
     }
 
     suspend fun saveState(state: DataState, cityId: CityId) {
-        val weatherMap = WeatherMemory.weatherState.value.toMutableMap()
-        weatherMap[cityIdEntityMapper.reverse(cityId)] = state
-        WeatherMemory.weatherState.send(weatherMap)
+        WeatherMemory.weatherState.getOrPut(cityIdEntityMapper.reverse(cityId)).send(state)
     }
 
     suspend fun loadContent(cityId: CityId): Weather? {

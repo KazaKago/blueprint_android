@@ -5,5 +5,5 @@ import com.kazakago.cleanarchitecture.data.memory.global.DataState
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 
 object WeatherMemory {
-    val weatherState = ConflatedBroadcastChannel<Map<CityIdEntity, DataState>>(mapOf())
+    val weatherState: MutableMap<CityIdEntity, ConflatedBroadcastChannel<DataState>> = mutableMapOf()
 }
