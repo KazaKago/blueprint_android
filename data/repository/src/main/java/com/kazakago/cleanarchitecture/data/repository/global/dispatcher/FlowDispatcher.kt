@@ -5,7 +5,7 @@ import com.kazakago.cleanarchitecture.domain.model.global.state.StateContent
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-internal class FlowDispatcher<T>(
+internal class FlowDispatcher<out T>(
     private val fetch: (suspend () -> T)
 ) {
 

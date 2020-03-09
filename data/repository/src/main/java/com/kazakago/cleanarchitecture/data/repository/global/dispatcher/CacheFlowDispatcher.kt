@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
-internal class CacheFlowDispatcher<T>(
+internal class CacheFlowDispatcher<out T>(
     private val loadState: (() -> Flow<DataState>),
     private val saveState: (suspend (state: DataState) -> Unit),
     private val loadContent: (suspend () -> T?),
