@@ -19,13 +19,13 @@ internal class CacheFlowDispatcher<out T>(
     private val fetchContent: (suspend () -> T)
 ) {
 
-    fun subscribe(isStale: (suspend (content: T) -> Boolean)): Flow<State<T>> {
+    fun subscribe(needRefresh: (suspend (content: T) -> Boolean)): Flow<State<T>> {
         return loadState()
             .onStart {
-                CoroutineScope(Dispatchers.IO).launch { checkState(isStale) }
+                CoroutineScope(Dispatchers.IO).launch { checkState(needRefresh) }
             }
             .map {
-                mapState(it, isStale)
+                mapState(it, needRefresh)
             }
     }
 
@@ -36,9 +36,9 @@ internal class CacheFlowDispatcher<out T>(
     private suspend fun mapState(dataState: DataState, isStale: (suspend (content: T) -> Boolean)): State<T> {
         val loadedContent = loadContent()
         val stateContent = if (loadedContent == null || isStale(loadedContent)) {
-            StateContent.NotStored<T>()
+            StateContent.NotExist<T>()
         } else {
-            StateContent.Stored(loadedContent)
+            StateContent.Exist(loadedContent)
         }
         return when (dataState) {
             is DataState.Fixed -> State.Fixed(stateContent)

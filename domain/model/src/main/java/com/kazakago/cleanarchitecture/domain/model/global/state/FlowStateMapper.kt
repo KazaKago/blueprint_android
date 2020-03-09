@@ -6,8 +6,8 @@ import kotlinx.coroutines.flow.map
 fun <A, Z> Flow<State<A>>.mapContent(transform: suspend (content: A) -> Z): Flow<State<Z>> {
     return map {
         val stateContent = when (val stateContent = it.content) {
-            is StateContent.Stored -> StateContent.Stored(transform(stateContent.rawContent))
-            is StateContent.NotStored -> StateContent.NotStored<Z>()
+            is StateContent.Exist -> StateContent.Exist(transform(stateContent.rawContent))
+            is StateContent.NotExist -> StateContent.NotExist<Z>()
         }
         when (it) {
             is State.Fixed -> State.Fixed(stateContent)

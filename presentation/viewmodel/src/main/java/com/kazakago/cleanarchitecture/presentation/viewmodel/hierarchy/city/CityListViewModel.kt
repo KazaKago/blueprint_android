@@ -54,10 +54,10 @@ class CityListViewModel(
 
     private fun updateCityListContent(content: StateContent<List<City>>) {
         when (content) {
-            is StateContent.Stored -> {
+            is StateContent.Exist -> {
                 _cityList.value = content.rawContent
             }
-            is StateContent.NotStored -> {
+            is StateContent.NotExist -> {
                 //do nothing.
             }
         }

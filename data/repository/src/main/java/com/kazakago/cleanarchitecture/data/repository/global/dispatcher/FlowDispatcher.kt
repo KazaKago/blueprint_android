@@ -12,11 +12,11 @@ internal class FlowDispatcher<out T>(
     fun subscribe(): Flow<State<T>> {
         return flow {
             try {
-                emit(State.Loading(StateContent.NotStored()))
+                emit(State.Loading(StateContent.NotExist()))
                 val newValue = fetch()
-                emit(State.Fixed(StateContent.Stored(newValue)))
+                emit(State.Fixed(StateContent.Exist(newValue)))
             } catch (exception: Exception) {
-                emit(State.Error(StateContent.NotStored(), exception))
+                emit(State.Error(StateContent.NotExist(), exception))
             }
         }
     }

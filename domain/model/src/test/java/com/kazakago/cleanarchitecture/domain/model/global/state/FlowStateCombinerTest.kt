@@ -12,8 +12,8 @@ class FlowStateCombinerTest {
 
     @Test
     fun combineState() = runBlocking {
-        val stateFlow1 = flow { emit(State.Fixed(StateContent.Stored(0))) }
-        val stateFlow2 = flow { emit(State.Fixed(StateContent.Stored(2))) }
+        val stateFlow1 = flow { emit(State.Fixed(StateContent.Exist(0))) }
+        val stateFlow2 = flow { emit(State.Fixed(StateContent.Exist(2))) }
         val combinedStateFlow = stateFlow1.combineState(stateFlow2) { content1, content2 ->
             assertThat(content1, `is`(0))
             assertThat(content2, `is`(2))
@@ -26,11 +26,11 @@ class FlowStateCombinerTest {
 
     @Test
     fun combineManyState() = runBlocking {
-        val stateFlow1 = flow { emit(State.Fixed(StateContent.Stored(0))) }
-        val stateFlow2 = flow { emit(State.Fixed(StateContent.Stored(2))) }
-        val stateFlow3 = flow { emit(State.Fixed(StateContent.Stored(4))) }
-        val stateFlow4 = flow { emit(State.Fixed(StateContent.Stored(6))) }
-        val stateFlow5 = flow { emit(State.Fixed(StateContent.Stored(8))) }
+        val stateFlow1 = flow { emit(State.Fixed(StateContent.Exist(0))) }
+        val stateFlow2 = flow { emit(State.Fixed(StateContent.Exist(2))) }
+        val stateFlow3 = flow { emit(State.Fixed(StateContent.Exist(4))) }
+        val stateFlow4 = flow { emit(State.Fixed(StateContent.Exist(6))) }
+        val stateFlow5 = flow { emit(State.Fixed(StateContent.Exist(8))) }
         val combinedStateFlow = stateFlow1.combineState(stateFlow2, stateFlow3, stateFlow4, stateFlow5) { content1, content2, content3, content4, content5 ->
             assertThat(content1, `is`(0))
             assertThat(content2, `is`(2))

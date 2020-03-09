@@ -66,11 +66,11 @@ class ForecastViewModel(
 
     private fun updateWeatherContent(content: StateContent<WeatherOutput>) {
         when (content) {
-            is StateContent.Stored -> {
+            is StateContent.Exist -> {
                 _weather.value = content.rawContent.weather
                 _city.value = content.rawContent.city
             }
-            is StateContent.NotStored -> {
+            is StateContent.NotExist -> {
                 //do nothing.
             }
         }

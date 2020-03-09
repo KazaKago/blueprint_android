@@ -58,11 +58,11 @@ class AboutViewModel(
 
     private fun updateAboutContent(content: StateContent<AboutOutput>) {
         when (content) {
-            is StateContent.Stored -> {
+            is StateContent.Exist -> {
                 _appInfo.value = content.rawContent.appInfo
                 _developerInfo.value = content.rawContent.developerInfo
             }
-            is StateContent.NotStored -> {
+            is StateContent.NotExist -> {
                 //do nothing.
             }
         }
