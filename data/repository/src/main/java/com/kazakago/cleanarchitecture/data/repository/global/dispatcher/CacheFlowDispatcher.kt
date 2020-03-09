@@ -29,13 +29,13 @@ internal class CacheFlowDispatcher<out T>(
             }
     }
 
-    suspend fun request(isStale: (suspend (content: T) -> Boolean) = { true }) {
-        checkState(isStale)
+    suspend fun request(needRefresh: (suspend (content: T) -> Boolean) = { true }) {
+        checkState(needRefresh)
     }
 
-    private suspend fun mapState(dataState: DataState, isStale: (suspend (content: T) -> Boolean)): State<T> {
+    private suspend fun mapState(dataState: DataState, needRefresh: (suspend (content: T) -> Boolean)): State<T> {
         val loadedContent = loadContent()
-        val stateContent = if (loadedContent == null || isStale(loadedContent)) {
+        val stateContent = if (loadedContent == null || needRefresh(loadedContent)) {
             StateContent.NotExist<T>()
         } else {
             StateContent.Exist(loadedContent)
@@ -47,17 +47,17 @@ internal class CacheFlowDispatcher<out T>(
         }
     }
 
-    private suspend fun checkState(isStale: (suspend (content: T) -> Boolean)) {
+    private suspend fun checkState(needRefresh: (suspend (content: T) -> Boolean)) {
         when (loadState().first()) {
-            is DataState.Fixed -> checkContent(isStale)
+            is DataState.Fixed -> checkContent(needRefresh)
             is DataState.Loading -> Unit
             is DataState.Error -> fetchNewContent()
         }
     }
 
-    private suspend fun checkContent(isStale: (suspend (content: T) -> Boolean)) {
+    private suspend fun checkContent(needRefresh: (suspend (content: T) -> Boolean)) {
         val loadedContent = loadContent()
-        if (loadedContent == null || isStale(loadedContent)) {
+        if (loadedContent == null || needRefresh(loadedContent)) {
             fetchNewContent()
         }
     }
