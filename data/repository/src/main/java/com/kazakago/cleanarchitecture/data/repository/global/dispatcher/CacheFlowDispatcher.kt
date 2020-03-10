@@ -17,15 +17,15 @@ internal class CacheFlowDispatcher<out ENTITY, out FETCHED_ENTITIES>(
     private val fetchOrigin: (suspend () -> FETCHED_ENTITIES)
 ) {
 
-    var loadState: (() -> Flow<DataState>) = {
-        StateMemory[stateId].asFlow()
+    var loadState: ((stateId: String) -> Flow<DataState>) = {
+        StateMemory[it].asFlow()
     }
     var saveState: (suspend (stateId: String, state: DataState) -> Unit) = { stateId, state ->
         StateMemory[stateId].send(state)
     }
 
     fun subscribe(needRefresh: ((entity: ENTITY) -> Boolean)): Flow<State<ENTITY>> {
-        return loadState()
+        return loadState(stateId)
             .onStart {
                 CoroutineScope(Dispatchers.IO).launch { checkState(needRefresh) }
             }
@@ -53,7 +53,7 @@ internal class CacheFlowDispatcher<out ENTITY, out FETCHED_ENTITIES>(
     }
 
     private suspend fun checkState(needRefresh: ((entity: ENTITY) -> Boolean)) {
-        when (loadState().first()) {
+        when (loadState(stateId).first()) {
             is DataState.Fixed -> checkContent(needRefresh)
             is DataState.Loading -> Unit
             is DataState.Error -> fetchNewContent()

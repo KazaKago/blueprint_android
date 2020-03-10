@@ -7,9 +7,7 @@ import com.kazakago.cleanarchitecture.data.database.entity.weather.ForecastEntit
 import com.kazakago.cleanarchitecture.data.database.entity.weather.LocationEntity
 import com.kazakago.cleanarchitecture.data.database.entity.weather.WeatherEntity
 import com.kazakago.cleanarchitecture.data.database.global.AppDatabase
-import com.kazakago.cleanarchitecture.data.memory.entity.weather.CityIdEntity
 import com.kazakago.cleanarchitecture.data.repository.global.dispatcher.CacheFlowDispatcher
-import com.kazakago.cleanarchitecture.data.repository.mapper.city.CityIdEntityMapper
 import com.kazakago.cleanarchitecture.data.repository.mapper.weather.*
 import com.kazakago.cleanarchitecture.domain.model.global.state.State
 import com.kazakago.cleanarchitecture.domain.model.global.state.mapContent
@@ -24,7 +22,6 @@ internal class WeatherRepositoryImpl(context: Context) : WeatherRepository {
 
     private val weatherApi = WeatherApi(context)
     private val weatherDao = AppDatabase.create(context).weatherDao()
-    private val cityIdEntityMapper = CityIdEntityMapper()
     private val weatherResponseMapper = WeatherResponseMapper(LocationResponseMapper(), DescriptionResponseMapper(), ForecastResponseMapper())
     private val weatherEntityMapper = WeatherEntityMapper(LocationEntityMapper(), DescriptionEntityMapper(), ForecastEntityMapper())
 
@@ -41,10 +38,9 @@ internal class WeatherRepositoryImpl(context: Context) : WeatherRepository {
     }
 
     private fun getDispatcher(cityId: CityId): CacheFlowDispatcher<Quartet<WeatherEntity, LocationEntity, DescriptionEntity, List<ForecastEntity>>, Quartet<WeatherEntity, LocationEntity, DescriptionEntity, List<ForecastEntity>>> {
-        val cityIdEntity = cityIdEntityMapper.reverse(cityId)
         return CacheFlowDispatcher(
             stateId = WeatherEntity::class.qualifiedName + cityId.value,
-            loadEntity = { loadEntity(cityIdEntity) },
+            loadEntity = { loadEntity(cityId) },
             saveEntities = { saveEntity(it.first, it.second, it.third, it.fourth) },
             fetchOrigin = {
                 val fetched = weatherApi.fetch(cityId.value)
@@ -53,7 +49,7 @@ internal class WeatherRepositoryImpl(context: Context) : WeatherRepository {
             })
     }
 
-    private suspend fun loadEntity(cityId: CityIdEntity): Quartet<WeatherEntity, LocationEntity, DescriptionEntity, List<ForecastEntity>>? {
+    private suspend fun loadEntity(cityId: CityId): Quartet<WeatherEntity, LocationEntity, DescriptionEntity, List<ForecastEntity>>? {
         val weather = weatherDao.findWeather(cityId.value)
         val location = weatherDao.findLocation(cityId.value)
         val description = weatherDao.findDescription(cityId.value)

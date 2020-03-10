@@ -5,6 +5,7 @@ import com.kazakago.cleanarchitecture.data.repository.global.dispatcher.FlowDisp
 import com.kazakago.cleanarchitecture.data.repository.mapper.city.CityEntityMapper
 import com.kazakago.cleanarchitecture.data.resource.hierarchy.city.CityDao
 import com.kazakago.cleanarchitecture.domain.model.global.state.State
+import com.kazakago.cleanarchitecture.domain.model.global.state.mapContent
 import com.kazakago.cleanarchitecture.domain.model.hierarchy.city.City
 import com.kazakago.cleanarchitecture.domain.model.hierarchy.city.CityId
 import com.kazakago.cleanarchitecture.domain.repository.hierarchy.city.CityRepository
@@ -18,24 +19,18 @@ internal class CityRepositoryImpl(context: Context) : CityRepository {
     private val cityMapper = CityEntityMapper()
 
     override fun subscribe(cityId: CityId): Flow<State<City>> {
-        return FlowDispatcher(
-            fetch = { get(cityId) }
-        ).subscribe()
+        return subscribeAll()
+            .mapContent { cityList ->
+                cityList.first { it.id == cityId }
+            }
     }
 
     override fun subscribeAll(): Flow<State<List<City>>> {
-        return FlowDispatcher(
-            fetch = { getAll() }
-        ).subscribe()
-    }
-
-    private suspend fun get(cityId: CityId): City {
-        return getAll().first { it.id == cityId }
-    }
-
-    private suspend fun getAll(): List<City> {
-        val prefEntityList = withContext(Dispatchers.IO) { cityDao.find() }
-        return prefEntityList.flatMap { cityMapper.map(it) }
+        return FlowDispatcher(fetchOrigin = { withContext(Dispatchers.IO) { cityDao.find() } })
+            .subscribe()
+            .mapContent { prefEntities ->
+                prefEntities.flatMap { cityMapper.map(it) }
+            }
     }
 
 }
