@@ -1,25 +1,30 @@
 package com.kazakago.cleanarchitecture.data.repository.global.dispatcher
 
 import com.kazakago.cleanarchitecture.data.memory.global.DataState
+import com.kazakago.cleanarchitecture.data.memory.hierarchy.state.StateMemory
 import com.kazakago.cleanarchitecture.domain.model.global.state.State
 import com.kazakago.cleanarchitecture.domain.model.global.state.StateContent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-internal class CacheFlowDispatcher<out T>(
-    private val loadState: (() -> Flow<DataState>),
-    private val saveState: (suspend (state: DataState) -> Unit),
-    private val loadContent: (suspend () -> T?),
-    private val saveContent: (suspend (content: T) -> Unit),
-    private val fetchContent: (suspend () -> T)
+internal class CacheFlowDispatcher<out ENTITY, out FETCHED_ENTITIES>(
+    private val stateId: String,
+    private val additionalStateIds: List<String> = emptyList(),
+    private val loadEntity: (suspend () -> ENTITY?),
+    private val saveEntities: (suspend (entity: FETCHED_ENTITIES) -> Unit),
+    private val fetchOrigin: (suspend () -> FETCHED_ENTITIES)
 ) {
 
-    fun subscribe(needRefresh: (suspend (content: T) -> Boolean)): Flow<State<T>> {
+    var loadState: (() -> Flow<DataState>) = {
+        StateMemory[stateId].asFlow()
+    }
+    var saveState: (suspend (stateId: String, state: DataState) -> Unit) = { stateId, state ->
+        StateMemory[stateId].send(state)
+    }
+
+    fun subscribe(needRefresh: ((entity: ENTITY) -> Boolean)): Flow<State<ENTITY>> {
         return loadState()
             .onStart {
                 CoroutineScope(Dispatchers.IO).launch { checkState(needRefresh) }
@@ -29,16 +34,16 @@ internal class CacheFlowDispatcher<out T>(
             }
     }
 
-    suspend fun request(needRefresh: (suspend (content: T) -> Boolean) = { true }) {
+    suspend fun request(needRefresh: ((entity: ENTITY) -> Boolean) = { true }) {
         checkState(needRefresh)
     }
 
-    private suspend fun mapState(dataState: DataState, needRefresh: (suspend (content: T) -> Boolean)): State<T> {
-        val loadedContent = loadContent()
-        val stateContent = if (loadedContent == null || needRefresh(loadedContent)) {
-            StateContent.NotExist<T>()
+    private suspend fun mapState(dataState: DataState, needRefresh: ((entity: ENTITY) -> Boolean)): State<ENTITY> {
+        val entity = loadEntity()
+        val stateContent = if (entity == null || needRefresh(entity)) {
+            StateContent.NotExist<ENTITY>()
         } else {
-            StateContent.Exist(loadedContent)
+            StateContent.Exist(entity)
         }
         return when (dataState) {
             is DataState.Fixed -> State.Fixed(stateContent)
@@ -47,7 +52,7 @@ internal class CacheFlowDispatcher<out T>(
         }
     }
 
-    private suspend fun checkState(needRefresh: (suspend (content: T) -> Boolean)) {
+    private suspend fun checkState(needRefresh: ((entity: ENTITY) -> Boolean)) {
         when (loadState().first()) {
             is DataState.Fixed -> checkContent(needRefresh)
             is DataState.Loading -> Unit
@@ -55,21 +60,22 @@ internal class CacheFlowDispatcher<out T>(
         }
     }
 
-    private suspend fun checkContent(needRefresh: (suspend (content: T) -> Boolean)) {
-        val loadedContent = loadContent()
-        if (loadedContent == null || needRefresh(loadedContent)) {
+    private suspend fun checkContent(needRefresh: ((entity: ENTITY) -> Boolean)) {
+        val entity = loadEntity()
+        if (entity == null || needRefresh(entity)) {
             fetchNewContent()
         }
     }
 
     private suspend fun fetchNewContent() {
+        val stateIds = listOf(stateId) + additionalStateIds
         try {
-            saveState(DataState.Loading)
-            val newContent = fetchContent()
-            saveContent(newContent)
-            saveState(DataState.Fixed)
+            stateIds.map { saveState(it, DataState.Loading) }
+            val fetchedEntities = fetchOrigin()
+            saveEntities(fetchedEntities)
+            stateIds.map { saveState(it, DataState.Fixed) }
         } catch (exception: Exception) {
-            saveState(DataState.Error(exception))
+            stateIds.map { saveState(it, DataState.Error(exception)) }
         }
     }
 

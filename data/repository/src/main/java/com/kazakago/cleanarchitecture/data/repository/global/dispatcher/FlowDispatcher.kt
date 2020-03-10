@@ -5,16 +5,16 @@ import com.kazakago.cleanarchitecture.domain.model.global.state.StateContent
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-internal class FlowDispatcher<out T>(
-    private val fetch: (suspend () -> T)
+internal class FlowDispatcher<out ENTITY>(
+    private val fetch: (suspend () -> ENTITY)
 ) {
 
-    fun subscribe(): Flow<State<T>> {
+    fun subscribe(): Flow<State<ENTITY>> {
         return flow {
             try {
                 emit(State.Loading(StateContent.NotExist()))
-                val newValue = fetch()
-                emit(State.Fixed(StateContent.Exist(newValue)))
+                val source = fetch()
+                emit(State.Fixed(StateContent.Exist(source)))
             } catch (exception: Exception) {
                 emit(State.Error(StateContent.NotExist(), exception))
             }

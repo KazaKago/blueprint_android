@@ -6,6 +6,8 @@ import com.kazakago.cleanarchitecture.data.database.entity.weather.LocationEntit
 import com.kazakago.cleanarchitecture.data.database.entity.weather.WeatherEntity
 import com.kazakago.cleanarchitecture.domain.model.hierarchy.city.CityId
 import com.kazakago.cleanarchitecture.domain.model.hierarchy.weather.Weather
+import com.os.operando.guild.kt.Quartet
+import com.os.operando.guild.kt.to
 import java.net.URL
 import java.time.LocalDateTime
 
@@ -24,31 +26,21 @@ internal class WeatherEntityMapper(
             publicTime = LocalDateTime.parse(weather.publicTime),
             description = descriptionEntityMapper.map(description),
             forecasts = forecasts.map { forecastEntityMapper.map(it) }
-        ).apply {
-            createdAt = LocalDateTime.parse(weather.createdAt)
-        }
-    }
-
-    fun reverse(destination: Weather): ReverseMappingResult {
-        return ReverseMappingResult(
-            weatherEntity = WeatherEntity(
-                cityId = destination.cityId.value,
-                title = destination.title,
-                link = destination.link.toString(),
-                publicTime = destination.publicTime.toString(),
-                createdAt = destination.createdAt.toString()
-            ),
-            locationEntity = locationEntityMapper.reverse(destination.cityId, destination.location),
-            descriptionEntity = descriptionEntityMapper.reverse(destination.cityId, destination.description),
-            forecastEntities = destination.forecasts.map { forecastEntityMapper.reverse(destination.cityId, it) }
         )
     }
 
-    data class ReverseMappingResult(
-        val weatherEntity: WeatherEntity,
-        val locationEntity: LocationEntity,
-        val descriptionEntity: DescriptionEntity,
-        val forecastEntities: List<ForecastEntity>
-    )
+    fun reverse(destination: Weather): Quartet<WeatherEntity, LocationEntity, DescriptionEntity, List<ForecastEntity>> {
+        return Quartet(
+            first = WeatherEntity(
+                cityId = destination.cityId.value,
+                title = destination.title,
+                link = destination.link.toString(),
+                publicTime = destination.publicTime.toString()
+            ),
+            second = locationEntityMapper.reverse(destination.cityId, destination.location),
+            third = descriptionEntityMapper.reverse(destination.cityId, destination.description),
+            fourth = destination.forecasts.map { forecastEntityMapper.reverse(destination.cityId, it) }
+        )
+    }
 
 }
