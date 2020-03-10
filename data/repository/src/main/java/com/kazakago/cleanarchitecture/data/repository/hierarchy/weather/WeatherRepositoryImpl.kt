@@ -44,12 +44,8 @@ internal class WeatherRepositoryImpl(context: Context) : WeatherRepository {
         val cityIdEntity = cityIdEntityMapper.reverse(cityId)
         return CacheFlowDispatcher(
             stateId = WeatherEntity::class.qualifiedName + cityId.value,
-            loadEntity = {
-                loadEntity(cityIdEntity)
-            },
-            saveEntities = {
-                saveEntity(it.first, it.second, it.third, it.fourth)
-            },
+            loadEntity = { loadEntity(cityIdEntity) },
+            saveEntities = { saveEntity(it.first, it.second, it.third, it.fourth) },
             fetchOrigin = {
                 val fetched = weatherApi.fetch(cityId.value)
                 val model = weatherResponseMapper.map(fetched, cityId)

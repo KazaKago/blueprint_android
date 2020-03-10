@@ -19,7 +19,7 @@ data class WeatherEntity(
     @ColumnInfo(name = "public_time")
     val publicTime: String,
     @ColumnInfo(name = "created_at")
-    val createdAt: LocalDateTime = LocalDateTime.now()
+    val createdAt: String = LocalDateTime.now().toString()
 ) {
 
     companion object {
@@ -27,6 +27,7 @@ data class WeatherEntity(
     }
 
     fun isExpired(): Boolean {
+        val createdAt = LocalDateTime.parse(createdAt)
         return ((createdAt + EXPIRED) <= LocalDateTime.now())
     }
 

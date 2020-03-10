@@ -4,12 +4,11 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
-import com.kazakago.cleanarchitecture.data.database.hierarchy.weather.WeatherDao
 import com.kazakago.cleanarchitecture.data.database.entity.weather.DescriptionEntity
 import com.kazakago.cleanarchitecture.data.database.entity.weather.ForecastEntity
 import com.kazakago.cleanarchitecture.data.database.entity.weather.LocationEntity
 import com.kazakago.cleanarchitecture.data.database.entity.weather.WeatherEntity
+import com.kazakago.cleanarchitecture.data.database.hierarchy.weather.WeatherDao
 
 @Database(
     entities = [
@@ -21,7 +20,6 @@ import com.kazakago.cleanarchitecture.data.database.entity.weather.WeatherEntity
     version = 1,
     exportSchema = false
 )
-@TypeConverters(DateTimeConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 
     companion object {
