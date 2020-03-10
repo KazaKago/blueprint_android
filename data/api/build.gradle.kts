@@ -50,8 +50,8 @@ dependencies {
     //Kotlin
     implementation(kotlin("stdlib-jdk8", KotlinCompilerVersion.VERSION))
     //Retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.7.1")
-    implementation("com.squareup.retrofit2:converter-moshi:2.7.1")
+    implementation("com.squareup.retrofit2:retrofit:2.7.2")
+    implementation("com.squareup.retrofit2:converter-moshi:2.7.2")
     //Moshi
     implementation("com.squareup.moshi:moshi:1.9.2")
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.9.2")
