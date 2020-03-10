@@ -13,13 +13,21 @@
         tools:layout="@layout/fragment_city_list">
         <action
             android:id="@+id/action_cityListFragment_to_forecastFragment"
-            app:destination="@id/forecastFragment" />
+            app:destination="@id/forecastFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
         <action
             android:id="@+id/action_cityListFragment_to_aboutFragment"
-            app:destination="@id/aboutFragment" />
+            app:destination="@id/aboutFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
         <action
-            android:id="@+id/action_cityListFragment_to_OssLicensesMenuFragment"
-            app:destination="@id/ossLicensesMenuFragment" />
+            android:id="@+id/action_cityListFragment_to_OssLicensesMenuActivity"
+            app:destination="@id/ossLicensesMenuActivity" />
     </fragment>
     <fragment
         android:id="@+id/forecastFragment"
@@ -50,6 +58,6 @@
         android:label="@string/about_title"
         tools:layout="@layout/fragment_about" />
     <activity
-        android:id="@+id/ossLicensesMenuFragment"
+        android:id="@+id/ossLicensesMenuActivity"
         android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity" />
 </navigation>

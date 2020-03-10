@@ -91,7 +91,7 @@ class CityListFragment : Fragment() {
     }
 
     private fun goOssLicenses() {
-        val action = CityListFragmentDirections.actionCityListFragmentToOssLicensesMenuFragment()
+        val action = CityListFragmentDirections.actionCityListFragmentToOssLicensesMenuActivity()
         findNavController().navigate(action)
     }
 
