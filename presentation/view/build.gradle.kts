@@ -79,7 +79,7 @@ dependencies {
     implementation("io.coil-kt:coil:0.9.5")
 
     //desugar_jdk_libs
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.4")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.5")
 
     //JUnit
     testImplementation("junit:junit:4.13")

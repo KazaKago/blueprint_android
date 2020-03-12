@@ -57,7 +57,7 @@ dependencies {
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.9.2")
 
     //desugar_jdk_libs
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.4")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.5")
 
     //Flipper
     debugImplementation("com.facebook.flipper:flipper:0.31.1")

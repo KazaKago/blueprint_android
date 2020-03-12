@@ -63,7 +63,7 @@ dependencies {
     implementation("com.os.operando.guild.kt:guild_kt:1.0.0")
 
     //desugar_jdk_libs
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.4")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.5")
 
     //JUnit
     testImplementation("junit:junit:4.13")

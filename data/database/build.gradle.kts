@@ -55,7 +55,7 @@ dependencies {
     kapt("androidx.room:room-compiler:2.2.4")
 
     //desugar_jdk_libs
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.4")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.5")
 
     //JUnit
     testImplementation("junit:junit:4.13")
