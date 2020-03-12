@@ -70,12 +70,12 @@ internal class CacheFlowDispatcher<out ENTITY, out FETCHED_ENTITIES>(
     private suspend fun fetchNewContent() {
         val stateIds = listOf(stateId) + additionalStateIds
         try {
-            stateIds.map { saveState(it, DataState.Loading) }
+            stateIds.forEach { saveState(it, DataState.Loading) }
             val fetchedEntities = fetchOrigin()
             saveEntities(fetchedEntities)
-            stateIds.map { saveState(it, DataState.Fixed) }
+            stateIds.forEach { saveState(it, DataState.Fixed) }
         } catch (exception: Exception) {
-            stateIds.map { saveState(it, DataState.Error(exception)) }
+            stateIds.forEach { saveState(it, DataState.Error(exception)) }
         }
     }
 
