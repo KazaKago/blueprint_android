@@ -1,10 +1,10 @@
 package com.kazakago.cleanarchitecture.data.repository.hierarchy.about
 
 import android.content.Context
-import com.kazakago.cleanarchitecture.data.repository.R
 import com.kazakago.cleanarchitecture.data.repository.global.dispatcher.FlowDispatcher
 import com.kazakago.cleanarchitecture.data.repository.mapper.about.AppInfoEntityMapper
 import com.kazakago.cleanarchitecture.data.repository.mapper.about.DeveloperInfoEntityMapper
+import com.kazakago.cleanarchitecture.data.resource.hierarchy.about.DeveloperInfoDao
 import com.kazakago.cleanarchitecture.data.resource.hierarchy.device.StoreLinkDao
 import com.kazakago.cleanarchitecture.data.resource.hierarchy.device.VersionDao
 import com.kazakago.cleanarchitecture.domain.model.global.state.State
@@ -15,11 +15,13 @@ import com.kazakago.cleanarchitecture.domain.repository.hierarchy.about.AboutRep
 import com.os.operando.guild.kt.to
 import kotlinx.coroutines.flow.Flow
 import java.net.URI
+import java.net.URL
 
 internal class AboutRepositoryImpl(private val context: Context) : AboutRepository {
 
     private val versionDao = VersionDao(context)
     private val storeLinkDao = StoreLinkDao(context)
+    private val developerInfoDao = DeveloperInfoDao(context)
     private val appInfoEntityMapper = AppInfoEntityMapper()
     private val developerInfoEntityMapper = DeveloperInfoEntityMapper()
 
@@ -43,8 +45,8 @@ internal class AboutRepositoryImpl(private val context: Context) : AboutReposito
         return versionDao.getVersionName() to versionDao.getVersionCode() to storeLinkDao.getStoreAppLink()
     }
 
-    private fun getDeveloperInfo(): Triple<String, String, String> {
-        return context.getString(R.string.developer_name) to context.getString(R.string.developer_mail_address) to context.getString(R.string.developer_website_url)
+    private fun getDeveloperInfo(): Triple<String, URI, URL> {
+        return developerInfoDao.getName() to developerInfoDao.getEmailAddress() to developerInfoDao.getWebSiteUrl()
     }
 
 }

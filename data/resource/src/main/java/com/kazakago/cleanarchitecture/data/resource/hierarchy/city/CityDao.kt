@@ -5,12 +5,16 @@ import com.kazakago.cleanarchitecture.data.resource.R
 import com.kazakago.cleanarchitecture.data.resource.entity.city.PrefEntity
 import com.kazakago.cleanarchitecture.data.resource.global.MoshiBuilder
 import com.squareup.moshi.Types
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class CityDao(private val context: Context) {
 
-    fun find(): List<PrefEntity> {
-        val jsonStr = readJsonStr()
-        return parseJson(jsonStr)
+    suspend fun getAll(): List<PrefEntity> {
+        return withContext(Dispatchers.IO) {
+            val jsonStr = readJsonStr()
+            parseJson(jsonStr)
+        }
     }
 
     private fun readJsonStr(): String {

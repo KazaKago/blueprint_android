@@ -9,9 +9,7 @@ import com.kazakago.cleanarchitecture.domain.model.global.state.mapContent
 import com.kazakago.cleanarchitecture.domain.model.hierarchy.city.City
 import com.kazakago.cleanarchitecture.domain.model.hierarchy.city.CityId
 import com.kazakago.cleanarchitecture.domain.repository.hierarchy.city.CityRepository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.withContext
 
 internal class CityRepositoryImpl(context: Context) : CityRepository {
 
@@ -26,7 +24,7 @@ internal class CityRepositoryImpl(context: Context) : CityRepository {
     }
 
     override fun subscribeAll(): Flow<State<List<City>>> {
-        return FlowDispatcher(fetchOrigin = { withContext(Dispatchers.IO) { cityDao.find() } })
+        return FlowDispatcher(fetchOrigin = { cityDao.getAll() })
             .subscribe()
             .mapContent { prefEntities ->
                 prefEntities.flatMap { cityMapper.map(it) }
