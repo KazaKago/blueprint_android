@@ -60,8 +60,8 @@ dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.5")
 
     //Flipper
-    debugImplementation("com.facebook.flipper:flipper:0.31.1")
-    debugImplementation("com.facebook.flipper:flipper-network-plugin:0.31.1")
+    debugImplementation("com.facebook.flipper:flipper:0.34.0")
+    debugImplementation("com.facebook.flipper:flipper-network-plugin:0.34.0")
     //Chuck
     debugImplementation("com.readystatesoftware.chuck:library:1.1.0")
     releaseImplementation("com.readystatesoftware.chuck:library-no-op:1.1.0")
