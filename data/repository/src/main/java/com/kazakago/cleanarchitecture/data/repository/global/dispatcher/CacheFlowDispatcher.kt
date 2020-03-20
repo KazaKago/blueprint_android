@@ -13,7 +13,7 @@ internal class CacheFlowDispatcher<out ENTITY, out FETCHED_ENTITIES>(
     private val stateId: String,
     private val additionalStateIds: List<String> = emptyList(),
     private val loadEntity: (suspend () -> ENTITY?),
-    private val saveEntities: (suspend (entity: FETCHED_ENTITIES) -> Unit),
+    private val saveEntities: (suspend (entities: FETCHED_ENTITIES) -> Unit),
     private val fetchOrigin: (suspend () -> FETCHED_ENTITIES)
 ) {
 
