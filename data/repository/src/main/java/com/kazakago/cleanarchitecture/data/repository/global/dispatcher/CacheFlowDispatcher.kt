@@ -54,20 +54,20 @@ internal class CacheFlowDispatcher<out ENTITY, out FETCHED_ENTITIES>(
 
     private suspend fun checkState(needRefresh: ((entity: ENTITY) -> Boolean)) {
         when (loadState(stateId).first()) {
-            is DataState.Fixed -> checkContent(needRefresh)
+            is DataState.Fixed -> checkEntity(needRefresh)
             is DataState.Loading -> Unit
-            is DataState.Error -> fetchNewContent()
+            is DataState.Error -> Unit
         }
     }
 
-    private suspend fun checkContent(needRefresh: ((entity: ENTITY) -> Boolean)) {
+    private suspend fun checkEntity(needRefresh: ((entity: ENTITY) -> Boolean)) {
         val entity = loadEntity()
         if (entity == null || needRefresh(entity)) {
-            fetchNewContent()
+            fetchNewEntities()
         }
     }
 
-    private suspend fun fetchNewContent() {
+    private suspend fun fetchNewEntities() {
         val stateIds = listOf(stateId) + additionalStateIds
         try {
             stateIds.forEach { saveState(it, DataState.Loading) }
