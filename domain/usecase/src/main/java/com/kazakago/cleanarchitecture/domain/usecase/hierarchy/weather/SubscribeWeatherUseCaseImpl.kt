@@ -1,8 +1,8 @@
 package com.kazakago.cleanarchitecture.domain.usecase.hierarchy.weather
 
-import com.kazakago.cleanarchitecture.domain.model.hierarchy.city.CityId
 import com.kazakago.cleanarchitecture.domain.model.global.state.State
 import com.kazakago.cleanarchitecture.domain.model.global.state.combineState
+import com.kazakago.cleanarchitecture.domain.model.hierarchy.city.CityId
 import com.kazakago.cleanarchitecture.domain.repository.hierarchy.city.CityRepository
 import com.kazakago.cleanarchitecture.domain.repository.hierarchy.weather.WeatherRepository
 import com.kazakago.cleanarchitecture.domain.usecase.output.weather.WeatherOutput

@@ -7,7 +7,6 @@ import com.kazakago.cleanarchitecture.data.database.entity.weather.WeatherEntity
 import com.kazakago.cleanarchitecture.domain.model.hierarchy.city.CityId
 import com.kazakago.cleanarchitecture.domain.model.hierarchy.weather.Weather
 import com.os.operando.guild.kt.Quartet
-import com.os.operando.guild.kt.to
 import java.net.URL
 import java.time.LocalDateTime
 
