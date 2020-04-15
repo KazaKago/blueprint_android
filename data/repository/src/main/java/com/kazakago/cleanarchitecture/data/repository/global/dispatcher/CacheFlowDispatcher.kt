@@ -27,15 +27,15 @@ internal class CacheFlowDispatcher<out ENTITY, out FETCHED_ENTITIES>(
     fun subscribe(needRefresh: ((entity: ENTITY) -> Boolean)): Flow<State<ENTITY>> {
         return loadState(stateId)
             .onStart {
-                CoroutineScope(Dispatchers.IO).launch { checkState(needRefresh) }
+                CoroutineScope(Dispatchers.IO).launch { checkState(needRefresh, false) }
             }
             .map {
                 mapState(it, needRefresh)
             }
     }
 
-    suspend fun request(needRefresh: ((entity: ENTITY) -> Boolean) = { true }) {
-        checkState(needRefresh)
+    suspend fun request(fetchOnError: Boolean = true) {
+        checkState({ true }, fetchOnError)
     }
 
     private suspend fun mapState(dataState: DataState, needRefresh: ((entity: ENTITY) -> Boolean)): State<ENTITY> {
@@ -52,11 +52,11 @@ internal class CacheFlowDispatcher<out ENTITY, out FETCHED_ENTITIES>(
         }
     }
 
-    private suspend fun checkState(needRefresh: ((entity: ENTITY) -> Boolean)) {
+    private suspend fun checkState(needRefresh: ((entity: ENTITY) -> Boolean), fetchOnError: Boolean) {
         when (loadState(stateId).first()) {
             is DataState.Fixed -> checkEntity(needRefresh)
             is DataState.Loading -> Unit
-            is DataState.Error -> Unit
+            is DataState.Error -> if (fetchOnError) fetchNewEntities()
         }
     }
 
