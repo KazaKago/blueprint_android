@@ -9,20 +9,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-internal class CacheFlowDispatcher<out ENTITY, out FETCHED_ENTITIES>(
+internal class CacheFlowDispatcher<ENTITY>(
     private val stateId: String,
-    private val additionalStateIds: List<String> = emptyList(),
     private val loadEntity: (suspend () -> ENTITY?),
-    private val saveEntities: (suspend (entities: FETCHED_ENTITIES) -> Unit),
-    private val fetchOrigin: (suspend () -> FETCHED_ENTITIES)
+    private val fetchOrigin: (suspend () -> ENTITY),
+    private val saveEntity: (suspend (entity: ENTITY) -> Unit),
+    private val loadState: ((stateId: String) -> Flow<DataState>) = { StateMemory[it].asFlow() },
+    private val saveState: (suspend (stateId: String, state: DataState) -> Unit) = { _stateId, state -> StateMemory[_stateId].send(state) }
 ) {
-
-    var loadState: ((stateId: String) -> Flow<DataState>) = {
-        StateMemory[it].asFlow()
-    }
-    var saveState: (suspend (stateId: String, state: DataState) -> Unit) = { stateId, state ->
-        StateMemory[stateId].send(state)
-    }
 
     fun subscribe(needRefresh: ((entity: ENTITY) -> Boolean)): Flow<State<ENTITY>> {
         return loadState(stateId)
@@ -36,6 +30,11 @@ internal class CacheFlowDispatcher<out ENTITY, out FETCHED_ENTITIES>(
 
     suspend fun request(fetchOnError: Boolean = true) {
         checkState({ true }, fetchOnError)
+    }
+
+    suspend fun update(newEntity: ENTITY) {
+        saveEntity(newEntity)
+        saveState(stateId, DataState.Fixed)
     }
 
     private suspend fun mapState(dataState: DataState, needRefresh: ((entity: ENTITY) -> Boolean)): State<ENTITY> {
@@ -56,26 +55,25 @@ internal class CacheFlowDispatcher<out ENTITY, out FETCHED_ENTITIES>(
         when (loadState(stateId).first()) {
             is DataState.Fixed -> checkEntity(needRefresh)
             is DataState.Loading -> Unit
-            is DataState.Error -> if (fetchOnError) fetchNewEntities()
+            is DataState.Error -> if (fetchOnError) fetchNewEntity()
         }
     }
 
     private suspend fun checkEntity(needRefresh: ((entity: ENTITY) -> Boolean)) {
         val entity = loadEntity()
         if (entity == null || needRefresh(entity)) {
-            fetchNewEntities()
+            fetchNewEntity()
         }
     }
 
-    private suspend fun fetchNewEntities() {
-        val stateIds = listOf(stateId) + additionalStateIds
+    private suspend fun fetchNewEntity() {
         try {
-            stateIds.forEach { saveState(it, DataState.Loading) }
-            val fetchedEntities = fetchOrigin()
-            saveEntities(fetchedEntities)
-            stateIds.forEach { saveState(it, DataState.Fixed) }
+            saveState(stateId, DataState.Loading)
+            val fetchedEntity = fetchOrigin()
+            saveEntity(fetchedEntity)
+            saveState(stateId, DataState.Fixed)
         } catch (exception: Exception) {
-            stateIds.forEach { saveState(it, DataState.Error(exception)) }
+            saveState(stateId, DataState.Error(exception))
         }
     }
 

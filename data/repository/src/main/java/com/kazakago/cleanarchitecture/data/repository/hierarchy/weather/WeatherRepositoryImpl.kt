@@ -37,16 +37,17 @@ internal class WeatherRepositoryImpl(context: Context) : WeatherRepository {
         return getDispatcher(cityId).request()
     }
 
-    private fun getDispatcher(cityId: CityId): CacheFlowDispatcher<Quartet<WeatherEntity, LocationEntity, DescriptionEntity, List<ForecastEntity>>, Quartet<WeatherEntity, LocationEntity, DescriptionEntity, List<ForecastEntity>>> {
+    private fun getDispatcher(cityId: CityId): CacheFlowDispatcher<Quartet<WeatherEntity, LocationEntity, DescriptionEntity, List<ForecastEntity>>> {
         return CacheFlowDispatcher(
             stateId = WeatherEntity::class.qualifiedName + cityId.value,
             loadEntity = { loadEntity(cityId) },
-            saveEntities = { saveEntity(it.first, it.second, it.third, it.fourth) },
             fetchOrigin = {
                 val fetched = weatherApi.fetch(cityId.value)
                 val model = weatherResponseMapper.map(fetched, cityId)
                 weatherEntityMapper.reverse(model)
-            })
+            },
+            saveEntity = { saveEntity(it.first, it.second, it.third, it.fourth) }
+        )
     }
 
     private suspend fun loadEntity(cityId: CityId): Quartet<WeatherEntity, LocationEntity, DescriptionEntity, List<ForecastEntity>>? {
