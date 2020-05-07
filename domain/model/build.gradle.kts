@@ -26,6 +26,6 @@ dependencies {
     //JUnit
     testImplementation("junit:junit:4.13")
     //MockK
-    testImplementation("io.mockk:mockk:1.9.3")
+    testImplementation("io.mockk:mockk:1.10.0")
 }
 
