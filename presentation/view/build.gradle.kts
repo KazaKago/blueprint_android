@@ -56,7 +56,7 @@ dependencies {
     //Kotlin
     implementation(kotlin("stdlib-jdk8", KotlinCompilerVersion.VERSION))
     //Koin
-    implementation("org.koin:koin-androidx-viewmodel:2.0.1")
+    implementation("org.koin:koin-androidx-viewmodel:2.1.5")
     //AndroidX KTX
     implementation("androidx.fragment:fragment-ktx:1.2.4")
     //AndroidX AppCompat
@@ -74,7 +74,7 @@ dependencies {
     //PlayServices OSS Licenses
     implementation("com.google.android.gms:play-services-oss-licenses:17.0.0")
     //Groupie
-    implementation("com.xwray:groupie:2.7.2")
+    implementation("com.xwray:groupie:2.8.0")
     //Coil
     implementation("io.coil-kt:coil:0.10.1")
 
