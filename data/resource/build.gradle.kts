@@ -52,7 +52,7 @@ dependencies {
     //kotlinx.coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.6")
     //AndroidX KTX
-    implementation("androidx.core:core-ktx:1.2.0")
+    implementation("androidx.core:core-ktx:1.3.0")
     //Moshi
     implementation("com.squareup.moshi:moshi:1.9.2")
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.9.2")

@@ -76,7 +76,7 @@ dependencies {
     //Groupie
     implementation("com.xwray:groupie:2.8.0")
     //Coil
-    implementation("io.coil-kt:coil:0.10.1")
+    implementation("io.coil-kt:coil:0.11.0")
 
     //desugar_jdk_libs
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.5")

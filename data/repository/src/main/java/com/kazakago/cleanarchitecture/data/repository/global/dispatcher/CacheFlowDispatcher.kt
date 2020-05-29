@@ -6,7 +6,10 @@ import com.kazakago.cleanarchitecture.domain.model.global.state.State
 import com.kazakago.cleanarchitecture.domain.model.global.state.StateContent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 internal class CacheFlowDispatcher<ENTITY>(
@@ -14,8 +17,8 @@ internal class CacheFlowDispatcher<ENTITY>(
     private val loadEntity: (suspend () -> ENTITY?),
     private val fetchOrigin: (suspend () -> ENTITY),
     private val saveEntity: (suspend (entity: ENTITY) -> Unit),
-    private val loadState: ((stateId: String) -> Flow<DataState>) = { StateMemory[it].asFlow() },
-    private val saveState: (suspend (stateId: String, state: DataState) -> Unit) = { _stateId, state -> StateMemory[_stateId].send(state) }
+    private val loadState: ((stateId: String) -> Flow<DataState>) = { StateMemory[it] },
+    private val saveState: (suspend (stateId: String, state: DataState) -> Unit) = { _stateId, state -> StateMemory[_stateId].value = state }
 ) {
 
     fun subscribe(needRefresh: ((entity: ENTITY) -> Boolean)): Flow<State<ENTITY>> {

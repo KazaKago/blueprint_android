@@ -1,14 +1,14 @@
 package com.kazakago.cleanarchitecture.data.memory.hierarchy.state
 
 import com.kazakago.cleanarchitecture.data.memory.global.DataState
-import kotlinx.coroutines.channels.ConflatedBroadcastChannel
+import kotlinx.coroutines.flow.MutableStateFlow
 
 object StateMemory {
 
-    private val state: MutableMap<String, ConflatedBroadcastChannel<DataState>> = mutableMapOf()
+    private val state: MutableMap<String, MutableStateFlow<DataState>> = mutableMapOf()
 
-    operator fun get(key: String): ConflatedBroadcastChannel<DataState> {
-        return state.getOrPut(key, { ConflatedBroadcastChannel(DataState.Fixed) })
+    operator fun get(key: String): MutableStateFlow<DataState> {
+        return state.getOrPut(key, { MutableStateFlow(DataState.Fixed) })
     }
 
 }

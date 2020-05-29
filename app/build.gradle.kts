@@ -79,8 +79,8 @@ dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.5")
 
     //Flipper
-    debugImplementation("com.facebook.flipper:flipper:0.41.0")
-    debugImplementation("com.facebook.flipper:flipper-network-plugin:0.41.0")
+    debugImplementation("com.facebook.flipper:flipper:0.44.0")
+    debugImplementation("com.facebook.flipper:flipper-network-plugin:0.44.0")
     debugImplementation("com.facebook.soloader:soloader:0.9.0")
     //LeakCanary
     debugImplementation("com.squareup.leakcanary:leakcanary-android:2.3")
