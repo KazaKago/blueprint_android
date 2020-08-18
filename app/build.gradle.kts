@@ -76,14 +76,14 @@ dependencies {
     implementation("org.koin:koin-android:2.1.5")
 
     //desugar_jdk_libs
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.5")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.10")
 
     //Flipper
-    debugImplementation("com.facebook.flipper:flipper:0.44.0")
-    debugImplementation("com.facebook.flipper:flipper-network-plugin:0.44.0")
+    debugImplementation("com.facebook.flipper:flipper:0.52.1")
+    debugImplementation("com.facebook.flipper:flipper-network-plugin:0.52.1")
     debugImplementation("com.facebook.soloader:soloader:0.9.0")
     //LeakCanary
-    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.3")
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.4")
     //Hyperion
     debugImplementation("com.willowtreeapps.hyperion:hyperion-core:0.9.27")
     debugImplementation("com.willowtreeapps.hyperion:hyperion-attr:0.9.27")

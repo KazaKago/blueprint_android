@@ -53,15 +53,15 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
     //Moshi
-    implementation("com.squareup.moshi:moshi:1.9.2")
-    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.9.2")
+    implementation("com.squareup.moshi:moshi:1.9.3")
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.9.3")
 
     //desugar_jdk_libs
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.5")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.10")
 
     //Flipper
-    debugImplementation("com.facebook.flipper:flipper:0.44.0")
-    debugImplementation("com.facebook.flipper:flipper-network-plugin:0.44.0")
+    debugImplementation("com.facebook.flipper:flipper:0.52.1")
+    debugImplementation("com.facebook.flipper:flipper-network-plugin:0.52.1")
     //Chuck
     debugImplementation("com.readystatesoftware.chuck:library:1.1.0")
     releaseImplementation("com.readystatesoftware.chuck:library-no-op:1.1.0")

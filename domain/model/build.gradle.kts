@@ -19,7 +19,7 @@ dependencies {
     //Kotlin
     implementation(kotlin("stdlib-jdk8", KotlinCompilerVersion.VERSION))
     //kotlinx.coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.6")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8")
     //Guild_kt
     implementation("com.os.operando.guild.kt:guild_kt:1.0.0")
 

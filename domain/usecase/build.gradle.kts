@@ -22,7 +22,7 @@ dependencies {
     //Kotlin
     implementation(kotlin("stdlib-jdk8", KotlinCompilerVersion.VERSION))
     //kotlinx.coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.6")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8")
     //Koin
     implementation("org.koin:koin-core:2.1.5")
 

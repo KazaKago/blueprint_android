@@ -58,19 +58,19 @@ dependencies {
     //Koin
     implementation("org.koin:koin-androidx-viewmodel:2.1.5")
     //AndroidX KTX
-    implementation("androidx.fragment:fragment-ktx:1.2.4")
+    implementation("androidx.fragment:fragment-ktx:1.2.5")
     //AndroidX AppCompat
-    api("androidx.appcompat:appcompat:1.1.0")
+    api("androidx.appcompat:appcompat:1.2.0")
     //AndroidX ConstraintLayout
     api("androidx.constraintlayout:constraintlayout:1.1.3")
     //AndroidX Material
-    api("com.google.android.material:material:1.1.0")
+    api("com.google.android.material:material:1.2.0")
     //AndroidX Lifecycle
     api("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
     api("androidx.lifecycle:lifecycle-common-java8:2.2.0")
     //AndroidX Navigation
-    implementation("androidx.navigation:navigation-fragment-ktx:2.2.2")
-    implementation("androidx.navigation:navigation-ui-ktx:2.2.2")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.3.0")
+    implementation("androidx.navigation:navigation-ui-ktx:2.3.0")
     //PlayServices OSS Licenses
     implementation("com.google.android.gms:play-services-oss-licenses:17.0.0")
     //Groupie
@@ -79,7 +79,7 @@ dependencies {
     implementation("io.coil-kt:coil:0.11.0")
 
     //desugar_jdk_libs
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.5")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.10")
 
     //JUnit
     testImplementation("junit:junit:4.13")

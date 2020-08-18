@@ -50,15 +50,15 @@ dependencies {
     //Kotlin
     implementation(kotlin("stdlib-jdk8", KotlinCompilerVersion.VERSION))
     //kotlinx.coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.6")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8")
     //AndroidX KTX
-    implementation("androidx.core:core-ktx:1.3.0")
+    implementation("androidx.core:core-ktx:1.3.1")
     //Moshi
-    implementation("com.squareup.moshi:moshi:1.9.2")
-    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.9.2")
+    implementation("com.squareup.moshi:moshi:1.9.3")
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.9.3")
 
     //desugar_jdk_libs
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.5")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.10")
 
     //JUnit
     testImplementation("junit:junit:4.13")
