@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.config.KotlinCompilerVersion
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -16,12 +15,12 @@ tasks.withType(KotlinCompile::class).all {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    //Kotlin
-    implementation(kotlin("stdlib-jdk8", KotlinCompilerVersion.VERSION))
-    //kotlinx.coroutines
+    // Kotlin
+    implementation(kotlin("stdlib-jdk8"))
+    // kotlinx.coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
 
-    //JUnit
+    // JUnit
     testImplementation("junit:junit:4.13.2")
 }
 

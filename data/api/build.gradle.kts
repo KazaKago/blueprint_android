@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.config.KotlinCompilerVersion
-
 plugins {
     id("com.android.library")
     kotlin("android")
@@ -44,28 +42,29 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    //Kotlin
-    implementation(kotlin("stdlib-jdk8", KotlinCompilerVersion.VERSION))
-    //Retrofit
+    // Kotlin
+    implementation(kotlin("stdlib-jdk8"))
+    // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
-    //Moshi
+    // Moshi
     implementation("com.squareup.moshi:moshi:1.12.0")
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.12.0")
 
-    //desugar_jdk_libs
+    // desugar_jdk_libs
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
 
-    //Flipper
+    // Flipper
     debugImplementation("com.facebook.flipper:flipper:0.84.0")
     debugImplementation("com.facebook.flipper:flipper-network-plugin:0.84.0")
-    //Chuck
+    // Chuck
     debugImplementation("com.readystatesoftware.chuck:library:1.1.0")
     releaseImplementation("com.readystatesoftware.chuck:library-no-op:1.1.0")
-    //JUnit
+
+    // JUnit
     testImplementation("junit:junit:4.13.2")
 
-    //Espresso
+    // Espresso
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
 }

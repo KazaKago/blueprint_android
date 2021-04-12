@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.config.KotlinCompilerVersion
-
 plugins {
     id("com.android.library")
     kotlin("android")
@@ -43,29 +41,29 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    //Module
+    // Module
     implementation(project(":domain:repository"))
     implementation(project(":domain:model"))
     implementation(project(":data:api"))
     implementation(project(":data:database"))
     implementation(project(":data:resource"))
     implementation(project(":data:memory"))
-    //Kotlin
-    implementation(kotlin("stdlib-jdk8", KotlinCompilerVersion.VERSION))
-    //kotlinx.coroutines
+    // Kotlin
+    implementation(kotlin("stdlib-jdk8"))
+    // kotlinx.coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
-    //Koin
+    // Koin
     implementation("org.koin:koin-core:2.2.2")
-    //Guild_kt
+    // Guild_kt
     implementation("com.os.operando.guild.kt:guild_kt:1.0.0")
 
-    //desugar_jdk_libs
+    // desugar_jdk_libs
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
 
-    //JUnit
+    // JUnit
     testImplementation("junit:junit:4.13.2")
 
-    //Espresso
+    // Espresso
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
 }

@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.config.KotlinCompilerVersion
-
 plugins {
     id("com.android.library")
     kotlin("android")
@@ -44,23 +42,23 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    //Kotlin
-    implementation(kotlin("stdlib-jdk8", KotlinCompilerVersion.VERSION))
-    //kotlinx.coroutines
+    // Kotlin
+    implementation(kotlin("stdlib-jdk8"))
+    // kotlinx.coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
-    //AndroidX KTX
+    // AndroidX KTX
     implementation("androidx.core:core-ktx:1.3.2")
-    //Moshi
+    // Moshi
     implementation("com.squareup.moshi:moshi:1.12.0")
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.12.0")
 
-    //desugar_jdk_libs
+    // desugar_jdk_libs
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
 
-    //JUnit
+    // JUnit
     testImplementation("junit:junit:4.13.2")
 
-    //Espresso
+    // Espresso
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
 }

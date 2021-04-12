@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.config.KotlinCompilerVersion
-
 plugins {
     id("com.android.library")
     kotlin("android")
@@ -47,41 +45,41 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    //Module
+    // Module
     implementation(project(":presentation:viewmodel"))
     implementation(project(":domain:model"))
-    //Kotlin
-    implementation(kotlin("stdlib-jdk8", KotlinCompilerVersion.VERSION))
-    //Koin
+    // Kotlin
+    implementation(kotlin("stdlib-jdk8"))
+    // Koin
     implementation("org.koin:koin-androidx-viewmodel:2.2.2")
-    //AndroidX AppCompat
+    // AndroidX AppCompat
     implementation("androidx.appcompat:appcompat:1.2.0")
-    //AndroidX Activity
+    // AndroidX Activity
     implementation("androidx.activity:activity-ktx:1.2.2")
-    //AndroidX Fragment
+    // AndroidX Fragment
     implementation("androidx.fragment:fragment-ktx:1.3.2")
-    //AndroidX ConstraintLayout
+    // AndroidX ConstraintLayout
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
-    //AndroidX Navigation
+    // AndroidX Navigation
     implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
-    //AndroidX Material
+    // Material Components
     implementation("com.google.android.material:material:1.3.0")
-    //PlayServices OSS Licenses
+    // PlayServices OSS Licenses
     implementation("com.google.android.gms:play-services-oss-licenses:17.0.0")
-    //Groupie
+    // Groupie
     implementation("com.xwray:groupie:2.9.0")
     implementation("com.xwray:groupie-viewbinding:2.9.0")
-    //Coil
+    // Coil
     implementation("io.coil-kt:coil:1.1.1")
 
-    //desugar_jdk_libs
+    // desugar_jdk_libs
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
 
-    //JUnit
+    // JUnit
     testImplementation("junit:junit:4.13.2")
 
-    //Espresso
+    // Espresso
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
 }
