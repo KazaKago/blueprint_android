@@ -1,2 +1,2 @@
 <manifest
-    package="com.kazakago.cleanarchitecture.data.repository" />
+    package="com.kazakago.blueprint.data.repository" />

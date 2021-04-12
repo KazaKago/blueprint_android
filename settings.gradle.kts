@@ -1,3 +1,4 @@
+rootProject.name = "blueprint"
 include(":app")
 include(":presentation:view")
 include(":presentation:viewmodel")

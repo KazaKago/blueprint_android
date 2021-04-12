@@ -7,7 +7,7 @@ plugins {
 android {
     compileSdkVersion(30)
     defaultConfig {
-        applicationId = "com.kazakago.cleanarchitecture"
+        applicationId = "com.kazakago.blueprint"
         minSdkVersion(26)
         targetSdkVersion(30)
         versionCode = 1

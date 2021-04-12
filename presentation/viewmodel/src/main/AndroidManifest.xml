@@ -1,2 +1,2 @@
 <manifest
-    package="com.kazakago.cleanarchitecture.presentation.viewmodel" />
+    package="com.kazakago.blueprint.presentation.viewmodel" />

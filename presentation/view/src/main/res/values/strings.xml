@@ -1,6 +1,6 @@
 <resources>
     <!-- General -->
-    <string name="app_name">CleanArchitectureSample</string>
+    <string name="app_name">Blueprint</string>
 
     <!-- Main -->
     <string name="public_time">発表日時: %1$s</string>
