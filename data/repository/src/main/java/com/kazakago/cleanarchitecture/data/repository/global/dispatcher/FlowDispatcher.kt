@@ -20,5 +20,4 @@ internal class FlowDispatcher<out ENTITY>(
             }
         }
     }
-
 }

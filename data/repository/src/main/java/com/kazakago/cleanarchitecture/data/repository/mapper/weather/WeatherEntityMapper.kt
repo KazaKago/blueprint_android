@@ -41,5 +41,4 @@ internal class WeatherEntityMapper(
             fourth = destination.forecasts.map { forecastEntityMapper.reverse(destination.cityId, it) }
         )
     }
-
 }

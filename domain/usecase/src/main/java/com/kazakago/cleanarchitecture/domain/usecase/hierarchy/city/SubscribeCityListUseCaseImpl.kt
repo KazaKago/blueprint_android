@@ -10,5 +10,4 @@ internal class SubscribeCityListUseCaseImpl(private val cityRepository: CityRepo
     override fun invoke(): Flow<State<List<City>>> {
         return cityRepository.subscribeAll()
     }
-
 }

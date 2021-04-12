@@ -68,5 +68,4 @@ class StateContentZipperTest {
         val zippedStateContent = stateContent1.zip(stateContent2, stateContent3, stateContent4, stateContent5) { content1, content2, content3, content4, content5 -> content1 to content2 to content3 to content4 to content5 }
         assertThat(zippedStateContent, `is`(instanceOf(StateContent.NotExist::class.java)))
     }
-
 }

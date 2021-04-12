@@ -99,5 +99,4 @@ class CityListFragment : Fragment() {
         val action = CityListFragmentDirections.actionCityListFragmentToOssLicensesMenuActivity()
         findNavController().navigate(action)
     }
-
 }

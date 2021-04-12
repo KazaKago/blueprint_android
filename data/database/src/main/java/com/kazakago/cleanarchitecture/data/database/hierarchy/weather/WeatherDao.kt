@@ -44,5 +44,4 @@ interface WeatherDao {
 
     @Delete
     suspend fun deleteForecasts(forecasts: List<ForecastEntity>): Int
-
 }

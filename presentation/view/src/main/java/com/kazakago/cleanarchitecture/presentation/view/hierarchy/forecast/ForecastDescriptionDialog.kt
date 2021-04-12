@@ -61,5 +61,4 @@ class ForecastDescriptionDialog : BottomSheetDialogFragment() {
     private fun showExceptionSnackbar(exception: Exception) {
         Snackbar.make(binding.root, exception.localizedMessage ?: "", Snackbar.LENGTH_LONG).show()
     }
-
 }

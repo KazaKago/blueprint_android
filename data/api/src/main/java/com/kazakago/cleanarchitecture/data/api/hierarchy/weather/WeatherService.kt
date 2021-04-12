@@ -9,5 +9,4 @@ internal interface WeatherService {
 
     @GET("json/v1")
     suspend fun fetch(@Query("city") cityId: String): Response<WeatherResponse>
-
 }

@@ -68,5 +68,4 @@ internal class WeatherRepositoryImpl(context: Context) : WeatherRepository {
         weatherDao.insertDescription(description)
         weatherDao.insertForecasts(forecasts)
     }
-
 }

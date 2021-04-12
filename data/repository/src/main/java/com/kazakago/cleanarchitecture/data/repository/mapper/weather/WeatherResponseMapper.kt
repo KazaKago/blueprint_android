@@ -23,5 +23,4 @@ internal class WeatherResponseMapper(
             forecasts = response.forecasts.map { forecastResponseMapper.map(it) }
         )
     }
-
 }

@@ -7,5 +7,4 @@ import kotlinx.coroutines.flow.Flow
 interface SubscribeAboutUseCase {
 
     operator fun invoke(): Flow<State<AboutOutput>>
-
 }

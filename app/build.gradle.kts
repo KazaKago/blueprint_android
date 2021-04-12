@@ -52,9 +52,6 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    lintOptions {
-        xmlReport = true
-    }
 }
 
 dependencies {
@@ -84,20 +81,6 @@ dependencies {
     debugImplementation("com.facebook.soloader:soloader:0.10.1")
     //LeakCanary
     debugImplementation("com.squareup.leakcanary:leakcanary-android:2.7")
-    //Hyperion
-    debugImplementation("com.willowtreeapps.hyperion:hyperion-core:0.9.32")
-    debugImplementation("com.willowtreeapps.hyperion:hyperion-attr:0.9.32")
-    debugImplementation("com.willowtreeapps.hyperion:hyperion-measurement:0.9.32")
-    debugImplementation("com.willowtreeapps.hyperion:hyperion-disk:0.9.32")
-    debugImplementation("com.willowtreeapps.hyperion:hyperion-recorder:0.9.32")
-    debugImplementation("com.willowtreeapps.hyperion:hyperion-phoenix:0.9.32")
-    debugImplementation("com.willowtreeapps.hyperion:hyperion-crash:0.9.32")
-    debugImplementation("com.willowtreeapps.hyperion:hyperion-shared-preferences:0.9.32")
-    debugImplementation("com.willowtreeapps.hyperion:hyperion-geiger-counter:0.9.32")
-    debugImplementation("com.willowtreeapps.hyperion:hyperion-timber:0.9.32")
-    debugImplementation("com.willowtreeapps.hyperion:hyperion-build-config:0.9.32")
-    //Hyperion-Chuck
-    debugImplementation("com.github.Commit451:Hyperion-Chuck:1.0.0")
 
     //JUnit
     testImplementation("junit:junit:4.13.2")

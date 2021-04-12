@@ -48,5 +48,4 @@ internal class AboutRepositoryImpl(private val context: Context) : AboutReposito
     private fun getDeveloperInfo(): Triple<String, URI, URL> {
         return developerInfoDao.getName() to developerInfoDao.getEmailAddress() to developerInfoDao.getWebSiteUrl()
     }
-
 }

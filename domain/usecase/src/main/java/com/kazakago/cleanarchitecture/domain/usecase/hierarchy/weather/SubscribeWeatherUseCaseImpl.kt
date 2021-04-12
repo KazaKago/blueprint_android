@@ -8,10 +8,7 @@ import com.kazakago.cleanarchitecture.domain.repository.hierarchy.weather.Weathe
 import com.kazakago.cleanarchitecture.domain.usecase.output.weather.WeatherOutput
 import kotlinx.coroutines.flow.Flow
 
-internal class SubscribeWeatherUseCaseImpl(
-    private val cityRepository: CityRepository,
-    private val weatherRepository: WeatherRepository
-) : SubscribeWeatherUseCase {
+internal class SubscribeWeatherUseCaseImpl(private val cityRepository: CityRepository, private val weatherRepository: WeatherRepository) : SubscribeWeatherUseCase {
 
     override fun invoke(cityId: CityId): Flow<State<WeatherOutput>> {
         val cityFlow = cityRepository.subscribe(cityId)
@@ -20,5 +17,4 @@ internal class SubscribeWeatherUseCaseImpl(
             WeatherOutput(city, weather)
         }
     }
-
 }

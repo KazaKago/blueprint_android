@@ -12,5 +12,4 @@ class DeveloperInfoDao(private val context: Context) {
     fun getEmailAddress() = URI(context.getString(R.string.developer_mail_address))
 
     fun getWebSiteUrl() = URL(context.getString(R.string.developer_website_url))
-
 }

@@ -10,5 +10,4 @@ interface AboutRepository {
     fun subscribeAppInfo(): Flow<State<AppInfo>>
 
     fun subscribeDeveloperInfo(): Flow<State<DeveloperInfo>>
-
 }

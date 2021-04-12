@@ -30,5 +30,4 @@ internal class ForecastEntityMapper {
             minTemperature = destination.minTemperature
         )
     }
-
 }

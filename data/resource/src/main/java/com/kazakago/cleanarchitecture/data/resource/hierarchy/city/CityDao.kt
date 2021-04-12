@@ -28,5 +28,4 @@ class CityDao(private val context: Context) {
         val adapter = moshi.adapter<List<PrefEntity>>(type)
         return adapter.fromJson(jsonStr).orEmpty()
     }
-
 }

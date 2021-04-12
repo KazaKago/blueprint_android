@@ -21,5 +21,4 @@ internal class DescriptionEntityMapper {
             publicTime = destination.publicTime.toString()
         )
     }
-
 }

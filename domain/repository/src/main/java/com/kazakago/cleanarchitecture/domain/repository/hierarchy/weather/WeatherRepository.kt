@@ -10,5 +10,4 @@ interface WeatherRepository {
     fun subscribe(cityId: CityId): Flow<State<Weather>>
 
     suspend fun request(cityId: CityId)
-
 }

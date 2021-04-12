@@ -15,5 +15,4 @@ internal class SubscribeAboutUseCaseImpl(private val aboutRepository: AboutRepos
             AboutOutput(appInfo, developerInfo)
         }
     }
-
 }

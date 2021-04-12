@@ -79,5 +79,4 @@ internal class CacheFlowDispatcher<ENTITY>(
             saveState(stateId, DataState.Error(exception))
         }
     }
-
 }

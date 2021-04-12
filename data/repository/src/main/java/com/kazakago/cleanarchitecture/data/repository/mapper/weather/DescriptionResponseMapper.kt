@@ -12,5 +12,4 @@ internal class DescriptionResponseMapper {
             publicTime = source.publicTime.parseDateTime()
         )
     }
-
 }

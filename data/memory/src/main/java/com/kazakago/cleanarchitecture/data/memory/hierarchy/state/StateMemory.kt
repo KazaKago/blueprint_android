@@ -10,5 +10,4 @@ object StateMemory {
     operator fun get(key: String): MutableStateFlow<DataState> {
         return state.getOrPut(key, { MutableStateFlow(DataState.Fixed) })
     }
-
 }

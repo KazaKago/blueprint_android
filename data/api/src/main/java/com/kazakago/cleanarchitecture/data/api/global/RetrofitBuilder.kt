@@ -11,7 +11,6 @@ import java.net.URL
 internal class RetrofitBuilder(context: Context, baseUrl: URL) {
 
     private val chuckInterceptor = ChuckInterceptor(context)
-        .showNotification(false)
 
     private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(chuckInterceptor)
@@ -28,5 +27,4 @@ internal class RetrofitBuilder(context: Context, baseUrl: URL) {
     fun build(): Retrofit {
         return builder.build()
     }
-
 }

@@ -10,5 +10,4 @@ interface CityRepository {
     fun subscribe(cityId: CityId): Flow<State<City>>
 
     fun subscribeAll(): Flow<State<List<City>>>
-
 }

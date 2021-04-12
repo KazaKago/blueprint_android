@@ -43,5 +43,4 @@ class FlowStateCombinerTest {
             assertThat(it, `is`(instanceOf(State.Fixed::class.java)))
         }
     }
-
 }

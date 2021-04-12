@@ -14,5 +14,4 @@ class VersionDao(private val context: Context) {
         val packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
         return PackageInfoCompat.getLongVersionCode(packageInfo)
     }
-
 }

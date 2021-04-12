@@ -30,5 +30,4 @@ data class WeatherEntity(
         val createdAt = LocalDateTime.parse(createdAt)
         return ((createdAt + EXPIRED) <= LocalDateTime.now())
     }
-
 }

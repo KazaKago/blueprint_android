@@ -114,5 +114,4 @@ class StateZipperTest {
         assertThat(zippedState, `is`(instanceOf(State.Error::class.java)))
         assertThat((zippedState as State.Error).exception, `is`(instanceOf(IllegalStateException::class.java)))
     }
-
 }

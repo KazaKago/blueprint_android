@@ -9,5 +9,4 @@ class CleanApplication : Application() {
         initializeKoin()
         initializeFlipper()
     }
-
 }

@@ -40,9 +40,6 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    lintOptions {
-        xmlReport = true
-    }
 }
 
 dependencies {

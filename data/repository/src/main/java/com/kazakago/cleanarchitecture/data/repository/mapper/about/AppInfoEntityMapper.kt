@@ -14,5 +14,4 @@ internal class AppInfoEntityMapper {
             playStoreUri = storeAppLink
         )
     }
-
 }

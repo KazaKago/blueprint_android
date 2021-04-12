@@ -17,5 +17,4 @@ internal class ForecastResponseMapper {
             minTemperature = response.temperature.min?.celsius
         )
     }
-
 }

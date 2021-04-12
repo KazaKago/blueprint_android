@@ -12,5 +12,4 @@ internal class LocationResponseMapper {
             city = source.city
         )
     }
-
 }

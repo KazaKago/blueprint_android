@@ -9,5 +9,4 @@ internal class MoshiBuilder {
     fun build(): Moshi {
         return builder.build()
     }
-
 }

@@ -7,5 +7,4 @@ import kotlinx.coroutines.flow.Flow
 interface SubscribeCityListUseCase {
 
     operator fun invoke(): Flow<State<List<City>>>
-
 }

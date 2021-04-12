@@ -89,5 +89,4 @@ class AboutFragment : Fragment() {
         val intent = Intent(Intent.ACTION_SENDTO, uri)
         startActivity(intent)
     }
-
 }

@@ -14,5 +14,4 @@ class WeatherApi(context: Context) {
     suspend fun fetch(cityId: String): WeatherResponse {
         return apiService.fetch(cityId).body()!!
     }
-
 }

@@ -30,5 +30,4 @@ internal class CityRepositoryImpl(context: Context) : CityRepository {
                 prefEntities.flatMap { cityMapper.map(it) }
             }
     }
-
 }

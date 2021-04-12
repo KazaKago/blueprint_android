@@ -22,5 +22,4 @@ internal class LocationEntityMapper {
             city = destination.city
         )
     }
-
 }

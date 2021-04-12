@@ -40,9 +40,6 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    lintOptions {
-        xmlReport = true
-    }
 }
 
 dependencies {
@@ -50,8 +47,7 @@ dependencies {
     //Kotlin
     implementation(kotlin("stdlib-jdk8", KotlinCompilerVersion.VERSION))
     //AndroidX Room
-    api("androidx.room:room-runtime:2.2.6")
-    implementation("androidx.room:room-ktx:2.2.6")
+    api("androidx.room:room-ktx:2.2.6")
     kapt("androidx.room:room-compiler:2.2.6")
 
     //desugar_jdk_libs

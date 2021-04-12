@@ -15,5 +15,4 @@ class StoreLinkDao(private val context: Context) {
         val packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
         return URL("http://play.google.com/store/apps/details?id=" + packageInfo.packageName)
     }
-
 }

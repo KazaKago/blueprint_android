@@ -8,5 +8,4 @@ import kotlinx.coroutines.flow.Flow
 interface SubscribeWeatherUseCase {
 
     operator fun invoke(cityId: CityId): Flow<State<WeatherOutput>>
-
 }

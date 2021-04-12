@@ -43,9 +43,6 @@ android {
     buildFeatures {
         viewBinding = true
     }
-    lintOptions {
-        xmlReport = true
-    }
 }
 
 dependencies {

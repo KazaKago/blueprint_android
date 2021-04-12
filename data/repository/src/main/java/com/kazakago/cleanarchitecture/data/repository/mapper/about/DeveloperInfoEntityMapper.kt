@@ -14,5 +14,4 @@ internal class DeveloperInfoEntityMapper {
             siteUrl = webSite
         )
     }
-
 }
