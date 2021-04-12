@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    compileSdkVersion(29)
+    compileSdkVersion(30)
     defaultConfig {
         applicationId = "com.kazakago.cleanarchitecture"
-        minSdkVersion(21)
-        targetSdkVersion(29)
+        minSdkVersion(26)
+        targetSdkVersion(30)
         versionCode = 1
         versionName = "1.0.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -45,7 +45,7 @@ android {
         }
     }
     compileOptions {
-        coreLibraryDesugaringEnabled = true
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -73,36 +73,36 @@ dependencies {
     //Kotlin
     implementation(kotlin("stdlib-jdk8", KotlinCompilerVersion.VERSION))
     //Koin for Android
-    implementation("org.koin:koin-android:2.1.5")
+    implementation("org.koin:koin-android:2.2.2")
 
     //desugar_jdk_libs
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.10")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
 
     //Flipper
-    debugImplementation("com.facebook.flipper:flipper:0.52.1")
-    debugImplementation("com.facebook.flipper:flipper-network-plugin:0.52.1")
-    debugImplementation("com.facebook.soloader:soloader:0.9.0")
+    debugImplementation("com.facebook.flipper:flipper:0.84.0")
+    debugImplementation("com.facebook.flipper:flipper-network-plugin:0.84.0")
+    debugImplementation("com.facebook.soloader:soloader:0.10.1")
     //LeakCanary
-    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.4")
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.7")
     //Hyperion
-    debugImplementation("com.willowtreeapps.hyperion:hyperion-core:0.9.27")
-    debugImplementation("com.willowtreeapps.hyperion:hyperion-attr:0.9.27")
-    debugImplementation("com.willowtreeapps.hyperion:hyperion-measurement:0.9.27")
-    debugImplementation("com.willowtreeapps.hyperion:hyperion-disk:0.9.27")
-    debugImplementation("com.willowtreeapps.hyperion:hyperion-recorder:0.9.27")
-    debugImplementation("com.willowtreeapps.hyperion:hyperion-phoenix:0.9.27")
-    debugImplementation("com.willowtreeapps.hyperion:hyperion-crash:0.9.27")
-    debugImplementation("com.willowtreeapps.hyperion:hyperion-shared-preferences:0.9.27")
-    debugImplementation("com.willowtreeapps.hyperion:hyperion-geiger-counter:0.9.27")
-    debugImplementation("com.willowtreeapps.hyperion:hyperion-timber:0.9.27")
-    debugImplementation("com.willowtreeapps.hyperion:hyperion-build-config:0.9.27")
+    debugImplementation("com.willowtreeapps.hyperion:hyperion-core:0.9.32")
+    debugImplementation("com.willowtreeapps.hyperion:hyperion-attr:0.9.32")
+    debugImplementation("com.willowtreeapps.hyperion:hyperion-measurement:0.9.32")
+    debugImplementation("com.willowtreeapps.hyperion:hyperion-disk:0.9.32")
+    debugImplementation("com.willowtreeapps.hyperion:hyperion-recorder:0.9.32")
+    debugImplementation("com.willowtreeapps.hyperion:hyperion-phoenix:0.9.32")
+    debugImplementation("com.willowtreeapps.hyperion:hyperion-crash:0.9.32")
+    debugImplementation("com.willowtreeapps.hyperion:hyperion-shared-preferences:0.9.32")
+    debugImplementation("com.willowtreeapps.hyperion:hyperion-geiger-counter:0.9.32")
+    debugImplementation("com.willowtreeapps.hyperion:hyperion-timber:0.9.32")
+    debugImplementation("com.willowtreeapps.hyperion:hyperion-build-config:0.9.32")
     //Hyperion-Chuck
     debugImplementation("com.github.Commit451:Hyperion-Chuck:1.0.0")
 
     //JUnit
-    testImplementation("junit:junit:4.13")
+    testImplementation("junit:junit:4.13.2")
 
     //Espresso
-    androidTestImplementation("androidx.test.ext:junit:1.1.1")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
+    androidTestImplementation("androidx.test.ext:junit:1.1.2")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
 }

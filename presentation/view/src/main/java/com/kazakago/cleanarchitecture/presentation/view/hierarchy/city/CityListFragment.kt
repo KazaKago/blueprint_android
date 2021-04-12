@@ -3,21 +3,20 @@ package com.kazakago.cleanarchitecture.presentation.view.hierarchy.city
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.observe
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.kazakago.cleanarchitecture.domain.model.hierarchy.city.City
 import com.kazakago.cleanarchitecture.presentation.view.R
 import com.kazakago.cleanarchitecture.presentation.view.databinding.FragmentCityListBinding
-import com.kazakago.cleanarchitecture.presentation.viewmodel.global.livedata.liveevent.observe
 import com.kazakago.cleanarchitecture.presentation.viewmodel.hierarchy.city.CityListViewModel
-import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.GroupieViewHolder
+import com.xwray.groupie.GroupieAdapter
+import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CityListFragment : Fragment() {
 
-    private val cityRecyclerAdapter = GroupAdapter<GroupieViewHolder>()
+    private val cityRecyclerAdapter = GroupieAdapter()
     private var _binding: FragmentCityListBinding? = null
     private val binding get() = _binding!!
     private val viewModel by viewModel<CityListViewModel>()
@@ -27,7 +26,7 @@ class CityListFragment : Fragment() {
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentCityListBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -37,14 +36,20 @@ class CityListFragment : Fragment() {
 
         binding.cityRecyclerView.adapter = cityRecyclerAdapter
 
-        viewModel.cityList.observe(viewLifecycleOwner) {
-            updateCityList(it)
+        lifecycleScope.launchWhenStarted {
+            viewModel.cityList.collect {
+                updateCityList(it)
+            }
         }
-        viewModel.isLoading.observe(viewLifecycleOwner) {
-            if (it) binding.loadingProgressBar.show() else binding.loadingProgressBar.hide()
+        lifecycleScope.launchWhenStarted {
+            viewModel.isLoading.collect {
+                if (it) binding.loadingProgressBar.show() else binding.loadingProgressBar.hide()
+            }
         }
-        viewModel.showError.observe(viewLifecycleOwner, "") {
-            showExceptionSnackbar(it)
+        lifecycleScope.launchWhenStarted {
+            viewModel.showError.collect {
+                showExceptionSnackbar(it)
+            }
         }
     }
 

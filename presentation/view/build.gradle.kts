@@ -7,10 +7,10 @@ plugins {
 }
 
 android {
-    compileSdkVersion(29)
+    compileSdkVersion(30)
     defaultConfig {
-        minSdkVersion(21)
-        targetSdkVersion(29)
+        minSdkVersion(26)
+        targetSdkVersion(30)
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -33,7 +33,7 @@ android {
         }
     }
     compileOptions {
-        coreLibraryDesugaringEnabled = true
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -56,35 +56,35 @@ dependencies {
     //Kotlin
     implementation(kotlin("stdlib-jdk8", KotlinCompilerVersion.VERSION))
     //Koin
-    implementation("org.koin:koin-androidx-viewmodel:2.1.5")
-    //AndroidX KTX
-    implementation("androidx.fragment:fragment-ktx:1.2.5")
+    implementation("org.koin:koin-androidx-viewmodel:2.2.2")
     //AndroidX AppCompat
-    api("androidx.appcompat:appcompat:1.2.0")
+    implementation("androidx.appcompat:appcompat:1.2.0")
+    //AndroidX Activity
+    implementation("androidx.activity:activity-ktx:1.2.2")
+    //AndroidX Fragment
+    implementation("androidx.fragment:fragment-ktx:1.3.2")
     //AndroidX ConstraintLayout
-    api("androidx.constraintlayout:constraintlayout:1.1.3")
-    //AndroidX Material
-    api("com.google.android.material:material:1.2.0")
-    //AndroidX Lifecycle
-    api("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
-    api("androidx.lifecycle:lifecycle-common-java8:2.2.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
     //AndroidX Navigation
-    implementation("androidx.navigation:navigation-fragment-ktx:2.3.0")
-    implementation("androidx.navigation:navigation-ui-ktx:2.3.0")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
+    implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
+    //AndroidX Material
+    implementation("com.google.android.material:material:1.3.0")
     //PlayServices OSS Licenses
     implementation("com.google.android.gms:play-services-oss-licenses:17.0.0")
     //Groupie
-    implementation("com.xwray:groupie:2.8.0")
+    implementation("com.xwray:groupie:2.9.0")
+    implementation("com.xwray:groupie-viewbinding:2.9.0")
     //Coil
-    implementation("io.coil-kt:coil:0.11.0")
+    implementation("io.coil-kt:coil:1.1.1")
 
     //desugar_jdk_libs
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.10")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
 
     //JUnit
-    testImplementation("junit:junit:4.13")
+    testImplementation("junit:junit:4.13.2")
 
     //Espresso
-    androidTestImplementation("androidx.test.ext:junit:1.1.1")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
+    androidTestImplementation("androidx.test.ext:junit:1.1.2")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
 }

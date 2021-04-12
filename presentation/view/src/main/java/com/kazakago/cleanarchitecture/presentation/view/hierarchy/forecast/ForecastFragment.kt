@@ -3,24 +3,24 @@ package com.kazakago.cleanarchitecture.presentation.view.hierarchy.forecast
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.observe
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
+import com.kazakago.cleanarchitecture.domain.model.hierarchy.city.CityId
 import com.kazakago.cleanarchitecture.domain.model.hierarchy.weather.Forecast
 import com.kazakago.cleanarchitecture.domain.model.hierarchy.weather.Weather
 import com.kazakago.cleanarchitecture.presentation.view.R
 import com.kazakago.cleanarchitecture.presentation.view.databinding.FragmentForecastBinding
-import com.kazakago.cleanarchitecture.presentation.viewmodel.global.livedata.liveevent.observe
 import com.kazakago.cleanarchitecture.presentation.viewmodel.hierarchy.forecast.ForecastViewModel
-import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.GroupieViewHolder
+import com.xwray.groupie.GroupieAdapter
+import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class ForecastFragment : Fragment() {
 
-    private val forecastRecyclerAdapter = GroupAdapter<GroupieViewHolder>()
+    private val forecastRecyclerAdapter = GroupieAdapter()
     private val args: ForecastFragmentArgs by navArgs()
     private var _binding: FragmentForecastBinding? = null
     private val binding get() = _binding!!
@@ -33,7 +33,7 @@ class ForecastFragment : Fragment() {
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentForecastBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -42,18 +42,24 @@ class ForecastFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.descriptionButton.setOnClickListener {
-            showForecastDescriptionDialog()
+            viewModel.city.value?.let { showForecastDescriptionDialog(it.id) }
         }
         binding.forecastRecyclerView.adapter = forecastRecyclerAdapter
 
-        viewModel.weather.observe(viewLifecycleOwner) {
-            updateWeather(it)
+        lifecycleScope.launchWhenStarted {
+            viewModel.weather.collect {
+                if (it != null) updateWeather(it)
+            }
         }
-        viewModel.isLoading.observe(viewLifecycleOwner) {
-            if (it) binding.loadingProgressBar.show() else binding.loadingProgressBar.hide()
+        lifecycleScope.launchWhenStarted {
+            viewModel.isLoading.collect {
+                if (it) binding.loadingProgressBar.show() else binding.loadingProgressBar.hide()
+            }
         }
-        viewModel.showError.observe(viewLifecycleOwner, "") {
-            showExceptionSnackbar(it)
+        lifecycleScope.launchWhenStarted {
+            viewModel.showError.collect {
+                showExceptionSnackbar(it)
+            }
         }
     }
 
@@ -92,9 +98,8 @@ class ForecastFragment : Fragment() {
         Snackbar.make(binding.root, forecast.telop, Snackbar.LENGTH_SHORT).show()
     }
 
-    private fun showForecastDescriptionDialog() {
-        val action = ForecastFragmentDirections.actionForecastFragmentToForecastDescriptionDialog(viewModel.city.value.id)
+    private fun showForecastDescriptionDialog(cityId: CityId) {
+        val action = ForecastFragmentDirections.actionForecastFragmentToForecastDescriptionDialog(cityId)
         findNavController().navigate(action)
     }
-
 }

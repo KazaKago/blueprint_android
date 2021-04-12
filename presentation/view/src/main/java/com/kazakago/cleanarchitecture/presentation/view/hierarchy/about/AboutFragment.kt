@@ -7,13 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.observe
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import com.kazakago.cleanarchitecture.presentation.view.R
 import com.kazakago.cleanarchitecture.presentation.view.databinding.FragmentAboutBinding
 import com.kazakago.cleanarchitecture.presentation.viewmodel.global.extension.toUri
-import com.kazakago.cleanarchitecture.presentation.viewmodel.global.livedata.liveevent.observe
 import com.kazakago.cleanarchitecture.presentation.viewmodel.hierarchy.about.AboutViewModel
+import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
@@ -28,7 +28,7 @@ class AboutFragment : Fragment() {
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentAboutBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -37,27 +37,37 @@ class AboutFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.playStoreLayout.setOnClickListener {
-            openActionView(viewModel.appInfo.value.playStoreUri.toUri())
+            viewModel.appInfo.value?.let { openActionView(it.playStoreUri.toUri()) }
         }
         binding.webSiteLayout.setOnClickListener {
-            openActionView(viewModel.developerInfo.value.siteUrl.toUri())
+            viewModel.developerInfo.value?.let { openActionView(it.siteUrl.toUri()) }
         }
         binding.mailLayout.setOnClickListener {
-            openSendTo(viewModel.developerInfo.value.mailAddress.toURI().toUri())
+            viewModel.developerInfo.value?.let { openSendTo(it.mailAddress.toURI().toUri()) }
         }
 
-        viewModel.appInfo.observe(viewLifecycleOwner) {
-            binding.versionTextView.text = getString(R.string.about_ver, it.versionName.value)
+        lifecycleScope.launchWhenStarted {
+            viewModel.appInfo.collect {
+                if (it != null) binding.versionTextView.text = getString(R.string.about_ver, it.versionName.value)
+            }
         }
-        viewModel.developerInfo.observe(viewLifecycleOwner) {
-            binding.copyrightTextView.text = getString(R.string.about_copyright, Calendar.getInstance().get(Calendar.YEAR), it.name)
-            binding.developByTextView.text = getString(R.string.about_develop_by, it.name)
+        lifecycleScope.launchWhenStarted {
+            viewModel.developerInfo.collect {
+                if (it != null) {
+                    binding.copyrightTextView.text = getString(R.string.about_copyright, Calendar.getInstance().get(Calendar.YEAR), it.name)
+                    binding.developByTextView.text = getString(R.string.about_develop_by, it.name)
+                }
+            }
         }
-        viewModel.isLoading.observe(viewLifecycleOwner) {
-            if (it) binding.loadingProgressBar.show() else binding.loadingProgressBar.hide()
+        lifecycleScope.launchWhenStarted {
+            viewModel.isLoading.collect {
+                if (it) binding.loadingProgressBar.show() else binding.loadingProgressBar.hide()
+            }
         }
-        viewModel.showError.observe(viewLifecycleOwner, "") {
-            showExceptionSnackbar(it)
+        lifecycleScope.launchWhenStarted {
+            viewModel.showError.collect {
+                showExceptionSnackbar(it)
+            }
         }
     }
 

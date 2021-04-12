@@ -9,11 +9,7 @@ import com.kazakago.cleanarchitecture.domain.model.hierarchy.about.AppInfo
 import com.kazakago.cleanarchitecture.domain.model.hierarchy.about.DeveloperInfo
 import com.kazakago.cleanarchitecture.domain.usecase.hierarchy.about.SubscribeAboutUseCase
 import com.kazakago.cleanarchitecture.domain.usecase.output.about.AboutOutput
-import com.kazakago.cleanarchitecture.presentation.viewmodel.global.livedata.liveevent.LiveEvent
-import com.kazakago.cleanarchitecture.presentation.viewmodel.global.livedata.liveevent.MutableLiveEvent
-import com.kazakago.cleanarchitecture.presentation.viewmodel.global.livedata.nullsafelivedata.MutableNullSafeLiveData
-import com.kazakago.cleanarchitecture.presentation.viewmodel.global.livedata.nullsafelivedata.NullSafeLiveData
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class AboutViewModel(
@@ -21,14 +17,14 @@ class AboutViewModel(
     private val subscribeAboutUseCase: SubscribeAboutUseCase
 ) : AndroidViewModel(application) {
 
-    private val _appInfo = MutableNullSafeLiveData<AppInfo>()
-    val appInfo: NullSafeLiveData<AppInfo> get() = _appInfo
-    private val _developerInfo = MutableNullSafeLiveData<DeveloperInfo>()
-    val developerInfo: NullSafeLiveData<DeveloperInfo> get() = _developerInfo
-    private val _isLoading = MutableNullSafeLiveData(false)
-    val isLoading: NullSafeLiveData<Boolean> get() = _isLoading
-    private val _showError = MutableLiveEvent<Exception>()
-    val showError: LiveEvent<Exception> get() = _showError
+    private val _appInfo = MutableStateFlow<AppInfo?>(null)
+    val appInfo: StateFlow<AppInfo?> get() = _appInfo
+    private val _developerInfo = MutableStateFlow<DeveloperInfo?>(null)
+    val developerInfo: StateFlow<DeveloperInfo?> get() = _developerInfo
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading: StateFlow<Boolean> get() = _isLoading
+    private val _showError = MutableSharedFlow<Exception>()
+    val showError: SharedFlow<Exception> get() = _showError
 
     init {
         subscribeAbout()
@@ -41,7 +37,7 @@ class AboutViewModel(
         }
     }
 
-    private fun updateAboutState(state: State<AboutOutput>) {
+    private suspend fun updateAboutState(state: State<AboutOutput>) {
         when (state) {
             is State.Fixed -> {
                 _isLoading.value = false
@@ -51,7 +47,7 @@ class AboutViewModel(
             }
             is State.Error -> {
                 _isLoading.value = false
-                _showError.call(state.exception)
+                _showError.emit(state.exception)
             }
         }
     }

@@ -7,11 +7,7 @@ import com.kazakago.cleanarchitecture.domain.model.global.state.State
 import com.kazakago.cleanarchitecture.domain.model.global.state.StateContent
 import com.kazakago.cleanarchitecture.domain.model.hierarchy.city.City
 import com.kazakago.cleanarchitecture.domain.usecase.hierarchy.city.SubscribeCityListUseCase
-import com.kazakago.cleanarchitecture.presentation.viewmodel.global.livedata.liveevent.LiveEvent
-import com.kazakago.cleanarchitecture.presentation.viewmodel.global.livedata.liveevent.MutableLiveEvent
-import com.kazakago.cleanarchitecture.presentation.viewmodel.global.livedata.nullsafelivedata.MutableNullSafeLiveData
-import com.kazakago.cleanarchitecture.presentation.viewmodel.global.livedata.nullsafelivedata.NullSafeLiveData
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class CityListViewModel(
@@ -19,12 +15,12 @@ class CityListViewModel(
     private val subscribeCityListUseCase: SubscribeCityListUseCase
 ) : AndroidViewModel(application) {
 
-    private val _cityList = MutableNullSafeLiveData<List<City>>()
-    val cityList: NullSafeLiveData<List<City>> get() = _cityList
-    private val _isLoading = MutableNullSafeLiveData(false)
-    val isLoading: NullSafeLiveData<Boolean> get() = _isLoading
-    private val _showError = MutableLiveEvent<Exception>()
-    val showError: LiveEvent<Exception> get() = _showError
+    private val _cityList = MutableStateFlow<List<City>>(emptyList())
+    val cityList: StateFlow<List<City>> get() = _cityList
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading: StateFlow<Boolean> get() = _isLoading
+    private val _showError = MutableSharedFlow<Exception>()
+    val showError: SharedFlow<Exception> get() = _showError
 
     init {
         subscribeCityList()
@@ -37,7 +33,7 @@ class CityListViewModel(
         }
     }
 
-    private fun updateCityListState(state: State<List<City>>) {
+    private suspend fun updateCityListState(state: State<List<City>>) {
         when (state) {
             is State.Fixed -> {
                 _isLoading.value = false
@@ -47,7 +43,7 @@ class CityListViewModel(
             }
             is State.Error -> {
                 _isLoading.value = false
-                _showError.call(state.exception)
+                _showError.emit(state.exception)
             }
         }
     }
