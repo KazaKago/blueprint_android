@@ -1,7 +1,6 @@
 plugins {
     id("com.android.library")
     kotlin("android")
-    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -60,9 +59,6 @@ dependencies {
     implementation("androidx.fragment:fragment-ktx:1.3.2")
     // AndroidX ConstraintLayout
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
-    // AndroidX Navigation
-    implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
-    implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
     // Material Components
     implementation("com.google.android.material:material:1.3.0")
     // PlayServices OSS Licenses

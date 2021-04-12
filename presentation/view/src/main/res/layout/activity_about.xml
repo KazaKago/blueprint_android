@@ -5,7 +5,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".hierarchy.about.AboutFragment">
+    tools:context=".hierarchy.about.AboutActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="@string/about_title" />
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <ImageView
         android:id="@+id/appIconImageView"
@@ -15,7 +34,7 @@
         android:contentDescription="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout"
         app:srcCompat="@drawable/ic_launcher_96dp" />
 
     <TextView
@@ -82,8 +101,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@null"
-            android:tint="?attr/colorAccent"
-            app:srcCompat="@drawable/ic_googleplay_24dp" />
+            app:srcCompat="@drawable/ic_googleplay_24dp"
+            app:tint="?attr/colorAccent" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -114,8 +133,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@null"
-            android:tint="?attr/colorAccent"
-            app:srcCompat="@drawable/ic_mail_outline_24dp" />
+            app:srcCompat="@drawable/ic_mail_outline_24dp"
+            app:tint="?attr/colorAccent" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -146,8 +165,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@null"
-            android:tint="?attr/colorAccent"
-            app:srcCompat="@drawable/ic_public_24dp" />
+            app:srcCompat="@drawable/ic_public_24dp"
+            app:tint="?attr/colorAccent" />
 
         <TextView
             android:layout_width="wrap_content"

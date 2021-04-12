@@ -4,10 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
+import com.kazakago.cleanarchitecture.domain.model.hierarchy.city.CityId
 import com.kazakago.cleanarchitecture.presentation.view.R
 import com.kazakago.cleanarchitecture.presentation.view.databinding.DialogForecastDescriptionBinding
 import com.kazakago.cleanarchitecture.presentation.view.global.extension.formattedText
@@ -18,11 +19,21 @@ import org.koin.core.parameter.parametersOf
 
 class ForecastDescriptionDialog : BottomSheetDialogFragment() {
 
-    private val args: ForecastDescriptionDialogArgs by navArgs()
+    companion object {
+        fun createInstance(cityId: CityId) = ForecastDescriptionDialog().apply {
+            arguments = bundleOf(ParameterKey.CITY_ID.name to cityId)
+        }
+    }
+
+    private enum class ParameterKey {
+        CITY_ID,
+    }
+
     private var _binding: DialogForecastDescriptionBinding? = null
     private val binding get() = _binding!!
     private val viewModel by viewModel<ForecastViewModel> {
-        parametersOf(args.cityId)
+        val cityId = requireArguments().getSerializable(ParameterKey.CITY_ID.name) as CityId
+        parametersOf(cityId)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {

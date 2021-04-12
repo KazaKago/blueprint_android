@@ -6,7 +6,7 @@ import com.kazakago.cleanarchitecture.presentation.view.R
 import com.kazakago.cleanarchitecture.presentation.view.databinding.RecyclerCityBinding
 import com.xwray.groupie.viewbinding.BindableItem
 
-data class CityRecyclerItem(private val city: City) : BindableItem<RecyclerCityBinding>(city.hashCode().toLong()) {
+data class CityItem(private val city: City) : BindableItem<RecyclerCityBinding>(city.id.value.hashCode().toLong()) {
 
     var onClickItem: ((city: City) -> Unit) = {}
 

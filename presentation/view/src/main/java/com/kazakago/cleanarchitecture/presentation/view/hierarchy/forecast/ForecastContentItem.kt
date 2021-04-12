@@ -9,7 +9,7 @@ import com.kazakago.cleanarchitecture.presentation.view.global.extension.formatt
 import com.kazakago.cleanarchitecture.presentation.viewmodel.global.extension.toUri
 import com.xwray.groupie.viewbinding.BindableItem
 
-data class ForecastRecyclerContent(private val forecast: Forecast) : BindableItem<RecyclerForecastContentBinding>(forecast.hashCode().toLong()) {
+data class ForecastContentItem(private val forecast: Forecast) : BindableItem<RecyclerForecastContentBinding>(forecast.hashCode().toLong()) {
 
     var onClickItem: ((forecast: Forecast) -> Unit) = {}
 

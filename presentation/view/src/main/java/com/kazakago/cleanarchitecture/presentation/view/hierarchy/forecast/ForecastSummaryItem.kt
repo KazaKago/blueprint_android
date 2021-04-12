@@ -7,7 +7,7 @@ import com.kazakago.cleanarchitecture.presentation.view.databinding.RecyclerFore
 import com.kazakago.cleanarchitecture.presentation.view.global.extension.formattedText
 import com.xwray.groupie.viewbinding.BindableItem
 
-data class ForecastRecyclerSummary(private val weather: Weather) : BindableItem<RecyclerForecastSummaryBinding>(weather.hashCode().toLong()) {
+data class ForecastSummaryItem(private val weather: Weather) : BindableItem<RecyclerForecastSummaryBinding>(weather.cityId.value.hashCode().toLong()) {
 
     override fun getLayout() = R.layout.recycler_forecast_summary
 
