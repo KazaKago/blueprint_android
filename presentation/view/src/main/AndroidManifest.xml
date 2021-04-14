@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".hierarchy.city.CityListActivity">
+            android:name=".hierarchy.github.GithubOrgsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".hierarchy.forecast.ForecastActivity" />
+            android:name=".hierarchy.github.GithubReposActivity" />
         <activity
             android:name=".hierarchy.about.AboutActivity" />
         <activity

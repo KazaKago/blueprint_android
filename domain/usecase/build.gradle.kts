@@ -24,6 +24,8 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
     // Koin
     implementation("org.koin:koin-core:2.2.2")
+    // StoreFlowable.kt
+    implementation("com.github.kazakago.storeflowable:storeflowable-core:release~3.2.0-SNAPSHOT")
 
     // JUnit
     testImplementation("junit:junit:4.13.2")

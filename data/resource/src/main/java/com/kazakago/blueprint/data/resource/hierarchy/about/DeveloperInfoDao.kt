@@ -7,9 +7,15 @@ import java.net.URL
 
 class DeveloperInfoDao(private val context: Context) {
 
-    fun getName() = context.getString(R.string.developer_name)
+    fun getName(): String {
+        return context.getString(R.string.developer_name)
+    }
 
-    fun getEmailAddress() = URI(context.getString(R.string.developer_mail_address))
+    fun getEmailAddress(): URI {
+        return URI(context.getString(R.string.developer_mail_address))
+    }
 
-    fun getWebSiteUrl() = URL(context.getString(R.string.developer_website_url))
+    fun getWebSiteUrl(): URL {
+        return URL(context.getString(R.string.developer_website_url))
+    }
 }

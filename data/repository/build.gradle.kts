@@ -42,20 +42,20 @@ android {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     // Module
-    implementation(project(":domain:repository"))
     implementation(project(":domain:model"))
+    implementation(project(":domain:repository"))
     implementation(project(":data:api"))
-    implementation(project(":data:database"))
+    implementation(project(":data:cache"))
     implementation(project(":data:resource"))
-    implementation(project(":data:memory"))
+    implementation(project(":data:mapper"))
     // Kotlin
     implementation(kotlin("stdlib-jdk8"))
     // kotlinx.coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
     // Koin
     implementation("org.koin:koin-core:2.2.2")
-    // Guild_kt
-    implementation("com.os.operando.guild.kt:guild_kt:1.0.0")
+    // StoreFlowable.kt
+    implementation("com.github.kazakago.storeflowable:storeflowable:release~3.2.0-SNAPSHOT")
 
     // desugar_jdk_libs
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")

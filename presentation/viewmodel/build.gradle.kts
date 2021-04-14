@@ -53,6 +53,8 @@ dependencies {
     // AndroidX Lifecycle
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
     implementation("androidx.lifecycle:lifecycle-common-java8:2.3.1")
+    // StoreFlowable.kt
+    implementation("com.github.kazakago.storeflowable:storeflowable-core:release~3.2.0-SNAPSHOT")
 
     // desugar_jdk_libs
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")

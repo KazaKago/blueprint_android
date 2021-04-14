@@ -62,9 +62,9 @@ dependencies {
     implementation(project(":domain:repository"))
     implementation(project(":data:repository"))
     implementation(project(":data:api"))
-    implementation(project(":data:database"))
+    implementation(project(":data:cache"))
     implementation(project(":data:resource"))
-    implementation(project(":data:memory"))
+    implementation(project(":data:mapper"))
     // Kotlin
     implementation(kotlin("stdlib-jdk8"))
     // Koin
@@ -72,13 +72,6 @@ dependencies {
 
     // desugar_jdk_libs
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
-
-    // Flipper
-    debugImplementation("com.facebook.flipper:flipper:0.84.0")
-    debugImplementation("com.facebook.flipper:flipper-network-plugin:0.84.0")
-    debugImplementation("com.facebook.soloader:soloader:0.10.1")
-    // LeakCanary
-    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.7")
 
     // JUnit
     testImplementation("junit:junit:4.13.2")

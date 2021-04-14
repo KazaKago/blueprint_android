@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
@@ -83,7 +83,7 @@
 
     <LinearLayout
         android:id="@+id/playStoreLayout"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="?android:attr/selectableItemBackground"
@@ -116,7 +116,7 @@
 
     <LinearLayout
         android:id="@+id/mailLayout"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="?android:attr/selectableItemBackground"
         android:gravity="center_vertical"
@@ -148,7 +148,7 @@
 
     <LinearLayout
         android:id="@+id/webSiteLayout"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="?android:attr/selectableItemBackground"
         android:gravity="center_vertical"
@@ -178,6 +178,38 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/ossLicenseLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="32dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="32dp"
+        android:paddingBottom="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/webSiteLayout">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            app:srcCompat="@drawable/ic_description_24dp"
+            app:tint="?attr/colorAccent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:text="@string/action_licenses"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="@dimen/text_size_medium_small" />
+
+    </LinearLayout>
+
     <TextView
         android:id="@+id/copyrightTextView"
         android:layout_width="0dp"
@@ -188,17 +220,7 @@
         android:textSize="@dimen/text_size_micro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/webSiteLayout"
+        app:layout_constraintTop_toBottomOf="@+id/ossLicenseLayout"
         tools:text="@string/about_copyright" />
-
-    <androidx.core.widget.ContentLoadingProgressBar
-        android:id="@+id/loadingProgressBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

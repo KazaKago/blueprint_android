@@ -1,23 +1,14 @@
 <resources>
-    <!-- General -->
     <string name="app_name">Blueprint</string>
-
-    <!-- Main -->
-    <string name="public_time">発表日時: %1$s</string>
-    <string name="temperature_max">最高:%1$s℃</string>
-    <string name="temperature_min">最低:%1$s℃</string>
-    <string name="action_about">アプリについて</string>
-    <string name="action_licenses">オープンソースライセンス</string>
-
-    <!-- Forecast -->
-    <string name="action_refresh">更新する</string>
-
-    <!-- About -->
-    <string name="about_title">アプリについて</string>
+    <string name="id">ID: %1$d</string>
+    <string name="retry">Retry</string>
+    <string name="action_about">About</string>
+    <string name="action_licenses">Oss licenses</string>
+    <string name="about_title">About</string>
     <string name="about_ver">Ver. %1$s</string>
     <string name="about_develop_by">Develop by %1$s</string>
-    <string name="about_play_store">Playストア</string>
-    <string name="about_email">Eメール</string>
-    <string name="about_web_site">Webサイト</string>
+    <string name="about_play_store">Google Play</string>
+    <string name="about_email">Email</string>
+    <string name="about_web_site">Website</string>
     <string name="about_copyright">© %1$d %2$s</string>
 </resources>

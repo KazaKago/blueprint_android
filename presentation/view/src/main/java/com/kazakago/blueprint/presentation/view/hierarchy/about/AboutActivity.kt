@@ -8,10 +8,8 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.google.android.material.snackbar.Snackbar
 import com.kazakago.blueprint.presentation.view.R
 import com.kazakago.blueprint.presentation.view.databinding.ActivityAboutBinding
-import com.kazakago.blueprint.presentation.viewmodel.global.extension.toUri
 import com.kazakago.blueprint.presentation.viewmodel.hierarchy.about.AboutViewModel
 import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -25,6 +23,7 @@ class AboutActivity : AppCompatActivity() {
     }
 
     private val viewBinding by lazy { ActivityAboutBinding.inflate(layoutInflater) }
+    private val ossLicensesMenuActivityLauncher = registerForActivityResult(OssLicensesMenuActivityContract()) {}
     private val viewModel by viewModel<AboutViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,13 +32,16 @@ class AboutActivity : AppCompatActivity() {
         setSupportActionBar(viewBinding.toolbar)
 
         viewBinding.playStoreLayout.setOnClickListener {
-            viewModel.appInfo.value?.let { openActionView(it.playStoreUri.toUri()) }
+            viewModel.appInfo.value?.let { openActionView(Uri.parse(it.playStoreUri.toString())) }
         }
         viewBinding.webSiteLayout.setOnClickListener {
-            viewModel.developerInfo.value?.let { openActionView(it.siteUrl.toUri()) }
+            viewModel.developerInfo.value?.let { openActionView(Uri.parse(it.siteUrl.toString())) }
         }
         viewBinding.mailLayout.setOnClickListener {
-            viewModel.developerInfo.value?.let { openSendTo(it.mailAddress.toURI().toUri()) }
+            viewModel.developerInfo.value?.let { openSendTo(Uri.parse(it.mailAddress.toString())) }
+        }
+        viewBinding.ossLicenseLayout.setOnClickListener {
+            goOssLicenses()
         }
 
         lifecycleScope.launchWhenStarted {
@@ -55,20 +57,6 @@ class AboutActivity : AppCompatActivity() {
                 }
             }
         }
-        lifecycleScope.launchWhenStarted {
-            viewModel.isLoading.collect {
-                if (it) viewBinding.loadingProgressBar.show() else viewBinding.loadingProgressBar.hide()
-            }
-        }
-        lifecycleScope.launchWhenStarted {
-            viewModel.showError.collect {
-                showExceptionSnackbar(it)
-            }
-        }
-    }
-
-    private fun showExceptionSnackbar(exception: Exception) {
-        Snackbar.make(viewBinding.root, exception.localizedMessage ?: "", Snackbar.LENGTH_LONG).show()
     }
 
     private fun openActionView(uri: Uri) {
@@ -79,5 +67,9 @@ class AboutActivity : AppCompatActivity() {
     private fun openSendTo(uri: Uri) {
         val intent = Intent(Intent.ACTION_SENDTO, uri)
         startActivity(intent)
+    }
+
+    private fun goOssLicenses() {
+        ossLicensesMenuActivityLauncher.launch(Unit)
     }
 }

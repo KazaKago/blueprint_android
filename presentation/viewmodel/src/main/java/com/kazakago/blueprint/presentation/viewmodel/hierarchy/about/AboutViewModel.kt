@@ -3,64 +3,30 @@ package com.kazakago.blueprint.presentation.viewmodel.hierarchy.about
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.kazakago.blueprint.domain.model.global.state.State
-import com.kazakago.blueprint.domain.model.global.state.StateContent
-import com.kazakago.blueprint.domain.model.hierarchy.about.AppInfo
-import com.kazakago.blueprint.domain.model.hierarchy.about.DeveloperInfo
-import com.kazakago.blueprint.domain.usecase.hierarchy.about.SubscribeAboutUseCase
-import com.kazakago.blueprint.domain.usecase.output.about.AboutOutput
-import kotlinx.coroutines.flow.*
+import com.kazakago.blueprint.domain.model.about.AppInfo
+import com.kazakago.blueprint.domain.model.about.DeveloperInfo
+import com.kazakago.blueprint.domain.usecase.hierarchy.about.GetAboutUseCase
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class AboutViewModel(
     application: Application,
-    private val subscribeAboutUseCase: SubscribeAboutUseCase
+    private val getAboutUseCase: GetAboutUseCase
 ) : AndroidViewModel(application) {
 
     private val _appInfo = MutableStateFlow<AppInfo?>(null)
-    val appInfo: StateFlow<AppInfo?> get() = _appInfo
+    val appInfo get() = _appInfo.asStateFlow()
     private val _developerInfo = MutableStateFlow<DeveloperInfo?>(null)
-    val developerInfo: StateFlow<DeveloperInfo?> get() = _developerInfo
-    private val _isLoading = MutableStateFlow(false)
-    val isLoading: StateFlow<Boolean> get() = _isLoading
-    private val _showError = MutableSharedFlow<Exception>()
-    val showError: SharedFlow<Exception> get() = _showError
+    val developerInfo get() = _developerInfo.asStateFlow()
 
     init {
-        subscribeAbout()
+        viewModelScope.launch { loadAboutInfo() }
     }
 
-    private fun subscribeAbout() = viewModelScope.launch {
-        subscribeAboutUseCase().collect {
-            updateAboutState(it)
-            updateAboutContent(it.content)
-        }
-    }
-
-    private suspend fun updateAboutState(state: State<AboutOutput>) {
-        when (state) {
-            is State.Fixed -> {
-                _isLoading.value = false
-            }
-            is State.Loading -> {
-                _isLoading.value = true
-            }
-            is State.Error -> {
-                _isLoading.value = false
-                _showError.emit(state.exception)
-            }
-        }
-    }
-
-    private fun updateAboutContent(content: StateContent<AboutOutput>) {
-        when (content) {
-            is StateContent.Exist -> {
-                _appInfo.value = content.rawContent.appInfo
-                _developerInfo.value = content.rawContent.developerInfo
-            }
-            is StateContent.NotExist -> {
-                //do nothing.
-            }
-        }
+    private suspend fun loadAboutInfo() {
+        val aboutInfo = getAboutUseCase()
+        _appInfo.emit(aboutInfo.appInfo)
+        _developerInfo.emit(aboutInfo.developerInfo)
     }
 }

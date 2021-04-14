@@ -1,0 +1,113 @@
+package com.kazakago.blueprint.presentation.view.hierarchy.github
+
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.os.Bundle
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
+import com.kazakago.blueprint.domain.model.github.GithubOrgName
+import com.kazakago.blueprint.domain.model.github.GithubRepo
+import com.kazakago.blueprint.presentation.view.databinding.ActivityGithubReposBinding
+import com.kazakago.blueprint.presentation.view.global.view.ErrorItem
+import com.kazakago.blueprint.presentation.view.global.view.LoadingItem
+import com.kazakago.blueprint.presentation.view.global.view.addOnBottomReached
+import com.kazakago.blueprint.presentation.viewmodel.hierarchy.github.GithubReposViewModel
+import com.xwray.groupie.Group
+import com.xwray.groupie.GroupieAdapter
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.combine
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
+
+class GithubReposActivity : AppCompatActivity() {
+
+    class Contract : ActivityResultContract<GithubOrgName, ActivityResult>() {
+        override fun createIntent(context: Context, input: GithubOrgName) = Intent(context, GithubReposActivity::class.java).apply {
+            putExtra(ParameterKey.GITHUB_ORG_ID.name, input)
+        }
+
+        override fun parseResult(resultCode: Int, intent: Intent?) = ActivityResult(resultCode, intent)
+    }
+
+    private enum class ParameterKey {
+        GITHUB_ORG_ID,
+    }
+
+    private val viewBinding by lazy { ActivityGithubReposBinding.inflate(layoutInflater) }
+    private val githubReposAdapter = GroupieAdapter()
+    private val githubReposViewModel by viewModel<GithubReposViewModel> {
+        val githubOrgName = intent.getSerializableExtra(ParameterKey.GITHUB_ORG_ID.name) as GithubOrgName
+        parametersOf(githubOrgName)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(viewBinding.root)
+        setSupportActionBar(viewBinding.toolbar)
+
+        viewBinding.githubReposRecyclerView.adapter = githubReposAdapter
+        viewBinding.githubReposRecyclerView.addOnBottomReached {
+            githubReposViewModel.requestAdditional()
+        }
+        viewBinding.swipeRefreshLayout.setOnRefreshListener {
+            githubReposViewModel.refresh()
+        }
+        viewBinding.retryButton.setOnClickListener {
+            githubReposViewModel.retry()
+        }
+
+        lifecycleScope.launchWhenStarted {
+            combine(githubReposViewModel.githubRepos, githubReposViewModel.isAdditionalLoading, githubReposViewModel.additionalError) { a, b, c -> Triple(a, b, c) }.collect {
+                val items: List<Group> = mutableListOf<Group>().apply {
+                    this += createGithubRepoItems(it.first)
+                    if (it.second) this += createLoadingItem()
+                    if (it.third != null) this += createErrorItem(it.third!!)
+                }
+                githubReposAdapter.updateAsync(items)
+            }
+        }
+        lifecycleScope.launchWhenStarted {
+            githubReposViewModel.isMainLoading.collect {
+                viewBinding.progressBar.isVisible = it
+            }
+        }
+        lifecycleScope.launchWhenStarted {
+            githubReposViewModel.mainError.collect {
+                viewBinding.errorGroup.isVisible = (it != null)
+                viewBinding.errorTextView.text = it?.toString()
+            }
+        }
+        lifecycleScope.launchWhenStarted {
+            githubReposViewModel.isRefreshing.collect {
+                viewBinding.swipeRefreshLayout.isRefreshing = it
+            }
+        }
+    }
+
+    private fun createGithubRepoItems(githubRepos: List<GithubRepo>): List<GithubRepoItem> {
+        return githubRepos.map { githubRepo ->
+            GithubRepoItem(githubRepo).apply {
+                onClick = { githubRepo -> launch(githubRepo.url.toString()) }
+            }
+        }
+    }
+
+    private fun createLoadingItem(): LoadingItem {
+        return LoadingItem()
+    }
+
+    private fun createErrorItem(exception: Exception): ErrorItem {
+        return ErrorItem(exception).apply {
+            onRetry = { githubReposViewModel.retryAdditional() }
+        }
+    }
+
+    private fun launch(url: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intent)
+    }
+}

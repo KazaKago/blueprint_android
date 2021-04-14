@@ -1,0 +1,10 @@
+package com.kazakago.blueprint.domain.usecase.hierarchy.github
+
+import com.kazakago.blueprint.domain.repository.GithubRepository
+
+internal class RequestAdditionalGithubOrgsUseCaseImpl(private val githubRepository: GithubRepository) : RequestAdditionalGithubOrgsUseCase {
+
+    override suspend fun invoke(continueWhenError: Boolean) {
+        return githubRepository.requestAdditionalOrgs(continueWhenError = continueWhenError)
+    }
+}

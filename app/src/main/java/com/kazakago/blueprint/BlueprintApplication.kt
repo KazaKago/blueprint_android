@@ -7,6 +7,5 @@ class BlueprintApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         initializeKoin()
-        initializeFlipper()
     }
 }

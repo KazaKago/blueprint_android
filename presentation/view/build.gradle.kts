@@ -61,6 +61,8 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
     // AndroidX RecyclerView
     implementation("androidx.recyclerview:recyclerview:1.2.0")
+    // AndroidX SwipeRefreshLayout
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     // Material Components
     implementation("com.google.android.material:material:1.3.0")
     // PlayServices OSS Licenses
@@ -69,7 +71,7 @@ dependencies {
     implementation("com.xwray:groupie:2.9.0")
     implementation("com.xwray:groupie-viewbinding:2.9.0")
     // Coil
-    implementation("io.coil-kt:coil:1.1.1")
+    implementation("io.coil-kt:coil:1.2.0")
 
     // desugar_jdk_libs
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
