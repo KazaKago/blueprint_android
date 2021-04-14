@@ -9,7 +9,6 @@ import com.kazakago.blueprint.data.memory.hierarchy.GithubCache
 import com.kazakago.blueprint.data.repository.flowable.GithubOrgsResponder
 import com.kazakago.blueprint.data.repository.flowable.GithubReposResponder
 import com.kazakago.blueprint.domain.model.github.GithubOrg
-import com.kazakago.blueprint.domain.model.github.GithubOrgId
 import com.kazakago.blueprint.domain.model.github.GithubOrgName
 import com.kazakago.blueprint.domain.model.github.GithubRepo
 import com.kazakago.blueprint.domain.repository.GithubRepository
