@@ -38,7 +38,7 @@ class AboutActivity : AppCompatActivity() {
             viewModel.developerInfo.value?.let { openActionView(Uri.parse(it.siteUrl.toString())) }
         }
         viewBinding.mailLayout.setOnClickListener {
-            viewModel.developerInfo.value?.let { openSendTo(Uri.parse(it.mailAddress.toString())) }
+            viewModel.developerInfo.value?.let { openSendTo(Uri.parse(it.mailAddress.toURI().toString())) }
         }
         viewBinding.ossLicenseLayout.setOnClickListener {
             goOssLicenses()
