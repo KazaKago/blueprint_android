@@ -1,8 +1,11 @@
 package com.kazakago.blueprint.domain.model.about
 
-import org.junit.Assert
+import org.amshove.kluent.invoking
+import org.amshove.kluent.shouldBeEqualTo
+import org.amshove.kluent.shouldThrow
 import org.junit.Before
 import org.junit.Test
+import java.net.URI
 
 class EmailTest {
 
@@ -13,18 +16,19 @@ class EmailTest {
         email = Email("kazakago@gmail.com")
     }
 
-    @Test(expected = IllegalArgumentException::class)
+    @Test
     fun rejectInvalidEmail1() {
-        Email("kazakagoATgmail.com")
+        invoking { Email("kazakagoATgmail.com") } shouldThrow IllegalArgumentException::class
     }
 
-    @Test(expected = IllegalArgumentException::class)
+    @Test
     fun rejectInvalidEmail2() {
-        Email("kazakago@gmailcom")
+        invoking { Email("kazakago@gmailcom") } shouldThrow IllegalArgumentException::class
     }
 
     @Test
     fun isCorrectEmailURI() {
-        Assert.assertEquals("mailto:kazakago@gmail.com", email.toURI().toString())
+        val email = Email("kazakago@gmail.com")
+        email.toURI() shouldBeEqualTo URI("mailto:kazakago@gmail.com")
     }
 }

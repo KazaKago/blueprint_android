@@ -20,6 +20,8 @@ dependencies {
 
     // JUnit
     testImplementation("junit:junit:4.13.2")
+    // Kluent
+    testImplementation("org.amshove.kluent:kluent:1.65")
     // MockK
     testImplementation("io.mockk:mockk:1.11.0")
 }
