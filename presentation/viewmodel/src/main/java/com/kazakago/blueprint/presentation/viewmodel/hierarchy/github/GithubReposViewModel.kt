@@ -1,6 +1,7 @@
 package com.kazakago.blueprint.presentation.viewmodel.hierarchy.github
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrgName
 import com.kazakago.blueprint.domain.model.hierarchy.github.GithubRepo
@@ -21,6 +22,15 @@ class GithubReposViewModel @AssistedInject constructor(
     private val requestAdditionalGithubReposUseCase: RequestAdditionalGithubReposUseCase,
     @Assisted private val githubOrgName: GithubOrgName,
 ) : ViewModel() {
+
+    companion object {
+        fun provideFactory(assistedFactory: Factory, githubOrgName: GithubOrgName): ViewModelProvider.Factory = object : ViewModelProvider.NewInstanceFactory() {
+            @Suppress("UNCHECKED_CAST")
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                return assistedFactory.create(githubOrgName) as T
+            }
+        }
+    }
 
     @AssistedFactory
     interface Factory {

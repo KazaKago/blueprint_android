@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
@@ -40,9 +41,9 @@ class GithubReposActivity : AppCompatActivity() {
 
     private val viewBinding by lazy { ActivityGithubReposBinding.inflate(layoutInflater) }
     private val githubReposAdapter = GroupieAdapter()
-    private val githubReposViewModel: GithubReposViewModel by lazy {
+    private val githubReposViewModel: GithubReposViewModel by viewModels {
         val githubOrgName = intent.getSerializableExtra(ParameterKey.GITHUB_ORG_ID.name) as GithubOrgName
-        githubReposViewModelFactory.create(githubOrgName)
+        GithubReposViewModel.provideFactory(githubReposViewModelFactory, githubOrgName)
     }
 
     @Inject
