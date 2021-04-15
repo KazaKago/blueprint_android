@@ -3,11 +3,12 @@ package com.kazakago.blueprint.presentation.view.hierarchy.github
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
-import com.kazakago.blueprint.domain.model.github.GithubOrg
-import com.kazakago.blueprint.domain.model.github.GithubOrgName
+import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrg
+import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrgName
 import com.kazakago.blueprint.presentation.view.R
 import com.kazakago.blueprint.presentation.view.databinding.ActivityGithubOrgsBinding
 import com.kazakago.blueprint.presentation.view.global.view.ErrorItem
@@ -17,17 +18,18 @@ import com.kazakago.blueprint.presentation.view.hierarchy.about.AboutActivity
 import com.kazakago.blueprint.presentation.viewmodel.hierarchy.github.GithubOrgsViewModel
 import com.xwray.groupie.Group
 import com.xwray.groupie.GroupieAdapter
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
+@AndroidEntryPoint
 class GithubOrgsActivity : AppCompatActivity() {
 
     private val viewBinding by lazy { ActivityGithubOrgsBinding.inflate(layoutInflater) }
     private val githubOrgsAdapter = GroupieAdapter()
     private val githubReposActivityLauncher = registerForActivityResult(GithubReposActivity.Contract()) {}
     private val aboutActivityLauncher = registerForActivityResult(AboutActivity.Contract()) {}
-    private val githubOrgsViewModel by viewModel<GithubOrgsViewModel>()
+    private val githubOrgsViewModel: GithubOrgsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

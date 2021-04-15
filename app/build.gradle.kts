@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     kotlin("android")
+    kotlin("kapt")
+    id("dagger.hilt.android.plugin")
     id("com.google.android.gms.oss-licenses-plugin")
 }
 
@@ -67,8 +69,11 @@ dependencies {
     implementation(project(":data:mapper"))
     // Kotlin
     implementation(kotlin("stdlib-jdk8"))
-    // Koin
-    implementation("org.koin:koin-android:2.2.2")
+    // Dagger Hilt
+    implementation("com.google.dagger:hilt-android:2.34.1-beta")
+    kapt("com.google.dagger:hilt-compiler:2.34.1-beta")
+    // AndroidX AppCompat
+    implementation("androidx.appcompat:appcompat:1.2.0")
 
     // desugar_jdk_libs
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")

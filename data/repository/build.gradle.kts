@@ -1,6 +1,8 @@
 plugins {
     id("com.android.library")
     kotlin("android")
+    kotlin("kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -52,8 +54,9 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
     // kotlinx.coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
-    // Koin
-    implementation("org.koin:koin-core:2.2.2")
+    // Dagger Hilt
+    implementation("com.google.dagger:hilt-android:2.34.1-beta")
+    kapt("com.google.dagger:hilt-compiler:2.34.1-beta")
     // StoreFlowable.kt
     implementation("com.github.kazakago.storeflowable:storeflowable:release~3.2.0-SNAPSHOT")
 

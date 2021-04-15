@@ -1,6 +1,8 @@
 plugins {
     id("com.android.library")
     kotlin("android")
+    kotlin("kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -48,8 +50,9 @@ dependencies {
     implementation(project(":data:resource"))
     // Kotlin
     implementation(kotlin("stdlib-jdk8"))
-    // Koin
-    implementation("org.koin:koin-core:2.2.2")
+    // Dagger Hilt
+    implementation("com.google.dagger:hilt-android:2.34.1-beta")
+    kapt("com.google.dagger:hilt-compiler:2.34.1-beta")
 
     // desugar_jdk_libs
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")

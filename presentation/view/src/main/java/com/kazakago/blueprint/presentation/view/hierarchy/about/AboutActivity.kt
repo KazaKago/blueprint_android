@@ -6,15 +6,17 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.kazakago.blueprint.presentation.view.R
 import com.kazakago.blueprint.presentation.view.databinding.ActivityAboutBinding
 import com.kazakago.blueprint.presentation.viewmodel.hierarchy.about.AboutViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
+@AndroidEntryPoint
 class AboutActivity : AppCompatActivity() {
 
     class Contract : ActivityResultContract<Unit, ActivityResult>() {
@@ -24,7 +26,7 @@ class AboutActivity : AppCompatActivity() {
 
     private val viewBinding by lazy { ActivityAboutBinding.inflate(layoutInflater) }
     private val ossLicensesMenuActivityLauncher = registerForActivityResult(OssLicensesMenuActivityContract()) {}
-    private val viewModel by viewModel<AboutViewModel>()
+    private val aboutViewModel: AboutViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,25 +34,25 @@ class AboutActivity : AppCompatActivity() {
         setSupportActionBar(viewBinding.toolbar)
 
         viewBinding.playStoreLayout.setOnClickListener {
-            viewModel.appInfo.value?.let { openActionView(Uri.parse(it.playStoreUri.toString())) }
+            aboutViewModel.appInfo.value?.let { openActionView(Uri.parse(it.playStoreUri.toString())) }
         }
         viewBinding.webSiteLayout.setOnClickListener {
-            viewModel.developerInfo.value?.let { openActionView(Uri.parse(it.siteUrl.toString())) }
+            aboutViewModel.developerInfo.value?.let { openActionView(Uri.parse(it.siteUrl.toString())) }
         }
         viewBinding.mailLayout.setOnClickListener {
-            viewModel.developerInfo.value?.let { openSendTo(Uri.parse(it.mailAddress.toURI().toString())) }
+            aboutViewModel.developerInfo.value?.let { openSendTo(Uri.parse(it.mailAddress.toURI().toString())) }
         }
         viewBinding.ossLicenseLayout.setOnClickListener {
             goOssLicenses()
         }
 
         lifecycleScope.launchWhenStarted {
-            viewModel.appInfo.collect {
+            aboutViewModel.appInfo.collect {
                 if (it != null) viewBinding.versionTextView.text = getString(R.string.about_ver, it.versionName.value)
             }
         }
         lifecycleScope.launchWhenStarted {
-            viewModel.developerInfo.collect {
+            aboutViewModel.developerInfo.collect {
                 if (it != null) {
                     viewBinding.copyrightTextView.text = getString(R.string.about_copyright, Calendar.getInstance().get(Calendar.YEAR), it.name)
                     viewBinding.developByTextView.text = getString(R.string.about_develop_by, it.name)

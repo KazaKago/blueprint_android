@@ -1,11 +1,11 @@
 package com.kazakago.blueprint.data.repository.flowable
 
 import com.kazakago.blueprint.data.api.hierarchy.GithubService
-import com.kazakago.blueprint.data.mapper.hierarchy.response.github.GithubRepoResponseMapper
-import com.kazakago.blueprint.data.memory.entity.GithubRepoEntity
-import com.kazakago.blueprint.data.memory.hierarchy.GithubCache
-import com.kazakago.blueprint.data.memory.hierarchy.GithubReposStateManager
-import com.kazakago.blueprint.domain.model.github.GithubOrgName
+import com.kazakago.blueprint.data.mapper.response.github.GithubRepoResponseMapper
+import com.kazakago.blueprint.data.cache.entity.GithubRepoEntity
+import com.kazakago.blueprint.data.cache.hierarchy.GithubCache
+import com.kazakago.blueprint.data.cache.hierarchy.GithubReposStateManager
+import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrgName
 import com.kazakago.storeflowable.FetchingResult
 import com.kazakago.storeflowable.pagination.PaginatingStoreFlowableResponder
 import java.time.Duration

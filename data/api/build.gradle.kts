@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     kotlin("android")
     kotlin("kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -44,8 +45,9 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     // Kotlin
     implementation(kotlin("stdlib-jdk8"))
-    // Koin
-    implementation("org.koin:koin-core:2.2.2")
+    // Dagger Hilt
+    implementation("com.google.dagger:hilt-android:2.34.1-beta")
+    kapt("com.google.dagger:hilt-compiler:2.34.1-beta")
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")

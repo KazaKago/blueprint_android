@@ -1,23 +1,24 @@
 package com.kazakago.blueprint.data.repository.hierarchy
 
 import com.kazakago.blueprint.data.api.hierarchy.GithubService
-import com.kazakago.blueprint.data.mapper.hierarchy.entity.github.GithubOrgEntityMapper
-import com.kazakago.blueprint.data.mapper.hierarchy.entity.github.GithubRepoEntityMapper
-import com.kazakago.blueprint.data.mapper.hierarchy.response.github.GithubOrgResponseMapper
-import com.kazakago.blueprint.data.mapper.hierarchy.response.github.GithubRepoResponseMapper
-import com.kazakago.blueprint.data.memory.hierarchy.GithubCache
+import com.kazakago.blueprint.data.mapper.entity.github.GithubOrgEntityMapper
+import com.kazakago.blueprint.data.mapper.entity.github.GithubRepoEntityMapper
+import com.kazakago.blueprint.data.mapper.response.github.GithubOrgResponseMapper
+import com.kazakago.blueprint.data.mapper.response.github.GithubRepoResponseMapper
+import com.kazakago.blueprint.data.cache.hierarchy.GithubCache
 import com.kazakago.blueprint.data.repository.flowable.GithubOrgsResponder
 import com.kazakago.blueprint.data.repository.flowable.GithubReposResponder
-import com.kazakago.blueprint.domain.model.github.GithubOrg
-import com.kazakago.blueprint.domain.model.github.GithubOrgName
-import com.kazakago.blueprint.domain.model.github.GithubRepo
-import com.kazakago.blueprint.domain.repository.GithubRepository
+import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrg
+import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrgName
+import com.kazakago.blueprint.domain.model.hierarchy.github.GithubRepo
+import com.kazakago.blueprint.domain.repository.hierarchy.GithubRepository
 import com.kazakago.storeflowable.core.State
 import com.kazakago.storeflowable.core.mapContent
 import com.kazakago.storeflowable.pagination.create
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-internal class GithubRepositoryImpl(
+class GithubRepositoryImpl @Inject constructor(
     private val githubService: GithubService,
     private val githubCache: GithubCache,
     private val githubOrgResponseMapper: GithubOrgResponseMapper,

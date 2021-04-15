@@ -3,16 +3,19 @@ package com.kazakago.blueprint.presentation.viewmodel.hierarchy.about
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.kazakago.blueprint.domain.model.about.AppInfo
-import com.kazakago.blueprint.domain.model.about.DeveloperInfo
+import com.kazakago.blueprint.domain.model.hierarchy.about.AppInfo
+import com.kazakago.blueprint.domain.model.hierarchy.about.DeveloperInfo
 import com.kazakago.blueprint.domain.usecase.hierarchy.about.GetAboutUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AboutViewModel(
+@HiltViewModel
+class AboutViewModel @Inject constructor(
     application: Application,
-    private val getAboutUseCase: GetAboutUseCase
+    private val getAboutUseCase: GetAboutUseCase,
 ) : AndroidViewModel(application) {
 
     private val _appInfo = MutableStateFlow<AppInfo?>(null)

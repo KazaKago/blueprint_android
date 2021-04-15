@@ -1,7 +1,7 @@
 package com.kazakago.blueprint.presentation.view.hierarchy.github
 
 import android.view.View
-import com.kazakago.blueprint.domain.model.github.GithubRepo
+import com.kazakago.blueprint.domain.model.hierarchy.github.GithubRepo
 import com.kazakago.blueprint.presentation.view.R
 import com.kazakago.blueprint.presentation.view.databinding.ItemGithubRepoBinding
 import com.xwray.groupie.viewbinding.BindableItem

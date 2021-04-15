@@ -1,6 +1,6 @@
 package com.kazakago.blueprint.domain.usecase.hierarchy.github
 
-import com.kazakago.blueprint.domain.model.github.GithubOrgName
+import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrgName
 
 interface RequestAdditionalGithubReposUseCase {
 

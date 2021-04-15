@@ -1,6 +1,8 @@
 plugins {
     id("com.android.library")
     kotlin("android")
+    kotlin("kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -49,8 +51,9 @@ dependencies {
     implementation(project(":domain:model"))
     // Kotlin
     implementation(kotlin("stdlib-jdk8"))
-    // Koin
-    implementation("org.koin:koin-androidx-viewmodel:2.2.2")
+    // Dagger Hilt
+    implementation("com.google.dagger:hilt-android:2.34.1-beta")
+    kapt("com.google.dagger:hilt-compiler:2.34.1-beta")
     // AndroidX AppCompat
     implementation("androidx.appcompat:appcompat:1.2.0")
     // AndroidX Activity

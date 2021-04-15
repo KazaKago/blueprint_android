@@ -3,9 +3,12 @@ package com.kazakago.blueprint.data.api.global
 import com.squareup.moshi.Moshi
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import javax.inject.Inject
+import javax.inject.Singleton
 import kotlin.reflect.KClass
 
-internal class ApiRequester {
+@Singleton
+class ApiRequester @Inject constructor() {
 
     private val retrofit: Retrofit
 

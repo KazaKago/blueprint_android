@@ -1,15 +1,16 @@
 package com.kazakago.blueprint.data.repository.hierarchy
 
-import com.kazakago.blueprint.data.mapper.hierarchy.entity.about.AppInfoEntityMapper
-import com.kazakago.blueprint.data.mapper.hierarchy.entity.about.DeveloperInfoEntityMapper
+import com.kazakago.blueprint.data.mapper.entity.about.AppInfoEntityMapper
+import com.kazakago.blueprint.data.mapper.entity.about.DeveloperInfoEntityMapper
 import com.kazakago.blueprint.data.resource.hierarchy.about.DeveloperInfoDao
 import com.kazakago.blueprint.data.resource.hierarchy.device.StoreDao
 import com.kazakago.blueprint.data.resource.hierarchy.device.VersionDao
-import com.kazakago.blueprint.domain.model.about.AppInfo
-import com.kazakago.blueprint.domain.model.about.DeveloperInfo
-import com.kazakago.blueprint.domain.repository.AboutRepository
+import com.kazakago.blueprint.domain.model.hierarchy.about.AppInfo
+import com.kazakago.blueprint.domain.model.hierarchy.about.DeveloperInfo
+import com.kazakago.blueprint.domain.repository.hierarchy.AboutRepository
+import javax.inject.Inject
 
-internal class AboutRepositoryImpl(
+class AboutRepositoryImpl @Inject constructor(
     private val versionDao: VersionDao,
     private val storeDao: StoreDao,
     private val developerInfoDao: DeveloperInfoDao,

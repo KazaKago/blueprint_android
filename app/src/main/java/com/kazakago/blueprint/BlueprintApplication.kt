@@ -1,11 +1,7 @@
 package com.kazakago.blueprint
 
 import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 
-class BlueprintApplication : Application() {
-
-    override fun onCreate() {
-        super.onCreate()
-        initializeKoin()
-    }
-}
+@HiltAndroidApp
+class BlueprintApplication : Application()

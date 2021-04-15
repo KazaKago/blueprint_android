@@ -2,22 +2,30 @@ package com.kazakago.blueprint.presentation.viewmodel.hierarchy.github
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kazakago.blueprint.domain.model.github.GithubOrgName
-import com.kazakago.blueprint.domain.model.github.GithubRepo
+import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrgName
+import com.kazakago.blueprint.domain.model.hierarchy.github.GithubRepo
 import com.kazakago.blueprint.domain.usecase.hierarchy.github.FollowGithubReposUseCase
 import com.kazakago.blueprint.domain.usecase.hierarchy.github.RefreshGithubReposUseCase
 import com.kazakago.blueprint.domain.usecase.hierarchy.github.RequestAdditionalGithubReposUseCase
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class GithubReposViewModel(
+class GithubReposViewModel @AssistedInject constructor(
     private val followGithubReposUseCase: FollowGithubReposUseCase,
     private val refreshGithubReposUseCase: RefreshGithubReposUseCase,
     private val requestAdditionalGithubReposUseCase: RequestAdditionalGithubReposUseCase,
-    private val githubOrgName: GithubOrgName,
+    @Assisted private val githubOrgName: GithubOrgName,
 ) : ViewModel() {
+
+    @AssistedFactory
+    interface Factory {
+        fun create(githubOrgName: GithubOrgName): GithubReposViewModel
+    }
 
     private val _githubRepos = MutableStateFlow<List<GithubRepo>>(emptyList())
     val githubRepos get() = _githubRepos.asStateFlow()

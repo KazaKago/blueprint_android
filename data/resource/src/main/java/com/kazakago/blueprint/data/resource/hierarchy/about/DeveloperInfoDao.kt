@@ -2,10 +2,14 @@ package com.kazakago.blueprint.data.resource.hierarchy.about
 
 import android.content.Context
 import com.kazakago.blueprint.data.resource.R
+import dagger.hilt.android.qualifiers.ApplicationContext
 import java.net.URI
 import java.net.URL
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class DeveloperInfoDao(private val context: Context) {
+@Singleton
+class DeveloperInfoDao @Inject constructor(@ApplicationContext private val context: Context) {
 
     fun getName(): String {
         return context.getString(R.string.developer_name)

@@ -9,8 +9,8 @@ import androidx.activity.result.contract.ActivityResultContract
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
-import com.kazakago.blueprint.domain.model.github.GithubOrgName
-import com.kazakago.blueprint.domain.model.github.GithubRepo
+import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrgName
+import com.kazakago.blueprint.domain.model.hierarchy.github.GithubRepo
 import com.kazakago.blueprint.presentation.view.databinding.ActivityGithubReposBinding
 import com.kazakago.blueprint.presentation.view.global.view.ErrorItem
 import com.kazakago.blueprint.presentation.view.global.view.LoadingItem
@@ -18,11 +18,12 @@ import com.kazakago.blueprint.presentation.view.global.view.addOnBottomReached
 import com.kazakago.blueprint.presentation.viewmodel.hierarchy.github.GithubReposViewModel
 import com.xwray.groupie.Group
 import com.xwray.groupie.GroupieAdapter
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class GithubReposActivity : AppCompatActivity() {
 
     class Contract : ActivityResultContract<GithubOrgName, ActivityResult>() {
@@ -39,10 +40,13 @@ class GithubReposActivity : AppCompatActivity() {
 
     private val viewBinding by lazy { ActivityGithubReposBinding.inflate(layoutInflater) }
     private val githubReposAdapter = GroupieAdapter()
-    private val githubReposViewModel by viewModel<GithubReposViewModel> {
+    private val githubReposViewModel: GithubReposViewModel by lazy {
         val githubOrgName = intent.getSerializableExtra(ParameterKey.GITHUB_ORG_ID.name) as GithubOrgName
-        parametersOf(githubOrgName)
+        githubReposViewModelFactory.create(githubOrgName)
     }
+
+    @Inject
+    lateinit var githubReposViewModelFactory: GithubReposViewModel.Factory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

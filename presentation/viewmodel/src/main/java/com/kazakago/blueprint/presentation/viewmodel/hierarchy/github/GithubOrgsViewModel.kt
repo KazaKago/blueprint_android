@@ -2,16 +2,19 @@ package com.kazakago.blueprint.presentation.viewmodel.hierarchy.github
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kazakago.blueprint.domain.model.github.GithubOrg
+import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrg
 import com.kazakago.blueprint.domain.usecase.hierarchy.github.FollowGithubOrgsUseCase
 import com.kazakago.blueprint.domain.usecase.hierarchy.github.RefreshGithubOrgsUseCase
 import com.kazakago.blueprint.domain.usecase.hierarchy.github.RequestAdditionalGithubOrgsUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class GithubOrgsViewModel(
+@HiltViewModel
+class GithubOrgsViewModel @Inject constructor(
     private val followGithubOrgsUseCase: FollowGithubOrgsUseCase,
     private val refreshGithubOrgsUseCase: RefreshGithubOrgsUseCase,
     private val requestAdditionalGithubOrgsUseCase: RequestAdditionalGithubOrgsUseCase,
