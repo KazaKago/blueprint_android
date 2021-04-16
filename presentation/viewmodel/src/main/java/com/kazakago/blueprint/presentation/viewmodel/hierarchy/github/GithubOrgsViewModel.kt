@@ -21,17 +21,17 @@ class GithubOrgsViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _githubOrgs = MutableStateFlow<List<GithubOrg>>(emptyList())
-    val githubOrgs get() = _githubOrgs.asStateFlow()
+    val githubOrgs = _githubOrgs.asStateFlow()
     private val _isMainLoading = MutableStateFlow(false)
     val isMainLoading = _isMainLoading.asStateFlow()
     private val _isAdditionalLoading = MutableStateFlow(false)
     val isAdditionalLoading = _isAdditionalLoading.asStateFlow()
     private val _isRefreshing = MutableStateFlow(false)
-    val isRefreshing get() = _isRefreshing.asStateFlow()
+    val isRefreshing = _isRefreshing.asStateFlow()
     private val _mainError = MutableStateFlow<Exception?>(null)
-    val mainError get() = _mainError.asStateFlow()
+    val mainError = _mainError.asStateFlow()
     private val _additionalError = MutableStateFlow<Exception?>(null)
-    val additionalError get() = _additionalError.asStateFlow()
+    val additionalError = _additionalError.asStateFlow()
 
     init {
         viewModelScope.launch { followOrgs() }

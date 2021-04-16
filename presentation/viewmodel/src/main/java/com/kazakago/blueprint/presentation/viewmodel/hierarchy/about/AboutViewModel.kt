@@ -19,9 +19,9 @@ class AboutViewModel @Inject constructor(
 ) : AndroidViewModel(application) {
 
     private val _appInfo = MutableStateFlow<AppInfo?>(null)
-    val appInfo get() = _appInfo.asStateFlow()
+    val appInfo = _appInfo.asStateFlow()
     private val _developerInfo = MutableStateFlow<DeveloperInfo?>(null)
-    val developerInfo get() = _developerInfo.asStateFlow()
+    val developerInfo = _developerInfo.asStateFlow()
 
     init {
         viewModelScope.launch { loadAboutInfo() }

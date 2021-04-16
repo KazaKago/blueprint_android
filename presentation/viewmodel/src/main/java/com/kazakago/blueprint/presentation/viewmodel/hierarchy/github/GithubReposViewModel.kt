@@ -38,15 +38,15 @@ class GithubReposViewModel @AssistedInject constructor(
     }
 
     private val _githubRepos = MutableStateFlow<List<GithubRepo>>(emptyList())
-    val githubRepos get() = _githubRepos.asStateFlow()
+    val githubRepos = _githubRepos.asStateFlow()
     private val _isMainLoading = MutableStateFlow(false)
-    val isMainLoading get() = _isMainLoading.asStateFlow()
+    val isMainLoading = _isMainLoading.asStateFlow()
     private val _isAdditionalLoading = MutableStateFlow(false)
-    val isAdditionalLoading get() = _isAdditionalLoading.asStateFlow()
+    val isAdditionalLoading = _isAdditionalLoading.asStateFlow()
     private val _isRefreshing = MutableStateFlow(false)
-    val isRefreshing get() = _isRefreshing.asStateFlow()
+    val isRefreshing = _isRefreshing.asStateFlow()
     private val _mainError = MutableStateFlow<Exception?>(null)
-    val mainError get() = _mainError.asStateFlow()
+    val mainError = _mainError.asStateFlow()
     private val _additionalError = MutableStateFlow<Exception?>(null)
     val additionalError = _additionalError.asStateFlow()
 
