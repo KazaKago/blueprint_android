@@ -1,8 +1,12 @@
 package com.kazakago.blueprint.presentation.view.hierarchy.github
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -24,6 +28,11 @@ import kotlinx.coroutines.flow.combine
 
 @AndroidEntryPoint
 class GithubOrgsActivity : AppCompatActivity() {
+
+    class Contract : ActivityResultContract<Unit, ActivityResult>() {
+        override fun createIntent(context: Context, input: Unit) = Intent(context, GithubOrgsActivity::class.java)
+        override fun parseResult(resultCode: Int, intent: Intent?) = ActivityResult(resultCode, intent)
+    }
 
     private val viewBinding by lazy { ActivityGithubOrgsBinding.inflate(layoutInflater) }
     private val githubOrgsAdapter = GroupieAdapter()
