@@ -4,7 +4,7 @@ import com.kazakago.blueprint.domain.repository.hierarchy.AboutRepository
 import com.kazakago.blueprint.domain.usecase.output.about.AboutOutput
 import javax.inject.Inject
 
-class GetAboutUseCaseImpl @Inject constructor(
+internal class GetAboutUseCaseImpl @Inject constructor(
     private val aboutRepository: AboutRepository,
 ) : GetAboutUseCase {
 

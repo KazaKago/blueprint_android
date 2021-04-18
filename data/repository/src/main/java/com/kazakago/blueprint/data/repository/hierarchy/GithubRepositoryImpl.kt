@@ -17,7 +17,7 @@ import com.kazakago.storeflowable.core.mapContent
 import com.kazakago.storeflowable.pagination.create
 import javax.inject.Inject
 
-class GithubRepositoryImpl @Inject constructor(
+internal class GithubRepositoryImpl @Inject constructor(
     private val githubService: GithubService,
     private val githubCache: GithubCache,
     private val githubOrgResponseMapper: GithubOrgResponseMapper,

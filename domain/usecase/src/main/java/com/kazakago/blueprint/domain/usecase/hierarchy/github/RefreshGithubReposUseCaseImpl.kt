@@ -4,7 +4,7 @@ import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrgName
 import com.kazakago.blueprint.domain.repository.hierarchy.GithubRepository
 import javax.inject.Inject
 
-class RefreshGithubReposUseCaseImpl @Inject constructor(
+internal class RefreshGithubReposUseCaseImpl @Inject constructor(
     private val githubRepository: GithubRepository,
 ) : RefreshGithubReposUseCase {
 

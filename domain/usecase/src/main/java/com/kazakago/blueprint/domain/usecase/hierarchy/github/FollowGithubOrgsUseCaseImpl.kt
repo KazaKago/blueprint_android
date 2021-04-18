@@ -5,7 +5,7 @@ import com.kazakago.blueprint.domain.repository.hierarchy.GithubRepository
 import com.kazakago.storeflowable.core.FlowableState
 import javax.inject.Inject
 
-class FollowGithubOrgsUseCaseImpl @Inject constructor(
+internal class FollowGithubOrgsUseCaseImpl @Inject constructor(
     private val githubRepository: GithubRepository,
 ) : FollowGithubOrgsUseCase {
 

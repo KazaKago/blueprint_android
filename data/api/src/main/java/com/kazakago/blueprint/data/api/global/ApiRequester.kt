@@ -8,7 +8,7 @@ import javax.inject.Singleton
 import kotlin.reflect.KClass
 
 @Singleton
-class ApiRequester @Inject constructor() {
+internal class ApiRequester @Inject constructor() {
 
     private val retrofit: Retrofit
 

@@ -10,7 +10,7 @@ import com.kazakago.blueprint.domain.model.hierarchy.about.DeveloperInfo
 import com.kazakago.blueprint.domain.repository.hierarchy.AboutRepository
 import javax.inject.Inject
 
-class AboutRepositoryImpl @Inject constructor(
+internal class AboutRepositoryImpl @Inject constructor(
     private val versionDao: VersionDao,
     private val storeDao: StoreDao,
     private val developerInfoDao: DeveloperInfoDao,
