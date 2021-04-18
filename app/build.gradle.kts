@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    compileSdkVersion(30)
+    compileSdk = 30
     defaultConfig {
         applicationId = "com.kazakago.blueprint"
-        minSdkVersion(26)
-        targetSdkVersion(30)
+        minSdk = 26
+        targetSdk = 30
         versionCode = 1
         versionName = "1.0.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
