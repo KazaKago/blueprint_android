@@ -58,7 +58,7 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.34.1-beta")
     kapt("com.google.dagger:hilt-compiler:2.34.1-beta")
     // StoreFlowable.kt
-    implementation("com.github.kazakago.storeflowable:storeflowable:release~3.2.0-SNAPSHOT")
+    implementation("com.github.kazakago.storeflowable:storeflowable:3713375")
 
     // desugar_jdk_libs
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")

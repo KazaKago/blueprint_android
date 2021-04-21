@@ -27,7 +27,7 @@ dependencies {
     implementation("com.google.dagger:hilt-core:2.34.1-beta")
     kapt("com.google.dagger:hilt-compiler:2.34.1-beta")
     // StoreFlowable.kt
-    implementation("com.github.kazakago.storeflowable:storeflowable-core:release~3.2.0-SNAPSHOT")
+    implementation("com.github.kazakago.storeflowable:storeflowable-core:3713375")
 
     // JUnit
     testImplementation("junit:junit:4.13.2")
