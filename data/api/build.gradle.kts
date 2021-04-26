@@ -46,8 +46,8 @@ dependencies {
     // Kotlin
     implementation(kotlin("stdlib-jdk8"))
     // Dagger Hilt
-    implementation("com.google.dagger:hilt-android:2.34.1-beta")
-    kapt("com.google.dagger:hilt-compiler:2.34.1-beta")
+    implementation("com.google.dagger:hilt-android:2.35")
+    kapt("com.google.dagger:hilt-compiler:2.35")
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
