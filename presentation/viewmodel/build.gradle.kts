@@ -51,8 +51,8 @@ dependencies {
     // kotlinx.coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
     // Dagger Hilt
-    implementation("com.google.dagger:hilt-android:2.35")
-    kapt("com.google.dagger:hilt-compiler:2.35")
+    implementation("com.google.dagger:hilt-android:2.35.1")
+    kapt("com.google.dagger:hilt-compiler:2.35.1")
     // AndroidX Lifecycle
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
     implementation("androidx.lifecycle:lifecycle-common-java8:2.3.1")

@@ -70,8 +70,8 @@ dependencies {
     // Kotlin
     implementation(kotlin("stdlib-jdk8"))
     // Dagger Hilt
-    implementation("com.google.dagger:hilt-android:2.35")
-    kapt("com.google.dagger:hilt-compiler:2.35")
+    implementation("com.google.dagger:hilt-android:2.35.1")
+    kapt("com.google.dagger:hilt-compiler:2.35.1")
     // AndroidX AppCompat
     implementation("androidx.appcompat:appcompat:1.2.0")
 
