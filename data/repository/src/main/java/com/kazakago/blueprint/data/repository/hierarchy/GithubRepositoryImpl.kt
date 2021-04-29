@@ -14,7 +14,7 @@ import com.kazakago.blueprint.domain.model.hierarchy.github.GithubRepo
 import com.kazakago.blueprint.domain.repository.hierarchy.GithubRepository
 import com.kazakago.storeflowable.core.FlowableState
 import com.kazakago.storeflowable.core.mapContent
-import com.kazakago.storeflowable.pagination.create
+import com.kazakago.storeflowable.create
 import javax.inject.Inject
 
 internal class GithubRepositoryImpl @Inject constructor(

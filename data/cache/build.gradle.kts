@@ -19,10 +19,10 @@ dependencies {
     // Kotlin
     implementation(kotlin("stdlib-jdk8"))
     // Dagger Hilt
-    implementation("com.google.dagger:hilt-core:2.35")
-    kapt("com.google.dagger:hilt-compiler:2.35")
+    implementation("com.google.dagger:hilt-core:2.35.1")
+    kapt("com.google.dagger:hilt-compiler:2.35.1")
     // StoreFlowable.kt
-    implementation("com.github.kazakago.storeflowable:storeflowable:3713375")
+    implementation("com.kazakago.storeflowable:storeflowable:3.2.0")
 
     // JUnit
     testImplementation("junit:junit:4.13.2")
