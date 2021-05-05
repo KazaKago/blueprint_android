@@ -50,7 +50,7 @@ dependencies {
     implementation(project(":data:resource"))
     // Kotlin
     implementation(kotlin("stdlib-jdk8"))
-    // Dagger Hilt
+    // Dagger
     implementation("com.google.dagger:hilt-android:2.35.1")
     kapt("com.google.dagger:hilt-compiler:2.35.1")
 

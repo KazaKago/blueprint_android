@@ -11,6 +11,14 @@
       <entry name="!?*.kt" />
       <entry name="!?*.clj" />
     </wildcardResourcePatterns>
-    <bytecodeTargetLevel target="1.8" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="blueprint.app" target="11" />
+      <module name="blueprint.data.api" target="11" />
+      <module name="blueprint.data.mapper" target="11" />
+      <module name="blueprint.data.repository" target="11" />
+      <module name="blueprint.data.resource" target="11" />
+      <module name="blueprint.presentation.view" target="11" />
+      <module name="blueprint.presentation.viewmodel" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>

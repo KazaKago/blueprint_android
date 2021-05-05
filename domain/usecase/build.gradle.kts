@@ -22,8 +22,8 @@ dependencies {
     // Kotlin
     implementation(kotlin("stdlib-jdk8"))
     // kotlinx.coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
-    // Dagger Hilt
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0-RC")
+    // Dagger
     implementation("com.google.dagger:hilt-core:2.35.1")
     kapt("com.google.dagger:hilt-compiler:2.35.1")
     // StoreFlowable.kt
