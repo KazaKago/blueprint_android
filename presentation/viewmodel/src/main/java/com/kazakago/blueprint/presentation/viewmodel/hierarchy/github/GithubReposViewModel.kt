@@ -20,7 +20,7 @@ class GithubReposViewModel @AssistedInject constructor(
     private val followGithubReposUseCase: FollowGithubReposUseCase,
     private val refreshGithubReposUseCase: RefreshGithubReposUseCase,
     private val requestAdditionalGithubReposUseCase: RequestAdditionalGithubReposUseCase,
-    @Assisted private val githubOrgName: GithubOrgName,
+    @Assisted githubOrgName: GithubOrgName,
 ) : ViewModel() {
 
     companion object {
@@ -37,6 +37,8 @@ class GithubReposViewModel @AssistedInject constructor(
         fun create(githubOrgName: GithubOrgName): GithubReposViewModel
     }
 
+    private val _githubOrgName = MutableStateFlow(githubOrgName)
+    val githubOrgName = _githubOrgName.asStateFlow()
     private val _githubRepos = MutableStateFlow<List<GithubRepo>>(emptyList())
     val githubRepos = _githubRepos.asStateFlow()
     private val _isMainLoading = MutableStateFlow(false)
@@ -57,31 +59,31 @@ class GithubReposViewModel @AssistedInject constructor(
     fun refresh() {
         viewModelScope.launch {
             _isRefreshing.value = true
-            refreshGithubReposUseCase(githubOrgName)
+            refreshGithubReposUseCase(githubOrgName.value)
             _isRefreshing.value = false
         }
     }
 
     fun retry() {
         viewModelScope.launch {
-            refreshGithubReposUseCase(githubOrgName)
+            refreshGithubReposUseCase(githubOrgName.value)
         }
     }
 
     fun requestAdditional() {
         viewModelScope.launch {
-            requestAdditionalGithubReposUseCase(githubOrgName, continueWhenError = false)
+            requestAdditionalGithubReposUseCase(githubOrgName.value, continueWhenError = false)
         }
     }
 
     fun retryAdditional() {
         viewModelScope.launch {
-            requestAdditionalGithubReposUseCase(githubOrgName, continueWhenError = true)
+            requestAdditionalGithubReposUseCase(githubOrgName.value, continueWhenError = true)
         }
     }
 
     private suspend fun followGithubRepos() {
-        followGithubReposUseCase(githubOrgName).collect {
+        followGithubReposUseCase(githubOrgName.value).collect {
             it.doAction(
                 onFixed = {
                     it.content.doAction(

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.viewModels
@@ -53,6 +54,7 @@ class GithubReposActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(viewBinding.root)
         setSupportActionBar(viewBinding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         viewBinding.githubReposRecyclerView.adapter = githubReposAdapter
         viewBinding.githubReposRecyclerView.addOnBottomReached {
@@ -65,6 +67,11 @@ class GithubReposActivity : AppCompatActivity() {
             githubReposViewModel.retry()
         }
 
+        lifecycleScope.launchWhenStarted {
+            githubReposViewModel.githubOrgName.collect {
+                supportActionBar?.title = it.value
+            }
+        }
         lifecycleScope.launchWhenStarted {
             combine(githubReposViewModel.githubRepos, githubReposViewModel.isAdditionalLoading, githubReposViewModel.additionalError) { a, b, c -> Triple(a, b, c) }.collect {
                 val items: List<Group> = mutableListOf<Group>().apply {
@@ -91,6 +98,16 @@ class GithubReposActivity : AppCompatActivity() {
                 viewBinding.swipeRefreshLayout.isRefreshing = it
             }
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun createGithubRepoItems(githubRepos: List<GithubRepo>): List<GithubRepoItem> {

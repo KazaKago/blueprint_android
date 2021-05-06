@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.viewModels
@@ -32,6 +33,7 @@ class AboutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(viewBinding.root)
         setSupportActionBar(viewBinding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         viewBinding.playStoreLayout.setOnClickListener {
             aboutViewModel.appInfo.value?.let { openActionView(Uri.parse(it.playStoreUri.toString())) }
@@ -59,6 +61,16 @@ class AboutActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun openActionView(uri: Uri) {
