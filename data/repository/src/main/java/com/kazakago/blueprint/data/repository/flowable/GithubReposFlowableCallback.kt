@@ -15,7 +15,7 @@ internal class GithubReposFlowableCallback(
     private val githubService: GithubService,
     private val githubCache: GithubCache,
     private val githubRepoResponseMapper: GithubRepoResponseMapper,
-    private val githubOrgName: GithubOrgName,
+    githubOrgName: GithubOrgName,
 ) : PaginatingStoreFlowableCallback<String, List<GithubRepoEntity>> {
 
     companion object {
@@ -28,12 +28,12 @@ internal class GithubReposFlowableCallback(
     override val key = githubOrgName.value
 
     override suspend fun loadDataFromCache(): List<GithubRepoEntity>? {
-        return githubCache.reposCache[githubOrgName.value]
+        return githubCache.reposCache[key]
     }
 
     override suspend fun saveDataToCache(newData: List<GithubRepoEntity>?) {
-        githubCache.reposCache[githubOrgName.value] = newData
-        githubCache.reposCacheCreatedAt[githubOrgName.value] = LocalDateTime.now()
+        githubCache.reposCache[key] = newData
+        githubCache.reposCacheCreatedAt[key] = LocalDateTime.now()
     }
 
     override suspend fun saveAdditionalDataToCache(cachedData: List<GithubRepoEntity>?, newData: List<GithubRepoEntity>) {
@@ -41,14 +41,14 @@ internal class GithubReposFlowableCallback(
     }
 
     override suspend fun fetchDataFromOrigin(): FetchingResult<List<GithubRepoEntity>> {
-        val response = githubService.getRepos(githubOrgName.value, 1, PER_PAGE)
+        val response = githubService.getRepos(key, 1, PER_PAGE)
         val data = response.map { githubRepoResponseMapper.map(it) }
         return FetchingResult(data = data, noMoreAdditionalData = data.isEmpty())
     }
 
     override suspend fun fetchAdditionalDataFromOrigin(cachedData: List<GithubRepoEntity>?): FetchingResult<List<GithubRepoEntity>> {
         val page = ((cachedData?.size ?: 0) / PER_PAGE + 1)
-        val response = githubService.getRepos(githubOrgName.value, page, PER_PAGE)
+        val response = githubService.getRepos(key, page, PER_PAGE)
         val data = response.map { githubRepoResponseMapper.map(it) }
         return FetchingResult(data = data, noMoreAdditionalData = data.isEmpty())
     }
