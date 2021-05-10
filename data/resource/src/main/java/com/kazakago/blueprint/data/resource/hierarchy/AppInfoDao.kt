@@ -1,4 +1,4 @@
-package com.kazakago.blueprint.data.resource.hierarchy.device
+package com.kazakago.blueprint.data.resource.hierarchy
 
 import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext

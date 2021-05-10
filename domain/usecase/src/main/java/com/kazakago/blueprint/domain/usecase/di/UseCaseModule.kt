@@ -1,7 +1,7 @@
 package com.kazakago.blueprint.domain.usecase.di
 
-import com.kazakago.blueprint.domain.usecase.hierarchy.about.GetAboutUseCase
-import com.kazakago.blueprint.domain.usecase.hierarchy.about.GetAboutUseCaseImpl
+import com.kazakago.blueprint.domain.usecase.hierarchy.about.GetAboutInfoUseCase
+import com.kazakago.blueprint.domain.usecase.hierarchy.about.GetAboutInfoUseCaseImpl
 import com.kazakago.blueprint.domain.usecase.hierarchy.github.*
 import dagger.Binds
 import dagger.Module
@@ -39,5 +39,5 @@ internal abstract class UseCaseModule {
 
     @Singleton
     @Binds
-    abstract fun bindGetAboutUseCase(getAboutUseCase: GetAboutUseCaseImpl): GetAboutUseCase
+    abstract fun bindGetAboutUseCase(getAboutUseCase: GetAboutInfoUseCaseImpl): GetAboutInfoUseCase
 }

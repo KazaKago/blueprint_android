@@ -1,16 +1,16 @@
 package com.kazakago.blueprint.domain.usecase.hierarchy.about
 
+import com.kazakago.blueprint.domain.model.hierarchy.about.AboutInfo
 import com.kazakago.blueprint.domain.repository.hierarchy.AboutRepository
-import com.kazakago.blueprint.domain.usecase.output.about.AboutOutput
 import javax.inject.Inject
 
-internal class GetAboutUseCaseImpl @Inject constructor(
+internal class GetAboutInfoUseCaseImpl @Inject constructor(
     private val aboutRepository: AboutRepository,
-) : GetAboutUseCase {
+) : GetAboutInfoUseCase {
 
-    override suspend fun invoke(): AboutOutput {
+    override suspend fun invoke(): AboutInfo {
         val appInfo = aboutRepository.getAppInfo()
         val developerInfo = aboutRepository.getDeveloperInfo()
-        return AboutOutput(appInfo, developerInfo)
+        return AboutInfo(appInfo, developerInfo)
     }
 }

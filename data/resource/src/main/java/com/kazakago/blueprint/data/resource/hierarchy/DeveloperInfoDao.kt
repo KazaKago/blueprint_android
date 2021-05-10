@@ -1,4 +1,4 @@
-package com.kazakago.blueprint.data.resource.hierarchy.about
+package com.kazakago.blueprint.data.resource.hierarchy
 
 import android.content.Context
 import com.kazakago.blueprint.data.resource.R

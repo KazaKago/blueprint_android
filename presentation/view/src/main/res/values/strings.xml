@@ -7,7 +7,6 @@
     <string name="about_title">About</string>
     <string name="about_ver">Ver. %1$s (%2$d)</string>
     <string name="about_develop_by">Develop by %1$s</string>
-    <string name="about_play_store">Google Play</string>
     <string name="about_email">Email</string>
     <string name="about_web_site">Website</string>
     <string name="about_copyright">© %1$d %2$s</string>
