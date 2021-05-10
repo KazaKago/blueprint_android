@@ -35,9 +35,6 @@ class AboutActivity : AppCompatActivity() {
         setSupportActionBar(viewBinding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        viewBinding.playStoreLayout.setOnClickListener {
-            aboutViewModel.appInfo.value?.let { openActionView(Uri.parse(it.playStoreUri.toString())) }
-        }
         viewBinding.webSiteLayout.setOnClickListener {
             aboutViewModel.developerInfo.value?.let { openActionView(Uri.parse(it.siteUrl.toString())) }
         }
@@ -50,7 +47,7 @@ class AboutActivity : AppCompatActivity() {
 
         lifecycleScope.launchWhenStarted {
             aboutViewModel.appInfo.collect {
-                if (it != null) viewBinding.versionTextView.text = getString(R.string.about_ver, it.versionName.value)
+                if (it != null) viewBinding.versionTextView.text = getString(R.string.about_ver, it.versionName.value, it.versionCode.value)
             }
         }
         lifecycleScope.launchWhenStarted {

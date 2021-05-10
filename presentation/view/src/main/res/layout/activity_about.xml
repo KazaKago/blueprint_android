@@ -82,7 +82,7 @@
         tools:text="@string/about_develop_by" />
 
     <LinearLayout
-        android:id="@+id/playStoreLayout"
+        android:id="@+id/mailLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -96,38 +96,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/developByTextView">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@null"
-            app:srcCompat="@drawable/ic_googleplay_24dp"
-            app:tint="?attr/colorAccent" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:text="@string/about_play_store"
-            android:textColor="?android:attr/textColorSecondary"
-            android:textSize="@dimen/text_size_medium_small" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/mailLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackground"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingStart="32dp"
-        android:paddingTop="16dp"
-        android:paddingEnd="32dp"
-        android:paddingBottom="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/playStoreLayout">
 
         <ImageView
             android:layout_width="wrap_content"

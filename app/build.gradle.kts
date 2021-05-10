@@ -10,7 +10,7 @@ android {
     compileSdk = 30
     defaultConfig {
         applicationId = "com.kazakago.blueprint"
-        minSdk = 26
+        minSdk = 28
         targetSdk = 30
         versionCode = 1
         versionName = "1.0.0"
