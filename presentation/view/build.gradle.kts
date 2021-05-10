@@ -71,8 +71,8 @@ dependencies {
     // PlayServices OSS Licenses
     implementation("com.google.android.gms:play-services-oss-licenses:17.0.0")
     // Groupie
-    implementation("com.xwray:groupie:2.9.0")
-    implementation("com.xwray:groupie-viewbinding:2.9.0")
+    implementation("com.github.lisawray.groupie:groupie:2.9.0")
+    implementation("com.github.lisawray.groupie:groupie-viewbinding:2.9.0")
     // Coil
     implementation("io.coil-kt:coil:1.2.1")
 
