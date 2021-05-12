@@ -57,7 +57,7 @@ dependencies {
     // AndroidX AppCompat
     implementation("androidx.appcompat:appcompat:1.2.0")
     // AndroidX Activity
-    implementation("androidx.activity:activity-ktx:1.2.2")
+    implementation("androidx.activity:activity-ktx:1.2.3")
     // AndroidX Fragment
     implementation("androidx.fragment:fragment-ktx:1.3.3")
     // AndroidX ConstraintLayout
