@@ -20,7 +20,7 @@ dependencies {
     // Kotlin
     implementation(kotlin("stdlib-jdk8"))
     // kotlinx.coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0-RC")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
     // StoreFlowable.kt
     implementation("com.kazakago.storeflowable:storeflowable-core:3.2.0")
 
