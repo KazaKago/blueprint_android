@@ -55,11 +55,11 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.35.1")
     kapt("com.google.dagger:hilt-compiler:2.35.1")
     // AndroidX AppCompat
-    implementation("androidx.appcompat:appcompat:1.2.0")
+    implementation("androidx.appcompat:appcompat:1.3.0")
     // AndroidX Activity
     implementation("androidx.activity:activity-ktx:1.2.3")
     // AndroidX Fragment
-    implementation("androidx.fragment:fragment-ktx:1.3.3")
+    implementation("androidx.fragment:fragment-ktx:1.3.4")
     // AndroidX ConstraintLayout
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
     // AndroidX RecyclerView
