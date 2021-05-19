@@ -22,7 +22,7 @@ dependencies {
     implementation("com.google.dagger:hilt-core:2.35.1")
     kapt("com.google.dagger:hilt-compiler:2.35.1")
     // StoreFlowable.kt
-    implementation("com.kazakago.storeflowable:storeflowable:3.2.0")
+    implementation("com.kazakago.storeflowable:storeflowable:3.3.0")
 
     // JUnit
     testImplementation("junit:junit:4.13.2")

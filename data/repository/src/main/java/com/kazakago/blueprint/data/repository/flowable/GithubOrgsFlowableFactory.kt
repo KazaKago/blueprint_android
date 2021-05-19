@@ -6,15 +6,15 @@ import com.kazakago.blueprint.data.cache.hierarchy.GithubCache
 import com.kazakago.blueprint.data.cache.hierarchy.GithubOrgsStateManager
 import com.kazakago.blueprint.data.mapper.response.github.GithubOrgResponseMapper
 import com.kazakago.storeflowable.FetchingResult
-import com.kazakago.storeflowable.pagination.PaginatingStoreFlowableCallback
+import com.kazakago.storeflowable.pagination.PaginatingStoreFlowableFactory
 import java.time.Duration
 import java.time.LocalDateTime
 
-internal class GithubOrgsFlowableCallback(
+internal class GithubOrgsFlowableFactory(
     private val githubService: GithubService,
     private val githubCache: GithubCache,
     private val githubOrgResponseMapper: GithubOrgResponseMapper,
-) : PaginatingStoreFlowableCallback<Unit, List<GithubOrgEntity>> {
+) : PaginatingStoreFlowableFactory<Unit, List<GithubOrgEntity>> {
 
     companion object {
         private val EXPIRED_DURATION = Duration.ofMinutes(30)
