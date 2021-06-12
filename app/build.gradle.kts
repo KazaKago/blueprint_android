@@ -53,7 +53,6 @@ android {
 }
 
 dependencies {
-    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     // Module
     implementation(project(":presentation:view"))
     implementation(project(":presentation:viewmodel"))
@@ -65,11 +64,9 @@ dependencies {
     implementation(project(":data:cache"))
     implementation(project(":data:resource"))
     implementation(project(":data:mapper"))
-    // Kotlin
-    implementation(kotlin("stdlib-jdk8"))
     // Dagger
-    implementation("com.google.dagger:hilt-android:2.35.1")
-    kapt("com.google.dagger:hilt-compiler:2.35.1")
+    implementation("com.google.dagger:hilt-android:2.37")
+    kapt("com.google.dagger:hilt-compiler:2.37")
     // AndroidX AppCompat
     implementation("androidx.appcompat:appcompat:1.3.0")
 

@@ -42,17 +42,14 @@ android {
 }
 
 dependencies {
-    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     // Module
     implementation(project(":domain:model"))
     implementation(project(":data:api"))
     implementation(project(":data:cache"))
     implementation(project(":data:resource"))
-    // Kotlin
-    implementation(kotlin("stdlib-jdk8"))
     // Dagger
-    implementation("com.google.dagger:hilt-android:2.35.1")
-    kapt("com.google.dagger:hilt-compiler:2.35.1")
+    implementation("com.google.dagger:hilt-android:2.37")
+    kapt("com.google.dagger:hilt-compiler:2.37")
 
     // desugar_jdk_libs
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")

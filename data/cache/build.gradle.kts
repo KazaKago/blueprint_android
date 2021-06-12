@@ -15,12 +15,9 @@ tasks.withType(KotlinCompile::class).all {
 }
 
 dependencies {
-    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    // Kotlin
-    implementation(kotlin("stdlib-jdk8"))
     // Dagger
-    implementation("com.google.dagger:hilt-core:2.35.1")
-    kapt("com.google.dagger:hilt-compiler:2.35.1")
+    implementation("com.google.dagger:hilt-core:2.37")
+    kapt("com.google.dagger:hilt-compiler:2.37")
     // StoreFlowable.kt
     implementation("com.kazakago.storeflowable:storeflowable:3.3.0")
 

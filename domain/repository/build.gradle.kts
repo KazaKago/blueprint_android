@@ -14,11 +14,8 @@ tasks.withType(KotlinCompile::class).all {
 }
 
 dependencies {
-    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     // Module
     implementation(project(":domain:model"))
-    // Kotlin
-    implementation(kotlin("stdlib-jdk8"))
     // kotlinx.coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
     // StoreFlowable.kt

@@ -14,10 +14,6 @@ tasks.withType(KotlinCompile::class).all {
 }
 
 dependencies {
-    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    // Kotlin
-    implementation(kotlin("stdlib-jdk8"))
-
     // JUnit
     testImplementation("junit:junit:4.13.2")
     // Kluent

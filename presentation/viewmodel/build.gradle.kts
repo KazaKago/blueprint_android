@@ -42,17 +42,14 @@ android {
 }
 
 dependencies {
-    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     // Module
     implementation(project(":domain:usecase"))
     implementation(project(":domain:model"))
-    // Kotlin
-    implementation(kotlin("stdlib-jdk8"))
     // kotlinx.coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
     // Dagger
-    implementation("com.google.dagger:hilt-android:2.35.1")
-    kapt("com.google.dagger:hilt-compiler:2.35.1")
+    implementation("com.google.dagger:hilt-android:2.37")
+    kapt("com.google.dagger:hilt-compiler:2.37")
     // AndroidX Lifecycle
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
     implementation("androidx.lifecycle:lifecycle-common-java8:2.3.1")

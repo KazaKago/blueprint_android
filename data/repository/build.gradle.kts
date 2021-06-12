@@ -42,7 +42,6 @@ android {
 }
 
 dependencies {
-    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     // Module
     implementation(project(":domain:model"))
     implementation(project(":domain:repository"))
@@ -50,13 +49,11 @@ dependencies {
     implementation(project(":data:cache"))
     implementation(project(":data:resource"))
     implementation(project(":data:mapper"))
-    // Kotlin
-    implementation(kotlin("stdlib-jdk8"))
     // kotlinx.coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
     // Dagger
-    implementation("com.google.dagger:hilt-android:2.35.1")
-    kapt("com.google.dagger:hilt-compiler:2.35.1")
+    implementation("com.google.dagger:hilt-android:2.37")
+    kapt("com.google.dagger:hilt-compiler:2.37")
     // StoreFlowable.kt
     implementation("com.kazakago.storeflowable:storeflowable:3.3.0")
 

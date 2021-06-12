@@ -45,15 +45,12 @@ android {
 }
 
 dependencies {
-    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     // Module
     implementation(project(":presentation:viewmodel"))
     implementation(project(":domain:model"))
-    // Kotlin
-    implementation(kotlin("stdlib-jdk8"))
     // Dagger
-    implementation("com.google.dagger:hilt-android:2.35.1")
-    kapt("com.google.dagger:hilt-compiler:2.35.1")
+    implementation("com.google.dagger:hilt-android:2.37")
+    kapt("com.google.dagger:hilt-compiler:2.37")
     // AndroidX AppCompat
     implementation("androidx.appcompat:appcompat:1.3.0")
     // AndroidX Activity
@@ -63,7 +60,7 @@ dependencies {
     // AndroidX ConstraintLayout
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
     // AndroidX RecyclerView
-    implementation("androidx.recyclerview:recyclerview:1.2.0")
+    implementation("androidx.recyclerview:recyclerview:1.2.1")
     // AndroidX SwipeRefreshLayout
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     // Material Components
@@ -74,7 +71,7 @@ dependencies {
     implementation("com.github.lisawray.groupie:groupie:2.9.0")
     implementation("com.github.lisawray.groupie:groupie-viewbinding:2.9.0")
     // Coil
-    implementation("io.coil-kt:coil:1.2.1")
+    implementation("io.coil-kt:coil:1.2.2")
 
     // desugar_jdk_libs
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
