@@ -1,8 +1,9 @@
 package com.kazakago.blueprint.data.api.global
 
-import com.squareup.moshi.Moshi
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.reflect.KClass
@@ -10,16 +11,18 @@ import kotlin.reflect.KClass
 @Singleton
 internal class ApiRequester @Inject constructor() {
 
-    private val retrofit: Retrofit
+    private val baseUrl = "https://api.github.com"
 
-    init {
-        val moshi = Moshi.Builder().build()
-        val moshiConverter = MoshiConverterFactory.create(moshi)
-        retrofit = Retrofit.Builder()
-            .baseUrl("https://api.github.com")
-            .addConverterFactory(moshiConverter)
-            .build()
+    private val serialFormatter = Json {
+        ignoreUnknownKeys = true
     }
+
+    private val contentType = "application/json".toMediaType()
+
+    private val retrofit: Retrofit = Retrofit.Builder()
+        .baseUrl(baseUrl)
+        .addConverterFactory(serialFormatter.asConverterFactory(contentType))
+        .build()
 
     fun <T : Any> create(kClass: KClass<T>): T {
         return retrofit.create(kClass.java)

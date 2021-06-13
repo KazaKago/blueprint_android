@@ -1,12 +1,12 @@
 package com.kazakago.blueprint.data.api.response
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class GithubOrgResponse(
-    @Json(name = "id")
+    @SerialName("id")
     val id: Long,
-    @Json(name = "login")
+    @SerialName("login")
     val name: String,
 )

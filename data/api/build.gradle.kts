@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     kotlin("android")
     kotlin("kapt")
+    kotlin("plugin.serialization")
     id("dagger.hilt.android.plugin")
 }
 
@@ -42,15 +43,17 @@ android {
 }
 
 dependencies {
+    // kotlinx.serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
     // Dagger
     implementation("com.google.dagger:hilt-android:2.37")
     kapt("com.google.dagger:hilt-compiler:2.37")
+    // OkHttp
+    implementation("com.squareup.okhttp3:okhttp:4.9.1")
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
-    // Moshi
-    implementation("com.squareup.moshi:moshi:1.12.0")
-    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.12.0")
+    // Kotlin Serialization Converter
+    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
 
     // desugar_jdk_libs
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
