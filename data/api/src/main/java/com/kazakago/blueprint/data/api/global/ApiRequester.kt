@@ -4,6 +4,7 @@ import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFact
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
+import java.net.URL
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.reflect.KClass
@@ -11,7 +12,7 @@ import kotlin.reflect.KClass
 @Singleton
 internal class ApiRequester @Inject constructor() {
 
-    private val baseUrl = "https://api.github.com"
+    private val baseUrl = URL("https://api.github.com")
 
     private val serialFormatter = Json {
         ignoreUnknownKeys = true

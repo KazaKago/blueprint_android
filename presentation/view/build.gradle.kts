@@ -56,7 +56,7 @@ dependencies {
     // AndroidX Activity
     implementation("androidx.activity:activity-ktx:1.2.3")
     // AndroidX Fragment
-    implementation("androidx.fragment:fragment-ktx:1.3.4")
+    implementation("androidx.fragment:fragment-ktx:1.3.5")
     // AndroidX ConstraintLayout
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
     // AndroidX RecyclerView
