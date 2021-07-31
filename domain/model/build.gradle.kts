@@ -15,8 +15,7 @@ tasks.withType<KotlinCompile> {
 
 dependencies {
     // JUnit
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.2")
+    testImplementation("junit:junit:4.13.2")
     // Kluent
     testImplementation("org.amshove.kluent:kluent:1.68")
     // MockK
