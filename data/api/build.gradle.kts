@@ -44,7 +44,7 @@ android {
 
 dependencies {
     // kotlinx.serialization
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
     // Dagger
     implementation("com.google.dagger:hilt-android:2.38.1")
     kapt("com.google.dagger:hilt-compiler:2.38.1")
