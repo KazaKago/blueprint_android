@@ -14,12 +14,12 @@ android {
         consumerProguardFiles("consumer-rules.pro")
     }
     buildTypes {
-        getByName("release") {
+        release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
-    flavorDimensions("app")
+    flavorDimensions += "app"
     productFlavors {
         create("production") {
             dimension = "app"
@@ -33,11 +33,11 @@ android {
     }
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
     buildFeatures {
         viewBinding = true
@@ -49,14 +49,14 @@ dependencies {
     implementation(project(":presentation:viewmodel"))
     implementation(project(":domain:model"))
     // Dagger
-    implementation("com.google.dagger:hilt-android:2.37")
-    kapt("com.google.dagger:hilt-compiler:2.37")
+    implementation("com.google.dagger:hilt-android:2.38.1")
+    kapt("com.google.dagger:hilt-compiler:2.38.1")
     // AndroidX AppCompat
-    implementation("androidx.appcompat:appcompat:1.3.0")
+    implementation("androidx.appcompat:appcompat:1.3.1")
     // AndroidX Activity
-    implementation("androidx.activity:activity-ktx:1.2.3")
+    implementation("androidx.activity:activity-ktx:1.3.0")
     // AndroidX Fragment
-    implementation("androidx.fragment:fragment-ktx:1.3.5")
+    implementation("androidx.fragment:fragment-ktx:1.3.6")
     // AndroidX ConstraintLayout
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
     // AndroidX RecyclerView
@@ -64,14 +64,14 @@ dependencies {
     // AndroidX SwipeRefreshLayout
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     // Material Components
-    implementation("com.google.android.material:material:1.3.0")
+    implementation("com.google.android.material:material:1.4.0")
     // PlayServices OSS Licenses
     implementation("com.google.android.gms:play-services-oss-licenses:17.0.0")
     // Groupie
     implementation("com.github.lisawray.groupie:groupie:2.9.0")
     implementation("com.github.lisawray.groupie:groupie-viewbinding:2.9.0")
     // Coil
-    implementation("io.coil-kt:coil:1.2.2")
+    implementation("io.coil-kt:coil:1.3.0")
 
     // desugar_jdk_libs
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
@@ -80,6 +80,6 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
 
     // Espresso
-    androidTestImplementation("androidx.test.ext:junit:1.1.2")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
+    androidTestImplementation("androidx.test.ext:junit:1.1.3")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 }

@@ -12,9 +12,9 @@ import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrg
 import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrgName
 import com.kazakago.blueprint.domain.model.hierarchy.github.GithubRepo
 import com.kazakago.blueprint.domain.repository.hierarchy.GithubRepository
-import com.kazakago.storeflowable.core.FlowableState
+import com.kazakago.storeflowable.core.FlowLoadingState
 import com.kazakago.storeflowable.core.mapContent
-import com.kazakago.storeflowable.create
+import com.kazakago.storeflowable.pagination.oneway.create
 import javax.inject.Inject
 
 internal class GithubRepositoryImpl @Inject constructor(
@@ -26,7 +26,7 @@ internal class GithubRepositoryImpl @Inject constructor(
     private val githubRepoEntityMapper: GithubRepoEntityMapper,
 ) : GithubRepository {
 
-    override fun followOrgs(): FlowableState<List<GithubOrg>> {
+    override fun followOrgs(): FlowLoadingState<List<GithubOrg>> {
         val githubOrgsFlowable = GithubOrgsFlowableFactory(githubService, githubCache, githubOrgResponseMapper).create()
         return githubOrgsFlowable.publish().mapContent {
             it.map { githubOrgEntity -> githubOrgEntityMapper.map(githubOrgEntity) }
@@ -40,10 +40,10 @@ internal class GithubRepositoryImpl @Inject constructor(
 
     override suspend fun requestAdditionalOrgs(continueWhenError: Boolean) {
         val githubOrgsFlowable = GithubOrgsFlowableFactory(githubService, githubCache, githubOrgResponseMapper).create()
-        githubOrgsFlowable.requestAdditionalData(continueWhenError = continueWhenError)
+        githubOrgsFlowable.requestNextData(continueWhenError = continueWhenError)
     }
 
-    override fun followRepos(githubOrgName: GithubOrgName): FlowableState<List<GithubRepo>> {
+    override fun followRepos(githubOrgName: GithubOrgName): FlowLoadingState<List<GithubRepo>> {
         val githubReposFlowable = GithubReposFlowableFactory(githubService, githubCache, githubRepoResponseMapper, githubOrgName).create()
         return githubReposFlowable.publish().mapContent {
             it.map { githubRepoEntity -> githubRepoEntityMapper.map(githubRepoEntity) }
@@ -57,6 +57,6 @@ internal class GithubRepositoryImpl @Inject constructor(
 
     override suspend fun requestAdditionalRepos(githubOrgName: GithubOrgName, continueWhenError: Boolean) {
         val githubReposFlowable = GithubReposFlowableFactory(githubService, githubCache, githubRepoResponseMapper, githubOrgName).create()
-        githubReposFlowable.requestAdditionalData(continueWhenError = continueWhenError)
+        githubReposFlowable.requestNextData(continueWhenError = continueWhenError)
     }
 }

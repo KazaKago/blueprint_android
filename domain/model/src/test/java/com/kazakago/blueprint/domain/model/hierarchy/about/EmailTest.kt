@@ -3,18 +3,10 @@ package com.kazakago.blueprint.domain.model.hierarchy.about
 import org.amshove.kluent.invoking
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldThrow
-import org.junit.Before
 import org.junit.Test
 import java.net.URI
 
 class EmailTest {
-
-    private lateinit var email: Email
-
-    @Before
-    fun setUp() {
-        email = Email("kazakago@gmail.com")
-    }
 
     @Test
     fun rejectInvalidEmail1() {

@@ -85,59 +85,43 @@ class GithubReposViewModel @AssistedInject constructor(
     private suspend fun followGithubRepos() {
         followGithubReposUseCase(githubOrgName.value).collect {
             it.doAction(
-                onFixed = {
-                    it.content.doAction(
-                        onExist = { githubRepos ->
-                            _githubRepos.value = githubRepos
-                            _isMainLoading.value = false
+                onLoading = { githubRepos ->
+                    if (githubRepos != null) {
+                        _githubRepos.value = githubRepos
+                        _isMainLoading.value = false
+                    } else {
+                        _githubRepos.value = emptyList()
+                        _isMainLoading.value = true
+                    }
+                    _isAdditionalLoading.value = false
+                    _mainError.value = null
+                    _additionalError.value = null
+                },
+                onCompleted = { githubRepos, next, _ ->
+                    next.doAction(
+                        onFixed = {
                             _isAdditionalLoading.value = false
-                            _mainError.value = null
                             _additionalError.value = null
                         },
-                        onNotExist = {
-                            _githubRepos.value = emptyList()
-                            _isMainLoading.value = true
-                            _isAdditionalLoading.value = false
-                            _mainError.value = null
-                            _additionalError.value = null
-                        }
-                    )
-                },
-                onLoading = {
-                    it.content.doAction(
-                        onExist = { githubRepos ->
-                            _githubRepos.value = githubRepos
-                            _isMainLoading.value = false
+                        onLoading = {
                             _isAdditionalLoading.value = true
-                            _mainError.value = null
                             _additionalError.value = null
                         },
-                        onNotExist = {
-                            _githubRepos.value = emptyList()
-                            _isMainLoading.value = true
+                        onError = { exception ->
                             _isAdditionalLoading.value = false
-                            _mainError.value = null
-                            _additionalError.value = null
-                        }
-                    )
-                },
-                onError = { exception ->
-                    it.content.doAction(
-                        onExist = { githubRepos ->
-                            _githubRepos.value = githubRepos
-                            _isMainLoading.value = false
-                            _isAdditionalLoading.value = false
-                            _mainError.value = null
                             _additionalError.value = exception
                         },
-                        onNotExist = {
-                            _githubRepos.value = emptyList()
-                            _isMainLoading.value = false
-                            _isAdditionalLoading.value = false
-                            _mainError.value = exception
-                            _additionalError.value = null
-                        }
                     )
+                    _githubRepos.value = githubRepos
+                    _isMainLoading.value = false
+                    _mainError.value = null
+                },
+                onError = { exception ->
+                    _githubRepos.value = emptyList()
+                    _isMainLoading.value = false
+                    _isAdditionalLoading.value = false
+                    _mainError.value = exception
+                    _additionalError.value = null
                 }
             )
         }

@@ -6,8 +6,8 @@ import com.kazakago.blueprint.data.cache.hierarchy.GithubCache
 import com.kazakago.blueprint.data.cache.hierarchy.GithubReposStateManager
 import com.kazakago.blueprint.data.mapper.response.github.GithubRepoResponseMapper
 import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrgName
-import com.kazakago.storeflowable.FetchingResult
-import com.kazakago.storeflowable.pagination.PaginatingStoreFlowableFactory
+import com.kazakago.storeflowable.pagination.oneway.Fetched
+import com.kazakago.storeflowable.pagination.oneway.PaginationStoreFlowableFactory
 import java.time.Duration
 import java.time.LocalDateTime
 
@@ -16,7 +16,7 @@ internal class GithubReposFlowableFactory(
     private val githubCache: GithubCache,
     private val githubRepoResponseMapper: GithubRepoResponseMapper,
     githubOrgName: GithubOrgName,
-) : PaginatingStoreFlowableFactory<String, List<GithubRepoEntity>> {
+) : PaginationStoreFlowableFactory<String, List<GithubRepoEntity>> {
 
     companion object {
         private val EXPIRED_DURATION = Duration.ofMinutes(30)
@@ -36,21 +36,27 @@ internal class GithubReposFlowableFactory(
         githubCache.reposCacheCreatedAt[key] = LocalDateTime.now()
     }
 
-    override suspend fun saveAdditionalDataToCache(cachedData: List<GithubRepoEntity>?, newData: List<GithubRepoEntity>) {
-        githubCache.reposCache[key] = (cachedData ?: emptyList()) + newData
+    override suspend fun saveNextDataToCache(cachedData: List<GithubRepoEntity>, newData: List<GithubRepoEntity>) {
+        githubCache.reposCache[key] = cachedData + newData
     }
 
-    override suspend fun fetchDataFromOrigin(): FetchingResult<List<GithubRepoEntity>> {
+    override suspend fun fetchDataFromOrigin(): Fetched<List<GithubRepoEntity>> {
         val response = githubService.getRepos(key, 1, PER_PAGE)
         val data = response.map { githubRepoResponseMapper.map(it) }
-        return FetchingResult(data = data, noMoreAdditionalData = data.isEmpty())
+        return Fetched(
+            data = data,
+            nextKey = if (data.isNotEmpty()) 2.toString() else null,
+        )
     }
 
-    override suspend fun fetchAdditionalDataFromOrigin(cachedData: List<GithubRepoEntity>?): FetchingResult<List<GithubRepoEntity>> {
-        val page = ((cachedData?.size ?: 0) / PER_PAGE + 1)
-        val response = githubService.getRepos(key, page, PER_PAGE)
+    override suspend fun fetchNextDataFromOrigin(nextKey: String): Fetched<List<GithubRepoEntity>> {
+        val nextPage = nextKey.toInt()
+        val response = githubService.getRepos(key, nextPage, PER_PAGE)
         val data = response.map { githubRepoResponseMapper.map(it) }
-        return FetchingResult(data = data, noMoreAdditionalData = data.isEmpty())
+        return Fetched(
+            data = data,
+            nextKey = if (data.isNotEmpty()) (nextPage + 1).toString() else null,
+        )
     }
 
     override suspend fun needRefresh(cachedData: List<GithubRepoEntity>): Boolean {

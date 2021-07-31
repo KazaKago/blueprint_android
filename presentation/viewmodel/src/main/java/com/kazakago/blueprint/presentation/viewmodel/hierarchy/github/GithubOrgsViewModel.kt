@@ -66,59 +66,43 @@ class GithubOrgsViewModel @Inject constructor(
     private suspend fun followOrgs() {
         followGithubOrgsUseCase().collect {
             it.doAction(
-                onFixed = {
-                    it.content.doAction(
-                        onExist = { githubOrgs ->
-                            _githubOrgs.value = githubOrgs
-                            _isMainLoading.value = false
+                onLoading = { githubOrgs ->
+                    if (githubOrgs != null) {
+                        _githubOrgs.value = githubOrgs
+                        _isMainLoading.value = false
+                    } else {
+                        _githubOrgs.value = emptyList()
+                        _isMainLoading.value = true
+                    }
+                    _isAdditionalLoading.value = false
+                    _mainError.value = null
+                    _additionalError.value = null
+                },
+                onCompleted = { githubOrgs, next, _ ->
+                    next.doAction(
+                        onFixed = {
                             _isAdditionalLoading.value = false
-                            _mainError.value = null
                             _additionalError.value = null
                         },
-                        onNotExist = {
-                            _githubOrgs.value = emptyList()
-                            _isMainLoading.value = true
-                            _isAdditionalLoading.value = false
-                            _mainError.value = null
-                            _additionalError.value = null
-                        }
-                    )
-                },
-                onLoading = {
-                    it.content.doAction(
-                        onExist = { githubOrgs ->
-                            _githubOrgs.value = githubOrgs
-                            _isMainLoading.value = false
+                        onLoading = {
                             _isAdditionalLoading.value = true
-                            _mainError.value = null
                             _additionalError.value = null
                         },
-                        onNotExist = {
-                            _githubOrgs.value = emptyList()
-                            _isMainLoading.value = true
+                        onError = { exception ->
                             _isAdditionalLoading.value = false
-                            _mainError.value = null
-                            _additionalError.value = null
-                        }
-                    )
-                },
-                onError = { exception ->
-                    it.content.doAction(
-                        onExist = { githubOrgs ->
-                            _githubOrgs.value = githubOrgs
-                            _isMainLoading.value = false
-                            _isAdditionalLoading.value = false
-                            _mainError.value = null
                             _additionalError.value = exception
                         },
-                        onNotExist = {
-                            _githubOrgs.value = emptyList()
-                            _isMainLoading.value = false
-                            _isAdditionalLoading.value = false
-                            _mainError.value = exception
-                            _additionalError.value = null
-                        }
                     )
+                    _githubOrgs.value = githubOrgs
+                    _isMainLoading.value = false
+                    _mainError.value = null
+                },
+                onError = { exception ->
+                    _githubOrgs.value = emptyList()
+                    _isMainLoading.value = false
+                    _isAdditionalLoading.value = false
+                    _mainError.value = exception
+                    _additionalError.value = null
                 }
             )
         }

@@ -15,12 +15,12 @@ android {
         consumerProguardFiles("consumer-rules.pro")
     }
     buildTypes {
-        getByName("release") {
+        release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
-    flavorDimensions("app")
+    flavorDimensions += "app"
     productFlavors {
         create("production") {
             dimension = "app"
@@ -34,11 +34,11 @@ android {
     }
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
 }
 
@@ -46,8 +46,8 @@ dependencies {
     // kotlinx.serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
     // Dagger
-    implementation("com.google.dagger:hilt-android:2.37")
-    kapt("com.google.dagger:hilt-compiler:2.37")
+    implementation("com.google.dagger:hilt-android:2.38.1")
+    kapt("com.google.dagger:hilt-compiler:2.38.1")
     // OkHttp
     implementation("com.squareup.okhttp3:okhttp:4.9.1")
     // Retrofit
@@ -62,6 +62,6 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
 
     // Espresso
-    androidTestImplementation("androidx.test.ext:junit:1.1.2")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
+    androidTestImplementation("androidx.test.ext:junit:1.1.3")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 }

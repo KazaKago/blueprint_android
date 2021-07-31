@@ -17,16 +17,16 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-        getByName("release") {
+        release {
             isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
-        getByName("debug") {
+        debug {
             applicationIdSuffix = ".debug"
             versionNameSuffix = " debug"
         }
     }
-    flavorDimensions("app")
+    flavorDimensions += "app"
     productFlavors {
         create("production") {
             dimension = "app"
@@ -44,11 +44,11 @@ android {
     }
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
 }
 
@@ -65,10 +65,10 @@ dependencies {
     implementation(project(":data:resource"))
     implementation(project(":data:mapper"))
     // Dagger
-    implementation("com.google.dagger:hilt-android:2.37")
-    kapt("com.google.dagger:hilt-compiler:2.37")
+    implementation("com.google.dagger:hilt-android:2.38.1")
+    kapt("com.google.dagger:hilt-compiler:2.38.1")
     // AndroidX AppCompat
-    implementation("androidx.appcompat:appcompat:1.3.0")
+    implementation("androidx.appcompat:appcompat:1.3.1")
 
     // desugar_jdk_libs
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
@@ -77,6 +77,6 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
 
     // Espresso
-    androidTestImplementation("androidx.test.ext:junit:1.1.2")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
+    androidTestImplementation("androidx.test.ext:junit:1.1.3")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 }

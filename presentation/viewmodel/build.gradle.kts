@@ -14,12 +14,12 @@ android {
         consumerProguardFiles("consumer-rules.pro")
     }
     buildTypes {
-        getByName("release") {
+        release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
-    flavorDimensions("app")
+    flavorDimensions += "app"
     productFlavors {
         create("production") {
             dimension = "app"
@@ -33,11 +33,11 @@ android {
     }
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
 }
 
@@ -46,15 +46,15 @@ dependencies {
     implementation(project(":domain:usecase"))
     implementation(project(":domain:model"))
     // kotlinx.coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1")
     // Dagger
-    implementation("com.google.dagger:hilt-android:2.37")
-    kapt("com.google.dagger:hilt-compiler:2.37")
+    implementation("com.google.dagger:hilt-android:2.38.1")
+    kapt("com.google.dagger:hilt-compiler:2.38.1")
     // AndroidX Lifecycle
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
     implementation("androidx.lifecycle:lifecycle-common-java8:2.3.1")
     // StoreFlowable.kt
-    implementation("com.kazakago.storeflowable:storeflowable-core:3.3.0")
+    implementation("com.kazakago.storeflowable:storeflowable-core:4.0.0")
 
     // desugar_jdk_libs
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
@@ -63,6 +63,6 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
 
     // Espresso
-    androidTestImplementation("androidx.test.ext:junit:1.1.2")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
+    androidTestImplementation("androidx.test.ext:junit:1.1.3")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 }
