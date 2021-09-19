@@ -6,9 +6,9 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:7.0.0")
-        classpath(kotlin("gradle-plugin", version = "1.5.21"))
-        classpath(kotlin("serialization", version = "1.5.21"))
+        classpath("com.android.tools.build:gradle:7.0.2")
+        classpath(kotlin("gradle-plugin", version = "1.5.30"))
+        classpath(kotlin("serialization", version = "1.5.30"))
         classpath("com.google.dagger:hilt-android-gradle-plugin:2.38.1")
         classpath("com.google.android.gms:oss-licenses-plugin:0.10.4")
 

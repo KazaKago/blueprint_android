@@ -46,7 +46,7 @@ dependencies {
     implementation(project(":domain:usecase"))
     implementation(project(":domain:model"))
     // kotlinx.coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
     // Dagger
     implementation("com.google.dagger:hilt-android:2.38.1")
     kapt("com.google.dagger:hilt-compiler:2.38.1")
@@ -62,7 +62,8 @@ dependencies {
     // JUnit
     testImplementation("junit:junit:4.13.2")
 
-    // Espresso
+    // AndroidX JUnit
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
+    // AndroidX Espresso
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 }

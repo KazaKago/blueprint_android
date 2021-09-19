@@ -54,11 +54,11 @@ dependencies {
     // AndroidX AppCompat
     implementation("androidx.appcompat:appcompat:1.3.1")
     // AndroidX Activity
-    implementation("androidx.activity:activity-ktx:1.3.0")
+    implementation("androidx.activity:activity-ktx:1.3.1")
     // AndroidX Fragment
     implementation("androidx.fragment:fragment-ktx:1.3.6")
     // AndroidX ConstraintLayout
-    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.0")
     // AndroidX RecyclerView
     implementation("androidx.recyclerview:recyclerview:1.2.1")
     // AndroidX SwipeRefreshLayout
@@ -71,7 +71,7 @@ dependencies {
     implementation("com.github.lisawray.groupie:groupie:2.9.0")
     implementation("com.github.lisawray.groupie:groupie-viewbinding:2.9.0")
     // Coil
-    implementation("io.coil-kt:coil:1.3.1")
+    implementation("io.coil-kt:coil:1.3.2")
 
     // desugar_jdk_libs
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
@@ -79,7 +79,8 @@ dependencies {
     // JUnit
     testImplementation("junit:junit:4.13.2")
 
-    // Espresso
+    // AndroidX JUnit
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
+    // AndroidX Espresso
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 }

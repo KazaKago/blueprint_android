@@ -19,7 +19,7 @@ dependencies {
     implementation(project(":domain:model"))
     implementation(project(":domain:repository"))
     // kotlinx.coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
     // Dagger
     implementation("com.google.dagger:hilt-core:2.38.1")
     kapt("com.google.dagger:hilt-compiler:2.38.1")

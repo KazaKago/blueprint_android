@@ -57,7 +57,8 @@ dependencies {
     // JUnit
     testImplementation("junit:junit:4.13.2")
 
-    // Espresso
+    // AndroidX JUnit
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
+    // AndroidX Espresso
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 }
