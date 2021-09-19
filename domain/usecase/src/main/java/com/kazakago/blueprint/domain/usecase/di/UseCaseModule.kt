@@ -15,29 +15,29 @@ internal abstract class UseCaseModule {
 
     @Singleton
     @Binds
-    abstract fun bindFollowGithubOrgsUseCase(followGithubOrgsUseCase: FollowGithubOrgsUseCaseImpl): FollowGithubOrgsUseCase
+    abstract fun provideFollowGithubOrgsUseCase(followGithubOrgsUseCase: FollowGithubOrgsUseCaseImpl): FollowGithubOrgsUseCase
 
     @Singleton
     @Binds
-    abstract fun bindFollowGithubReposUseCase(followGithubReposUseCase: FollowGithubReposUseCaseImpl): FollowGithubReposUseCase
+    abstract fun provideFollowGithubReposUseCase(followGithubReposUseCase: FollowGithubReposUseCaseImpl): FollowGithubReposUseCase
 
     @Singleton
     @Binds
-    abstract fun bindRefreshGithubOrgsUseCase(refreshGithubOrgsUseCase: RefreshGithubOrgsUseCaseImpl): RefreshGithubOrgsUseCase
+    abstract fun provideRefreshGithubOrgsUseCase(refreshGithubOrgsUseCase: RefreshGithubOrgsUseCaseImpl): RefreshGithubOrgsUseCase
 
     @Singleton
     @Binds
-    abstract fun bindRefreshGithubReposUseCase(refreshGithubReposUseCase: RefreshGithubReposUseCaseImpl): RefreshGithubReposUseCase
+    abstract fun provideRefreshGithubReposUseCase(refreshGithubReposUseCase: RefreshGithubReposUseCaseImpl): RefreshGithubReposUseCase
 
     @Singleton
     @Binds
-    abstract fun bindRequestAdditionalGithubOrgsUseCase(requestAdditionalGithubOrgsUseCase: RequestAdditionalGithubOrgsUseCaseImpl): RequestAdditionalGithubOrgsUseCase
+    abstract fun provideRequestAdditionalGithubOrgsUseCase(requestAdditionalGithubOrgsUseCase: RequestAdditionalGithubOrgsUseCaseImpl): RequestAdditionalGithubOrgsUseCase
 
     @Singleton
     @Binds
-    abstract fun bindRequestAdditionalGithubReposUseCase(requestAdditionalGithubReposUseCase: RequestAdditionalGithubReposUseCaseImpl): RequestAdditionalGithubReposUseCase
+    abstract fun provideRequestAdditionalGithubReposUseCase(requestAdditionalGithubReposUseCase: RequestAdditionalGithubReposUseCaseImpl): RequestAdditionalGithubReposUseCase
 
     @Singleton
     @Binds
-    abstract fun bindGetAboutUseCase(getAboutUseCase: GetAboutInfoUseCaseImpl): GetAboutInfoUseCase
+    abstract fun provideGetAboutUseCase(getAboutUseCase: GetAboutInfoUseCaseImpl): GetAboutInfoUseCase
 }
