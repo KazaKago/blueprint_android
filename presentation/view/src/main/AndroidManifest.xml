@@ -17,14 +17,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".hierarchy.github.GithubReposActivity" />
+            android:name=".hierarchy.github.GithubReposActivity"
+            android:exported="false" />
         <activity
-            android:name=".hierarchy.about.AboutActivity" />
+            android:name=".hierarchy.about.AboutActivity"
+            android:exported="false" />
         <activity
             android:name="com.google.android.gms.oss.licenses.OssLicensesActivity"
+            android:exported="false"
             android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar" />
         <activity
             android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
+            android:exported="false"
             android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar" />
     </application>
 
