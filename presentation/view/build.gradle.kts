@@ -49,8 +49,8 @@ dependencies {
     implementation(project(":presentation:viewmodel"))
     implementation(project(":domain:model"))
     // Dagger
-    implementation("com.google.dagger:hilt-android:2.38.1")
-    kapt("com.google.dagger:hilt-compiler:2.38.1")
+    implementation("com.google.dagger:hilt-android:2.39")
+    kapt("com.google.dagger:hilt-compiler:2.39")
     // AndroidX AppCompat
     implementation("androidx.appcompat:appcompat:1.3.1")
     // AndroidX Activity
@@ -58,7 +58,7 @@ dependencies {
     // AndroidX Fragment
     implementation("androidx.fragment:fragment-ktx:1.3.6")
     // AndroidX ConstraintLayout
-    implementation("androidx.constraintlayout:constraintlayout:2.1.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.1")
     // AndroidX RecyclerView
     implementation("androidx.recyclerview:recyclerview:1.2.1")
     // AndroidX SwipeRefreshLayout

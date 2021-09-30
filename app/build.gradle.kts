@@ -65,8 +65,8 @@ dependencies {
     implementation(project(":data:resource"))
     implementation(project(":data:mapper"))
     // Dagger
-    implementation("com.google.dagger:hilt-android:2.38.1")
-    kapt("com.google.dagger:hilt-compiler:2.38.1")
+    implementation("com.google.dagger:hilt-android:2.39")
+    kapt("com.google.dagger:hilt-compiler:2.39")
     // AndroidX AppCompat (Need for Dagger-Hilt)
     implementation("androidx.appcompat:appcompat:1.3.1")
 

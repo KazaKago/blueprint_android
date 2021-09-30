@@ -43,8 +43,8 @@ android {
 
 dependencies {
     // Dagger
-    implementation("com.google.dagger:hilt-android:2.38.1")
-    kapt("com.google.dagger:hilt-compiler:2.38.1")
+    implementation("com.google.dagger:hilt-android:2.39")
+    kapt("com.google.dagger:hilt-compiler:2.39")
 
     // desugar_jdk_libs
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")

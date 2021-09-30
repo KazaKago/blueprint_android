@@ -44,10 +44,10 @@ android {
 
 dependencies {
     // kotlinx.serialization
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0")
     // Dagger
-    implementation("com.google.dagger:hilt-android:2.38.1")
-    kapt("com.google.dagger:hilt-compiler:2.38.1")
+    implementation("com.google.dagger:hilt-android:2.39")
+    kapt("com.google.dagger:hilt-compiler:2.39")
     // OkHttp
     implementation("com.squareup.okhttp3:okhttp:4.9.1")
     // Retrofit
