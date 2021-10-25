@@ -16,8 +16,8 @@ tasks.withType<KotlinCompile> {
 
 dependencies {
     // Dagger
-    implementation("com.google.dagger:hilt-core:2.39")
-    kapt("com.google.dagger:hilt-compiler:2.39")
+    implementation("com.google.dagger:hilt-core:2.39.1")
+    kapt("com.google.dagger:hilt-compiler:2.39.1")
     // StoreFlowable.kt
     implementation("com.kazakago.storeflowable:storeflowable:4.0.0")
 

@@ -48,8 +48,8 @@ dependencies {
     implementation(project(":data:cache"))
     implementation(project(":data:resource"))
     // Dagger
-    implementation("com.google.dagger:hilt-android:2.39")
-    kapt("com.google.dagger:hilt-compiler:2.39")
+    implementation("com.google.dagger:hilt-android:2.39.1")
+    kapt("com.google.dagger:hilt-compiler:2.39.1")
 
     // desugar_jdk_libs
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")

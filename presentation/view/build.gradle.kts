@@ -49,8 +49,8 @@ dependencies {
     implementation(project(":presentation:viewmodel"))
     implementation(project(":domain:model"))
     // Dagger
-    implementation("com.google.dagger:hilt-android:2.39")
-    kapt("com.google.dagger:hilt-compiler:2.39")
+    implementation("com.google.dagger:hilt-android:2.39.1")
+    kapt("com.google.dagger:hilt-compiler:2.39.1")
     // AndroidX AppCompat
     implementation("androidx.appcompat:appcompat:1.3.1")
     // AndroidX Activity
@@ -63,15 +63,18 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.2.1")
     // AndroidX SwipeRefreshLayout
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+    // AndroidX Lifecycle
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
+    implementation("androidx.lifecycle:lifecycle-common-java8:2.3.1")
     // Material Components
     implementation("com.google.android.material:material:1.4.0")
     // PlayServices OSS Licenses
     implementation("com.google.android.gms:play-services-oss-licenses:17.0.0")
     // Groupie
-    implementation("com.github.lisawray.groupie:groupie:2.9.0")
-    implementation("com.github.lisawray.groupie:groupie-viewbinding:2.9.0")
+    implementation("com.github.lisawray.groupie:groupie:2.10.0")
+    implementation("com.github.lisawray.groupie:groupie-viewbinding:2.10.0")
     // Coil
-    implementation("io.coil-kt:coil:1.3.2")
+    implementation("io.coil-kt:coil:1.4.0")
 
     // desugar_jdk_libs
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
