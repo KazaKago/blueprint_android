@@ -9,12 +9,11 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import com.kazakago.blueprint.presentation.view.R
 import com.kazakago.blueprint.presentation.view.databinding.ActivityAboutBinding
+import com.kazakago.blueprint.presentation.view.global.flow.collectOnStarted
 import com.kazakago.blueprint.presentation.viewmodel.hierarchy.about.AboutViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import java.util.*
 
 @AndroidEntryPoint
@@ -45,17 +44,13 @@ class AboutActivity : AppCompatActivity() {
             goOssLicenses()
         }
 
-        lifecycleScope.launchWhenStarted {
-            aboutViewModel.appInfo.collect {
-                if (it != null) viewBinding.versionTextView.text = getString(R.string.about_ver, it.versionName.value, it.versionCode.value)
-            }
+        aboutViewModel.appInfo.collectOnStarted(this) {
+            if (it != null) viewBinding.versionTextView.text = getString(R.string.about_ver, it.versionName.value, it.versionCode.value)
         }
-        lifecycleScope.launchWhenStarted {
-            aboutViewModel.developerInfo.collect {
-                if (it != null) {
-                    viewBinding.copyrightTextView.text = getString(R.string.about_copyright, Calendar.getInstance().get(Calendar.YEAR), it.name)
-                    viewBinding.developByTextView.text = getString(R.string.about_develop_by, it.name)
-                }
+        aboutViewModel.developerInfo.collectOnStarted(this) {
+            if (it != null) {
+                viewBinding.copyrightTextView.text = getString(R.string.about_copyright, Calendar.getInstance().get(Calendar.YEAR), it.name)
+                viewBinding.developByTextView.text = getString(R.string.about_develop_by, it.name)
             }
         }
     }

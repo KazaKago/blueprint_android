@@ -10,10 +10,10 @@ import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.lifecycle.lifecycleScope
 import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrgName
 import com.kazakago.blueprint.domain.model.hierarchy.github.GithubRepo
 import com.kazakago.blueprint.presentation.view.databinding.ActivityGithubReposBinding
+import com.kazakago.blueprint.presentation.view.global.flow.collectOnStarted
 import com.kazakago.blueprint.presentation.view.global.view.ErrorItem
 import com.kazakago.blueprint.presentation.view.global.view.LoadingItem
 import com.kazakago.blueprint.presentation.view.global.view.addOnBottomReached
@@ -21,7 +21,6 @@ import com.kazakago.blueprint.presentation.viewmodel.hierarchy.github.GithubRepo
 import com.xwray.groupie.Group
 import com.xwray.groupie.GroupieAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
 import javax.inject.Inject
 
@@ -67,36 +66,26 @@ class GithubReposActivity : AppCompatActivity() {
             githubReposViewModel.retry()
         }
 
-        lifecycleScope.launchWhenStarted {
-            githubReposViewModel.githubOrgName.collect {
-                supportActionBar?.title = it.value
-            }
+        githubReposViewModel.githubOrgName.collectOnStarted(this) {
+            supportActionBar?.title = it.value
         }
-        lifecycleScope.launchWhenStarted {
-            combine(githubReposViewModel.githubRepos, githubReposViewModel.isAdditionalLoading, githubReposViewModel.additionalError) { a, b, c -> Triple(a, b, c) }.collect {
-                val items: List<Group> = mutableListOf<Group>().apply {
-                    this += createGithubRepoItems(it.first)
-                    if (it.second) this += createLoadingItem()
-                    if (it.third != null) this += createErrorItem(it.third!!)
-                }
-                githubReposAdapter.updateAsync(items)
+        combine(githubReposViewModel.githubRepos, githubReposViewModel.isAdditionalLoading, githubReposViewModel.additionalError) { a, b, c -> Triple(a, b, c) }.collectOnStarted(this) {
+            val items: List<Group> = mutableListOf<Group>().apply {
+                this += createGithubRepoItems(it.first)
+                if (it.second) this += createLoadingItem()
+                if (it.third != null) this += createErrorItem(it.third!!)
             }
+            githubReposAdapter.updateAsync(items)
         }
-        lifecycleScope.launchWhenStarted {
-            githubReposViewModel.isMainLoading.collect {
-                viewBinding.progressBar.isVisible = it
-            }
+        githubReposViewModel.isMainLoading.collectOnStarted(this) {
+            viewBinding.progressBar.isVisible = it
         }
-        lifecycleScope.launchWhenStarted {
-            githubReposViewModel.mainError.collect {
-                viewBinding.errorGroup.isVisible = (it != null)
-                viewBinding.errorTextView.text = it?.toString()
-            }
+        githubReposViewModel.mainError.collectOnStarted(this) {
+            viewBinding.errorGroup.isVisible = (it != null)
+            viewBinding.errorTextView.text = it?.toString()
         }
-        lifecycleScope.launchWhenStarted {
-            githubReposViewModel.isRefreshing.collect {
-                viewBinding.swipeRefreshLayout.isRefreshing = it
-            }
+        githubReposViewModel.isRefreshing.collectOnStarted(this) {
+            viewBinding.swipeRefreshLayout.isRefreshing = it
         }
     }
 
