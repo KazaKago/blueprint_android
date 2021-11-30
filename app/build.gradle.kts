@@ -66,8 +66,6 @@ dependencies {
     // Dagger
     implementation("com.google.dagger:hilt-android:2.40.3")
     kapt("com.google.dagger:hilt-compiler:2.40.3")
-    // AndroidX AppCompat (Need for Dagger-Hilt)
-    implementation("androidx.appcompat:appcompat:1.4.0")
 
     // desugar_jdk_libs
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
