@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    compileSdk = 30
+    compileSdk = 31
     defaultConfig {
         applicationId = "com.kazakago.blueprint"
         minSdk = 28
-        targetSdk = 30
+        targetSdk = 31
         versionCode = 1
         versionName = "1.0.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -65,10 +65,10 @@ dependencies {
     implementation(project(":data:resource"))
     implementation(project(":data:mapper"))
     // Dagger
-    implementation("com.google.dagger:hilt-android:2.39.1")
-    kapt("com.google.dagger:hilt-compiler:2.39.1")
+    implementation("com.google.dagger:hilt-android:2.40.3")
+    kapt("com.google.dagger:hilt-compiler:2.40.3")
     // AndroidX AppCompat (Need for Dagger-Hilt)
-    implementation("androidx.appcompat:appcompat:1.3.1")
+    implementation("androidx.appcompat:appcompat:1.4.0")
 
     // desugar_jdk_libs
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")

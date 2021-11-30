@@ -48,24 +48,26 @@ dependencies {
     // Module
     implementation(project(":presentation:viewmodel"))
     implementation(project(":domain:model"))
+    // kotlinx.coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-RC")
     // Dagger
-    implementation("com.google.dagger:hilt-android:2.39.1")
-    kapt("com.google.dagger:hilt-compiler:2.39.1")
+    implementation("com.google.dagger:hilt-android:2.40.3")
+    kapt("com.google.dagger:hilt-compiler:2.40.3")
     // AndroidX AppCompat
-    implementation("androidx.appcompat:appcompat:1.3.1")
+    implementation("androidx.appcompat:appcompat:1.4.0")
     // AndroidX Activity
-    implementation("androidx.activity:activity-ktx:1.3.1")
+    implementation("androidx.activity:activity-ktx:1.4.0")
     // AndroidX Fragment
-    implementation("androidx.fragment:fragment-ktx:1.3.6")
+    implementation("androidx.fragment:fragment-ktx:1.4.0")
     // AndroidX ConstraintLayout
-    implementation("androidx.constraintlayout:constraintlayout:2.1.1")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.2")
     // AndroidX RecyclerView
     implementation("androidx.recyclerview:recyclerview:1.2.1")
     // AndroidX SwipeRefreshLayout
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     // AndroidX Lifecycle
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
-    implementation("androidx.lifecycle:lifecycle-common-java8:2.3.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0")
+    implementation("androidx.lifecycle:lifecycle-common-java8:2.4.0")
     // Material Components
     implementation("com.google.android.material:material:1.4.0")
     // PlayServices OSS Licenses

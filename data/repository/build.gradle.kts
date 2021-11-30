@@ -50,10 +50,10 @@ dependencies {
     implementation(project(":data:resource"))
     implementation(project(":data:mapper"))
     // kotlinx.coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-RC")
     // Dagger
-    implementation("com.google.dagger:hilt-android:2.39.1")
-    kapt("com.google.dagger:hilt-compiler:2.39.1")
+    implementation("com.google.dagger:hilt-android:2.40.3")
+    kapt("com.google.dagger:hilt-compiler:2.40.3")
     // StoreFlowable.kt
     implementation("com.kazakago.storeflowable:storeflowable:4.0.0")
 

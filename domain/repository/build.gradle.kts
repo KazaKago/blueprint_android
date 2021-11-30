@@ -17,7 +17,7 @@ dependencies {
     // Module
     implementation(project(":domain:model"))
     // kotlinx.coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-RC")
     // StoreFlowable.kt
     implementation("com.kazakago.storeflowable:storeflowable-core:4.0.0")
 

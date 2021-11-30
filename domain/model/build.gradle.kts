@@ -19,5 +19,5 @@ dependencies {
     // Kluent
     testImplementation("org.amshove.kluent:kluent:1.68")
     // MockK
-    testImplementation("io.mockk:mockk:1.12.0")
+    testImplementation("io.mockk:mockk:1.12.1")
 }
