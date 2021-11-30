@@ -70,8 +70,6 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-common-java8:2.4.0")
     // Material Components
     implementation("com.google.android.material:material:1.4.0")
-    // PlayServices OSS Licenses
-    implementation("com.google.android.gms:play-services-oss-licenses:17.0.0")
     // Groupie
     implementation("com.github.lisawray.groupie:groupie:2.10.0")
     implementation("com.github.lisawray.groupie:groupie-viewbinding:2.10.0")

@@ -25,7 +25,6 @@ class AboutActivity : AppCompatActivity() {
     }
 
     private val viewBinding by lazy { ActivityAboutBinding.inflate(layoutInflater) }
-    private val ossLicensesMenuActivityLauncher = registerForActivityResult(OssLicensesMenuActivityContract()) {}
     private val aboutViewModel: AboutViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,9 +38,6 @@ class AboutActivity : AppCompatActivity() {
         }
         viewBinding.mailLayout.setOnClickListener {
             aboutViewModel.developerInfo.value?.let { openSendTo(Uri.parse(it.mailAddress.toURI().toString())) }
-        }
-        viewBinding.ossLicenseLayout.setOnClickListener {
-            goOssLicenses()
         }
 
         aboutViewModel.appInfo.collectOnStarted(this) {
@@ -73,9 +69,5 @@ class AboutActivity : AppCompatActivity() {
     private fun openSendTo(uri: Uri) {
         val intent = Intent(Intent.ACTION_SENDTO, uri)
         startActivity(intent)
-    }
-
-    private fun goOssLicenses() {
-        ossLicensesMenuActivityLauncher.launch(Unit)
     }
 }
