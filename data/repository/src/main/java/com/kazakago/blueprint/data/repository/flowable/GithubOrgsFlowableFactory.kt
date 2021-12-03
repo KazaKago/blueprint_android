@@ -23,22 +23,20 @@ internal class GithubOrgsFlowableFactory(
 
     override val flowableDataStateManager = GithubOrgsStateManager
 
-    override val key = Unit
-
-    override suspend fun loadDataFromCache(): List<GithubOrgEntity>? {
+    override suspend fun loadDataFromCache(param: Unit): List<GithubOrgEntity>? {
         return githubCache.orgsCache
     }
 
-    override suspend fun saveDataToCache(newData: List<GithubOrgEntity>?) {
+    override suspend fun saveDataToCache(newData: List<GithubOrgEntity>?, param: Unit) {
         githubCache.orgsCache = newData
         githubCache.orgsCacheCreatedAt = LocalDateTime.now()
     }
 
-    override suspend fun saveNextDataToCache(cachedData: List<GithubOrgEntity>, newData: List<GithubOrgEntity>) {
+    override suspend fun saveNextDataToCache(cachedData: List<GithubOrgEntity>, newData: List<GithubOrgEntity>, param: Unit) {
         githubCache.orgsCache = cachedData + newData
     }
 
-    override suspend fun fetchDataFromOrigin(): Fetched<List<GithubOrgEntity>> {
+    override suspend fun fetchDataFromOrigin(param: Unit): Fetched<List<GithubOrgEntity>> {
         val response = githubService.getOrgs(null, PER_PAGE)
         val data = response.map { githubOrgResponseMapper.map(it) }
         return Fetched(
@@ -47,7 +45,7 @@ internal class GithubOrgsFlowableFactory(
         )
     }
 
-    override suspend fun fetchNextDataFromOrigin(nextKey: String): Fetched<List<GithubOrgEntity>> {
+    override suspend fun fetchNextDataFromOrigin(nextKey: String, param: Unit): Fetched<List<GithubOrgEntity>> {
         val response = githubService.getOrgs(nextKey.toLong(), PER_PAGE)
         val data = response.map { githubOrgResponseMapper.map(it) }
         return Fetched(
@@ -56,7 +54,7 @@ internal class GithubOrgsFlowableFactory(
         )
     }
 
-    override suspend fun needRefresh(cachedData: List<GithubOrgEntity>): Boolean {
+    override suspend fun needRefresh(cachedData: List<GithubOrgEntity>, param: Unit): Boolean {
         val createdAt = githubCache.orgsCacheCreatedAt
         return if (createdAt != null) {
             val expiredAt = createdAt + EXPIRED_DURATION

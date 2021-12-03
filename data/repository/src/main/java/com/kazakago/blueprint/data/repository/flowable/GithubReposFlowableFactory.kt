@@ -5,7 +5,6 @@ import com.kazakago.blueprint.data.cache.entity.GithubRepoEntity
 import com.kazakago.blueprint.data.cache.hierarchy.GithubCache
 import com.kazakago.blueprint.data.cache.hierarchy.GithubReposStateManager
 import com.kazakago.blueprint.data.mapper.response.github.GithubRepoResponseMapper
-import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrgName
 import com.kazakago.storeflowable.pagination.oneway.Fetched
 import com.kazakago.storeflowable.pagination.oneway.PaginationStoreFlowableFactory
 import java.time.Duration
@@ -15,7 +14,6 @@ internal class GithubReposFlowableFactory(
     private val githubService: GithubService,
     private val githubCache: GithubCache,
     private val githubRepoResponseMapper: GithubRepoResponseMapper,
-    githubOrgName: GithubOrgName,
 ) : PaginationStoreFlowableFactory<String, List<GithubRepoEntity>> {
 
     companion object {
@@ -25,23 +23,21 @@ internal class GithubReposFlowableFactory(
 
     override val flowableDataStateManager = GithubReposStateManager
 
-    override val key = githubOrgName.value
-
-    override suspend fun loadDataFromCache(): List<GithubRepoEntity>? {
-        return githubCache.reposCache[key]
+    override suspend fun loadDataFromCache(param: String): List<GithubRepoEntity>? {
+        return githubCache.reposCache[param]
     }
 
-    override suspend fun saveDataToCache(newData: List<GithubRepoEntity>?) {
-        githubCache.reposCache[key] = newData
-        githubCache.reposCacheCreatedAt[key] = LocalDateTime.now()
+    override suspend fun saveDataToCache(newData: List<GithubRepoEntity>?, param: String) {
+        githubCache.reposCache[param] = newData
+        githubCache.reposCacheCreatedAt[param] = LocalDateTime.now()
     }
 
-    override suspend fun saveNextDataToCache(cachedData: List<GithubRepoEntity>, newData: List<GithubRepoEntity>) {
-        githubCache.reposCache[key] = cachedData + newData
+    override suspend fun saveNextDataToCache(cachedData: List<GithubRepoEntity>, newData: List<GithubRepoEntity>, param: String) {
+        githubCache.reposCache[param] = cachedData + newData
     }
 
-    override suspend fun fetchDataFromOrigin(): Fetched<List<GithubRepoEntity>> {
-        val response = githubService.getRepos(key, 1, PER_PAGE)
+    override suspend fun fetchDataFromOrigin(param: String): Fetched<List<GithubRepoEntity>> {
+        val response = githubService.getRepos(param, 1, PER_PAGE)
         val data = response.map { githubRepoResponseMapper.map(it) }
         return Fetched(
             data = data,
@@ -49,9 +45,9 @@ internal class GithubReposFlowableFactory(
         )
     }
 
-    override suspend fun fetchNextDataFromOrigin(nextKey: String): Fetched<List<GithubRepoEntity>> {
+    override suspend fun fetchNextDataFromOrigin(nextKey: String, param: String): Fetched<List<GithubRepoEntity>> {
         val nextPage = nextKey.toInt()
-        val response = githubService.getRepos(key, nextPage, PER_PAGE)
+        val response = githubService.getRepos(param, nextPage, PER_PAGE)
         val data = response.map { githubRepoResponseMapper.map(it) }
         return Fetched(
             data = data,
@@ -59,8 +55,8 @@ internal class GithubReposFlowableFactory(
         )
     }
 
-    override suspend fun needRefresh(cachedData: List<GithubRepoEntity>): Boolean {
-        val createdAt = githubCache.reposCacheCreatedAt[key]
+    override suspend fun needRefresh(cachedData: List<GithubRepoEntity>, param: String): Boolean {
+        val createdAt = githubCache.reposCacheCreatedAt[param]
         return if (createdAt != null) {
             val expiredAt = createdAt + EXPIRED_DURATION
             expiredAt < LocalDateTime.now()

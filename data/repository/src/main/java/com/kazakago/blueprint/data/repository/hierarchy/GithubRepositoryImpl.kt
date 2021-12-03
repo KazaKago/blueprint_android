@@ -27,36 +27,36 @@ internal class GithubRepositoryImpl @Inject constructor(
 ) : GithubRepository {
 
     override fun followOrgs(): FlowLoadingState<List<GithubOrg>> {
-        val githubOrgsFlowable = GithubOrgsFlowableFactory(githubService, githubCache, githubOrgResponseMapper).create()
+        val githubOrgsFlowable = GithubOrgsFlowableFactory(githubService, githubCache, githubOrgResponseMapper).create(Unit)
         return githubOrgsFlowable.publish().mapContent {
             it.map { githubOrgEntity -> githubOrgEntityMapper.map(githubOrgEntity) }
         }
     }
 
     override suspend fun refreshOrgs() {
-        val githubOrgsFlowable = GithubOrgsFlowableFactory(githubService, githubCache, githubOrgResponseMapper).create()
+        val githubOrgsFlowable = GithubOrgsFlowableFactory(githubService, githubCache, githubOrgResponseMapper).create(Unit)
         githubOrgsFlowable.refresh()
     }
 
     override suspend fun requestAdditionalOrgs(continueWhenError: Boolean) {
-        val githubOrgsFlowable = GithubOrgsFlowableFactory(githubService, githubCache, githubOrgResponseMapper).create()
+        val githubOrgsFlowable = GithubOrgsFlowableFactory(githubService, githubCache, githubOrgResponseMapper).create(Unit)
         githubOrgsFlowable.requestNextData(continueWhenError = continueWhenError)
     }
 
     override fun followRepos(githubOrgName: GithubOrgName): FlowLoadingState<List<GithubRepo>> {
-        val githubReposFlowable = GithubReposFlowableFactory(githubService, githubCache, githubRepoResponseMapper, githubOrgName).create()
+        val githubReposFlowable = GithubReposFlowableFactory(githubService, githubCache, githubRepoResponseMapper).create(githubOrgName.value)
         return githubReposFlowable.publish().mapContent {
             it.map { githubRepoEntity -> githubRepoEntityMapper.map(githubRepoEntity) }
         }
     }
 
     override suspend fun refreshRepos(githubOrgName: GithubOrgName) {
-        val githubReposFlowable = GithubReposFlowableFactory(githubService, githubCache, githubRepoResponseMapper, githubOrgName).create()
+        val githubReposFlowable = GithubReposFlowableFactory(githubService, githubCache, githubRepoResponseMapper).create(githubOrgName.value)
         githubReposFlowable.refresh()
     }
 
     override suspend fun requestAdditionalRepos(githubOrgName: GithubOrgName, continueWhenError: Boolean) {
-        val githubReposFlowable = GithubReposFlowableFactory(githubService, githubCache, githubRepoResponseMapper, githubOrgName).create()
+        val githubReposFlowable = GithubReposFlowableFactory(githubService, githubCache, githubRepoResponseMapper).create(githubOrgName.value)
         githubReposFlowable.requestNextData(continueWhenError = continueWhenError)
     }
 }
