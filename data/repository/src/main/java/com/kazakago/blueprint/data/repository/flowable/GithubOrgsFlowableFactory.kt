@@ -7,21 +7,24 @@ import com.kazakago.blueprint.data.cache.hierarchy.GithubOrgsStateManager
 import com.kazakago.blueprint.data.mapper.response.github.GithubOrgResponseMapper
 import com.kazakago.storeflowable.pagination.oneway.Fetched
 import com.kazakago.storeflowable.pagination.oneway.PaginationStoreFlowableFactory
-import java.time.Duration
-import java.time.LocalDateTime
+import kotlinx.datetime.Clock
+import javax.inject.Inject
+import kotlin.time.DurationUnit
+import kotlin.time.toDuration
 
-internal class GithubOrgsFlowableFactory(
+internal class GithubOrgsFlowableFactory @Inject constructor(
     private val githubService: GithubService,
     private val githubCache: GithubCache,
     private val githubOrgResponseMapper: GithubOrgResponseMapper,
+    githubOrgsStateManager: GithubOrgsStateManager,
 ) : PaginationStoreFlowableFactory<Unit, List<GithubOrgEntity>> {
 
     companion object {
-        private val EXPIRED_DURATION = Duration.ofMinutes(30)
+        private val EXPIRED_DURATION = 30.toDuration(DurationUnit.MINUTES)
         private const val PER_PAGE = 20
     }
 
-    override val flowableDataStateManager = GithubOrgsStateManager
+    override val flowableDataStateManager = githubOrgsStateManager
 
     override suspend fun loadDataFromCache(param: Unit): List<GithubOrgEntity>? {
         return githubCache.orgsCache
@@ -29,7 +32,7 @@ internal class GithubOrgsFlowableFactory(
 
     override suspend fun saveDataToCache(newData: List<GithubOrgEntity>?, param: Unit) {
         githubCache.orgsCache = newData
-        githubCache.orgsCacheCreatedAt = LocalDateTime.now()
+        githubCache.orgsCacheCreatedAt = Clock.System.now()
     }
 
     override suspend fun saveNextDataToCache(cachedData: List<GithubOrgEntity>, newData: List<GithubOrgEntity>, param: Unit) {
@@ -58,7 +61,7 @@ internal class GithubOrgsFlowableFactory(
         val createdAt = githubCache.orgsCacheCreatedAt
         return if (createdAt != null) {
             val expiredAt = createdAt + EXPIRED_DURATION
-            expiredAt < LocalDateTime.now()
+            expiredAt < Clock.System.now()
         } else {
             true
         }

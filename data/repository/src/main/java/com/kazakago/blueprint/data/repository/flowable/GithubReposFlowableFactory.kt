@@ -7,21 +7,24 @@ import com.kazakago.blueprint.data.cache.hierarchy.GithubReposStateManager
 import com.kazakago.blueprint.data.mapper.response.github.GithubRepoResponseMapper
 import com.kazakago.storeflowable.pagination.oneway.Fetched
 import com.kazakago.storeflowable.pagination.oneway.PaginationStoreFlowableFactory
-import java.time.Duration
-import java.time.LocalDateTime
+import kotlinx.datetime.Clock
+import javax.inject.Inject
+import kotlin.time.DurationUnit
+import kotlin.time.toDuration
 
-internal class GithubReposFlowableFactory(
+internal class GithubReposFlowableFactory @Inject constructor(
     private val githubService: GithubService,
     private val githubCache: GithubCache,
     private val githubRepoResponseMapper: GithubRepoResponseMapper,
+    githubReposStateManager: GithubReposStateManager,
 ) : PaginationStoreFlowableFactory<String, List<GithubRepoEntity>> {
 
     companion object {
-        private val EXPIRED_DURATION = Duration.ofMinutes(30)
+        private val EXPIRED_DURATION = 30.toDuration(DurationUnit.MINUTES)
         private const val PER_PAGE = 20
     }
 
-    override val flowableDataStateManager = GithubReposStateManager
+    override val flowableDataStateManager = githubReposStateManager
 
     override suspend fun loadDataFromCache(param: String): List<GithubRepoEntity>? {
         return githubCache.reposCache[param]
@@ -29,7 +32,7 @@ internal class GithubReposFlowableFactory(
 
     override suspend fun saveDataToCache(newData: List<GithubRepoEntity>?, param: String) {
         githubCache.reposCache[param] = newData
-        githubCache.reposCacheCreatedAt[param] = LocalDateTime.now()
+        githubCache.reposCacheCreatedAt[param] = Clock.System.now()
     }
 
     override suspend fun saveNextDataToCache(cachedData: List<GithubRepoEntity>, newData: List<GithubRepoEntity>, param: String) {
@@ -59,7 +62,7 @@ internal class GithubReposFlowableFactory(
         val createdAt = githubCache.reposCacheCreatedAt[param]
         return if (createdAt != null) {
             val expiredAt = createdAt + EXPIRED_DURATION
-            expiredAt < LocalDateTime.now()
+            expiredAt < Clock.System.now()
         } else {
             true
         }

@@ -42,7 +42,6 @@ android {
         }
     }
     compileOptions {
-        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
@@ -64,11 +63,8 @@ dependencies {
     implementation(project(":data:resource"))
     implementation(project(":data:mapper"))
     // Dagger
-    implementation("com.google.dagger:hilt-android:2.40.3")
-    kapt("com.google.dagger:hilt-compiler:2.40.3")
-
-    // desugar_jdk_libs
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
+    implementation("com.google.dagger:hilt-android:2.40.5")
+    kapt("com.google.dagger:hilt-compiler:2.40.5")
 
     // JUnit
     testImplementation("junit:junit:4.13.2")

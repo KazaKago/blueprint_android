@@ -16,4 +16,8 @@ class GithubOrgEntityMapper @Inject constructor() {
             name = GithubOrgName(entity.name),
         )
     }
+
+    fun map(entities: List<GithubOrgEntity>): List<GithubOrg> {
+        return entities.map { map(it) }
+    }
 }

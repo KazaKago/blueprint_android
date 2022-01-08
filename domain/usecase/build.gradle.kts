@@ -19,12 +19,12 @@ dependencies {
     implementation(project(":domain:model"))
     implementation(project(":domain:repository"))
     // kotlinx.coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-RC")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
     // Dagger
-    implementation("com.google.dagger:hilt-core:2.40.3")
-    kapt("com.google.dagger:hilt-compiler:2.40.3")
+    implementation("com.google.dagger:hilt-core:2.40.5")
+    kapt("com.google.dagger:hilt-compiler:2.40.5")
     // StoreFlowable.kt
-    implementation("com.kazakago.storeflowable:storeflowable-core:5.0.0")
+    implementation("com.kazakago.storeflowable:storeflowable-core:5.2.0")
 
     // JUnit
     testImplementation("junit:junit:4.13.2")

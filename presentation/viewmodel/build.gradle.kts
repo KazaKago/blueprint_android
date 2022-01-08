@@ -6,10 +6,10 @@ plugins {
 }
 
 android {
-    compileSdk = 30
+    compileSdk = 31
     defaultConfig {
         minSdk = 28
-        targetSdk = 30
+        targetSdk = 31
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -32,7 +32,6 @@ android {
         }
     }
     compileOptions {
-        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
@@ -46,18 +45,15 @@ dependencies {
     implementation(project(":domain:usecase"))
     implementation(project(":domain:model"))
     // kotlinx.coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-RC")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
     // Dagger
-    implementation("com.google.dagger:hilt-android:2.40.3")
-    kapt("com.google.dagger:hilt-compiler:2.40.3")
+    implementation("com.google.dagger:hilt-android:2.40.5")
+    kapt("com.google.dagger:hilt-compiler:2.40.5")
     // AndroidX Lifecycle
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
     implementation("androidx.lifecycle:lifecycle-common-java8:2.4.0")
     // StoreFlowable.kt
-    implementation("com.kazakago.storeflowable:storeflowable-core:5.0.0")
-
-    // desugar_jdk_libs
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
+    implementation("com.kazakago.storeflowable:storeflowable-core:5.2.0")
 
     // JUnit
     testImplementation("junit:junit:4.13.2")

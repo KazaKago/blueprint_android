@@ -7,10 +7,10 @@ plugins {
 }
 
 android {
-    compileSdk = 30
+    compileSdk = 31
     defaultConfig {
         minSdk = 28
-        targetSdk = 30
+        targetSdk = 31
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -33,7 +33,6 @@ android {
         }
     }
     compileOptions {
-        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
@@ -44,19 +43,16 @@ android {
 
 dependencies {
     // kotlinx.serialization
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
     // Dagger
-    implementation("com.google.dagger:hilt-android:2.40.3")
-    kapt("com.google.dagger:hilt-compiler:2.40.3")
+    implementation("com.google.dagger:hilt-android:2.40.5")
+    kapt("com.google.dagger:hilt-compiler:2.40.5")
     // OkHttp
     implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.3")
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     // Kotlin Serialization Converter
     implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
-
-    // desugar_jdk_libs
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
 
     // JUnit
     testImplementation("junit:junit:4.13.2")

@@ -16,4 +16,8 @@ class GithubRepoEntityMapper @Inject constructor() {
             url = entity.htmlUrl,
         )
     }
+
+    fun map(entities: List<GithubRepoEntity>): List<GithubRepo> {
+        return entities.map { map(it) }
+    }
 }
