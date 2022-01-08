@@ -19,7 +19,7 @@ dependencies {
     // kotlinx.coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
     // StoreFlowable.kt
-    implementation("com.kazakago.storeflowable:storeflowable-core:5.2.0")
+    implementation("com.kazakago.storeflowable:storeflowable-core:5.2.1")
 
     // JUnit
     testImplementation("junit:junit:4.13.2")

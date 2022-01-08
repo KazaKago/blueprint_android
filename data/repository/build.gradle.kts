@@ -56,7 +56,7 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.40.5")
     kapt("com.google.dagger:hilt-compiler:2.40.5")
     // StoreFlowable.kt
-    implementation("com.kazakago.storeflowable:storeflowable:5.2.0")
+    implementation("com.kazakago.storeflowable:storeflowable:5.2.1")
 
     // JUnit
     testImplementation("junit:junit:4.13.2")

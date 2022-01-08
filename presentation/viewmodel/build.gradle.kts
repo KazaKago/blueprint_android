@@ -53,7 +53,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
     implementation("androidx.lifecycle:lifecycle-common-java8:2.4.0")
     // StoreFlowable.kt
-    implementation("com.kazakago.storeflowable:storeflowable-core:5.2.0")
+    implementation("com.kazakago.storeflowable:storeflowable-core:5.2.1")
 
     // JUnit
     testImplementation("junit:junit:4.13.2")
