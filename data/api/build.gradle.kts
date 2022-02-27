@@ -19,8 +19,8 @@ dependencies {
     // kotlinx.serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
     // Dagger
-    implementation("com.google.dagger:hilt-core:2.40.5")
-    kapt("com.google.dagger:hilt-compiler:2.40.5")
+    implementation("com.google.dagger:hilt-core:2.41")
+    kapt("com.google.dagger:hilt-compiler:2.41")
     // OkHttp
     implementation("com.squareup.okhttp3:okhttp:4.9.3")
     // Retrofit

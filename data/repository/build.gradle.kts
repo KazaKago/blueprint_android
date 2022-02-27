@@ -51,10 +51,10 @@ dependencies {
     // kotlinx.coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
     // kotlinx-datetime
-    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.2")
     // Dagger
-    implementation("com.google.dagger:hilt-android:2.40.5")
-    kapt("com.google.dagger:hilt-compiler:2.40.5")
+    implementation("com.google.dagger:hilt-android:2.41")
+    kapt("com.google.dagger:hilt-compiler:2.41")
     // StoreFlowable.kt
     implementation("com.kazakago.storeflowable:storeflowable:5.2.1")
 

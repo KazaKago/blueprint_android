@@ -47,11 +47,11 @@ dependencies {
     // kotlinx.coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
     // Dagger
-    implementation("com.google.dagger:hilt-android:2.40.5")
-    kapt("com.google.dagger:hilt-compiler:2.40.5")
+    implementation("com.google.dagger:hilt-android:2.41")
+    kapt("com.google.dagger:hilt-compiler:2.41")
     // AndroidX Lifecycle
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
-    implementation("androidx.lifecycle:lifecycle-common-java8:2.4.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")
+    implementation("androidx.lifecycle:lifecycle-common-java8:2.4.1")
     // StoreFlowable.kt
     implementation("com.kazakago.storeflowable:storeflowable-core:5.2.1")
 

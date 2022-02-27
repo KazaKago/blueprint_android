@@ -63,8 +63,8 @@ dependencies {
     implementation(project(":data:resource"))
     implementation(project(":data:mapper"))
     // Dagger
-    implementation("com.google.dagger:hilt-android:2.40.5")
-    kapt("com.google.dagger:hilt-compiler:2.40.5")
+    implementation("com.google.dagger:hilt-android:2.41")
+    kapt("com.google.dagger:hilt-compiler:2.41")
 
     // JUnit
     testImplementation("junit:junit:4.13.2")
