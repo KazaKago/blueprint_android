@@ -37,6 +37,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
+        freeCompilerArgs = freeCompilerArgs + "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api"
     }
     buildFeatures {
         compose = true
@@ -62,7 +63,7 @@ dependencies {
     // AndroidX Compose Foundation
     implementation("androidx.compose.foundation:foundation:1.1.1")
     // AndroidX Compose Material Design
-    implementation("androidx.compose.material:material:1.1.1")
+    implementation("androidx.compose.material3:material3:1.0.0-alpha08")
     // AndroidX Compose Material Design icons
     implementation("androidx.compose.material:material-icons-core:1.1.1")
     implementation("androidx.compose.material:material-icons-extended:1.1.1")
@@ -72,6 +73,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1")
     // Accompanist Swipe Refresh
     implementation("com.google.accompanist:accompanist-swiperefresh:0.23.1")
+    // Accompanist System UI Controller
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.23.1")
 
     // JUnit
     testImplementation("junit:junit:4.13.2")

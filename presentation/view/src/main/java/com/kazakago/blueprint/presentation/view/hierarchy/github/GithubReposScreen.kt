@@ -5,9 +5,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -16,7 +16,7 @@ import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrgName
 import com.kazakago.blueprint.domain.model.hierarchy.github.GithubRepo
 import com.kazakago.blueprint.domain.model.hierarchy.github.GithubRepoId
-import com.kazakago.blueprint.presentation.view.global.theme.AppTheme
+import com.kazakago.blueprint.presentation.view.global.theme.PreviewTheme
 import com.kazakago.blueprint.presentation.view.global.util.OnBottomReached
 import com.kazakago.blueprint.presentation.view.global.view.ErrorContent
 import com.kazakago.blueprint.presentation.view.global.view.ErrorRow
@@ -38,7 +38,7 @@ fun GithubReposScreen(
 ) {
     Scaffold(
         topBar = {
-            TopAppBar(
+            SmallTopAppBar(
                 title = { Text(uiState.githubOrgName.value) },
                 navigationIcon = {
                     IconButton(onClick = onClickBack) {
@@ -107,7 +107,7 @@ private fun ListContent(
 @Preview
 @Composable
 fun PreviewGithubReposScreenOnLoading() {
-    AppTheme {
+    PreviewTheme {
         GithubReposScreen(
             uiState = GithubReposUiState.Loading(
                 githubOrgName = GithubOrgName("kazakago"),
@@ -126,7 +126,7 @@ fun PreviewGithubReposScreenOnLoading() {
 @Preview
 @Composable
 fun PreviewGithubReposScreenOnCompleted() {
-    AppTheme {
+    PreviewTheme {
         GithubReposScreen(
             uiState = GithubReposUiState.Completed(
                 githubOrgName = GithubOrgName("kazakago"),
@@ -150,7 +150,7 @@ fun PreviewGithubReposScreenOnCompleted() {
 @Preview
 @Composable
 fun PreviewGithubReposScreenOnError() {
-    AppTheme {
+    PreviewTheme {
         GithubReposScreen(
             uiState = GithubReposUiState.Error(
                 githubOrgName = GithubOrgName("kazakago"),
@@ -170,7 +170,7 @@ fun PreviewGithubReposScreenOnError() {
 @Preview
 @Composable
 fun PreviewGithubReposScreenOnAdditionalLoading() {
-    AppTheme {
+    PreviewTheme {
         GithubReposScreen(
             uiState = GithubReposUiState.AdditionalLoading(
                 githubOrgName = GithubOrgName("kazakago"),
@@ -194,7 +194,7 @@ fun PreviewGithubReposScreenOnAdditionalLoading() {
 @Preview
 @Composable
 fun PreviewGithubReposScreenOnAdditionalError() {
-    AppTheme {
+    PreviewTheme {
         GithubReposScreen(
             uiState = GithubReposUiState.AdditionalError(
                 githubOrgName = GithubOrgName("kazakago"),

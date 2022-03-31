@@ -5,9 +5,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -18,7 +18,7 @@ import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrg
 import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrgId
 import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrgName
 import com.kazakago.blueprint.presentation.view.R
-import com.kazakago.blueprint.presentation.view.global.theme.AppTheme
+import com.kazakago.blueprint.presentation.view.global.theme.PreviewTheme
 import com.kazakago.blueprint.presentation.view.global.util.OnBottomReached
 import com.kazakago.blueprint.presentation.view.global.view.ErrorContent
 import com.kazakago.blueprint.presentation.view.global.view.ErrorRow
@@ -39,13 +39,13 @@ fun GithubOrgsScreen(
 ) {
     Scaffold(
         topBar = {
-            TopAppBar(
+            SmallTopAppBar(
                 title = { Text(stringResource(id = R.string.app_name)) },
                 actions = {
                     IconButton(onClick = onClickAbout) {
-                        Icon(Icons.Outlined.Info, contentDescription = stringResource(id = R.string.action_about))
+                        Icon(Icons.Outlined.Info, contentDescription = null)
                     }
-                }
+                },
             )
         },
     ) {
@@ -105,7 +105,7 @@ private fun ListContent(
 @Preview
 @Composable
 fun PreviewGithubOrgsScreenOnLoading() {
-    AppTheme {
+    PreviewTheme {
         GithubOrgsScreen(
             uiState = GithubOrgsUiState.Loading,
             isRefreshing = false,
@@ -122,7 +122,7 @@ fun PreviewGithubOrgsScreenOnLoading() {
 @Preview
 @Composable
 fun PreviewGithubOrgsScreenOnCompleted() {
-    AppTheme {
+    PreviewTheme {
         GithubOrgsScreen(
             uiState = GithubOrgsUiState.Completed(
                 githubOrgs = listOf(
@@ -145,7 +145,7 @@ fun PreviewGithubOrgsScreenOnCompleted() {
 @Preview
 @Composable
 fun PreviewGithubOrgsScreenOnError() {
-    AppTheme {
+    PreviewTheme {
         GithubOrgsScreen(
             uiState = GithubOrgsUiState.Error(
                 error = IllegalAccessException("hogehogepiyopiyohogehogepiyopiyohogehogepiyopiyo"),
@@ -164,7 +164,7 @@ fun PreviewGithubOrgsScreenOnError() {
 @Preview
 @Composable
 fun PreviewGithubOrgsScreenOnAdditionalLoading() {
-    AppTheme {
+    PreviewTheme {
         GithubOrgsScreen(
             uiState = GithubOrgsUiState.AdditionalLoading(
                 githubOrgs = listOf(
@@ -187,7 +187,7 @@ fun PreviewGithubOrgsScreenOnAdditionalLoading() {
 @Preview
 @Composable
 fun PreviewGithubOrgsScreenOnAdditionalError() {
-    AppTheme {
+    PreviewTheme {
         GithubOrgsScreen(
             uiState = GithubOrgsUiState.AdditionalError(
                 githubOrgs = listOf(
