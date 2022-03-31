@@ -18,10 +18,10 @@ import com.kazakago.blueprint.domain.model.hierarchy.github.GithubRepo
 import com.kazakago.blueprint.domain.model.hierarchy.github.GithubRepoId
 import com.kazakago.blueprint.presentation.view.global.theme.PreviewTheme
 import com.kazakago.blueprint.presentation.view.global.util.OnBottomReached
-import com.kazakago.blueprint.presentation.view.global.view.ErrorContent
-import com.kazakago.blueprint.presentation.view.global.view.ErrorRow
-import com.kazakago.blueprint.presentation.view.global.view.LoadingContent
-import com.kazakago.blueprint.presentation.view.global.view.LoadingRow
+import com.kazakago.blueprint.presentation.view.global.ui.ErrorContent
+import com.kazakago.blueprint.presentation.view.global.ui.ErrorRow
+import com.kazakago.blueprint.presentation.view.global.ui.LoadingContent
+import com.kazakago.blueprint.presentation.view.global.ui.LoadingRow
 import com.kazakago.blueprint.presentation.viewmodel.hierarchy.github.GithubReposUiState
 import java.net.URL
 

@@ -1,8 +1,7 @@
-package com.kazakago.blueprint.presentation.view.global.view
+package com.kazakago.blueprint.presentation.view.global.ui
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
@@ -13,12 +12,11 @@ import androidx.compose.ui.unit.dp
 import com.kazakago.blueprint.presentation.view.global.theme.PreviewTheme
 
 @Composable
-fun LoadingContent() {
+fun LoadingRow() {
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.Center,
+            .fillMaxWidth()
+            .padding(12.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         CircularProgressIndicator()
@@ -27,8 +25,8 @@ fun LoadingContent() {
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewLoadingContent() {
+fun PreviewLoadingRow() {
     PreviewTheme {
-        LoadingContent()
+        LoadingRow()
     }
 }

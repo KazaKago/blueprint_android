@@ -1,4 +1,4 @@
-package com.kazakago.blueprint.presentation.view.global.view
+package com.kazakago.blueprint.presentation.view.global.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
@@ -15,15 +15,14 @@ import com.kazakago.blueprint.presentation.view.R
 import com.kazakago.blueprint.presentation.view.global.theme.PreviewTheme
 
 @Composable
-fun ErrorContent(
+fun ErrorRow(
     error: Exception,
     onRetry: () -> Unit,
 ) {
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.Center,
+            .fillMaxWidth()
+            .padding(12.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
@@ -32,7 +31,7 @@ fun ErrorContent(
             style = MaterialTheme.typography.titleSmall,
             color = MaterialTheme.colorScheme.error,
         )
-        Spacer(modifier = Modifier.size(4.dp))
+        Spacer(modifier = Modifier.size(2.dp))
         Button(onClick = onRetry) {
             Text(stringResource(id = R.string.retry))
         }
@@ -41,9 +40,9 @@ fun ErrorContent(
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewErrorContent() {
+fun PreviewErrorRow() {
     PreviewTheme {
-        ErrorContent(
+        ErrorRow(
             error = IllegalAccessException("hogehogehogehogehogehogehogehogehogehoge"),
             onRetry = {},
         )
