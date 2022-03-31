@@ -38,6 +38,12 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.1.0"
+    }
 }
 
 dependencies {
@@ -49,6 +55,8 @@ dependencies {
     // Dagger
     implementation("com.google.dagger:hilt-android:2.41")
     kapt("com.google.dagger:hilt-compiler:2.41")
+    // AndroidX Compose Runtime
+    implementation("androidx.compose.runtime:runtime:1.1.1")
     // AndroidX Lifecycle
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")
     implementation("androidx.lifecycle:lifecycle-common-java8:2.4.1")

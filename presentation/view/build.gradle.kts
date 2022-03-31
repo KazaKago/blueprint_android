@@ -39,7 +39,10 @@ android {
         jvmTarget = "11"
     }
     buildFeatures {
-        viewBinding = true
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.1.0"
     }
 }
 
@@ -52,28 +55,23 @@ dependencies {
     // Dagger
     implementation("com.google.dagger:hilt-android:2.41")
     kapt("com.google.dagger:hilt-compiler:2.41")
-    // AndroidX AppCompat
-    implementation("androidx.appcompat:appcompat:1.4.1")
-    // AndroidX Activity
-    implementation("androidx.activity:activity-ktx:1.4.0")
-    // AndroidX Fragment
-    implementation("androidx.fragment:fragment-ktx:1.4.1")
-    // AndroidX ConstraintLayout
-    implementation("androidx.constraintlayout:constraintlayout:2.1.3")
-    // AndroidX RecyclerView
-    implementation("androidx.recyclerview:recyclerview:1.2.1")
-    // AndroidX SwipeRefreshLayout
-    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
-    // AndroidX Lifecycle
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.1")
-    implementation("androidx.lifecycle:lifecycle-common-java8:2.4.1")
-    // Material Components
-    implementation("com.google.android.material:material:1.5.0")
-    // Groupie
-    implementation("com.github.lisawray.groupie:groupie:2.10.0")
-    implementation("com.github.lisawray.groupie:groupie-viewbinding:2.10.0")
-    // Coil
-    implementation("io.coil-kt:coil:1.4.0")
+    // AndroidX Compose UI
+    implementation("androidx.compose.ui:ui:1.1.1")
+    // AndroidX Compose Tooling support
+    implementation("androidx.compose.ui:ui-tooling:1.1.1")
+    // AndroidX Compose Foundation
+    implementation("androidx.compose.foundation:foundation:1.1.1")
+    // AndroidX Compose Material Design
+    implementation("androidx.compose.material:material:1.1.1")
+    // AndroidX Compose Material Design icons
+    implementation("androidx.compose.material:material-icons-core:1.1.1")
+    implementation("androidx.compose.material:material-icons-extended:1.1.1")
+    // AndroidX Compose Integration with activities
+    implementation("androidx.activity:activity-compose:1.4.0")
+    // AndroidX Compose Integration with ViewModels
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1")
+    // Accompanist Swipe Refresh
+    implementation("com.google.accompanist:accompanist-swiperefresh:0.23.1")
 
     // JUnit
     testImplementation("junit:junit:4.13.2")
@@ -82,4 +80,5 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     // AndroidX Espresso
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
-}
+    // AndroidX Compose UI Tests
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.1.1")}

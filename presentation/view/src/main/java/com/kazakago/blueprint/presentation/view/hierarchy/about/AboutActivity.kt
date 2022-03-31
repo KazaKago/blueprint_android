@@ -4,70 +4,54 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.MenuItem
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContract
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
-import com.kazakago.blueprint.presentation.view.R
-import com.kazakago.blueprint.presentation.view.databinding.ActivityAboutBinding
-import com.kazakago.blueprint.presentation.view.global.flow.collectOnStarted
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.kazakago.blueprint.presentation.view.global.theme.AppTheme
 import com.kazakago.blueprint.presentation.viewmodel.hierarchy.about.AboutViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
 
 @AndroidEntryPoint
-class AboutActivity : AppCompatActivity() {
+class AboutActivity : ComponentActivity() {
 
     class Contract : ActivityResultContract<Unit, ActivityResult>() {
         override fun createIntent(context: Context, input: Unit) = Intent(context, AboutActivity::class.java)
         override fun parseResult(resultCode: Int, intent: Intent?) = ActivityResult(resultCode, intent)
     }
 
-    private val viewBinding by lazy { ActivityAboutBinding.inflate(layoutInflater) }
-    private val aboutViewModel: AboutViewModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(viewBinding.root)
-        setSupportActionBar(viewBinding.toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        viewBinding.webSiteLayout.setOnClickListener {
-            aboutViewModel.developerInfo.value?.let { openActionView(Uri.parse(it.siteUrl.toString())) }
-        }
-        viewBinding.mailLayout.setOnClickListener {
-            aboutViewModel.developerInfo.value?.let { openSendTo(Uri.parse(it.mailAddress.toURI().toString())) }
-        }
-
-        aboutViewModel.appInfo.collectOnStarted(this) {
-            if (it != null) viewBinding.versionTextView.text = getString(R.string.about_ver, it.versionName.value, it.versionCode.value)
-        }
-        aboutViewModel.developerInfo.collectOnStarted(this) {
-            if (it != null) {
-                viewBinding.copyrightTextView.text = getString(R.string.about_copyright, Calendar.getInstance().get(Calendar.YEAR), it.name)
-                viewBinding.developByTextView.text = getString(R.string.about_develop_by, it.name)
+        setContent {
+            val viewModel: AboutViewModel = viewModel()
+            val uiState by viewModel.uiState.collectAsState()
+            AppTheme {
+                AboutScreen(
+                    uiState = uiState,
+                    onClickBack = {
+                        finish()
+                    },
+                    onClickWebSite = {
+                        openActionView(it.toString())
+                    },
+                    onClickMail = {
+                        openSendTo(it.toString())
+                    },
+                )
             }
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                finish()
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    private fun openActionView(uri: Uri) {
-        val intent = Intent(Intent.ACTION_VIEW, uri)
+    private fun openActionView(uri: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
         startActivity(intent)
     }
 
-    private fun openSendTo(uri: Uri) {
-        val intent = Intent(Intent.ACTION_SENDTO, uri)
+    private fun openSendTo(uri: String) {
+        val intent = Intent(Intent.ACTION_SENDTO, Uri.parse(uri))
         startActivity(intent)
     }
 }

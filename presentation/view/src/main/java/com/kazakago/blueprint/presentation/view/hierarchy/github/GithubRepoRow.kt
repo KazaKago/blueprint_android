@@ -1,0 +1,52 @@
+package com.kazakago.blueprint.presentation.view.hierarchy.github
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.kazakago.blueprint.domain.model.hierarchy.github.GithubRepo
+import com.kazakago.blueprint.domain.model.hierarchy.github.GithubRepoId
+import com.kazakago.blueprint.presentation.view.R
+import com.kazakago.blueprint.presentation.view.global.util.clickableWithRipple
+import java.net.URL
+
+@Composable
+fun GithubRepoRow(
+    githubRepo: GithubRepo,
+    onClickItem: (githubRepo: GithubRepo) -> Unit,
+) {
+    Column(
+        modifier = Modifier
+            .clickableWithRipple(onClick = { onClickItem(githubRepo) })
+            .fillMaxWidth()
+            .padding(12.dp),
+    ) {
+        Text(
+            text = stringResource(R.string.id, githubRepo.id.value),
+            style = MaterialTheme.typography.caption,
+        )
+        Spacer(modifier = Modifier.size(2.dp))
+        Text(
+            text = githubRepo.name,
+            style = MaterialTheme.typography.h6,
+        )
+        Spacer(modifier = Modifier.size(2.dp))
+        Text(
+            text = githubRepo.url.toString(),
+            color = MaterialTheme.colors.primary,
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewGithubRepoRow() {
+    GithubRepoRow(
+        githubRepo = GithubRepo(id = GithubRepoId(1), name = "cueue_server", url = URL("https://github.com/KazaKago/cueue_server")),
+        onClickItem = {},
+    )
+}

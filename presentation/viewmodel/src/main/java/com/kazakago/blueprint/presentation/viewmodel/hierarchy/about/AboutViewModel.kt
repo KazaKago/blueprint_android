@@ -1,10 +1,7 @@
 package com.kazakago.blueprint.presentation.viewmodel.hierarchy.about
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kazakago.blueprint.domain.model.hierarchy.about.AppInfo
-import com.kazakago.blueprint.domain.model.hierarchy.about.DeveloperInfo
 import com.kazakago.blueprint.domain.usecase.hierarchy.about.GetAboutInfoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,14 +11,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AboutViewModel @Inject constructor(
-    application: Application,
     private val getAboutInfoUseCase: GetAboutInfoUseCase,
-) : AndroidViewModel(application) {
+) : ViewModel() {
 
-    private val _appInfo = MutableStateFlow<AppInfo?>(null)
-    val appInfo = _appInfo.asStateFlow()
-    private val _developerInfo = MutableStateFlow<DeveloperInfo?>(null)
-    val developerInfo = _developerInfo.asStateFlow()
+    private val _uiState = MutableStateFlow<AboutUiState>(AboutUiState.Loading)
+    val uiState = _uiState.asStateFlow()
 
     init {
         viewModelScope.launch { loadAboutInfo() }
@@ -29,7 +23,14 @@ class AboutViewModel @Inject constructor(
 
     private suspend fun loadAboutInfo() {
         val aboutInfo = getAboutInfoUseCase()
-        _appInfo.emit(aboutInfo.appInfo)
-        _developerInfo.emit(aboutInfo.developerInfo)
+        _uiState.emit(
+            AboutUiState.Completed(
+                versionCode = aboutInfo.appInfo.versionCode.value,
+                versionName = aboutInfo.appInfo.versionName.value,
+                developerName = aboutInfo.developerInfo.name,
+                developerMailAddress = aboutInfo.developerInfo.mailAddress.toURI(),
+                developerSiteUrl = aboutInfo.developerInfo.siteUrl,
+            )
+        )
     }
 }
