@@ -18,8 +18,6 @@ tasks.withType<KotlinCompile> {
 dependencies {
     // JUnit
     testImplementation("junit:junit:4.13.2")
-    // Kluent
-    testImplementation("org.amshove.kluent:kluent:1.68")
-    // MockK
-    testImplementation("io.mockk:mockk:1.12.1")
+    // Kotest
+    testImplementation("io.kotest:kotest-assertions-core:5.2.2")
 }
