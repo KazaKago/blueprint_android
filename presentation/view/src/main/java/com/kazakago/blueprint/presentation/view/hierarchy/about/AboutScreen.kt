@@ -2,7 +2,6 @@ package com.kazakago.blueprint.presentation.view.hierarchy.about
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Public
 import androidx.compose.material3.*
@@ -15,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.kazakago.blueprint.presentation.view.R
 import com.kazakago.blueprint.presentation.view.global.theme.PreviewTheme
+import com.kazakago.blueprint.presentation.view.global.ui.BackIconButton
 import com.kazakago.blueprint.presentation.view.global.util.clickableWithRipple
 import com.kazakago.blueprint.presentation.viewmodel.hierarchy.about.AboutUiState
 import java.net.URI
@@ -32,14 +32,7 @@ fun AboutScreen(
         topBar = {
             SmallTopAppBar(
                 title = { Text(stringResource(id = R.string.about_title)) },
-                navigationIcon = {
-                    IconButton(onClick = onClickBack) {
-                        Icon(
-                            imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = null,
-                        )
-                    }
-                },
+                navigationIcon = { BackIconButton(onClick = onClickBack) },
             )
         },
     ) {

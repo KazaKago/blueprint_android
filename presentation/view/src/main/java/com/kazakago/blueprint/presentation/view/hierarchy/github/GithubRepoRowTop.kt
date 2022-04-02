@@ -19,20 +19,17 @@ import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrgId
 import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrgName
 import com.kazakago.blueprint.presentation.view.R
 import com.kazakago.blueprint.presentation.view.global.theme.PreviewTheme
-import com.kazakago.blueprint.presentation.view.global.util.clickableWithRipple
 import java.net.URL
 
 @Composable
-fun GithubOrgRow(
+fun GithubRepoRowTop(
     githubOrg: GithubOrg,
-    onClickItem: (githubOrg: GithubOrg) -> Unit,
 ) {
-    Row(
+    Column(
         modifier = Modifier
-            .clickableWithRipple(onClick = { onClickItem(githubOrg) })
             .fillMaxWidth()
             .padding(16.dp),
-        verticalAlignment = Alignment.CenterVertically,
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
@@ -41,31 +38,27 @@ fun GithubOrgRow(
                 .build(),
             contentDescription = null,
             modifier = Modifier
-                .size(32.dp)
-                .clip(RoundedCornerShape(6.dp)),
+                .size(128.dp)
+                .clip(RoundedCornerShape(12.dp)),
         )
-        Spacer(modifier = Modifier.width(16.dp))
-        Column(modifier = Modifier.fillMaxWidth()) {
-            Text(
-                text = stringResource(R.string.id, githubOrg.id.value),
-                style = MaterialTheme.typography.labelMedium,
-            )
-            Spacer(modifier = Modifier.size(2.dp))
-            Text(
-                text = githubOrg.name.value,
-                style = MaterialTheme.typography.titleLarge,
-            )
-        }
+        Spacer(modifier = Modifier.size(16.dp))
+        Text(
+            text = stringResource(R.string.id, githubOrg.id.value),
+            style = MaterialTheme.typography.labelMedium,
+        )
+        Text(
+            text = githubOrg.name.value,
+            style = MaterialTheme.typography.headlineMedium,
+        )
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewGithubOrgRow() {
+fun PreviewGithubRepoRowTop() {
     PreviewTheme {
-        GithubOrgRow(
+        GithubRepoRowTop(
             githubOrg = GithubOrg(id = GithubOrgId(1), name = GithubOrgName("kazakago"), imageUrl = URL("https://avatars.githubusercontent.com/u/7742104?v=4")),
-            onClickItem = {},
         )
     }
 }

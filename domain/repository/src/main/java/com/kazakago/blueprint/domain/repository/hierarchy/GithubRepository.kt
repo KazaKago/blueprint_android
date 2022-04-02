@@ -13,6 +13,8 @@ interface GithubRepository {
 
     suspend fun requestAdditionalOrgs(continueWhenError: Boolean)
 
+    fun followOrg(githubOrgName: GithubOrgName): FlowLoadingState<GithubOrg>
+
     fun followRepos(githubOrgName: GithubOrgName): FlowLoadingState<List<GithubRepo>>
 
     suspend fun refreshRepos(githubOrgName: GithubOrgName)

@@ -11,6 +11,9 @@ interface GithubService {
     @GET("organizations")
     suspend fun getOrgs(@Query("since") since: Long?, @Query("per_page") perPage: Int): List<GithubOrgResponse>
 
-    @GET("orgs/{org}/repos")
-    suspend fun getRepos(@Path("org") org: String, @Query("page") page: Int?, @Query("per_page") perPage: Int): List<GithubRepoResponse>
+    @GET("orgs/{org_name}")
+    suspend fun getOrg(@Path("org_name") orgName: String): GithubOrgResponse
+
+    @GET("orgs/{org_name}/repos")
+    suspend fun getRepos(@Path("org_name") orgName: String, @Query("page") page: Int?, @Query("per_page") perPage: Int): List<GithubRepoResponse>
 }

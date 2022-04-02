@@ -2,6 +2,7 @@ package com.kazakago.blueprint.presentation.viewmodel.hierarchy.github
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
+import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrg
 import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrgName
 import com.kazakago.blueprint.domain.model.hierarchy.github.GithubRepo
 
@@ -15,9 +16,11 @@ sealed interface GithubReposUiState {
     ) : GithubReposUiState
 
     data class Completed(
-        override val githubOrgName: GithubOrgName,
+        val githubOrg: GithubOrg,
         val githubRepos: List<GithubRepo>,
-    ) : GithubReposUiState
+    ) : GithubReposUiState {
+        override val githubOrgName = githubOrg.name
+    }
 
     data class Error(
         override val githubOrgName: GithubOrgName,
@@ -25,15 +28,19 @@ sealed interface GithubReposUiState {
     ) : GithubReposUiState
 
     data class AdditionalLoading(
-        override val githubOrgName: GithubOrgName,
+        val githubOrg: GithubOrg,
         val githubRepos: List<GithubRepo>,
-    ) : GithubReposUiState
+    ) : GithubReposUiState {
+        override val githubOrgName = githubOrg.name
+    }
 
     data class AdditionalError(
-        override val githubOrgName: GithubOrgName,
+        val githubOrg: GithubOrg,
         val githubRepos: List<GithubRepo>,
         val error: Exception,
-    ) : GithubReposUiState
+    ) : GithubReposUiState {
+        override val githubOrgName = githubOrg.name
+    }
 
     fun githubReposOrEmpty() = when (this) {
         is AdditionalError -> githubRepos

@@ -12,6 +12,7 @@ class GithubOrgResponseMapper @Inject constructor() {
         return GithubOrgEntity(
             id = response.id,
             name = response.name,
+            imageUrl = response.avatarUrl,
         )
     }
 }

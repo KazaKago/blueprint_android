@@ -24,7 +24,7 @@ fun GithubRepoRow(
         modifier = Modifier
             .clickableWithRipple(onClick = { onClickItem(githubRepo) })
             .fillMaxWidth()
-            .padding(12.dp),
+            .padding(16.dp),
     ) {
         Text(
             text = stringResource(R.string.id, githubRepo.id.value),

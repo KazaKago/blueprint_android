@@ -75,6 +75,8 @@ dependencies {
     implementation("com.google.accompanist:accompanist-swiperefresh:0.23.1")
     // Accompanist System UI Controller
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.23.1")
+    // Coil for Jetpack Compose
+    implementation("io.coil-kt:coil-compose:2.0.0-rc02")
 
     // JUnit
     testImplementation("junit:junit:4.13.2")

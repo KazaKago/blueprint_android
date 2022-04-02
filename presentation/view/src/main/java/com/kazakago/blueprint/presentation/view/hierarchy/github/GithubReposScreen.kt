@@ -5,23 +5,18 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.*
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SmallTopAppBar
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
-import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrgName
-import com.kazakago.blueprint.domain.model.hierarchy.github.GithubRepo
-import com.kazakago.blueprint.domain.model.hierarchy.github.GithubRepoId
+import com.kazakago.blueprint.domain.model.hierarchy.github.*
 import com.kazakago.blueprint.presentation.view.global.theme.PreviewTheme
+import com.kazakago.blueprint.presentation.view.global.ui.*
 import com.kazakago.blueprint.presentation.view.global.util.OnBottomReached
-import com.kazakago.blueprint.presentation.view.global.ui.ErrorContent
-import com.kazakago.blueprint.presentation.view.global.ui.ErrorRow
-import com.kazakago.blueprint.presentation.view.global.ui.LoadingContent
-import com.kazakago.blueprint.presentation.view.global.ui.LoadingRow
 import com.kazakago.blueprint.presentation.viewmodel.hierarchy.github.GithubReposUiState
 import java.net.URL
 
@@ -40,14 +35,7 @@ fun GithubReposScreen(
         topBar = {
             SmallTopAppBar(
                 title = { Text(uiState.githubOrgName.value) },
-                navigationIcon = {
-                    IconButton(onClick = onClickBack) {
-                        Icon(
-                            imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = null,
-                        )
-                    }
-                },
+                navigationIcon = { BackIconButton(onClick = onClickBack) },
             )
         },
     ) {
@@ -58,12 +46,20 @@ fun GithubReposScreen(
                 onClickItem = onClickItem,
                 onBottomReached = onBottomReached,
                 onRefresh = onRefresh,
-            ) {
-                uiState.MayLayout(
-                    onAdditionalError = { ErrorRow(it.error, onRetryAdditional) },
-                    onAdditionalLoading = { LoadingRow() },
-                )
-            }
+                prependingItem = {
+                    uiState.MayLayout(
+                        onCompleted = { GithubRepoRowTop(githubOrg = it.githubOrg) },
+                        onAdditionalError = { GithubRepoRowTop(githubOrg = it.githubOrg) },
+                        onAdditionalLoading = { GithubRepoRowTop(githubOrg = it.githubOrg) }
+                    )
+                },
+                appendingItem = {
+                    uiState.MayLayout(
+                        onAdditionalError = { ErrorRow(it.error, onRetryAdditional) },
+                        onAdditionalLoading = { LoadingRow() },
+                    )
+                }
+            )
             uiState.MayLayout(
                 onLoading = { LoadingContent() },
                 onError = { ErrorContent(error = it.error, onRetry = onRetry) },
@@ -79,7 +75,8 @@ private fun ListContent(
     onClickItem: (githubRepo: GithubRepo) -> Unit,
     onBottomReached: () -> Unit,
     onRefresh: () -> Unit,
-    additionalItem: @Composable () -> Unit = {},
+    prependingItem: @Composable () -> Unit = {},
+    appendingItem: @Composable () -> Unit = {},
 ) {
     SwipeRefresh(
         state = rememberSwipeRefreshState(isRefreshing),
@@ -90,11 +87,14 @@ private fun ListContent(
             modifier = Modifier.fillMaxSize(),
             state = listState,
         ) {
+            item {
+                prependingItem()
+            }
             items(githubRepos) { githubRepo ->
                 GithubRepoRow(githubRepo = githubRepo, onClickItem = onClickItem)
             }
             item {
-                additionalItem()
+                appendingItem()
             }
         }
         listState.OnBottomReached {
@@ -129,7 +129,7 @@ fun PreviewGithubReposScreenOnCompleted() {
     PreviewTheme {
         GithubReposScreen(
             uiState = GithubReposUiState.Completed(
-                githubOrgName = GithubOrgName("kazakago"),
+                githubOrg = GithubOrg(id = GithubOrgId(1), name = GithubOrgName("kazakago"), imageUrl = URL("https://avatars.githubusercontent.com/u/7742104?v=4")),
                 githubRepos = listOf(
                     GithubRepo(id = GithubRepoId(1), name = "cueue_server", url = URL("https://github.com/KazaKago/cueue_server")),
                     GithubRepo(id = GithubRepoId(2), name = "cueue_flutter", url = URL("https://github.com/KazaKago/cueue_flutter")),
@@ -173,7 +173,7 @@ fun PreviewGithubReposScreenOnAdditionalLoading() {
     PreviewTheme {
         GithubReposScreen(
             uiState = GithubReposUiState.AdditionalLoading(
-                githubOrgName = GithubOrgName("kazakago"),
+                githubOrg = GithubOrg(id = GithubOrgId(1), name = GithubOrgName("kazakago"), imageUrl = URL("https://avatars.githubusercontent.com/u/7742104?v=4")),
                 githubRepos = listOf(
                     GithubRepo(id = GithubRepoId(1), name = "cueue_server", url = URL("https://github.com/KazaKago/cueue_server")),
                     GithubRepo(id = GithubRepoId(2), name = "cueue_flutter", url = URL("https://github.com/KazaKago/cueue_flutter")),
@@ -197,7 +197,7 @@ fun PreviewGithubReposScreenOnAdditionalError() {
     PreviewTheme {
         GithubReposScreen(
             uiState = GithubReposUiState.AdditionalError(
-                githubOrgName = GithubOrgName("kazakago"),
+                githubOrg = GithubOrg(id = GithubOrgId(1), name = GithubOrgName("kazakago"), imageUrl = URL("https://avatars.githubusercontent.com/u/7742104?v=4")),
                 githubRepos = listOf(
                     GithubRepo(id = GithubRepoId(1), name = "cueue_server", url = URL("https://github.com/KazaKago/cueue_server")),
                     GithubRepo(id = GithubRepoId(2), name = "cueue_flutter", url = URL("https://github.com/KazaKago/cueue_flutter")),

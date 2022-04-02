@@ -22,14 +22,14 @@ class GithubReposActivity : ComponentActivity() {
 
     class Contract : ActivityResultContract<GithubOrgName, ActivityResult>() {
         override fun createIntent(context: Context, input: GithubOrgName) = Intent(context, GithubReposActivity::class.java).apply {
-            putExtra(ParameterKey.GITHUB_ORG_ID.name, input)
+            putExtra(ParameterKey.GITHUB_ORG_NAME.name, input)
         }
 
         override fun parseResult(resultCode: Int, intent: Intent?) = ActivityResult(resultCode, intent)
     }
 
     private enum class ParameterKey {
-        GITHUB_ORG_ID,
+        GITHUB_ORG_NAME,
     }
 
     @Inject
@@ -37,7 +37,7 @@ class GithubReposActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val githubOrgName = intent.getSerializableExtra(ParameterKey.GITHUB_ORG_ID.name) as GithubOrgName
+        val githubOrgName = intent.getSerializableExtra(ParameterKey.GITHUB_ORG_NAME.name) as GithubOrgName
         val factory = GithubReposViewModel.provideFactory(githubReposViewModelFactory, githubOrgName)
         setContent {
             val viewModel: GithubReposViewModel = viewModel(factory = factory)

@@ -73,11 +73,11 @@ class GithubReposViewModel @AssistedInject constructor(
     private suspend fun followGithubRepos() {
         followGithubReposUseCase(githubOrgName).collect {
             _uiState.value = it.doAction(
-                onLoading = { githubRepos ->
-                    if (githubRepos != null) {
+                onLoading = { githubOrgAndRepos ->
+                    if (githubOrgAndRepos != null) {
                         GithubReposUiState.Completed(
-                            githubOrgName = githubOrgName,
-                            githubRepos = githubRepos,
+                            githubOrg = githubOrgAndRepos.githubOrg,
+                            githubRepos = githubOrgAndRepos.githubRepos,
                         )
                     } else {
                         GithubReposUiState.Loading(
@@ -85,24 +85,24 @@ class GithubReposViewModel @AssistedInject constructor(
                         )
                     }
                 },
-                onCompleted = { githubRepos, next, _ ->
+                onCompleted = { githubOrgAndRepos, next, _ ->
                     next.doAction(
                         onFixed = {
                             GithubReposUiState.Completed(
-                                githubOrgName = githubOrgName,
-                                githubRepos = githubRepos,
+                                githubOrg = githubOrgAndRepos.githubOrg,
+                                githubRepos = githubOrgAndRepos.githubRepos,
                             )
                         },
                         onLoading = {
                             GithubReposUiState.AdditionalLoading(
-                                githubOrgName = githubOrgName,
-                                githubRepos = githubRepos,
+                                githubOrg = githubOrgAndRepos.githubOrg,
+                                githubRepos = githubOrgAndRepos.githubRepos,
                             )
                         },
                         onError = { exception ->
                             GithubReposUiState.AdditionalError(
-                                githubOrgName = githubOrgName,
-                                githubRepos = githubRepos,
+                                githubOrg = githubOrgAndRepos.githubOrg,
+                                githubRepos = githubOrgAndRepos.githubRepos,
                                 error = exception,
                             )
                         },

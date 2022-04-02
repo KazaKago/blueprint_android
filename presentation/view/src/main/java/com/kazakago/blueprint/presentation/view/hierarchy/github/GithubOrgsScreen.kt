@@ -19,12 +19,13 @@ import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrgId
 import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrgName
 import com.kazakago.blueprint.presentation.view.R
 import com.kazakago.blueprint.presentation.view.global.theme.PreviewTheme
-import com.kazakago.blueprint.presentation.view.global.util.OnBottomReached
 import com.kazakago.blueprint.presentation.view.global.ui.ErrorContent
 import com.kazakago.blueprint.presentation.view.global.ui.ErrorRow
 import com.kazakago.blueprint.presentation.view.global.ui.LoadingContent
 import com.kazakago.blueprint.presentation.view.global.ui.LoadingRow
+import com.kazakago.blueprint.presentation.view.global.util.OnBottomReached
 import com.kazakago.blueprint.presentation.viewmodel.hierarchy.github.GithubOrgsUiState
+import java.net.URL
 
 @Composable
 fun GithubOrgsScreen(
@@ -126,9 +127,9 @@ fun PreviewGithubOrgsScreenOnCompleted() {
         GithubOrgsScreen(
             uiState = GithubOrgsUiState.Completed(
                 githubOrgs = listOf(
-                    GithubOrg(id = GithubOrgId(1), name = GithubOrgName("kazakago")),
-                    GithubOrg(id = GithubOrgId(2), name = GithubOrgName("apple")),
-                    GithubOrg(id = GithubOrgId(3), name = GithubOrgName("google")),
+                    GithubOrg(id = GithubOrgId(1), name = GithubOrgName("kazakago"), imageUrl = URL("https://avatars.githubusercontent.com/u/7742104?v=4")),
+                    GithubOrg(id = GithubOrgId(2), name = GithubOrgName("apple"), imageUrl = URL("https://avatars.githubusercontent.com/u/7742104?v=4")),
+                    GithubOrg(id = GithubOrgId(3), name = GithubOrgName("google"), imageUrl = URL("https://avatars.githubusercontent.com/u/7742104?v=4")),
                 ),
             ),
             isRefreshing = false,
@@ -168,9 +169,9 @@ fun PreviewGithubOrgsScreenOnAdditionalLoading() {
         GithubOrgsScreen(
             uiState = GithubOrgsUiState.AdditionalLoading(
                 githubOrgs = listOf(
-                    GithubOrg(id = GithubOrgId(1), name = GithubOrgName("kazakago")),
-                    GithubOrg(id = GithubOrgId(2), name = GithubOrgName("apple")),
-                    GithubOrg(id = GithubOrgId(3), name = GithubOrgName("google")),
+                    GithubOrg(id = GithubOrgId(1), name = GithubOrgName("kazakago"), imageUrl = URL("https://avatars.githubusercontent.com/u/7742104?v=4")),
+                    GithubOrg(id = GithubOrgId(2), name = GithubOrgName("apple"), imageUrl = URL("https://avatars.githubusercontent.com/u/7742104?v=4")),
+                    GithubOrg(id = GithubOrgId(3), name = GithubOrgName("google"), imageUrl = URL("https://avatars.githubusercontent.com/u/7742104?v=4")),
                 ),
             ),
             isRefreshing = false,
@@ -191,9 +192,9 @@ fun PreviewGithubOrgsScreenOnAdditionalError() {
         GithubOrgsScreen(
             uiState = GithubOrgsUiState.AdditionalError(
                 githubOrgs = listOf(
-                    GithubOrg(id = GithubOrgId(1), name = GithubOrgName("kazakago")),
-                    GithubOrg(id = GithubOrgId(2), name = GithubOrgName("apple")),
-                    GithubOrg(id = GithubOrgId(3), name = GithubOrgName("google")),
+                    GithubOrg(id = GithubOrgId(1), name = GithubOrgName("kazakago"), imageUrl = URL("https://avatars.githubusercontent.com/u/7742104?v=4")),
+                    GithubOrg(id = GithubOrgId(2), name = GithubOrgName("apple"), imageUrl = URL("https://avatars.githubusercontent.com/u/7742104?v=4")),
+                    GithubOrg(id = GithubOrgId(3), name = GithubOrgName("google"), imageUrl = URL("https://avatars.githubusercontent.com/u/7742104?v=4")),
                 ),
                 error = IllegalAccessException("hogehogepiyopiyohogehogepiyopiyohogehogepiyopiyo"),
             ),
