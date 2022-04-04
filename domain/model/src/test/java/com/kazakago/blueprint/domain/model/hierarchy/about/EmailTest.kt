@@ -1,8 +1,7 @@
 package com.kazakago.blueprint.domain.model.hierarchy.about
 
-import org.amshove.kluent.invoking
-import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldThrow
+import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.matchers.shouldBe
 import org.junit.Test
 import java.net.URI
 
@@ -10,17 +9,17 @@ class EmailTest {
 
     @Test
     fun rejectInvalidEmail1() {
-        invoking { Email("kazakagoATgmail.com") } shouldThrow IllegalArgumentException::class
+        shouldThrow<IllegalArgumentException> { Email("kazakagoATgmail.com") }
     }
 
     @Test
     fun rejectInvalidEmail2() {
-        invoking { Email("kazakago@gmailcom") } shouldThrow IllegalArgumentException::class
+        shouldThrow<IllegalArgumentException> { Email("kazakago@gmailcom") }
     }
 
     @Test
     fun isCorrectEmailURI() {
         val email = Email("kazakago@gmail.com")
-        email.toURI() shouldBeEqualTo URI("mailto:kazakago@gmail.com")
+        email.toURI() shouldBe URI("mailto:kazakago@gmail.com")
     }
 }

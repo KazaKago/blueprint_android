@@ -12,7 +12,10 @@ java {
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "11"
+    kotlinOptions{
+        jvmTarget = "11"
+        freeCompilerArgs = freeCompilerArgs + "-opt-in=kotlinx.serialization.ExperimentalSerializationApi"
+    }
 }
 
 dependencies {

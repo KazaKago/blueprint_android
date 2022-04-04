@@ -4,6 +4,7 @@ import com.kazakago.blueprint.data.cache.entity.GithubOrgEntity
 import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrg
 import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrgId
 import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrgName
+import java.net.URL
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -14,6 +15,7 @@ class GithubOrgEntityMapper @Inject constructor() {
         return GithubOrg(
             id = GithubOrgId(entity.id),
             name = GithubOrgName(entity.name),
+            imageUrl = URL(entity.imageUrl),
         )
     }
 

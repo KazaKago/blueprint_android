@@ -2,7 +2,6 @@ package com.kazakago.blueprint.presentation.viewmodel.hierarchy.github
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrg
 import com.kazakago.blueprint.domain.usecase.hierarchy.github.FollowGithubOrgsUseCase
 import com.kazakago.blueprint.domain.usecase.hierarchy.github.RefreshGithubOrgsUseCase
 import com.kazakago.blueprint.domain.usecase.hierarchy.github.RequestAdditionalGithubOrgsUseCase
@@ -19,18 +18,10 @@ class GithubOrgsViewModel @Inject constructor(
     private val requestAdditionalGithubOrgsUseCase: RequestAdditionalGithubOrgsUseCase,
 ) : ViewModel() {
 
-    private val _githubOrgs = MutableStateFlow<List<GithubOrg>>(emptyList())
-    val githubOrgs = _githubOrgs.asStateFlow()
-    private val _isMainLoading = MutableStateFlow(false)
-    val isMainLoading = _isMainLoading.asStateFlow()
-    private val _isAdditionalLoading = MutableStateFlow(false)
-    val isAdditionalLoading = _isAdditionalLoading.asStateFlow()
+    private val _uiState = MutableStateFlow<GithubOrgsUiState>(GithubOrgsUiState.Loading)
+    val uiState = _uiState.asStateFlow()
     private val _isRefreshing = MutableStateFlow(false)
     val isRefreshing = _isRefreshing.asStateFlow()
-    private val _mainError = MutableStateFlow<Exception?>(null)
-    val mainError = _mainError.asStateFlow()
-    private val _additionalError = MutableStateFlow<Exception?>(null)
-    val additionalError = _additionalError.asStateFlow()
 
     init {
         viewModelScope.launch { followOrgs() }
@@ -64,44 +55,40 @@ class GithubOrgsViewModel @Inject constructor(
 
     private suspend fun followOrgs() {
         followGithubOrgsUseCase().collect {
-            it.doAction(
+            _uiState.value = it.doAction(
                 onLoading = { githubOrgs ->
                     if (githubOrgs != null) {
-                        _githubOrgs.value = githubOrgs
-                        _isMainLoading.value = false
+                        GithubOrgsUiState.Completed(
+                            githubOrgs = githubOrgs,
+                        )
                     } else {
-                        _githubOrgs.value = emptyList()
-                        _isMainLoading.value = true
+                        GithubOrgsUiState.Loading
                     }
-                    _isAdditionalLoading.value = false
-                    _mainError.value = null
-                    _additionalError.value = null
                 },
                 onCompleted = { githubOrgs, next, _ ->
                     next.doAction(
                         onFixed = {
-                            _isAdditionalLoading.value = false
-                            _additionalError.value = null
+                            GithubOrgsUiState.Completed(
+                                githubOrgs = githubOrgs,
+                            )
                         },
                         onLoading = {
-                            _isAdditionalLoading.value = true
-                            _additionalError.value = null
+                            GithubOrgsUiState.AdditionalLoading(
+                                githubOrgs = githubOrgs,
+                            )
                         },
                         onError = { exception ->
-                            _isAdditionalLoading.value = false
-                            _additionalError.value = exception
+                            GithubOrgsUiState.AdditionalError(
+                                githubOrgs = githubOrgs,
+                                error = exception,
+                            )
                         },
                     )
-                    _githubOrgs.value = githubOrgs
-                    _isMainLoading.value = false
-                    _mainError.value = null
                 },
                 onError = { exception ->
-                    _githubOrgs.value = emptyList()
-                    _isMainLoading.value = false
-                    _isAdditionalLoading.value = false
-                    _mainError.value = exception
-                    _additionalError.value = null
+                    GithubOrgsUiState.Error(
+                        error = exception,
+                    )
                 }
             )
         }

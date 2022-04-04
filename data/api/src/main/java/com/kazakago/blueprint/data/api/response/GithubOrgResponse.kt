@@ -9,4 +9,6 @@ data class GithubOrgResponse(
     val id: Long,
     @SerialName("login")
     val name: String,
+    @SerialName("avatar_url")
+    val avatarUrl: String,
 )

@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrgName
-import com.kazakago.blueprint.domain.model.hierarchy.github.GithubRepo
 import com.kazakago.blueprint.domain.usecase.hierarchy.github.FollowGithubReposUseCase
 import com.kazakago.blueprint.domain.usecase.hierarchy.github.RefreshGithubReposUseCase
 import com.kazakago.blueprint.domain.usecase.hierarchy.github.RequestAdditionalGithubReposUseCase
@@ -19,7 +18,7 @@ class GithubReposViewModel @AssistedInject constructor(
     private val followGithubReposUseCase: FollowGithubReposUseCase,
     private val refreshGithubReposUseCase: RefreshGithubReposUseCase,
     private val requestAdditionalGithubReposUseCase: RequestAdditionalGithubReposUseCase,
-    @Assisted githubOrgName: GithubOrgName,
+    @Assisted private val githubOrgName: GithubOrgName,
 ) : ViewModel() {
 
     companion object {
@@ -36,20 +35,10 @@ class GithubReposViewModel @AssistedInject constructor(
         fun create(githubOrgName: GithubOrgName): GithubReposViewModel
     }
 
-    private val _githubOrgName = MutableStateFlow(githubOrgName)
-    val githubOrgName = _githubOrgName.asStateFlow()
-    private val _githubRepos = MutableStateFlow<List<GithubRepo>>(emptyList())
-    val githubRepos = _githubRepos.asStateFlow()
-    private val _isMainLoading = MutableStateFlow(false)
-    val isMainLoading = _isMainLoading.asStateFlow()
-    private val _isAdditionalLoading = MutableStateFlow(false)
-    val isAdditionalLoading = _isAdditionalLoading.asStateFlow()
+    private val _uiState = MutableStateFlow<GithubReposUiState>(GithubReposUiState.Loading(githubOrgName))
+    val uiState = _uiState.asStateFlow()
     private val _isRefreshing = MutableStateFlow(false)
     val isRefreshing = _isRefreshing.asStateFlow()
-    private val _mainError = MutableStateFlow<Exception?>(null)
-    val mainError = _mainError.asStateFlow()
-    private val _additionalError = MutableStateFlow<Exception?>(null)
-    val additionalError = _additionalError.asStateFlow()
 
     init {
         viewModelScope.launch { followGithubRepos() }
@@ -58,69 +47,72 @@ class GithubReposViewModel @AssistedInject constructor(
     fun refresh() {
         viewModelScope.launch {
             _isRefreshing.value = true
-            refreshGithubReposUseCase(githubOrgName.value)
+            refreshGithubReposUseCase(githubOrgName)
             _isRefreshing.value = false
         }
     }
 
     fun retry() {
         viewModelScope.launch {
-            refreshGithubReposUseCase(githubOrgName.value)
+            refreshGithubReposUseCase(githubOrgName)
         }
     }
 
-    fun requestAdditional() {
+    fun requestAddition() {
         viewModelScope.launch {
-            requestAdditionalGithubReposUseCase(githubOrgName.value, continueWhenError = false)
+            requestAdditionalGithubReposUseCase(githubOrgName, continueWhenError = false)
         }
     }
 
-    fun retryAdditional() {
+    fun retryAddition() {
         viewModelScope.launch {
-            requestAdditionalGithubReposUseCase(githubOrgName.value, continueWhenError = true)
+            requestAdditionalGithubReposUseCase(githubOrgName, continueWhenError = true)
         }
     }
 
     private suspend fun followGithubRepos() {
-        followGithubReposUseCase(githubOrgName.value).collect {
-            it.doAction(
-                onLoading = { githubRepos ->
-                    if (githubRepos != null) {
-                        _githubRepos.value = githubRepos
-                        _isMainLoading.value = false
+        followGithubReposUseCase(githubOrgName).collect {
+            _uiState.value = it.doAction(
+                onLoading = { githubOrgAndRepos ->
+                    if (githubOrgAndRepos != null) {
+                        GithubReposUiState.Completed(
+                            githubOrg = githubOrgAndRepos.githubOrg,
+                            githubRepos = githubOrgAndRepos.githubRepos,
+                        )
                     } else {
-                        _githubRepos.value = emptyList()
-                        _isMainLoading.value = true
+                        GithubReposUiState.Loading(
+                            githubOrgName = githubOrgName,
+                        )
                     }
-                    _isAdditionalLoading.value = false
-                    _mainError.value = null
-                    _additionalError.value = null
                 },
-                onCompleted = { githubRepos, next, _ ->
+                onCompleted = { githubOrgAndRepos, next, _ ->
                     next.doAction(
                         onFixed = {
-                            _isAdditionalLoading.value = false
-                            _additionalError.value = null
+                            GithubReposUiState.Completed(
+                                githubOrg = githubOrgAndRepos.githubOrg,
+                                githubRepos = githubOrgAndRepos.githubRepos,
+                            )
                         },
                         onLoading = {
-                            _isAdditionalLoading.value = true
-                            _additionalError.value = null
+                            GithubReposUiState.AdditionalLoading(
+                                githubOrg = githubOrgAndRepos.githubOrg,
+                                githubRepos = githubOrgAndRepos.githubRepos,
+                            )
                         },
                         onError = { exception ->
-                            _isAdditionalLoading.value = false
-                            _additionalError.value = exception
+                            GithubReposUiState.AdditionalError(
+                                githubOrg = githubOrgAndRepos.githubOrg,
+                                githubRepos = githubOrgAndRepos.githubRepos,
+                                error = exception,
+                            )
                         },
                     )
-                    _githubRepos.value = githubRepos
-                    _isMainLoading.value = false
-                    _mainError.value = null
                 },
                 onError = { exception ->
-                    _githubRepos.value = emptyList()
-                    _isMainLoading.value = false
-                    _isAdditionalLoading.value = false
-                    _mainError.value = exception
-                    _additionalError.value = null
+                    GithubReposUiState.Error(
+                        githubOrgName = githubOrgName,
+                        error = exception,
+                    )
                 }
             )
         }
