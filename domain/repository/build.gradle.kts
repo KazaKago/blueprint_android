@@ -1,7 +1,8 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+@Suppress("DSL_SCOPE_VIOLATION") // https://youtrack.jetbrains.com/issue/KTIJ-19369
 plugins {
-    kotlin("jvm")
+    alias(libs.plugins.kotlin.jvm)
 }
 
 java {
@@ -17,12 +18,12 @@ tasks.withType<KotlinCompile> {
 
 dependencies {
     // Module
-    implementation(project(":domain:model"))
+    implementation(projects.domain.model)
     // kotlinx.coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
+    implementation(libs.kotlinx.coroutines.core)
     // StoreFlowable.kt
-    implementation("com.kazakago.storeflowable:storeflowable-core:5.2.1")
+    implementation(libs.storeflowable.core)
 
     // JUnit
-    testImplementation("junit:junit:4.13.2")
+    testImplementation(libs.junit)
 }

@@ -1,15 +1,16 @@
+@Suppress("DSL_SCOPE_VIOLATION") // https://youtrack.jetbrains.com/issue/KTIJ-19369
 plugins {
-    id("com.android.library")
-    kotlin("android")
-    kotlin("kapt")
-    id("dagger.hilt.android.plugin")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.dagger.hilt)
 }
 
 android {
-    compileSdk = 31
+    compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
-        minSdk = 28
-        targetSdk = 31
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -22,9 +23,6 @@ android {
     flavorDimensions += "app"
     productFlavors {
         create("production") {
-            dimension = "app"
-        }
-        create("staging") {
             dimension = "app"
         }
         create("develop") {
@@ -43,27 +41,27 @@ android {
 
 dependencies {
     // Module
-    implementation(project(":domain:model"))
-    implementation(project(":domain:repository"))
-    implementation(project(":data:api"))
-    implementation(project(":data:cache"))
-    implementation(project(":data:resource"))
-    implementation(project(":data:mapper"))
+    implementation(projects.domain.model)
+    implementation(projects.domain.repository)
+    implementation(projects.data.api)
+    implementation(projects.data.cache)
+    implementation(projects.data.resource)
+    implementation(projects.data.mapper)
     // kotlinx.coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
+    implementation(libs.kotlinx.coroutines.core)
     // kotlinx-datetime
-    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.2")
+    implementation(libs.kotlinx.datetime)
     // Dagger
-    implementation("com.google.dagger:hilt-android:2.41")
-    kapt("com.google.dagger:hilt-compiler:2.41")
+    implementation(libs.dagger.hilt.android)
+    kapt(libs.dagger.hilt.compiler)
     // StoreFlowable.kt
-    implementation("com.kazakago.storeflowable:storeflowable:5.2.1")
+    implementation(libs.storeflowable)
 
     // JUnit
-    testImplementation("junit:junit:4.13.2")
+    testImplementation(libs.junit)
 
     // AndroidX JUnit
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
+    androidTestImplementation(libs.androidx.junit)
     // AndroidX Espresso
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    androidTestImplementation(libs.androidx.espresso.core)
 }

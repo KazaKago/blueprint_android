@@ -1,18 +1,19 @@
+@Suppress("DSL_SCOPE_VIOLATION") // https://youtrack.jetbrains.com/issue/KTIJ-19369
 plugins {
-    id("com.android.application")
-    kotlin("android")
-    kotlin("kapt")
-    id("dagger.hilt.android.plugin")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.dagger.hilt)
 }
 
 android {
-    compileSdk = 31
+    compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
         applicationId = "com.kazakago.blueprint"
-        minSdk = 28
-        targetSdk = 31
-        versionCode = 1
-        versionName = "1.0.0"
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
+        versionCode = libs.versions.versionCode.get().toInt()
+        versionName = libs.versions.versionName.get()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -29,11 +30,6 @@ android {
     productFlavors {
         create("production") {
             dimension = "app"
-        }
-        create("staging") {
-            dimension = "app"
-            applicationId = defaultConfig.applicationId + ".staging"
-            versionName = defaultConfig.versionName + " staging"
         }
         create("develop") {
             dimension = "app"
@@ -52,25 +48,25 @@ android {
 
 dependencies {
     // Module
-    implementation(project(":presentation:view"))
-    implementation(project(":presentation:viewmodel"))
-    implementation(project(":domain:usecase"))
-    implementation(project(":domain:model"))
-    implementation(project(":domain:repository"))
-    implementation(project(":data:repository"))
-    implementation(project(":data:api"))
-    implementation(project(":data:cache"))
-    implementation(project(":data:resource"))
-    implementation(project(":data:mapper"))
+    implementation(projects.presentation.view)
+    implementation(projects.presentation.viewmodel)
+    implementation(projects.domain.usecase)
+    implementation(projects.domain.model)
+    implementation(projects.domain.repository)
+    implementation(projects.data.repository)
+    implementation(projects.data.api)
+    implementation(projects.data.cache)
+    implementation(projects.data.resource)
+    implementation(projects.data.mapper)
     // Dagger
-    implementation("com.google.dagger:hilt-android:2.41")
-    kapt("com.google.dagger:hilt-compiler:2.41")
+    implementation(libs.dagger.hilt.android)
+    kapt(libs.dagger.hilt.compiler)
 
     // JUnit
-    testImplementation("junit:junit:4.13.2")
+    testImplementation(libs.junit)
 
     // AndroidX JUnit
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
+    androidTestImplementation(libs.androidx.junit)
     // AndroidX Espresso
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    androidTestImplementation(libs.androidx.espresso.core)
 }

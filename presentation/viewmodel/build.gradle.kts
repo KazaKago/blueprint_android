@@ -1,15 +1,16 @@
+@Suppress("DSL_SCOPE_VIOLATION") // https://youtrack.jetbrains.com/issue/KTIJ-19369
 plugins {
-    id("com.android.library")
-    kotlin("android")
-    kotlin("kapt")
-    id("dagger.hilt.android.plugin")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.dagger.hilt)
 }
 
 android {
-    compileSdk = 31
+    compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
-        minSdk = 28
-        targetSdk = 31
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -22,9 +23,6 @@ android {
     flavorDimensions += "app"
     productFlavors {
         create("production") {
-            dimension = "app"
-        }
-        create("staging") {
             dimension = "app"
         }
         create("develop") {
@@ -42,32 +40,32 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.1.1"
+        kotlinCompilerExtensionVersion = libs.versions.compose.get()
     }
 }
 
 dependencies {
     // Module
-    implementation(project(":domain:usecase"))
-    implementation(project(":domain:model"))
+    implementation(projects.domain.usecase)
+    implementation(projects.domain.model)
     // kotlinx.coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
+    implementation(libs.kotlinx.coroutines.core)
     // Dagger
-    implementation("com.google.dagger:hilt-android:2.41")
-    kapt("com.google.dagger:hilt-compiler:2.41")
+    implementation(libs.dagger.hilt.android)
+    kapt(libs.dagger.hilt.compiler)
     // AndroidX Compose Runtime
-    implementation("androidx.compose.runtime:runtime:1.1.1")
+    implementation(libs.androidx.compose.runtime)
     // AndroidX Lifecycle
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")
-    implementation("androidx.lifecycle:lifecycle-common-java8:2.4.1")
+    implementation(libs.androidx.lifecycle.viewmodel)
+    implementation(libs.androidx.lifecycle.viewmodel.common)
     // StoreFlowable.kt
-    implementation("com.kazakago.storeflowable:storeflowable-core:5.2.1")
+    implementation(libs.storeflowable.core)
 
     // JUnit
-    testImplementation("junit:junit:4.13.2")
+    testImplementation(libs.junit)
 
     // AndroidX JUnit
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
+    androidTestImplementation(libs.androidx.junit)
     // AndroidX Espresso
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    androidTestImplementation(libs.androidx.espresso.core)
 }

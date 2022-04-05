@@ -1,9 +1,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+@Suppress("DSL_SCOPE_VIOLATION") // https://youtrack.jetbrains.com/issue/KTIJ-19369
 plugins {
-    kotlin("jvm")
-    kotlin("kapt")
-    kotlin("plugin.serialization")
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 java {
@@ -12,7 +13,7 @@ java {
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions{
+    kotlinOptions {
         jvmTarget = "11"
         freeCompilerArgs = freeCompilerArgs + "-opt-in=kotlinx.serialization.ExperimentalSerializationApi"
     }
@@ -20,17 +21,17 @@ tasks.withType<KotlinCompile> {
 
 dependencies {
     // kotlinx.serialization
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
+    implementation(libs.kotlinx.serialization.json)
     // Dagger
-    implementation("com.google.dagger:hilt-core:2.41")
-    kapt("com.google.dagger:hilt-compiler:2.41")
+    implementation(libs.dagger.hilt.core)
+    kapt(libs.dagger.hilt.compiler)
     // OkHttp
-    implementation("com.squareup.okhttp3:okhttp:4.9.3")
+    implementation(libs.okhttp)
     // Retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    // Kotlin Serialization Converter
-    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
+    implementation(libs.retrofit)
+    // Retrofit Serialization Converter
+    implementation(libs.retrofit.serialization.converter)
 
     // JUnit
-    testImplementation("junit:junit:4.13.2")
+    testImplementation(libs.junit)
 }

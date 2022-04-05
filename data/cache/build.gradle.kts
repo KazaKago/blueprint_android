@@ -1,8 +1,9 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+@Suppress("DSL_SCOPE_VIOLATION") // https://youtrack.jetbrains.com/issue/KTIJ-19369
 plugins {
-    kotlin("jvm")
-    kotlin("kapt")
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.kapt)
 }
 
 java {
@@ -18,13 +19,13 @@ tasks.withType<KotlinCompile> {
 
 dependencies {
     // kotlinx-datetime
-    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.2")
+    implementation(libs.kotlinx.datetime)
     // Dagger
-    implementation("com.google.dagger:hilt-core:2.41")
-    kapt("com.google.dagger:hilt-compiler:2.41")
+    implementation(libs.dagger.hilt.core)
+    kapt(libs.dagger.hilt.compiler)
     // StoreFlowable.kt
-    implementation("com.kazakago.storeflowable:storeflowable:5.2.1")
+    implementation(libs.storeflowable)
 
     // JUnit
-    testImplementation("junit:junit:4.13.2")
+    testImplementation(libs.junit)
 }
