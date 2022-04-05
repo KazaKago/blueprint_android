@@ -7,13 +7,13 @@ plugins {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    setSourceCompatibility(libs.versions.java.get())
+    setTargetCompatibility(libs.versions.java.get())
 }
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = libs.versions.java.get()
     }
 }
 

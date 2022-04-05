@@ -5,6 +5,7 @@ versionName = "1.0.0"
 compileSdk = "31"
 minSdk = "28"
 targetSdk = "31"
+java = "11"
 
 android-plugin = "7.1.2"
 kotlin = "1.6.10"
