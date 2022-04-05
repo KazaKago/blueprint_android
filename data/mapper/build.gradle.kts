@@ -43,7 +43,6 @@ dependencies {
     implementation(projects.domain.model)
     implementation(projects.data.api)
     implementation(projects.data.cache)
-    implementation(projects.data.resource)
     // Dagger
     implementation(libs.dagger.hilt.android)
     kapt(libs.dagger.hilt.compiler)
