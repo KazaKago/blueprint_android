@@ -56,6 +56,8 @@ dependencies {
     kapt(libs.dagger.hilt.compiler)
     // AndroidX Compose UI
     implementation(libs.androidx.compose.ui)
+    // AndroidX Compose Tooling support
+    implementation(libs.androidx.compose.ui.tooling)
     // AndroidX Compose Foundation
     implementation(libs.androidx.compose.fondation)
     // AndroidX Compose Material3
@@ -83,7 +85,4 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     // AndroidX Compose UI Tests
     androidTestImplementation(libs.androidx.compose.ui.test)
-
-    // AndroidX Compose Tooling support
-    debugImplementation(libs.androidx.compose.ui.tooling)
 }
