@@ -18,7 +18,7 @@ tasks.withType<KotlinCompile> {
 }
 
 dependencies {
-    // kotlinx-datetime
+    // Kotlinx DateTime
     implementation(libs.kotlinx.datetime)
     // Dagger
     implementation(libs.dagger.hilt.core)

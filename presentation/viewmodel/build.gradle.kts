@@ -45,17 +45,17 @@ android {
 }
 
 dependencies {
-    // Module
+    // Modules
     implementation(projects.domain.usecase)
     implementation(projects.domain.model)
-    // kotlinx.coroutines
+    // Kotlinx Coroutines
     implementation(libs.kotlinx.coroutines.core)
     // Dagger
     implementation(libs.dagger.hilt.android)
     kapt(libs.dagger.hilt.compiler)
     // AndroidX Compose Runtime
     implementation(libs.androidx.compose.runtime)
-    // AndroidX Lifecycle
+    // AndroidX Lifecycle ViewModel
     implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.androidx.lifecycle.viewmodel.common)
     // StoreFlowable.kt

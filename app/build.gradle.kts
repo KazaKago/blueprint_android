@@ -47,7 +47,7 @@ android {
 }
 
 dependencies {
-    // Module
+    // Modules
     implementation(projects.presentation.view)
     implementation(projects.presentation.viewmodel)
     implementation(projects.domain.usecase)

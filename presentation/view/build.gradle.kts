@@ -46,34 +46,32 @@ android {
 }
 
 dependencies {
-    // Module
+    // Modules
     implementation(projects.presentation.viewmodel)
     implementation(projects.domain.model)
-    // kotlinx.coroutines
+    // Kotlinx Coroutines
     implementation(libs.kotlinx.coroutines.core)
     // Dagger
     implementation(libs.dagger.hilt.android)
     kapt(libs.dagger.hilt.compiler)
     // AndroidX Compose UI
     implementation(libs.androidx.compose.ui)
-    // AndroidX Compose Tooling support
-    implementation(libs.androidx.compose.ui.tooling)
     // AndroidX Compose Foundation
     implementation(libs.androidx.compose.fondation)
-    // AndroidX Compose Material Design
+    // AndroidX Compose Material3
     implementation(libs.androidx.compose.material3)
-    // AndroidX Compose Material Design icons
+    // AndroidX Compose Material Icons
     implementation(libs.androidx.compose.material.icons.core)
     implementation(libs.androidx.compose.material.icons.extended)
-    // AndroidX Compose Integration with activities
+    // AndroidX Activity Compose
     implementation(libs.androidx.activity.compose)
-    // AndroidX Compose Integration with ViewModels
+    // AndroidX Lifecycle ViewModel Compose
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     // Accompanist Swipe Refresh
     implementation(libs.accompanist.swiperefresh)
     // Accompanist System UI Controller
     implementation(libs.accompanist.systemuicontroller)
-    // Coil for Jetpack Compose
+    // Coil
     implementation(libs.coil.compose)
 
     // JUnit
@@ -85,4 +83,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     // AndroidX Compose UI Tests
     androidTestImplementation(libs.androidx.compose.ui.test)
+
+    // AndroidX Compose Tooling support
+    debugImplementation(libs.androidx.compose.ui.tooling)
 }

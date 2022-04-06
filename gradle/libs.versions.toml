@@ -52,7 +52,7 @@ androidx-espresso-core = "androidx.test.espresso:espresso-core:3.4.0"
 accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanist" }
 # Accompanist System UI Controller
 accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
-# Coil for Jetpack Compose
+# Coil
 coil-compose = "io.coil-kt:coil-compose:2.0.0-rc02"
 # Dagger
 dagger-hilt-core = { module = "com.google.dagger:hilt-core", version.ref = "dagger" }

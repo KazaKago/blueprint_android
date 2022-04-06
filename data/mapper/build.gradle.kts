@@ -39,7 +39,7 @@ android {
 }
 
 dependencies {
-    // Module
+    // Modules
     implementation(projects.domain.model)
     implementation(projects.data.api)
     implementation(projects.data.cache)

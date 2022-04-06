@@ -18,10 +18,10 @@ tasks.withType<KotlinCompile> {
 }
 
 dependencies {
-    // Module
+    // Modules
     implementation(projects.domain.model)
     implementation(projects.domain.repository)
-    // kotlinx.coroutines
+    // Kotlinx Coroutines
     implementation(libs.kotlinx.coroutines.core)
     // Dagger
     implementation(libs.dagger.hilt.core)

@@ -20,7 +20,7 @@ tasks.withType<KotlinCompile> {
 }
 
 dependencies {
-    // kotlinx.serialization
+    // Kotlinx Serialization
     implementation(libs.kotlinx.serialization.json)
     // Dagger
     implementation(libs.dagger.hilt.core)

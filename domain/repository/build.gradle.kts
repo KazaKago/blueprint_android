@@ -17,9 +17,9 @@ tasks.withType<KotlinCompile> {
 }
 
 dependencies {
-    // Module
+    // Modules
     implementation(projects.domain.model)
-    // kotlinx.coroutines
+    // Kotlinx Coroutines
     implementation(libs.kotlinx.coroutines.core)
     // StoreFlowable.kt
     implementation(libs.storeflowable.core)

@@ -40,16 +40,16 @@ android {
 }
 
 dependencies {
-    // Module
+    // Modules
     implementation(projects.domain.model)
     implementation(projects.domain.repository)
     implementation(projects.data.api)
     implementation(projects.data.cache)
     implementation(projects.data.resource)
     implementation(projects.data.mapper)
-    // kotlinx.coroutines
+    // Kotlinx Coroutines
     implementation(libs.kotlinx.coroutines.core)
-    // kotlinx-datetime
+    // Kotlinx DateTime
     implementation(libs.kotlinx.datetime)
     // Dagger
     implementation(libs.dagger.hilt.android)
