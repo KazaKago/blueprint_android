@@ -1,6 +1,8 @@
 {
-  "extends": [
-    "config:base"
+  "extends": ["config:base"],
+  "ignorePresets": [
+    ":prHourlyLimit2",
+    ":prImmediately"
   ],
   "baseBranches": ["develop"],
   "labels": ["dependencies"]
