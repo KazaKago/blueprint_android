@@ -2,6 +2,7 @@ package com.kazakago.blueprint.presentation.view.hierarchy.github
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -47,9 +48,11 @@ fun GithubRepoRow(
 @Composable
 fun PreviewGithubRepoRow() {
     PreviewTheme {
-        GithubRepoRow(
-            githubRepo = GithubRepo(id = GithubRepoId(1), name = "cueue_server", url = URL("https://github.com/KazaKago/cueue_server")),
-            onClickItem = {},
-        )
+        Surface {
+            GithubRepoRow(
+                githubRepo = GithubRepo(id = GithubRepoId(1), name = "cueue_server", url = URL("https://github.com/KazaKago/cueue_server")),
+                onClickItem = {},
+            )
+        }
     }
 }

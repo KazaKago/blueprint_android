@@ -3,6 +3,7 @@ package com.kazakago.blueprint.presentation.view.global.ui
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -43,9 +44,11 @@ fun ErrorContent(
 @Composable
 fun PreviewErrorContent() {
     PreviewTheme {
-        ErrorContent(
-            error = IllegalAccessException("hogehogehogehogehogehogehogehogehogehoge"),
-            onRetry = {},
-        )
+        Surface {
+            ErrorContent(
+                error = IllegalAccessException("hogehogehogehogehogehogehogehogehogehoge"),
+                onRetry = {},
+            )
+        }
     }
 }

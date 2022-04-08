@@ -3,6 +3,7 @@ package com.kazakago.blueprint.presentation.view.hierarchy.github
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -57,8 +58,10 @@ fun GithubRepoRowTop(
 @Composable
 fun PreviewGithubRepoRowTop() {
     PreviewTheme {
-        GithubRepoRowTop(
-            githubOrg = GithubOrg(id = GithubOrgId(1), name = GithubOrgName("kazakago"), imageUrl = URL("https://avatars.githubusercontent.com/u/7742104?v=4")),
-        )
+        Surface {
+            GithubRepoRowTop(
+                githubOrg = GithubOrg(id = GithubOrgId(1), name = GithubOrgName("kazakago"), imageUrl = URL("https://avatars.githubusercontent.com/u/7742104?v=4")),
+            )
+        }
     }
 }
