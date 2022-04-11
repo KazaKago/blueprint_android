@@ -17,4 +17,4 @@ jobs:
         distribution: 'temurin'
         cache: gradle
     - name: Test
-      run: ./gradlew app:testDevelopReleaseUnitTest
+      run: ./gradlew test
