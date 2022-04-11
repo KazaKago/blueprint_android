@@ -1,3 +1,3 @@
 # KazaKago's blueprint for Android
 
-[![Build Status](https://app.bitrise.io/app/e16c0b5f917e7630/status.svg?token=CNy6A_B_q2WTCSGQu_VZSw)](https://app.bitrise.io/app/e16c0b5f917e7630)
+[![DeployDevelop](https://github.com/KazaKago/blueprint_android/actions/workflows/deploy_develop.yml/badge.svg?branch=develop)](https://github.com/KazaKago/blueprint_android/actions/workflows/deploy_develop.yml) [![Test](https://github.com/KazaKago/blueprint_android/actions/workflows/unit_test.yml/badge.svg?branch=develop)](https://github.com/KazaKago/blueprint_android/actions/workflows/unit_test.yml)
