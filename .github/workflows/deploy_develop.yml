@@ -23,6 +23,7 @@ jobs:
     - name: Build
       run: ./gradlew app:bundleDevelopRelease
     - name: Sign
+      id: sign
       uses: mukeshsolanki/bundletool-action@v1.0.0
       with:
         aabFile: ./app/build/outputs/bundle/developRelease/app-develop-release.aab
@@ -33,5 +34,5 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@v3
       with:
-        name: release-apk
-        path: ${{ steps.convert_aab.outputs.apkPath }}
+        name: signed-apk
+        path: ${{ steps.sign.outputs.apkPath }}
