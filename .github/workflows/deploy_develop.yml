@@ -14,16 +14,23 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-    - name: Set up JDK 11
+    - name: Setup JDK
       uses: actions/setup-java@v3
       with:
         java-version: '11'
         distribution: 'temurin'
         cache: gradle
-    - name: Assemble
-      run: ./gradlew app:assembleDevelopRelease
-    - name: Upload Apk
-      uses: actions/upload-artifact@v2
+    - name: Build
+      run: ./gradlew app:bundleDevelopRelease
+    - name: Sign
       with:
-          name: apk
-          path: ./app/build/outputs/apk/develop/release/app-develop-release-unsigned.apk
+        aabFile: ./app/build/outputs/apk/develop/release/app-develop-release.apk
+        base64Keystore: ${{ secrets.SIGNING_KEY_BASE64_KEY }}
+        keystorePassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
+        keystoreAlias: ${{ secrets.SIGNING_KEY_ALIAS }}
+        keyPassword: ${{ secrets.SIGNING_KEY_ALIAS_PASSWORD }}
+    - name: Upload
+      uses: actions/upload-artifact@v3
+      with:
+        name: release-apk
+        path: ${{ steps.convert_aab.outputs.apkPath }}
