@@ -25,7 +25,7 @@ jobs:
     - name: Sign
       uses: mukeshsolanki/bundletool-action@v1.0.0
       with:
-        aabFile: ./app/build/outputs/bundle/developRrelease/app-develop-release.aab
+        aabFile: ./app/build/outputs/bundle/developRelease/app-develop-release.aab
         base64Keystore: ${{ secrets.SIGNING_KEY_BASE64 }}
         keystorePassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
         keystoreAlias: ${{ secrets.SIGNING_KEY_ALIAS }}
