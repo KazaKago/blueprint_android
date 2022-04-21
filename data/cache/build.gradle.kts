@@ -49,4 +49,9 @@ dependencies {
 
     // JUnit
     testImplementation(libs.junit)
+
+    // AndroidX JUnit
+    androidTestImplementation(libs.androidx.junit)
+    // AndroidX Espresso
+    androidTestImplementation(libs.androidx.espresso.core)
 }
