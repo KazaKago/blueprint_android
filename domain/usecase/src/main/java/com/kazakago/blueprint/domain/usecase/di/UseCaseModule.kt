@@ -15,11 +15,11 @@ internal abstract class UseCaseModule {
 
     @Singleton
     @Binds
-    abstract fun provideFollowGithubOrgsUseCase(followGithubOrgsUseCase: FollowGithubOrgsUseCaseImpl): FollowGithubOrgsUseCase
+    abstract fun provideGetGithubOrgsFlowUseCase(followGithubOrgsUseCase: GetGithubOrgsFlowUseCaseImpl): GetGithubOrgsFlowUseCase
 
     @Singleton
     @Binds
-    abstract fun provideFollowGithubReposUseCase(followGithubReposUseCase: FollowGithubReposUseCaseImpl): FollowGithubReposUseCase
+    abstract fun provideGetGithubReposFlowUseCase(followGithubReposUseCase: GetGithubReposFlowUseCaseImpl): GetGithubReposFlowUseCase
 
     @Singleton
     @Binds

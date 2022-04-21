@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrgName
-import com.kazakago.blueprint.domain.usecase.hierarchy.github.FollowGithubReposUseCase
+import com.kazakago.blueprint.domain.usecase.hierarchy.github.GetGithubReposFlowUseCase
 import com.kazakago.blueprint.domain.usecase.hierarchy.github.RefreshGithubReposUseCase
 import com.kazakago.blueprint.domain.usecase.hierarchy.github.RequestAdditionalGithubReposUseCase
 import dagger.assisted.Assisted
@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class GithubReposViewModel @AssistedInject constructor(
-    private val followGithubReposUseCase: FollowGithubReposUseCase,
+    private val getGithubReposFlowUseCase: GetGithubReposFlowUseCase,
     private val refreshGithubReposUseCase: RefreshGithubReposUseCase,
     private val requestAdditionalGithubReposUseCase: RequestAdditionalGithubReposUseCase,
     @Assisted private val githubOrgName: GithubOrgName,
@@ -71,7 +71,7 @@ class GithubReposViewModel @AssistedInject constructor(
     }
 
     private suspend fun followGithubRepos() {
-        followGithubReposUseCase(githubOrgName).collect {
+        getGithubReposFlowUseCase(githubOrgName).collect {
             _uiState.value = it.doAction(
                 onLoading = { githubOrgAndRepos ->
                     if (githubOrgAndRepos != null) {

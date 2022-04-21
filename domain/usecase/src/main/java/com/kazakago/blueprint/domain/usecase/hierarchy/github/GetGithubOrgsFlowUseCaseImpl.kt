@@ -5,9 +5,9 @@ import com.kazakago.blueprint.domain.repository.hierarchy.GithubRepository
 import com.kazakago.storeflowable.core.FlowLoadingState
 import javax.inject.Inject
 
-internal class FollowGithubOrgsUseCaseImpl @Inject constructor(
+internal class GetGithubOrgsFlowUseCaseImpl @Inject constructor(
     private val githubRepository: GithubRepository,
-) : FollowGithubOrgsUseCase {
+) : GetGithubOrgsFlowUseCase {
 
     override fun invoke(): FlowLoadingState<List<GithubOrg>> {
         return githubRepository.followOrgs()

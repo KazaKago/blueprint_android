@@ -4,7 +4,7 @@ import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrgAndRepos
 import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrgName
 import com.kazakago.storeflowable.core.FlowLoadingState
 
-interface FollowGithubReposUseCase {
+interface GetGithubReposFlowUseCase {
 
     operator fun invoke(githubOrgName: GithubOrgName): FlowLoadingState<GithubOrgAndRepos>
 }

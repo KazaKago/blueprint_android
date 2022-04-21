@@ -7,9 +7,9 @@ import com.kazakago.storeflowable.core.FlowLoadingState
 import com.kazakago.storeflowable.core.combineState
 import javax.inject.Inject
 
-internal class FollowGithubReposUseCaseImpl @Inject constructor(
+internal class GetGithubReposFlowUseCaseImpl @Inject constructor(
     private val githubRepository: GithubRepository,
-) : FollowGithubReposUseCase {
+) : GetGithubReposFlowUseCase {
 
     override fun invoke(githubOrgName: GithubOrgName): FlowLoadingState<GithubOrgAndRepos> {
         return githubRepository.followOrg(githubOrgName)

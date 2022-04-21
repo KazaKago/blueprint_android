@@ -2,7 +2,7 @@ package com.kazakago.blueprint.presentation.viewmodel.hierarchy.github
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kazakago.blueprint.domain.usecase.hierarchy.github.FollowGithubOrgsUseCase
+import com.kazakago.blueprint.domain.usecase.hierarchy.github.GetGithubOrgsFlowUseCase
 import com.kazakago.blueprint.domain.usecase.hierarchy.github.RefreshGithubOrgsUseCase
 import com.kazakago.blueprint.domain.usecase.hierarchy.github.RequestAdditionalGithubOrgsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GithubOrgsViewModel @Inject constructor(
-    private val followGithubOrgsUseCase: FollowGithubOrgsUseCase,
+    private val getGithubOrgsFlowUseCase: GetGithubOrgsFlowUseCase,
     private val refreshGithubOrgsUseCase: RefreshGithubOrgsUseCase,
     private val requestAdditionalGithubOrgsUseCase: RequestAdditionalGithubOrgsUseCase,
 ) : ViewModel() {
@@ -54,7 +54,7 @@ class GithubOrgsViewModel @Inject constructor(
     }
 
     private suspend fun followOrgs() {
-        followGithubOrgsUseCase().collect {
+        getGithubOrgsFlowUseCase().collect {
             _uiState.value = it.doAction(
                 onLoading = { githubOrgs ->
                     if (githubOrgs != null) {
