@@ -1,6 +1,6 @@
 package com.kazakago.blueprint.data.repository.flowable
 
-import com.kazakago.blueprint.data.api.hierarchy.GithubService
+import com.kazakago.blueprint.data.api.hierarchy.GithubApi
 import com.kazakago.blueprint.data.cache.entity.GithubRepoEntity
 import com.kazakago.blueprint.data.cache.hierarchy.GithubCache
 import com.kazakago.blueprint.data.cache.hierarchy.GithubReposStateManager
@@ -13,7 +13,7 @@ import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 
 internal class GithubReposFlowableFactory @Inject constructor(
-    private val githubService: GithubService,
+    private val githubApi: GithubApi,
     private val githubCache: GithubCache,
     private val githubRepoResponseMapper: GithubRepoResponseMapper,
     githubReposStateManager: GithubReposStateManager,
@@ -40,7 +40,7 @@ internal class GithubReposFlowableFactory @Inject constructor(
     }
 
     override suspend fun fetchDataFromOrigin(param: String): Fetched<List<GithubRepoEntity>> {
-        val response = githubService.getRepos(param, 1, PER_PAGE)
+        val response = githubApi.getRepos(param, 1, PER_PAGE)
         val data = response.map { githubRepoResponseMapper.map(it) }
         return Fetched(
             data = data,
@@ -50,7 +50,7 @@ internal class GithubReposFlowableFactory @Inject constructor(
 
     override suspend fun fetchNextDataFromOrigin(nextKey: String, param: String): Fetched<List<GithubRepoEntity>> {
         val nextPage = nextKey.toInt()
-        val response = githubService.getRepos(param, nextPage, PER_PAGE)
+        val response = githubApi.getRepos(param, nextPage, PER_PAGE)
         val data = response.map { githubRepoResponseMapper.map(it) }
         return Fetched(
             data = data,

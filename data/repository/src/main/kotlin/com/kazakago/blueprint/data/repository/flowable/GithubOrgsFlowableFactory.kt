@@ -1,6 +1,6 @@
 package com.kazakago.blueprint.data.repository.flowable
 
-import com.kazakago.blueprint.data.api.hierarchy.GithubService
+import com.kazakago.blueprint.data.api.hierarchy.GithubApi
 import com.kazakago.blueprint.data.cache.entity.GithubOrgEntity
 import com.kazakago.blueprint.data.cache.hierarchy.GithubCache
 import com.kazakago.blueprint.data.cache.hierarchy.GithubOrgsStateManager
@@ -13,7 +13,7 @@ import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 
 internal class GithubOrgsFlowableFactory @Inject constructor(
-    private val githubService: GithubService,
+    private val githubApi: GithubApi,
     private val githubCache: GithubCache,
     private val githubOrgResponseMapper: GithubOrgResponseMapper,
     githubOrgsStateManager: GithubOrgsStateManager,
@@ -40,7 +40,7 @@ internal class GithubOrgsFlowableFactory @Inject constructor(
     }
 
     override suspend fun fetchDataFromOrigin(param: Unit): Fetched<List<GithubOrgEntity>> {
-        val response = githubService.getOrgs(null, PER_PAGE)
+        val response = githubApi.getOrgs(null, PER_PAGE)
         val data = response.map { githubOrgResponseMapper.map(it) }
         return Fetched(
             data = data,
@@ -49,7 +49,7 @@ internal class GithubOrgsFlowableFactory @Inject constructor(
     }
 
     override suspend fun fetchNextDataFromOrigin(nextKey: String, param: Unit): Fetched<List<GithubOrgEntity>> {
-        val response = githubService.getOrgs(nextKey.toLong(), PER_PAGE)
+        val response = githubApi.getOrgs(nextKey.toLong(), PER_PAGE)
         val data = response.map { githubOrgResponseMapper.map(it) }
         return Fetched(
             data = data,

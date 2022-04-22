@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface GithubService {
+interface GithubApi {
 
     @GET("organizations")
     suspend fun getOrgs(@Query("since") since: Long?, @Query("per_page") perPage: Int): List<GithubOrgResponse>

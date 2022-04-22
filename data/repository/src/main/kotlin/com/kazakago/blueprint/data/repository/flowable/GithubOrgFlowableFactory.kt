@@ -1,6 +1,6 @@
 package com.kazakago.blueprint.data.repository.flowable
 
-import com.kazakago.blueprint.data.api.hierarchy.GithubService
+import com.kazakago.blueprint.data.api.hierarchy.GithubApi
 import com.kazakago.blueprint.data.cache.entity.GithubOrgEntity
 import com.kazakago.blueprint.data.cache.hierarchy.GithubCache
 import com.kazakago.blueprint.data.cache.hierarchy.GithubOrgStateManager
@@ -9,7 +9,7 @@ import com.kazakago.storeflowable.StoreFlowableFactory
 import javax.inject.Inject
 
 internal class GithubOrgFlowableFactory @Inject constructor(
-    private val githubService: GithubService,
+    private val githubApi: GithubApi,
     private val githubCache: GithubCache,
     private val githubOrgResponseMapper: GithubOrgResponseMapper,
     githubOrgStateManager: GithubOrgStateManager,
@@ -28,7 +28,7 @@ internal class GithubOrgFlowableFactory @Inject constructor(
     }
 
     override suspend fun fetchDataFromOrigin(param: String): GithubOrgEntity {
-        val response = githubService.getOrg(param)
+        val response = githubApi.getOrg(param)
         return githubOrgResponseMapper.map(response)
     }
 
