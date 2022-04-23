@@ -2,6 +2,7 @@ package com.kazakago.blueprint.data.repository.flowable
 
 import com.kazakago.blueprint.data.api.hierarchy.GithubApi
 import com.kazakago.blueprint.data.cache.entity.GithubOrgEntity
+import com.kazakago.blueprint.data.cache.global.CacheHolder
 import com.kazakago.blueprint.data.cache.hierarchy.GithubCache
 import com.kazakago.blueprint.data.cache.hierarchy.GithubOrgsStateManager
 import com.kazakago.blueprint.data.mapper.response.github.GithubOrgResponseMapper
@@ -16,7 +17,7 @@ internal class GithubOrgsFlowableFactory @Inject constructor(
     private val githubApi: GithubApi,
     private val githubCache: GithubCache,
     private val githubOrgResponseMapper: GithubOrgResponseMapper,
-    githubOrgsStateManager: GithubOrgsStateManager,
+    override val flowableDataStateManager: GithubOrgsStateManager,
 ) : PaginationStoreFlowableFactory<Unit, List<GithubOrgEntity>> {
 
     companion object {
@@ -24,19 +25,22 @@ internal class GithubOrgsFlowableFactory @Inject constructor(
         private const val PER_PAGE = 20
     }
 
-    override val flowableDataStateManager = githubOrgsStateManager
-
     override suspend fun loadDataFromCache(param: Unit): List<GithubOrgEntity>? {
-        return githubCache.orgsCache
+        return githubCache.orgNameListCache?.value?.mapNotNull { githubCache.orgMapCache[it]?.value }
     }
 
     override suspend fun saveDataToCache(newData: List<GithubOrgEntity>?, param: Unit) {
-        githubCache.orgsCache = newData
-        githubCache.orgsCacheCreatedAt = Clock.System.now()
+        githubCache.orgNameListCache = if (newData != null) CacheHolder(newData.map { it.name }) else null
+        newData?.forEach {
+            githubCache.orgMapCache[it.name] = CacheHolder(it)
+        }
     }
 
     override suspend fun saveNextDataToCache(cachedData: List<GithubOrgEntity>, newData: List<GithubOrgEntity>, param: Unit) {
-        githubCache.orgsCache = cachedData + newData
+        githubCache.orgNameListCache = CacheHolder(
+            value = cachedData.map { it.name } + newData.map { it.name },
+            createdAt = githubCache.orgNameListCache?.createdAt ?: Clock.System.now(),
+        )
     }
 
     override suspend fun fetchDataFromOrigin(param: Unit): Fetched<List<GithubOrgEntity>> {
@@ -58,7 +62,7 @@ internal class GithubOrgsFlowableFactory @Inject constructor(
     }
 
     override suspend fun needRefresh(cachedData: List<GithubOrgEntity>, param: Unit): Boolean {
-        val createdAt = githubCache.orgsCacheCreatedAt
+        val createdAt = githubCache.orgNameListCache?.createdAt
         return if (createdAt != null) {
             val expiredAt = createdAt + EXPIRED_DURATION
             expiredAt < Clock.System.now()
