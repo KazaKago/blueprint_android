@@ -40,26 +40,36 @@ fun GithubReposScreen(
         },
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
-            ListContent(
-                githubRepos = uiState.getGithubReposOrEmpty(),
-                isRefreshing = isRefreshing,
-                onClickItem = onClickItem,
-                onBottomReached = onBottomReached,
+            SwipeRefresh(
+                state = rememberSwipeRefreshState(isRefreshing),
                 onRefresh = onRefresh,
-                prependingItem = {
-                    uiState.MayLayout(
-                        onCompleted = { GithubRepoRowTop(githubOrg = it.githubOrg) },
-                        onAdditionalError = { GithubRepoRowTop(githubOrg = it.githubOrg) },
-                        onAdditionalLoading = { GithubRepoRowTop(githubOrg = it.githubOrg) }
-                    )
-                },
-                appendingItem = {
-                    uiState.MayLayout(
-                        onAdditionalError = { ErrorRow(it.error, onRetryAdditional) },
-                        onAdditionalLoading = { LoadingRow() },
-                    )
+            ) {
+                val listState = rememberLazyListState()
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize(),
+                    state = listState,
+                ) {
+                    item {
+                        uiState.MayLayout(
+                            onCompleted = { GithubRepoRowTop(githubOrg = it.githubOrg) },
+                            onAdditionalError = { GithubRepoRowTop(githubOrg = it.githubOrg) },
+                            onAdditionalLoading = { GithubRepoRowTop(githubOrg = it.githubOrg) }
+                        )
+                    }
+                    items(uiState.getGithubReposOrEmpty()) { githubRepo ->
+                        GithubRepoRow(githubRepo = githubRepo, onClickItem = onClickItem)
+                    }
+                    item {
+                        uiState.MayLayout(
+                            onAdditionalError = { ErrorRow(it.error, onRetryAdditional) },
+                            onAdditionalLoading = { LoadingRow() },
+                        )
+                    }
                 }
-            )
+                listState.OnBottomReached {
+                    onBottomReached()
+                }
+            }
             uiState.MayLayout(
                 onLoading = { LoadingContent() },
                 onError = { ErrorContent(error = it.error, onRetry = onRetry) },
@@ -67,42 +77,6 @@ fun GithubReposScreen(
         }
     }
 }
-
-@Composable
-private fun ListContent(
-    githubRepos: List<GithubRepo>,
-    isRefreshing: Boolean,
-    onClickItem: (githubRepo: GithubRepo) -> Unit,
-    onBottomReached: () -> Unit,
-    onRefresh: () -> Unit,
-    prependingItem: @Composable () -> Unit = {},
-    appendingItem: @Composable () -> Unit = {},
-) {
-    SwipeRefresh(
-        state = rememberSwipeRefreshState(isRefreshing),
-        onRefresh = onRefresh,
-    ) {
-        val listState = rememberLazyListState()
-        LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            state = listState,
-        ) {
-            item {
-                prependingItem()
-            }
-            items(githubRepos) { githubRepo ->
-                GithubRepoRow(githubRepo = githubRepo, onClickItem = onClickItem)
-            }
-            item {
-                appendingItem()
-            }
-        }
-        listState.OnBottomReached {
-            onBottomReached()
-        }
-    }
-}
-
 
 @Preview
 @Composable

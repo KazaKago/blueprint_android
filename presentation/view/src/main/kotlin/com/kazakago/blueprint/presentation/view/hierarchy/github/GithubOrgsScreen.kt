@@ -51,17 +51,28 @@ fun GithubOrgsScreen(
         },
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
-            ListContent(
-                githubOrgs = uiState.getGithubOrgsOrEmpty(),
-                isRefreshing = isRefreshing,
-                onClickItem = onClickItem,
-                onBottomReached = onBottomReached,
+            SwipeRefresh(
+                state = rememberSwipeRefreshState(isRefreshing),
                 onRefresh = onRefresh,
             ) {
-                uiState.MayLayout(
-                    onAdditionalLoading = { LoadingRow() },
-                    onAdditionalError = { ErrorRow(it.error, onRetryAdditional) },
-                )
+                val listState = rememberLazyListState()
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize(),
+                    state = listState,
+                ) {
+                    items(uiState.getGithubOrgsOrEmpty()) { githubOrg ->
+                        GithubOrgRow(githubOrg = githubOrg, onClickItem = onClickItem)
+                    }
+                    item {
+                        uiState.MayLayout(
+                            onAdditionalLoading = { LoadingRow() },
+                            onAdditionalError = { ErrorRow(it.error, onRetryAdditional) },
+                        )
+                    }
+                }
+                listState.OnBottomReached {
+                    onBottomReached()
+                }
             }
             uiState.MayLayout(
                 onLoading = { LoadingContent() },
@@ -70,38 +81,6 @@ fun GithubOrgsScreen(
         }
     }
 }
-
-@Composable
-private fun ListContent(
-    githubOrgs: List<GithubOrg>,
-    isRefreshing: Boolean,
-    onClickItem: (githubOrg: GithubOrg) -> Unit,
-    onBottomReached: () -> Unit,
-    onRefresh: () -> Unit,
-    additionalItem: @Composable () -> Unit = {},
-) {
-    SwipeRefresh(
-        state = rememberSwipeRefreshState(isRefreshing),
-        onRefresh = onRefresh,
-    ) {
-        val listState = rememberLazyListState()
-        LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            state = listState,
-        ) {
-            items(githubOrgs) { githubOrg ->
-                GithubOrgRow(githubOrg = githubOrg, onClickItem = onClickItem)
-            }
-            item {
-                additionalItem()
-            }
-        }
-        listState.OnBottomReached {
-            onBottomReached()
-        }
-    }
-}
-
 
 @Preview
 @Composable
