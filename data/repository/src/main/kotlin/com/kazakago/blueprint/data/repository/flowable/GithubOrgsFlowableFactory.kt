@@ -41,6 +41,9 @@ internal class GithubOrgsFlowableFactory @Inject constructor(
             value = cachedData.map { it.name } + newData.map { it.name },
             createdAt = githubCache.orgNameListCache?.createdAt ?: Clock.System.now(),
         )
+        newData.forEach {
+            githubCache.orgMapCache[it.name] = CacheHolder(it)
+        }
     }
 
     override suspend fun fetchDataFromOrigin(param: Unit): Fetched<List<GithubOrgEntity>> {

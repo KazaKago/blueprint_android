@@ -26,7 +26,7 @@ sealed interface GithubOrgsUiState {
         val error: Exception,
     ) : GithubOrgsUiState
 
-    fun githubOrgsOrEmpty() = when (this) {
+    fun getGithubOrgsOrEmpty() = when (this) {
         is AdditionalError -> githubOrgs
         is AdditionalLoading -> githubOrgs
         is Completed -> githubOrgs

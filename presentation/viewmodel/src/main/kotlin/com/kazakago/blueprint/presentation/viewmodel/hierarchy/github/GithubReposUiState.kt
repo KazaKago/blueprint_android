@@ -42,7 +42,7 @@ sealed interface GithubReposUiState {
         override val githubOrgName = githubOrg.name
     }
 
-    fun githubReposOrEmpty() = when (this) {
+    fun getGithubReposOrEmpty() = when (this) {
         is AdditionalError -> githubRepos
         is AdditionalLoading -> githubRepos
         is Completed -> githubRepos

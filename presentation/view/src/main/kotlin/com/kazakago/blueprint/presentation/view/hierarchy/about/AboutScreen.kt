@@ -77,7 +77,7 @@ fun AboutScreen(
             Spacer(modifier = Modifier.size(16.dp))
             Row(
                 modifier = Modifier
-                    .clickableWithRipple(onClick = uiState.developerMailAddress { onClickMail(it) })
+                    .clickableWithRipple(onClick = uiState.onDeveloperMailAddress { onClickMail(it) })
                     .fillMaxWidth()
                     .padding(horizontal = 32.dp, vertical = 16.dp),
                 verticalAlignment = Alignment.CenterVertically,
@@ -95,7 +95,7 @@ fun AboutScreen(
             }
             Row(
                 modifier = Modifier
-                    .clickableWithRipple(onClick = uiState.developerSiteUrl { onClickWebSite(it) })
+                    .clickableWithRipple(onClick = uiState.onDeveloperSiteUrl { onClickWebSite(it) })
                     .fillMaxWidth()
                     .padding(horizontal = 32.dp, vertical = 16.dp),
                 verticalAlignment = Alignment.CenterVertically,

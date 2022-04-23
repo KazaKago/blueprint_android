@@ -41,7 +41,7 @@ fun GithubReposScreen(
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
             ListContent(
-                githubRepos = uiState.githubReposOrEmpty(),
+                githubRepos = uiState.getGithubReposOrEmpty(),
                 isRefreshing = isRefreshing,
                 onClickItem = onClickItem,
                 onBottomReached = onBottomReached,

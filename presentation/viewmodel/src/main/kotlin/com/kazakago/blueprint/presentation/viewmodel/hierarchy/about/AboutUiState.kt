@@ -15,14 +15,14 @@ sealed interface AboutUiState {
         val developerInfo: DeveloperInfo,
     ) : AboutUiState
 
-    fun developerMailAddress(invoke: (Email) -> Unit): () -> Unit = {
+    fun onDeveloperMailAddress(invoke: (Email) -> Unit): () -> Unit = {
         when (this) {
             is Loading -> Unit
             is Completed -> invoke(developerInfo.mailAddress)
         }
     }
 
-    fun developerSiteUrl(invoke: (URL) -> Unit): () -> Unit = {
+    fun onDeveloperSiteUrl(invoke: (URL) -> Unit): () -> Unit = {
         when (this) {
             is Loading -> Unit
             is Completed -> invoke(developerInfo.siteUrl)

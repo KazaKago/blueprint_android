@@ -52,15 +52,15 @@ fun GithubOrgsScreen(
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
             ListContent(
-                githubOrgs = uiState.githubOrgsOrEmpty(),
+                githubOrgs = uiState.getGithubOrgsOrEmpty(),
                 isRefreshing = isRefreshing,
                 onClickItem = onClickItem,
                 onBottomReached = onBottomReached,
                 onRefresh = onRefresh,
             ) {
                 uiState.MayLayout(
-                    onAdditionalError = { ErrorRow(it.error, onRetryAdditional) },
                     onAdditionalLoading = { LoadingRow() },
+                    onAdditionalError = { ErrorRow(it.error, onRetryAdditional) },
                 )
             }
             uiState.MayLayout(

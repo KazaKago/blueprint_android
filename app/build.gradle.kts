@@ -22,8 +22,8 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
         debug {
-            applicationIdSuffix = ".debug"
-            versionNameSuffix = " debug"
+            applicationIdSuffix = ".$name"
+            versionNameSuffix = " $name"
         }
     }
     flavorDimensions += "app"
@@ -33,8 +33,8 @@ android {
         }
         create("develop") {
             dimension = "app"
-            applicationIdSuffix = ".develop"
-            versionNameSuffix = " develop"
+            applicationIdSuffix = ".$name"
+            versionNameSuffix = " $name"
         }
     }
     compileOptions {
