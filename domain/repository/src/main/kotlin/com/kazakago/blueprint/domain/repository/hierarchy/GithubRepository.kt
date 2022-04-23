@@ -7,15 +7,15 @@ import com.kazakago.storeflowable.core.FlowLoadingState
 
 interface GithubRepository {
 
-    fun followOrgs(): FlowLoadingState<List<GithubOrg>>
+    fun getOrgsFlow(): FlowLoadingState<List<GithubOrg>>
+
+    fun getOrgFlow(githubOrgName: GithubOrgName): FlowLoadingState<GithubOrg>
 
     suspend fun refreshOrgs()
 
     suspend fun requestAdditionalOrgs(continueWhenError: Boolean)
 
-    fun followOrg(githubOrgName: GithubOrgName): FlowLoadingState<GithubOrg>
-
-    fun followRepos(githubOrgName: GithubOrgName): FlowLoadingState<List<GithubRepo>>
+    fun getReposFlow(githubOrgName: GithubOrgName): FlowLoadingState<List<GithubRepo>>
 
     suspend fun refreshRepos(githubOrgName: GithubOrgName)
 

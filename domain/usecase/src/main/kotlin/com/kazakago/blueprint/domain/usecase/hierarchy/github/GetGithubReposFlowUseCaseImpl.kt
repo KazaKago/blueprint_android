@@ -12,8 +12,8 @@ internal class GetGithubReposFlowUseCaseImpl @Inject constructor(
 ) : GetGithubReposFlowUseCase {
 
     override fun invoke(githubOrgName: GithubOrgName): FlowLoadingState<GithubOrgAndRepos> {
-        return githubRepository.followOrg(githubOrgName)
-            .combineState(githubRepository.followRepos(githubOrgName)) { githubOrg, githubRepos ->
+        return githubRepository.getOrgFlow(githubOrgName)
+            .combineState(githubRepository.getReposFlow(githubOrgName)) { githubOrg, githubRepos ->
                 GithubOrgAndRepos(githubOrg, githubRepos)
             }
     }

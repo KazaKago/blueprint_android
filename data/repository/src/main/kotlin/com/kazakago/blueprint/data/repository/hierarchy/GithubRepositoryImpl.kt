@@ -23,9 +23,16 @@ internal class GithubRepositoryImpl @Inject constructor(
     private val githubReposFlowableFactory: GithubReposFlowableFactory,
 ) : GithubRepository {
 
-    override fun followOrgs(): FlowLoadingState<List<GithubOrg>> {
+    override fun getOrgsFlow(): FlowLoadingState<List<GithubOrg>> {
         val githubOrgsFlowable = githubOrgsFlowableFactory.create(Unit)
         return githubOrgsFlowable.publish().mapContent {
+            githubOrgEntityMapper.map(it)
+        }
+    }
+
+    override fun getOrgFlow(githubOrgName: GithubOrgName): FlowLoadingState<GithubOrg> {
+        val githubOrgFlowable = githubOrgFlowableFactory.create(githubOrgName.value)
+        return githubOrgFlowable.publish().mapContent {
             githubOrgEntityMapper.map(it)
         }
     }
@@ -40,14 +47,7 @@ internal class GithubRepositoryImpl @Inject constructor(
         githubOrgsFlowable.requestNextData(continueWhenError = continueWhenError)
     }
 
-    override fun followOrg(githubOrgName: GithubOrgName): FlowLoadingState<GithubOrg> {
-        val githubOrgFlowable = githubOrgFlowableFactory.create(githubOrgName.value)
-        return githubOrgFlowable.publish().mapContent {
-            githubOrgEntityMapper.map(it)
-        }
-    }
-
-    override fun followRepos(githubOrgName: GithubOrgName): FlowLoadingState<List<GithubRepo>> {
+    override fun getReposFlow(githubOrgName: GithubOrgName): FlowLoadingState<List<GithubRepo>> {
         val githubReposFlowable = githubReposFlowableFactory.create(githubOrgName.value)
         return githubReposFlowable.publish().mapContent {
             githubRepoEntityMapper.map(it)

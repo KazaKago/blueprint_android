@@ -10,6 +10,6 @@ internal class GetGithubOrgsFlowUseCaseImpl @Inject constructor(
 ) : GetGithubOrgsFlowUseCase {
 
     override fun invoke(): FlowLoadingState<List<GithubOrg>> {
-        return githubRepository.followOrgs()
+        return githubRepository.getOrgsFlow()
     }
 }
