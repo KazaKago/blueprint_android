@@ -33,8 +33,8 @@ android {
         }
         create("develop") {
             dimension = "app"
-            applicationId = defaultConfig.applicationId + ".develop"
-            versionName = defaultConfig.versionName + " develop"
+            applicationIdSuffix = ".develop"
+            versionNameSuffix = " develop"
         }
     }
     compileOptions {
