@@ -1,5 +1,6 @@
 package com.kazakago.blueprint.presentation.view.hierarchy.about
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -46,8 +47,8 @@ fun AboutScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Spacer(modifier = Modifier.size(16.dp))
-            Icon(
-                painter = painterResource(id = R.drawable.ic_launcher_96dp),
+            Image(
+                painter = painterResource(id = R.drawable.profile),
                 contentDescription = null,
             )
             Spacer(modifier = Modifier.size(16.dp))
