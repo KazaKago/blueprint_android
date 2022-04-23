@@ -31,15 +31,9 @@ class AboutActivity : ComponentActivity() {
             AppTheme {
                 AboutScreen(
                     uiState = uiState,
-                    onClickBack = {
-                        finish()
-                    },
-                    onClickWebSite = {
-                        openActionView(it.toString())
-                    },
-                    onClickMail = {
-                        openSendTo(it.toString())
-                    },
+                    onClickBack = ::finish,
+                    onClickWebSite = { openActionView(it.toString()) },
+                    onClickMail = { openSendTo(it.toString()) },
                 )
             }
         }

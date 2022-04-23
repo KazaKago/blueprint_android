@@ -37,24 +37,12 @@ class GithubOrgsActivity : ComponentActivity() {
                 GithubOrgsScreen(
                     uiState = uiState,
                     isRefreshing = isRefreshing,
-                    onClickItem = { githubRepo ->
-                        goGithubRepos(githubRepo.name)
-                    },
-                    onClickAbout = {
-                        goAbout()
-                    },
-                    onBottomReached = {
-                        viewModel.requestAddition()
-                    },
-                    onRefresh = {
-                        viewModel.refresh()
-                    },
-                    onRetry = {
-                        viewModel.retry()
-                    },
-                    onRetryAdditional = {
-                        viewModel.retryAddition()
-                    },
+                    onClickItem = { goGithubRepos(it.name) },
+                    onClickAbout = ::goAbout,
+                    onBottomReached = viewModel::requestAddition,
+                    onRefresh = viewModel::refresh,
+                    onRetry = viewModel::retry,
+                    onRetryAdditional = viewModel::retryAddition,
                 )
             }
         }

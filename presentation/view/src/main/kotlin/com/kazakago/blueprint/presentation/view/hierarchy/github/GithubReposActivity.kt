@@ -47,24 +47,12 @@ class GithubReposActivity : ComponentActivity() {
                 GithubReposScreen(
                     uiState = uiState,
                     isRefreshing = isRefreshing,
-                    onClickBack = {
-                        finish()
-                    },
-                    onClickItem = { githubRepo ->
-                        launch(githubRepo.url.toString())
-                    },
-                    onBottomReached = {
-                        viewModel.requestAddition()
-                    },
-                    onRefresh = {
-                        viewModel.refresh()
-                    },
-                    onRetry = {
-                        viewModel.retry()
-                    },
-                    onRetryAdditional = {
-                        viewModel.retryAddition()
-                    },
+                    onClickBack = ::finish,
+                    onClickItem = { launch(it.url.toString()) },
+                    onBottomReached = viewModel::requestAddition,
+                    onRefresh = viewModel::refresh,
+                    onRetry = viewModel::retry,
+                    onRetryAdditional = viewModel::retryAddition,
                 )
             }
         }
