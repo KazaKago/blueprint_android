@@ -25,11 +25,8 @@ class AboutViewModel @Inject constructor(
         val aboutInfo = getAboutInfoUseCase()
         _uiState.emit(
             AboutUiState.Completed(
-                versionCode = aboutInfo.appInfo.versionCode.value,
-                versionName = aboutInfo.appInfo.versionName.value,
-                developerName = aboutInfo.developerInfo.name,
-                developerMailAddress = aboutInfo.developerInfo.mailAddress.toURI(),
-                developerSiteUrl = aboutInfo.developerInfo.siteUrl,
+                appInfo = aboutInfo.appInfo,
+                developerInfo = aboutInfo.developerInfo,
             )
         )
     }

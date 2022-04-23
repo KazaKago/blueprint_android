@@ -15,12 +15,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.kazakago.blueprint.domain.model.hierarchy.about.*
 import com.kazakago.blueprint.presentation.view.R
 import com.kazakago.blueprint.presentation.view.global.theme.PreviewTheme
 import com.kazakago.blueprint.presentation.view.global.ui.BackIconButton
 import com.kazakago.blueprint.presentation.view.global.util.clickableWithRipple
 import com.kazakago.blueprint.presentation.viewmodel.hierarchy.about.AboutUiState
-import java.net.URI
 import java.net.URL
 import java.util.*
 
@@ -29,7 +29,7 @@ fun AboutScreen(
     uiState: AboutUiState,
     onClickBack: () -> Unit,
     onClickWebSite: (url: URL) -> Unit,
-    onClickMail: (mail: URI) -> Unit,
+    onClickMail: (mail: Email) -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -62,7 +62,7 @@ fun AboutScreen(
                 modifier = Modifier.padding(horizontal = 16.dp),
                 text = uiState.classify(
                     onLoading = { stringResource(id = R.string.loading) },
-                    onCompleted = { stringResource(id = R.string.about_ver, it.versionName, it.versionCode) },
+                    onCompleted = { stringResource(id = R.string.about_ver, it.appInfo.versionName.value, it.appInfo.versionCode.value) },
                 ),
                 style = MaterialTheme.typography.bodyMedium,
             )
@@ -70,7 +70,7 @@ fun AboutScreen(
                 modifier = Modifier.padding(horizontal = 16.dp),
                 text = uiState.classify(
                     onLoading = { stringResource(id = R.string.loading) },
-                    onCompleted = { stringResource(id = R.string.about_develop_by, it.developerName) },
+                    onCompleted = { stringResource(id = R.string.about_develop_by, it.developerInfo.name) },
                 ),
                 style = MaterialTheme.typography.bodyMedium,
             )
@@ -116,7 +116,7 @@ fun AboutScreen(
                 modifier = Modifier.padding(horizontal = 16.dp),
                 text = uiState.classify(
                     onLoading = { stringResource(id = R.string.loading) },
-                    onCompleted = { stringResource(id = R.string.about_copyright, Calendar.getInstance().get(Calendar.YEAR), it.developerName) },
+                    onCompleted = { stringResource(id = R.string.about_copyright, Calendar.getInstance().get(Calendar.YEAR), it.developerInfo.name) },
                 ),
                 style = MaterialTheme.typography.bodySmall,
             )
@@ -127,15 +127,32 @@ fun AboutScreen(
 
 @Preview
 @Composable
-fun PreviewAboutScreen() {
+fun PreviewAboutScreenOnLoading() {
+    PreviewTheme {
+        AboutScreen(
+            uiState = AboutUiState.Loading,
+            onClickBack = {},
+            onClickMail = {},
+            onClickWebSite = {},
+        )
+    }
+}
+
+@Preview
+@Composable
+fun PreviewAboutScreenOnCompleted() {
     PreviewTheme {
         AboutScreen(
             uiState = AboutUiState.Completed(
-                versionCode = 1,
-                versionName = "1.0.0",
-                developerName = "hogehoge",
-                developerMailAddress = URI("hogehoge@gmail.com"),
-                developerSiteUrl = URL("https://hogehoge.com"),
+                appInfo = AppInfo(
+                    versionCode = VersionCode(1),
+                    versionName = VersionName("1.0.0"),
+                ),
+                developerInfo = DeveloperInfo(
+                    name = "KazaKago",
+                    mailAddress = Email("kazakago@gmail.com"),
+                    siteUrl = URL("https://blog.kazakago.com"),
+                ),
             ),
             onClickBack = {},
             onClickMail = {},
