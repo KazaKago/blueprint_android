@@ -51,9 +51,9 @@ fun GithubReposScreen(
                 ) {
                     item {
                         uiState.MayLayout(
-                            onCompleted = { GithubRepoRowTop(githubOrg = it.githubOrg) },
-                            onAdditionalError = { GithubRepoRowTop(githubOrg = it.githubOrg) },
-                            onAdditionalLoading = { GithubRepoRowTop(githubOrg = it.githubOrg) }
+                            onCompleted = { GithubRepoTopRow(githubOrg = it.githubOrg) },
+                            onAdditionalError = { GithubRepoTopRow(githubOrg = it.githubOrg) },
+                            onAdditionalLoading = { GithubRepoTopRow(githubOrg = it.githubOrg) }
                         )
                     }
                     items(uiState.getGithubReposOrEmpty()) { githubRepo ->

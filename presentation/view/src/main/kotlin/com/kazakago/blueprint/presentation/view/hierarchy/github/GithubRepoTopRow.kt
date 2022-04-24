@@ -23,7 +23,7 @@ import com.kazakago.blueprint.presentation.view.global.theme.PreviewTheme
 import java.net.URL
 
 @Composable
-fun GithubRepoRowTop(
+fun GithubRepoTopRow(
     githubOrg: GithubOrg,
 ) {
     Column(
@@ -59,7 +59,7 @@ fun GithubRepoRowTop(
 fun PreviewGithubRepoRowTop() {
     PreviewTheme {
         Surface {
-            GithubRepoRowTop(
+            GithubRepoTopRow(
                 githubOrg = GithubOrg(id = GithubOrgId(1), name = GithubOrgName("kazakago"), imageUrl = URL("https://avatars.githubusercontent.com/u/7742104?v=4")),
             )
         }
