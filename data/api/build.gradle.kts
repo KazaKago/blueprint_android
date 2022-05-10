@@ -7,6 +7,7 @@ plugins {
 }
 
 android {
+    namespace = "com.kazakago.blueprint.data.api"
     compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()

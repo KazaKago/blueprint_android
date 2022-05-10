@@ -7,6 +7,7 @@ plugins {
 }
 
 android {
+    namespace = "com.kazakago.blueprint"
     compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
         applicationId = "com.kazakago.blueprint"

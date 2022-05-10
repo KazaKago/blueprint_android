@@ -6,6 +6,7 @@ plugins {
 }
 
 android {
+    namespace = "com.kazakago.blueprint.data.mapper"
     compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()

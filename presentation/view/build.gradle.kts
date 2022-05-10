@@ -7,6 +7,7 @@ plugins {
 }
 
 android {
+    namespace = "com.kazakago.blueprint.presentation.view"
     compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
