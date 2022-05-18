@@ -3,6 +3,7 @@ package com.kazakago.blueprint.presentation.viewmodel.hierarchy.about
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kazakago.blueprint.domain.usecase.hierarchy.about.GetAboutInfoUseCase
+import com.kazakago.blueprint.presentation.uistate.hierarchy.about.AboutUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

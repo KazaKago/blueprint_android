@@ -49,7 +49,9 @@ android {
 
 dependencies {
     // Modules
-    implementation(projects.presentation.view)
+    implementation(projects.presentation.controller)
+    implementation(projects.presentation.ui)
+    implementation(projects.presentation.uistate)
     implementation(projects.presentation.viewmodel)
     implementation(projects.domain.usecase)
     implementation(projects.domain.model)

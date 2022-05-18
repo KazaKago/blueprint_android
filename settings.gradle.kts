@@ -14,7 +14,9 @@ dependencyResolutionManagement {
 }
 rootProject.name = "blueprint"
 include(":app")
-include(":presentation:view")
+include(":presentation:controller")
+include(":presentation:ui")
+include(":presentation:uistate")
 include(":presentation:viewmodel")
 include(":domain:usecase")
 include(":domain:model")

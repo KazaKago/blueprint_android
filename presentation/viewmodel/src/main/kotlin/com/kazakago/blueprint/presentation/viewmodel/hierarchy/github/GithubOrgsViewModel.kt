@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.kazakago.blueprint.domain.usecase.hierarchy.github.GetGithubOrgsFlowUseCase
 import com.kazakago.blueprint.domain.usecase.hierarchy.github.RefreshGithubOrgsUseCase
 import com.kazakago.blueprint.domain.usecase.hierarchy.github.RequestAdditionalGithubOrgsUseCase
+import com.kazakago.blueprint.presentation.uistate.hierarchy.github.GithubOrgsUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

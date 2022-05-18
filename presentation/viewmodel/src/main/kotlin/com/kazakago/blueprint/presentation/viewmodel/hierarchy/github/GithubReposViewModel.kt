@@ -7,6 +7,7 @@ import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrgName
 import com.kazakago.blueprint.domain.usecase.hierarchy.github.GetGithubReposFlowUseCase
 import com.kazakago.blueprint.domain.usecase.hierarchy.github.RefreshGithubReposUseCase
 import com.kazakago.blueprint.domain.usecase.hierarchy.github.RequestAdditionalGithubReposUseCase
+import com.kazakago.blueprint.presentation.uistate.hierarchy.github.GithubReposUiState
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject

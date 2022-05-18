@@ -2,11 +2,10 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
 }
 
 android {
-    namespace = "com.kazakago.blueprint.presentation.viewmodel"
+    namespace = "com.kazakago.blueprint.presentation.ui"
     compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
@@ -35,24 +34,39 @@ android {
     }
     kotlinOptions {
         jvmTarget = libs.versions.java.get()
+        freeCompilerArgs = freeCompilerArgs + "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api"
+    }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.compose.get()
     }
 }
 
 dependencies {
     // Modules
     implementation(projects.presentation.uistate)
-    implementation(projects.domain.usecase)
     implementation(projects.domain.model)
     // Kotlinx Coroutines
     implementation(libs.kotlinx.coroutines.core)
-    // Dagger
-    implementation(libs.dagger.hilt.android)
-    kapt(libs.dagger.hilt.compiler)
-    // AndroidX Lifecycle ViewModel
-    implementation(libs.androidx.lifecycle.viewmodel)
-    implementation(libs.androidx.lifecycle.viewmodel.common)
-    // StoreFlowable.kt
-    implementation(libs.storeflowable.core)
+    // AndroidX Compose UI
+    implementation(libs.androidx.compose.ui)
+    // AndroidX Compose Tooling support
+    implementation(libs.androidx.compose.ui.tooling)
+    // AndroidX Compose Foundation
+    implementation(libs.androidx.compose.fondation)
+    // AndroidX Compose Material3
+    implementation(libs.androidx.compose.material3)
+    // AndroidX Compose Material Icons
+    implementation(libs.androidx.compose.material.icons.core)
+    implementation(libs.androidx.compose.material.icons.extended)
+    // Accompanist Swipe Refresh
+    implementation(libs.accompanist.swiperefresh)
+    // Accompanist System UI Controller
+    implementation(libs.accompanist.systemuicontroller)
+    // Coil
+    implementation(libs.coil.compose)
 
     // JUnit
     testImplementation(libs.junit)
@@ -61,4 +75,6 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     // AndroidX Espresso
     androidTestImplementation(libs.androidx.espresso.core)
+    // AndroidX Compose UI Tests
+    androidTestImplementation(libs.androidx.compose.ui.test)
 }

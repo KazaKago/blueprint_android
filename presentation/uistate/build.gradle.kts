@@ -2,11 +2,10 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
 }
 
 android {
-    namespace = "com.kazakago.blueprint.presentation.viewmodel"
+    namespace = "com.kazakago.blueprint.presentation.uistate"
     compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
@@ -36,23 +35,19 @@ android {
     kotlinOptions {
         jvmTarget = libs.versions.java.get()
     }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.compose.get()
+    }
 }
 
 dependencies {
     // Modules
-    implementation(projects.presentation.uistate)
-    implementation(projects.domain.usecase)
     implementation(projects.domain.model)
-    // Kotlinx Coroutines
-    implementation(libs.kotlinx.coroutines.core)
-    // Dagger
-    implementation(libs.dagger.hilt.android)
-    kapt(libs.dagger.hilt.compiler)
-    // AndroidX Lifecycle ViewModel
-    implementation(libs.androidx.lifecycle.viewmodel)
-    implementation(libs.androidx.lifecycle.viewmodel.common)
-    // StoreFlowable.kt
-    implementation(libs.storeflowable.core)
+    // AndroidX Compose Runtime
+    implementation(libs.androidx.compose.runtime)
 
     // JUnit
     testImplementation(libs.junit)

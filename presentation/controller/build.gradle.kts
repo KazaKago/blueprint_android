@@ -3,10 +3,11 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.dagger.hilt)
 }
 
 android {
-    namespace = "com.kazakago.blueprint.presentation.viewmodel"
+    namespace = "com.kazakago.blueprint.presentation.controller"
     compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
@@ -35,24 +36,33 @@ android {
     }
     kotlinOptions {
         jvmTarget = libs.versions.java.get()
+        freeCompilerArgs = freeCompilerArgs + "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api"
+    }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.compose.get()
     }
 }
 
 dependencies {
     // Modules
+    implementation(projects.presentation.ui)
     implementation(projects.presentation.uistate)
-    implementation(projects.domain.usecase)
+    implementation(projects.presentation.viewmodel)
     implementation(projects.domain.model)
     // Kotlinx Coroutines
     implementation(libs.kotlinx.coroutines.core)
     // Dagger
     implementation(libs.dagger.hilt.android)
     kapt(libs.dagger.hilt.compiler)
-    // AndroidX Lifecycle ViewModel
-    implementation(libs.androidx.lifecycle.viewmodel)
-    implementation(libs.androidx.lifecycle.viewmodel.common)
-    // StoreFlowable.kt
-    implementation(libs.storeflowable.core)
+    // AndroidX Compose Runtime
+    implementation(libs.androidx.compose.runtime)
+    // AndroidX Activity Compose
+    implementation(libs.androidx.activity.compose)
+    // AndroidX Lifecycle ViewModel Compose
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
 
     // JUnit
     testImplementation(libs.junit)
