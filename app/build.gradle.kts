@@ -52,7 +52,6 @@ dependencies {
     implementation(projects.presentation.controller)
     implementation(projects.presentation.ui)
     implementation(projects.presentation.uistate)
-    implementation(projects.presentation.viewmodel)
     implementation(projects.domain.usecase)
     implementation(projects.domain.model)
     implementation(projects.domain.repository)

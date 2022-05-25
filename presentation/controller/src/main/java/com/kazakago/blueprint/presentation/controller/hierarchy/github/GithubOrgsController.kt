@@ -8,7 +8,6 @@ import com.kazakago.blueprint.presentation.controller.hierarchy.destinations.Abo
 import com.kazakago.blueprint.presentation.controller.hierarchy.destinations.GithubReposControllerDestination
 import com.kazakago.blueprint.presentation.ui.global.theme.AppTheme
 import com.kazakago.blueprint.presentation.ui.hierarchy.github.GithubOrgsScreen
-import com.kazakago.blueprint.presentation.viewmodel.hierarchy.github.GithubOrgsViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator

@@ -1,4 +1,4 @@
-package com.kazakago.blueprint.presentation.viewmodel.hierarchy.github
+package com.kazakago.blueprint.presentation.controller.hierarchy.github
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

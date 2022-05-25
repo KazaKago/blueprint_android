@@ -57,7 +57,7 @@ dependencies {
     // Modules
     implementation(projects.presentation.ui)
     implementation(projects.presentation.uistate)
-    implementation(projects.presentation.viewmodel)
+    implementation(projects.domain.usecase)
     implementation(projects.domain.model)
     // Kotlinx Coroutines
     implementation(libs.kotlinx.coroutines.core)
@@ -74,9 +74,14 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     // AndroidX Hilt Navigation Compose
     implementation(libs.androidx.hilt.navigation.compose)
+    // AndroidX Lifecycle ViewModel
+    implementation(libs.androidx.lifecycle.viewmodel)
+    implementation(libs.androidx.lifecycle.viewmodel.common)
     // Compose Destinations
     implementation(libs.compose.distinations.core)
     ksp(libs.compose.distinations.ksp)
+    // StoreFlowable.kt
+    implementation(libs.storeflowable.core)
 
     // JUnit
     testImplementation(libs.junit)

@@ -11,14 +11,13 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrgName
 import com.kazakago.blueprint.presentation.ui.global.theme.AppTheme
 import com.kazakago.blueprint.presentation.ui.hierarchy.github.GithubReposScreen
-import com.kazakago.blueprint.presentation.viewmodel.hierarchy.github.GithubReposViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import java.net.URL
 
 @Destination
 @Composable
-fun GithubReposController(navigator: DestinationsNavigator, name: GithubOrgName) {
+fun GithubReposController(navigator: DestinationsNavigator, @Suppress("UNUSED_PARAMETER") name: GithubOrgName) {
     val viewModel: GithubReposViewModel = hiltViewModel()
     val uiState by viewModel.uiState.collectAsState()
     val isRefreshing by viewModel.isRefreshing.collectAsState()

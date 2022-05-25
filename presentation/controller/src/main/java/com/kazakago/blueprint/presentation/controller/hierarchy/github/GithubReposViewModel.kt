@@ -1,12 +1,13 @@
-package com.kazakago.blueprint.presentation.viewmodel.hierarchy.github
+package com.kazakago.blueprint.presentation.controller.hierarchy.github
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrgName
 import com.kazakago.blueprint.domain.usecase.hierarchy.github.GetGithubReposFlowUseCase
 import com.kazakago.blueprint.domain.usecase.hierarchy.github.RefreshGithubReposUseCase
 import com.kazakago.blueprint.domain.usecase.hierarchy.github.RequestAdditionalGithubReposUseCase
+import com.kazakago.blueprint.presentation.controller.hierarchy.destinations.GithubReposControllerDestination
+import com.kazakago.blueprint.presentation.controller.hierarchy.navArgs
 import com.kazakago.blueprint.presentation.uistate.hierarchy.github.GithubReposUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,8 +23,8 @@ class GithubReposViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
-    private val githubOrgName = savedStateHandle.get<GithubOrgName>("name") ?: throw NullPointerException()
-    private val _uiState = MutableStateFlow<GithubReposUiState>(GithubReposUiState.Loading(githubOrgName))
+    private val args = savedStateHandle.navArgs<GithubReposControllerDestination.NavArgs>()
+    private val _uiState = MutableStateFlow<GithubReposUiState>(GithubReposUiState.Loading(args.name))
     val uiState = _uiState.asStateFlow()
     private val _isRefreshing = MutableStateFlow(false)
     val isRefreshing = _isRefreshing.asStateFlow()
@@ -35,31 +36,31 @@ class GithubReposViewModel @Inject constructor(
     fun refresh() {
         viewModelScope.launch {
             _isRefreshing.value = true
-            refreshGithubReposUseCase(githubOrgName)
+            refreshGithubReposUseCase(args.name)
             _isRefreshing.value = false
         }
     }
 
     fun retry() {
         viewModelScope.launch {
-            refreshGithubReposUseCase(githubOrgName)
+            refreshGithubReposUseCase(args.name)
         }
     }
 
     fun requestAddition() {
         viewModelScope.launch {
-            requestAdditionalGithubReposUseCase(githubOrgName, continueWhenError = false)
+            requestAdditionalGithubReposUseCase(args.name, continueWhenError = false)
         }
     }
 
     fun retryAddition() {
         viewModelScope.launch {
-            requestAdditionalGithubReposUseCase(githubOrgName, continueWhenError = true)
+            requestAdditionalGithubReposUseCase(args.name, continueWhenError = true)
         }
     }
 
     private suspend fun followGithubRepos() {
-        getGithubReposFlowUseCase(githubOrgName).collect {
+        getGithubReposFlowUseCase(args.name).collect {
             _uiState.value = it.doAction(
                 onLoading = { githubOrgAndRepos ->
                     if (githubOrgAndRepos != null) {
@@ -69,7 +70,7 @@ class GithubReposViewModel @Inject constructor(
                         )
                     } else {
                         GithubReposUiState.Loading(
-                            githubOrgName = githubOrgName,
+                            githubOrgName = args.name,
                         )
                     }
                 },
@@ -98,7 +99,7 @@ class GithubReposViewModel @Inject constructor(
                 },
                 onError = { exception ->
                     GithubReposUiState.Error(
-                        githubOrgName = githubOrgName,
+                        githubOrgName = args.name,
                         error = exception,
                     )
                 }
