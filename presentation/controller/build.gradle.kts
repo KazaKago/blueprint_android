@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.dagger.hilt)
+    alias(libs.plugins.google.ksp)
 }
 
 android {
@@ -43,6 +44,13 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.compose.get()
     }
+    libraryVariants.all {
+        kotlin.sourceSets {
+            getByName(name) {
+                kotlin.srcDir("build/generated/ksp/$name/kotlin") // https://github.com/google/ksp/issues/37
+            }
+        }
+    }
 }
 
 dependencies {
@@ -60,8 +68,15 @@ dependencies {
     implementation(libs.androidx.compose.runtime)
     // AndroidX Activity Compose
     implementation(libs.androidx.activity.compose)
+    // AndroidX Navigation Compose
+    implementation(libs.androidx.navigation.compose)
     // AndroidX Lifecycle ViewModel Compose
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+    // AndroidX Hilt Navigation Compose
+    implementation(libs.androidx.hilt.navigation.compose)
+    // Compose Destinations
+    implementation(libs.compose.distinations.core)
+    ksp(libs.compose.distinations.ksp)
 
     // JUnit
     testImplementation(libs.junit)

@@ -1,41 +1,28 @@
 package com.kazakago.blueprint.presentation.viewmodel.hierarchy.github
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrgName
 import com.kazakago.blueprint.domain.usecase.hierarchy.github.GetGithubReposFlowUseCase
 import com.kazakago.blueprint.domain.usecase.hierarchy.github.RefreshGithubReposUseCase
 import com.kazakago.blueprint.domain.usecase.hierarchy.github.RequestAdditionalGithubReposUseCase
 import com.kazakago.blueprint.presentation.uistate.hierarchy.github.GithubReposUiState
-import dagger.assisted.Assisted
-import dagger.assisted.AssistedFactory
-import dagger.assisted.AssistedInject
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class GithubReposViewModel @AssistedInject constructor(
+@HiltViewModel
+class GithubReposViewModel @Inject constructor(
     private val getGithubReposFlowUseCase: GetGithubReposFlowUseCase,
     private val refreshGithubReposUseCase: RefreshGithubReposUseCase,
     private val requestAdditionalGithubReposUseCase: RequestAdditionalGithubReposUseCase,
-    @Assisted private val githubOrgName: GithubOrgName,
+    savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
-    companion object {
-        fun provideFactory(assistedFactory: Factory, githubOrgName: GithubOrgName): ViewModelProvider.Factory = object : ViewModelProvider.NewInstanceFactory() {
-            @Suppress("UNCHECKED_CAST")
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return assistedFactory.create(githubOrgName) as T
-            }
-        }
-    }
-
-    @AssistedFactory
-    interface Factory {
-        fun create(githubOrgName: GithubOrgName): GithubReposViewModel
-    }
-
+    private val githubOrgName = savedStateHandle.get<GithubOrgName>("name") ?: throw NullPointerException()
     private val _uiState = MutableStateFlow<GithubReposUiState>(GithubReposUiState.Loading(githubOrgName))
     val uiState = _uiState.asStateFlow()
     private val _isRefreshing = MutableStateFlow(false)

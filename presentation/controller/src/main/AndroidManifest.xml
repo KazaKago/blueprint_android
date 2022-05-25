@@ -4,7 +4,7 @@
     <application
         android:theme="@style/Theme.AppTheme">
         <activity
-            android:name=".hierarchy.github.GithubOrgsActivity"
+            android:name=".global.entrypoint.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -12,12 +12,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".hierarchy.github.GithubReposActivity"
-            android:exported="false" />
-        <activity
-            android:name=".hierarchy.about.AboutActivity"
-            android:exported="false" />
     </application>
 
 </manifest>
