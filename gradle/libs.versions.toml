@@ -2,9 +2,9 @@
 versionCode = "1"
 versionName = "1.0.0"
 
-compileSdk = "31"
+compileSdk = "32"
 minSdk = "28"
-targetSdk = "31"
+targetSdk = "32"
 java = "11"
 
 android-plugin = "7.2.0"

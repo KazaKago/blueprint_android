@@ -70,10 +70,10 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     // AndroidX Navigation Compose
     implementation(libs.androidx.navigation.compose)
-    // AndroidX Lifecycle ViewModel Compose
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
     // AndroidX Hilt Navigation Compose
     implementation(libs.androidx.hilt.navigation.compose)
+    // AndroidX Lifecycle ViewModel Compose
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
     // AndroidX Lifecycle ViewModel
     implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.androidx.lifecycle.viewmodel.common)
