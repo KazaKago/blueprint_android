@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.kazakago.blueprint.domain.usecase.hierarchy.github.GetGithubReposFlowUseCase
 import com.kazakago.blueprint.domain.usecase.hierarchy.github.RefreshGithubReposUseCase
 import com.kazakago.blueprint.domain.usecase.hierarchy.github.RequestAdditionalGithubReposUseCase
-import com.kazakago.blueprint.presentation.controller.hierarchy.destinations.GithubReposControllerDestination
 import com.kazakago.blueprint.presentation.controller.hierarchy.navArgs
 import com.kazakago.blueprint.presentation.uistate.hierarchy.github.GithubReposUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,7 +22,7 @@ class GithubReposViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
-    private val args = savedStateHandle.navArgs<GithubReposControllerDestination.NavArgs>()
+    private val args = savedStateHandle.navArgs<GithubReposNagArgs>()
     private val _uiState = MutableStateFlow<GithubReposUiState>(GithubReposUiState.Loading(args.name))
     val uiState = _uiState.asStateFlow()
     private val _isRefreshing = MutableStateFlow(false)
