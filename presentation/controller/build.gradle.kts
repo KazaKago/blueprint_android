@@ -77,6 +77,8 @@ dependencies {
     // AndroidX Lifecycle ViewModel
     implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.androidx.lifecycle.viewmodel.common)
+    // AndroidX Lifecycle Runtime
+    implementation(libs.androidx.lifecycle.runtime)
     // Compose Destinations
     implementation(libs.compose.distinations.core)
     ksp(libs.compose.distinations.ksp)
