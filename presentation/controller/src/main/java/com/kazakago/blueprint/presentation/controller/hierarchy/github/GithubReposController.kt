@@ -25,7 +25,7 @@ fun GithubReposController(navigator: DestinationsNavigator) {
         GithubReposScreen(
             uiState = uiState,
             isRefreshing = isRefreshing,
-            onClickBack = { navigator.popBackStack() },
+            onClickBack = navigator::popBackStack,
             onClickItem = { actionView(context, it.url) },
             onBottomReached = viewModel::requestAddition,
             onRefresh = viewModel::refresh,

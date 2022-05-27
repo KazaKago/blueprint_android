@@ -24,7 +24,7 @@ fun AboutController(navigator: DestinationsNavigator) {
     AppTheme {
         AboutScreen(
             uiState = uiState,
-            onClickBack = { navigator.popBackStack() },
+            onClickBack = navigator::popBackStack,
             onClickWebSite = { actionView(context, it) },
             onClickMail = { sendTo(context, it.toURI()) },
         )

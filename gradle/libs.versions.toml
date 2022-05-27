@@ -94,5 +94,5 @@ android-application = { id = "com.android.application", version.ref = "android-p
 android-library = { id = "com.android.library", version.ref = "android-plugin" }
 # Dagger Hilt
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
-# Compose Distination
+# Google Ksp
 google-ksp = { id = "com.google.devtools.ksp", version = "1.6.10-1.0.4" }
