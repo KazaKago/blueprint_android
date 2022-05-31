@@ -24,11 +24,9 @@ class AboutViewModel @Inject constructor(
 
     private suspend fun loadAboutInfo() {
         val aboutInfo = getAboutInfoUseCase()
-        _uiState.emit(
-            AboutUiState.Completed(
-                appInfo = aboutInfo.appInfo,
-                developerInfo = aboutInfo.developerInfo,
-            )
+        _uiState.value = AboutUiState.Completed(
+            appInfo = aboutInfo.appInfo,
+            developerInfo = aboutInfo.developerInfo,
         )
     }
 }
