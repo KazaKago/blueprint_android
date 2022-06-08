@@ -8,7 +8,7 @@ targetSdk = "32"
 java = "11"
 
 android-plugin = "7.2.1"
-kotlin = "1.6.10"
+kotlin = "1.7.0"
 dagger = "2.42"
 lifecycle = "2.4.1"
 compose = "1.1.1"
