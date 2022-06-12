@@ -67,7 +67,7 @@ dagger-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref
 compose-distinations-core = { module = "io.github.raamcosta.compose-destinations:core", version.ref = "distinations" }
 compose-distinations-ksp = { module = "io.github.raamcosta.compose-destinations:ksp", version.ref = "distinations" }
 # OkHttp
-okhttp = "com.squareup.okhttp3:okhttp:4.9.3"
+okhttp = "com.squareup.okhttp3:okhttp:4.10.0"
 # Retrofit
 retrofit = "com.squareup.retrofit2:retrofit:2.9.0"
 # Retrofit Serialization Converter
