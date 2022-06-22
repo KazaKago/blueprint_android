@@ -36,13 +36,6 @@ internal class GithubRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getOrgFlow(githubOrgName: GithubOrgName): FlowLoadingState<GithubOrg> {
-        val githubOrgFlowable = StoreFlowable.from(githubOrgCacher, githubOrgFetcher, githubOrgName.value)
-        return githubOrgFlowable.publish().mapContent {
-            githubOrgEntityMapper.map(it)
-        }
-    }
-
     override suspend fun refreshOrgs() {
         val githubOrgsFlowable = StoreFlowable.from(githubOrgsCacher, githubOrgsFetcher)
         githubOrgsFlowable.refresh()
@@ -51,6 +44,18 @@ internal class GithubRepositoryImpl @Inject constructor(
     override suspend fun requestAdditionalOrgs(continueWhenError: Boolean) {
         val githubOrgsFlowable = StoreFlowable.from(githubOrgsCacher, githubOrgsFetcher)
         githubOrgsFlowable.requestNextData(continueWhenError = continueWhenError)
+    }
+
+    override fun getOrgFlow(githubOrgName: GithubOrgName): FlowLoadingState<GithubOrg> {
+        val githubOrgFlowable = StoreFlowable.from(githubOrgCacher, githubOrgFetcher, githubOrgName.value)
+        return githubOrgFlowable.publish().mapContent {
+            githubOrgEntityMapper.map(it)
+        }
+    }
+
+    override suspend fun refreshOrg(githubOrgName: GithubOrgName) {
+        val githubOrgFlowable = StoreFlowable.from(githubOrgCacher, githubOrgFetcher, githubOrgName.value)
+        githubOrgFlowable.refresh()
     }
 
     override fun getReposFlow(githubOrgName: GithubOrgName): FlowLoadingState<List<GithubRepo>> {

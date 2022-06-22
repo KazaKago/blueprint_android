@@ -2,6 +2,9 @@ package com.kazakago.blueprint.domain.usecase.hierarchy.github
 
 import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrgName
 import com.kazakago.blueprint.domain.repository.hierarchy.GithubRepository
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
 import javax.inject.Inject
 
 internal class RefreshGithubReposUseCaseImpl @Inject constructor(
@@ -9,6 +12,11 @@ internal class RefreshGithubReposUseCaseImpl @Inject constructor(
 ) : RefreshGithubReposUseCase {
 
     override suspend fun invoke(githubOrgName: GithubOrgName) {
-        return githubRepository.refreshRepos(githubOrgName)
+        coroutineScope {
+            listOf(
+                async { githubRepository.refreshOrg(githubOrgName) },
+                async { githubRepository.refreshRepos(githubOrgName) }
+            )
+        }.awaitAll()
     }
 }
