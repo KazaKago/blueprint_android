@@ -4,11 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kazakago.blueprint.presentation.ui.global.theme.AppTheme
 import com.kazakago.blueprint.presentation.ui.hierarchy.about.AboutScreen
 import com.ramcosta.composedestinations.annotation.Destination
@@ -21,7 +21,7 @@ import java.net.URL
 @OptIn(ExperimentalLifecycleComposeApi::class)
 fun AboutController(navigator: DestinationsNavigator) {
     val viewModel: AboutViewModel = hiltViewModel()
-    val uiState by viewModel.uiState.collectAsState()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val context = LocalContext.current
     AppTheme {
         AboutScreen(
