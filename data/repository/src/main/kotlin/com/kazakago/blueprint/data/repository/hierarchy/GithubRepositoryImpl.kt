@@ -16,6 +16,7 @@ import com.kazakago.storeflowable.StoreFlowable
 import com.kazakago.storeflowable.core.FlowLoadingState
 import com.kazakago.storeflowable.core.mapContent
 import com.kazakago.storeflowable.from
+import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
 
 internal class GithubRepositoryImpl @Inject constructor(
@@ -29,6 +30,7 @@ internal class GithubRepositoryImpl @Inject constructor(
     private val githubReposFetcher: GithubReposFetcher,
 ) : GithubRepository {
 
+    @OptIn(FlowPreview::class)
     override fun getOrgsFlow(): FlowLoadingState<List<GithubOrg>> {
         val githubOrgsFlowable = StoreFlowable.from(githubOrgsCacher, githubOrgsFetcher)
         return githubOrgsFlowable.publish().mapContent {
@@ -46,6 +48,7 @@ internal class GithubRepositoryImpl @Inject constructor(
         githubOrgsFlowable.requestNextData(continueWhenError = continueWhenError)
     }
 
+    @OptIn(FlowPreview::class)
     override fun getOrgFlow(githubOrgName: GithubOrgName): FlowLoadingState<GithubOrg> {
         val githubOrgFlowable = StoreFlowable.from(githubOrgCacher, githubOrgFetcher, githubOrgName.value)
         return githubOrgFlowable.publish().mapContent {
@@ -58,6 +61,7 @@ internal class GithubRepositoryImpl @Inject constructor(
         githubOrgFlowable.refresh()
     }
 
+    @OptIn(FlowPreview::class)
     override fun getReposFlow(githubOrgName: GithubOrgName): FlowLoadingState<List<GithubRepo>> {
         val githubReposFlowable = StoreFlowable.from(githubReposCacher, githubReposFetcher, githubOrgName.value)
         return githubReposFlowable.publish().mapContent {

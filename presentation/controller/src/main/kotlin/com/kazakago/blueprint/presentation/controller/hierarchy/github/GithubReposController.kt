@@ -8,6 +8,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import com.kazakago.blueprint.presentation.ui.global.theme.AppTheme
 import com.kazakago.blueprint.presentation.ui.hierarchy.github.GithubReposScreen
 import com.ramcosta.composedestinations.annotation.Destination
@@ -16,6 +17,7 @@ import java.net.URL
 
 @Destination(navArgsDelegate = GithubReposNagArgs::class)
 @Composable
+@OptIn(ExperimentalLifecycleComposeApi::class)
 fun GithubReposController(navigator: DestinationsNavigator) {
     val viewModel: GithubReposViewModel = hiltViewModel()
     val uiState by viewModel.uiState.collectAsState()

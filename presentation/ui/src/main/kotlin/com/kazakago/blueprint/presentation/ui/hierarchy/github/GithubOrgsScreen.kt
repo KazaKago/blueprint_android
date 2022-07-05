@@ -29,6 +29,7 @@ import com.kazakago.blueprint.presentation.uistate.hierarchy.github.GithubOrgsUi
 import java.net.URL
 
 @Composable
+@OptIn(ExperimentalMaterial3Api::class)
 fun GithubOrgsScreen(
     uiState: GithubOrgsUiState,
     isRefreshing: Boolean,

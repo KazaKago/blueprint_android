@@ -25,6 +25,7 @@ import java.net.URL
 import java.util.*
 
 @Composable
+@OptIn(ExperimentalMaterial3Api::class)
 fun AboutScreen(
     uiState: AboutUiState,
     onClickBack: () -> Unit,

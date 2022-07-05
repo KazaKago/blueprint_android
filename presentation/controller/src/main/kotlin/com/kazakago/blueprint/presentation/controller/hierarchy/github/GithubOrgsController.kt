@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import com.kazakago.blueprint.presentation.controller.hierarchy.destinations.AboutControllerDestination
 import com.kazakago.blueprint.presentation.controller.hierarchy.destinations.GithubReposControllerDestination
 import com.kazakago.blueprint.presentation.ui.global.theme.AppTheme
@@ -15,6 +16,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 @RootNavGraph(start = true)
 @Destination
 @Composable
+@OptIn(ExperimentalLifecycleComposeApi::class)
 fun GithubOrgsController(navigator: DestinationsNavigator) {
     val viewModel: GithubOrgsViewModel = hiltViewModel()
     val uiState by viewModel.uiState.collectAsState()
