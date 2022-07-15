@@ -3,9 +3,8 @@ name: DeployDevelop
 on:
   push:
     branches: 
-      - develop
-      - release/**
-      - hotfix/**
+      - main
+      - production
   workflow_dispatch:
 
 jobs:
