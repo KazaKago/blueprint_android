@@ -9,7 +9,7 @@ java = "11"
 
 android-plugin = "7.2.1"
 kotlin = "1.7.0"
-dagger = "2.43.1"
+dagger = "2.43.2"
 lifecycle = "2.6.0-alpha01"
 compose-compiler = "1.2.0"
 compose-ui = "1.2.0"
