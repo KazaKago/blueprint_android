@@ -9,7 +9,7 @@ java = "11"
 
 android-plugin = "7.2.1"
 kotlin = "1.7.0"
-dagger = "2.43"
+dagger = "2.43.1"
 lifecycle = "2.6.0-alpha01"
 compose-compiler = "1.2.0"
 compose-ui = "1.2.0"
@@ -80,7 +80,7 @@ storeflowable-core = { module = "com.kazakago.storeflowable:storeflowable-core",
 # Junit
 junit = "junit:junit:4.13.2"
 # Kotest
-kotest-assertions-core = "io.kotest:kotest-assertions-core:5.4.0"
+kotest-assertions-core = "io.kotest:kotest-assertions-core:5.4.1"
 
 [plugins]
 # Kotlin JVM
