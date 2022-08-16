@@ -14,7 +14,7 @@ lifecycle = "2.6.0-alpha01"
 compose-compiler = "1.2.0"
 compose-ui = "1.2.1"
 compose-material = "1.2.1"
-accompanist = "0.25.0"
+accompanist = "0.25.1"
 storeflowable = "5.3.0"
 distinations = "1.5.7-beta"
 
