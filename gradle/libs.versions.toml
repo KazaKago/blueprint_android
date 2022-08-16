@@ -34,7 +34,7 @@ androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", versi
 # AndroidX Compose Foundation
 androidx-compose-fondation = "androidx.compose.foundation:foundation:1.2.1"
 # AndroidX Compose Material3
-androidx-compose-material3 = "androidx.compose.material3:material3:1.0.0-alpha15"
+androidx-compose-material3 = "androidx.compose.material3:material3:1.0.0-alpha16"
 # AndroidX Compose Material Icons
 androidx-compose-material-icons-core = { module = "androidx.compose.material:material-icons-core", version.ref = "compose-material" }
 androidx-compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose-material" }
