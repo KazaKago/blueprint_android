@@ -71,7 +71,7 @@ dependencies {
     // Need for Compose preview, bug of AS.
     // Updating AS to Dolphin will fix it.
     // https://issuetracker.google.com/issues/227767363
-    debugImplementation("androidx.activity:activity-ktx:1.5.1")
+    debugImplementation("androidx.activity:activity-ktx:1.6.0")
     debugImplementation("androidx.customview:customview-poolingcontainer:1.0.0")
 
     // JUnit
