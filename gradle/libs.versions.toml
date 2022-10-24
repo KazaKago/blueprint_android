@@ -80,7 +80,7 @@ storeflowable-core = { module = "com.kazakago.storeflowable:storeflowable-core",
 # Junit
 junit = "junit:junit:4.13.2"
 # Kotest
-kotest-assertions-core = "io.kotest:kotest-assertions-core:5.5.0"
+kotest-assertions-core = "io.kotest:kotest-assertions-core:5.5.2"
 
 [plugins]
 # Kotlin JVM
