@@ -34,7 +34,7 @@ fun AboutScreen(
 ) {
     Scaffold(
         topBar = {
-            SmallTopAppBar(
+            TopAppBar(
                 title = { Text(stringResource(id = R.string.about_title)) },
                 navigationIcon = { BackIconButton(onClick = onClickBack) },
             )
