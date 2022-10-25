@@ -1,5 +1,6 @@
 package com.kazakago.blueprint.presentation.ui.hierarchy.github
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -20,7 +21,6 @@ import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrgId
 import com.kazakago.blueprint.domain.model.hierarchy.github.GithubOrgName
 import com.kazakago.blueprint.presentation.ui.R
 import com.kazakago.blueprint.presentation.ui.global.theme.PreviewTheme
-import com.kazakago.blueprint.presentation.ui.global.util.clickableWithRipple
 import java.net.URL
 
 @Composable
@@ -30,7 +30,7 @@ fun GithubOrgRow(
 ) {
     Row(
         modifier = Modifier
-            .clickableWithRipple(onClick = { onClickItem(githubOrg) })
+            .clickable(onClick = { onClickItem(githubOrg) })
             .fillMaxWidth()
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically,

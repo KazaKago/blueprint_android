@@ -1,6 +1,7 @@
 package com.kazakago.blueprint.presentation.ui.hierarchy.about
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -19,7 +20,6 @@ import com.kazakago.blueprint.domain.model.hierarchy.about.*
 import com.kazakago.blueprint.presentation.ui.R
 import com.kazakago.blueprint.presentation.ui.global.theme.PreviewTheme
 import com.kazakago.blueprint.presentation.ui.global.ui.BackIconButton
-import com.kazakago.blueprint.presentation.ui.global.util.clickableWithRipple
 import com.kazakago.blueprint.presentation.uistate.hierarchy.about.AboutUiState
 import java.net.URL
 import java.util.*
@@ -78,7 +78,7 @@ fun AboutScreen(
             Spacer(modifier = Modifier.size(16.dp))
             Row(
                 modifier = Modifier
-                    .clickableWithRipple(onClick = uiState.onDeveloperMailAddress { onClickMail(it) })
+                    .clickable(onClick = uiState.onDeveloperMailAddress { onClickMail(it) })
                     .fillMaxWidth()
                     .padding(horizontal = 32.dp, vertical = 16.dp),
                 verticalAlignment = Alignment.CenterVertically,
@@ -96,7 +96,7 @@ fun AboutScreen(
             }
             Row(
                 modifier = Modifier
-                    .clickableWithRipple(onClick = uiState.onDeveloperSiteUrl { onClickWebSite(it) })
+                    .clickable(onClick = uiState.onDeveloperSiteUrl { onClickWebSite(it) })
                     .fillMaxWidth()
                     .padding(horizontal = 32.dp, vertical = 16.dp),
                 verticalAlignment = Alignment.CenterVertically,
