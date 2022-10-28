@@ -1,30 +1,24 @@
 @Suppress("DSL_SCOPE_VIOLATION") // https://youtrack.jetbrains.com/issue/KTIJ-19369
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
-    alias(libs.plugins.dagger.hilt)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
-    namespace = "com.kazakago.blueprint"
+    namespace = "com.kazakago.blueprint.data.repository"
     compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
-        applicationId = "com.kazakago.blueprint"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = libs.versions.versionCode.get().toInt()
-        versionName = libs.versions.versionName.get()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
     buildTypes {
         release {
-            isMinifyEnabled = true
+            isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-        }
-        debug {
-            applicationIdSuffix = ".$name"
-            versionNameSuffix = " $name"
         }
     }
     flavorDimensions += "app"
@@ -34,8 +28,6 @@ android {
         }
         create("develop") {
             dimension = "app"
-            applicationIdSuffix = ".$name"
-            versionNameSuffix = " $name"
         }
     }
     compileOptions {
@@ -49,12 +41,22 @@ android {
 
 dependencies {
     // Modules
-    implementation(projects.presentation)
     implementation(projects.domain)
-    implementation(projects.data)
+    // Kotlinx Coroutines
+    implementation(libs.kotlinx.coroutines.core)
+    // Kotlinx Serialization
+    implementation(libs.kotlinx.serialization.json)
+    // Kotlinx DateTime
+    implementation(libs.kotlinx.datetime)
     // Dagger
     implementation(libs.dagger.hilt.android)
     kapt(libs.dagger.hilt.compiler)
+    // OkHttp
+    implementation(libs.okhttp)
+    // Retrofit
+    implementation(libs.retrofit)
+    // Retrofit Serialization Converter
+    implementation(libs.retrofit.serialization.converter)
 
     // JUnit
     testImplementation(libs.junit)
