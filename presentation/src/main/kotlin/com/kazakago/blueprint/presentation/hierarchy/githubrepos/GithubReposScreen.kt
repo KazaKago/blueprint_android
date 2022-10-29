@@ -6,11 +6,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.google.accompanist.swiperefresh.SwipeRefresh
@@ -35,6 +33,7 @@ fun GithubReposScreen(
     query: PagingQueryResult<GithubOrgAndRepos> = queryGithubRepos(name),
 ) {
     val actionView = useActionView()
+    val snackbarHostState = remember { SnackbarHostState() }
     Scaffold(
         topBar = {
             TopAppBar(
@@ -42,17 +41,14 @@ fun GithubReposScreen(
                 navigationIcon = { BackIconButton(onClick = navigator::popBackStack) },
             )
         },
+        snackbarHost = { SnackbarHost(snackbarHostState) },
     ) { paddingValues ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues),
         ) {
-            if (query.error != null) {
-                ErrorContent(error = query.error, onRetry = query.refresh)
-            } else if (query.loading && query.data == null) {
-                LoadingContent()
-            } else if (query.data != null) {
+            if (query.data != null) {
                 GithubReposContent(
                     githubOrgAndRepos = query.data,
                     loading = query.loading,
@@ -62,6 +58,15 @@ fun GithubReposScreen(
                     onClickItem = { actionView(it.url) },
                     onRefresh = query.refresh,
                 )
+            }
+            if (query.loading && query.data == null) {
+                LoadingContent()
+            }
+            if (query.error != null && query.data != null) {
+                ErrorSnackbar(error = query.error, state = snackbarHostState)
+            }
+            if (query.error != null && query.data == null) {
+                ErrorContent(error = query.error, onRetry = query.refresh)
             }
         }
     }

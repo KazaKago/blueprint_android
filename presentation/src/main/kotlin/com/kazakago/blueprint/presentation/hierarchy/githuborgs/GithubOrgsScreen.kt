@@ -20,10 +20,7 @@ import com.kazakago.blueprint.domain.model.github.GithubOrgId
 import com.kazakago.blueprint.domain.model.github.GithubOrgName
 import com.kazakago.blueprint.presentation.R
 import com.kazakago.blueprint.presentation.global.theme.PreviewTheme
-import com.kazakago.blueprint.presentation.global.ui.ErrorContent
-import com.kazakago.blueprint.presentation.global.ui.ErrorRow
-import com.kazakago.blueprint.presentation.global.ui.LoadingContent
-import com.kazakago.blueprint.presentation.global.ui.LoadingRow
+import com.kazakago.blueprint.presentation.global.ui.*
 import com.kazakago.blueprint.presentation.global.util.OnBottomReached
 import com.kazakago.blueprint.presentation.global.util.PagingQueryResult
 import com.kazakago.blueprint.presentation.hierarchy.destinations.AboutScreenDestination
@@ -42,6 +39,7 @@ fun GithubOrgsScreen(
     navigator: DestinationsNavigator,
     query: PagingQueryResult<List<GithubOrg>> = queryGithubOrgs(),
 ) {
+    val snackbarHostState = remember { SnackbarHostState() }
     Scaffold(
         topBar = {
             TopAppBar(
@@ -53,17 +51,14 @@ fun GithubOrgsScreen(
                 },
             )
         },
+        snackbarHost = { SnackbarHost(snackbarHostState) },
     ) { paddingValues ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues),
         ) {
-            if (query.error != null) {
-                ErrorContent(error = query.error, onRetry = query.refresh)
-            } else if (query.loading && query.data == null) {
-                LoadingContent()
-            } else if (query.data != null) {
+            if (query.data != null) {
                 GithubOrgsContent(
                     githubOrgs = query.data,
                     loading = query.loading,
@@ -73,6 +68,15 @@ fun GithubOrgsScreen(
                     onClickItem = { navigator.navigate(GithubReposScreenDestination(it.name)) },
                     onRefresh = query.refresh,
                 )
+            }
+            if (query.loading && query.data == null) {
+                LoadingContent()
+            }
+            if (query.error != null && query.data != null) {
+                ErrorSnackbar(error = query.error, state = snackbarHostState)
+            }
+            if (query.error != null && query.data == null) {
+                ErrorContent(error = query.error, onRetry = query.refresh)
             }
         }
     }
