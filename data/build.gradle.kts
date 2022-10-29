@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.kazakago.blueprint.data.repository"
+    namespace = "com.kazakago.blueprint.data"
     compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
@@ -51,12 +51,14 @@ dependencies {
     // Dagger
     implementation(libs.dagger.hilt.android)
     kapt(libs.dagger.hilt.compiler)
-    // OkHttp
-    implementation(libs.okhttp)
-    // Retrofit
-    implementation(libs.retrofit)
-    // Retrofit Serialization Converter
-    implementation(libs.retrofit.serialization.converter)
+    // Ktor BOM
+    implementation(platform(libs.ktor.bom))
+    // Ktor Serialization
+    implementation(libs.ktor.serialization.json)
+    // Ktor Client CIO
+    implementation(libs.ktor.client.cio)
+    // Ktor Client Content Negotiation
+    implementation(libs.ktor.client.content.negotiation)
 
     // JUnit
     testImplementation(libs.junit)

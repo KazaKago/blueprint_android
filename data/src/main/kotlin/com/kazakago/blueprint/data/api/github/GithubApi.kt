@@ -1,17 +1,36 @@
 package com.kazakago.blueprint.data.api.github
 
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import io.ktor.client.*
+import io.ktor.client.call.*
+import io.ktor.client.request.*
+import io.ktor.http.*
+import javax.inject.Inject
+import javax.inject.Singleton
 
-interface GithubApi {
+@Singleton
+internal class GithubApi @Inject constructor(
+    private val httpClient: HttpClient,
+) {
 
-    @GET("organizations")
-    suspend fun getOrgs(@Query("since") since: Long?, @Query("per_page") perPage: Int): List<GithubOrgResponse>
+    suspend fun getOrgs(since: Long?, perPage: Int): List<GithubOrgResponse> {
+        return httpClient.get {
+            url { path("organizations") }
+            parameter("since", since)
+            parameter("per_page", perPage)
+        }.body()
+    }
 
-    @GET("orgs/{org_name}")
-    suspend fun getOrg(@Path("org_name") orgName: String): GithubOrgResponse
+    suspend fun getOrg(orgName: String): GithubOrgResponse {
+        return httpClient.get {
+            url { path("orgs/$orgName") }
+        }.body()
+    }
 
-    @GET("orgs/{org_name}/repos")
-    suspend fun getRepos(@Path("org_name") orgName: String, @Query("page") page: Int?, @Query("per_page") perPage: Int): List<GithubRepoResponse>
+    suspend fun getRepos(orgName: String, page: Int?, perPage: Int): List<GithubRepoResponse> {
+        return httpClient.get {
+            url { path("orgs/$orgName/repos") }
+            parameter("page", page)
+            parameter("per_page", perPage)
+        }.body()
+    }
 }
