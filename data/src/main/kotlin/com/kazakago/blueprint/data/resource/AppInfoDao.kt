@@ -9,7 +9,9 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class AppInfoDao @Inject constructor(@ApplicationContext private val context: Context) {
+class AppInfoDao @Inject constructor(
+    @ApplicationContext private val context: Context,
+) {
 
     fun getVersionName(): String {
         return getPackageInfo().versionName

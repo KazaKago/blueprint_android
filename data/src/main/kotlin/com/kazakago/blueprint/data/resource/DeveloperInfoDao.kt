@@ -9,7 +9,9 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class DeveloperInfoDao @Inject constructor(@ApplicationContext private val context: Context) {
+class DeveloperInfoDao @Inject constructor(
+    @ApplicationContext private val context: Context,
+) {
 
     fun getName(): String {
         return context.getString(R.string.developer_name)

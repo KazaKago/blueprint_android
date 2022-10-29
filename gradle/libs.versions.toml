@@ -50,12 +50,15 @@ dagger-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref
 # Compose Distinations
 compose-distinations-core = { module = "io.github.raamcosta.compose-destinations:core", version.ref = "distinations" }
 compose-distinations-ksp = { module = "io.github.raamcosta.compose-destinations:ksp", version.ref = "distinations" }
-# OkHttp
-okhttp = "com.squareup.okhttp3:okhttp:4.10.0"
-# Retrofit
-retrofit = "com.squareup.retrofit2:retrofit:2.9.0"
-# Retrofit Serialization Converter
-retrofit-serialization-converter = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
+# Ktor BOM
+ktor-bom = "io.ktor:ktor-bom:2.1.2"
+# Ktor Client
+ktor-client-core = { module = "io.ktor:ktor-client-core" }
+ktor-client-cio = { module = "io.ktor:ktor-client-cio" }
+# Ktor Content Negotiation
+ktor-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation" }
+# Ktor Serialization
+ktor-serialization-json = { module = "io.ktor:ktor-serialization-kotlinx-json" }
 # Junit
 junit = "junit:junit:4.13.2"
 # Kotest

@@ -51,12 +51,15 @@ dependencies {
     // Dagger
     implementation(libs.dagger.hilt.android)
     kapt(libs.dagger.hilt.compiler)
-    // OkHttp
-    implementation(libs.okhttp)
-    // Retrofit
-    implementation(libs.retrofit)
-    // Retrofit Serialization Converter
-    implementation(libs.retrofit.serialization.converter)
+    // Ktor BOM
+    implementation(platform(libs.ktor.bom))
+    // Ktor Client
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.cio)
+    // Ktor Content Negotiation
+    implementation(libs.ktor.content.negotiation)
+    // Ktor Serialization
+    implementation(libs.ktor.serialization.json)
 
     // JUnit
     testImplementation(libs.junit)
