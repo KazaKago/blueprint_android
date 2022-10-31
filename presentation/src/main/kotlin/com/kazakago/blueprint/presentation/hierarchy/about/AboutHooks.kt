@@ -9,14 +9,12 @@ import com.kazakago.blueprint.presentation.global.util.produceQuery
 @Composable
 fun queryAboutInfo(): QueryResult<AboutInfo> {
     val repository = LocalAboutRepository.current
-    val fetch = suspend {
-        val appInfo = repository.getAppInfo()
-        val developerInfo = repository.getDeveloperInfo()
-        AboutInfo(appInfo, developerInfo)
-    }
     return produceQuery(
         key = Unit,
-        fetch = fetch,
-        refresh = fetch,
+        fetch = {
+            val appInfo = repository.getAppInfo()
+            val developerInfo = repository.getDeveloperInfo()
+            AboutInfo(appInfo, developerInfo)
+        },
     )
 }

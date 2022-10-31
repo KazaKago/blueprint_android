@@ -6,7 +6,7 @@ import com.kazakago.blueprint.domain.model.about.*
 import com.kazakago.blueprint.domain.repository.AboutRepository
 import javax.inject.Inject
 
-internal class AboutRepositoryImpl @Inject constructor(
+class AboutRepositoryImpl @Inject constructor(
     private val appInfoDao: AppInfoDao,
     private val developerInfoDao: DeveloperInfoDao,
 ) : AboutRepository {

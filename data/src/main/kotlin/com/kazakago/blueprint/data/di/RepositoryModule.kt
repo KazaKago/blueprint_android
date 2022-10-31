@@ -12,7 +12,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal abstract class RepositoryModule {
+abstract class RepositoryModule {
 
     @Singleton
     @Binds

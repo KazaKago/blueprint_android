@@ -12,7 +12,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-internal class ApiRequester @Inject constructor() {
+class ApiRequester @Inject constructor() {
 
     private val baseUrl = "https://api.github.com"
 

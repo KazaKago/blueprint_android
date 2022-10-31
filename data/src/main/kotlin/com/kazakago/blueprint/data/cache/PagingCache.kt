@@ -12,7 +12,7 @@ data class PagingCache<DATA, NEXT_PAGE>(
     val validTime: Duration = 30.minutes,
 ) {
     data class Result<DATA, NEXT_PAGE>(
-        val newData: List<DATA>?,
+        val newData: List<DATA>,
         val newNextPage: NEXT_PAGE?,
     )
 
@@ -20,7 +20,7 @@ data class PagingCache<DATA, NEXT_PAGE>(
     private var savedTime: Instant? = null
     private var nextPage: NEXT_PAGE? = null
 
-    val data: List<DATA>? = dataFlow.value
+    val data: List<DATA>? get() = dataFlow.value
     val asFlow: Flow<List<DATA>> = dataFlow.filterNotNull()
 
     suspend fun fetch(force: Boolean, block: suspend () -> Result<DATA, NEXT_PAGE?>) {
@@ -32,10 +32,11 @@ data class PagingCache<DATA, NEXT_PAGE>(
         }
     }
 
-    suspend fun fetchNext(block: suspend (nextPage: NEXT_PAGE?) -> Result<DATA, NEXT_PAGE?>) {
-        if (data != null) {
-            val (newData, newNextKey) = block(nextPage)
-            dataFlow.value = data + (newData ?: emptyList())
+    suspend fun fetchNext(block: suspend (nextPage: NEXT_PAGE) -> Result<DATA, NEXT_PAGE?>) {
+        val currentNextPage = nextPage
+        if (currentNextPage != null) {
+            val (newData, newNextKey) = block(currentNextPage)
+            dataFlow.value = (data ?: emptyList()) + newData
             nextPage = newNextKey
         }
     }

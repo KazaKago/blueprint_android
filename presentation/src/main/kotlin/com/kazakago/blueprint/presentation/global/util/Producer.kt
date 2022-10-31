@@ -1,6 +1,8 @@
 package com.kazakago.blueprint.presentation.global.util
 
 import androidx.compose.runtime.*
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -73,33 +75,19 @@ data class QueryResult<out T>(
 @Composable
 fun <T> produceQuery(
     key: Any?,
-    fetch: suspend () -> T,
-    refresh: suspend () -> T,
+    fetch: suspend (force: Boolean) -> T,
 ): QueryResult<T> {
     val scope: CoroutineScope = rememberCoroutineScope()
     var data: T? by remember(key) { mutableStateOf(null) }
     var loading: Boolean by remember(key) { mutableStateOf(false) }
     var error: Throwable? by remember(key) { mutableStateOf(null) }
-    val fetchBlock: () -> Unit = {
+    val fetchBlock: (force: Boolean) -> Unit = { force ->
         scope.launch {
             if (loading) return@launch
             loading = true
             error = null
             runCatching {
-                data = fetch()
-            }.onFailure {
-                error = it
-            }
-            loading = false
-        }
-    }
-    val refreshBlock: () -> Unit = {
-        scope.launch {
-            if (loading) return@launch
-            loading = true
-            error = null
-            runCatching {
-                data = refresh()
+                data = fetch(force)
             }.onFailure {
                 error = it
             }
@@ -107,49 +95,36 @@ fun <T> produceQuery(
         }
     }
     LaunchedEffect(key) {
-        fetchBlock()
+        fetchBlock(false)
     }
     return remember(key, data, loading, error) {
         QueryResult(
             data = data,
             loading = loading,
             error = error,
-            refresh = refreshBlock,
+            refresh = { fetchBlock(true) },
         )
     }
 }
 
 @Composable
+@OptIn(ExperimentalLifecycleComposeApi::class)
 fun <T> produceQuery(
     key: Any?,
     flow: () -> Flow<T>,
-    fetch: suspend () -> Unit,
-    refresh: suspend () -> Unit,
+    fetch: suspend (force: Boolean) -> Unit,
 ): QueryResult<T> {
     val scope: CoroutineScope = rememberCoroutineScope()
-    val data: T? by flow().collectAsState(initial = null)
+    val data: T? by flow().collectAsStateWithLifecycle(initialValue = null)
     var loading: Boolean by remember(key) { mutableStateOf(false) }
     var error: Throwable? by remember(key) { mutableStateOf(null) }
-    val fetchBlock: () -> Unit = {
+    val fetchBlock: (force: Boolean) -> Unit = { force ->
         scope.launch {
             if (loading) return@launch
             loading = true
             error = null
             runCatching {
-                fetch()
-            }.onFailure {
-                error = it
-            }
-            loading = false
-        }
-    }
-    val refreshBlock: () -> Unit = {
-        scope.launch {
-            if (loading) return@launch
-            loading = true
-            error = null
-            runCatching {
-                refresh()
+                fetch(force)
             }.onFailure {
                 error = it
             }
@@ -157,14 +132,14 @@ fun <T> produceQuery(
         }
     }
     LaunchedEffect(key) {
-        fetchBlock()
+        fetchBlock(false)
     }
     return remember(key, data, loading, error) {
         QueryResult(
             data = data,
             loading = loading,
             error = error,
-            refresh = refreshBlock,
+            refresh = { fetchBlock(true) },
         )
     }
 }
@@ -193,20 +168,20 @@ data class PagingQueryResult<out T>(
 }
 
 @Composable
+@OptIn(ExperimentalLifecycleComposeApi::class)
 fun <T> producePagingQuery(
     key: Any?,
     flow: () -> Flow<T>,
-    fetch: suspend () -> Unit,
-    refresh: suspend () -> Unit,
+    fetch: suspend (force: Boolean) -> Unit,
     next: suspend () -> Unit,
 ): PagingQueryResult<T> {
     val scope: CoroutineScope = rememberCoroutineScope()
-    val data: T? by flow().collectAsState(initial = null)
+    val data: T? by flow().collectAsStateWithLifecycle(initialValue = null)
     var loading: Boolean by remember(key) { mutableStateOf(false) }
     var error: Throwable? by remember(key) { mutableStateOf(null) }
     var loadingNext: Boolean by remember(key) { mutableStateOf(false) }
     var errorNext: Throwable? by remember(key) { mutableStateOf(null) }
-    val fetchBlock: () -> Unit = {
+    val fetchBlock: (force: Boolean) -> Unit = { force ->
         scope.launch {
             if (loading || loadingNext) return@launch
             loading = true
@@ -214,22 +189,7 @@ fun <T> producePagingQuery(
             error = null
             errorNext = null
             runCatching {
-                fetch()
-            }.onFailure {
-                error = it
-            }
-            loading = false
-        }
-    }
-    val refreshBlock: () -> Unit = {
-        scope.launch {
-            if (loading || loadingNext) return@launch
-            loading = true
-            loadingNext = false
-            error = null
-            errorNext = null
-            runCatching {
-                refresh()
+                fetch(force)
             }.onFailure {
                 error = it
             }
@@ -252,14 +212,14 @@ fun <T> producePagingQuery(
         }
     }
     LaunchedEffect(key) {
-        fetchBlock()
+        fetchBlock(false)
     }
     return remember(key, data, loading, error, loadingNext, errorNext) {
         PagingQueryResult(
             data = data,
             loading = loading,
             error = error,
-            refresh = refreshBlock,
+            refresh = { fetchBlock(true) },
             next = nextBlock,
             loadingNext = loadingNext,
             errorNext = errorNext,

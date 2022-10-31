@@ -70,6 +70,8 @@ dependencies {
     implementation(libs.androidx.compose.material.icons.extended)
     // AndroidX Activity Compose
     implementation(libs.androidx.activity.compose)
+    // AndroidX Lifecycle Runtime Compose
+    implementation(libs.androidx.lifecycle.runtime.compose)
     // Accompanist Swipe Refresh
     implementation(libs.accompanist.swiperefresh)
     // Accompanist System UI Controller

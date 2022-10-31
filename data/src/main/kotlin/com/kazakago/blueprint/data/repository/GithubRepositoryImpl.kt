@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-internal class GithubRepositoryImpl @Inject constructor(
+class GithubRepositoryImpl @Inject constructor(
     private val githubApi: GithubApi,
     private val githubCache: GithubCache,
 ) : GithubRepository {

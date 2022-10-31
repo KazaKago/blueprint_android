@@ -12,8 +12,7 @@ fun queryGithubOrgs(): PagingQueryResult<List<GithubOrg>> {
     return producePagingQuery(
         key = Unit,
         flow = { repository.flowOrgs() },
-        fetch = { repository.requestOrgs(force = false) },
-        refresh = { repository.requestOrgs(force = true) },
+        fetch = { repository.requestOrgs(force = it) },
         next = { repository.requestOrgsNext() },
     )
 }

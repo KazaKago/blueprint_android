@@ -8,7 +8,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-internal class GithubApi @Inject constructor(
+class GithubApi @Inject constructor(
     private val httpClient: HttpClient,
 ) {
 

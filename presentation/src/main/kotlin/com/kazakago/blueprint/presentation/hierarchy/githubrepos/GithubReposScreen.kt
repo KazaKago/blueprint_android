@@ -106,11 +106,7 @@ fun GithubReposContent(
                 }
             }
         }
-        listState.OnBottomReached {
-            if (errorNext == null) {
-                onNext()
-            }
-        }
+        listState.OnBottomReached(loadMore = onNext)
     }
 }
 

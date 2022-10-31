@@ -19,8 +19,7 @@ fun queryGithubRepos(githubOrgName: GithubOrgName): PagingQueryResult<GithubOrgA
                     GithubOrgAndRepos(orgs, repos)
                 }
         },
-        fetch = { repository.requestRepos(force = false, githubOrgName = githubOrgName) },
-        refresh = { repository.requestRepos(force = true, githubOrgName = githubOrgName) },
+        fetch = { repository.requestRepos(force = it, githubOrgName = githubOrgName) },
         next = { repository.requestReposNext(githubOrgName = githubOrgName) },
     )
 }
