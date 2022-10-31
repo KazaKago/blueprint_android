@@ -2,24 +2,24 @@ package com.kazakago.blueprint.data.cache
 
 import kotlin.time.Duration
 
-data class KeyedCache<KEY, DATA>(
+data class KeyedPagingCache<KEY, DATA, NEXT_PAGE>(
     val validTime: Duration? = null,
 ) {
-    private val _dataMap: MutableMap<KEY, Cache<DATA>> = mutableMapOf()
+    private val _dataMap: MutableMap<KEY, PagingCache<DATA, NEXT_PAGE>> = mutableMapOf()
 
-    operator fun get(key: KEY): Cache<DATA> {
+    operator fun get(key: KEY): PagingCache<DATA, NEXT_PAGE> {
         return _dataMap.getOrPut(key)
     }
 
-    private fun MutableMap<KEY, Cache<DATA>>.getOrPut(key: KEY): Cache<DATA> {
+    private fun MutableMap<KEY, PagingCache<DATA, NEXT_PAGE>>.getOrPut(key: KEY): PagingCache<DATA, NEXT_PAGE> {
         val storedCache = this[key]
         return if (storedCache != null) {
             storedCache
         } else {
             val newCache = if (validTime != null) {
-                Cache<DATA>(validTime)
+                PagingCache<DATA, NEXT_PAGE>(validTime)
             } else {
-                Cache()
+                PagingCache()
             }
             this[key] = newCache
             newCache

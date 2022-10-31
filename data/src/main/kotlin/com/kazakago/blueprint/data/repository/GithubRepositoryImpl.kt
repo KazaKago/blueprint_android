@@ -2,6 +2,7 @@ package com.kazakago.blueprint.data.repository
 
 import com.kazakago.blueprint.data.api.github.GithubApi
 import com.kazakago.blueprint.data.cache.GithubCache
+import com.kazakago.blueprint.data.cache.PagingCache
 import com.kazakago.blueprint.domain.model.github.GithubOrg
 import com.kazakago.blueprint.domain.model.github.GithubOrgName
 import com.kazakago.blueprint.domain.model.github.GithubRepo
@@ -23,7 +24,7 @@ internal class GithubRepositoryImpl @Inject constructor(
         return githubCache.githubOrgs.asFlow
     }
 
-    override fun flowOrgs(githubOrgName: GithubOrgName): Flow<GithubOrg> {
+    override fun flowOrg(githubOrgName: GithubOrgName): Flow<GithubOrg> {
         return githubCache.githubOrgs.asFlow.map { githubOrgs ->
             githubOrgs.firstOrNull { it.name == githubOrgName } ?: run {
                 githubApi.getOrg(githubOrgName.value).toModel()
@@ -32,18 +33,20 @@ internal class GithubRepositoryImpl @Inject constructor(
     }
 
     override suspend fun requestOrgs(force: Boolean) {
-        if (githubCache.githubOrgs.data == null || force) {
+        githubCache.githubOrgs.fetch(force) {
             val response = githubApi.getOrgs(null, PER_PAGE)
-            githubCache.githubOrgs.data = response.map { it.toModel() }
-            githubCache.githubOrgsNextKey.data = response.lastOrNull()?.id
+            val newData = response.map { it.toModel() }
+            val newNextPage = response.lastOrNull()?.id
+            PagingCache.Result(newData, newNextPage)
         }
     }
 
     override suspend fun requestOrgsNext() {
-        if (githubCache.githubOrgsNextKey.data != null) {
-            val response = githubApi.getOrgs(githubCache.githubOrgsNextKey.data, PER_PAGE)
-            githubCache.githubOrgs.data = githubCache.githubOrgs.data plus response.map { it.toModel() }
-            githubCache.githubOrgsNextKey.data = response.lastOrNull()?.id
+        githubCache.githubOrgs.fetchNext { nextPage ->
+            val response = githubApi.getOrgs(nextPage, PER_PAGE)
+            val newData = response.map { it.toModel() }
+            val newNextPage = response.lastOrNull()?.id
+            PagingCache.Result(newData, newNextPage)
         }
     }
 
@@ -52,28 +55,24 @@ internal class GithubRepositoryImpl @Inject constructor(
     }
 
     override suspend fun requestRepos(force: Boolean, githubOrgName: GithubOrgName) {
-        if (githubCache.githubRepos[githubOrgName].data == null || force) {
+        githubCache.githubRepos[githubOrgName].fetch(force) {
             val response = githubApi.getRepos(githubOrgName.value, 1, PER_PAGE)
-            githubCache.githubRepos[githubOrgName].data = response.map { it.toModel() }
-            githubCache.githubReposNextPages[githubOrgName].data = 2
+            val newData = response.map { it.toModel() }
+            val newNextPage = 2
+            PagingCache.Result(newData, newNextPage)
         }
     }
 
     override suspend fun requestReposNext(githubOrgName: GithubOrgName) {
-        if (githubCache.githubReposNextPages[githubOrgName].data != null) {
-            val response = githubApi.getRepos(githubOrgName.value, githubCache.githubReposNextPages[githubOrgName].data, PER_PAGE)
-            githubCache.githubRepos[githubOrgName].data = githubCache.githubRepos[githubOrgName].data plus response.map { it.toModel() }
-            githubCache.githubReposNextPages[githubOrgName].data = if (response.isNotEmpty()) {
-                githubCache.githubRepos[githubOrgName].data?.size divisionPlus1 PER_PAGE
-            } else null
+        githubCache.githubRepos[githubOrgName].fetchNext { nextPage ->
+            val response = githubApi.getRepos(githubOrgName.value, nextPage, PER_PAGE)
+            val newData = response.map { it.toModel() }
+            val newNextPage = if (response.isNotEmpty()) {
+                (((githubCache.githubRepos[githubOrgName].data?.size ?: 0) + response.size) / PER_PAGE) + 1
+            } else {
+                null
+            }
+            PagingCache.Result(newData, newNextPage)
         }
-    }
-
-    private infix fun <T> List<T>?.plus(list: List<T>): List<T> {
-        return (this ?: emptyList()) + list
-    }
-
-    private infix fun Int?.divisionPlus1(other: Int): Int {
-        return ((this ?: 0) / other) + 1
     }
 }

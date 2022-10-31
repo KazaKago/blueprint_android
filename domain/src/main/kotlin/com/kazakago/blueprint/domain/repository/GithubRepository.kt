@@ -9,7 +9,7 @@ interface GithubRepository {
 
     fun flowOrgs(): Flow<List<GithubOrg>>
 
-    fun flowOrgs(githubOrgName: GithubOrgName): Flow<GithubOrg>
+    fun flowOrg(githubOrgName: GithubOrgName): Flow<GithubOrg>
 
     suspend fun requestOrgs(force: Boolean)
 

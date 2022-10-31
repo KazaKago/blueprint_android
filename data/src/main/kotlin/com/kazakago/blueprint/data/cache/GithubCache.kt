@@ -8,8 +8,6 @@ import javax.inject.Singleton
 
 @Singleton
 class GithubCache @Inject constructor() {
-    val githubOrgs: Cache<List<GithubOrg>> = Cache()
-    val githubOrgsNextKey: Cache<Long> = Cache()
-    val githubRepos: KeyedCache<GithubOrgName, List<GithubRepo>> = KeyedCache()
-    val githubReposNextPages: KeyedCache<GithubOrgName, Int?> = KeyedCache()
+    val githubOrgs: PagingCache<GithubOrg, Long> = PagingCache()
+    val githubRepos: KeyedPagingCache<GithubOrgName, GithubRepo, Int> = KeyedPagingCache()
 }

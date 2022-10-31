@@ -122,12 +122,12 @@ fun <T> produceQuery(
 @Composable
 fun <T> produceQuery(
     key: Any?,
-    flow: suspend () -> Flow<T>,
+    flow: () -> Flow<T>,
     fetch: suspend () -> Unit,
     refresh: suspend () -> Unit,
 ): QueryResult<T> {
     val scope: CoroutineScope = rememberCoroutineScope()
-    var data: T? by remember(key) { mutableStateOf(null) }
+    val data: T? by flow().collectAsState(initial = null)
     var loading: Boolean by remember(key) { mutableStateOf(false) }
     var error: Throwable? by remember(key) { mutableStateOf(null) }
     val fetchBlock: () -> Unit = {
@@ -154,11 +154,6 @@ fun <T> produceQuery(
                 error = it
             }
             loading = false
-        }
-    }
-    LaunchedEffect(key) {
-        flow().collect {
-            data = it
         }
     }
     LaunchedEffect(key) {
@@ -200,13 +195,13 @@ data class PagingQueryResult<out T>(
 @Composable
 fun <T> producePagingQuery(
     key: Any?,
-    flow: suspend () -> Flow<T>,
+    flow: () -> Flow<T>,
     fetch: suspend () -> Unit,
     refresh: suspend () -> Unit,
     next: suspend () -> Unit,
 ): PagingQueryResult<T> {
     val scope: CoroutineScope = rememberCoroutineScope()
-    var data: T? by remember(key) { mutableStateOf(null) }
+    val data: T? by flow().collectAsState(initial = null)
     var loading: Boolean by remember(key) { mutableStateOf(false) }
     var error: Throwable? by remember(key) { mutableStateOf(null) }
     var loadingNext: Boolean by remember(key) { mutableStateOf(false) }
@@ -254,11 +249,6 @@ fun <T> producePagingQuery(
                 errorNext = it
             }
             loadingNext = false
-        }
-    }
-    LaunchedEffect(key) {
-        flow().collect {
-            data = it
         }
     }
     LaunchedEffect(key) {

@@ -11,15 +11,14 @@ import kotlinx.coroutines.flow.combine
 @Composable
 fun queryGithubRepos(githubOrgName: GithubOrgName): PagingQueryResult<GithubOrgAndRepos> {
     val repository = LocalGithubRepository.current
-    val flowFunction = suspend {
-        repository.flowOrgs(githubOrgName = githubOrgName)
-            .combine(repository.flowRepos(githubOrgName = githubOrgName)) { orgs, repos ->
-                GithubOrgAndRepos(orgs, repos)
-            }
-    }
     return producePagingQuery(
         key = githubOrgName,
-        flow = flowFunction,
+        flow = {
+            repository.flowOrg(githubOrgName = githubOrgName)
+                .combine(repository.flowRepos(githubOrgName = githubOrgName)) { orgs, repos ->
+                    GithubOrgAndRepos(orgs, repos)
+                }
+        },
         fetch = { repository.requestRepos(force = false, githubOrgName = githubOrgName) },
         refresh = { repository.requestRepos(force = true, githubOrgName = githubOrgName) },
         next = { repository.requestReposNext(githubOrgName = githubOrgName) },
