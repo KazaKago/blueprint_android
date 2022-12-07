@@ -22,7 +22,7 @@ kotlinx-serialization-json = "org.jetbrains.kotlinx:kotlinx-serialization-json:1
 # Kotlinx DateTime
 kotlinx-datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.4.0"
 # AndroidX Compose BOM
-androidx-compose-bom = "androidx.compose:compose-bom:2022.10.00"
+androidx-compose-bom = "androidx.compose:compose-bom:2022.12.00"
 # AndroidX Compose Preview support
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
