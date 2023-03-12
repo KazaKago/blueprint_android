@@ -38,7 +38,7 @@ androidx-activity-compose = "androidx.activity:activity-compose:1.6.1"
 # AndroidX Lifecycle Runtime Compose
 androidx-lifecycle-runtime-compose = "androidx.lifecycle:lifecycle-runtime-compose:2.6.0-alpha03"
 # AndroidX JUnit
-androidx-junit = "androidx.test.ext:junit:1.1.3"
+androidx-junit = "androidx.test.ext:junit:1.1.5"
 # Accompanist Swipe Refresh
 accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanist" }
 # Accompanist System UI Controller
