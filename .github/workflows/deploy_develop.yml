@@ -23,7 +23,7 @@ jobs:
       run: ./gradlew app:bundleDevelopRelease
     - name: Sign
       id: sign
-      uses: mukeshsolanki/bundletool-action@v1.0.0
+      uses: mukeshsolanki/bundletool-action@v1.0.2
       with:
         aabFile: ./app/build/outputs/bundle/developRelease/app-develop-release.aab
         base64Keystore: ${{ secrets.SIGNING_KEY_BASE64 }}
