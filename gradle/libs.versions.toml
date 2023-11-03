@@ -80,4 +80,4 @@ android-library = { id = "com.android.library", version.ref = "android-plugin" }
 # Dagger Hilt
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
 # Google Ksp
-google-ksp = { id = "com.google.devtools.ksp", version = "1.7.20-1.0.7" }
+google-ksp = { id = "com.google.devtools.ksp", version = "1.9.20-1.0.14" }
