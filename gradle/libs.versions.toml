@@ -34,7 +34,7 @@ androidx-compose-material-icons-extended = { module = "androidx.compose.material
 androidx-compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
 androidx-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 # AndroidX Activity Compose
-androidx-activity-compose = "androidx.activity:activity-compose:1.6.1"
+androidx-activity-compose = "androidx.activity:activity-compose:1.8.1"
 # AndroidX Lifecycle Runtime Compose
 androidx-lifecycle-runtime-compose = "androidx.lifecycle:lifecycle-runtime-compose:2.6.0-alpha03"
 # AndroidX JUnit
