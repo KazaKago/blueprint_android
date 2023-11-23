@@ -9,7 +9,7 @@ java = "11"
 
 android-plugin = "7.4.2"
 kotlin = "1.7.20"
-dagger = "2.44"
+dagger = "2.48.1"
 compose-compiler = "1.3.2"
 accompanist = "0.32.0"
 distinations = "1.7.23-beta"
