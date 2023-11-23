@@ -16,7 +16,7 @@ distinations = "1.7.23-beta"
 
 [libraries]
 # Kotlinx Coroutines
-kotlinx-coroutines-core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
+kotlinx-coroutines-core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3"
 # Kotlinx Serialization
 kotlinx-serialization-json = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1"
 # Kotlinx DateTime
