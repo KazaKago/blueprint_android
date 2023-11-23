@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.kazakago.blueprint.domain.model.github.GithubRepo
 import com.kazakago.blueprint.domain.model.github.GithubRepoId
 import com.kazakago.blueprint.presentation.R
-import com.kazakago.blueprint.presentation.global.theme.PreviewTheme
+import com.kazakago.blueprint.presentation.global.theme.AppTheme
 import java.net.URL
 
 @Composable
@@ -47,7 +47,7 @@ fun GithubRepoRow(
 @Preview(showBackground = true)
 @Composable
 fun PreviewGithubRepoRow() {
-    PreviewTheme {
+    AppTheme {
         Surface {
             GithubRepoRow(
                 githubRepo = GithubRepo(id = GithubRepoId(1), name = "cueue_server", url = URL("https://github.com/KazaKago/cueue_server")),

@@ -7,14 +7,17 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.*
+import androidx.compose.material3.pulltorefresh.PullToRefreshContainer
+import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.tooling.preview.Preview
-import com.google.accompanist.swiperefresh.SwipeRefresh
-import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.kazakago.blueprint.domain.model.github.*
-import com.kazakago.blueprint.presentation.global.theme.PreviewTheme
+import com.kazakago.blueprint.presentation.global.theme.AppTheme
 import com.kazakago.blueprint.presentation.global.ui.*
 import com.kazakago.blueprint.presentation.global.util.OnBottomReached
 import com.kazakago.blueprint.presentation.global.util.PagingQueryResult
@@ -73,6 +76,7 @@ fun GithubReposScreen(
 }
 
 @Composable
+@OptIn(ExperimentalMaterial3Api::class)
 fun GithubReposContent(
     githubOrgAndRepos: GithubOrgAndRepos,
     loading: Boolean,
@@ -82,9 +86,18 @@ fun GithubReposContent(
     onNext: () -> Unit,
     onRefresh: () -> Unit,
 ) {
-    SwipeRefresh(
-        state = rememberSwipeRefreshState(loading),
-        onRefresh = onRefresh,
+    val pullToRefreshState = rememberPullToRefreshState()
+    if (pullToRefreshState.isRefreshing) {
+        LaunchedEffect(Unit) {
+            pullToRefreshState.startRefresh()
+            onRefresh()
+        }
+    }
+    if (!loading) {
+        pullToRefreshState.endRefresh()
+    }
+    Box(
+        modifier = Modifier.nestedScroll(pullToRefreshState.nestedScrollConnection),
     ) {
         val listState = rememberLazyListState()
         LazyColumn(
@@ -107,13 +120,17 @@ fun GithubReposContent(
             }
         }
         listState.OnBottomReached(loadMore = onNext)
+        PullToRefreshContainer(
+            modifier = Modifier.align(Alignment.TopCenter),
+            state = pullToRefreshState,
+        )
     }
 }
 
 @Preview
 @Composable
 fun PreviewGithubReposScreen() {
-    PreviewTheme {
+    AppTheme {
         GithubReposScreen(
             navigator = EmptyDestinationsNavigator,
             query = PagingQueryResult.forPreview(
@@ -134,7 +151,7 @@ fun PreviewGithubReposScreen() {
 @Preview
 @Composable
 fun PreviewGithubReposScreenWithLoading() {
-    PreviewTheme {
+    AppTheme {
         GithubReposScreen(
             navigator = EmptyDestinationsNavigator,
             query = PagingQueryResult.forPreview(
@@ -148,7 +165,7 @@ fun PreviewGithubReposScreenWithLoading() {
 @Preview
 @Composable
 fun PreviewGithubReposScreenWithRefreshing() {
-    PreviewTheme {
+    AppTheme {
         GithubReposScreen(
             navigator = EmptyDestinationsNavigator,
             query = PagingQueryResult.forPreview(
@@ -170,7 +187,7 @@ fun PreviewGithubReposScreenWithRefreshing() {
 @Preview
 @Composable
 fun PreviewGithubReposScreenWithError() {
-    PreviewTheme {
+    AppTheme {
         GithubReposScreen(
             navigator = EmptyDestinationsNavigator,
             query = PagingQueryResult.forPreview(
@@ -184,7 +201,7 @@ fun PreviewGithubReposScreenWithError() {
 @Preview
 @Composable
 fun PreviewGithubReposScreenWithLoadingNext() {
-    PreviewTheme {
+    AppTheme {
         GithubReposScreen(
             navigator = EmptyDestinationsNavigator,
             query = PagingQueryResult.forPreview(
@@ -206,7 +223,7 @@ fun PreviewGithubReposScreenWithLoadingNext() {
 @Preview
 @Composable
 fun PreviewGithubReposScreenWithErrorNext() {
-    PreviewTheme {
+    AppTheme {
         GithubReposScreen(
             navigator = EmptyDestinationsNavigator,
             query = PagingQueryResult.forPreview(

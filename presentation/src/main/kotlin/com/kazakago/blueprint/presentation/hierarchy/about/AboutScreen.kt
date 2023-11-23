@@ -18,7 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.kazakago.blueprint.domain.model.about.*
 import com.kazakago.blueprint.presentation.R
-import com.kazakago.blueprint.presentation.global.theme.PreviewTheme
+import com.kazakago.blueprint.presentation.global.theme.AppTheme
 import com.kazakago.blueprint.presentation.global.ui.BackIconButton
 import com.kazakago.blueprint.presentation.global.util.QueryResult
 import com.kazakago.blueprint.presentation.global.util.useActionView
@@ -147,7 +147,7 @@ fun AboutScreen(
 @Preview
 @Composable
 fun PreviewAboutScreenOnLoading() {
-    PreviewTheme {
+    AppTheme {
         AboutScreen(
             navigator = EmptyDestinationsNavigator,
             query = QueryResult.forPreview(),
@@ -158,7 +158,7 @@ fun PreviewAboutScreenOnLoading() {
 @Preview
 @Composable
 fun PreviewAboutScreenOnCompleted() {
-    PreviewTheme {
+    AppTheme {
         AboutScreen(
             navigator = EmptyDestinationsNavigator,
             query = QueryResult.forPreview(

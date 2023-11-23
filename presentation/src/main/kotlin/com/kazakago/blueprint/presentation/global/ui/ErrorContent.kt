@@ -13,7 +13,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.kazakago.blueprint.presentation.R
-import com.kazakago.blueprint.presentation.global.theme.PreviewTheme
+import com.kazakago.blueprint.presentation.global.theme.AppTheme
 
 @Composable
 fun ErrorContent(
@@ -43,7 +43,7 @@ fun ErrorContent(
 @Preview(showBackground = true)
 @Composable
 fun PreviewErrorContent() {
-    PreviewTheme {
+    AppTheme {
         Surface {
             ErrorContent(
                 error = IllegalAccessException("hogehogehogehogehogehogehogehogehogehoge"),

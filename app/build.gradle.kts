@@ -1,8 +1,7 @@
-@Suppress("DSL_SCOPE_VIOLATION") // https://youtrack.jetbrains.com/issue/KTIJ-19369
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.google.ksp)
     alias(libs.plugins.dagger.hilt)
 }
 
@@ -22,43 +21,24 @@ android {
             isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
-        debug {
-            applicationIdSuffix = ".$name"
-            versionNameSuffix = " $name"
-        }
-    }
-    flavorDimensions += "app"
-    productFlavors {
-        create("production") {
-            dimension = "app"
-        }
-        create("develop") {
-            dimension = "app"
-            applicationIdSuffix = ".$name"
-            versionNameSuffix = " $name"
-        }
-    }
-    compileOptions {
-        sourceCompatibility(libs.versions.java.get())
-        targetCompatibility(libs.versions.java.get())
-    }
-    kotlinOptions {
-        jvmTarget = libs.versions.java.get()
     }
 }
 
+kotlin {
+    jvmToolchain(libs.versions.java.get().toInt())
+}
+
 dependencies {
-    // Modules
     implementation(projects.presentation)
     implementation(projects.domain)
     implementation(projects.data)
-    // Dagger
     implementation(libs.dagger.hilt.android)
-    kapt(libs.dagger.hilt.compiler)
+    ksp(libs.dagger.hilt.compiler)
 
-    // JUnit
+    // Unit Tests
     testImplementation(libs.junit)
 
-    // AndroidX JUnit
-    androidTestImplementation(libs.androidx.junit)
+    // UI Tests
+    androidTestImplementation(libs.androidx.test.junit)
+    androidTestImplementation(libs.androidx.test.espresso)
 }

@@ -1,7 +1,6 @@
 package com.kazakago.blueprint.presentation.global.util
 
 import androidx.compose.runtime.*
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -108,7 +107,6 @@ fun <T> produceQuery(
 }
 
 @Composable
-@OptIn(ExperimentalLifecycleComposeApi::class)
 fun <T> produceQuery(
     key: Any?,
     flow: () -> Flow<T>,
@@ -168,7 +166,6 @@ data class PagingQueryResult<out T>(
 }
 
 @Composable
-@OptIn(ExperimentalLifecycleComposeApi::class)
 fun <T> producePagingQuery(
     key: Any?,
     flow: () -> Flow<T>,

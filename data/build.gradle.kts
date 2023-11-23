@@ -1,9 +1,8 @@
-@Suppress("DSL_SCOPE_VIOLATION") // https://youtrack.jetbrains.com/issue/KTIJ-19369
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.google.ksp)
 }
 
 android {
@@ -11,7 +10,6 @@ android {
     compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
-        targetSdk = libs.versions.targetSdk.get().toInt()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -21,48 +19,27 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
-    flavorDimensions += "app"
-    productFlavors {
-        create("production") {
-            dimension = "app"
-        }
-        create("develop") {
-            dimension = "app"
-        }
-    }
-    compileOptions {
-        sourceCompatibility(libs.versions.java.get())
-        targetCompatibility(libs.versions.java.get())
-    }
-    kotlinOptions {
-        jvmTarget = libs.versions.java.get()
-    }
+}
+
+kotlin {
+    jvmToolchain(libs.versions.java.get().toInt())
 }
 
 dependencies {
-    // Modules
     implementation(projects.domain)
-    // Kotlinx Coroutines
-    implementation(libs.kotlinx.coroutines.core)
-    // Kotlinx Serialization
     implementation(libs.kotlinx.serialization.json)
-    // Kotlinx DateTime
     implementation(libs.kotlinx.datetime)
-    // Dagger
-    implementation(libs.dagger.hilt.android)
-    kapt(libs.dagger.hilt.compiler)
-    // Ktor BOM
     implementation(platform(libs.ktor.bom))
-    // Ktor Serialization
     implementation(libs.ktor.serialization.json)
-    // Ktor Client CIO
     implementation(libs.ktor.client.cio)
-    // Ktor Client Content Negotiation
     implementation(libs.ktor.client.content.negotiation)
+    implementation(libs.dagger.hilt.android)
+    ksp(libs.dagger.hilt.compiler)
 
-    // JUnit
+    // Unit Tests
     testImplementation(libs.junit)
 
-    // AndroidX JUnit
-    androidTestImplementation(libs.androidx.junit)
+    // UI Tests
+    androidTestImplementation(libs.androidx.test.junit)
+    androidTestImplementation(libs.androidx.test.espresso)
 }

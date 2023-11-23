@@ -9,17 +9,19 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.*
+import androidx.compose.material3.pulltorefresh.PullToRefreshContainer
+import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.google.accompanist.swiperefresh.SwipeRefresh
-import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.kazakago.blueprint.domain.model.github.GithubOrg
 import com.kazakago.blueprint.domain.model.github.GithubOrgId
 import com.kazakago.blueprint.domain.model.github.GithubOrgName
 import com.kazakago.blueprint.presentation.R
-import com.kazakago.blueprint.presentation.global.theme.PreviewTheme
+import com.kazakago.blueprint.presentation.global.theme.AppTheme
 import com.kazakago.blueprint.presentation.global.ui.*
 import com.kazakago.blueprint.presentation.global.util.OnBottomReached
 import com.kazakago.blueprint.presentation.global.util.PagingQueryResult
@@ -83,6 +85,7 @@ fun GithubOrgsScreen(
 }
 
 @Composable
+@OptIn(ExperimentalMaterial3Api::class)
 fun GithubOrgsContent(
     githubOrgs: List<GithubOrg>,
     loading: Boolean,
@@ -92,11 +95,20 @@ fun GithubOrgsContent(
     onNext: () -> Unit,
     onRefresh: () -> Unit,
 ) {
-    SwipeRefresh(
-        state = rememberSwipeRefreshState(loading),
-        onRefresh = onRefresh,
+    val pullToRefreshState = rememberPullToRefreshState()
+    if (pullToRefreshState.isRefreshing) {
+        LaunchedEffect(Unit) {
+            pullToRefreshState.startRefresh()
+            onRefresh()
+        }
+    }
+    if (!loading) {
+        pullToRefreshState.endRefresh()
+    }
+    val listState = rememberLazyListState()
+    Box(
+        modifier = Modifier.nestedScroll(pullToRefreshState.nestedScrollConnection),
     ) {
-        val listState = rememberLazyListState()
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
             state = listState,
@@ -114,13 +126,17 @@ fun GithubOrgsContent(
             }
         }
         listState.OnBottomReached(loadMore = onNext)
+        PullToRefreshContainer(
+            modifier = Modifier.align(Alignment.TopCenter),
+            state = pullToRefreshState,
+        )
     }
 }
 
 @Preview
 @Composable
 fun PreviewGithubOrgsScreen() {
-    PreviewTheme {
+    AppTheme {
         GithubOrgsScreen(
             navigator = EmptyDestinationsNavigator,
             query = PagingQueryResult.forPreview(
@@ -137,7 +153,7 @@ fun PreviewGithubOrgsScreen() {
 @Preview
 @Composable
 fun PreviewGithubOrgsScreenWithLoading() {
-    PreviewTheme {
+    AppTheme {
         GithubOrgsScreen(
             navigator = EmptyDestinationsNavigator,
             query = PagingQueryResult.forPreview(
@@ -150,7 +166,7 @@ fun PreviewGithubOrgsScreenWithLoading() {
 @Preview
 @Composable
 fun PreviewGithubOrgsScreenWithRefreshing() {
-    PreviewTheme {
+    AppTheme {
         GithubOrgsScreen(
             navigator = EmptyDestinationsNavigator,
             query = PagingQueryResult.forPreview(
@@ -168,8 +184,8 @@ fun PreviewGithubOrgsScreenWithRefreshing() {
 @Preview
 @Composable
 fun PreviewGithubOrgsScreenWithError() {
-    PreviewTheme {
-        PreviewTheme {
+    AppTheme {
+        AppTheme {
             GithubOrgsScreen(
                 navigator = EmptyDestinationsNavigator,
                 query = PagingQueryResult.forPreview(
@@ -183,7 +199,7 @@ fun PreviewGithubOrgsScreenWithError() {
 @Preview
 @Composable
 fun PreviewGithubOrgsScreenWithNextLoading() {
-    PreviewTheme {
+    AppTheme {
         GithubOrgsScreen(
             navigator = EmptyDestinationsNavigator,
             query = PagingQueryResult.forPreview(
@@ -201,7 +217,7 @@ fun PreviewGithubOrgsScreenWithNextLoading() {
 @Preview
 @Composable
 fun PreviewGithubOrgsScreenWithNextError() {
-    PreviewTheme {
+    AppTheme {
         GithubOrgsScreen(
             navigator = EmptyDestinationsNavigator,
             query = PagingQueryResult.forPreview(

@@ -10,7 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.kazakago.blueprint.presentation.global.theme.PreviewTheme
+import com.kazakago.blueprint.presentation.global.theme.AppTheme
 
 @Composable
 fun LoadingRow() {
@@ -27,7 +27,7 @@ fun LoadingRow() {
 @Preview(showBackground = true)
 @Composable
 fun PreviewLoadingRow() {
-    PreviewTheme {
+    AppTheme {
         Surface {
             LoadingRow()
         }
