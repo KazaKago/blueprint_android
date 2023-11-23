@@ -20,7 +20,7 @@ kotlinx-coroutines-core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
 # Kotlinx Serialization
 kotlinx-serialization-json = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1"
 # Kotlinx DateTime
-kotlinx-datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.4.0"
+kotlinx-datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.4.1"
 # AndroidX Compose BOM
 androidx-compose-bom = "androidx.compose:compose-bom:2022.10.00"
 # AndroidX Compose Preview support
