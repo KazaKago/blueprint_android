@@ -44,7 +44,7 @@ accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiper
 # Accompanist System UI Controller
 accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
 # Coil
-coil-compose = "io.coil-kt:coil-compose:2.2.2"
+coil-compose = "io.coil-kt:coil-compose:2.5.0"
 # Dagger
 dagger-hilt-core = { module = "com.google.dagger:hilt-core", version.ref = "dagger" }
 dagger-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "dagger" }
