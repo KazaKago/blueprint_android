@@ -14,9 +14,11 @@ import androidx.compose.ui.unit.dp
 import com.kazakago.blueprint.presentation.global.theme.AppTheme
 
 @Composable
-fun LoadingContent() {
+fun LoadingContent(
+    modifier: Modifier = Modifier,
+) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(16.dp),
         verticalArrangement = Arrangement.Center,
@@ -28,7 +30,7 @@ fun LoadingContent() {
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewLoadingContent() {
+fun LoadingContentPreview() {
     AppTheme {
         Surface {
             LoadingContent()

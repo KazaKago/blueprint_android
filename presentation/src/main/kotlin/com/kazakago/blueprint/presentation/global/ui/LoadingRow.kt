@@ -13,9 +13,11 @@ import androidx.compose.ui.unit.dp
 import com.kazakago.blueprint.presentation.global.theme.AppTheme
 
 @Composable
-fun LoadingRow() {
+fun LoadingRow(
+    modifier: Modifier = Modifier,
+) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(12.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -26,7 +28,7 @@ fun LoadingRow() {
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewLoadingRow() {
+fun LoadingRowPreview() {
     AppTheme {
         Surface {
             LoadingRow()

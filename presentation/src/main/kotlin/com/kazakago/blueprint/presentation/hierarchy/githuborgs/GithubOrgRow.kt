@@ -27,9 +27,10 @@ import java.net.URL
 fun GithubOrgRow(
     githubOrg: GithubOrg,
     onClickItem: (githubOrg: GithubOrg) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .clickable(onClick = { onClickItem(githubOrg) })
             .fillMaxWidth()
             .padding(16.dp),
@@ -62,7 +63,7 @@ fun GithubOrgRow(
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewGithubOrgRow() {
+fun GithubOrgRowPreview() {
     AppTheme {
         Surface {
             GithubOrgRow(

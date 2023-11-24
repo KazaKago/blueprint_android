@@ -33,11 +33,13 @@ import java.net.URL
 fun GithubReposScreen(
     name: GithubOrgName,
     navigator: DestinationsNavigator,
+    modifier: Modifier = Modifier,
     query: PagingQueryResult<GithubOrgAndRepos> = queryGithubRepos(name),
 ) {
     val actionView = useActionView()
     val snackbarHostState = remember { SnackbarHostState() }
     Scaffold(
+        modifier = modifier,
         topBar = {
             TopAppBar(
                 title = { Text(query.data?.githubOrg?.name?.value ?: name.value) },
@@ -77,7 +79,7 @@ fun GithubReposScreen(
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-fun GithubReposContent(
+private fun GithubReposContent(
     githubOrgAndRepos: GithubOrgAndRepos,
     loading: Boolean,
     loadingNext: Boolean,
@@ -85,6 +87,7 @@ fun GithubReposContent(
     onClickItem: (GithubRepo) -> Unit,
     onNext: () -> Unit,
     onRefresh: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     val pullToRefreshState = rememberPullToRefreshState()
     if (pullToRefreshState.isRefreshing) {
@@ -97,7 +100,7 @@ fun GithubReposContent(
         pullToRefreshState.endRefresh()
     }
     Box(
-        modifier = Modifier.nestedScroll(pullToRefreshState.nestedScrollConnection),
+        modifier = modifier.nestedScroll(pullToRefreshState.nestedScrollConnection),
     ) {
         val listState = rememberLazyListState()
         LazyColumn(
@@ -129,7 +132,7 @@ fun GithubReposContent(
 
 @Preview
 @Composable
-fun PreviewGithubReposScreen() {
+fun GithubReposScreenPreview() {
     AppTheme {
         GithubReposScreen(
             navigator = EmptyDestinationsNavigator,
@@ -150,7 +153,7 @@ fun PreviewGithubReposScreen() {
 
 @Preview
 @Composable
-fun PreviewGithubReposScreenWithLoading() {
+fun GithubReposScreenWithLoadingPreview() {
     AppTheme {
         GithubReposScreen(
             navigator = EmptyDestinationsNavigator,
@@ -164,7 +167,7 @@ fun PreviewGithubReposScreenWithLoading() {
 
 @Preview
 @Composable
-fun PreviewGithubReposScreenWithRefreshing() {
+fun GithubReposScreenWithRefreshingPreview() {
     AppTheme {
         GithubReposScreen(
             navigator = EmptyDestinationsNavigator,
@@ -186,7 +189,7 @@ fun PreviewGithubReposScreenWithRefreshing() {
 
 @Preview
 @Composable
-fun PreviewGithubReposScreenWithError() {
+fun GithubReposScreenWithErrorPreview() {
     AppTheme {
         GithubReposScreen(
             navigator = EmptyDestinationsNavigator,
@@ -200,7 +203,7 @@ fun PreviewGithubReposScreenWithError() {
 
 @Preview
 @Composable
-fun PreviewGithubReposScreenWithLoadingNext() {
+fun GithubReposScreenWithLoadingNextPreview() {
     AppTheme {
         GithubReposScreen(
             navigator = EmptyDestinationsNavigator,
@@ -222,7 +225,7 @@ fun PreviewGithubReposScreenWithLoadingNext() {
 
 @Preview
 @Composable
-fun PreviewGithubReposScreenWithErrorNext() {
+fun GithubReposScreenWithErrorNextPreview() {
     AppTheme {
         GithubReposScreen(
             navigator = EmptyDestinationsNavigator,

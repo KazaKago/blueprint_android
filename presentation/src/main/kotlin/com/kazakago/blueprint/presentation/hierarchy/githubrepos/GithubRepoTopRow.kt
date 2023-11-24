@@ -25,9 +25,10 @@ import java.net.URL
 @Composable
 fun GithubRepoTopRow(
     githubOrg: GithubOrg,
+    modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -56,7 +57,7 @@ fun GithubRepoTopRow(
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewGithubRepoRowTop() {
+fun GithubRepoRowTopPreview() {
     AppTheme {
         Surface {
             GithubRepoTopRow(

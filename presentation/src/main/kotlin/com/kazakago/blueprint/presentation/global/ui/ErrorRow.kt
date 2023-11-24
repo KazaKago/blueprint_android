@@ -19,9 +19,10 @@ import com.kazakago.blueprint.presentation.global.theme.AppTheme
 fun ErrorRow(
     error: Throwable,
     onRetry: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(12.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -41,7 +42,7 @@ fun ErrorRow(
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewErrorRow() {
+fun ErrorRowPreview() {
     AppTheme {
         Surface {
             ErrorRow(

@@ -39,10 +39,12 @@ import java.net.URL
 @OptIn(ExperimentalMaterial3Api::class)
 fun GithubOrgsScreen(
     navigator: DestinationsNavigator,
+    modifier: Modifier = Modifier,
     query: PagingQueryResult<List<GithubOrg>> = queryGithubOrgs(),
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
     Scaffold(
+        modifier = modifier,
         topBar = {
             TopAppBar(
                 title = { Text(stringResource(id = R.string.app_name)) },
@@ -86,7 +88,7 @@ fun GithubOrgsScreen(
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-fun GithubOrgsContent(
+private fun GithubOrgsContent(
     githubOrgs: List<GithubOrg>,
     loading: Boolean,
     loadingNext: Boolean,
@@ -94,6 +96,7 @@ fun GithubOrgsContent(
     onClickItem: (GithubOrg) -> Unit,
     onNext: () -> Unit,
     onRefresh: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     val pullToRefreshState = rememberPullToRefreshState()
     if (pullToRefreshState.isRefreshing) {
@@ -107,7 +110,7 @@ fun GithubOrgsContent(
     }
     val listState = rememberLazyListState()
     Box(
-        modifier = Modifier.nestedScroll(pullToRefreshState.nestedScrollConnection),
+        modifier = modifier.nestedScroll(pullToRefreshState.nestedScrollConnection),
     ) {
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
@@ -135,7 +138,7 @@ fun GithubOrgsContent(
 
 @Preview
 @Composable
-fun PreviewGithubOrgsScreen() {
+fun GithubOrgsScreenPreview() {
     AppTheme {
         GithubOrgsScreen(
             navigator = EmptyDestinationsNavigator,
@@ -152,7 +155,7 @@ fun PreviewGithubOrgsScreen() {
 
 @Preview
 @Composable
-fun PreviewGithubOrgsScreenWithLoading() {
+fun GithubOrgsScreenWithLoadingPreview() {
     AppTheme {
         GithubOrgsScreen(
             navigator = EmptyDestinationsNavigator,
@@ -165,7 +168,7 @@ fun PreviewGithubOrgsScreenWithLoading() {
 
 @Preview
 @Composable
-fun PreviewGithubOrgsScreenWithRefreshing() {
+fun GithubOrgsScreenWithRefreshingPreview() {
     AppTheme {
         GithubOrgsScreen(
             navigator = EmptyDestinationsNavigator,
@@ -183,7 +186,7 @@ fun PreviewGithubOrgsScreenWithRefreshing() {
 
 @Preview
 @Composable
-fun PreviewGithubOrgsScreenWithError() {
+fun GithubOrgsScreenWithErrorPreview() {
     AppTheme {
         AppTheme {
             GithubOrgsScreen(
@@ -198,7 +201,7 @@ fun PreviewGithubOrgsScreenWithError() {
 
 @Preview
 @Composable
-fun PreviewGithubOrgsScreenWithNextLoading() {
+fun GithubOrgsScreenWithNextLoadingPreview() {
     AppTheme {
         GithubOrgsScreen(
             navigator = EmptyDestinationsNavigator,
@@ -216,7 +219,7 @@ fun PreviewGithubOrgsScreenWithNextLoading() {
 
 @Preview
 @Composable
-fun PreviewGithubOrgsScreenWithNextError() {
+fun GithubOrgsScreenWithNextErrorPreview() {
     AppTheme {
         GithubOrgsScreen(
             navigator = EmptyDestinationsNavigator,

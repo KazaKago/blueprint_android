@@ -40,6 +40,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.coil.compose)
     implementation(libs.compose.distinations.core)
+    implementation(libs.swr.compose)
     ksp(libs.compose.distinations.ksp)
     implementation(libs.dagger.hilt.android)
     ksp(libs.dagger.hilt.compiler)

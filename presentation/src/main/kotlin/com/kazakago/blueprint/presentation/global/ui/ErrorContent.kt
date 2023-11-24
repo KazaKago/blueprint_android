@@ -19,9 +19,10 @@ import com.kazakago.blueprint.presentation.global.theme.AppTheme
 fun ErrorContent(
     error: Throwable,
     onRetry: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(16.dp),
         verticalArrangement = Arrangement.Center,
@@ -42,7 +43,7 @@ fun ErrorContent(
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewErrorContent() {
+fun ErrorContentPreview() {
     AppTheme {
         Surface {
             ErrorContent(

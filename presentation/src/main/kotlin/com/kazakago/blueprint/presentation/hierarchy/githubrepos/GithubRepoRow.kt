@@ -20,9 +20,10 @@ import java.net.URL
 fun GithubRepoRow(
     githubRepo: GithubRepo,
     onClickItem: (githubRepo: GithubRepo) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .clickable(onClick = { onClickItem(githubRepo) })
             .fillMaxWidth()
             .padding(16.dp),
@@ -46,7 +47,7 @@ fun GithubRepoRow(
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewGithubRepoRow() {
+fun GithubRepoRowPreview() {
     AppTheme {
         Surface {
             GithubRepoRow(

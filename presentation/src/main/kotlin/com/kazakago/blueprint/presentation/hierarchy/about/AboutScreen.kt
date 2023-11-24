@@ -10,6 +10,7 @@ import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Public
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -20,9 +21,10 @@ import com.kazakago.blueprint.domain.model.about.*
 import com.kazakago.blueprint.presentation.R
 import com.kazakago.blueprint.presentation.global.theme.AppTheme
 import com.kazakago.blueprint.presentation.global.ui.BackIconButton
-import com.kazakago.blueprint.presentation.global.util.QueryResult
+import com.kazakago.blueprint.presentation.global.ui.DefaultLayout
 import com.kazakago.blueprint.presentation.global.util.useActionView
 import com.kazakago.blueprint.presentation.global.util.useSendTo
+import com.kazakago.swr.compose.state.SWRState
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
@@ -35,133 +37,123 @@ import java.util.*
 @OptIn(ExperimentalMaterial3Api::class)
 fun AboutScreen(
     navigator: DestinationsNavigator,
-    query: QueryResult<AboutInfo> = queryAboutInfo(),
+    modifier: Modifier = Modifier,
+    state: SWRState<String, AboutInfo> = useAboutInfo(),
 ) {
-    val actionView: (URL) -> Unit = useActionView()
-    val sendTo: (URI) -> Unit = useSendTo()
+    val snackbarHostState = remember { SnackbarHostState() }
     Scaffold(
+        modifier = modifier,
         topBar = {
             TopAppBar(
                 title = { Text(stringResource(id = R.string.about_title)) },
                 navigationIcon = { BackIconButton(onClick = navigator::popBackStack) },
             )
         },
+        snackbarHost = { SnackbarHost(snackbarHostState) },
     ) { paddingValues ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .verticalScroll(rememberScrollState()),
-            horizontalAlignment = Alignment.CenterHorizontally,
+        DefaultLayout(
+            state = state,
+            snackbarHostState = snackbarHostState,
+            modifier = Modifier.padding(paddingValues),
         ) {
-            Spacer(modifier = Modifier.size(32.dp))
-            Image(
-                painter = painterResource(id = R.drawable.profile),
-                contentDescription = null,
-            )
-            Spacer(modifier = Modifier.size(16.dp))
-            Text(
-                modifier = Modifier.padding(horizontal = 16.dp),
-                text = stringResource(id = R.string.app_name),
-                style = MaterialTheme.typography.headlineMedium,
-            )
-            Spacer(modifier = Modifier.size(8.dp))
-            Text(
-                modifier = Modifier.padding(horizontal = 16.dp),
-                text = if (query.data != null) {
-                    stringResource(id = R.string.about_ver, query.data.appInfo.versionName.value, query.data.appInfo.versionCode.value)
-                } else {
-                    stringResource(id = R.string.loading)
-                },
-                style = MaterialTheme.typography.bodyMedium,
-            )
-            Text(
-                modifier = Modifier.padding(horizontal = 16.dp),
-                text = if (query.data != null) {
-                    stringResource(id = R.string.about_develop_by, query.data.developerInfo.name)
-                } else {
-                    stringResource(id = R.string.loading)
-                },
-                style = MaterialTheme.typography.bodyMedium,
-            )
-            Spacer(modifier = Modifier.size(16.dp))
-            Row(
-                modifier = Modifier
-                    .clickable(onClick = {
-                        if (query.data != null) {
-                            sendTo(query.data.developerInfo.mailAddress.toURI())
-                        }
-                    })
-                    .fillMaxWidth()
-                    .padding(horizontal = 32.dp, vertical = 16.dp),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Icon(
-                    imageVector = Icons.Outlined.Email,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary,
-                )
-                Spacer(modifier = Modifier.width(32.dp))
-                Text(
-                    text = stringResource(id = R.string.about_email),
-                    style = MaterialTheme.typography.bodyLarge,
-                )
-            }
-            Row(
-                modifier = Modifier
-                    .clickable(onClick = {
-                        if (query.data != null) {
-                            actionView(query.data.developerInfo.siteUrl)
-                        }
-                    })
-                    .fillMaxWidth()
-                    .padding(horizontal = 32.dp, vertical = 16.dp),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Icon(
-                    imageVector = Icons.Outlined.Public,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary,
-                )
-                Spacer(modifier = Modifier.width(32.dp))
-                Text(
-                    text = stringResource(id = R.string.about_web_site),
-                    style = MaterialTheme.typography.bodyLarge,
-                )
-            }
-            Spacer(modifier = Modifier.size(16.dp))
-            Text(
-                modifier = Modifier.padding(horizontal = 16.dp),
-                text = if (query.data != null) {
-                    stringResource(id = R.string.about_copyright, Calendar.getInstance().get(Calendar.YEAR), query.data.developerInfo.name)
-                } else {
-                    stringResource(id = R.string.loading)
-                },
-                style = MaterialTheme.typography.bodySmall,
-            )
-            Spacer(modifier = Modifier.size(32.dp))
+            AboutContent(it)
         }
     }
 }
 
-@Preview
 @Composable
-fun PreviewAboutScreenOnLoading() {
-    AppTheme {
-        AboutScreen(
-            navigator = EmptyDestinationsNavigator,
-            query = QueryResult.forPreview(),
+private fun AboutContent(
+    aboutInfo: AboutInfo,
+    modifier: Modifier = Modifier,
+) {
+    val actionView: (URL) -> Unit = useActionView()
+    val sendTo: (URI) -> Unit = useSendTo()
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Spacer(modifier = Modifier.size(32.dp))
+        Image(
+            painter = painterResource(id = R.drawable.profile),
+            contentDescription = null,
         )
+        Spacer(modifier = Modifier.size(16.dp))
+        Text(
+            modifier = Modifier.padding(horizontal = 16.dp),
+            text = stringResource(id = R.string.app_name),
+            style = MaterialTheme.typography.headlineMedium,
+        )
+        Spacer(modifier = Modifier.size(8.dp))
+        Text(
+            modifier = Modifier.padding(horizontal = 16.dp),
+            text = stringResource(id = R.string.about_ver, aboutInfo.appInfo.versionName.value, aboutInfo.appInfo.versionCode.value),
+            style = MaterialTheme.typography.bodyMedium,
+        )
+        Text(
+            modifier = Modifier.padding(horizontal = 16.dp),
+            text = stringResource(id = R.string.about_develop_by, aboutInfo.developerInfo.name),
+            style = MaterialTheme.typography.bodyMedium,
+        )
+        Spacer(modifier = Modifier.size(16.dp))
+        Row(
+            modifier = Modifier
+                .clickable(onClick = {
+                    sendTo(aboutInfo.developerInfo.mailAddress.toURI())
+                })
+                .fillMaxWidth()
+                .padding(horizontal = 32.dp, vertical = 16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Icon(
+                imageVector = Icons.Outlined.Email,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary,
+            )
+            Spacer(modifier = Modifier.width(32.dp))
+            Text(
+                text = stringResource(id = R.string.about_email),
+                style = MaterialTheme.typography.bodyLarge,
+            )
+        }
+        Row(
+            modifier = Modifier
+                .clickable(onClick = {
+                    actionView(aboutInfo.developerInfo.siteUrl)
+                })
+                .fillMaxWidth()
+                .padding(horizontal = 32.dp, vertical = 16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Icon(
+                imageVector = Icons.Outlined.Public,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary,
+            )
+            Spacer(modifier = Modifier.width(32.dp))
+            Text(
+                text = stringResource(id = R.string.about_web_site),
+                style = MaterialTheme.typography.bodyLarge,
+            )
+        }
+        Spacer(modifier = Modifier.size(16.dp))
+        Text(
+            modifier = Modifier.padding(horizontal = 16.dp),
+            text = stringResource(id = R.string.about_copyright, Calendar.getInstance().get(Calendar.YEAR), aboutInfo.developerInfo.name),
+            style = MaterialTheme.typography.bodySmall,
+        )
+        Spacer(modifier = Modifier.size(32.dp))
     }
 }
 
 @Preview
 @Composable
-fun PreviewAboutScreenOnCompleted() {
+fun AboutScreenPreview() {
     AppTheme {
         AboutScreen(
             navigator = EmptyDestinationsNavigator,
-            query = QueryResult.forPreview(
+            state = SWRState.empty(
                 data = AboutInfo(
                     appInfo = AppInfo(
                         versionCode = VersionCode(1),
