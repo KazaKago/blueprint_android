@@ -17,7 +17,7 @@ distinations = "1.9.55"
 # Kotlinx Coroutines
 kotlinx-coroutines-core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3"
 # Kotlinx Serialization Json
-kotlinx-serialization-json = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.1"
+kotlinx-serialization-json = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2"
 # Kotlinx DateTime
 kotlinx-datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.4.1"
 # AndroidX Compose BOM
