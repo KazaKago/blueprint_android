@@ -33,14 +33,15 @@ kotlin {
 
 dependencies {
     implementation(projects.domain)
+    implementation(projects.data)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material.icons.extended)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.coil.compose)
-    implementation(libs.compose.distinations.core)
     implementation(libs.swr.compose)
+    implementation(libs.compose.distinations.core)
     ksp(libs.compose.distinations.ksp)
     implementation(libs.dagger.hilt.android)
     ksp(libs.dagger.hilt.compiler)

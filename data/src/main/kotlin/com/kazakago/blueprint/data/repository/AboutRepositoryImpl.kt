@@ -2,7 +2,11 @@ package com.kazakago.blueprint.data.repository
 
 import com.kazakago.blueprint.data.resource.AppInfoDao
 import com.kazakago.blueprint.data.resource.DeveloperInfoDao
-import com.kazakago.blueprint.domain.model.about.*
+import com.kazakago.blueprint.domain.model.about.AppInfo
+import com.kazakago.blueprint.domain.model.about.DeveloperInfo
+import com.kazakago.blueprint.domain.model.about.Email
+import com.kazakago.blueprint.domain.model.about.VersionCode
+import com.kazakago.blueprint.domain.model.about.VersionName
 import com.kazakago.blueprint.domain.repository.AboutRepository
 import javax.inject.Inject
 

@@ -31,12 +31,14 @@ fun <KEY, DATA> DefaultLayout(
     val scope = rememberCoroutineScope()
     Box(modifier.fillMaxSize()) {
         if (data == null) {
-            if (error == null) {
+            if (error == null || isValidating) {
                 LoadingContent()
             } else {
                 ErrorContent(
                     error = error,
-                    onRetry = { scope.launch { mutate() } },
+                    onRetry = {
+                        scope.launch { runCatching { mutate() } }
+                    },
                 )
             }
         } else {

@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.platform.LocalContext
+import com.kazakago.blueprint.data.api.github.GithubApi
 import com.kazakago.blueprint.domain.repository.AboutRepository
 import com.kazakago.blueprint.domain.repository.GithubRepository
 import dagger.hilt.EntryPoint
@@ -16,6 +17,7 @@ import dagger.hilt.components.SingletonComponent
 interface HiltEntryPoint {
     fun githubRepository(): GithubRepository
     fun aboutRepository(): AboutRepository
+    fun githubApi(): GithubApi
 }
 
 @Composable
@@ -24,8 +26,13 @@ fun LocalDIProvider(content: @Composable () -> Unit) {
     CompositionLocalProvider(
         LocalGithubRepository provides entryPoint.githubRepository(),
         LocalAboutRepository provides entryPoint.aboutRepository(),
+        LocalGithubApi provides entryPoint.githubApi(),
         content = content,
     )
+}
+
+val LocalGithubApi = staticCompositionLocalOf<GithubApi> {
+    error("not found")
 }
 
 val LocalAboutRepository = staticCompositionLocalOf<AboutRepository> {

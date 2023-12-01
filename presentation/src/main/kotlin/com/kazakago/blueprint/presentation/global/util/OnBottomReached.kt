@@ -1,7 +1,11 @@
 package com.kazakago.blueprint.presentation.global.util
 
 import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.snapshotFlow
 
 @Composable
 fun LazyListState.OnBottomReached(
@@ -15,7 +19,7 @@ fun LazyListState.OnBottomReached(
             lastVisibleItem.index >= layoutInfo.totalItemsCount - 1 - buffer
         }
     }
-    LaunchedEffect(shouldLoadMore) {
+    LaunchedEffect(shouldLoadMore, loadMore) {
         snapshotFlow { shouldLoadMore.value }
             .collect {
                 if (it) loadMore()
