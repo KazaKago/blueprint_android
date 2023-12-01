@@ -9,7 +9,7 @@ java = "17"
 
 kotlin = "1.9.20"
 android-plugin = "8.1.4"
-dagger = "2.48.1"
+dagger = "2.49"
 compose-compiler = "1.5.4" # https://developer.android.com/jetpack/androidx/releases/compose-kotlin
 distinations = "1.9.55"
 
