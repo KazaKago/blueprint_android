@@ -8,7 +8,7 @@ targetSdk = "34"
 java = "17"
 
 kotlin = "1.9.20"
-ksp = "1.9.20-1.0.14" # https://github.com/google/ksp/releases
+google-ksp = "1.9.20-1.0.14" # https://github.com/google/ksp/releases
 compose-compiler = "1.5.5" # https://developer.android.com/jetpack/androidx/releases/compose-kotlin
 android-plugin = "8.2.0"
 dagger = "2.49"
@@ -44,7 +44,6 @@ androidx-test-espresso = "androidx.test.espresso:espresso-core:3.5.1"
 # Coil
 coil-compose = "io.coil-kt:coil-compose:2.5.0"
 # Dagger
-dagger-hilt-core = { module = "com.google.dagger:hilt-core", version.ref = "dagger" }
 dagger-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "dagger" }
 dagger-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "dagger" }
 # Compose Distinations
@@ -65,6 +64,15 @@ junit = "junit:junit:4.13.2"
 # Kotest
 kotest-assertions-core = "io.kotest:kotest-assertions-core:5.8.0"
 
+# Kotlin Gradle Plugin
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+# Android Gradle Plugin
+android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "android-plugin" }
+# Google Ksp Gradle Plugin
+google-ksp-gradle-plugin = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "google-ksp" }
+# Dagger Hilt Gradle Plugin
+dagger-hilt-gradle-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "dagger" }
+
 [plugins]
 # Kotlin JVM
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
@@ -76,6 +84,6 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 android-application = { id = "com.android.application", version.ref = "android-plugin" }
 android-library = { id = "com.android.library", version.ref = "android-plugin" }
 # Google Ksp
-google-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+google-ksp = { id = "com.google.devtools.ksp", version.ref = "google-ksp" }
 # Dagger Hilt
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }

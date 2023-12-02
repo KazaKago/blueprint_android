@@ -1,15 +1,7 @@
 plugins {
-    alias(libs.plugins.kotlin.jvm)
-}
-
-kotlin {
-    jvmToolchain(libs.versions.java.get().toInt())
+    id("buildlogic.module.kotlin")
 }
 
 dependencies {
     implementation(libs.kotlinx.coroutines.core)
-
-    // Unit Tests
-    testImplementation(libs.junit)
-    testImplementation(libs.kotest.assertions.core)
 }
