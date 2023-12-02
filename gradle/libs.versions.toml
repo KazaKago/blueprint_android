@@ -8,9 +8,10 @@ targetSdk = "34"
 java = "17"
 
 kotlin = "1.9.20"
+ksp = "1.9.20-1.0.14" # https://github.com/google/ksp/releases
+compose-compiler = "1.5.5" # https://developer.android.com/jetpack/androidx/releases/compose-kotlin
 android-plugin = "8.2.0"
-dagger = "2.48.1"
-compose-compiler = "1.5.4" # https://developer.android.com/jetpack/androidx/releases/compose-kotlin
+dagger = "2.49"
 distinations = "1.9.55"
 
 [libraries]
@@ -75,6 +76,6 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 android-application = { id = "com.android.application", version.ref = "android-plugin" }
 android-library = { id = "com.android.library", version.ref = "android-plugin" }
 # Google Ksp
-google-ksp = { id = "com.google.devtools.ksp", version = "1.9.20-1.0.14" }
+google-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 # Dagger Hilt
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
