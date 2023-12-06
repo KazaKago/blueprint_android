@@ -15,9 +15,10 @@ dependencyResolutionManagement {
 }
 rootProject.name = "blueprint"
 include(":app")
-include(":presentation")
-include(":domain")
+include(":ui")
 include(":data")
+include(":model")
+include(":mockserver")
 
 // https://docs.gradle.org/current/userguide/declaring_dependencies.html#sec:type-safe-project-accessors
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")

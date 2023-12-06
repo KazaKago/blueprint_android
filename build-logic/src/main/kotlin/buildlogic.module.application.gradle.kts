@@ -18,6 +18,11 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
+    packaging {
+        resources {
+            excludes += "/META-INF/*"
+        }
+    }
 }
 
 kotlin {

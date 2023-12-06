@@ -17,6 +17,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.kazakago.blueprint.data.repository.test", appContext.packageName)
+        assertEquals("com.kazakago.blueprint.data.test", appContext.packageName)
     }
 }

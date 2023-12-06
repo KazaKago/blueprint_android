@@ -2,7 +2,7 @@ name: DeployDevelop
 
 on:
   push:
-    branches: 
+    branches:
       - main
       - production
   workflow_dispatch:
@@ -11,27 +11,27 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-    - name: Setup JDK
-      uses: actions/setup-java@v4
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-        cache: gradle
-    - name: Build
-      run: ./gradlew app:bundleRelease
-    - name: Sign
-      id: sign
-      uses: mukeshsolanki/bundletool-action@v1.0.2
-      with:
-        aabFile: ./app/build/outputs/bundle/release/app-release.aab
-        base64Keystore: ${{ secrets.SIGNING_KEY_BASE64 }}
-        keystorePassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
-        keystoreAlias: ${{ secrets.SIGNING_KEY_ALIAS }}
-        keyPassword: ${{ secrets.SIGNING_KEY_ALIAS_PASSWORD }}
-    - name: Upload
-      uses: actions/upload-artifact@v3
-      with:
-        name: signed-apk
-        path: ${{ steps.sign.outputs.apkPath }}
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+      - name: Build
+        run: ./gradlew app:bundleRelease
+      - name: Sign
+        id: sign
+        uses: mukeshsolanki/bundletool-action@v1.0.2
+        with:
+          aabFile: ./app/build/outputs/bundle/release/app-release.aab
+          base64Keystore: ${{ secrets.SIGNING_KEY_BASE64 }}
+          keystorePassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
+          keystoreAlias: ${{ secrets.SIGNING_KEY_ALIAS }}
+          keyPassword: ${{ secrets.SIGNING_KEY_ALIAS_PASSWORD }}
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: signed-apk
+          path: ${{ steps.sign.outputs.apkPath }}

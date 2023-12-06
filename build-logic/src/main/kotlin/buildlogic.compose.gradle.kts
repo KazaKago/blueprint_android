@@ -22,7 +22,7 @@ dependencies {
     implementation(libs.findLibrary("androidx.activity.compose").get())
     implementation(libs.findLibrary("coil.compose").get())
     implementation(libs.findLibrary("swr.compose").get())
-    implementation(libs.findLibrary("compose.distinations.core").get())
+    implementation(libs.findLibrary("compose.distinations.animation").get())
     ksp(libs.findLibrary("compose.distinations.ksp").get())
 
     // Android Studio Preview support

@@ -13,7 +13,8 @@ android {
 }
 
 dependencies {
-    implementation(projects.presentation)
-    implementation(projects.domain)
+    implementation(projects.ui)
     implementation(projects.data)
+    implementation(projects.model)
+    implementation(projects.mockserver)
 }

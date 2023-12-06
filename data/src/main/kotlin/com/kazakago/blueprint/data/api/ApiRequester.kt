@@ -7,17 +7,14 @@ import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.request.header
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
+import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ApiRequester @Inject constructor() {
-
-    private val baseUrl = "https://api.github.com"
-
-    private val contentType = ContentType.Application.Json
+internal class ApiRequester @Inject constructor() {
 
     private val serialFormatter = Json {
         ignoreUnknownKeys = true
@@ -25,8 +22,8 @@ class ApiRequester @Inject constructor() {
 
     val httpClient = HttpClient(CIO) {
         defaultRequest {
-            url(baseUrl)
-            header(HttpHeaders.ContentType, contentType)
+            url("http://localhost:8080")
+            contentType(ContentType.Application.Json)
         }
         install(ContentNegotiation) {
             json(serialFormatter)
