@@ -52,7 +52,7 @@ compose-distinations-ksp = { module = "io.github.raamcosta.compose-destinations:
 # SWR Compose
 swr-compose = "com.kazakago.swr.compose:swr-android:0.6.3"
 # Ktor BOM
-ktor-bom = "io.ktor:ktor-bom:2.3.6"
+ktor-bom = "io.ktor:ktor-bom:2.3.7"
 # Ktor Serialization
 ktor-serialization-json = { module = "io.ktor:ktor-serialization-kotlinx-json" }
 # Ktor Client CIO
