@@ -31,7 +31,7 @@ jobs:
         keystoreAlias: ${{ secrets.SIGNING_KEY_ALIAS }}
         keyPassword: ${{ secrets.SIGNING_KEY_ALIAS_PASSWORD }}
     - name: Upload
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: signed-apk
         path: ${{ steps.sign.outputs.apkPath }}
