@@ -32,17 +32,16 @@ class ToDoApi @Inject constructor(
         }.body()
     }
 
-    suspend fun editToDo(toDo: ToDo): ToDo {
+    suspend fun editToDo(toDoId: ToDoId, toDoRegistration: ToDoRegistration): ToDo {
         return httpClient.put {
-            url { path("todos") }
-            setBody(toDo)
+            url { path("todos/${toDoId.value}") }
+            setBody(toDoRegistration)
         }.body()
     }
 
     suspend fun removeToDo(toDoId: ToDoId) {
         return httpClient.delete {
-            url { path("todos") }
-            setBody(toDoId)
+            url { path("todos/${toDoId.value}") }
         }.body()
     }
 }

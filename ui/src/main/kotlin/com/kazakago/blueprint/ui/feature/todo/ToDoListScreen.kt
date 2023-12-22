@@ -27,7 +27,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.kazakago.blueprint.model.todo.ToDo
 import com.kazakago.blueprint.model.todo.ToDoId
-import com.kazakago.blueprint.model.todo.ToDoRegistration
 import com.kazakago.blueprint.ui.feature.destinations.AboutScreenDestination
 import com.kazakago.blueprint.ui.global.theme.AppTheme
 import com.kazakago.blueprint.ui.global.ui.DefaultLayout
@@ -46,7 +45,7 @@ fun ToDoListScreen(
     snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
     state: SWRState<String, List<ToDo>> = useToDo(),
     create: (title: String) -> Unit = useToDoCreate(snackbarHostState),
-    edit: (toDo: ToDo) -> Unit = useToDoEdit(snackbarHostState),
+    edit: (toDoId: ToDoId, title: String) -> Unit = useToDoEdit(snackbarHostState),
     delete: (id: ToDoId) -> Unit = useToDoDelete(snackbarHostState),
 ) {
     val openToDoCreationDialog: MutableState<Boolean> = remember { mutableStateOf(false) }
@@ -108,7 +107,7 @@ fun ToDoListScreen(
             initialText = toDo.title,
             onSubmit = { text ->
                 openToDoEditingDialog.value = null
-                edit(toDo.copy(title = text))
+                toDo.id?.let { id -> edit(id, text) }
             },
             onCancel = {
                 openToDoEditingDialog.value = null
@@ -134,7 +133,7 @@ fun ToDoListScreenPreview() {
                 ),
             ),
             create = {},
-            edit = {},
+            edit = { _, _ -> },
             delete = {},
         )
     }

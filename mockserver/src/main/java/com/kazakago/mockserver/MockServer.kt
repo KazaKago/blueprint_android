@@ -40,21 +40,26 @@ fun main() {
                 post {
                     delay(1000)
                     val registrationToDo = call.receive<ToDoRegistration>()
-                    val addingToDo = ToDo(id = ToDoId(idCounter++), title = registrationToDo.title)
+                    val toDoId = ToDoId(idCounter++)
+                    val addingToDo = ToDo(id = toDoId, title = registrationToDo.title)
                     todoList = todoList + addingToDo
                     call.respond(HttpStatusCode.Created, addingToDo)
                 }
-                put {
-                    delay(1000)
-                    val updatingToDo = call.receive<ToDo>()
-                    todoList = todoList.map { if (it.id == updatingToDo.id) updatingToDo else it }
-                    call.respond(HttpStatusCode.OK, updatingToDo)
-                }
-                delete {
-                    delay(1000)
-                    val deleteId = call.receive<ToDoId>()
-                    todoList = todoList.filter { it.id != deleteId }
-                    call.respond(HttpStatusCode.NoContent)
+                route("/{id}") {
+                    put {
+                        delay(1000)
+                        val registrationToDo = call.receive<ToDoRegistration>()
+                        val toDoId = call.parameters["id"]?.toLong()?.let { ToDoId(it) }
+                        val updatingToDo = ToDo(id = toDoId, title = registrationToDo.title)
+                        todoList = todoList.map { if (it.id == toDoId) updatingToDo else it }
+                        call.respond(HttpStatusCode.OK, updatingToDo)
+                    }
+                    delete {
+                        delay(1000)
+                        val toDoId = call.parameters["id"]?.toLong()?.let { ToDoId(it) }
+                        todoList = todoList.filter { it.id != toDoId }
+                        call.respond(HttpStatusCode.NoContent)
+                    }
                 }
             }
         }
