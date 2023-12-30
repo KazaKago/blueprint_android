@@ -1,25 +1,24 @@
 package com.kazakago.blueprint.model.about
 
-import io.kotest.assertions.throwables.shouldThrow
-import io.kotest.matchers.shouldBe
+import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.net.URI
 
 class EmailTest {
 
-    @Test
+    @Test(expected = IllegalArgumentException::class)
     fun rejectInvalidEmail1() {
-        shouldThrow<IllegalArgumentException> { Email("kazakagoATgmail.com") }
+        Email("kazakagoATgmail.com")
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException::class)
     fun rejectInvalidEmail2() {
-        shouldThrow<IllegalArgumentException> { Email("kazakago@gmailcom") }
+        Email("kazakago@gmailcom")
     }
 
     @Test
     fun isCorrectEmailURI() {
         val email = Email("kazakago@gmail.com")
-        email.toURI() shouldBe URI("mailto:kazakago@gmail.com")
+        assertEquals(URI("mailto:kazakago@gmail.com"), email.toURI())
     }
 }

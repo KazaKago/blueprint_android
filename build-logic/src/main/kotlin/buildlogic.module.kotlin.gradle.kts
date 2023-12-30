@@ -11,5 +11,4 @@ kotlin {
 dependencies {
     // Unit Tests
     testImplementation(libs.findLibrary("junit").get())
-    testImplementation(libs.findLibrary("kotest.assertions.core").get())
 }
