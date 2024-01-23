@@ -10,7 +10,7 @@ java = "17"
 kotlin = "1.9.22"
 google-ksp = "1.9.22-1.0.17" # https://github.com/google/ksp/releases
 compose-compiler = "1.5.8" # https://developer.android.com/jetpack/androidx/releases/compose-kotlin
-android-plugin = "8.2.1"
+android-plugin = "8.2.2"
 dagger = "2.50"
 distinations = "1.9.62"
 
