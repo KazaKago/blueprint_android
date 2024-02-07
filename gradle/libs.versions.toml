@@ -23,7 +23,7 @@ androidx-compose-bom = "androidx.compose:compose-bom:2024.01.00" # https://devel
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 # AndroidX Compose Material3
-androidx-compose-material3 = { module = "androidx.compose.material3:material3", version = "1.2.0-rc01" }
+androidx-compose-material3 = { module = "androidx.compose.material3:material3", version = "1.2.0" }
 # AndroidX Compose Material Icons
 androidx-compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
 # AndroidX Compose UI Test
