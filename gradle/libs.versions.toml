@@ -18,7 +18,7 @@ distinations = "1.10.0"
 # Kotlinx Serialization Core
 kotlinx-serialization-core = "org.jetbrains.kotlinx:kotlinx-serialization-core:1.6.2"
 # AndroidX Compose BOM
-androidx-compose-bom = "androidx.compose:compose-bom:2024.01.00" # https://developer.android.com/jetpack/compose/bom/bom-mapping
+androidx-compose-bom = "androidx.compose:compose-bom:2024.02.00" # https://developer.android.com/jetpack/compose/bom/bom-mapping
 # AndroidX Compose Preview support
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
