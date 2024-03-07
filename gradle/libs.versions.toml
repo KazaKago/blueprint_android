@@ -7,7 +7,7 @@ minSdk = "29"
 targetSdk = "34"
 java = "17"
 
-kotlin = "1.9.22"
+kotlin = "1.9.23"
 google-ksp = "1.9.22-1.0.18" # https://github.com/google/ksp/releases
 compose-compiler = "1.5.8" # https://developer.android.com/jetpack/androidx/releases/compose-kotlin
 android-plugin = "8.3.0"
