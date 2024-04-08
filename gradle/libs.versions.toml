@@ -46,7 +46,7 @@ dagger-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref
 compose-distinations-animation = { module = "io.github.raamcosta.compose-destinations:animations-core", version.ref = "distinations" }
 compose-distinations-ksp = { module = "io.github.raamcosta.compose-destinations:ksp", version.ref = "distinations" }
 # Ktor BOM
-ktor-bom = "io.ktor:ktor-bom:2.3.9"
+ktor-bom = "io.ktor:ktor-bom:2.3.10"
 # Ktor Serialization
 ktor-serialization-json = { module = "io.ktor:ktor-serialization-kotlinx-json" }
 # Ktor Client CIO
