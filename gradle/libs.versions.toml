@@ -30,7 +30,7 @@ androidx-compose-material-icons-extended = { module = "androidx.compose.material
 androidx-compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
 androidx-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 # AndroidX Activity Compose
-androidx-activity-compose = "androidx.activity:activity-compose:1.8.2"
+androidx-activity-compose = "androidx.activity:activity-compose:1.9.0"
 # AndroidX Test JUnit
 androidx-test-junit = "androidx.test.ext:junit:1.1.5"
 # AndroidX Test Espresso
