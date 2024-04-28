@@ -10,7 +10,7 @@ java = "17"
 kotlin = "1.9.23"
 google-ksp = "1.9.23-1.0.20" # https://github.com/google/ksp/releases
 compose-compiler = "1.5.11" # https://developer.android.com/jetpack/androidx/releases/compose-kotlin
-android-plugin = "8.3.1"
+android-plugin = "8.3.2"
 dagger = "2.51.1"
 distinations = "1.10.2"
 
@@ -18,7 +18,7 @@ distinations = "1.10.2"
 # Kotlinx Serialization Core
 kotlinx-serialization-core = "org.jetbrains.kotlinx:kotlinx-serialization-core:1.6.3"
 # AndroidX Compose BOM
-androidx-compose-bom = "androidx.compose:compose-bom:2024.04.00" # https://developer.android.com/jetpack/compose/bom/bom-mapping
+androidx-compose-bom = "androidx.compose:compose-bom:2024.04.01" # https://developer.android.com/jetpack/compose/bom/bom-mapping
 # AndroidX Compose Preview support
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
@@ -30,7 +30,9 @@ androidx-compose-material-icons-extended = { module = "androidx.compose.material
 androidx-compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
 androidx-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 # AndroidX Activity Compose
-androidx-activity-compose = "androidx.activity:activity-compose:1.8.2"
+androidx-activity-compose = "androidx.activity:activity-compose:1.9.0"
+# AndroidX Startup
+androidx-startup = "androidx.startup:startup-runtime:1.1.1"
 # AndroidX Test JUnit
 androidx-test-junit = "androidx.test.ext:junit:1.1.5"
 # AndroidX Test Espresso
@@ -46,13 +48,17 @@ dagger-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref
 compose-distinations-animation = { module = "io.github.raamcosta.compose-destinations:animations-core", version.ref = "distinations" }
 compose-distinations-ksp = { module = "io.github.raamcosta.compose-destinations:ksp", version.ref = "distinations" }
 # Ktor BOM
-ktor-bom = "io.ktor:ktor-bom:2.3.9"
-# Ktor Serialization
+ktor-bom = "io.ktor:ktor-bom:2.3.10"
+# Ktor Serialization Json
 ktor-serialization-json = { module = "io.ktor:ktor-serialization-kotlinx-json" }
 # Ktor Client CIO
 ktor-client-cio = { module = "io.ktor:ktor-client-cio" }
 # Ktor Client Content Negotiation
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation" }
+# Ktor Server Netty
+ktor-server-netty = { module = "io.ktor:ktor-server-netty" }
+# Ktor Server Content Negotiation
+ktor-server-content-negotiation = { module = "io.ktor:ktor-server-content-negotiation" }
 # Junit
 junit = "junit:junit:4.13.2"
 

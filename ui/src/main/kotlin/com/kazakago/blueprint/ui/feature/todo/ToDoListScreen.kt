@@ -2,8 +2,8 @@ package com.kazakago.blueprint.ui.feature.todo
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
@@ -30,6 +30,7 @@ import com.kazakago.blueprint.model.todo.ToDoId
 import com.kazakago.blueprint.ui.feature.destinations.AboutScreenDestination
 import com.kazakago.blueprint.ui.global.theme.AppTheme
 import com.kazakago.blueprint.ui.global.ui.DefaultLayout
+import com.kazakago.blueprint.ui.global.utils.plus
 import com.kazakago.swr.compose.state.SWRState
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
@@ -69,15 +70,16 @@ fun ToDoListScreen(
         snackbarHost = {
             SnackbarHost(snackbarHostState)
         },
-    ) { paddingValue ->
+    ) { innerPadding ->
         DefaultLayout(
             state = state,
             snackbarHostState = snackbarHostState,
-            modifier = Modifier.padding(paddingValue),
         ) { todoList ->
             LazyColumn(
-                modifier = Modifier.fillMaxSize(),
-                contentPadding = PaddingValues(vertical = 8.dp, horizontal = 16.dp),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .consumeWindowInsets(innerPadding),
+                contentPadding = innerPadding + PaddingValues(horizontal = 16.dp, vertical = 8.dp),
             ) {
                 items(todoList.size) { index ->
                     ToDoRow(

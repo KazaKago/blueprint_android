@@ -8,9 +8,9 @@ android {
 
 dependencies {
     implementation(projects.model)
-    implementation("androidx.startup:startup-runtime:1.1.1")
-    implementation(platform("io.ktor:ktor-bom:2.3.9"))
-    implementation("io.ktor:ktor-serialization-kotlinx-json")
-    implementation("io.ktor:ktor-server-netty")
-    implementation("io.ktor:ktor-server-content-negotiation")
+    implementation(libs.androidx.startup)
+    implementation(platform(libs.ktor.bom))
+    implementation(libs.ktor.serialization.json)
+    implementation(libs.ktor.server.netty)
+    implementation(libs.ktor.server.content.negotiation)
 }
