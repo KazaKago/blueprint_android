@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.plugin.compose")
     id("org.jetbrains.kotlin.plugin.serialization")
     id("buildlogic.dagger.hilt")
 }
@@ -20,16 +21,14 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.findVersion("compose.compiler").get().toString()
-    }
 }
 
 kotlin {
     jvmToolchain(libs.findVersion("java").get().requiredVersion.toInt())
+}
+
+composeCompiler {
+    enableStrongSkippingMode = true
 }
 
 dependencies {
