@@ -6,7 +6,7 @@ plugins {
 val libs: VersionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
 
 kotlin {
-    jvmToolchain(libs.findVersion("java").get().requiredVersion.toInt())
+    jvmToolchain(libs.findVersion("jdk").get().requiredVersion.toInt())
 }
 
 dependencies {

@@ -5,7 +5,7 @@ versionName = "1.0.0"
 compileSdk = "34"
 minSdk = "29"
 targetSdk = "34"
-java = "17"
+jdk = "17"
 
 kotlin = "2.0.0-RC2"
 google-ksp = "2.0.0-RC2-1.0.20" # https://github.com/google/ksp/releases

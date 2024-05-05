@@ -21,13 +21,13 @@ android {
     }
     packaging {
         resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "/META-INF/*"
         }
     }
 }
 
 kotlin {
-    jvmToolchain(libs.findVersion("java").get().requiredVersion.toInt())
+    jvmToolchain(libs.findVersion("jdk").get().requiredVersion.toInt())
 }
 
 dependencies {

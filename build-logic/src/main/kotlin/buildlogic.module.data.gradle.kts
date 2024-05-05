@@ -23,7 +23,7 @@ android {
 }
 
 kotlin {
-    jvmToolchain(libs.findVersion("java").get().requiredVersion.toInt())
+    jvmToolchain(libs.findVersion("jdk").get().requiredVersion.toInt())
 }
 
 dependencies {
