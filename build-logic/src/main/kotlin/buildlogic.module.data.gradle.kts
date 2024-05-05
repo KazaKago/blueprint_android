@@ -1,6 +1,8 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.plugin.serialization")
+    id("buildlogic.dagger.hilt")
 }
 
 val libs: VersionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
@@ -25,6 +27,11 @@ kotlin {
 }
 
 dependencies {
+    implementation(platform(libs.findLibrary("ktor.bom").get()))
+    implementation(libs.findLibrary("ktor.serialization.json").get())
+    implementation(libs.findLibrary("ktor.client.cio").get())
+    implementation(libs.findLibrary("ktor.client.content.negotiation").get())
+
     // Unit Tests
     testImplementation(libs.findLibrary("junit").get())
 

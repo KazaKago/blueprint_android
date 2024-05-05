@@ -10,15 +10,14 @@ java = "17"
 kotlin = "1.9.23"
 google-ksp = "1.9.23-1.0.20" # https://github.com/google/ksp/releases
 compose-compiler = "1.5.11" # https://developer.android.com/jetpack/androidx/releases/compose-kotlin
-android-plugin = "8.3.2"
+android-plugin = "8.4.0"
 dagger = "2.51.1"
-distinations = "1.10.2"
 
 [libraries]
 # Kotlinx Serialization Core
 kotlinx-serialization-core = "org.jetbrains.kotlinx:kotlinx-serialization-core:1.6.3"
 # AndroidX Compose BOM
-androidx-compose-bom = "androidx.compose:compose-bom:2024.04.01" # https://developer.android.com/jetpack/compose/bom/bom-mapping
+androidx-compose-bom = "androidx.compose:compose-bom:2024.05.00" # https://developer.android.com/jetpack/compose/bom/bom-mapping
 # AndroidX Compose Preview support
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
@@ -31,6 +30,8 @@ androidx-compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4
 androidx-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 # AndroidX Activity Compose
 androidx-activity-compose = "androidx.activity:activity-compose:1.9.0"
+# AndroidX Navigation Compose
+androidx-navigation-compose = "androidx.navigation:navigation-compose:2.8.0-alpha08"
 # AndroidX Startup
 androidx-startup = "androidx.startup:startup-runtime:1.1.1"
 # AndroidX Test JUnit
@@ -44,9 +45,6 @@ swr-compose = "com.kazakago.swr.compose:swr-android:0.6.3"
 # Dagger
 dagger-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "dagger" }
 dagger-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "dagger" }
-# Compose Distinations
-compose-distinations-animation = { module = "io.github.raamcosta.compose-destinations:animations-core", version.ref = "distinations" }
-compose-distinations-ksp = { module = "io.github.raamcosta.compose-destinations:ksp", version.ref = "distinations" }
 # Ktor BOM
 ktor-bom = "io.ktor:ktor-bom:2.3.10"
 # Ktor Serialization Json
@@ -64,6 +62,8 @@ junit = "junit:junit:4.13.2"
 
 # Kotlin Gradle Plugin
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+# Kotlin Serialization Gradle Plugin
+kotlin-serialization-gradle-plugin = { module = "org.jetbrains.kotlin.plugin.serialization:org.jetbrains.kotlin.plugin.serialization.gradle.plugin", version.ref = "kotlin" }
 # Android Gradle Plugin
 android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "android-plugin" }
 # Google Ksp Gradle Plugin
@@ -72,13 +72,17 @@ google-ksp-gradle-plugin = { module = "com.google.devtools.ksp:com.google.devtoo
 dagger-hilt-gradle-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "dagger" }
 
 [plugins]
-# Kotlin JVM
+# Build Logic
+buildlogic-module-application = { id = "buildlogic.module.application", version = "unspecified" }
+buildlogic-module-ui = { id = "buildlogic.module.ui", version = "unspecified" }
+buildlogic-module-domain = { id = "buildlogic.module.domain", version = "unspecified" }
+buildlogic-module-data = { id = "buildlogic.module.data", version = "unspecified" }
+# Kotlin
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-# Kotlin Android
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 # Kotlin Serialization
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-# Android Gradle Plugin
+# Android
 android-application = { id = "com.android.application", version.ref = "android-plugin" }
 android-library = { id = "com.android.library", version.ref = "android-plugin" }
 # Google Ksp

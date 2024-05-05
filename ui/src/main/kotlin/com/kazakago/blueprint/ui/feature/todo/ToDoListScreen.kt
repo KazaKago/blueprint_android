@@ -27,22 +27,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.kazakago.blueprint.model.todo.ToDo
 import com.kazakago.blueprint.model.todo.ToDoId
-import com.kazakago.blueprint.ui.feature.destinations.AboutScreenDestination
 import com.kazakago.blueprint.ui.global.theme.AppTheme
 import com.kazakago.blueprint.ui.global.ui.DefaultLayout
 import com.kazakago.blueprint.ui.global.utils.plus
 import com.kazakago.swr.compose.state.SWRState
-import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.annotation.RootNavGraph
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
-import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
+import kotlinx.serialization.Serializable
 
-@RootNavGraph(start = true)
-@Destination
-@Composable
+@Serializable
+object ToDoList
+
 @OptIn(ExperimentalMaterial3Api::class)
+@Composable
 fun ToDoListScreen(
-    navigator: DestinationsNavigator,
+    onNavigateAbout: () -> Unit,
     snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
     state: SWRState<String, List<ToDo>> = useToDo(),
     create: (title: String) -> Unit = useToDoCreate(snackbarHostState),
@@ -56,7 +53,7 @@ fun ToDoListScreen(
             TopAppBar(
                 title = { Text(text = "ToDo List") },
                 actions = {
-                    IconButton(onClick = { navigator.navigate(AboutScreenDestination()) }) {
+                    IconButton(onClick = onNavigateAbout) {
                         Icon(Icons.Outlined.Info, contentDescription = null)
                     }
                 },
@@ -127,7 +124,7 @@ fun ToDoListScreen(
 fun ToDoListScreenPreview() {
     AppTheme {
         ToDoListScreen(
-            navigator = EmptyDestinationsNavigator,
+            onNavigateAbout = {},
             state = SWRState.empty(
                 data = listOf(
                     ToDo(ToDoId(1), "Remember the milk"),

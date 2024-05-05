@@ -44,18 +44,18 @@ import com.kazakago.blueprint.ui.global.theme.AppTheme
 import com.kazakago.blueprint.ui.global.ui.BackIconButton
 import com.kazakago.blueprint.ui.global.ui.DefaultLayout
 import com.kazakago.swr.compose.state.SWRState
-import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
-import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
+import kotlinx.serialization.Serializable
 import java.net.URI
 import java.net.URL
 import java.util.Calendar
 
-@Destination
-@Composable
+@Serializable
+object About
+
 @OptIn(ExperimentalMaterial3Api::class)
+@Composable
 fun AboutScreen(
-    navigator: DestinationsNavigator,
+    onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier,
     state: SWRState<String, AboutInfo> = useAboutInfo(),
 ) {
@@ -65,7 +65,7 @@ fun AboutScreen(
         topBar = {
             TopAppBar(
                 title = { Text(stringResource(id = R.string.about_title)) },
-                navigationIcon = { BackIconButton(onClick = navigator::popBackStack) },
+                navigationIcon = { BackIconButton(onClick = onNavigateBack) },
             )
         },
         snackbarHost = { SnackbarHost(snackbarHostState) },
@@ -171,7 +171,7 @@ private fun AboutContent(
 fun AboutScreenPreview() {
     AppTheme {
         AboutScreen(
-            navigator = EmptyDestinationsNavigator,
+            onNavigateBack = {},
             state = SWRState.empty(
                 data = AboutInfo(
                     appInfo = AppInfo(

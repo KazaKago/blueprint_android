@@ -1,7 +1,5 @@
 plugins {
-    id("buildlogic.module.library")
-    id("buildlogic.dagger.hilt")
-    id("buildlogic.compose")
+    alias(libs.plugins.buildlogic.module.ui)
 }
 
 android {
