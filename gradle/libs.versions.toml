@@ -45,7 +45,7 @@ swr-compose = "com.kazakago.swr.compose:swr-android:0.6.3"
 dagger-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "dagger" }
 dagger-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "dagger" }
 # Ktor BOM
-ktor-bom = "io.ktor:ktor-bom:2.3.10"
+ktor-bom = "io.ktor:ktor-bom:2.3.11"
 # Ktor Serialization Json
 ktor-serialization-json = { module = "io.ktor:ktor-serialization-kotlinx-json" }
 # Ktor Client CIO
