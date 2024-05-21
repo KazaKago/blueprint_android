@@ -9,7 +9,7 @@ jdk = "17"
 
 kotlin = "2.0.0-RC3"
 google-ksp = "2.0.0-RC3-1.0.20" # https://github.com/google/ksp/releases
-android-plugin = "8.4.0"
+android-plugin = "8.4.1"
 dagger = "2.51.1"
 
 [libraries]
