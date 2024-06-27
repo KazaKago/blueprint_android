@@ -36,7 +36,7 @@ androidx-startup = "androidx.startup:startup-runtime:1.1.1"
 # AndroidX Test JUnit
 androidx-test-junit = "androidx.test.ext:junit:1.1.5"
 # AndroidX Test Espresso
-androidx-test-espresso = "androidx.test.espresso:espresso-core:3.5.1"
+androidx-test-espresso = "androidx.test.espresso:espresso-core:3.6.1"
 # Coil
 coil-compose = "io.coil-kt:coil-compose:2.6.0"
 # SWR Compose
