@@ -40,7 +40,7 @@ androidx-test-espresso = "androidx.test.espresso:espresso-core:3.6.1"
 # Coil
 coil-compose = "io.coil-kt:coil-compose:2.6.0"
 # SWR Compose
-swr-compose = "com.kazakago.swr.compose:swr-android:0.6.3"
+swr-compose = "com.kazakago.swr.compose:swr:0.7.1"
 # Dagger
 dagger-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "dagger" }
 dagger-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "dagger" }

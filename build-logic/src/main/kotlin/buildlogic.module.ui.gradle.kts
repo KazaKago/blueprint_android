@@ -30,10 +30,6 @@ kotlin {
     jvmToolchain(libs.findVersion("jdk").get().requiredVersion.toInt())
 }
 
-composeCompiler {
-    enableStrongSkippingMode = true
-}
-
 dependencies {
     implementation(libs.findLibrary("kotlinx.serialization.core").get())
     implementation(platform(libs.findLibrary("androidx.compose.bom").get()))
