@@ -38,7 +38,7 @@ androidx-test-junit = "androidx.test.ext:junit:1.2.1"
 # AndroidX Test Espresso
 androidx-test-espresso = "androidx.test.espresso:espresso-core:3.6.1"
 # Coil
-coil-compose = "io.coil-kt:coil-compose:2.6.0"
+coil-compose = "io.coil-kt:coil-compose:2.7.0"
 # SWR Compose
 swr-compose = "com.kazakago.swr.compose:swr:0.7.1"
 # Dagger
