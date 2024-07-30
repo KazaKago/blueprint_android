@@ -8,7 +8,7 @@ targetSdk = "34"
 jdk = "17"
 
 kotlin = "2.0.0"
-google-ksp = "2.0.0-1.0.23" # https://github.com/google/ksp/releases
+google-ksp = "2.0.0-1.0.24" # https://github.com/google/ksp/releases
 android-plugin = "8.5.1"
 dagger = "2.51.1"
 
