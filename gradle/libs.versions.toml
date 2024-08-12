@@ -10,7 +10,7 @@ jdk = "17"
 kotlin = "2.0.10"
 google-ksp = "2.0.10-1.0.24" # https://github.com/google/ksp/releases
 android-plugin = "8.5.2"
-dagger = "2.51.1"
+dagger = "2.52"
 
 [libraries]
 # Kotlinx Serialization Core
