@@ -2,13 +2,13 @@
 .gradle
 /local.properties
 .idea/*
+!.idea/codeStyles/
+!.idea/inspectionProfiles/
+!.idea/runConfigurations/
 .DS_Store
 /build
 /captures
 .externalNativeBuild
 .cxx
 local.properties
-!.idea/codeStyles/
-!.idea/inspectionProfiles/
-!.idea/runConfigurations/
 .kotlin/
