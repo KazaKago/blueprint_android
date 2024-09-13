@@ -42,7 +42,7 @@ import com.kazakago.blueprint.ui.global.hooks.useActionView
 import com.kazakago.blueprint.ui.global.hooks.useSendTo
 import com.kazakago.blueprint.ui.global.theme.AppTheme
 import com.kazakago.blueprint.ui.global.ui.BackIconButton
-import com.kazakago.blueprint.ui.global.ui.DefaultLayout
+import com.kazakago.blueprint.ui.global.ui.StateLayout
 import com.kazakago.swr.compose.state.SWRState
 import kotlinx.serialization.Serializable
 import java.net.URI
@@ -70,7 +70,7 @@ fun AboutScreen(
         },
         snackbarHost = { SnackbarHost(snackbarHostState) },
     ) { paddingValues ->
-        DefaultLayout(
+        StateLayout(
             state = state,
             snackbarHostState = snackbarHostState,
             modifier = Modifier.padding(paddingValues),
