@@ -76,62 +76,51 @@ fun ToDoListScreen(
             SnackbarHost(snackbarHostState)
         },
     ) { innerPadding ->
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .consumeWindowInsets(innerPadding),
-            contentPadding = innerPadding + PaddingValues(horizontal = 16.dp, vertical = 8.dp),
-        ) {
-            items(50) { index ->
-                Text("hogehoge - $index")
+        StateLayout(
+            state = state,
+            snackbarHostState = snackbarHostState,
+        ) { todoList ->
+            val scope = rememberCoroutineScope()
+            var isPullToRefreshing by remember { mutableStateOf(false) }
+            val pullToRefreshState = rememberPullToRefreshState()
+            PullToRefreshBox(
+                isRefreshing = isPullToRefreshing || state.isValidating,
+                state = pullToRefreshState,
+                indicator = {
+                    Indicator(
+                        modifier = Modifier
+                            .align(Alignment.TopCenter)
+                            .padding(top = innerPadding.calculateTopPadding()),
+                        isRefreshing = isPullToRefreshing || state.isValidating,
+                        state = pullToRefreshState,
+                    )
+                },
+                onRefresh = {
+                    scope.launch {
+                        isPullToRefreshing = true
+                        runCatching { state.mutate() }
+                        isPullToRefreshing = false
+                    }
+                },
+            ) {
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .consumeWindowInsets(innerPadding),
+                    contentPadding = innerPadding + PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+                ) {
+                    items(todoList.size) { index ->
+                        ToDoRow(
+                            toDo = todoList[index],
+                            onClick = { openToDoEditingDialog.value = it },
+                        )
+                        if (index < todoList.size - 1) {
+                            Spacer(Modifier.size(8.dp))
+                        }
+                    }
+                }
             }
         }
-
-//        StateLayout(
-//            state = state,
-//            snackbarHostState = snackbarHostState,
-//        ) { todoList ->
-//            val scope = rememberCoroutineScope()
-//            var isPullToRefreshing by remember { mutableStateOf(false) }
-//            val pullToRefreshState = rememberPullToRefreshState()
-//            PullToRefreshBox(
-//                isRefreshing = isPullToRefreshing || state.isValidating,
-//                state = pullToRefreshState,
-//                indicator = {
-//                    Indicator(
-//                        modifier = Modifier
-//                            .align(Alignment.TopCenter)
-//                            .padding(top = innerPadding.calculateTopPadding()),
-//                        isRefreshing = isPullToRefreshing || state.isValidating,
-//                        state = pullToRefreshState,
-//                    )
-//                },
-//                onRefresh = {
-//                    scope.launch {
-//                        isPullToRefreshing = true
-//                        runCatching { state.mutate() }
-//                        isPullToRefreshing = false
-//                    }
-//                },
-//            ) {
-//                LazyColumn(
-//                    modifier = Modifier
-//                        .fillMaxSize()
-//                        .consumeWindowInsets(innerPadding),
-//                    contentPadding = innerPadding + PaddingValues(horizontal = 16.dp, vertical = 8.dp),
-//                ) {
-//                    items(todoList.size) { index ->
-//                        ToDoRow(
-//                            toDo = todoList[index],
-//                            onClick = { openToDoEditingDialog.value = it },
-//                        )
-//                        if (index < todoList.size - 1) {
-//                            Spacer(Modifier.size(8.dp))
-//                        }
-//                    }
-//                }
-//            }
-//        }
     }
     if (openToDoCreationDialog.value) {
         ToDoCreationDialog(

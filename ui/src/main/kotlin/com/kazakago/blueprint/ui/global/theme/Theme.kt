@@ -9,8 +9,6 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalInspectionMode
-import com.kazakago.blueprint.ui.global.di.DIProvider
 
 private val DarkColorScheme = darkColorScheme(
     primary = Blue200,
@@ -33,17 +31,8 @@ fun AppTheme(
     } else {
         if (darkTheme) DarkColorScheme else LightColorScheme
     }
-    if (!LocalInspectionMode.current) {
-        DIProvider {
-            MaterialTheme(
-                colorScheme = colorScheme,
-                content = content,
-            )
-        }
-    } else {
-        MaterialTheme(
-            colorScheme = colorScheme,
-            content = content,
-        )
-    }
+    MaterialTheme(
+        colorScheme = colorScheme,
+        content = content,
+    )
 }
